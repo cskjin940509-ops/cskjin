@@ -7,12 +7,6 @@ on:
         description: '目标交易日 YYYY-MM-DD，留空则使用最新市场快照日期'
         required: false
         type: string
-  push:
-    branches: [ main ]
-    paths:
-      - 'tools/run_daily_strategy.py'
-      - 'tools/run_daily_strategy_fast.py'
-      - '.github/workflows/run-daily-strategy.yml'
   schedule:
     # 北京时间工作日 18:40，确保收盘市场快照已先落库
     - cron: '40 10 * * 1-5'
@@ -51,6 +45,12 @@ jobs:
         env:
           TARGET_DATE: ${{ inputs.target_date }}
         run: python tools/run_daily_strategy_fast.py
+      - name: 生成两两资金确认池
+        env:
+          TARGET_DATE: ${{ inputs.target_date }}
+        run: python tools/augment_pairwise_pools.py
+      - name: 更新全部池的后续表现
+        run: python tools/update_strategy_backtest.py
       - name: 保存正式 Daily Cohort
         run: |
           if git diff --quiet -- astock_snapshots/index.json; then
