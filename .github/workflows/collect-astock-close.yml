@@ -1,0 +1,88 @@
+name: Collect A-share close snapshot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths: [ '.github/workflows/collect-astock-close.yml' ]
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Collect verified close data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, re, requests, time
+          from datetime import datetime, timezone, timedelta
+          from urllib.parse import quote
+
+          S=requests.Session()
+          S.headers.update({'User-Agent':'Mozilla/5.0 AStockStrategy-Collector/1.0','Referer':'https://quote.eastmoney.com/'})
+          def get(url, encoding=None):
+              last=None
+              for i in range(4):
+                  try:
+                      r=S.get(url,timeout=15)
+                      r.raise_for_status()
+                      if encoding: r.encoding=encoding
+                      return r.text
+                  except Exception as e:
+                      last=e; time.sleep(1+i)
+              raise last
+          def num(x,k):
+              v=x.get(k)
+              try:return float(v) if v not in (None,'-','') else None
+              except:return None
+          def board_list(fs,typ):
+              fields='f3,f6,f12,f14,f62,f184,f104,f105,f106'
+              url='https://push2.eastmoney.com/api/qt/clist/get?pn=1&pz=500&po=1&np=1&fltt=2&invt=2&fid=f3&fs='+quote(fs,safe='')+'&fields='+fields
+              a=json.loads(get(url)).get('data',{}).get('diff') or []
+              out=[]
+              for x in a:
+                  up=int(x.get('f104') or 0); down=int(x.get('f105') or 0); flat=int(x.get('f106') or 0); total=up+down+flat
+                  out.append({'boardCode':str(x.get('f12') or ''),'name':x.get('f14'),'changePct':num(x,'f3'),'amount':num(x,'f6'),'up':up,'down':down,'flat':flat,'breadthPct':(up/total*100 if total else None),'mainNetFlow':num(x,'f62'),'mainFlowPct':num(x,'f184'),'RS5':None,'RS20':None,'RS60':None,'MTA':None,'sourceDate':'2026-08-18','availableAt':'2026-08-18T18:25:00+08:00','confidence':'High','type':typ})
+              return out
+          # Tencent index quotes
+          syms=['sh000001','sz399001','sz399006','sh000688','sh000300','sh000852']
+          txt=get('https://qt.gtimg.cn/q='+','.join(syms), 'gbk')
+          names={'sh000001':'上证指数','sz399001':'深证成指','sz399006':'创业板指','sh000688':'科创50','sh000300':'沪深300','sh000852':'中证1000'}
+          indices={}
+          for m in re.finditer(r'v_([A-Za-z0-9]+)="([^"]*)"',txt):
+              s=m.group(1); f=m.group(2).split('~')
+              if len(f)>37 and s in names:
+                  def fnum(i):
+                      try:return float(f[i])
+                      except:return None
+                  indices[s]={'name':names[s],'close':fnum(3),'changePct':fnum(32),'amount':(fnum(37)*10000 if fnum(37) is not None else None),'quoteTime':f[30] if len(f)>30 else None}
+          # Full A-share breadth from Eastmoney list
+          fs='m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23,m:0+t:81+s:2048'
+          url='https://push2.eastmoney.com/api/qt/clist/get?pn=1&pz=6000&po=1&np=1&fltt=2&invt=2&fid=f3&fs='+quote(fs,safe='')+'&fields=f2,f3,f6,f12,f14'
+          rows=json.loads(get(url)).get('data',{}).get('diff') or []
+          changes=[num(x,'f3') for x in rows if num(x,'f3') is not None]
+          up=sum(v>0 for v in changes); down=sum(v<0 for v in changes); flat=sum(v==0 for v in changes)
+          total_amount=sum(num(x,'f6') or 0 for x in rows)
+          changes2=sorted(changes)
+          median=(changes2[len(changes2)//2] if len(changes2)%2 else ((changes2[len(changes2)//2-1]+changes2[len(changes2)//2])/2 if changes2 else None))
+          limit_up=sum(v>=9.8 for v in changes); limit_down=sum(v<=-9.8 for v in changes)
+          industry=board_list('m:90+t:2+f:!50','industry')
+          concept=board_list('m:90+t:3+f:!50','concept')
+          out={'date':'2026-08-18','collectedAt':datetime.now(timezone(timedelta(hours=8))).isoformat(),'indices':indices,'market':{'totalAmount':total_amount,'up':up,'down':down,'flat':flat,'limitUpApprox':limit_up,'limitDownApprox':limit_down,'medianChangePct':median,'universeCount':len(changes)},'industry':industry,'concept':concept,'sources':['Tencent quote','Eastmoney push2'],'confidence':'High'}
+          p='astock_snapshots/raw_2026-08-18.json'
+          open(p,'w',encoding='utf-8').write(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add astock_snapshots/raw_2026-08-18.json
+          git commit -m 'Collect 2026-08-18 A-share close snapshot' || exit 0
+          git push
