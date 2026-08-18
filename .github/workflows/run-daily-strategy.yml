@@ -1,0 +1,53 @@
+name: Run AStock Daily Strategy
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: '目标交易日 YYYY-MM-DD，留空则使用最新市场快照日期'
+        required: false
+        type: string
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/run_daily_strategy.py'
+      - '.github/workflows/run-daily-strategy.yml'
+  schedule:
+    # 北京时间工作日 18:40，确保收盘市场快照已先落库
+    - cron: '40 10 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-daily-strategy
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 运行日终主线与股票池扫描
+        env:
+          TARGET_DATE: ${{ inputs.target_date }}
+        run: python tools/run_daily_strategy.py
+      - name: 保存正式 Daily Cohort
+        run: |
+          if git diff --quiet -- astock_snapshots/index.json; then
+            echo 'No strategy snapshot changes.'
+            exit 0
+          fi
+          git config user.name 'astock-strategy-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_snapshots/index.json
+          git commit -m 'Freeze daily A-share strategy cohort'
+          git pull --rebase origin main
+          git push origin HEAD:main
