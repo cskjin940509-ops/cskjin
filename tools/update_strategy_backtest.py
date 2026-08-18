@@ -38,7 +38,7 @@ def secid(code: str) -> str:
     return ("1." if code.startswith(("5", "6", "9")) else "0.") + code
 
 
-def fetch_kline(code: str, limit: int = 620) -> list[dict]:
+def fetch_kline_eastmoney(code: str, limit: int = 620) -> list[dict]:
     query = {
         "secid": secid(code),
         "klt": 101,
@@ -83,6 +83,60 @@ def fetch_kline(code: str, limit: int = 620) -> list[dict]:
     return rows
 
 
+def fetch_kline_tencent(code: str, limit: int = 620) -> list[dict]:
+    prefix = "bj" if code.startswith(("8", "9")) else ("sh" if code.startswith(("5", "6")) else "sz")
+    symbol = prefix + code
+    url = (
+        "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?"
+        + urlencode({"param": f"{symbol},day,,,{limit},qfq"})
+    )
+    request = Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 AStockStrategy-Backtest/1.0",
+            "Accept": "application/json",
+            "Referer": "https://gu.qq.com/",
+        },
+    )
+    with urlopen(request, timeout=12) as response:
+        payload = json.loads(response.read().decode("utf-8", "replace"))
+    root = (payload.get("data") or {}).get(symbol) or {}
+    raw_rows = root.get("qfqday") or root.get("day") or []
+    rows = []
+    for fields in raw_rows:
+        if not isinstance(fields, list) or len(fields) < 5:
+            continue
+        opened, closed = finite(fields[1]), finite(fields[2])
+        high, low = finite(fields[3]), finite(fields[4])
+        if not fields[0] or opened is None or closed is None:
+            continue
+        rows.append(
+            {
+                "date": fields[0],
+                "open": opened,
+                "close": closed,
+                "high": high if high is not None else max(opened, closed),
+                "low": low if low is not None else min(opened, closed),
+                "amount": None,
+            }
+        )
+    rows.sort(key=lambda item: item["date"])
+    return rows
+
+
+def fetch_kline(code: str, limit: int = 620) -> list[dict]:
+    errors = []
+    for provider in (fetch_kline_tencent, fetch_kline_eastmoney):
+        try:
+            rows = provider(code, limit)
+            if rows:
+                return rows
+            errors.append(provider.__name__ + ":empty")
+        except Exception as error:
+            errors.append(provider.__name__ + ":" + error.__class__.__name__)
+    raise RuntimeError(";".join(errors))
+
+
 def rounded(value):
     return round(value, 6) if value is not None and math.isfinite(value) else None
 
@@ -120,7 +174,7 @@ def performance_for(rows: list[dict], cohort_date: str, benchmark: list[dict]) -
         "entryPrice": rounded(entry_price),
         "asOf": future[-1]["date"],
         "tradingDays": len(future),
-        "source": "东方财富前复权日线",
+        "source": "腾讯/东方财富前复权日线",
     }
     for label, sessions in HORIZONS.items():
         if len(future) < sessions:
@@ -275,7 +329,7 @@ def update_all(root: Path | None = None, now: datetime | None = None) -> dict:
             "exit": "第1/5/10/20/60个交易日收盘",
             "weight": "池内等权",
             "benchmark": "沪深300",
-            "price": "前复权",
+            "price": "腾讯优先、东方财富兜底的前复权日线",
             "version": VERSION,
         }
         updated += 1
