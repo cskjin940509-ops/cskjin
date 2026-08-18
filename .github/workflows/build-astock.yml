@@ -48,6 +48,7 @@ jobs:
               'abs(v.toDouble())<2': 'abs(v.toDouble()) < 2',
               'if(v>=0)': 'if(v >= 0)',
               'if(v<0)': 'if(v < 0)',
+              'return"': 'return "',
           }
           for old, new in replacements.items():
               s = s.replace(old, new)
