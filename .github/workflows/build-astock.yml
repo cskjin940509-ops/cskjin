@@ -26,35 +26,11 @@ jobs:
           fi
       - uses: actions/checkout@v4
         with:
-          ref: astock-build-v0.5
-      - name: Patch v0.5 source for clean build
+          ref: astock-build-v0.6-live
+      - name: Keep only v0.6 activity
         run: |
           rm -f app/src/main/java/com/rui/astockstrategy/V04Activity.kt
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          p = Path('app/src/main/java/com/rui/astockstrategy/v5/V5Activity.kt')
-          s = p.read_text(encoding='utf-8')
-          replacements = {
-              'label={Text(t.label)})}}}}': 'label={Text(t.label)})}}}',
-              'suspend fun fetchSnapshots():List<Snapshot>=': 'suspend fun fetchSnapshots(): List<Snapshot> =',
-              'suspend fun fetchQuotes(symbols:List<String>):Map<String,Quote>=': 'suspend fun fetchQuotes(symbols: List<String>): Map<String, Quote> =',
-              'suspend fun fetchBoards(type:String):List<Board>=': 'suspend fun fetchBoards(type: String): List<Board> =',
-              'suspend fun fetchMembers(boardCode:String):List<Member>=': 'suspend fun fetchMembers(boardCode: String): List<Member> =',
-              '(b.change?:0.0)>2': '(b.change ?: 0.0) > 2',
-              '(b.change?:0.0)>0': '(b.change ?: 0.0) > 0',
-              '(b.change?:0.0)<-2': '(b.change ?: 0.0) < -2',
-              '(b.change?:0.0)<0': '(b.change ?: 0.0) < 0',
-              'abs(v.toDouble())<2': 'abs(v.toDouble()) < 2',
-              'if(v>=0)': 'if(v >= 0)',
-              'if(v<0)': 'if(v < 0)',
-              'return"': 'return "',
-          }
-          for old, new in replacements.items():
-              s = s.replace(old, new)
-          s = re.sub(r'(?<=\d)->', ' ->', s)
-          p.write_text(s, encoding='utf-8')
-          PY
+          rm -f app/src/main/java/com/rui/astockstrategy/v5/V5Activity.kt
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -72,6 +48,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v0.5-debug
+          name: AStockStrategy-v0.6-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
