@@ -5,11 +5,25 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+      - name: Record run id
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-run.txt -f message='Record latest APK build run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-run.txt -f message='Record latest APK build run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
       - uses: actions/checkout@v4
         with:
           ref: astock-build-v0.3
