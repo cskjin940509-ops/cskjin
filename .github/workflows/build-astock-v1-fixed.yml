@@ -1,9 +1,9 @@
-name: Build AStock v1.1 Quant APK
+name: Build AStock v1.2 Quant APK
 
 on:
   workflow_dispatch:
   push:
-    branches: [ astock-quant-v1.1 ]
+    branches: [ astock-quant-v1.2 ]
     paths:
       - '.github/workflows/build-astock-v1-fixed.yml'
       - 'tools/patch_v1_android.py'
@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: astock-quant-v1.1
+          ref: astock-quant-v1.2
       - name: 接入 quant.yunai 运行时认证与数据源自检
         run: python tools/patch_v1_android.py
       - uses: actions/setup-java@v4
@@ -43,6 +43,6 @@ jobs:
       - name: 上传 APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v1.1-quant-debug
+          name: AStockStrategy-v1.2-quant-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
