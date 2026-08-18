@@ -157,12 +157,12 @@
       "marketSnapshot": "ready",
       "boardHeatmap": "ready",
       "officialCohort": "pending",
-      "marketUpdatedAt": "2026-08-18T18:35:33+08:00"
+      "marketUpdatedAt": "2026-08-18T18:43:41+08:00"
     },
     "note": "盘中预览保持不变，不作为正式冻结批次。2026-08-18收盘正式数据尚待独立核验；在可验证前不改写为Official，不填充无法确认的市场截面、板块热力图或资金字段。",
     "marketSnapshot": {
       "sourceDate": "2026-08-18",
-      "availableAt": "2026-08-18T18:35:33+08:00",
+      "availableAt": "2026-08-18T18:43:41+08:00",
       "confidence": "高",
       "verifiedToday": true,
       "dataSource": "腾讯行情 + 东方财富",
@@ -203,12 +203,15 @@
           "quoteTime": "16:14:02"
         }
       },
-      "totalAmount": 743643211483.02,
-      "up": 39,
-      "down": 61,
-      "flat": 0,
-      "medianChangePct": -1.13,
-      "sampleCount": 100
+      "totalAmount": null,
+      "up": null,
+      "down": null,
+      "flat": null,
+      "medianChangePct": null,
+      "sampleCount": 100,
+      "breadthStatus": "全市场统计待同步",
+      "breadthSampleCount": 100,
+      "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。"
     },
     "boardHeatmap": {
       "industry": [
@@ -2816,7 +2819,7 @@
         }
       ],
       "sourceDate": "2026-08-18",
-      "availableAt": "2026-08-18T18:35:33+08:00"
+      "availableAt": "2026-08-18T18:43:41+08:00"
     }
   }
 ]
