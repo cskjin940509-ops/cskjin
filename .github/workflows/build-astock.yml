@@ -27,40 +27,131 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: astock-build-v0.6-live
-      - name: Add history replay and post-close dashboard
+      - name: Build v0.9 Chinese finance UI
         run: |
           rm -f app/src/main/java/com/rui/astockstrategy/V04Activity.kt
           rm -f app/src/main/java/com/rui/astockstrategy/v5/V5Activity.kt
           python - <<'PY'
           from pathlib import Path
+          import re
+
           p=Path('app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt')
           s=p.read_text(encoding='utf-8')
 
           history_needle='''        item { CardBlock { Key("日期", snap.date); Key("状态", snap.status); Key("Regime", snap.regime); Key("主线", snap.mainlines.joinToString(" / ").ifBlank { "—" }) } }'''
-          history_repl=history_needle+'''\n        item { HistoricalMarketReplay(snap.date) }\n        item { Title("Strategy Review（策略回顾）") }'''
+          history_repl='''        item { CardBlock { Key("日期", snap.date); Key("状态", zhStatus(snap.status)); Key("市场状态", snap.regime); Key("主线", snap.mainlines.joinToString(" / ").ifBlank { "—" }) } }\n        item { HistoricalMarketReplay(snap.date) }\n        item { Title("策略回顾") }'''
           if 'HistoricalMarketReplay(snap.date)' not in s:
               if history_needle not in s:
                   raise SystemExit('history insertion point not found')
               s=s.replace(history_needle,history_repl,1)
+          else:
+              s=s.replace('Key("Regime", snap.regime)', 'Key("市场状态", snap.regime)')
+              s=s.replace('Title("Strategy Review（策略回顾）")','Title("策略回顾")')
 
           today_old='''        item {\n            StatusCard(now, quoteOkAt, boardOkAt, s)\n        }\n        item { Title("Intraday Preview（盘中预览）") }\n        item {\n            Notice("盘中只用当前可实时取得的公开行情生成主线候选，不冒充正式 B1/B2/B3/B4。正式 Daily Cohort 收盘后另行冻结。")\n        }'''
-          today_new='''        item {\n            StatusCard(now, quoteOkAt, boardOkAt, s)\n        }\n        if (!marketOpenNow()) {\n            item { PostCloseDashboard(quotes, preview, s) }\n            item { Title("Close Preview（收盘主线预览）") }\n            item { Notice("15:00 后优先展示当天真实收盘行情和板块收盘截面；Official Daily Cohort 尚未完成时只标记策略计算中，不留空白，也不拿昨日名单冒充今日结果。") }\n        } else {\n            item { Title("Intraday Preview（盘中预览）") }\n            item { Notice("盘中只用当前可实时取得的公开行情生成主线候选，不冒充正式 B1/B2/B3/B4。正式 Daily Cohort 收盘后另行冻结。") }\n        }'''
+          today_new='''        item {\n            StatusCard(now, quoteOkAt, boardOkAt, s)\n        }\n        if (!marketOpenNow()) {\n            item { PostCloseDashboard(quotes, preview, s) }\n            item { Title("收盘主线预览") }\n            item { Notice("15:00 后优先展示当天真实收盘行情和板块收盘截面；正式每日股票池尚未完成时只标记“策略计算中”，不留空白，也不拿昨日名单冒充今日结果。") }\n        } else {\n            item { Title("盘中主线预览") }\n            item { Notice("盘中只用当前可实时取得的公开行情生成主线候选，不冒充正式 B1/B2/B3/B4。正式每日股票池收盘后另行冻结。") }\n        }'''
           if 'PostCloseDashboard(quotes, preview, s)' not in s:
               if today_old not in s:
                   raise SystemExit('today insertion point not found')
               s=s.replace(today_old,today_new,1)
 
+          # Chinese finance terminology throughout the main UI.
+          repl={
+            'Data Status（数据状态）':'数据状态',
+            'Intraday Preview（盘中预览）':'盘中主线预览',
+            'Latest Official / Snapshot':'最新正式策略快照',
+            'B4 Live Monitor（实时跟踪）':'B4组合实时跟踪',
+            'Mainline Preview':'主线预览',
+            'Momentum':'动量强度',
+            'Breadth':'上涨扩散度',
+            'Flow':'资金强度',
+            'Official Snapshot':'正式策略快照',
+            'Official':'正式',
+            'Preview':'预览',
+            'Close Preview':'收盘预览',
+            'LIVE Preview':'实时预览',
+            'Strategy':'策略',
+            'Regime':'市场状态',
+            'Selection':'筛选',
+            'Confidence':'置信度',
+            'Pool':'股票池',
+            'Market Alpha':'市场超额收益',
+            'Industry Alpha':'行业超额收益',
+            'Alpha':'超额收益',
+            'MFE':'最大有利涨幅',
+            'MAE':'最大不利跌幅',
+          }
+          for a,b in repl.items(): s=s.replace(a,b)
           s=s.replace('item { Title("实时${type}热力图") }','item { Title(if (marketOpenNow()) "实时${type}热力图" else "收盘${type}热力图") }')
+
+          # Do not expose raw provider timestamps. Validate yyyyMMddHHmmss and show HH:mm:ss.
+          s=s.replace('quoteTime = f.getOrNull(30)', 'quoteTime = normalizeQuoteTime(f.getOrNull(30))')
+          marker='''fun breadth(b: Board): Double {'''
+          helper='''fun normalizeQuoteTime(raw: String?): String? {\n    val v = raw?.trim().orEmpty()\n    if (!Regex("\\\\d{14}").matches(v)) return null\n    return runCatching {\n        val dt = LocalDateTime.parse(v, DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))\n        dt.format(DateTimeFormatter.ofPattern("HH:mm:ss"))\n    }.getOrNull()\n}\n\nfun zhStatus(v: String?): String = when (v?.lowercase()) {\n    "official" -> "正式"\n    "preview" -> "预览"\n    else -> v ?: "未知"\n}\n\n'''
+          if 'fun normalizeQuoteTime' not in s:
+              s=s.replace(marker,helper+marker,1)
+
+          # Chinese data freshness labels.
+          s=s.replace('return "行情 OFFLINE"','return "行情未连接"')
+          s=s.replace('return "行情 STALE ${age}s"','return "行情已过期 ${age}秒"')
+          s=s.replace('"行情 LIVE ${age}s"','"行情实时 ${age}秒"')
+          s=s.replace('"行情 CLOSED ${quoteTime?.takeLast(6) ?: "已收盘"}"','"行情已收盘 ${quoteTime ?: ""}"')
+          s=s.replace('"LIVE", "STALE"','"实时", "已过期"')
+          s=s.replace('return "OFFLINE"','return "未连接"')
+          s=s.replace('"无时间戳"','"行情时间不可用"')
+          s=s.replace('q?.quoteTime?.let { "行情 $it" }','q?.quoteTime?.let { "行情时间 $it" }')
+
+          # Add referers for providers to improve direct Android request compatibility.
+          old='''        c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/0.6")\n        c.setRequestProperty("Cache-Control", "no-cache")'''
+          new='''        c.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 16) AppleWebKit/537.36 Chrome/140 Mobile Safari/537.36")\n        c.setRequestProperty("Accept", "*/*")\n        c.setRequestProperty("Cache-Control", "no-cache")\n        if (url.contains("gtimg.cn")) c.setRequestProperty("Referer", "https://gu.qq.com/")\n        if (url.contains("eastmoney.com")) c.setRequestProperty("Referer", "https://quote.eastmoney.com/")'''
+          s=s.replace(old,new)
+
+          # Make snapshot absence explicit instead of visually empty.
+          s=s.replace('EmptyCard("尚未读取到正式策略快照")','EmptyCard("正式策略数据源尚未同步；行情与板块数据仍可独立读取")')
+          s=s.replace('EmptyCard("暂无 Official Snapshot")','EmptyCard("正式策略数据源尚未同步")')
           p.write_text(s,encoding='utf-8')
 
+          # Historical replay: Chinese-only finance vocabulary and explicit missing-data diagnosis.
           h=Path('app/src/main/java/com/rui/astockstrategy/v6/HistoricalReplay.kt')
           hs=h.read_text(encoding='utf-8')
-          hs=hs.replace('"该日$title热力图尚未冻结/回填。不会显示今天的实时板块数据。"','"该日${title}热力图尚未冻结/回填。不会显示今天的实时板块数据。"')
+          hrepl={
+            'Historical Market Replay（历史市场回放）':'历史市场回放',
+            'Backfill（历史回填）':'历史回填',
+            'marketSnapshot / boardHeatmap':'市场快照 / 板块热力图',
+            'RS20':'20日相对强弱',
+            'MTA ':'多周期趋势 ',
+            'confidence':'置信度',
+          }
+          for a,b in hrepl.items(): hs=hs.replace(a,b)
+          hs=hs.replace('listOf("涨跌", "资金", "广度", "20日相对强弱")','listOf("涨跌", "资金", "上涨扩散度", "20日相对强弱")')
+          hs=hs.replace('"广度" -> items.sortedByDescending', '"上涨扩散度" -> items.sortedByDescending')
+          hs=hs.replace('"广度 ${b.breadthPct?.let', '"上涨扩散度 ${b.breadthPct?.let')
+          hs=hs.replace('历史数据读取失败：$error。不会拿当前实时行情冒充历史。','历史数据源读取失败（$error）。不会拿当前行情冒充历史。')
+          hs=hs.replace('$date 尚未保存 市场快照 / 板块热力图。后台完成历史回填后这里会自动出现，不需要重装 APK。','$date 的市场快照和板块热力图尚未同步。数据源补齐后这里会自动出现，不需要重装应用。')
+          hs=hs.replace('"该日$title热力图尚未冻结/回填。不会显示今天的实时板块数据。"','"该日${title}热力图数据源尚未同步。不会显示今天的实时板块数据。"')
           h.write_text(hs,encoding='utf-8')
+
+          # Post-close screen translations.
+          pc=Path('app/src/main/java/com/rui/astockstrategy/v6/PostCloseDashboard.kt')
+          if pc.exists():
+              ps=pc.read_text(encoding='utf-8')
+              prepl={
+                'Post-Close Facts（收盘事实层）':'收盘市场事实',
+                'Official Daily Cohort':'正式每日股票池',
+                'Close Preview':'收盘预览',
+                'Mainline':'主线',
+                'Breadth':'上涨扩散度',
+                'Momentum':'动量强度',
+                'Flow':'资金强度',
+                'LIVE':'实时',
+                'STALE':'已过期',
+              }
+              for a,b in prepl.items(): ps=ps.replace(a,b)
+              pc.write_text(ps,encoding='utf-8')
 
           g=Path('app/build.gradle.kts')
           gs=g.read_text(encoding='utf-8')
-          gs=gs.replace('versionCode = 7','versionCode = 9').replace('versionName = "0.7.0"','versionName = "0.8.0"')
+          gs=gs.replace('versionCode = 7','versionCode = 10').replace('versionName = "0.7.0"','versionName = "0.9.0"')
           g.write_text(gs,encoding='utf-8')
           PY
       - uses: actions/setup-java@v4
@@ -85,6 +176,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v0.8-stable-debug
+          name: AStockStrategy-v0.9-stable-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
