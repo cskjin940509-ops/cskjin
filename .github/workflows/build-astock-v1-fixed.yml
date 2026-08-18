@@ -1,0 +1,59 @@
+name: Build AStock v1.0 Fixed APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/build-astock-v1-fixed.yml'
+      - 'astock_gateway/trigger-v1-fixed.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 记录构建编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-v1-fixed-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-v1-fixed-run.txt -f message='Record latest fixed v1 build run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-v1-fixed-run.txt -f message='Record latest fixed v1 build run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: astock-build-v0.6-live
+      - name: 应用多源行情与中文界面补丁
+        run: python tools/patch_v1_android.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: 安装Android SDK
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-36" "build-tools;35.0.0" "platform-tools"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+      - name: 恢复固定应用签名
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: astock-debug-signing-v1
+      - name: 编译APK
+        run: gradle :app:assembleDebug --stacktrace
+      - name: 上传APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AStockStrategy-v1.0-fixed-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
