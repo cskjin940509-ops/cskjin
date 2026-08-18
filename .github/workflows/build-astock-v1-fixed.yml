@@ -1,4 +1,4 @@
-name: Build AStock v1.0 Fixed APK
+name: Build AStock v1.1 Detail APK
 
 on:
   workflow_dispatch:
@@ -32,6 +32,8 @@ jobs:
           ref: astock-build-v0.6-live
       - name: 应用多源行情与中文界面补丁
         run: python tools/patch_v1_android.py
+      - name: 接入板块与个股二级详情页
+        run: python tools/patch_detail_navigation.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -54,6 +56,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v1.0-fixed-debug
+          name: AStockStrategy-v1.1-detail-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
