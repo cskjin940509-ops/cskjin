@@ -31,6 +31,14 @@
     "performance": {},
     "added": ["688981"],
     "removed": [],
-    "note": "盘中预览，不作为正式冻结批次；收盘后 Official 替换。"
+    "syncStatus": {
+      "state": "PendingVerification",
+      "attemptedAt": "2026-08-18T18:23:30+08:00",
+      "reason": "当前可访问公开源尚未提供可独立核验的2026-08-18完整收盘市场截面；未将2025-08-18同日数据或陈旧行情误写为今日数据。",
+      "marketSnapshot": "pending",
+      "boardHeatmap": "pending",
+      "officialCohort": "pending"
+    },
+    "note": "盘中预览保持不变，不作为正式冻结批次。2026-08-18收盘正式数据尚待独立核验；在可验证前不改写为Official，不填充无法确认的市场截面、板块热力图或资金字段。"
   }
 ]
