@@ -176,13 +176,39 @@ def merge_snapshot(day, market, heat):
     return changed
 
 
+def active_pool_symbols():
+    if not SNAPS.exists():
+        return [], None
+    try:
+        snapshots = json.loads(SNAPS.read_text(encoding="utf-8"))
+        official = [item for item in snapshots if item.get("status") == "Official"]
+        latest = max(official, key=lambda item: item.get("date", "")) if official else None
+        if not latest:
+            return [], None
+        codes = sorted({
+            str(code)
+            for members in (latest.get("pools") or {}).values()
+            for code in (members or [])
+            if str(code).isdigit()
+        })
+        symbols = []
+        for code in codes:
+            prefix = "bj" if code.startswith(("8", "9")) else ("sh" if code.startswith(("5", "6")) else "sz")
+            symbols.append(prefix + code)
+        return symbols, latest.get("date")
+    except Exception:
+        return [], None
+
+
 def main():
     now = datetime.now(CN)
     day = now.strftime("%Y-%m-%d")
     day_compact = now.strftime("%Y%m%d")
     generated = now.isoformat(timespec="seconds")
     errors = []
-    symbols = ["sh000001", "sz399006", "sh000688", "sh000300", "sh000852"]
+    index_symbols = ["sh000001", "sz399006", "sh000688", "sh000300", "sh000852"]
+    pool_symbols, active_cohort_date = active_pool_symbols()
+    symbols = list(dict.fromkeys(index_symbols + pool_symbols))
 
     try:
         quotes = tencent_quotes(symbols)
@@ -230,6 +256,8 @@ def main():
         "state": "可用" if (quotes or industry or concept) else "不可用",
         "verifiedToday": verified_today,
         "providerDate": latest_provider_date,
+        "activeCohortDate": active_cohort_date,
+        "activePoolQuoteCount": sum(1 for symbol in pool_symbols if symbol in quotes),
         "marketSnapshot": market,
         "boardHeatmap": heat,
         "quotes": quotes,
@@ -249,7 +277,9 @@ def main():
 
     print(json.dumps({
         "generatedAt": generated, "verifiedToday": verified_today, "providerDate": latest_provider_date,
-        "indices": len(market["indices"]), "industry": len(industry), "concept": len(concept),
+        "indices": len(market["indices"]), "activeCohortDate": active_cohort_date,
+        "poolQuotes": sum(1 for symbol in pool_symbols if symbol in quotes),
+        "industry": len(industry), "concept": len(concept),
         "breadth": breadth.get("sampleCount"), "errors": errors
     }, ensure_ascii=False))
     if not quotes and not industry and not concept:
