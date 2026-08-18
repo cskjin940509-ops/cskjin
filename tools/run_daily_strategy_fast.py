@@ -6,7 +6,7 @@ from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 CN=timezone(timedelta(hours=8)); ROOT=Path(__file__).resolve().parents[1]
-SNAPS=ROOT/'astock_snapshots'/'index.json'; GATEWAY=ROOT/'astock_gateway'; VERSION='v1.6.1-daily-scanner-tracking'
+SNAPS=ROOT/'astock_snapshots'/'index.json'; GATEWAY=ROOT/'astock_gateway'; VERSION='v1.6.2-daily-scanner-tracking'
 def get_json(url,timeout=8):
     req=Request(url,headers={'User-Agent':'Mozilla/5.0 AStockStrategy/1.5','Accept':'*/*','Referer':'https://quote.eastmoney.com/'})
     with urlopen(req,timeout=timeout) as r:return json.loads(r.read().decode('utf-8','replace'))
