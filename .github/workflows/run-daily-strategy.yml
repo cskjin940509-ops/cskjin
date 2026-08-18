@@ -11,6 +11,7 @@ on:
     branches: [ main ]
     paths:
       - 'tools/run_daily_strategy.py'
+      - 'tools/run_daily_strategy_fast.py'
       - '.github/workflows/run-daily-strategy.yml'
   schedule:
     # 北京时间工作日 18:40，确保收盘市场快照已先落库
@@ -21,12 +22,12 @@ permissions:
 
 concurrency:
   group: astock-daily-strategy
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 15
     steps:
       - name: 记录策略运行编号
         env:
@@ -49,7 +50,7 @@ jobs:
       - name: 运行日终主线与股票池扫描
         env:
           TARGET_DATE: ${{ inputs.target_date }}
-        run: python tools/run_daily_strategy.py
+        run: python tools/run_daily_strategy_fast.py
       - name: 保存正式 Daily Cohort
         run: |
           if git diff --quiet -- astock_snapshots/index.json; then
