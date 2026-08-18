@@ -6,7 +6,7 @@ from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 CN=timezone(timedelta(hours=8)); ROOT=Path(__file__).resolve().parents[1]
-SNAPS=ROOT/'astock_snapshots'/'index.json'; GATEWAY=ROOT/'astock_gateway'; VERSION='v1.5.1-daily-scanner'
+SNAPS=ROOT/'astock_snapshots'/'index.json'; GATEWAY=ROOT/'astock_gateway'; VERSION='v1.6.0-daily-scanner-tracking'
 def get_json(url,timeout=8):
     req=Request(url,headers={'User-Agent':'Mozilla/5.0 AStockStrategy/1.5','Accept':'*/*','Referer':'https://quote.eastmoney.com/'})
     with urlopen(req,timeout=timeout) as r:return json.loads(r.read().decode('utf-8','replace'))
@@ -121,5 +121,11 @@ def freeze(day,payload,sel,sc,pools):
 def main():
     day=os.environ.get('TARGET_DATE') or ((json.loads((GATEWAY/'latest.json').read_text(encoding='utf-8')).get('marketSnapshot') or {}).get('sourceDate'))
     if not day:raise SystemExit('无法确定交易日')
-    p=load(day);sel=choose_sectors(p);sc,pools=choose_stocks(sel);o=freeze(day,p,sel,sc,pools);print(json.dumps({'date':day,'mainlines':o['mainlines'],'B0':pools['B0'],'B3':pools['B3'],'B4':pools['B4'],'B1':[],'B2':[]},ensure_ascii=False))
+    p=load(day);sel=choose_sectors(p);sc,pools=choose_stocks(sel);o=freeze(day,p,sel,sc,pools)
+    try:
+        from update_strategy_backtest import update_all
+        tracking=update_all()
+    except Exception as error:
+        tracking={'state':'failed','error':error.__class__.__name__}
+    print(json.dumps({'date':day,'mainlines':o['mainlines'],'B0':pools['B0'],'B3':pools['B3'],'B4':pools['B4'],'B1':[],'B2':[],'tracking':tracking},ensure_ascii=False))
 if __name__=='__main__':main()
