@@ -224,7 +224,7 @@ gateway = gateway.replace(gateway_state_marker, gateway_state, 1)
 gateway_method_marker = "    suspend fun fetchBoardsPair(): Pair<List<Board>, List<Board>> {"
 gateway_methods = '''    suspend fun configureAndTestQuant(rawToken: String): String {
         val normalized = rawToken.trim()
-            .replace(Regex("^Bearer\\s+", RegexOption.IGNORE_CASE), "")
+            .replace(Regex("^Bearer\\\\s+", RegexOption.IGNORE_CASE), "")
             .trim()
         if (normalized.isBlank()) return "请输入有效令牌"
 
