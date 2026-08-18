@@ -1,0 +1,47 @@
+name: Build AStock v1.1 Quant APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ astock-quant-v1.1 ]
+    paths:
+      - '.github/workflows/build-astock-v1-fixed.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: astock-quant-v1.1
+      - name: 接入 quant.yunai 运行时认证与数据源自检
+        run: python tools/patch_v1_android.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: 安装 Android SDK
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-36" "build-tools;35.0.0" "platform-tools"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+      - name: 恢复固定应用签名
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: astock-debug-signing-v1
+      - name: 编译 APK
+        run: gradle :app:assembleDebug --stacktrace
+      - name: 上传 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AStockStrategy-v1.1-quant-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
