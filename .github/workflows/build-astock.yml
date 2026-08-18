@@ -47,6 +47,11 @@ jobs:
           hs=h.read_text(encoding='utf-8')
           hs=hs.replace('"该日$title热力图尚未冻结/回填。不会显示今天的实时板块数据。"','"该日${title}热力图尚未冻结/回填。不会显示今天的实时板块数据。"')
           h.write_text(hs,encoding='utf-8')
+
+          g=Path('app/build.gradle.kts')
+          gs=g.read_text(encoding='utf-8')
+          gs=gs.replace('versionCode = 7','versionCode = 8').replace('versionName = "0.7.0"','versionName = "0.7.1"')
+          g.write_text(gs,encoding='utf-8')
           PY
       - uses: actions/setup-java@v4
         with:
@@ -60,11 +65,16 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.13'
+      - name: Restore persistent debug signing key
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: astock-debug-signing-v1
       - name: Assemble debug APK
         run: gradle :app:assembleDebug --stacktrace
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v0.7-debug
+          name: AStockStrategy-v0.7.1-stable-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
