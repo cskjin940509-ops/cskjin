@@ -50,7 +50,7 @@ activity = activity.replace(
 
 # Data source diagnostics.
 status_line = '''            Key("盘中主线", if (marketOpenNow()) "LIVE Preview" else "Close Preview")'''
-status_new = '''            Key("盘中主线", if (marketOpenNow()) "实时预览" else "收盘预览")\n            Key("quant.yunai", ResilientDataApi.quantStatus)\n            Key("行情来源", ResilientDataApi.quoteSource)\n            Key("板块来源", ResilientDataApi.boardSource)'''
+status_new = '''            Key("盘中主线", if (marketOpenNow()) "实时预览" else "收盘预览")\n            Key("自动刷新", "行情5秒 · 板块/策略30秒")\n            Key("quant.yunai", ResilientDataApi.quantStatus)\n            Key("行情来源", ResilientDataApi.quoteSource)\n            Key("板块来源", ResilientDataApi.boardSource)\n            Key("批次生成", s?.availableAt?.replace("T", " ")?.substringBefore("+")?.takeLast(14) ?: "未同步")\n            Key("历史回测", s?.trackingUpdatedAt?.replace("T", " ")?.substringBefore("+")?.takeLast(14) ?: "等待可交易数据")'''
 activity = activity.replace(status_line, status_new)
 
 # Runtime token input. The token is not persisted and is removed from the text field after success.
@@ -125,6 +125,9 @@ for old, new in {
     "MFE": "最大有利涨幅",
     "MAE": "最大不利跌幅",
     "Trend Survival": "趋势存续期",
+    "Daily Cohort": "每日冻结批次",
+    "Live Monitor": "实时跟踪",
+    "Cohort Forward Tracking": "历史回测",
 }.items():
     activity = activity.replace(old, new)
 
@@ -161,6 +164,86 @@ activity = activity.replace(
     'EmptyCard("正式策略尚未同步；行情与板块数据仍独立可用")',
 )
 activity = activity.replace('EmptyCard("暂无 Official Snapshot")', 'EmptyCard("正式策略尚未同步")')
+
+# v1.2 surfaces batch and backtest freshness, and shows current/MFE/MAE/alpha metrics.
+activity = activity.replace(
+    '''    val stockPerformance: Map<String, JSONObject>,\n    val note: String?''',
+    '''    val stockPerformance: Map<String, JSONObject>,\n    val availableAt: String?,\n    val trackingUpdatedAt: String?,\n    val backtestMethod: JSONObject?,\n    val note: String?''',
+)
+activity = activity.replace(
+    '''            stockPerformance = objMap(o.optJSONObject("stockPerformance")),\n            note = o.optString("note").takeIf { it.isNotBlank() }''',
+    '''            stockPerformance = objMap(o.optJSONObject("stockPerformance")),\n            availableAt = o.optString("availableAt").takeIf { it.isNotBlank() },\n            trackingUpdatedAt = o.optString("trackingUpdatedAt").takeIf { it.isNotBlank() },\n            backtestMethod = o.optJSONObject("backtestMethod"),\n            note = o.optString("note").takeIf { it.isNotBlank() }''',
+)
+activity = activity.replace(
+    '''fun symbol(code: String): String = when {\n    code.startsWith("6") || code.startsWith("68") -> "sh$code"\n    else -> "sz$code"\n}''',
+    '''fun symbol(code: String): String = when {\n    code.startsWith("8") || code.startsWith("9") -> "bj$code"\n    code.startsWith("5") || code.startsWith("6") -> "sh$code"\n    else -> "sz$code"\n}''',
+)
+tracking_old = '''@Composable
+fun TrackingStrip(p: JSONObject?) {
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        listOf("1D", "5D", "10D", "20D", "60D").forEach { h ->
+            Column(
+                Modifier.weight(1f).background(Color(0xFFF3F5F9), RoundedCornerShape(8.dp)).padding(5.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(h, fontSize = 8.sp, color = Muted)
+                Text(extractHorizon(p, h), fontSize = 9.sp, fontWeight = FontWeight.SemiBold)
+            }
+        }
+    }
+}
+'''
+tracking_new = '''@Composable
+fun TrackingStrip(p: JSONObject?) {
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        listOf("1D", "5D", "10D", "20D", "60D").forEach { h ->
+            Column(
+                Modifier.weight(1f).background(Color(0xFFF3F5F9), RoundedCornerShape(8.dp)).padding(5.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(h, fontSize = 8.sp, color = Muted)
+                Text(extractHorizon(p, h), fontSize = 9.sp, fontWeight = FontWeight.SemiBold)
+            }
+        }
+    }
+    Spacer(Modifier.height(6.dp))
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        MetricPill("当前", metricNumber(p, "current"), Modifier.weight(1f))
+        MetricPill("超额", metricNumber(p, "current", "alpha"), Modifier.weight(1f))
+        MetricPill("最大有利", metricNumber(p, "MFE"), Modifier.weight(1f))
+        MetricPill("最大不利", metricNumber(p, "MAE"), Modifier.weight(1f))
+        MetricPill("胜率", metricNumber(p, "current", "hitRate"), Modifier.weight(1f))
+    }
+}
+
+@Composable
+fun MetricPill(label: String, value: Double?, modifier: Modifier) {
+    Column(
+        modifier.background(Color(0xFFF8F9FC), RoundedCornerShape(8.dp)).padding(5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(label, fontSize = 7.sp, color = Muted, maxLines = 1)
+        Text(
+            value?.let { String.format("%+.2f%%", it * 100.0) } ?: "—",
+            fontSize = 8.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = value?.let(::pnl) ?: Muted
+        )
+    }
+}
+
+fun metricNumber(p: JSONObject?, key: String, field: String = "return"): Double? {
+    val value = p?.opt(key)
+    return when (value) {
+        is JSONObject -> if (value.has(field) && !value.isNull(field)) value.optDouble(field) else null
+        is Number -> value.toDouble()
+        else -> null
+    }
+}
+'''
+if tracking_old not in activity:
+    raise SystemExit("tracking strip marker not found")
+activity = activity.replace(tracking_old, tracking_new, 1)
 
 # Improve direct public-source compatibility on Android.
 http_old = '''        c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/0.6")\n        c.setRequestProperty("Cache-Control", "no-cache")'''
@@ -257,7 +340,7 @@ gateway_methods = '''    suspend fun configureAndTestQuant(rawToken: String): St
         val indexSymbols = setOf("sh000001", "sz399006", "sh000688", "sh000300", "sh000852")
         val appByCode = symbols
             .filterNot { it in indexSymbols }
-            .associateBy { it.removePrefix("sh").removePrefix("sz") }
+            .associateBy { it.removePrefix("sh").removePrefix("sz").removePrefix("bj") }
         if (appByCode.isEmpty()) return@withContext emptyMap()
 
         val body = JSONObject().put("symbols", JSONArray(appByCode.keys.toList())).toString()
@@ -408,7 +491,7 @@ post_close_path.write_text(post_close, encoding="utf-8")
 # Version.
 gradle_path = Path("app/build.gradle.kts")
 gradle = gradle_path.read_text(encoding="utf-8")
-gradle = gradle.replace("versionCode = 7", "versionCode = 12")
-gradle = gradle.replace('versionName = "0.7.0"', 'versionName = "1.1.0"')
+gradle = gradle.replace("versionCode = 7", "versionCode = 13")
+gradle = gradle.replace('versionName = "0.7.0"', 'versionName = "1.2.0"')
 gradle_path.write_text(gradle, encoding="utf-8")
 
