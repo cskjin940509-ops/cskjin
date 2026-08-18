@@ -1,4 +1,4 @@
-name: Build AStock v1.1 Detail APK
+name: Build AStock v1.2 Pairwise APK
 
 on:
   workflow_dispatch:
@@ -36,6 +36,8 @@ jobs:
         run: python tools/patch_detail_navigation.py
       - name: 修复详情页编译兼容
         run: python tools/patch_detail_compile_fixes.py
+      - name: 接入两两组合筛选池
+        run: python tools/patch_pairwise_pools.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -58,6 +60,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v1.1-detail-debug
+          name: AStockStrategy-v1.2-pairwise-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
