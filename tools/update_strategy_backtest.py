@@ -35,7 +35,7 @@ def finite(value):
 
 
 def secid(code: str) -> str:
-    return ("1." if code.startswith(("5", "6", "9")) else "0.") + code
+    return ("1." if code == "000300" or code.startswith(("5", "6", "9")) else "0.") + code
 
 
 def fetch_kline_eastmoney(code: str, limit: int = 620) -> list[dict]:
@@ -84,7 +84,11 @@ def fetch_kline_eastmoney(code: str, limit: int = 620) -> list[dict]:
 
 
 def fetch_kline_tencent(code: str, limit: int = 620) -> list[dict]:
-    prefix = "bj" if code.startswith(("8", "9")) else ("sh" if code.startswith(("5", "6")) else "sz")
+    prefix = (
+        "bj"
+        if code.startswith(("8", "9"))
+        else ("sh" if code == "000300" or code.startswith(("5", "6")) else "sz")
+    )
     symbol = prefix + code
     url = (
         "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?"
@@ -248,7 +252,10 @@ def aggregate(codes: list[str], stock_performance: dict[str, dict]) -> dict:
 
 
 def snapshot_is_trackable(snapshot: dict, now: datetime) -> bool:
-    if snapshot.get("status") != "Official" or not snapshot.get("stocks"):
+    has_members = bool(snapshot.get("stocks")) or any(
+        snapshot.get("pools", {}).get(pool) for pool in ("B0", "B1", "B2", "B3", "B4")
+    )
+    if snapshot.get("status") != "Official" or not has_members:
         return False
     try:
         selected = datetime.strptime(snapshot["date"], "%Y-%m-%d").replace(tzinfo=CN)
