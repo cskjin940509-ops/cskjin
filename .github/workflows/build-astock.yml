@@ -42,6 +42,11 @@ jobs:
                   raise SystemExit('history insertion point not found')
               s=s.replace(needle,repl,1)
           p.write_text(s,encoding='utf-8')
+
+          h=Path('app/src/main/java/com/rui/astockstrategy/v6/HistoricalReplay.kt')
+          hs=h.read_text(encoding='utf-8')
+          hs=hs.replace('"该日$title热力图尚未冻结/回填。不会显示今天的实时板块数据。"','"该日${title}热力图尚未冻结/回填。不会显示今天的实时板块数据。"')
+          h.write_text(hs,encoding='utf-8')
           PY
       - uses: actions/setup-java@v4
         with:
