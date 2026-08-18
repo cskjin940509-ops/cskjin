@@ -3,6 +3,8 @@ name: Build AStock APK
 on:
   push:
     branches: [ astock-build-v0.3 ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
