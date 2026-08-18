@@ -27,6 +27,31 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: astock-build-v0.5
+      - name: Patch v0.5 source for clean build
+        run: |
+          rm -f app/src/main/java/com/rui/astockstrategy/V04Activity.kt
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('app/src/main/java/com/rui/astockstrategy/v5/V5Activity.kt')
+          s = p.read_text(encoding='utf-8')
+          replacements = {
+              'label={Text(t.label)})}}}}': 'label={Text(t.label)})}}}',
+              'suspend fun fetchSnapshots():List<Snapshot>=': 'suspend fun fetchSnapshots(): List<Snapshot> =',
+              'suspend fun fetchQuotes(symbols:List<String>):Map<String,Quote>=': 'suspend fun fetchQuotes(symbols: List<String>): Map<String, Quote> =',
+              'suspend fun fetchBoards(type:String):List<Board>=': 'suspend fun fetchBoards(type: String): List<Board> =',
+              'suspend fun fetchMembers(boardCode:String):List<Member>=': 'suspend fun fetchMembers(boardCode: String): List<Member> =',
+              '(b.change?:0.0)>2': '(b.change ?: 0.0) > 2',
+              '(b.change?:0.0)>0': '(b.change ?: 0.0) > 0',
+              '(b.change?:0.0)<-2': '(b.change ?: 0.0) < -2',
+              '(b.change?:0.0)<0': '(b.change ?: 0.0) < 0',
+              'abs(v.toDouble())<2': 'abs(v.toDouble()) < 2',
+              'if(v>=0)': 'if(v >= 0)',
+              'if(v<0)': 'if(v < 0)',
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new)
+          p.write_text(s, encoding='utf-8')
+          PY
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
