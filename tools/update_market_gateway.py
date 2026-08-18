@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, os, re, statistics, sys, time
+import json, re, statistics, sys, time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
@@ -13,7 +13,12 @@ UA = "Mozilla/5.0 AStockStrategy-Gateway/1.0"
 
 
 def get_bytes(url, timeout=15):
-    req = Request(url, headers={"User-Agent": UA, "Accept": "*/*", "Cache-Control": "no-cache", "Referer": "https://quote.eastmoney.com/"})
+    req = Request(url, headers={
+        "User-Agent": UA,
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Referer": "https://quote.eastmoney.com/"
+    })
     with urlopen(req, timeout=timeout) as r:
         if r.status < 200 or r.status >= 300:
             raise RuntimeError(f"HTTP {r.status}")
@@ -42,6 +47,11 @@ def tencent_quotes(symbols):
         if len(f) <= 37:
             continue
         qt = f[30] if len(f) > 30 else None
+        qtime = None
+        if qt and len(qt) >= 14 and qt[-6:].isdigit():
+            hh, mm, ss = int(qt[-6:-4]), int(qt[-4:-2]), int(qt[-2:])
+            if 0 <= hh <= 23 and 0 <= mm <= 59 and 0 <= ss <= 59:
+                qtime = f"{hh:02d}:{mm:02d}:{ss:02d}"
         out[sym] = {
             "symbol": sym,
             "name": f[1] if len(f) > 1 else "",
@@ -54,7 +64,7 @@ def tencent_quotes(symbols):
             "amount": (num(f[37]) * 10000.0) if len(f) > 37 and num(f[37]) is not None else None,
             "quoteTimeRaw": qt,
             "quoteDate": qt[:8] if qt and len(qt) >= 8 and qt[:8].isdigit() else None,
-            "quoteTime": (qt[-6:-4] + ":" + qt[-4:-2] + ":" + qt[-2:]) if qt and len(qt) >= 6 and qt[-6:].isdigit() else None,
+            "quoteTime": qtime,
             "source": "腾讯行情"
         }
     if not out:
@@ -65,11 +75,24 @@ def tencent_quotes(symbols):
 def eastmoney_clist(fs, fields, pz=500, fid="f3"):
     params = {
         "pn": 1, "pz": pz, "po": 1, "np": 1, "fltt": 2, "invt": 2,
-        "fid": fid, "fs": fs, "fields": fields
+        "fid": fid, "fs": fs, "fields": fields,
+        "ut": "bd1d9ddb04089700cf9c27f6f7426281"
     }
-    url = "https://push2.eastmoney.com/api/qt/clist/get?" + urlencode(params)
-    data = get_json(url).get("data") or {}
-    return data.get("diff") or []
+    last = None
+    # 实时域名在部分云机房会 502；延迟域名作为独立网络路径兜底。
+    for host in ("push2.eastmoney.com", "push2delay.eastmoney.com"):
+        for attempt in range(3):
+            try:
+                url = f"https://{host}/api/qt/clist/get?" + urlencode({**params, "_": int(time.time() * 1000)})
+                data = get_json(url).get("data") or {}
+                diff = data.get("diff") or []
+                if diff:
+                    return diff
+                last = RuntimeError(f"{host} 返回空数据")
+            except Exception as e:
+                last = e
+                time.sleep(0.8 * (attempt + 1))
+    raise RuntimeError(str(last or "东方财富列表接口不可用"))
 
 
 def boards(kind):
@@ -211,7 +234,7 @@ def main():
         "boardHeatmap": heat,
         "quotes": quotes,
         "errors": errors,
-        "dataSources": ["腾讯行情", "东方财富板块/全A截面"]
+        "dataSources": ["腾讯行情", "东方财富实时/延迟板块"]
     }
 
     GATEWAY.mkdir(parents=True, exist_ok=True)
@@ -224,7 +247,11 @@ def main():
         (hist / f"{day}.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         merge_snapshot(day, market, heat)
 
-    print(json.dumps({"generatedAt": generated, "verifiedToday": verified_today, "providerDate": latest_provider_date, "indices": len(market["indices"]), "industry": len(industry), "concept": len(concept), "breadth": breadth.get("sampleCount"), "errors": errors}, ensure_ascii=False))
+    print(json.dumps({
+        "generatedAt": generated, "verifiedToday": verified_today, "providerDate": latest_provider_date,
+        "indices": len(market["indices"]), "industry": len(industry), "concept": len(concept),
+        "breadth": breadth.get("sampleCount"), "errors": errors
+    }, ensure_ascii=False))
     if not quotes and not industry and not concept:
         sys.exit(2)
 
