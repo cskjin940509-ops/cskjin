@@ -11,12 +11,14 @@ on:
       - 'tools/enrich_yunai_gateway.py'
       - 'tools/yunai_tail_overlay.py'
       - 'tools/sync_yunai_production.py'
+      - 'tools/update_trade_execution_signals.py'
       - 'tools/run_tail_rolling_reliable.py'
       - '.github/workflows/update-market-gateway.yml'
   schedule:
-    # 北京交易时段兜底快照：09:30-11:30 / 13:00-15:00，每10分钟
-    - cron: '*/10 1-3 * * 1-5'
-    - cron: '*/10 5-7 * * 1-5'
+    # 北京交易时段：09:30-11:30 / 13:00-15:00，每5分钟刷新行情与交易辅助。
+    # cron会覆盖稍宽时间段，执行脚本自身负责严格交易窗口判断。
+    - cron: '*/5 1-3 * * 1-5'
+    - cron: '*/5 5-7 * * 1-5'
     # 收盘后立刻补抓。15:02/15:06/15:10优先形成可验证收盘快照；15:20/15:30继续兜底。
     - cron: '2,6,10,20,30 7 * * 1-5'
     # 晚间只做额外数据兜底，不再作为正式股票池生成前置条件。
@@ -32,7 +34,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 16
+    timeout-minutes: 18
     steps:
       - name: 记录市场网关运行编号
         env:
@@ -63,21 +65,26 @@ jobs:
         run: |
           python tools/enrich_yunai_gateway.py
           python tools/sync_yunai_production.py
+      - name: 更新5分钟交易辅助信号
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+          DRY_RUN: ${{ github.event_name == 'push' && '1' || '0' }}
+        run: python tools/update_trade_execution_signals.py
       - name: 收盘后兜底锁定 TailFinal
         env:
           FINAL_ONLY: '1'
         run: |
           python tools/run_tail_rolling_reliable.py
           python tools/enrich_tail_yunai.py
-      - name: 保存数据网关、TailFinal与历史市场快照
+      - name: 保存数据网关、交易信号、TailFinal与历史市场快照
         run: |
-          if git diff --quiet -- astock_gateway astock_tail astock_snapshots/index.json; then
-            echo 'No market/tail data changes.'
+          if git diff --quiet -- astock_gateway astock_execution astock_tail astock_snapshots/index.json; then
+            echo 'No market/execution/tail data changes.'
             exit 0
           fi
           git config user.name 'astock-data-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_gateway astock_tail astock_snapshots/index.json
-          git commit -m 'Update A-share market gateway and tail final snapshot'
+          git add astock_gateway astock_execution astock_tail astock_snapshots/index.json
+          git commit -m 'Update A-share market gateway, execution signals and tail snapshot'
           git pull --rebase origin main
           git push origin HEAD:main
