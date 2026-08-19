@@ -36,7 +36,7 @@ def scalar(o,names):
 
 def post(path,body):
     token=yg.bearer()
-    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.2'})
+    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.3'})
     try:
         with urlopen(req,timeout=20) as r:
             raw=r.read().decode('utf-8','replace'); status=r.status; ctype=r.headers.get('Content-Type','')
@@ -67,17 +67,15 @@ def fetch_stock_overlay(codes):
     for i in range(0,len(codes),10):
         batch=codes[i:i+10]
         st,_,p=post(PREFIX+'/real-time-quotes',{'symbols':batch})
-        if 200<=st<300:
-            apply_quote(out,batch,p)
-        else:
-            for c in batch:
+        if 200<=st<300: apply_quote(out,batch,p)
+        for c in batch:
+            if not out[c]['quoteOk']:
                 s,_,one=post(PREFIX+'/real-time-quotes',{'symbols':[c]})
                 if 200<=s<300: apply_quote(out,[c],one)
         st,_,p=post(PREFIX+'/capital-distribution',{'symbols':batch})
-        if 200<=st<300:
-            apply_capital(out,batch,p)
-        else:
-            for c in batch:
+        if 200<=st<300: apply_capital(out,batch,p)
+        for c in batch:
+            if not out[c]['capitalOk']:
                 s,_,one=post(PREFIX+'/capital-distribution',{'symbols':[c]})
                 if 200<=s<300: apply_capital(out,[c],one)
     return out
