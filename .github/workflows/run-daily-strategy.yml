@@ -7,21 +7,26 @@ on:
         description: '目标交易日 YYYY-MM-DD，留空则使用最新冻结市场快照日期'
         required: false
         type: string
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/run-daily-strategy.yml'
   schedule:
-    # 北京时间工作日 18:40；只生产当天、已冻结且已通过校验的 Official Cohort
-    - cron: '40 10 * * 1-5'
+    # 北京时间收盘后尽快冻结：15:05首次尝试，15:15/15:25仅做数据延迟兜底。
+    # 任一轮通过当日冻结快照 + 双源未复权OHLC校验后即生成Official；后续轮次读取immutable并退出。
+    - cron: '5,15,25 7 * * 1-5'
 
 permissions:
   contents: write
 
 concurrency:
   group: astock-daily-strategy
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: 记录策略运行编号
         env:
