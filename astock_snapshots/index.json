@@ -5390,7 +5390,7 @@
     "note": "日终扫描已冻结；B1/B2缺失不伪造，B4按当前可用因子合成并标低置信度。",
     "marketSnapshot": {
       "sourceDate": "2026-08-19",
-      "availableAt": "2026-08-19T16:26:27+08:00",
+      "availableAt": "2026-08-19T17:51:28+08:00",
       "confidence": "高",
       "verifiedToday": true,
       "dataSource": "腾讯行情 + 东方财富",
@@ -5439,7 +5439,8 @@
       "sampleCount": 100,
       "breadthStatus": "全市场统计待同步",
       "breadthSampleCount": 100,
-      "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。"
+      "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
+      "marketStatusProvider": "Yunai Quant API"
     },
     "boardHeatmap": {
       "industry": [
@@ -8047,12 +8048,15 @@
         }
       ],
       "sourceDate": "2026-08-19",
-      "availableAt": "2026-08-19T16:26:27+08:00"
+      "availableAt": "2026-08-19T17:51:28+08:00"
     },
     "syncStatus": {
       "officialCohort": "ready",
       "officialUpdatedAt": "2026-08-19T16:30:56+08:00",
-      "strategyVersion": "v1.8.1-verified-point-in-time-bse-3source"
+      "strategyVersion": "v1.8.1-verified-point-in-time-bse-3source",
+      "marketSnapshot": "ready",
+      "boardHeatmap": "ready",
+      "marketUpdatedAt": "2026-08-19T17:51:28+08:00"
     },
     "dataValidation": {
       "status": "Verified",
@@ -8106,6 +8110,43 @@
         "requires": "两个源因子均有正式入池确认"
       }
     },
-    "poolSchemaVersion": "v2-pairwise"
+    "poolSchemaVersion": "v2-pairwise",
+    "yunai": {
+      "configured": true,
+      "connected": true,
+      "marketStatus": {
+        "connected": true,
+        "provider": "Yunai Quant API",
+        "checkedAt": "2026-08-19T17:51:56+08:00",
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
+        "responseDigest": "e859d3fc39bb4ced",
+        "data": [
+          {
+            "market": "US",
+            "status": "PRE_HOUR_TRADING",
+            "marketStatus": "Pre-Mkt",
+            "openTime": 1787146200000
+          },
+          {
+            "market": "HK",
+            "status": "CLOSING",
+            "marketStatus": "Closed"
+          },
+          {
+            "market": "CN",
+            "status": "CLOSING",
+            "marketStatus": "Closed"
+          }
+        ]
+      },
+      "openapiState": "ready",
+      "endpointCount": 38,
+      "categories": [
+        "K线",
+        "行情"
+      ]
+    }
   }
 ]
