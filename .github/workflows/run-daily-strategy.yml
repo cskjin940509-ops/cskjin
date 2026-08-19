@@ -14,9 +14,10 @@ on:
       - 'tools/run_daily_strategy_verified.py'
       - 'tools/run_daily_strategy_verified_bse.py'
       - 'tools/update_strategy_tracking_display_ready.py'
+      - 'tools/enrich_official_trade_metrics.py'
   schedule:
     # 北京时间收盘后尽快冻结：15:05首次尝试，15:15/15:25仅做数据延迟兜底。
-    # 任一轮通过当日冻结快照 + 至少双源未复权OHLC校验后即生成Official；后续不改写原始名单。
+    # 任一轮通过当日冻结快照 + 至少双源未复权OHLC校验后即生成正式池；后续不改写原始名单。
     - cron: '5,15,25 7 * * 1-5'
 
 permissions:
@@ -63,11 +64,16 @@ jobs:
           else
             python tools/augment_pairwise_pools.py
           fi
+      - name: 补全正式池当日交易事实
+        env:
+          TARGET_DATE: ${{ inputs.target_date }}
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/enrich_official_trade_metrics.py
       - name: 更新正式与参考批次后续表现
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/update_strategy_tracking_display_ready.py
-      - name: 保存正式 Daily Cohort 与 Tracking
+      - name: 保存正式股票池与收益跟踪
         run: |
           if git diff --quiet -- astock_snapshots/index.json; then
             echo 'No strategy/tracking changes.'
