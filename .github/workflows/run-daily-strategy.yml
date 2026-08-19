@@ -11,9 +11,11 @@ on:
     branches: [ main ]
     paths:
       - '.github/workflows/run-daily-strategy.yml'
+      - 'tools/run_daily_strategy_verified.py'
+      - 'tools/run_daily_strategy_verified_bse.py'
   schedule:
     # 北京时间收盘后尽快冻结：15:05首次尝试，15:15/15:25仅做数据延迟兜底。
-    # 任一轮通过当日冻结快照 + 双源未复权OHLC校验后即生成Official；后续轮次读取immutable并退出。
+    # 任一轮通过当日冻结快照 + 至少双源未复权OHLC校验后即生成Official；后续轮次读取immutable并退出。
     - cron: '5,15,25 7 * * 1-5'
 
 permissions:
@@ -46,9 +48,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 运行时点安全 + 双源校验的日终扫描
+      - name: 运行时点安全 + 至少双源校验的日终扫描
         env:
           TARGET_DATE: ${{ inputs.target_date }}
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/run_daily_strategy_verified_bse.py
       - name: 生成两两资金确认池
         env:
