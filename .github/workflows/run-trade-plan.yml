@@ -1,0 +1,48 @@
+name: Run AStock Live Trade Plan
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/update_trade_plan.py'
+      - '.github/workflows/run-trade-plan.yml'
+  schedule:
+    - cron: '*/5 1-3 * * 1-5'
+    - cron: '*/5 5-7 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-live-trade-plan
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 计算实时交易计划与形态候选
+        env:
+          FORCE_SNAPSHOT: ${{ github.event_name == 'push' && '1' || '0' }}
+        run: python tools/update_trade_plan.py
+      - name: 保存交易计划
+        run: |
+          if git status --porcelain -- astock_trade | grep -q .; then
+            git config user.name 'astock-trade-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add astock_trade
+            git commit -m 'Update live A-share trade plan'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          else
+            echo 'No trade-plan changes.'
+          fi
