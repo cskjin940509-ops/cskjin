@@ -1,4 +1,4 @@
-name: Recover AStock Tail Decision
+name: Recover AStock Rolling Tail Decision
 
 on:
   push:
@@ -25,20 +25,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 尾盘决策恢复扫描
+      - name: 尾盘滚动/Final恢复扫描
         env:
           ALLOW_ANY_TIME: '1'
           DRY_RUN: '0'
-        run: python tools/run_tail_decision.py
+        run: python tools/run_tail_rolling.py
+      - name: 刷新 Yunai 候选股确认
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/sync_yunai_production.py
+      - name: 合并 Yunai 二次确认
+        env:
+          DRY_RUN: '0'
+        run: python tools/enrich_tail_yunai.py
       - name: 保存恢复结果
         run: |
-          if git diff --quiet -- astock_tail; then
-            echo 'Tail decision already exists or no recovery changes.'
-            exit 0
-          fi
           git config user.name 'astock-tail-watchdog'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_tail
-          git commit -m 'Recover missing 14:30 tail decision cohort'
+          git add astock_tail astock_gateway/yunai_live.json astock_gateway/latest.json
+          if git diff --cached --quiet; then
+            echo 'Tail result already healthy or no recovery changes.'
+            exit 0
+          fi
+          git commit -m 'Recover rolling tail decision result'
           git pull --rebase origin main
           git push origin HEAD:main
