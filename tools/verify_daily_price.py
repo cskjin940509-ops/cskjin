@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import json, math, os
+import csv, io, json, math, os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlencode
@@ -10,7 +10,7 @@ from urllib.request import Request, urlopen
 CN = timezone(timedelta(hours=8))
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "astock_gateway" / "validation"
-UA = "Mozilla/5.0 AStockStrategy-Validator/1.0"
+UA = "Mozilla/5.0 AStockStrategy-Validator/1.1"
 
 
 def finite(v):
@@ -21,11 +21,15 @@ def finite(v):
         return None
 
 
-def get_text(url, referer=None):
+def get_bytes(url, referer=None):
     h = {"User-Agent": UA, "Accept": "*/*", "Cache-Control": "no-cache"}
     if referer: h["Referer"] = referer
     with urlopen(Request(url, headers=h), timeout=15) as r:
-        return r.read().decode("utf-8", "replace")
+        return r.read()
+
+
+def get_text(url, referer=None, encoding="utf-8"):
+    return get_bytes(url, referer).decode(encoding, "replace")
 
 
 def market_symbol(code):
@@ -81,6 +85,46 @@ def eastmoney(code, day, adjust):
     return {"provider":"东方财富", "adjust":"qfq" if adjust else "raw", "row":row, "urlKind":"kline"}
 
 
+def netease(code, day):
+    # NetEase CHD uses 0+code for Shanghai and 1+code for Shenzhen.
+    if code.startswith(("8", "9")):
+        return {"provider":"网易财经", "adjust":"raw", "row":None, "error":"unsupported-market"}
+    prefix = "0" if code.startswith(("5", "6")) else "1"
+    compact = day.replace("-", "")
+    q = {
+        "code": prefix + code,
+        "start": compact,
+        "end": compact,
+        "fields": "TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;VOTURNOVER;VATURNOVER",
+    }
+    url = "https://quotes.money.163.com/service/chddata.html?" + urlencode(q)
+    raw = get_bytes(url, "https://quotes.money.163.com/")
+    text = None
+    for enc in ("gb18030", "gbk", "utf-8"):
+        try:
+            text = raw.decode(enc)
+            break
+        except Exception:
+            continue
+    if text is None: text = raw.decode("utf-8", "replace")
+    reader = csv.DictReader(io.StringIO(text))
+    row = None
+    for x in reader:
+        d = (x.get("日期") or x.get("date") or "").strip()
+        if d == day:
+            row = {
+                "date": d,
+                "open": finite(x.get("开盘价") or x.get("TOPEN")),
+                "close": finite(x.get("收盘价") or x.get("TCLOSE")),
+                "high": finite(x.get("最高价") or x.get("HIGH")),
+                "low": finite(x.get("最低价") or x.get("LOW")),
+                "volume": finite(x.get("成交量") or x.get("VOTURNOVER")),
+                "amount": finite(x.get("成交金额") or x.get("VATURNOVER")),
+            }
+            break
+    return {"provider":"网易财经", "adjust":"raw", "row":row, "urlKind":"chddata"}
+
+
 def max_rel_diff(rows):
     vals=[]
     for field in ("open","close","high","low"):
@@ -110,16 +154,20 @@ def main():
             try: checks.append(fn(code,day,adjust))
             except Exception as e:
                 checks.append({"provider":fn.__name__,"adjust":"qfq" if adjust else "raw","row":None,"error":f"{e.__class__.__name__}: {e}"})
+    try: checks.append(netease(code, day))
+    except Exception as e: checks.append({"provider":"网易财经","adjust":"raw","row":None,"error":f"{e.__class__.__name__}: {e}"})
+
     raw=[x for x in checks if x.get("adjust")=="raw" and x.get("row")]
     qfq=[x for x in checks if x.get("adjust")=="qfq" and x.get("row")]
     for x in checks:
         for e in validate_ohlc(x.get("row")): errors.append(f"{x.get('provider')}/{x.get('adjust')}:{e}")
     raw_diff=max_rel_diff(raw); qfq_diff=max_rel_diff(qfq)
-    verified=bool(len(raw)>=2 and raw_diff is not None and raw_diff <= 0.001)
+    providers={x.get("provider") for x in raw}
+    verified=bool(len(providers)>=2 and raw_diff is not None and raw_diff <= 0.001)
     report={
         "symbol":code,"date":day,"generatedAt":datetime.now(CN).isoformat(timespec="seconds"),
         "checks":checks,"rawCrossSourceMaxRelDiff":raw_diff,"qfqCrossSourceMaxRelDiff":qfq_diff,
-        "verified":verified,"errors":errors,
+        "verified":verified,"verifiedRawProviders":sorted(providers),"errors":errors,
         "rule":"正式价格必须至少两个独立源的未复权OHLC一致（最大相对差<=0.1%）；复权价只用于收益/因子，不作为实际成交价展示。",
     }
     OUT.mkdir(parents=True,exist_ok=True)
