@@ -7,6 +7,7 @@ on:
     paths:
       - 'tools/run_tail_decision.py'
       - 'tools/bse_market_mapping.py'
+      - 'tools/enrich_tail_yunai.py'
       - '.github/workflows/run-tail-decision.yml'
   schedule:
     # 北京时间工作日 14:30 主跑；14:34 / 14:38 只做冗余补跑。
@@ -48,6 +49,10 @@ jobs:
           DRY_RUN: ${{ github.event_name == 'push' && '1' || '0' }}
           ALLOW_ANY_TIME: ${{ github.event_name == 'push' && '1' || '0' }}
         run: python tools/run_tail_decision.py
+      - name: 合并Yunai生产网关确认
+        env:
+          DRY_RUN: ${{ github.event_name == 'push' && '1' || '0' }}
+        run: python tools/enrich_tail_yunai.py
       - name: 保存尾盘冻结结果
         if: github.event_name != 'push'
         run: |
