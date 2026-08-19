@@ -78,13 +78,14 @@ jobs:
           python tools/enrich_tail_yunai.py
       - name: 保存数据网关、交易信号、TailFinal与历史市场快照
         run: |
-          if git diff --quiet -- astock_gateway astock_execution astock_tail astock_snapshots/index.json; then
+          if git diff --quiet -- astock_gateway astock_tail astock_snapshots/index.json && { [ ! -d astock_execution ] || git diff --quiet -- astock_execution; }; then
             echo 'No market/execution/tail data changes.'
             exit 0
           fi
           git config user.name 'astock-data-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_gateway astock_execution astock_tail astock_snapshots/index.json
+          git add astock_gateway astock_tail astock_snapshots/index.json
+          if [ -d astock_execution ]; then git add astock_execution; fi
           git commit -m 'Update A-share market gateway, execution signals and tail snapshot'
           git pull --rebase origin main
           git push origin HEAD:main
