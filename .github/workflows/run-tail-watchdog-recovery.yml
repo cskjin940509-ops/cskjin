@@ -1,0 +1,44 @@
+name: Recover AStock Tail Decision
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'astock_tail/watchdog-trigger.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-tail-watchdog-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 尾盘决策恢复扫描
+        env:
+          ALLOW_ANY_TIME: '1'
+          DRY_RUN: '0'
+        run: python tools/run_tail_decision.py
+      - name: 保存恢复结果
+        run: |
+          if git diff --quiet -- astock_tail; then
+            echo 'Tail decision already exists or no recovery changes.'
+            exit 0
+          fi
+          git config user.name 'astock-tail-watchdog'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_tail
+          git commit -m 'Recover missing 14:30 tail decision cohort'
+          git pull --rebase origin main
+          git push origin HEAD:main
