@@ -13,7 +13,7 @@ on:
       - '.github/workflows/run-daily-strategy.yml'
       - 'tools/run_daily_strategy_verified.py'
       - 'tools/run_daily_strategy_verified_bse.py'
-      - 'tools/update_strategy_tracking_reference.py'
+      - 'tools/update_strategy_tracking_display_ready.py'
   schedule:
     # 北京时间收盘后尽快冻结：15:05首次尝试，15:15/15:25仅做数据延迟兜底。
     # 任一轮通过当日冻结快照 + 至少双源未复权OHLC校验后即生成Official；后续不改写原始名单。
@@ -60,11 +60,13 @@ jobs:
         run: |
           if git diff --quiet -- astock_snapshots/index.json; then
             echo 'No new verified cohort; skip pairwise augmentation.'
-            exit 0
+          else
+            python tools/augment_pairwise_pools.py
           fi
-          python tools/augment_pairwise_pools.py
       - name: 更新正式与参考批次后续表现
-        run: python tools/update_strategy_tracking_reference.py
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/update_strategy_tracking_display_ready.py
       - name: 保存正式 Daily Cohort 与 Tracking
         run: |
           if git diff --quiet -- astock_snapshots/index.json; then
