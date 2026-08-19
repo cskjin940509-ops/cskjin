@@ -42,6 +42,11 @@ data class TailStock(
 
 data class TailDecision(
     val date: String,
+    val status: String,
+    val phase: String?,
+    val isFinal: Boolean,
+    val scheduledSlot: String?,
+    val refreshIntervalMin: Int,
     val capturedAt: String,
     val boardSource: String,
     val confidence: String,
@@ -62,7 +67,7 @@ fun TailDecisionPanel() {
             runCatching { fetchTailDecision() }
                 .onSuccess { tail = it; error = null }
                 .onFailure { error = it.javaClass.simpleName }
-            delay(60_000)
+            delay(30_000)
         }
     }
 
@@ -73,8 +78,13 @@ fun TailDecisionPanel() {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text("14:30 尾盘决策池", fontWeight = FontWeight.Bold, fontSize = 17.sp)
-                Text("尾盘可交易参考 · 与收盘正式池分开冻结", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("14:30–15:00 尾盘实时池", fontWeight = FontWeight.Bold, fontSize = 17.sp)
+                Text(
+                    if (current?.isFinal == true) "15:00收盘锁定 · 与盘后正式池分开留档"
+                    else "每5分钟重算主线与股票池 · 15:00收盘锁定",
+                    fontSize = 10.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
             Surface(
                 color = if (current != null && !current.noTrade) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
@@ -82,8 +92,10 @@ fun TailDecisionPanel() {
             ) {
                 Text(
                     when {
-                        current != null && current.noTrade -> "无核心信号"
-                        current != null -> "已冻结"
+                        current?.isFinal == true && current.noTrade -> "最终无信号"
+                        current?.isFinal == true -> "最终已锁定"
+                        current != null && current.noTrade -> "滚动无信号"
+                        current != null -> "滚动中"
                         now.isBefore(LocalTime.of(14, 30)) -> "等待14:30"
                         else -> "生成中"
                     },
@@ -98,8 +110,8 @@ fun TailDecisionPanel() {
             Card(shape = RoundedCornerShape(16.dp)) {
                 Column(Modifier.fillMaxWidth().padding(13.dp)) {
                     Text(
-                        if (now.isBefore(LocalTime.of(14, 30))) "今天14:30会按当时确认主线生成尾盘板块与股票池。"
-                        else "今日尾盘池尚未同步；GitHub定时任务可能有数分钟启动延迟。",
+                        if (now.isBefore(LocalTime.of(14, 30))) "今天14:30开始生成尾盘主线与股票池，之后每5分钟更新一次。"
+                        else "今日尾盘实时池尚未同步；定时任务可能有数分钟启动延迟。",
                         fontSize = 11.sp
                     )
                     tail?.let { Text("最近一次：${it.date} ${tailTime(it.capturedAt)}", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant) }
@@ -111,28 +123,37 @@ fun TailDecisionPanel() {
 
         Card(shape = RoundedCornerShape(16.dp)) {
             Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Key("冻结时间", "${current.date} ${tailTime(current.capturedAt)}")
+                Key(if (current.isFinal) "锁定时间" else "最近更新", "${current.date} ${tailTime(current.capturedAt)}")
+                Key("阶段", current.phase ?: if (current.isFinal) "收盘锁定" else "尾盘滚动")
+                Key("下一刷新", nextTailRefresh(current))
                 Key("板块来源", current.boardSource)
                 Key("置信度", current.confidence)
                 Key("确认主线", current.confirmedMainlines.joinToString(" / ").ifBlank { "无" })
                 if (current.confirmedMainlines.isEmpty() && current.candidateMainlines.isNotEmpty()) {
                     Key("候选观察", current.candidateMainlines.joinToString(" / "))
                 }
+                Text(tailTimeline(current), fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
 
         if (current.noTrade) {
-            Notice("14:30 当时没有同时满足“确认主线 + 基础强度 + 主力资金确认”的核心股票，不强行给尾盘买入名单。")
+            Notice(
+                if (current.isFinal) "15:00最终锁定时没有同时满足“确认主线 + 基础强度 + 主力资金确认”的核心股票，今日尾盘最终池为空。"
+                else "本轮没有同时满足“确认主线 + 基础强度 + 主力资金确认”的核心股票；下一5分钟会重新扫描，不强行给买入名单。"
+            )
         } else {
             val core = current.pools["TailCore"].orEmpty()
-            Text("尾盘核心池 TailCore", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-            Text("TB0基础强度 ∩ TB3主力资金确认；按尾盘综合分排序。", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(if (current.isFinal) "尾盘最终核心池 TailCore" else "尾盘实时核心池 TailCore", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("TB0基础强度 ∩ TB3主力资金确认；每轮按当时数据重新排序。", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             core.take(8).forEach { code ->
                 current.stocks[code]?.let { TailStockRow(it) }
             }
         }
 
-        Notice("这是14:30冻结的尾盘决策依据，不是收盘结论。15:00后市场事实会重新计算，18:40生成收盘 Verified Official；14:30名单不会被收盘结果回写。")
+        Notice(
+            if (current.isFinal) "这是15:00后第一次成功计算并锁定的 TailFinal（尾盘最终池），后续不会用盘后数据或未来表现改写。收盘 Official（正式池）仍会独立计算。"
+            else "当前是 TailLive（尾盘滚动池），不是最终结果。14:30后每5分钟重新计算一次，15:00后第一次成功结果会切换为 TailFinal 并锁定。"
+        )
     }
 }
 
@@ -170,11 +191,33 @@ private fun MiniMetric(label: String, value: String, modifier: Modifier) {
 
 private fun tailTime(v: String): String = if (v.length >= 19) v.substring(11, 19) else v
 
+private fun nextTailRefresh(d: TailDecision): String {
+    if (d.isFinal) return "已锁定，不再滚动"
+    val slot = d.scheduledSlot?.takeIf { it.length == 4 && it.all(Char::isDigit) }
+    val total = if (slot != null) slot.substring(0, 2).toInt() * 60 + slot.substring(2, 4).toInt() else {
+        val t = tailTime(d.capturedAt)
+        runCatching { t.substring(0, 2).toInt() * 60 + t.substring(3, 5).toInt() }.getOrDefault(14 * 60 + 30)
+    }
+    val next = total + d.refreshIntervalMin.coerceAtLeast(5)
+    if (next >= 15 * 60) return "15:00 收盘锁定"
+    return String.format("%02d:%02d", next / 60, next % 60)
+}
+
+private fun tailTimeline(d: TailDecision): String {
+    val current = d.scheduledSlot
+    val slots = listOf("1430", "1435", "1440", "1445", "1450", "1455")
+    val intraday = slots.joinToString("  ") { s ->
+        val label = "${s.substring(0, 2)}:${s.substring(2, 4)}"
+        if (!d.isFinal && s == current) "[$label]" else label
+    }
+    return if (d.isFinal) "$intraday  [15:00 Final]" else "$intraday  15:00 Final"
+}
+
 private suspend fun fetchTailDecision(): TailDecision = withContext(Dispatchers.IO) {
     val c = URL("$TAIL_URL?t=${System.currentTimeMillis()}").openConnection() as HttpURLConnection
     c.connectTimeout = 8_000
     c.readTimeout = 8_000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/1.7")
+    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/1.8")
     c.setRequestProperty("Cache-Control", "no-cache")
     c.connect()
     try {
@@ -214,6 +257,11 @@ private fun parseTail(o: JSONObject): TailDecision {
     }
     return TailDecision(
         date = o.optString("date"),
+        status = o.optString("status", "TailDecision"),
+        phase = o.optString("phase").takeIf { it.isNotBlank() },
+        isFinal = o.optBoolean("isFinal", o.optString("status") == "TailFinal"),
+        scheduledSlot = o.optString("scheduledSlot").takeIf { it.isNotBlank() },
+        refreshIntervalMin = o.optInt("refreshIntervalMin", 5),
         capturedAt = o.optString("capturedAt"),
         boardSource = o.optString("boardSource", "未知"),
         confidence = o.optString("confidence", "—"),
