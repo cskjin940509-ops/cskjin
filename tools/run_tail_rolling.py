@@ -14,7 +14,7 @@ OUT = ROOT / "astock_tail"
 HIST = OUT / "history"
 INTRADAY = OUT / "intraday"
 LATEST = OUT / "latest.json"
-VERSION = "v1.1-tail-1430-1500-rolling"
+VERSION = "v1.2-tail-1430-1500-rolling-recovery"
 
 
 def slot_for(now: datetime) -> str:
@@ -30,13 +30,23 @@ def main():
     now = datetime.now(CN)
     day = now.strftime("%Y-%m-%d")
     dry_run = os.getenv("DRY_RUN", "0") == "1"
-    allow_any = os.getenv("ALLOW_ANY_TIME", "0") == "1" or dry_run
+    recovery_push = os.getenv("RECOVERY_PUSH", "0") == "1"
+    allow_any = os.getenv("ALLOW_ANY_TIME", "0") == "1" or dry_run or recovery_push
 
     if now.weekday() >= 5:
         print(json.dumps({"state": "skip", "reason": "weekend", "date": day}, ensure_ascii=False))
         return
 
-    if not allow_any and not (dtime(14, 30) <= now.time() < dtime(15, 6)):
+    # Code pushes are allowed to recover a missing post-close Final, but may not
+    # create arbitrary pre-close TailLive snapshots outside the normal schedule.
+    if recovery_push and now.time() < dtime(15, 0):
+        print(json.dumps({"state": "skip", "reason": "push-recovery-only-after-close", "capturedAt": now.isoformat(timespec="seconds")}, ensure_ascii=False))
+        return
+
+    # Scheduled GitHub Actions can be delayed substantially. After 15:00 the A-share
+    # cash session is already closed, so a delayed same-day run may still freeze the
+    # close-state TailFinal. This is preferable to leaving a stale TailLive overnight.
+    if not allow_any and not (dtime(14, 30) <= now.time() < dtime(23, 30)):
         print(json.dumps({"state": "skip", "reason": "outside-rolling-tail-window", "capturedAt": now.isoformat(timespec="seconds")}, ensure_ascii=False))
         return
 
@@ -59,7 +69,6 @@ def main():
         core.main()
         return
 
-    # Reuse the already-tested point-in-time scanner, but rolling controller owns persistence semantics.
     old_force = os.environ.get("FORCE_REBUILD")
     old_allow = os.environ.get("ALLOW_ANY_TIME")
     os.environ["FORCE_REBUILD"] = "1"
@@ -89,9 +98,9 @@ def main():
 
     if is_final:
         result["status"] = "TailFinal"
-        result["phase"] = "收盘锁定"
-        result["note"] = "14:30后每5分钟重算尾盘主线与筛选池；本批次为15:00收盘后第一次成功结果，已锁定。B1两融/B2 ETF申赎缺失时不伪造。"
-        result["executionNote"] = "TailFinal 为当日尾盘最终留档；后续不会因盘后数据或未来表现改写本批次原始信号。"
+        result["phase"] = "收盘锁定" if now.time() < dtime(15, 20) else "收盘恢复锁定"
+        result["note"] = "14:30后每5分钟重算尾盘主线与筛选池；本批次使用当日收盘状态完成最终锁定。B1两融/B2 ETF申赎缺失时不伪造。"
+        result["executionNote"] = "TailFinal 为当日尾盘最终留档；GitHub Actions若延迟，可在收盘后恢复生成，但不使用下一交易日数据，也不会被后续盘后任务改写。"
         result["snapshotPath"] = f"astock_tail/history/{day}.json"
     else:
         result["status"] = "TailLive"
@@ -109,7 +118,6 @@ def main():
         slot_dir = INTRADAY / day
         slot_dir.mkdir(parents=True, exist_ok=True)
         (slot_dir / f"{slot}.json").write_text(text, encoding="utf-8")
-        # Before 15:00 there must be no file that can be mistaken for the day's final tail result.
         if final_path.exists():
             final_path.unlink()
 
