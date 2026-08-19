@@ -1,4 +1,4 @@
-name: Build AStock v1.6 BSE Mapping APK
+name: Build AStock v1.7 Tail Decision APK
 
 on:
   workflow_dispatch:
@@ -46,6 +46,8 @@ jobs:
         run: python tools/patch_board_source_failover.py
       - name: 修复北交所代码映射
         run: python tools/patch_bse_market_mapping.py
+      - name: 接入14:30尾盘决策池
+        run: python tools/patch_tail_decision_ui.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -68,6 +70,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v1.6-bse-fix-debug
+          name: AStockStrategy-v1.7-tail-decision-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
