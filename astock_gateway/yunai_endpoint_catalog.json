@@ -1,0 +1,633 @@
+{
+  "source": "https://quant.yunai.com.cn/quant-market/v3/api-docs",
+  "endpointCount": 38,
+  "methodCounts": {
+    "GET": 11,
+    "POST": 27,
+    "PUT": 0,
+    "DELETE": 0,
+    "PATCH": 0
+  },
+  "categoryCounts": {
+    "K线": 6,
+    "行情": 38,
+    "资金流": 1,
+    "公司行动": 2,
+    "ETF": 10,
+    "财务": 4,
+    "期货": 7,
+    "证券基础": 7,
+    "逐笔/盘口": 4,
+    "WebSocket": 3,
+    "指数": 3
+  },
+  "endpoints": [
+    {
+      "no": 1,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/bars",
+      "summary": "获取股票 K 线数据",
+      "operationId": "QuoteController_getBars",
+      "requestSchema": "BarsRequest",
+      "categories": [
+        "K线",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 2,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/bars-range",
+      "summary": "获取股票历史 K 线数据",
+      "operationId": "QuoteController_getBarsRange",
+      "requestSchema": "BarsRangeRequest",
+      "categories": [
+        "K线",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 3,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/capital-distribution",
+      "summary": "获取实时资金分布",
+      "operationId": "QuoteController_getCapitalDistribution",
+      "requestSchema": "RealTimeQuotesRequest",
+      "categories": [
+        "资金流",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 4,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/corporate-dividend",
+      "summary": "获取股票分红信息",
+      "operationId": "QuoteController_getCorporateDividend",
+      "requestSchema": "CorporateActionRequest",
+      "categories": [
+        "公司行动",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 5,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/corporate-split",
+      "summary": "获取股票拆分信息",
+      "operationId": "QuoteController_getCorporateSplit",
+      "requestSchema": "CorporateActionRequest",
+      "categories": [
+        "公司行动",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 6,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/financial-daily",
+      "summary": "(待开放)获取财务日报",
+      "operationId": "QuoteController_getFinancialDaily",
+      "requestSchema": "FinancialDailyRequest",
+      "categories": [
+        "ETF",
+        "财务",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 7,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/financial-report",
+      "summary": "(待开放)获取财务报告",
+      "operationId": "QuoteController_getFinancialReport",
+      "requestSchema": "FinancialReportRequest",
+      "categories": [
+        "ETF",
+        "财务",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 8,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/fundamentals-summary",
+      "summary": "获取基本面摘要",
+      "operationId": "QuoteController_getFundamentalsSummary",
+      "requestSchema": "FundamentalsSummaryRequest",
+      "categories": [
+        "ETF",
+        "财务",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 9,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/futures-bars",
+      "summary": "获取期货 K 线最新数据",
+      "operationId": "QuoteController_getFuturesBars",
+      "requestSchema": "FuturesBarsRequest",
+      "categories": [
+        "ETF",
+        "期货",
+        "K线",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 10,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/futures-bars-range",
+      "summary": "获取期货历史 K 线数据",
+      "operationId": "QuoteController_getFuturesBarsRange",
+      "requestSchema": "FuturesBarsRangeRequest",
+      "categories": [
+        "ETF",
+        "期货",
+        "K线",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 11,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/futures-real-time-quotes",
+      "summary": "获取期货实时行情",
+      "operationId": "QuoteController_getFuturesRealTimeQuotes",
+      "requestSchema": "FuturesRealTimeQuotesRequest",
+      "categories": [
+        "ETF",
+        "期货",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 12,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/futures-symbol-names",
+      "summary": "获取期货合约代码及名称",
+      "operationId": "QuoteController_getFuturesSymbolNames",
+      "requestSchema": null,
+      "categories": [
+        "ETF",
+        "期货",
+        "行情",
+        "证券基础"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 13,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/futures-symbols",
+      "summary": "获取期货合约代码",
+      "operationId": "QuoteController_getFuturesSymbols",
+      "requestSchema": null,
+      "categories": [
+        "ETF",
+        "期货",
+        "行情",
+        "证券基础"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 14,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/futures-trade-ticks",
+      "summary": "获取期货逐笔成交",
+      "operationId": "QuoteController_getFuturesTradeTicks",
+      "requestSchema": "FuturesTradeTicksRequest",
+      "categories": [
+        "ETF",
+        "期货",
+        "逐笔/盘口",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 15,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/futures-websocket-capabilities",
+      "summary": "WebSocket 期货实时行情 / WebSocket Futures Live Quotes",
+      "operationId": "QuoteController_getFuturesWebSocketCapabilities",
+      "requestSchema": null,
+      "categories": [
+        "ETF",
+        "期货",
+        "行情",
+        "WebSocket"
+      ],
+      "queryParameters": [
+        {
+          "name": "lang",
+          "required": false,
+          "description": "语言枚举值：zh_CN，zh_TW，en_US，默认：en_US"
+        }
+      ]
+    },
+    {
+      "no": 16,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/global-index-klines",
+      "summary": "获取全球指数 K 线",
+      "operationId": "QuoteController_getGlobalIndexKlines",
+      "requestSchema": "GlobalIndexKlineRequest",
+      "categories": [
+        "指数",
+        "K线",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 17,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/global-index-real-time-quotes",
+      "summary": "获取全球指数实时行情",
+      "operationId": "QuoteController_getGlobalIndexRealTimeQuotes",
+      "requestSchema": "GlobalIndexRealTimeQuotesRequest",
+      "categories": [
+        "指数",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 18,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/global-index-time-share",
+      "summary": "获取全球指数当日分时行情",
+      "operationId": "QuoteController_getGlobalIndexTimeShare",
+      "requestSchema": "GlobalIndexTimeShareRequest",
+      "categories": [
+        "指数",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 19,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/market-status",
+      "summary": "获取市场状态",
+      "operationId": "QuoteController_getMarketState",
+      "requestSchema": null,
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": [
+        {
+          "name": "market",
+          "required": true,
+          "description": "市场类型，例如 US（美股），HK（港股）"
+        },
+        {
+          "name": "lang",
+          "required": true,
+          "description": "语言枚举值：zh_CN，zh_TW，en_US，默认：en_US"
+        }
+      ]
+    },
+    {
+      "no": 20,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/news",
+      "summary": "获取股票相关新闻",
+      "operationId": "QuoteController_getSecurityNews",
+      "requestSchema": "SecurityNewsRequest",
+      "categories": [
+        "行情",
+        "证券基础",
+        "WebSocket"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 21,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/order-books",
+      "summary": "获取股票实时盘口",
+      "operationId": "QuoteController_getOrderBooks",
+      "requestSchema": "OrderBookRequest",
+      "categories": [
+        "逐笔/盘口",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 22,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/real-time-brokers",
+      "summary": "获取实时席位队列快照",
+      "operationId": "QuoteController_getRealtimeBrokers",
+      "requestSchema": "RealTimeQuotesRequest",
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 23,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/real-time-candlesticks",
+      "summary": "获取实时K线快照",
+      "operationId": "QuoteController_getRealtimeCandlesticks",
+      "requestSchema": "RealtimeCandlestickSnapshotRequest",
+      "categories": [
+        "K线",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 24,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/real-time-quotes",
+      "summary": "获取股票最新或实时行情",
+      "operationId": "QuoteController_getRealTimeQuotes",
+      "requestSchema": "RealTimeQuotesRequest",
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 25,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/symbol-catalog/search",
+      "summary": "根据股票代码或多语言名称搜索股票主数据",
+      "operationId": "QuoteController_searchSymbolCatalog",
+      "requestSchema": null,
+      "categories": [
+        "行情",
+        "证券基础"
+      ],
+      "queryParameters": [
+        {
+          "name": "keyword",
+          "required": true,
+          "description": "股票代码或名称关键字，支持英文、简体、繁体"
+        },
+        {
+          "name": "market",
+          "required": false,
+          "description": "可选市场代码，仅支持 US（美股）、HK（港股）、CN（A股）；不传则跨市场搜索"
+        },
+        {
+          "name": "lang",
+          "required": false,
+          "description": "显示名称优先语言：zh_CN、zh_TW、en_US，默认 en_US"
+        },
+        {
+          "name": "limit",
+          "required": false,
+          "description": "返回条数上限，默认 20，最大 50"
+        }
+      ]
+    },
+    {
+      "no": 26,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/symbol-names",
+      "summary": "获取股票名称",
+      "operationId": "QuoteController_getSymbolNames",
+      "requestSchema": null,
+      "categories": [
+        "行情",
+        "证券基础"
+      ],
+      "queryParameters": [
+        {
+          "name": "market",
+          "required": true,
+          "description": "市场类型，例如 US（美股），HK（港股）"
+        },
+        {
+          "name": "lang",
+          "required": true,
+          "description": "语言枚举值：zh_CN，zh_TW，en_US，默认：en_US"
+        }
+      ]
+    },
+    {
+      "no": 27,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/symbols",
+      "summary": "获取市场股票代码",
+      "operationId": "QuoteController_getSymbols",
+      "requestSchema": null,
+      "categories": [
+        "行情",
+        "证券基础"
+      ],
+      "queryParameters": [
+        {
+          "name": "market",
+          "required": true,
+          "description": "市场类型，例如 US（美股），HK（港股）"
+        }
+      ]
+    },
+    {
+      "no": 28,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/terminal-financial-summary",
+      "summary": "获取终端页财务摘要",
+      "operationId": "QuoteController_getTerminalFinancialSummary",
+      "requestSchema": null,
+      "categories": [
+        "财务",
+        "行情"
+      ],
+      "queryParameters": [
+        {
+          "name": "symbol",
+          "required": true,
+          "description": "股票代码，例如 MU、00700、000001"
+        },
+        {
+          "name": "market",
+          "required": true,
+          "description": "市场类型，例如 US（美股），HK（港股）"
+        }
+      ]
+    },
+    {
+      "no": 29,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/terminal-profile",
+      "summary": "获取终端页公司概览",
+      "operationId": "QuoteController_getTerminalCompanyProfile",
+      "requestSchema": null,
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": [
+        {
+          "name": "symbol",
+          "required": true,
+          "description": "股票代码，例如 MU、00700、000001"
+        },
+        {
+          "name": "market",
+          "required": true,
+          "description": "市场类型，例如 US（美股），HK（港股）"
+        },
+        {
+          "name": "lang",
+          "required": false,
+          "description": "语言枚举值：zh_CN，zh_TW，en_US，默认：en_US"
+        }
+      ]
+    },
+    {
+      "no": 30,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/time-share-quotes",
+      "summary": "获取当前/最近交易日分时",
+      "operationId": "QuoteController_getTimeShareQuotes",
+      "requestSchema": "TimeShareQuoteLatestRequest",
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 31,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/trade-ticks",
+      "summary": "获取最近逐笔成交",
+      "operationId": "QuoteController_getTradeTicks",
+      "requestSchema": "TradeTicksRequest",
+      "categories": [
+        "逐笔/盘口",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 32,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/trading-calendar",
+      "summary": "获取交易日历",
+      "operationId": "QuoteController_getTradingCalendar",
+      "requestSchema": null,
+      "categories": [
+        "行情",
+        "证券基础"
+      ],
+      "queryParameters": [
+        {
+          "name": "market",
+          "required": true,
+          "description": "市场类型，例如 US（美股），HK（港股）"
+        },
+        {
+          "name": "beginDate",
+          "required": true,
+          "description": "开始日期（格式：yyyy-MM-dd）"
+        },
+        {
+          "name": "endDate",
+          "required": true,
+          "description": "结束日期（格式：yyyy-MM-dd）"
+        }
+      ]
+    },
+    {
+      "no": 33,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/us-option-brief",
+      "summary": "获取美股期权实时简况",
+      "operationId": "QuoteController_getUsOptionBrief",
+      "requestSchema": "UsOptionBriefRequest",
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 34,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/us-option-chain",
+      "summary": "获取美股期权链实时行情",
+      "operationId": "QuoteController_getUsOptionChain",
+      "requestSchema": "UsOptionChainRequest",
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 35,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/us-option-depth",
+      "summary": "获取美股期权深度行情",
+      "operationId": "QuoteController_getUsOptionDepth",
+      "requestSchema": "UsOptionDepthRequest",
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 36,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/us-option-expirations",
+      "summary": "获取美股期权到期日",
+      "operationId": "QuoteController_getUsOptionExpirations",
+      "requestSchema": "UsOptionExpirationRequest",
+      "categories": [
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 37,
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/us-option-trade-ticks",
+      "summary": "获取美股期权逐笔成交",
+      "operationId": "QuoteController_getUsOptionTradeTicks",
+      "requestSchema": "UsOptionTradeTicksRequest",
+      "categories": [
+        "逐笔/盘口",
+        "行情"
+      ],
+      "queryParameters": []
+    },
+    {
+      "no": 38,
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/websocket-capabilities",
+      "summary": "WebSocket 实时行情 / WebSocket Live Quotes",
+      "operationId": "QuoteController_getWebSocketCapabilities",
+      "requestSchema": null,
+      "categories": [
+        "行情",
+        "WebSocket"
+      ],
+      "queryParameters": [
+        {
+          "name": "lang",
+          "required": false,
+          "description": "语言枚举值：zh_CN，zh_TW，en_US，默认：en_US"
+        }
+      ]
+    }
+  ]
+}
