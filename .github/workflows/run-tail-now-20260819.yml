@@ -21,9 +21,9 @@ jobs:
           CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
           OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-tail-now-run.txt?ref=main --jq .sha 2>/dev/null || true)
           if [ -n "$OLD_SHA" ]; then
-            gh api --method PUT repos/${{ github.repository }}/contents/latest-tail-now-run.txt -f message='Record one-time tail run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-tail-now-run.txt -f message='Record one-time rolling tail run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
           else
-            gh api --method PUT repos/${{ github.repository }}/contents/latest-tail-now-run.txt -f message='Record one-time tail run' -f content="$CONTENT" -f branch='main' >/dev/null
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-tail-now-run.txt -f message='Record one-time rolling tail run' -f content="$CONTENT" -f branch='main' >/dev/null
           fi
       - uses: actions/checkout@v4
         with:
@@ -32,24 +32,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Freeze tail decision in live tail window
+      - name: Run rolling tail now
         env:
           DRY_RUN: '0'
           ALLOW_ANY_TIME: '0'
-        run: python tools/run_tail_decision.py
-      - name: Merge Yunai production confirmation
+        run: python tools/run_tail_rolling.py
+      - name: Refresh Yunai for current candidates
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/sync_yunai_production.py
+      - name: Merge Yunai confirmation
         env:
           DRY_RUN: '0'
         run: python tools/enrich_tail_yunai.py
-      - name: Save frozen tail result
+      - name: Save rolling tail result
         run: |
           git config user.name 'astock-tail-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_tail
+          git add astock_tail astock_gateway/yunai_live.json astock_gateway/latest.json
           if git diff --cached --quiet; then
             echo 'No tail changes.'
             exit 0
           fi
-          git commit -m 'Freeze 2026-08-19 tail decision cohort'
+          git commit -m 'Update 2026-08-19 rolling tail decision'
           git pull --rebase origin main
           git push origin HEAD:main
