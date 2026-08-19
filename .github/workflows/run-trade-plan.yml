@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths:
       - 'tools/update_trade_plan.py'
+      - 'tools/run_trade_plan_resilient.py'
       - '.github/workflows/run-trade-plan.yml'
   schedule:
     - cron: '*/5 1-3 * * 1-5'
@@ -44,7 +45,7 @@ jobs:
       - name: 计算实时交易计划与形态候选
         env:
           FORCE_SNAPSHOT: ${{ github.event_name == 'push' && '1' || '0' }}
-        run: python tools/update_trade_plan.py
+        run: python tools/run_trade_plan_resilient.py
       - name: 保存交易计划
         run: |
           if git status --porcelain -- astock_trade | grep -q .; then
