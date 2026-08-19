@@ -19,6 +19,13 @@ def symbol_map(p):
     if isinstance(d,dict): return d
     return {str(k):v for k,v in p.items() if isinstance(v,(dict,list))}
 
+def obj(v):
+    if isinstance(v,dict): return v
+    if isinstance(v,list):
+        for x in reversed(v):
+            if isinstance(x,dict): return x
+    return None
+
 def scalar(o,names):
     if not isinstance(o,dict): return None
     for k in names:
@@ -29,7 +36,7 @@ def scalar(o,names):
 
 def post(path,body):
     token=yg.bearer()
-    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.1'})
+    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.2'})
     try:
         with urlopen(req,timeout=20) as r:
             raw=r.read().decode('utf-8','replace'); status=r.status; ctype=r.headers.get('Content-Type','')
@@ -42,16 +49,16 @@ def post(path,body):
 def apply_quote(out,batch,p):
     mp=symbol_map(p)
     for c in batch:
-        o=mp.get(c)
-        if isinstance(o,dict):
+        o=obj(mp.get(c))
+        if o is not None:
             out[c]['quoteOk']=True
             out[c]['quote']={'price':scalar(o,('lastPrice','latestPrice','price','currentPrice','close','last')),'changePct':scalar(o,('changePct','changePercent','changeRate','percentChange','pctChange')),'amount':scalar(o,('amount','turnoverAmount','turnoverValue','value')),'keys':list(o.keys())[:30]}
 
 def apply_capital(out,batch,p):
     mp=symbol_map(p)
     for c in batch:
-        o=mp.get(c)
-        if isinstance(o,dict):
+        o=obj(mp.get(c))
+        if o is not None:
             out[c]['capitalOk']=True
             out[c]['capital']={'largeNetInflow':scalar(o,('largeNetInflow','largeOrderNetInflow','largeNetFlow')),'totalNetInflow':scalar(o,('totalNetInflow','netInflow','totalNetFlow')),'keys':list(o.keys())[:30]}
 
