@@ -598,9 +598,9 @@
         "entryRule": "次一交易日开盘等权",
         "entryDate": "2026-08-18",
         "entryPrice": 277.34,
-        "asOf": "2026-08-18",
-        "tradingDays": 1,
-        "source": "腾讯/东方财富前复权日线",
+        "asOf": "2026-08-19",
+        "tradingDays": 2,
+        "source": "腾讯+东方财富未复权入场价；收益使用前复权日线",
         "1D": {
           "return": 0.040888,
           "benchmark": -0.001745,
@@ -609,18 +609,29 @@
           "mature": true
         },
         "current": {
-          "return": 0.040888,
-          "benchmark": -0.001745,
-          "alpha": 0.042633,
-          "asOf": "2026-08-18"
+          "return": -0.020913,
+          "benchmark": -0.030707,
+          "alpha": 0.009794,
+          "asOf": "2026-08-19"
         },
         "MFE": {
           "return": 0.043304,
-          "asOf": "2026-08-18"
+          "asOf": "2026-08-19"
         },
         "MAE": {
-          "return": -0.011827,
-          "asOf": "2026-08-18"
+          "return": -0.040888,
+          "asOf": "2026-08-19"
+        },
+        "returnEntryPriceAdjusted": 277.34,
+        "priceValidation": {
+          "status": "Verified",
+          "basis": "raw-open",
+          "providers": [
+            "腾讯",
+            "东方财富"
+          ],
+          "maxRelDiff": 0.0,
+          "returnBasis": "qfq"
         }
       },
       "688200": {
@@ -744,10 +755,10 @@
           "asOf": "2026-08-18"
         },
         "current": {
-          "return": -0.066516,
+          "return": -0.072696,
           "median": -0.068051,
-          "alpha": -0.038705,
-          "hitRate": 0.1,
+          "alpha": -0.041989,
+          "hitRate": 0.0,
           "members": 10,
           "asOf": "2026-08-19"
         },
@@ -760,7 +771,7 @@
           "asOf": "2026-08-19"
         },
         "MAE": {
-          "return": -0.081727,
+          "return": -0.084633,
           "median": -0.075144,
           "alpha": null,
           "hitRate": 0.0,
@@ -812,10 +823,10 @@
           "asOf": "2026-08-18"
         },
         "current": {
-          "return": -0.06294,
+          "return": -0.069121,
           "median": -0.068051,
-          "alpha": -0.035129,
-          "hitRate": 0.1,
+          "alpha": -0.038413,
+          "hitRate": 0.0,
           "members": 10,
           "asOf": "2026-08-19"
         },
@@ -828,7 +839,7 @@
           "asOf": "2026-08-19"
         },
         "MAE": {
-          "return": -0.07983,
+          "return": -0.082737,
           "median": -0.075144,
           "alpha": null,
           "hitRate": 0.0,
@@ -906,14 +917,14 @@
       }
     },
     "sectorPerformance": {},
-    "trackingUpdatedAt": "2026-08-19T17:37:39+08:00",
+    "trackingUpdatedAt": "2026-08-19T17:55:38+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "audit": {
       "status": "PartiallyVerified",
@@ -987,7 +998,8 @@
       }
     },
     "trackingDisplayStatus": "ReferenceOnly",
-    "trackingDisplayNote": "价格路径通过入场价验证后可展示参考跟踪；该批次仍不进入胜率、Alpha或因子有效性统计。"
+    "trackingDisplayNote": "价格路径通过入场价验证后可展示参考跟踪；该批次仍不进入胜率、Alpha或因子有效性统计。",
+    "trackingUse": "ReferenceOnly"
   },
   {
     "date": "2026-08-18",
@@ -4119,35 +4131,35 @@
     "poolPerformance": {
       "B0": {
         "1D": {
-          "return": -0.015095,
-          "median": -0.027258,
-          "alpha": 0.000218,
-          "hitRate": 0.375,
-          "members": 8,
+          "return": -0.018333,
+          "median": -0.027995,
+          "alpha": -0.00302,
+          "hitRate": 0.333333,
+          "members": 9,
           "asOf": "2026-08-19"
         },
         "current": {
-          "return": -0.015095,
-          "median": -0.027258,
-          "alpha": 0.000218,
-          "hitRate": 0.375,
-          "members": 8,
+          "return": -0.018333,
+          "median": -0.027995,
+          "alpha": -0.00302,
+          "hitRate": 0.333333,
+          "members": 9,
           "asOf": "2026-08-19"
         },
         "MFE": {
-          "return": 0.056753,
-          "median": 0.047759,
+          "return": 0.050447,
+          "median": 0.047619,
           "alpha": null,
-          "hitRate": 1.0,
-          "members": 8,
+          "hitRate": 0.888889,
+          "members": 9,
           "asOf": "2026-08-19"
         },
         "MAE": {
-          "return": -0.047234,
-          "median": -0.046215,
+          "return": -0.048539,
+          "median": -0.050111,
           "alpha": null,
           "hitRate": 0.0,
-          "members": 8,
+          "members": 9,
           "asOf": "2026-08-19"
         }
       },
@@ -4155,69 +4167,69 @@
       "B2": {},
       "B3": {
         "1D": {
-          "return": -0.027477,
+          "return": -0.029153,
+          "median": -0.030464,
+          "alpha": -0.01384,
+          "hitRate": 0.2,
+          "members": 10,
+          "asOf": "2026-08-19"
+        },
+        "current": {
+          "return": -0.029153,
+          "median": -0.030464,
+          "alpha": -0.01384,
+          "hitRate": 0.2,
+          "members": 10,
+          "asOf": "2026-08-19"
+        },
+        "MFE": {
+          "return": 0.049677,
+          "median": 0.049337,
+          "alpha": null,
+          "hitRate": 0.8,
+          "members": 10,
+          "asOf": "2026-08-19"
+        },
+        "MAE": {
+          "return": -0.050436,
+          "median": -0.049655,
+          "alpha": null,
+          "hitRate": 0.0,
+          "members": 10,
+          "asOf": "2026-08-19"
+        }
+      },
+      "B4": {
+        "1D": {
+          "return": -0.018367,
           "median": -0.027995,
-          "alpha": -0.012164,
-          "hitRate": 0.222222,
+          "alpha": -0.003054,
+          "hitRate": 0.333333,
           "members": 9,
           "asOf": "2026-08-19"
         },
         "current": {
-          "return": -0.027477,
+          "return": -0.018367,
           "median": -0.027995,
-          "alpha": -0.012164,
-          "hitRate": 0.222222,
+          "alpha": -0.003054,
+          "hitRate": 0.333333,
           "members": 9,
           "asOf": "2026-08-19"
         },
         "MFE": {
-          "return": 0.055197,
-          "median": 0.056757,
+          "return": 0.055857,
+          "median": 0.0479,
           "alpha": null,
           "hitRate": 0.888889,
           "members": 9,
           "asOf": "2026-08-19"
         },
         "MAE": {
-          "return": -0.049487,
-          "median": -0.043353,
+          "return": -0.049479,
+          "median": -0.050111,
           "alpha": null,
           "hitRate": 0.0,
           "members": 9,
-          "asOf": "2026-08-19"
-        }
-      },
-      "B4": {
-        "1D": {
-          "return": -0.015133,
-          "median": -0.027258,
-          "alpha": 0.00018,
-          "hitRate": 0.375,
-          "members": 8,
-          "asOf": "2026-08-19"
-        },
-        "current": {
-          "return": -0.015133,
-          "median": -0.027258,
-          "alpha": 0.00018,
-          "hitRate": 0.375,
-          "members": 8,
-          "asOf": "2026-08-19"
-        },
-        "MFE": {
-          "return": 0.062839,
-          "median": 0.052329,
-          "alpha": null,
-          "hitRate": 1.0,
-          "members": 8,
-          "asOf": "2026-08-19"
-        },
-        "MAE": {
-          "return": -0.048291,
-          "median": -0.046215,
-          "alpha": null,
-          "hitRate": 0.0,
-          "members": 8,
           "asOf": "2026-08-19"
         }
       }
@@ -4225,35 +4237,35 @@
     "sectorPerformance": {
       "种植业": {
         "1D": {
-          "return": -0.016656,
-          "median": -0.026521,
-          "alpha": -0.001343,
-          "hitRate": 0.428571,
-          "members": 7,
+          "return": -0.020103,
+          "median": -0.031779,
+          "alpha": -0.00479,
+          "hitRate": 0.375,
+          "members": 8,
           "asOf": "2026-08-19"
         },
         "current": {
-          "return": -0.016656,
-          "median": -0.026521,
-          "alpha": -0.001343,
-          "hitRate": 0.428571,
-          "members": 7,
+          "return": -0.020103,
+          "median": -0.031779,
+          "alpha": -0.00479,
+          "hitRate": 0.375,
+          "members": 8,
           "asOf": "2026-08-19"
         },
         "MFE": {
-          "return": 0.062702,
-          "median": 0.056757,
+          "return": 0.054864,
+          "median": 0.052329,
           "alpha": null,
-          "hitRate": 1.0,
-          "members": 7,
+          "hitRate": 0.875,
+          "members": 8,
           "asOf": "2026-08-19"
         },
         "MAE": {
-          "return": -0.053656,
-          "median": -0.062434,
+          "return": -0.054321,
+          "median": -0.060707,
           "alpha": null,
           "hitRate": 0.0,
-          "members": 7,
+          "members": 8,
           "asOf": "2026-08-19"
         }
       },
@@ -4806,6 +4818,46 @@
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
         }
+      },
+      "600313": {
+        "entryRule": "次一交易日开盘等权",
+        "entryDate": "2026-08-19",
+        "entryPrice": 7.46,
+        "asOf": "2026-08-19",
+        "tradingDays": 1,
+        "source": "腾讯+东方财富未复权入场价；收益使用前复权日线",
+        "1D": {
+          "return": -0.044236,
+          "benchmark": -0.015313,
+          "alpha": -0.028923,
+          "asOf": "2026-08-19",
+          "mature": true
+        },
+        "current": {
+          "return": -0.044236,
+          "benchmark": -0.015313,
+          "alpha": -0.028923,
+          "asOf": "2026-08-19"
+        },
+        "MFE": {
+          "return": 0.0,
+          "asOf": "2026-08-19"
+        },
+        "MAE": {
+          "return": -0.058981,
+          "asOf": "2026-08-19"
+        },
+        "returnEntryPriceAdjusted": 7.46,
+        "priceValidation": {
+          "status": "Verified",
+          "basis": "raw-open",
+          "providers": [
+            "腾讯",
+            "东方财富"
+          ],
+          "maxRelDiff": 0.0,
+          "returnBasis": "qfq"
+        }
       }
     },
     "audit": {
@@ -4878,17 +4930,18 @@
         }
       }
     },
-    "trackingUpdatedAt": "2026-08-19T17:37:39+08:00",
+    "trackingUpdatedAt": "2026-08-19T17:55:38+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingDisplayStatus": "ReferenceOnly",
-    "trackingDisplayNote": "价格路径通过入场价验证后可展示参考跟踪；该批次仍不进入胜率、Alpha或因子有效性统计。"
+    "trackingDisplayNote": "价格路径通过入场价验证后可展示参考跟踪；该批次仍不进入胜率、Alpha或因子有效性统计。",
+    "trackingUse": "ReferenceOnly"
   },
   {
     "date": "2026-08-19",
