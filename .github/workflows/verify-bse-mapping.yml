@@ -1,0 +1,56 @@
+name: Verify BSE Market Mapping
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/bse_market_mapping.py'
+      - 'tools/verify_bse_mapping.py'
+      - '.github/workflows/verify-bse-mapping.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 记录运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-bse-verify-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-bse-verify-run.txt -f message='Record latest BSE verify run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-bse-verify-run.txt -f message='Record latest BSE verify run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 实测秋乐种业北交所映射
+        run: |
+          set +e
+          python tools/verify_bse_mapping.py
+          echo $? > /tmp/code
+          exit 0
+      - name: 保存校验结果
+        run: |
+          if [ -n "$(git status --porcelain -- astock_gateway/validation/bse-920087.json)" ]; then
+            git config user.name 'astock-validator-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add astock_gateway/validation/bse-920087.json
+            git commit -m 'Verify BSE mapping for Qiule Seeds'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: 强制暴露映射失败
+        run: |
+          CODE=$(cat /tmp/code)
+          if [ "$CODE" != "0" ]; then exit "$CODE"; fi
