@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-08-19T14:14:47+08:00",
+  "authenticated": true,
+  "calls": [
+    {
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/market-status",
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "ok": true,
+      "response": {
+        "type": "list",
+        "count": 1
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/real-time-quotes",
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "ok": true,
+      "response": {
+        "type": "dict",
+        "keys": [
+          "000001"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/capital-distribution",
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "ok": true,
+      "response": {
+        "type": "dict",
+        "keys": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/bars-range",
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "ok": true,
+      "response": {
+        "type": "dict",
+        "keys": [
+          "tradeSession",
+          "000001"
+        ],
+        "tradeSession": "Regular"
+      }
+    }
+  ]
+}
