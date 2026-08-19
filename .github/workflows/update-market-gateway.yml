@@ -12,11 +12,12 @@ on:
       - 'tools/yunai_tail_overlay.py'
       - 'tools/sync_yunai_production.py'
       - 'tools/update_trade_execution_signals.py'
+      - 'tools/update_trade_execution_signals_strict.py'
       - 'tools/run_tail_rolling_reliable.py'
       - '.github/workflows/update-market-gateway.yml'
   schedule:
     # 北京交易时段：09:30-11:30 / 13:00-15:00，每5分钟刷新行情与交易辅助。
-    # cron会覆盖稍宽时间段，执行脚本自身负责严格交易窗口判断。
+    # cron会覆盖稍宽时间段，严格包装器负责排除午休与盘外时段。
     - cron: '*/5 1-3 * * 1-5'
     - cron: '*/5 5-7 * * 1-5'
     # 收盘后立刻补抓。15:02/15:06/15:10优先形成可验证收盘快照；15:20/15:30继续兜底。
@@ -69,7 +70,7 @@ jobs:
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
           DRY_RUN: ${{ github.event_name == 'push' && '1' || '0' }}
-        run: python tools/update_trade_execution_signals.py
+        run: python tools/update_trade_execution_signals_strict.py
       - name: 收盘后兜底锁定 TailFinal
         env:
           FINAL_ONLY: '1'
