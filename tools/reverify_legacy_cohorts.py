@@ -88,8 +88,6 @@ def price_audit(day: str, codes: list[str]) -> dict:
         if result.get("verified"):
             ok += 1
         elif code.startswith(("8", "9")) and "东方财富" in providers:
-            # Tencent live supports BSE but its historical fqkline endpoint can return
-            # no day row for 920xxx. Do not weaken the two-source rule; record coverage.
             bse_single_source += 1
         rows[code] = {
             "verified": bool(result.get("verified")),
@@ -145,14 +143,11 @@ def factor_provenance(item: dict) -> dict:
     availability = item.get("factorAvailability") or {}
     stocks = item.get("stocks") or {}
     checks = {}
-
-    # B0 requires original strategy/version + stock metadata to reproduce original ranking.
     checks["B0"] = {
         "used": bool(pools.get("B0")),
         "proven": bool(item.get("strategyVersion") and stocks),
         "evidence": "strategyVersion+stockMetadata" if item.get("strategyVersion") and stocks else None,
     }
-    # B1/B2 cannot be reconstructed from price bars; require original source provenance.
     for pool, key in (("B1", "margin"), ("B2", "etf")):
         used = bool(pools.get(pool))
         text = str(availability.get(pool) or "")
@@ -162,7 +157,6 @@ def factor_provenance(item: dict) -> dict:
             "evidence": text or None,
             "requiredSource": key,
         }
-    # B3 can at least be tied to frozen per-stock money-flow fields when metadata exists.
     b3_codes = [str(x) for x in pools.get("B3") or []]
     b3_meta = [stocks.get(c) or {} for c in b3_codes]
     b3_has_fields = bool(b3_codes) and all(
@@ -182,8 +176,6 @@ def factor_provenance(item: dict) -> dict:
 
 
 def point_in_time_membership(item: dict) -> dict:
-    # Historical board membership must be explicitly frozen. Current constituents,
-    # or merely having a `sector` label on a stock, are insufficient evidence.
     candidates = [
         item.get("pointInTimeConstituents"),
         item.get("constituentSnapshot"),
@@ -234,9 +226,7 @@ def audit_one(item: dict, now: str) -> tuple[dict, dict]:
         "eligibleForPerformanceComparison": status == "Verified",
         "issues": issues,
         "auditedAt": now,
-        "note": (
-            "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。"
-        ),
+        "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
         "reverification": {
             "rawPrice": {k: v for k, v in prices.items() if k != "stocks"},
             "factorRecompute": {k: v for k, v in factors.items() if k != "stocks"},
