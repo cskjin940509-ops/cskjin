@@ -56,13 +56,13 @@ jobs:
       - name: 保存尾盘冻结结果
         if: github.event_name != 'push'
         run: |
-          if git diff --quiet -- astock_tail; then
-            echo 'No tail-decision changes.'
-            exit 0
-          fi
           git config user.name 'astock-tail-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add astock_tail
+          if git diff --cached --quiet; then
+            echo 'No tail-decision changes.'
+            exit 0
+          fi
           git commit -m 'Freeze 14:30 A-share tail decision cohort'
           git pull --rebase origin main
           git push origin HEAD:main
