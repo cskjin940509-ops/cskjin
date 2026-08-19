@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """BSE-safe production entrypoint for the verified daily scanner.
 
-Tencent's fqkline endpoint currently returns no historical row for new 920xxx BSE
-codes, while its realtime quote endpoint does. Production cohorts are created on
-the same trading day, so BSE raw OHLC is cross-checked using Tencent's timestamped
-same-day quote snapshot + Eastmoney raw daily K line. The two-source threshold is
-unchanged (<=0.1%).
+Production cohorts are generated from the same-day frozen market snapshot. Raw
+OHLC validation keeps the >=2 independent-provider rule. This wrapper also fills
+compatibility/diff metadata during the *same freeze operation* so future Official
+cohorts never expose an empty mainlines field when selectedSectors is non-empty.
+Existing Official cohorts remain immutable.
 """
 from datetime import datetime
+import json
 import re
 from urllib.request import Request, urlopen
 
@@ -16,6 +17,7 @@ import run_daily_strategy_verified as verified
 from bse_market_mapping import eastmoney_secid, tencent_symbol
 
 _original_verify_price = verified.verify_price
+_original_freeze = base.freeze
 
 
 def secid(code):
@@ -82,11 +84,60 @@ def verify_price_bse(code, day):
         "rule": "北交所：腾讯同日收盘快照+东方财富未复权日线OHLC最大相对差<=0.1%",
     }
 
+
+def freeze_with_compat(day, payload, selected, stocks, pools):
+    """Finalize compatibility fields atomically with the original signal freeze.
+
+    This function is reached only when verified.main() is creating today's new
+    Official. If an Official for the date already exists, verified.main() exits
+    before calling freeze, so historical signals are never rewritten here.
+    """
+    cohort = _original_freeze(day, payload, selected, stocks, pools)
+    path = base.SNAPS
+    arr = json.loads(path.read_text(encoding="utf-8"))
+    idx = next((i for i, item in enumerate(arr) if item.get("date") == day), None)
+    if idx is None:
+        return cohort
+    item = arr[idx]
+    if item.get("status") != "Official":
+        return cohort
+
+    # mainlines is a compatibility field: selectedSectors remains the canonical
+    # structured source, while mainlines must not be empty when sectors were selected.
+    if not item.get("mainlines"):
+        item["mainlines"] = [x.get("name") for x in (item.get("selectedSectors") or []) if x.get("name")]
+
+    previous = next(
+        (x for x in sorted(arr[:idx], key=lambda z: z.get("date", ""), reverse=True)
+         if x.get("status") == "Official"),
+        None,
+    )
+    prev_pools = (previous or {}).get("pools") or {}
+    cur_pools = item.get("pools") or {}
+    prev_b4 = set(prev_pools.get("B4") or [])
+    cur_b4 = set(cur_pools.get("B4") or [])
+    prev_any = {c for members in prev_pools.values() for c in (members or [])}
+    cur_any = {c for members in cur_pools.values() for c in (members or [])}
+    item["upgraded"] = sorted((cur_b4 - prev_b4) & prev_any)
+    item["downgraded"] = sorted((prev_b4 - cur_b4) & cur_any)
+
+    # Availability timestamp belongs to the freeze metadata, not to future tracking.
+    available_at = item.get("availableAt") or datetime.now(base.CN).isoformat(timespec="seconds")
+    for sector in item.get("selectedSectors") or []:
+        sector.setdefault("availableAt", available_at)
+    for meta in (item.get("stocks") or {}).values():
+        meta.setdefault("availableAt", available_at)
+
+    path.write_text(json.dumps(arr, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return item
+
+
 base.sid = secid
+base.freeze = freeze_with_compat
 verified.secid = secid
 verified.symbol = symbol
 verified.verify_price = verify_price_bse
-verified.VERSION = "v1.8.1-verified-point-in-time-bse-3source"
+verified.VERSION = "v1.8.2-verified-point-in-time-bse-3source"
 
 if __name__ == "__main__":
     verified.main()
