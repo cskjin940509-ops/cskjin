@@ -10,7 +10,6 @@ from __future__ import annotations
 import json
 import math
 import os
-import statistics
 import time
 from datetime import datetime, time as dtime, timedelta, timezone
 from pathlib import Path
@@ -153,8 +152,6 @@ def build_payload(now: datetime):
     if provider_date != today_compact:
         raise RuntimeError(f"腾讯指数行情日期不是今天: {provider_date}")
 
-    # Require reasonably fresh index timestamp. This prevents a stale prior-session
-    # cache from becoming a tail trading signal.
     stamps = []
     for x in quotes.values():
         raw = x.get("quoteTimeRaw")
@@ -213,11 +210,12 @@ def stock_view(s: dict, memberships: list[str]):
 def main():
     now = datetime.now(CN)
     day = now.strftime("%Y-%m-%d")
+    dry_run = os.getenv("DRY_RUN", "0") == "1"
     if now.weekday() >= 5:
         print(json.dumps({"state": "skip", "reason": "weekend", "date": day}, ensure_ascii=False))
         return
 
-    allow_any = os.getenv("ALLOW_ANY_TIME", "0") == "1"
+    allow_any = dry_run or os.getenv("ALLOW_ANY_TIME", "0") == "1"
     if not allow_any and not (dtime(14, 25) <= now.time() < dtime(15, 0)):
         print(json.dumps({"state": "skip", "reason": "outside-tail-window", "capturedAt": now.isoformat(timespec="seconds")}, ensure_ascii=False))
         return
@@ -225,7 +223,7 @@ def main():
     HIST.mkdir(parents=True, exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
     hist_path = HIST / f"{day}.json"
-    if hist_path.exists() and os.getenv("FORCE_REBUILD", "0") != "1":
+    if not dry_run and hist_path.exists() and os.getenv("FORCE_REBUILD", "0") != "1":
         existing = json.loads(hist_path.read_text(encoding="utf-8"))
         (OUT / "latest.json").write_text(json.dumps(existing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"state": "immutable", "date": day, "capturedAt": existing.get("capturedAt")}, ensure_ascii=False))
@@ -233,7 +231,6 @@ def main():
 
     payload, quote_age = build_payload(now)
 
-    # Point-in-time factor safety + BSE-safe market IDs.
     base.kline = safe_kline
     base.sid = lambda code: eastmoney_secid(code)
     base.em_clist = fetch_clist
@@ -294,14 +291,20 @@ def main():
         "executionNote": "用于尾盘决策参考；接近涨跌停的股票从可交易池剔除。收盘后会重新计算，14:30结果保持冻结以便复盘。",
     }
 
-    hist_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (OUT / "latest.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({
-        "state": "tail-frozen", "date": day, "capturedAt": result["capturedAt"],
+    summary = {
+        "state": "dry-run-ok" if dry_run else "tail-frozen",
+        "date": day, "capturedAt": result["capturedAt"],
         "confirmedMainlines": [x.get("name") for x in confirmed],
         "TB0": len(tb0), "TB3": len(tb3), "TailCore": len(core),
         "boardSource": board_source, "noTrade": result["noTrade"],
-    }, ensure_ascii=False))
+    }
+    if dry_run:
+        print(json.dumps(summary, ensure_ascii=False))
+        return
+
+    hist_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / "latest.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(summary, ensure_ascii=False))
 
 
 if __name__ == "__main__":
