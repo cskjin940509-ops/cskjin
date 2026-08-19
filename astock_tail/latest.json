@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-08-19",
+  "status": "TailDecision",
+  "strategyVersion": "v1.0-tail-1430-point-in-time",
+  "scheduledFor": "2026-08-19T14:30:00+08:00",
+  "capturedAt": "2026-08-19T14:34:23+08:00",
+  "marketQuoteAgeSec": 3.0,
+  "dataSource": "腾讯指数行情 + 东方财富延迟源（约15分钟）",
+  "boardSource": "东方财富延迟源（约15分钟）",
+  "factorCutoff": "2026-08-19T14:34:23+08:00",
+  "confirmedMainlines": [],
+  "candidateMainlines": [
+    {
+      "boardCode": "BK1611",
+      "name": "国有大型银行Ⅲ",
+      "type": "行业",
+      "score": 66.55,
+      "status": "观察",
+      "changePct": 1.2,
+      "amount": 12131908299.0,
+      "mainNetFlow": 139526672.0,
+      "mainFlowPct": 1.15,
+      "breadthPct": 100.0,
+      "RS20": null,
+      "RS60": null,
+      "MTA": "历史趋势未同步",
+      "confidence": "中",
+      "reason": "综合强度66.6；上涨扩散100%；涨跌+1.20%；主力资金占比+1.15%"
+    },
+    {
+      "boardCode": "BK1492",
+      "name": "焦炭Ⅲ",
+      "type": "行业",
+      "score": 65.95,
+      "status": "观察",
+      "changePct": 5.73,
+      "amount": 2587627823.0,
+      "mainNetFlow": 637062917.0,
+      "mainFlowPct": 24.62,
+      "breadthPct": 100.0,
+      "RS20": null,
+      "RS60": null,
+      "MTA": "历史趋势未同步",
+      "confidence": "中",
+      "reason": "综合强度66.0；上涨扩散100%；涨跌+5.73%；主力资金占比+24.62%"
+    },
+    {
+      "boardCode": "BK1569",
+      "name": "炼油化工",
+      "type": "行业",
+      "score": 64.46,
+      "status": "观察",
+      "changePct": 3.07,
+      "amount": 9763229302.0,
+      "mainNetFlow": 764690848.0,
+      "mainFlowPct": 7.83,
+      "breadthPct": 70.0,
+      "RS20": null,
+      "RS60": null,
+      "MTA": "历史趋势未同步",
+      "confidence": "中",
+      "reason": "综合强度64.5；上涨扩散70%；涨跌+3.07%；主力资金占比+7.83%"
+    }
+  ],
+  "pools": {
+    "TB0": [],
+    "TB3": [],
+    "TailCore": []
+  },
+  "stocks": {},
+  "noTrade": true,
+  "confidence": "中",
+  "note": "14:30尾盘决策池只使用捕获时已可获得的数据；不等同于收盘Official。TB0=基础强度，TB3=主力资金确认，TailCore=TB0与TB3交集并按尾盘综合分排序；B1两融/B2 ETF申赎未同步时不伪造。",
+  "executionNote": "用于尾盘决策参考；接近涨跌停的股票从可交易池剔除。收盘后会重新计算，14:30结果保持冻结以便复盘。",
+  "yunaiIntegration": {
+    "state": "no-candidates"
+  }
+}
