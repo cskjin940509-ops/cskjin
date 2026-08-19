@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-08-19T14:29:06+08:00",
+  "checkedAt": "2026-08-19T14:31:05+08:00",
   "provider": "Yunai Quant API",
   "connected": true,
   "marketStatus": {
@@ -26,6 +26,34 @@
   "quoteAvailable": 0,
   "capitalResponseAvailable": 0,
   "stocks": {},
+  "diagnostic": {
+    "000001": {
+      "httpStatus": 200,
+      "shape": {
+        "type": "dict",
+        "keys": [
+          "000001"
+        ],
+        "valueTypes": {
+          "000001": "dict"
+        }
+      }
+    },
+    "920087": {
+      "httpStatus": 400,
+      "shape": {
+        "type": "dict",
+        "keys": [
+          "code",
+          "msg"
+        ],
+        "valueTypes": {
+          "code": "str",
+          "msg": "str"
+        }
+      }
+    }
+  },
   "roles": {
     "realTimeQuotes": "第二实时行情源",
     "capitalDistribution": "独立大单资金分布，不等同东方财富主力净流入",
