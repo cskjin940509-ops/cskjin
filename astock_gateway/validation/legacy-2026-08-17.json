@@ -7,25 +7,24 @@
     "missing-original-strategy-version",
     "missing-original-stock-metadata:17",
     "same-day-frozen-market-snapshot-missing",
-    "raw-price-cross-source-incomplete:3/17",
+    "raw-price-cross-source-incomplete:0/17",
     "original-factor-provenance-incomplete",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
     "total": 17,
-    "verified": 3,
-    "coveragePct": 17.65,
+    "verified": 0,
+    "coveragePct": 0.0,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
       "002371": {
-        "verified": true,
-        "rawClose": 765.97,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "002384": {
@@ -56,13 +55,12 @@
         ]
       },
       "300394": {
-        "verified": true,
-        "rawClose": 286.56,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300476": {
@@ -93,13 +91,12 @@
         ]
       },
       "600183": {
-        "verified": true,
-        "rawClose": 144.49,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "688008": {
@@ -177,23 +174,35 @@
     }
   },
   "factorRecompute": {
-    "available": 0,
+    "available": 3,
     "total": 17,
-    "coveragePct": 0.0,
+    "coveragePct": 17.65,
     "cutoff": "2026-08-17",
     "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution",
     "stocks": {
       "002371": {
-        "available": false,
-        "error": "RemoteDisconnected"
+        "available": true,
+        "barCount": 90,
+        "lastBarDate": "2026-08-17",
+        "r20": 0.13156845075416235,
+        "r60": 0.14624985035316662,
+        "mta": "双周期共振"
       },
       "002384": {
-        "available": false,
-        "error": "RemoteDisconnected"
+        "available": true,
+        "barCount": 90,
+        "lastBarDate": "2026-08-17",
+        "r20": -0.00032149910439527307,
+        "r60": -0.013103604624801646,
+        "mta": "双周期共振"
       },
       "002916": {
-        "available": false,
-        "error": "RemoteDisconnected"
+        "available": true,
+        "barCount": 90,
+        "lastBarDate": "2026-08-17",
+        "r20": 0.21130842274016515,
+        "r60": 0.04530821826695397,
+        "mta": "双周期共振"
       },
       "300308": {
         "available": false,
@@ -288,5 +297,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-08-19T17:32:06+08:00"
+  "auditedAt": "2026-08-19T17:36:20+08:00"
 }
