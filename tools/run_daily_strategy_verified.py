@@ -1,0 +1,245 @@
+#!/usr/bin/env python3
+"""Production-safe Daily Cohort runner.
+
+Safety invariants:
+1) Historical factor bars are capped at TARGET_DATE; no future bars are visible.
+2) Production Official cohorts must be generated from a frozen same-day gateway history file.
+3) Every selected stock's displayed selectionPrice is the target-day *raw* close,
+   independently confirmed by Tencent + Eastmoney within 0.1%.
+4) Existing Official cohorts are immutable unless FORCE_REBUILD=1; manual historical
+   reconstruction is refused when point-in-time constituent membership cannot be proven.
+"""
+from __future__ import annotations
+
+import json
+import math
+import os
+import sys
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+
+import run_daily_strategy_fast as base
+
+CN = timezone(timedelta(hours=8))
+ROOT = Path(__file__).resolve().parents[1]
+GATEWAY = ROOT / "astock_gateway"
+SNAPS = ROOT / "astock_snapshots" / "index.json"
+VERSION = "v1.7.0-verified-point-in-time"
+TARGET_DAY: str | None = None
+
+
+def finite(v):
+    try:
+        x = float(v)
+        return x if math.isfinite(x) else None
+    except Exception:
+        return None
+
+
+def get_json(url, referer, timeout=12):
+    req = Request(url, headers={
+        "User-Agent": "Mozilla/5.0 AStockStrategy-Verified/1.7",
+        "Accept": "application/json,*/*",
+        "Referer": referer,
+        "Cache-Control": "no-cache",
+    })
+    with urlopen(req, timeout=timeout) as r:
+        return json.loads(r.read().decode("utf-8", "replace"))
+
+
+def safe_kline(secid: str, lmt: int = 80):
+    if not TARGET_DAY:
+        raise RuntimeError("TARGET_DAY not initialized")
+    q = {
+        "secid": secid,
+        "klt": 101,
+        "fqt": 1,  # adjusted bars are only for factors/returns
+        "lmt": lmt,
+        "end": TARGET_DAY.replace("-", ""),
+        "fields1": "f1,f2,f3,f4,f5,f6",
+        "fields2": "f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61",
+        "ut": "fa5fd1943c7b386f172d6893dbfba10b",
+    }
+    d = (base.get_json("https://push2his.eastmoney.com/api/qt/stock/kline/get?" + urlencode(q)).get("data") or {})
+    out = []
+    for row in d.get("klines") or []:
+        f = row.split(",")
+        if len(f) >= 7 and f[0] <= TARGET_DAY and finite(f[2]) is not None:
+            out.append({"date": f[0], "close": finite(f[2]), "amount": finite(f[6])})
+    if any(x["date"] > TARGET_DAY for x in out):
+        raise RuntimeError("future bar leaked into factor window")
+    return out
+
+
+def symbol(code):
+    if code.startswith(("8", "9")): return "bj" + code
+    return ("sh" if code.startswith(("5", "6")) else "sz") + code
+
+
+def secid(code):
+    return ("1." if code.startswith(("5", "6", "9")) else "0.") + code
+
+
+def tencent_raw_day(code, day):
+    sym = symbol(code)
+    param = f"{sym},day,{day},{day},10,"
+    p = get_json(
+        "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?" + urlencode({"param": param}),
+        "https://gu.qq.com/",
+    )
+    root = (p.get("data") or {}).get(sym) or {}
+    rows = root.get("day") or []
+    for f in rows:
+        if isinstance(f, list) and len(f) >= 5 and f[0] == day:
+            return {"open":finite(f[1]),"close":finite(f[2]),"high":finite(f[3]),"low":finite(f[4])}
+    return None
+
+
+def eastmoney_raw_day(code, day):
+    q = {
+        "secid": secid(code), "klt":101, "fqt":0, "lmt":5,
+        "end":day.replace("-", ""),
+        "fields1":"f1,f2,f3,f4,f5,f6",
+        "fields2":"f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61",
+        "ut":"fa5fd1943c7b386f172d6893dbfba10b",
+    }
+    p = get_json(
+        "https://push2his.eastmoney.com/api/qt/stock/kline/get?" + urlencode(q),
+        "https://quote.eastmoney.com/",
+    )
+    for raw in ((p.get("data") or {}).get("klines") or []):
+        f = raw.split(",")
+        if len(f) >= 5 and f[0] == day:
+            return {"open":finite(f[1]),"close":finite(f[2]),"high":finite(f[3]),"low":finite(f[4])}
+    return None
+
+
+def rel_diff(a, b):
+    if a is None or b is None or min(abs(a), abs(b)) == 0: return None
+    return abs(a-b) / min(abs(a), abs(b))
+
+
+def verify_price(code, day):
+    checks = []
+    for name, fn in (("腾讯", tencent_raw_day), ("东方财富", eastmoney_raw_day)):
+        try:
+            row = fn(code, day)
+            checks.append({"provider":name,"row":row})
+        except Exception as e:
+            checks.append({"provider":name,"row":None,"error":e.__class__.__name__})
+    valid = [x for x in checks if x.get("row") and finite(x["row"].get("close")) is not None]
+    if len(valid) < 2:
+        return {"verified":False,"checks":checks,"reason":"fewer-than-two-raw-providers"}
+    diffs=[]
+    for field in ("open","close","high","low"):
+        d=rel_diff(finite(valid[0]["row"].get(field)), finite(valid[1]["row"].get(field)))
+        if d is not None: diffs.append(d)
+    mx=max(diffs) if diffs else None
+    verified=mx is not None and mx <= 0.001
+    close=finite(valid[0]["row"].get("close")) if verified else None
+    return {"verified":verified,"rawClose":close,"maxRelDiff":mx,"checks":checks,
+            "rule":"腾讯+东方财富未复权OHLC最大相对差<=0.1%"}
+
+
+def existing_official(day):
+    if not SNAPS.exists(): return None
+    arr=json.loads(SNAPS.read_text(encoding="utf-8"))
+    return next((x for x in arr if x.get("date")==day and x.get("status")=="Official"), None)
+
+
+def load_frozen_payload(day):
+    path=GATEWAY/"history"/f"{day}.json"
+    if not path.exists():
+        raise RuntimeError("缺少当日冻结市场快照，禁止重建 Official")
+    payload=json.loads(path.read_text(encoding="utf-8"))
+    source=(payload.get("marketSnapshot") or {}).get("sourceDate")
+    if source != day:
+        raise RuntimeError(f"冻结快照日期不匹配: {source} != {day}")
+    if not (payload.get("boardHeatmap") or {}).get("industry"):
+        raise RuntimeError("冻结板块截面缺失")
+    return payload
+
+
+def main():
+    global TARGET_DAY
+    requested=os.getenv("TARGET_DATE", "").strip()
+    if requested:
+        TARGET_DAY=requested
+    else:
+        latest=json.loads((GATEWAY/"latest.json").read_text(encoding="utf-8"))
+        TARGET_DAY=(latest.get("marketSnapshot") or {}).get("sourceDate")
+    if not TARGET_DAY:
+        raise RuntimeError("无法确定目标交易日")
+
+    prior=existing_official(TARGET_DAY)
+    if prior and os.getenv("FORCE_REBUILD", "0") != "1":
+        print(json.dumps({"state":"immutable","date":TARGET_DAY,"reason":"Official cohort already exists"},ensure_ascii=False))
+        return
+
+    payload=load_frozen_payload(TARGET_DAY)
+
+    # A historical board membership snapshot is not currently persisted. Therefore
+    # only same-session production runs may promote a newly computed cohort to Official.
+    now=datetime.now(CN)
+    target=datetime.strptime(TARGET_DAY, "%Y-%m-%d").date()
+    if now.date() != target:
+        raise RuntimeError("历史重建缺少 point-in-time 成分股快照；禁止生成 Official")
+
+    base.kline=safe_kline
+    base.VERSION=VERSION
+    selected=base.choose_sectors(payload)
+    stocks,pools=base.choose_stocks(selected)
+
+    required=sorted({c for values in pools.values() for c in (values or [])})
+    validations={}
+    for code in required:
+        validations[code]=verify_price(code, TARGET_DAY)
+    failed=[c for c,v in validations.items() if not v.get("verified")]
+    if failed:
+        raise RuntimeError("未通过双源收盘价校验: " + ",".join(failed))
+
+    by_code={s["code"]:s for s in stocks}
+    for code,v in validations.items():
+        if code in by_code:
+            by_code[code]["price"]=v["rawClose"]
+            by_code[code]["priceValidation"]={k:v.get(k) for k in ("verified","maxRelDiff","rule")}
+
+    cohort=base.freeze(TARGET_DAY,payload,selected,stocks,pools)
+    # freeze() writes the immutable signal; now attach validation metadata without changing membership.
+    arr=json.loads(SNAPS.read_text(encoding="utf-8"))
+    for item in arr:
+        if item.get("date") != TARGET_DAY: continue
+        item["strategyVersion"]=VERSION
+        item["dataValidation"]={
+            "status":"Verified",
+            "priceBasis":"未复权实际收盘价",
+            "factorPriceBasis":"前复权，仅用于RS/MTA等因子",
+            "factorBarsCutoff":TARGET_DAY,
+            "priceProviders":["腾讯","东方财富"],
+            "stockCount":len(required),
+            "rule":"所有入池股票未复权OHLC双源最大相对差<=0.1%",
+        }
+        item["audit"]={
+            "status":"Verified",
+            "eligibleForPerformanceComparison":True,
+            "issues":[],
+            "auditedAt":datetime.now(CN).isoformat(timespec="seconds"),
+            "note":"生产扫描通过目标日时点和双源价格门禁。",
+        }
+        for code,v in validations.items():
+            meta=(item.get("stocks") or {}).get(code)
+            if meta is not None:
+                meta["selectionPrice"]=v["rawClose"]
+                meta["priceValidation"]={
+                    "status":"Verified","providers":["腾讯","东方财富"],
+                    "maxRelDiff":v.get("maxRelDiff"),"basis":"raw-close"
+                }
+        break
+    SNAPS.write_text(json.dumps(arr,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    print(json.dumps({"state":"verified-official","date":TARGET_DAY,"stocks":len(required),"version":VERSION},ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()
