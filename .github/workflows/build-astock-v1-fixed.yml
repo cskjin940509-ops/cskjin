@@ -1,4 +1,4 @@
-name: Build AStock v1.3 Yunai APK
+name: Build AStock v1.4 Data Audit APK
 
 on:
   workflow_dispatch:
@@ -40,6 +40,8 @@ jobs:
         run: python tools/patch_pairwise_pools.py
       - name: 接入 Yunai Quant API 状态
         run: python tools/patch_yunai_ui.py
+      - name: 展示数据审计可信状态
+        run: python tools/patch_data_audit_ui.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -62,6 +64,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v1.3-yunai-debug
+          name: AStockStrategy-v1.4-data-audit-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
