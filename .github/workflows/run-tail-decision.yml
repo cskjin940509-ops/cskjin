@@ -1,0 +1,41 @@
+name: Run AStock 14:30 Tail Decision
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 北京时间工作日 14:30
+    - cron: '30 6 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-tail-decision
+  cancel-in-progress: false
+
+jobs:
+  tail:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 生成14:30尾盘决策池
+        run: python tools/run_tail_decision.py
+      - name: 保存尾盘冻结结果
+        run: |
+          if git diff --quiet -- astock_tail; then
+            echo 'No tail-decision changes.'
+            exit 0
+          fi
+          git config user.name 'astock-tail-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_tail
+          git commit -m 'Freeze 14:30 A-share tail decision cohort'
+          git pull --rebase origin main
+          git push origin HEAD:main
