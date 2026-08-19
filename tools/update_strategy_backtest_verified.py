@@ -4,7 +4,10 @@
 - Returns/MFE/MAE continue to use qfq bars for corporate-action continuity.
 - Displayed/audited entryPrice is the unadjusted next-session open.
 - The raw open must agree between Tencent and Eastmoney within 0.1%.
-- LegacyUnverified cohorts are excluded from strategy-performance comparison.
+- Audit eligibility controls whether a cohort may enter model-performance statistics,
+  but it does NOT suppress auditable reference tracking. Older/partially verified
+  Official cohorts may therefore show reference returns when their entry price itself
+  passes the same raw-price gate; the App must label those results as reference-only.
 """
 from __future__ import annotations
 
@@ -14,7 +17,7 @@ from urllib.request import Request, urlopen
 
 import update_strategy_backtest as legacy
 
-VERSION = "v1.1-next-open-verified-raw-entry"
+VERSION = "v1.2-next-open-verified-raw-entry-reference-tracking"
 _original_fetch = legacy.fetch_kline
 _original_performance = legacy.performance_for
 _original_trackable = legacy.snapshot_is_trackable
@@ -22,7 +25,7 @@ _original_trackable = legacy.snapshot_is_trackable
 
 def request_json(url, referer):
     req=Request(url,headers={
-        "User-Agent":"Mozilla/5.0 AStockStrategy-Backtest-Verified/1.1",
+        "User-Agent":"Mozilla/5.0 AStockStrategy-Backtest-Verified/1.2",
         "Accept":"application/json,*/*","Referer":referer,"Cache-Control":"no-cache"})
     with urlopen(req,timeout=12) as r:
         return json.loads(r.read().decode("utf-8","replace"))
@@ -104,9 +107,10 @@ def performance_verified(rows,cohort_date,benchmark):
 
 
 def trackable_verified(snapshot,now):
-    audit=snapshot.get("audit") or {}
-    if audit.get("eligibleForPerformanceComparison") is False:
-        return False
+    # A cohort's audit flag decides whether its return may contribute to aggregate
+    # strategy statistics. It must not hide valid market follow-up from the UI.
+    # The per-stock performance gate below still requires a dual-source verified
+    # next-session raw open, so reference tracking cannot fabricate an entry price.
     return _original_trackable(snapshot,now)
 
 
