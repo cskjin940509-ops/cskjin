@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths:
       - 'tools/import_yunai_openapi.py'
+      - 'tools/summarize_yunai_openapi.py'
       - '.github/workflows/import-yunai-openapi.yml'
 
 permissions:
@@ -38,11 +39,13 @@ jobs:
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/import_yunai_openapi.py
+      - name: 生成紧凑接口目录
+        run: python tools/summarize_yunai_openapi.py
       - name: 保存接口清单
         run: |
           git config user.name 'astock-yunai-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_gateway/yunai_openapi.json
+          git add astock_gateway/yunai_openapi.json astock_gateway/yunai_endpoint_catalog.json
           if git diff --cached --quiet; then
             echo 'No Yunai OpenAPI changes.'
             exit 0
