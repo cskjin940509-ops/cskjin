@@ -2,6 +2,12 @@ name: Run AStock 14:30 Tail Decision
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/run_tail_decision.py'
+      - 'tools/bse_market_mapping.py'
+      - '.github/workflows/run-tail-decision.yml'
   schedule:
     # 北京时间工作日 14:30
     - cron: '30 6 * * 1-5'
@@ -10,7 +16,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: astock-tail-decision
+  group: astock-tail-decision-${{ github.event_name }}
   cancel-in-progress: false
 
 jobs:
@@ -25,9 +31,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 生成14:30尾盘决策池
+      - name: 运行14:30尾盘决策扫描
+        env:
+          DRY_RUN: ${{ github.event_name == 'push' && '1' || '0' }}
+          ALLOW_ANY_TIME: ${{ github.event_name == 'push' && '1' || '0' }}
         run: python tools/run_tail_decision.py
       - name: 保存尾盘冻结结果
+        if: github.event_name != 'push'
         run: |
           if git diff --quiet -- astock_tail; then
             echo 'No tail-decision changes.'
