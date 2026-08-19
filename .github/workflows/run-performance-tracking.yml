@@ -1,0 +1,48 @@
+name: Update AStock Forward Tracking
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/update_strategy_backtest.py'
+      - 'tools/update_strategy_backtest_verified.py'
+      - 'tools/update_strategy_backtest_verified_bse.py'
+      - '.github/workflows/run-performance-tracking.yml'
+  schedule:
+    # 收盘后独立更新历史批次收益；不依赖当天是否新建Official。
+    - cron: '10,30 7 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-forward-tracking
+  cancel-in-progress: true
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 更新参考与已验证Forward Tracking
+        run: python tools/update_strategy_backtest_verified_bse.py
+      - name: 保存收益跟踪
+        run: |
+          if git diff --quiet -- astock_snapshots/index.json; then
+            echo 'No tracking changes.'
+            exit 0
+          fi
+          git config user.name 'astock-tracking-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_snapshots/index.json
+          git commit -m 'Update A-share forward tracking'
+          git pull --rebase origin main
+          git push origin HEAD:main
