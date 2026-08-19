@@ -43,13 +43,13 @@ jobs:
         run: python tools/enrich_tail_yunai.py
       - name: Save frozen tail result
         run: |
-          if git diff --quiet -- astock_tail; then
-            echo 'No tail changes.'
-            exit 0
-          fi
           git config user.name 'astock-tail-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add astock_tail
+          if git diff --cached --quiet; then
+            echo 'No tail changes.'
+            exit 0
+          fi
           git commit -m 'Freeze 2026-08-19 tail decision cohort'
           git pull --rebase origin main
           git push origin HEAD:main
