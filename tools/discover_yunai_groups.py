@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Public Knife4j group discovery for quant.yunai.com.cn
 import json
 from pathlib import Path
 from urllib.request import Request, urlopen
