@@ -52,7 +52,8 @@ def main():
     except Exception as e:
         overlay={'_error':e.__class__.__name__}
     diagnostic={}
-    for code in ['000001']+([codes[0]] if codes else []):
+    probe_codes=['000001']+codes[:4]
+    for code in list(dict.fromkeys(probe_codes)):
         try:
             st,_,p=yo.post(yo.PREFIX+'/real-time-quotes',{'symbols':[code]})
             diagnostic[code]={'httpStatus':st,'shape':shape(p)}
