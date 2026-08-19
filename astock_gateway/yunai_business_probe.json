@@ -1,0 +1,87 @@
+{
+  "checkedAt": "2026-08-19T14:12:48+08:00",
+  "base": "https://quant.yunai.com.cn",
+  "authenticated": true,
+  "calls": [
+    {
+      "method": "GET",
+      "path": "/api/v1/quantitative/quotes/market-status",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "request": {
+        "query": {
+          "market": "CN",
+          "lang": "zh_CN"
+        },
+        "body": null
+      },
+      "response": {
+        "type": "str",
+        "preview": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+      },
+      "ok": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/real-time-quotes",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "request": {
+        "query": null,
+        "body": {
+          "symbols": [
+            "000001"
+          ]
+        }
+      },
+      "response": {
+        "type": "str",
+        "preview": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+      },
+      "ok": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/capital-distribution",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "request": {
+        "query": null,
+        "body": {
+          "symbols": [
+            "000001"
+          ]
+        }
+      },
+      "response": {
+        "type": "str",
+        "preview": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+      },
+      "ok": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quantitative/quotes/bars-range",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "request": {
+        "query": null,
+        "body": {
+          "symbols": [
+            "000001"
+          ],
+          "barType": "day",
+          "startDate": "2026-08-16",
+          "endDate": "2026-08-19",
+          "tradeSession": "Regular",
+          "rightOption": "nr"
+        }
+      },
+      "response": {
+        "type": "str",
+        "preview": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+      },
+      "ok": false
+    }
+  ]
+}
