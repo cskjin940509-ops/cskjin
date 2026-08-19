@@ -31,7 +31,7 @@ def tencent_same_day_snapshot(code, day):
     req = Request(
         "https://qt.gtimg.cn/q=" + sym,
         headers={
-            "User-Agent": "Mozilla/5.0 AStockStrategy-BSE-Verified/1.0",
+            "User-Agent": "Mozilla/5.0 AStockStrategy-BSE-Verified/1.1",
             "Accept": "*/*",
             "Referer": "https://gu.qq.com/",
             "Cache-Control": "no-cache",
@@ -50,7 +50,6 @@ def tencent_same_day_snapshot(code, day):
         return None
     def n(i):
         return verified.finite(f[i]) if len(f) > i else None
-    # Tencent quote layout: current=3, previous close=4, open=5, high=33, low=34.
     return {"open": n(5), "close": n(3), "high": n(33), "low": n(34), "quoteTime": stamp}
 
 
@@ -66,33 +65,28 @@ def verify_price_bse(code, day):
         tx = None
     try:
         em = verified.eastmoney_raw_day(code, day)
-        checks.append({"provider": "东方财富日线", "row": em})
+        checks.append({"provider": "东方财富", "row": em})
     except Exception as e:
-        checks.append({"provider": "东方财富日线", "row": None, "error": e.__class__.__name__})
+        checks.append({"provider": "东方财富", "row": None, "error": e.__class__.__name__})
         em = None
     if not tx or not em:
         return {"verified": False, "checks": checks, "reason": "fewer-than-two-bse-raw-providers"}
-    diffs = []
-    for field in ("open", "close", "high", "low"):
-        d = verified.rel_diff(verified.finite(tx.get(field)), verified.finite(em.get(field)))
-        if d is not None:
-            diffs.append(d)
-    mx = max(diffs) if diffs else None
+    mx = verified.pair_diff(tx, em)
     ok = mx is not None and mx <= 0.001
     return {
         "verified": ok,
         "rawClose": verified.finite(tx.get("close")) if ok else None,
         "maxRelDiff": mx,
+        "providers": ["腾讯实时收盘快照", "东方财富"] if ok else [],
         "checks": checks,
         "rule": "北交所：腾讯同日收盘快照+东方财富未复权日线OHLC最大相对差<=0.1%",
     }
 
-# base.choose_stocks -> shist -> base.sid; verified price audit -> verified.secid/symbol.
 base.sid = secid
 verified.secid = secid
 verified.symbol = symbol
 verified.verify_price = verify_price_bse
-verified.VERSION = "v1.7.2-verified-point-in-time-bse"
+verified.VERSION = "v1.8.1-verified-point-in-time-bse-3source"
 
 if __name__ == "__main__":
     verified.main()
