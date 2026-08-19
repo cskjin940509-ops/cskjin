@@ -1,4 +1,4 @@
-name: Build AStock v2.0 Full Drilldown APK
+name: Build AStock v2.1 Chinese Trading Assistant APK
 
 on:
   workflow_dispatch:
@@ -38,7 +38,7 @@ jobs:
         run: python tools/patch_detail_compile_fixes.py
       - name: 接入两两组合筛选池
         run: python tools/patch_pairwise_pools.py
-      - name: 接入 Yunai Quant API 状态
+      - name: 接入云AI量化数据源状态
         run: python tools/patch_yunai_ui.py
       - name: 展示数据审计可信状态
         run: python tools/patch_data_audit_ui.py
@@ -48,12 +48,14 @@ jobs:
         run: python tools/patch_bse_market_mapping.py
       - name: 接入14:30-15:00滚动尾盘池
         run: python tools/patch_tail_decision_ui.py
-      - name: 完整解析Official数据并打通板块个股下钻
+      - name: 完整解析正式数据并打通板块个股下钻
         run: python tools/patch_v1_9_data_display.py
       - name: 区分完整核对与部分核对跟踪
         run: python tools/patch_audit_tracking_labels.py
-      - name: 补齐尾盘板块下钻与板块Forward Tracking
+      - name: 补齐尾盘板块下钻与板块收益跟踪
         run: python tools/patch_v2_drilldown_completion.py
+      - name: 接入交易辅助并完成全中文金融术语
+        run: python tools/patch_chinese_trade_assistant.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -76,6 +78,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v2.0-full-drilldown-debug
+          name: AStockStrategy-v2.1-chinese-trading-assistant-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
