@@ -1,4 +1,4 @@
-name: Run AStock 14:30 Tail Decision
+name: Run AStock 14:30-15:00 Rolling Tail Decision
 
 on:
   workflow_dispatch:
@@ -6,19 +6,23 @@ on:
     branches: [ main ]
     paths:
       - 'tools/run_tail_decision.py'
+      - 'tools/run_tail_rolling.py'
       - 'tools/bse_market_mapping.py'
       - 'tools/enrich_tail_yunai.py'
+      - 'tools/sync_yunai_production.py'
+      - 'tools/yunai_tail_overlay.py'
       - '.github/workflows/run-tail-decision.yml'
   schedule:
-    # 北京时间工作日 14:30 主跑；14:34 / 14:38 只做冗余补跑。
-    # run_tail_decision.py 对当天首个成功结果做 immutable freeze，后续补跑不会覆盖。
-    - cron: '30,34,38 6 * * 1-5'
+    # 北京时间工作日 14:30-14:55 每5分钟滚动重算。
+    - cron: '30,35,40,45,50,55 6 * * 1-5'
+    # 15:00 收盘锁定；15:03 为收盘数据/Actions延迟兜底，首个成功 Final 后保持 immutable。
+    - cron: '0,3 7 * * 1-5'
 
 permissions:
   contents: write
 
 concurrency:
-  group: astock-tail-decision-${{ github.event_name }}
+  group: astock-tail-decision
   cancel-in-progress: false
 
 jobs:
@@ -44,25 +48,30 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 运行14:30尾盘决策扫描
+      - name: 每5分钟重算尾盘主线与筛选池
         env:
           DRY_RUN: ${{ github.event_name == 'push' && '1' || '0' }}
           ALLOW_ANY_TIME: ${{ github.event_name == 'push' && '1' || '0' }}
-        run: python tools/run_tail_decision.py
-      - name: 合并Yunai生产网关确认
+        run: python tools/run_tail_rolling.py
+      - name: 刷新 Yunai 候选股实时行情与资金分布
+        if: github.event_name != 'push'
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/sync_yunai_production.py
+      - name: 合并 Yunai 二次确认
         env:
           DRY_RUN: ${{ github.event_name == 'push' && '1' || '0' }}
         run: python tools/enrich_tail_yunai.py
-      - name: 保存尾盘冻结结果
+      - name: 保存滚动快照或15:00最终结果
         if: github.event_name != 'push'
         run: |
           git config user.name 'astock-tail-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_tail
+          git add astock_tail astock_gateway/yunai_live.json astock_gateway/latest.json
           if git diff --cached --quiet; then
             echo 'No tail-decision changes.'
             exit 0
           fi
-          git commit -m 'Freeze 14:30 A-share tail decision cohort'
+          git commit -m 'Update rolling A-share tail decision pool'
           git pull --rebase origin main
           git push origin HEAD:main
