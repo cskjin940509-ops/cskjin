@@ -275,6 +275,13 @@ insert = r'''        item { DetailSectionTitle("当日交易事实") }
 if needle in ds and 'DetailSectionTitle("当日交易事实")' not in ds:
     ds = ds.replace(needle, insert, 1)
 
+# The v1.9 detail template exposes a lightweight snapshot-stock record without
+# the money-flow properties. In detail rows, the complete StockFacts object `f`
+# is the authoritative frozen source for those two fields. Keep the richer
+# StockMeta use in V6Activity unchanged.
+ds = ds.replace('meta?.mainNetFlow', 'f?.mainNetFlow')
+ds = ds.replace('meta?.mainFlowPct', 'f?.mainFlowPct')
+
 # Exact visible finance terms; internal JSON keys remain unchanged.
 ds = ds.replace('DetailKey("RS20",', 'DetailKey("20日相对强弱",')
 ds = ds.replace('DetailKey("RS60",', 'DetailKey("60日相对强弱",')
