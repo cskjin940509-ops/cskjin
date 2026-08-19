@@ -9,8 +9,9 @@ on:
       - 'tools/bse_market_mapping.py'
       - '.github/workflows/run-tail-decision.yml'
   schedule:
-    # 北京时间工作日 14:30
-    - cron: '30 6 * * 1-5'
+    # 北京时间工作日 14:30 主跑；14:34 / 14:38 只做冗余补跑。
+    # run_tail_decision.py 对当天首个成功结果做 immutable freeze，后续补跑不会覆盖。
+    - cron: '30,34,38 6 * * 1-5'
 
 permissions:
   contents: write
