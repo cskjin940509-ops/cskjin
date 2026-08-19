@@ -50,6 +50,8 @@ jobs:
         run: python tools/patch_tail_decision_ui.py
       - name: 修复Official正式池与收益展示
         run: python tools/patch_official_returns_ui.py
+      - name: 区分完整核对与部分核对跟踪
+        run: python tools/patch_audit_tracking_labels.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
