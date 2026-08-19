@@ -749,6 +749,20 @@
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
       "version": "v1.0-next-open-tracker"
+    },
+    "audit": {
+      "status": "LegacyUnverified",
+      "eligibleForPerformanceComparison": false,
+      "issues": [
+        "missing-strategy-version",
+        "missing-stock-metadata:17",
+        "B1-margin-provenance-missing",
+        "B2-etf-provenance-missing",
+        "cross-source-price-validation-missing"
+      ],
+      "auditedAt": "2026-08-19T08:52:32+08:00",
+      "note": "保留原始冻结名单，不回写/伪造缺失因子；在完成逐项时点审计前不纳入策略胜率、Alpha和池间比较。",
+      "previousStatus": null
     }
   },
   {
@@ -3880,6 +3894,16 @@
     "availableAt": "2026-08-19T01:41:13+08:00",
     "poolPerformance": {},
     "sectorPerformance": {},
-    "stockPerformance": {}
+    "stockPerformance": {},
+    "audit": {
+      "status": "LegacyUnverified",
+      "eligibleForPerformanceComparison": false,
+      "issues": [
+        "cross-source-price-validation-missing"
+      ],
+      "auditedAt": "2026-08-19T08:52:32+08:00",
+      "note": "保留原始冻结名单，不回写/伪造缺失因子；在完成逐项时点审计前不纳入策略胜率、Alpha和池间比较。",
+      "previousStatus": null
+    }
   }
 ]
