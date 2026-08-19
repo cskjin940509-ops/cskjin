@@ -7,14 +7,14 @@
     "missing-original-strategy-version",
     "missing-original-stock-metadata:17",
     "same-day-frozen-market-snapshot-missing",
-    "raw-price-cross-source-incomplete:7/17",
+    "raw-price-cross-source-incomplete:3/17",
     "original-factor-provenance-incomplete",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
     "total": 17,
-    "verified": 7,
-    "coveragePct": 41.18,
+    "verified": 3,
+    "coveragePct": 17.65,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
@@ -29,33 +29,30 @@
         ]
       },
       "002384": {
-        "verified": true,
-        "rawClose": 217.66,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "002916": {
-        "verified": true,
-        "rawClose": 392.9,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300308": {
-        "verified": true,
-        "rawClose": 1001.03,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300394": {
@@ -72,7 +69,7 @@
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
           "腾讯"
         ]
@@ -81,7 +78,7 @@
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
           "腾讯"
         ]
@@ -90,32 +87,14 @@
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
           "腾讯"
         ]
       },
       "600183": {
-        "verified": false,
-        "rawClose": null,
-        "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
-        "providersWithRow": [
-          "腾讯"
-        ]
-      },
-      "688008": {
-        "verified": false,
-        "rawClose": null,
-        "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
-        "providersWithRow": [
-          "腾讯"
-        ]
-      },
-      "688012": {
         "verified": true,
-        "rawClose": 387.82,
+        "rawClose": 144.49,
         "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
@@ -123,11 +102,29 @@
           "东方财富"
         ]
       },
+      "688008": {
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
+        "providersWithRow": [
+          "腾讯"
+        ]
+      },
+      "688012": {
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
+        "providersWithRow": [
+          "腾讯"
+        ]
+      },
       "688017": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
           "腾讯"
         ]
@@ -136,26 +133,25 @@
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
           "腾讯"
         ]
       },
       "688120": {
-        "verified": true,
-        "rawClose": 277.44,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "688200": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
           "腾讯"
         ]
@@ -164,7 +160,7 @@
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
           "腾讯"
         ]
@@ -173,7 +169,7 @@
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
-        "reason": "fewer-than-two-raw-providers",
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
           "腾讯"
         ]
@@ -181,9 +177,9 @@
     }
   },
   "factorRecompute": {
-    "available": 3,
+    "available": 0,
     "total": 17,
-    "coveragePct": 17.65,
+    "coveragePct": 0.0,
     "cutoff": "2026-08-17",
     "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution",
     "stocks": {
@@ -240,28 +236,16 @@
         "error": "RemoteDisconnected"
       },
       "688120": {
-        "available": true,
-        "barCount": 90,
-        "lastBarDate": "2026-08-17",
-        "r20": 0.21700223713646527,
-        "r60": 0.40682521170326047,
-        "mta": "日周月共振"
+        "available": false,
+        "error": "RemoteDisconnected"
       },
       "688200": {
-        "available": true,
-        "barCount": 90,
-        "lastBarDate": "2026-08-17",
-        "r20": 0.23803319549085145,
-        "r60": 0.44114737883283883,
-        "mta": "双周期共振"
+        "available": false,
+        "error": "RemoteDisconnected"
       },
       "688361": {
-        "available": true,
-        "barCount": 90,
-        "lastBarDate": "2026-08-17",
-        "r20": 0.20734822188748447,
-        "r60": 0.5021389284986759,
-        "mta": "日周月共振"
+        "available": false,
+        "error": "RemoteDisconnected"
       },
       "688981": {
         "available": false,
@@ -304,5 +288,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-08-19T13:25:29+08:00"
+  "auditedAt": "2026-08-19T17:32:06+08:00"
 }
