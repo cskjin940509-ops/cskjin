@@ -1,0 +1,57 @@
+name: Reverify Legacy AStock Cohorts
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/reverify_legacy_cohorts.py'
+      - '.github/workflows/reverify-legacy-cohorts.yml'
+  schedule:
+    # 每周日北京时间 10:20 再检查一次；若未来补齐历史数据源可自动升级审计状态。
+    - cron: '20 2 * * 0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-legacy-reverify
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 记录旧批次复核运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-legacy-reverify-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-legacy-reverify-run.txt -f message='Record latest legacy reverify run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-legacy-reverify-run.txt -f message='Record latest legacy reverify run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 逐批复核旧版 Official
+        run: python tools/reverify_legacy_cohorts.py
+      - name: 保存复核证据
+        run: |
+          if git diff --quiet -- astock_snapshots/index.json astock_gateway/validation; then
+            echo 'No legacy audit changes.'
+            exit 0
+          fi
+          git config user.name 'astock-audit-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_snapshots/index.json astock_gateway/validation
+          git commit -m 'Reverify legacy A-share strategy cohorts'
+          git pull --rebase origin main
+          git push origin HEAD:main
