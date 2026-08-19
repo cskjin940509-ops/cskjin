@@ -1,0 +1,86 @@
+name: Probe Yunai Business APIs v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/probe-yunai-business-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Call authenticated Yunai APIs
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone, timedelta
+          from urllib.request import Request, urlopen
+          from urllib.error import HTTPError
+
+          base='https://quant.yunai.com.cn/quant-market'
+          token=os.environ.get('YUNAI_TOKEN','').strip()
+          if not token:
+              raise RuntimeError('YUNAI_TOKEN missing')
+          if not token.lower().startswith('bearer '):
+              token='Bearer '+token
+
+          def call(method,path,query='',body=None):
+              url=base+path+query
+              headers={'Accept':'application/json,*/*','Authorization':token,'User-Agent':'AStockStrategy-Yunai-Probe/2.0'}
+              data=None
+              if body is not None:
+                  headers['Content-Type']='application/json'
+                  data=json.dumps(body).encode()
+              req=Request(url,headers=headers,data=data,method=method)
+              try:
+                  with urlopen(req,timeout=20) as r:
+                      raw=r.read().decode('utf-8','replace')
+                      status=r.status; ctype=r.headers.get('Content-Type','')
+              except HTTPError as e:
+                  raw=e.read().decode('utf-8','replace')
+                  status=e.code; ctype=e.headers.get('Content-Type','') if e.headers else ''
+              try: payload=json.loads(raw)
+              except Exception: payload=raw
+              summary={'type':type(payload).__name__}
+              if isinstance(payload,dict):
+                  summary['keys']=list(payload.keys())[:20]
+                  for k in ('code','msg','message','success','tradeSession'):
+                      if k in payload and isinstance(payload[k],(str,int,float,bool,type(None))): summary[k]=payload[k]
+                  if isinstance(payload.get('data'),dict): summary['dataKeys']=list(payload['data'].keys())[:10]
+              elif isinstance(payload,list): summary['count']=len(payload)
+              else: summary['preview']=str(payload)[:160]
+              return {'method':method,'path':path,'httpStatus':status,'contentType':ctype,'ok':200<=status<300,'response':summary}
+
+          calls=[]
+          calls.append(call('GET','/api/v1/quantitative/quotes/market-status','?market=CN&lang=zh_CN'))
+          calls.append(call('POST','/api/v1/quantitative/quotes/real-time-quotes',body={'symbols':['000001']}))
+          calls.append(call('POST','/api/v1/quantitative/quotes/capital-distribution',body={'symbols':['000001']}))
+          calls.append(call('POST','/api/v1/quantitative/quotes/bars-range',body={'symbols':['000001'],'barType':'day','startDate':'2026-08-18','endDate':'2026-08-19','tradeSession':'Regular','rightOption':'nr'}))
+          out={'checkedAt':datetime.now(timezone(timedelta(hours=8))).isoformat(timespec='seconds'),'authenticated':True,'calls':calls}
+          os.makedirs('astock_gateway',exist_ok=True)
+          open('astock_gateway/yunai_business_probe_v2.json','w').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps([{'path':x['path'],'status':x['httpStatus'],'ok':x['ok']} for x in calls],ensure_ascii=False))
+          PY
+      - name: Save sanitized result
+        run: |
+          git config user.name 'astock-yunai-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_gateway/yunai_business_probe_v2.json
+          git commit -m 'Record authenticated Yunai v2 business API probe' || exit 0
+          git pull --rebase origin main
+          git push origin HEAD:main
