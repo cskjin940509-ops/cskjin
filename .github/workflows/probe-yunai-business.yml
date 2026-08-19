@@ -1,0 +1,52 @@
+name: Probe Yunai Business APIs
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/probe_yunai_business.py'
+      - '.github/workflows/probe-yunai-business.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 记录运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-yunai-business-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-yunai-business-run.txt -f message='Record latest Yunai business probe run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-yunai-business-run.txt -f message='Record latest Yunai business probe run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 使用 Token 调用 Yunai 业务接口
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/probe_yunai_business.py
+      - name: 保存脱敏探测结果
+        run: |
+          git config user.name 'astock-yunai-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_gateway/yunai_business_probe.json
+          if git diff --cached --quiet; then
+            echo 'No probe result changes.'
+            exit 0
+          fi
+          git commit -m 'Record authenticated Yunai business API probe'
+          git pull --rebase origin main
+          git push origin HEAD:main
