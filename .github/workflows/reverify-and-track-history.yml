@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/reverify-and-track-history.yml'
       - 'tools/reverify_legacy_cohorts.py'
+      - 'tools/reverify_legacy_with_yunai_history.py'
       - 'tools/update_strategy_tracking_reference.py'
   schedule:
     # Beijing weekdays: refresh shortly after close and retry once for delayed daily bars.
@@ -46,7 +47,7 @@ jobs:
       - name: Reverify recoverable historical evidence
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-        run: python tools/reverify_legacy_cohorts.py
+        run: python tools/reverify_legacy_with_yunai_history.py
       - name: Refresh verified and reference forward tracking
         run: python tools/update_strategy_tracking_reference.py
       - name: Save audit and tracking updates
