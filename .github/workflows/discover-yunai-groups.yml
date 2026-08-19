@@ -1,0 +1,50 @@
+name: Discover Yunai API Groups
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/discover_yunai_groups.py'
+      - '.github/workflows/discover-yunai-groups.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 记录运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-yunai-groups-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-yunai-groups-run.txt -f message='Record latest Yunai group discovery run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-yunai-groups-run.txt -f message='Record latest Yunai group discovery run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 扫描 Knife4j 分组
+        run: python tools/discover_yunai_groups.py
+      - name: 保存分组索引
+        run: |
+          git config user.name 'astock-yunai-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_gateway/yunai_groups.json
+          if git diff --cached --quiet; then
+            echo 'No group changes.'
+            exit 0
+          fi
+          git commit -m 'Discover Yunai Knife4j API groups'
+          git pull --rebase origin main
+          git push origin HEAD:main
