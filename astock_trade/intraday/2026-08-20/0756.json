@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-08-20",
+  "generatedAt": "2026-08-20T07:56:54+08:00",
+  "phase": "PREOPEN",
+  "officialDate": "2026-08-19",
+  "officialPlans": [],
+  "setupCandidates": [],
+  "summary": {
+    "official": 0,
+    "officialBuy": 0,
+    "officialWatch": 0,
+    "expandedSetupCandidates": 0
+  },
+  "rules": {
+    "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
+    "exit": "止损/TP为条件式计划；A股普通股票T+1，买入日不生成可执行卖出。",
+    "dayRange": "当日低点→高点仅作行情描述，不视为可实现收益；真实信号MFE需按信号发生后的分钟序列计算。",
+    "history": "历史形态统计只使用当前日期之前的数据，当前信号不看未来。"
+  },
+  "sources": [
+    "腾讯实时行情",
+    "东方财富板块成分/前复权日线",
+    "Official冻结池",
+    "TailCore（如当日存在）"
+  ]
+}
