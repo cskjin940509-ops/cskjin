@@ -1,0 +1,54 @@
+{
+  "base": "https://quant.yunai.com.cn",
+  "groups": [
+    {
+      "name": "quant-market",
+      "url": "/quant-market/v3/api-docs"
+    }
+  ],
+  "attempts": [
+    {
+      "path": "/v3/api-docs/swagger-config",
+      "status": 200,
+      "contentType": "application/json",
+      "type": "dict",
+      "keys": [
+        "configUrl",
+        "oauth2RedirectUrl",
+        "operationsSorter",
+        "tagsSorter",
+        "urls",
+        "validatorUrl"
+      ]
+    },
+    {
+      "path": "/swagger-resources",
+      "status": 404
+    },
+    {
+      "path": "/v3/api-docs",
+      "status": 404
+    },
+    {
+      "path": "/v2/api-docs",
+      "status": 404
+    },
+    {
+      "path": "/quant-market/v3/api-docs",
+      "status": 200,
+      "contentType": "application/json",
+      "type": "dict",
+      "keys": [
+        "components",
+        "info",
+        "openapi",
+        "paths",
+        "security",
+        "servers",
+        "tags",
+        "x-openapi"
+      ],
+      "endpointCount": 38
+    }
+  ]
+}
