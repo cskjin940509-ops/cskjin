@@ -17,6 +17,7 @@ on:
     branches: [ main ]
     paths:
       - 'tools/verify_daily_price.py'
+      - 'tools/audit_snapshot_symbol.py'
       - '.github/workflows/verify-market-price.yml'
 
 permissions:
@@ -53,6 +54,7 @@ jobs:
           set +e
           python tools/verify_daily_price.py
           echo $? > /tmp/verify_code
+          python tools/audit_snapshot_symbol.py
           exit 0
       - name: 保存校验报告
         run: |
