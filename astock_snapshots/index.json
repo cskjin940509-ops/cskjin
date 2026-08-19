@@ -751,18 +751,75 @@
       "version": "v1.0-next-open-tracker"
     },
     "audit": {
-      "status": "LegacyUnverified",
+      "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
-        "missing-strategy-version",
-        "missing-stock-metadata:17",
-        "B1-margin-provenance-missing",
-        "B2-etf-provenance-missing",
-        "cross-source-price-validation-missing"
+        "missing-original-strategy-version",
+        "missing-original-stock-metadata:17",
+        "same-day-frozen-market-snapshot-missing",
+        "raw-price-cross-source-incomplete:7/17",
+        "original-factor-provenance-incomplete",
+        "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-08-19T08:52:32+08:00",
-      "note": "保留原始冻结名单，不回写/伪造缺失因子；在完成逐项时点审计前不纳入策略胜率、Alpha和池间比较。",
-      "previousStatus": null
+      "auditedAt": "2026-08-19T13:25:29+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "reverification": {
+        "rawPrice": {
+          "total": 17,
+          "verified": 7,
+          "coveragePct": 41.18,
+          "bseSingleSource": 0,
+          "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
+        },
+        "factorRecompute": {
+          "available": 3,
+          "total": 17,
+          "coveragePct": 17.65,
+          "cutoff": "2026-08-17",
+          "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
+        },
+        "frozenMarket": {
+          "available": false,
+          "reason": "frozen-market-snapshot-missing"
+        },
+        "factorProvenance": {
+          "complete": false,
+          "checks": {
+            "B0": {
+              "used": true,
+              "proven": false,
+              "evidence": null
+            },
+            "B1": {
+              "used": true,
+              "proven": false,
+              "evidence": null,
+              "requiredSource": "margin"
+            },
+            "B2": {
+              "used": true,
+              "proven": false,
+              "evidence": null,
+              "requiredSource": "etf"
+            },
+            "B3": {
+              "used": true,
+              "proven": false,
+              "evidence": null
+            }
+          }
+        },
+        "pointInTimeMembership": {
+          "available": false,
+          "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
+        },
+        "originalMetadata": {
+          "strategyVersion": null,
+          "symbols": 17,
+          "stockMetadataPresent": 0,
+          "stockMetadataMissing": 17
+        }
+      }
     }
   },
   {
@@ -3896,14 +3953,74 @@
     "sectorPerformance": {},
     "stockPerformance": {},
     "audit": {
-      "status": "LegacyUnverified",
+      "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
-        "cross-source-price-validation-missing"
+        "raw-price-cross-source-incomplete:3/14",
+        "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-08-19T08:52:32+08:00",
-      "note": "保留原始冻结名单，不回写/伪造缺失因子；在完成逐项时点审计前不纳入策略胜率、Alpha和池间比较。",
-      "previousStatus": null
+      "auditedAt": "2026-08-19T13:25:29+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "reverification": {
+        "rawPrice": {
+          "total": 14,
+          "verified": 3,
+          "coveragePct": 21.43,
+          "bseSingleSource": 0,
+          "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
+        },
+        "factorRecompute": {
+          "available": 0,
+          "total": 14,
+          "coveragePct": 0.0,
+          "cutoff": "2026-08-18",
+          "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
+        },
+        "frozenMarket": {
+          "available": true,
+          "sourceDate": "2026-08-18",
+          "availableAt": "2026-08-18T18:43:41+08:00",
+          "boardCount": 200,
+          "sameDay": true
+        },
+        "factorProvenance": {
+          "complete": true,
+          "checks": {
+            "B0": {
+              "used": true,
+              "proven": true,
+              "evidence": "strategyVersion+stockMetadata"
+            },
+            "B1": {
+              "used": false,
+              "proven": true,
+              "evidence": "两融数据未同步，正式池留空",
+              "requiredSource": "margin"
+            },
+            "B2": {
+              "used": false,
+              "proven": true,
+              "evidence": "ETF真实申赎未同步，正式池留空",
+              "requiredSource": "etf"
+            },
+            "B3": {
+              "used": true,
+              "proven": true,
+              "evidence": "frozen-stock-main-flow-fields"
+            }
+          }
+        },
+        "pointInTimeMembership": {
+          "available": false,
+          "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
+        },
+        "originalMetadata": {
+          "strategyVersion": "v1.6.2-daily-scanner-tracking",
+          "symbols": 14,
+          "stockMetadataPresent": 14,
+          "stockMetadataMissing": 0
+        }
+      }
     }
   }
 ]
