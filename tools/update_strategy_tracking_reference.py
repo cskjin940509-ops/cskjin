@@ -28,7 +28,7 @@ def trackable_with_reference(snapshot, now):
 
 
 legacy.snapshot_is_trackable = trackable_with_reference
-legacy.VERSION = "v1.4-next-open-verified-reference"
+legacy.VERSION = "v1.4.1-next-open-verified-reference"
 
 
 def annotate_reference_only():
