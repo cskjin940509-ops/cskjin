@@ -1,0 +1,49 @@
+name: Update AStock Forward Tracking
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/update_strategy_tracking_display_ready.py'
+      - '.github/workflows/update-strategy-tracking.yml'
+  schedule:
+    # 北京时间工作日15:35更新当日已成熟的1D/5D/...跟踪；16:35再做一次数据延迟兜底。
+    - cron: '35 7 * * 1-5'
+    - cron: '35 8 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-forward-tracking
+  cancel-in-progress: false
+
+jobs:
+  tracking:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 更新正式与参考批次 Forward Tracking
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/update_strategy_tracking_display_ready.py
+      - name: 保存跟踪结果
+        run: |
+          if git diff --quiet -- astock_snapshots/index.json; then
+            echo 'No tracking changes.'
+            exit 0
+          fi
+          git config user.name 'astock-tracking-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_snapshots/index.json
+          git commit -m 'Update A-share forward tracking'
+          git pull --rebase origin main
+          git push origin HEAD:main
