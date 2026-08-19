@@ -56,7 +56,7 @@ jobs:
           exit 0
       - name: 保存校验报告
         run: |
-          if git diff --quiet -- astock_gateway/validation; then
+          if [ -z "$(git status --porcelain -- astock_gateway/validation)" ]; then
             echo 'No validation report changes.'
           else
             git config user.name 'astock-validator-bot'
