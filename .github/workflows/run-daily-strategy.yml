@@ -44,7 +44,7 @@ jobs:
       - name: 运行时点安全 + 双源校验的日终扫描
         env:
           TARGET_DATE: ${{ inputs.target_date }}
-        run: python tools/run_daily_strategy_verified.py
+        run: python tools/run_daily_strategy_verified_bse.py
       - name: 生成两两资金确认池
         env:
           TARGET_DATE: ${{ inputs.target_date }}
@@ -60,7 +60,7 @@ jobs:
             echo 'No new verified cohort; skip forward tracking in this run.'
             exit 0
           fi
-          python tools/update_strategy_backtest_verified.py
+          python tools/update_strategy_backtest_verified_bse.py
       - name: 保存正式 Daily Cohort
         run: |
           if git diff --quiet -- astock_snapshots/index.json; then
