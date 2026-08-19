@@ -36,7 +36,7 @@ def scalar(o,names):
 
 def post(path,body):
     token=yg.bearer()
-    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.3'})
+    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.4'})
     try:
         with urlopen(req,timeout=20) as r:
             raw=r.read().decode('utf-8','replace'); status=r.status; ctype=r.headers.get('Content-Type','')
@@ -64,8 +64,14 @@ def apply_capital(out,batch,p):
 
 def fetch_stock_overlay(codes):
     out={c:{'quoteOk':False,'capitalOk':False} for c in codes}
-    for i in range(0,len(codes),10):
-        batch=codes[i:i+10]
+    supported=[]
+    for c in codes:
+        if str(c).startswith(('8','9')):
+            out[c]['unsupportedMarket']='BSE'
+        else:
+            supported.append(c)
+    for i in range(0,len(supported),10):
+        batch=supported[i:i+10]
         st,_,p=post(PREFIX+'/real-time-quotes',{'symbols':batch})
         if 200<=st<300: apply_quote(out,batch,p)
         for c in batch:
@@ -81,6 +87,7 @@ def fetch_stock_overlay(codes):
     return out
 
 def fetch_daily_kline(code,lmt=80):
+    if str(code).startswith(('8','9')): return []
     today=datetime.now(yg.CN).date(); start=today-timedelta(days=max(140,lmt*2))
     body={'symbols':[code],'barType':'day','startDate':start.isoformat(),'endDate':today.isoformat(),'tradeSession':'Regular','rightOption':'br'}
     st,_,p=post(PREFIX+'/bars-range',body)
