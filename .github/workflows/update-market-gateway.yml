@@ -7,6 +7,7 @@ on:
     paths:
       - 'tools/update_market_gateway.py'
       - 'tools/sanitize_market_gateway.py'
+      - 'tools/ensure_market_snapshot_core_indices.py'
       - 'tools/enrich_yunai_gateway.py'
       - 'tools/yunai_tail_overlay.py'
       - 'tools/sync_yunai_production.py'
@@ -55,6 +56,7 @@ jobs:
         run: |
           python tools/update_market_gateway.py
           python tools/sanitize_market_gateway.py
+          python tools/ensure_market_snapshot_core_indices.py
       - name: 接入 Yunai Quant API
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
