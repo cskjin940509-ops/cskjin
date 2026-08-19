@@ -1,7 +1,7 @@
 {
   "symbol": "002371",
   "date": "2026-08-18",
-  "generatedAt": "2026-08-19T08:46:20+08:00",
+  "generatedAt": "2026-08-19T08:47:54+08:00",
   "checks": [
     {
       "provider": "腾讯",
@@ -30,32 +30,16 @@
       "urlKind": "fqkline"
     },
     {
-      "provider": "东方财富",
+      "provider": "eastmoney",
       "adjust": "raw",
-      "row": {
-        "date": "2026-08-18",
-        "open": 770.0,
-        "close": 777.0,
-        "high": 785.9,
-        "low": 757.25,
-        "volume": 81666.0,
-        "amount": 6312195098.18
-      },
-      "urlKind": "kline"
+      "row": null,
+      "error": "RemoteDisconnected: Remote end closed connection without response"
     },
     {
-      "provider": "东方财富",
+      "provider": "eastmoney",
       "adjust": "qfq",
-      "row": {
-        "date": "2026-08-18",
-        "open": 770.0,
-        "close": 777.0,
-        "high": 785.9,
-        "low": 757.25,
-        "volume": 81666.0,
-        "amount": 6312195098.18
-      },
-      "urlKind": "kline"
+      "row": null,
+      "error": "RemoteDisconnected: Remote end closed connection without response"
     },
     {
       "provider": "网易财经",
@@ -64,14 +48,15 @@
       "error": "HTTPError: HTTP Error 502: Bad Gateway"
     }
   ],
-  "rawCrossSourceMaxRelDiff": 0.0,
-  "qfqCrossSourceMaxRelDiff": 0.0,
-  "verified": true,
+  "rawCrossSourceMaxRelDiff": null,
+  "qfqCrossSourceMaxRelDiff": null,
+  "verified": false,
   "verifiedRawProviders": [
-    "东方财富",
     "腾讯"
   ],
   "errors": [
+    "eastmoney/raw:missing-row",
+    "eastmoney/qfq:missing-row",
     "网易财经/raw:missing-row"
   ],
   "rule": "正式价格必须至少两个独立源的未复权OHLC一致（最大相对差<=0.1%）；复权价只用于收益/因子，不作为实际成交价展示。"
