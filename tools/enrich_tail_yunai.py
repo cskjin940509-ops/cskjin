@@ -2,11 +2,11 @@
 from __future__ import annotations
 import json, os
 from pathlib import Path
-import yunai_tail_overlay as yo
 
 ROOT=Path(__file__).resolve().parents[1]
 LATEST=ROOT/'astock_tail'/'latest.json'
 HIST=ROOT/'astock_tail'/'history'
+YUNAI=ROOT/'astock_gateway'/'yunai_live.json'
 
 
 def main():
@@ -16,9 +16,11 @@ def main():
     codes=list((o.get('stocks') or {}).keys())
     if not codes:
         o['yunaiIntegration']={'state':'no-candidates'}
+    elif not YUNAI.exists():
+        o['yunaiIntegration']={'state':'gateway-unavailable'}
     else:
-        ov=yo.fetch_stock_overlay(codes)
-        qc=vc=cc=0
+        y=json.loads(YUNAI.read_text(encoding='utf-8'))
+        ov=y.get('stocks') or {}; qc=vc=cc=0
         for code in codes:
             row=(o.get('stocks') or {}).get(code) or {}; x=ov.get(code) or {}
             q=x.get('quote') or {}; cap=x.get('capital') or {}
@@ -33,8 +35,9 @@ def main():
                 if large is not None or total is not None: cc+=1
                 row['yunaiCapital']={'largeNetInflow':large,'totalNetInflow':total,'role':'独立大单资金分布，不等同东方财富主力净流入'}
             (o.get('stocks') or {})[code]=row
-        o['yunaiIntegration']={'state':'connected','quoteChecked':qc,'quoteVerifiedWithin1Pct':vc,'capitalAvailable':cc,'priceRole':'第二实时行情源交叉核对','capitalRole':'独立资金确认源；当前不改变TB3池排序'}
-        o['dataSource']=str(o.get('dataSource') or '')+' + Yunai Quant API'
+        o['yunaiIntegration']={'state':'connected' if y.get('connected') else 'gateway-degraded','gatewayCheckedAt':y.get('checkedAt'),'quoteChecked':qc,'quoteVerifiedWithin1Pct':vc,'capitalAvailable':cc,'priceRole':'第二实时行情源交叉核对','capitalRole':'独立资金确认源；当前不改变TB3池排序'}
+        if 'Yunai Quant API' not in str(o.get('dataSource') or ''):
+            o['dataSource']=str(o.get('dataSource') or '')+' + Yunai Quant API'
     text=json.dumps(o,ensure_ascii=False,indent=2)+'\n'
     LATEST.write_text(text,encoding='utf-8')
     day=o.get('date')
