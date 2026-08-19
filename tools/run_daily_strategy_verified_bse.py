@@ -1,8 +1,21 @@
 #!/usr/bin/env python3
-"""BSE-safe production entrypoint for the verified daily scanner."""
+"""BSE-safe production entrypoint for the verified daily scanner.
+
+Tencent's fqkline endpoint currently returns no historical row for new 920xxx BSE
+codes, while its realtime quote endpoint does. Production cohorts are created on
+the same trading day, so BSE raw OHLC is cross-checked using Tencent's timestamped
+same-day quote snapshot + Eastmoney raw daily K line. The two-source threshold is
+unchanged (<=0.1%).
+"""
+from datetime import datetime
+import re
+from urllib.request import Request, urlopen
+
 import run_daily_strategy_fast as base
 import run_daily_strategy_verified as verified
 from bse_market_mapping import eastmoney_secid, tencent_symbol
+
+_original_verify_price = verified.verify_price
 
 
 def secid(code):
@@ -12,11 +25,74 @@ def secid(code):
 def symbol(code):
     return tencent_symbol(code)
 
+
+def tencent_same_day_snapshot(code, day):
+    sym = symbol(code)
+    req = Request(
+        "https://qt.gtimg.cn/q=" + sym,
+        headers={
+            "User-Agent": "Mozilla/5.0 AStockStrategy-BSE-Verified/1.0",
+            "Accept": "*/*",
+            "Referer": "https://gu.qq.com/",
+            "Cache-Control": "no-cache",
+        },
+    )
+    with urlopen(req, timeout=12) as r:
+        text = r.read().decode("gbk", "replace")
+    m = re.search(r'v_[A-Za-z0-9]+="([^"]*)"', text)
+    if not m:
+        return None
+    f = m.group(1).split("~")
+    if len(f) <= 34:
+        return None
+    stamp = f[30] if len(f) > 30 else ""
+    if len(stamp) < 8 or stamp[:8] != day.replace("-", ""):
+        return None
+    def n(i):
+        return verified.finite(f[i]) if len(f) > i else None
+    # Tencent quote layout: current=3, previous close=4, open=5, high=33, low=34.
+    return {"open": n(5), "close": n(3), "high": n(33), "low": n(34), "quoteTime": stamp}
+
+
+def verify_price_bse(code, day):
+    if not str(code).startswith(("8", "9")):
+        return _original_verify_price(code, day)
+    checks = []
+    try:
+        tx = tencent_same_day_snapshot(code, day)
+        checks.append({"provider": "腾讯实时收盘快照", "row": tx})
+    except Exception as e:
+        checks.append({"provider": "腾讯实时收盘快照", "row": None, "error": e.__class__.__name__})
+        tx = None
+    try:
+        em = verified.eastmoney_raw_day(code, day)
+        checks.append({"provider": "东方财富日线", "row": em})
+    except Exception as e:
+        checks.append({"provider": "东方财富日线", "row": None, "error": e.__class__.__name__})
+        em = None
+    if not tx or not em:
+        return {"verified": False, "checks": checks, "reason": "fewer-than-two-bse-raw-providers"}
+    diffs = []
+    for field in ("open", "close", "high", "low"):
+        d = verified.rel_diff(verified.finite(tx.get(field)), verified.finite(em.get(field)))
+        if d is not None:
+            diffs.append(d)
+    mx = max(diffs) if diffs else None
+    ok = mx is not None and mx <= 0.001
+    return {
+        "verified": ok,
+        "rawClose": verified.finite(tx.get("close")) if ok else None,
+        "maxRelDiff": mx,
+        "checks": checks,
+        "rule": "北交所：腾讯同日收盘快照+东方财富未复权日线OHLC最大相对差<=0.1%",
+    }
+
 # base.choose_stocks -> shist -> base.sid; verified price audit -> verified.secid/symbol.
 base.sid = secid
 verified.secid = secid
 verified.symbol = symbol
-verified.VERSION = "v1.7.1-verified-point-in-time-bse"
+verified.verify_price = verify_price_bse
+verified.VERSION = "v1.7.2-verified-point-in-time-bse"
 
 if __name__ == "__main__":
     verified.main()
