@@ -13,9 +13,10 @@ on:
       - '.github/workflows/run-daily-strategy.yml'
       - 'tools/run_daily_strategy_verified.py'
       - 'tools/run_daily_strategy_verified_bse.py'
+      - 'tools/update_strategy_tracking_reference.py'
   schedule:
     # 北京时间收盘后尽快冻结：15:05首次尝试，15:15/15:25仅做数据延迟兜底。
-    # 任一轮通过当日冻结快照 + 至少双源未复权OHLC校验后即生成Official；后续轮次读取immutable并退出。
+    # 任一轮通过当日冻结快照 + 至少双源未复权OHLC校验后即生成Official；后续不改写原始名单。
     - cron: '5,15,25 7 * * 1-5'
 
 permissions:
@@ -62,22 +63,17 @@ jobs:
             exit 0
           fi
           python tools/augment_pairwise_pools.py
-      - name: 更新已验证批次的后续表现
+      - name: 更新正式与参考批次后续表现
+        run: python tools/update_strategy_tracking_reference.py
+      - name: 保存正式 Daily Cohort 与 Tracking
         run: |
           if git diff --quiet -- astock_snapshots/index.json; then
-            echo 'No new verified cohort; skip forward tracking in this run.'
-            exit 0
-          fi
-          python tools/update_strategy_backtest_verified_bse.py
-      - name: 保存正式 Daily Cohort
-        run: |
-          if git diff --quiet -- astock_snapshots/index.json; then
-            echo 'No verified strategy snapshot changes.'
+            echo 'No strategy/tracking changes.'
             exit 0
           fi
           git config user.name 'astock-strategy-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add astock_snapshots/index.json
-          git commit -m 'Freeze verified daily A-share strategy cohort'
+          git commit -m 'Update verified daily A-share cohort and tracking'
           git pull --rebase origin main
           git push origin HEAD:main
