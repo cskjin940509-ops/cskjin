@@ -36,12 +36,14 @@ def scalar(o,names):
 
 def post(path,body):
     token=yg.bearer()
-    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.4'})
+    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.5'})
     try:
-        with urlopen(req,timeout=20) as r:
+        with urlopen(req,timeout=12) as r:
             raw=r.read().decode('utf-8','replace'); status=r.status; ctype=r.headers.get('Content-Type','')
     except HTTPError as e:
         raw=e.read().decode('utf-8','replace'); status=e.code; ctype=e.headers.get('Content-Type','') if e.headers else ''
+    except Exception as e:
+        return 599,'',{'error':e.__class__.__name__}
     try: p=json.loads(raw)
     except Exception: p=raw
     return status,ctype,p
@@ -80,10 +82,7 @@ def fetch_stock_overlay(codes):
                 if 200<=s<300: apply_quote(out,[c],one)
         st,_,p=post(PREFIX+'/capital-distribution',{'symbols':batch})
         if 200<=st<300: apply_capital(out,batch,p)
-        for c in batch:
-            if not out[c]['capitalOk']:
-                s,_,one=post(PREFIX+'/capital-distribution',{'symbols':[c]})
-                if 200<=s<300: apply_capital(out,[c],one)
+        # Empty capital response is valid coverage state; do not fan out retries.
     return out
 
 def fetch_daily_kline(code,lmt=80):
