@@ -10,6 +10,7 @@ on:
       - 'tools/enrich_yunai_gateway.py'
       - 'tools/yunai_tail_overlay.py'
       - 'tools/sync_yunai_production.py'
+      - 'tools/run_tail_rolling_reliable.py'
       - '.github/workflows/update-market-gateway.yml'
   schedule:
     # 北京交易时段兜底快照：09:30-11:30 / 13:00-15:00，每10分钟
@@ -30,7 +31,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 16
     steps:
       - name: 记录市场网关运行编号
         env:
@@ -46,6 +47,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -59,15 +61,21 @@ jobs:
         run: |
           python tools/enrich_yunai_gateway.py
           python tools/sync_yunai_production.py
-      - name: 保存数据网关与历史市场快照
+      - name: 收盘后兜底锁定 TailFinal
+        env:
+          FINAL_ONLY: '1'
         run: |
-          if git diff --quiet -- astock_gateway astock_snapshots/index.json; then
-            echo 'No market data changes.'
+          python tools/run_tail_rolling_reliable.py
+          python tools/enrich_tail_yunai.py
+      - name: 保存数据网关、TailFinal与历史市场快照
+        run: |
+          if git diff --quiet -- astock_gateway astock_tail astock_snapshots/index.json; then
+            echo 'No market/tail data changes.'
             exit 0
           fi
           git config user.name 'astock-data-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_gateway astock_snapshots/index.json
-          git commit -m 'Update A-share market gateway snapshot'
+          git add astock_gateway astock_tail astock_snapshots/index.json
+          git commit -m 'Update A-share market gateway and tail final snapshot'
           git pull --rebase origin main
           git push origin HEAD:main
