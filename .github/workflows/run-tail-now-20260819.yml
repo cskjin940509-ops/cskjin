@@ -1,0 +1,55 @@
+name: Run AStock Tail Now 2026-08-19
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/run-tail-now-20260819.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  tail-now:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Record run id
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-tail-now-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-tail-now-run.txt -f message='Record one-time tail run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-tail-now-run.txt -f message='Record one-time tail run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Freeze tail decision in live tail window
+        env:
+          DRY_RUN: '0'
+          ALLOW_ANY_TIME: '0'
+        run: python tools/run_tail_decision.py
+      - name: Merge Yunai production confirmation
+        env:
+          DRY_RUN: '0'
+        run: python tools/enrich_tail_yunai.py
+      - name: Save frozen tail result
+        run: |
+          if git diff --quiet -- astock_tail; then
+            echo 'No tail changes.'
+            exit 0
+          fi
+          git config user.name 'astock-tail-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_tail
+          git commit -m 'Freeze 2026-08-19 tail decision cohort'
+          git pull --rebase origin main
+          git push origin HEAD:main
