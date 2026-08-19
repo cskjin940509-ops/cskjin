@@ -1,216 +1,144 @@
 {
-  "checkedAt": "2026-08-19T17:52:01+08:00",
+  "checkedAt": "2026-08-19T18:28:50+08:00",
   "provider": "Yunai Quant API",
-  "connected": true,
+  "connected": false,
   "marketStatus": {
-    "httpStatus": 200,
-    "type": "list",
-    "count": 1
+    "error": "HTTPError"
   },
   "checkedSymbols": [
-    "002035",
-    "603551",
-    "002508",
-    "300894"
+    "000723",
+    "601011",
+    "601015",
+    "600408",
+    "000059",
+    "600740",
+    "601288",
+    "000703",
+    "601857",
+    "601658",
+    "600028",
+    "601328"
   ],
-  "quoteAvailable": 4,
+  "quoteAvailable": 0,
   "capitalResponseAvailable": 0,
   "stocks": {
-    "002035": {
-      "quoteOk": true,
-      "capitalOk": false,
-      "quote": {
-        "price": 4.9,
-        "changePct": 0.0187110187,
-        "amount": 84203780.72,
-        "keys": [
-          "symbol",
-          "open",
-          "high",
-          "low",
-          "preClose",
-          "change",
-          "changeRate",
-          "latestPrice",
-          "latestTime",
-          "timestamp",
-          "askPrice",
-          "askSize",
-          "bidPrice",
-          "bidSize",
-          "volume",
-          "amount",
-          "turnoverRate",
-          "peRatio",
-          "pbRatio",
-          "marketCap",
-          "status",
-          "tradeSession",
-          "brokerSource"
-        ]
-      }
+    "000723": {
+      "quoteOk": false,
+      "capitalOk": false
     },
-    "603551": {
-      "quoteOk": true,
-      "capitalOk": false,
-      "quote": {
-        "price": 9.45,
-        "changePct": 0.0161290323,
-        "amount": 63182061.0,
-        "keys": [
-          "symbol",
-          "open",
-          "high",
-          "low",
-          "preClose",
-          "change",
-          "changeRate",
-          "latestPrice",
-          "latestTime",
-          "timestamp",
-          "askPrice",
-          "askSize",
-          "bidPrice",
-          "bidSize",
-          "volume",
-          "amount",
-          "turnoverRate",
-          "peRatio",
-          "pbRatio",
-          "marketCap",
-          "status",
-          "tradeSession",
-          "brokerSource"
-        ]
-      }
+    "601011": {
+      "quoteOk": false,
+      "capitalOk": false
     },
-    "002508": {
-      "quoteOk": true,
-      "capitalOk": false,
-      "quote": {
-        "price": 16.43,
-        "changePct": 0.0431746032,
-        "amount": 376063324.02,
-        "keys": [
-          "symbol",
-          "open",
-          "high",
-          "low",
-          "preClose",
-          "change",
-          "changeRate",
-          "latestPrice",
-          "latestTime",
-          "timestamp",
-          "askPrice",
-          "askSize",
-          "bidPrice",
-          "bidSize",
-          "volume",
-          "amount",
-          "turnoverRate",
-          "peRatio",
-          "pbRatio",
-          "marketCap",
-          "status",
-          "tradeSession",
-          "brokerSource"
-        ]
-      }
+    "601015": {
+      "quoteOk": false,
+      "capitalOk": false
     },
-    "300894": {
-      "quoteOk": true,
-      "capitalOk": false,
-      "quote": {
-        "price": 11.07,
-        "changePct": -0.0697478992,
-        "amount": 128819182.63,
-        "keys": [
-          "symbol",
-          "open",
-          "high",
-          "low",
-          "preClose",
-          "change",
-          "changeRate",
-          "latestPrice",
-          "latestTime",
-          "timestamp",
-          "askPrice",
-          "askSize",
-          "bidPrice",
-          "bidSize",
-          "volume",
-          "amount",
-          "turnoverRate",
-          "peRatio",
-          "pbRatio",
-          "marketCap",
-          "status",
-          "tradeSession",
-          "brokerSource"
-        ]
-      }
+    "600408": {
+      "quoteOk": false,
+      "capitalOk": false
+    },
+    "000059": {
+      "quoteOk": false,
+      "capitalOk": false
+    },
+    "600740": {
+      "quoteOk": false,
+      "capitalOk": false
+    },
+    "601288": {
+      "quoteOk": false,
+      "capitalOk": false
+    },
+    "000703": {
+      "quoteOk": false,
+      "capitalOk": false
+    },
+    "601857": {
+      "quoteOk": false,
+      "capitalOk": false
+    },
+    "601658": {
+      "quoteOk": false,
+      "capitalOk": false
+    },
+    "600028": {
+      "quoteOk": false,
+      "capitalOk": false
+    },
+    "601328": {
+      "quoteOk": false,
+      "capitalOk": false
     }
   },
   "diagnostic": {
     "000001": {
-      "httpStatus": 200,
+      "httpStatus": 400,
       "shape": {
         "type": "dict",
         "keys": [
-          "000001"
+          "code",
+          "msg"
         ],
         "valueTypes": {
-          "000001": "dict"
+          "code": "str",
+          "msg": "str"
         }
       }
     },
-    "002035": {
-      "httpStatus": 200,
+    "000723": {
+      "httpStatus": 400,
       "shape": {
         "type": "dict",
         "keys": [
-          "002035"
+          "code",
+          "msg"
         ],
         "valueTypes": {
-          "002035": "dict"
+          "code": "str",
+          "msg": "str"
         }
       }
     },
-    "603551": {
-      "httpStatus": 200,
+    "601011": {
+      "httpStatus": 400,
       "shape": {
         "type": "dict",
         "keys": [
-          "603551"
+          "code",
+          "msg"
         ],
         "valueTypes": {
-          "603551": "dict"
+          "code": "str",
+          "msg": "str"
         }
       }
     },
-    "002508": {
-      "httpStatus": 200,
+    "601015": {
+      "httpStatus": 400,
       "shape": {
         "type": "dict",
         "keys": [
-          "002508"
+          "code",
+          "msg"
         ],
         "valueTypes": {
-          "002508": "dict"
+          "code": "str",
+          "msg": "str"
         }
       }
     },
-    "300894": {
-      "httpStatus": 200,
+    "600408": {
+      "httpStatus": 400,
       "shape": {
         "type": "dict",
         "keys": [
-          "300894"
+          "code",
+          "msg"
         ],
         "valueTypes": {
-          "300894": "dict"
+          "code": "str",
+          "msg": "str"
         }
       }
     }

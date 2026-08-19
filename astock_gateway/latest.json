@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-19T17:51:28+08:00",
+  "generatedAt": "2026-08-19T18:28:21+08:00",
   "state": "可用",
   "verifiedToday": true,
   "providerDate": "20260819",
@@ -8,45 +8,52 @@
   "activePoolQuoteCount": 12,
   "marketSnapshot": {
     "sourceDate": "2026-08-19",
-    "availableAt": "2026-08-19T17:51:28+08:00",
+    "availableAt": "2026-08-19T18:28:21+08:00",
     "confidence": "高",
     "verifiedToday": true,
-    "dataSource": "Yunai Quant API（市场状态） + 腾讯行情 + 东方财富",
+    "dataSource": "腾讯行情 + 东方财富",
     "indices": {
       "sh000001": {
         "name": "上证指数",
         "close": 3894.42,
         "changePct": -2.4,
         "amount": 1218107970000.0,
-        "quoteTime": "16:14:02"
+        "quoteTime": "161402"
       },
       "sz399006": {
         "name": "创业板指",
         "close": 3473.49,
         "changePct": -6.26,
         "amount": 633622300000.0,
-        "quoteTime": "16:14:27"
+        "quoteTime": "161427"
       },
       "sh000688": {
         "name": "科创50",
         "close": 1667.52,
         "changePct": -6.89,
         "amount": 132458970000.0,
-        "quoteTime": "16:14:14"
+        "quoteTime": "161414"
       },
       "sh000300": {
         "name": "沪深300",
         "close": 4588.7,
         "changePct": -2.9,
         "amount": 705253510000.0,
-        "quoteTime": "16:14:14"
+        "quoteTime": "161414"
       },
       "sh000852": {
         "name": "中证1000",
         "close": 7517.77,
         "changePct": -5.39,
         "amount": 534762700000.0,
-        "quoteTime": "16:14:02"
+        "quoteTime": "161402"
+      },
+      "sz399001": {
+        "name": "深证成指",
+        "close": 13890.15,
+        "changePct": -5.01,
+        "amount": 1292934550000.0,
+        "quoteTime": "161412"
       }
     },
     "totalAmount": null,
@@ -58,7 +65,8 @@
     "breadthStatus": "全市场统计待同步",
     "breadthSampleCount": 100,
     "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
-    "marketStatusProvider": "Yunai Quant API"
+    "coreIndexCoverage": "6/6",
+    "coreIndexSource": "腾讯当日收盘快照"
   },
   "boardHeatmap": {
     "industry": [
@@ -2666,7 +2674,7 @@
       }
     ],
     "sourceDate": "2026-08-19",
-    "availableAt": "2026-08-19T17:51:28+08:00"
+    "availableAt": "2026-08-19T18:28:21+08:00"
   },
   "quotes": {
     "sh000001": {
@@ -2927,39 +2935,15 @@
   },
   "errors": [],
   "dataSources": [
-    "Yunai Quant API",
     "腾讯行情",
     "东方财富实时/延迟板块"
   ],
   "yunai": {
     "configured": true,
-    "connected": true,
+    "connected": false,
     "marketStatus": {
-      "connected": true,
-      "provider": "Yunai Quant API",
-      "checkedAt": "2026-08-19T17:51:56+08:00",
-      "httpStatus": 200,
-      "contentType": "application/json",
-      "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
-      "responseDigest": "e859d3fc39bb4ced",
-      "data": [
-        {
-          "market": "US",
-          "status": "PRE_HOUR_TRADING",
-          "marketStatus": "Pre-Mkt",
-          "openTime": 1787146200000
-        },
-        {
-          "market": "HK",
-          "status": "CLOSING",
-          "marketStatus": "Closed"
-        },
-        {
-          "market": "CN",
-          "status": "CLOSING",
-          "marketStatus": "Closed"
-        }
-      ]
+      "connected": false,
+      "error": "HTTPError"
     },
     "openapiState": "ready",
     "endpointCount": 38,
@@ -2969,21 +2953,27 @@
     ]
   },
   "yunaiProduction": {
-    "checkedAt": "2026-08-19T17:52:01+08:00",
+    "checkedAt": "2026-08-19T18:28:50+08:00",
     "provider": "Yunai Quant API",
-    "connected": true,
+    "connected": false,
     "marketStatus": {
-      "httpStatus": 200,
-      "type": "list",
-      "count": 1
+      "error": "HTTPError"
     },
     "checkedSymbols": [
-      "002035",
-      "603551",
-      "002508",
-      "300894"
+      "000723",
+      "601011",
+      "601015",
+      "600408",
+      "000059",
+      "600740",
+      "601288",
+      "000703",
+      "601857",
+      "601658",
+      "600028",
+      "601328"
     ],
-    "quoteAvailable": 4,
+    "quoteAvailable": 0,
     "capitalResponseAvailable": 0,
     "roles": {
       "realTimeQuotes": "第二实时行情源",
