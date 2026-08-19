@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       target_date:
-        description: '目标交易日 YYYY-MM-DD，留空则使用最新市场快照日期'
+        description: '目标交易日 YYYY-MM-DD，留空则使用最新冻结市场快照日期'
         required: false
         type: string
   schedule:
-    # 北京时间工作日 18:40，确保收盘市场快照已先落库
+    # 北京时间工作日 18:40；只生产当天、已冻结且已通过校验的 Official Cohort
     - cron: '40 10 * * 1-5'
 
 permissions:
@@ -21,7 +21,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: 记录策略运行编号
         env:
@@ -41,25 +41,35 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 运行日终主线与股票池扫描
+      - name: 运行时点安全 + 双源校验的日终扫描
         env:
           TARGET_DATE: ${{ inputs.target_date }}
-        run: python tools/run_daily_strategy_fast.py
+        run: python tools/run_daily_strategy_verified.py
       - name: 生成两两资金确认池
         env:
           TARGET_DATE: ${{ inputs.target_date }}
-        run: python tools/augment_pairwise_pools.py
-      - name: 更新全部池的后续表现
-        run: python tools/update_strategy_backtest.py
+        run: |
+          if git diff --quiet -- astock_snapshots/index.json; then
+            echo 'No new verified cohort; skip pairwise augmentation.'
+            exit 0
+          fi
+          python tools/augment_pairwise_pools.py
+      - name: 更新已验证批次的后续表现
+        run: |
+          if git diff --quiet -- astock_snapshots/index.json; then
+            echo 'No new verified cohort; skip forward tracking in this run.'
+            exit 0
+          fi
+          python tools/update_strategy_backtest_verified.py
       - name: 保存正式 Daily Cohort
         run: |
           if git diff --quiet -- astock_snapshots/index.json; then
-            echo 'No strategy snapshot changes.'
+            echo 'No verified strategy snapshot changes.'
             exit 0
           fi
           git config user.name 'astock-strategy-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add astock_snapshots/index.json
-          git commit -m 'Freeze daily A-share strategy cohort'
+          git commit -m 'Freeze verified daily A-share strategy cohort'
           git pull --rebase origin main
           git push origin HEAD:main
