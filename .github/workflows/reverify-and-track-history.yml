@@ -1,0 +1,63 @@
+name: Reverify and Track AStock History
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/reverify-and-track-history.yml'
+      - 'tools/reverify_legacy_cohorts.py'
+      - 'tools/update_strategy_tracking_reference.py'
+  schedule:
+    # Beijing weekdays: refresh shortly after close and retry once for delayed daily bars.
+    - cron: '35 7 * * 1-5'
+    - cron: '5 8 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-history-reverify-track
+  cancel-in-progress: false
+
+jobs:
+  reverify-track:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Record run id
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-history-tracking-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-history-tracking-run.txt -f message='Record latest history tracking run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-history-tracking-run.txt -f message='Record latest history tracking run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reverify recoverable historical evidence
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/reverify_legacy_cohorts.py
+      - name: Refresh verified and reference forward tracking
+        run: python tools/update_strategy_tracking_reference.py
+      - name: Save audit and tracking updates
+        run: |
+          if git diff --quiet -- astock_snapshots/index.json astock_gateway/validation; then
+            echo 'No history audit/tracking changes.'
+            exit 0
+          fi
+          git config user.name 'astock-history-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_snapshots/index.json astock_gateway/validation
+          git commit -m 'Reverify historical cohorts and refresh tracking'
+          git pull --rebase origin main
+          git push origin HEAD:main
