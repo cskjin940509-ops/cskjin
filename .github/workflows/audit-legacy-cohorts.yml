@@ -1,0 +1,43 @@
+name: Audit Legacy AStock Cohorts
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/audit_legacy_cohorts.py'
+      - '.github/workflows/audit-legacy-cohorts.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-legacy-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 审计旧版正式批次
+        run: python tools/audit_legacy_cohorts.py
+      - name: 保存审计标记
+        run: |
+          if git diff --quiet -- astock_snapshots/index.json; then
+            echo 'No audit changes.'
+            exit 0
+          fi
+          git config user.name 'astock-audit-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_snapshots/index.json
+          git commit -m 'Audit legacy A-share strategy cohorts'
+          git pull --rebase origin main
+          git push origin HEAD:main
