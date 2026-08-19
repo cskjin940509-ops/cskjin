@@ -7,6 +7,7 @@ on:
     paths:
       - 'tools/update_market_gateway.py'
       - 'tools/sanitize_market_gateway.py'
+      - 'tools/enrich_yunai_gateway.py'
       - '.github/workflows/update-market-gateway.yml'
   schedule:
     # 北京交易时段兜底快照：09:30-11:30 / 13:00-15:00，每10分钟
@@ -26,7 +27,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,6 +39,10 @@ jobs:
         run: |
           python tools/update_market_gateway.py
           python tools/sanitize_market_gateway.py
+      - name: 接入 Yunai Quant API
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/enrich_yunai_gateway.py
       - name: 保存数据网关与历史市场快照
         run: |
           if git diff --quiet -- astock_gateway astock_snapshots/index.json; then
