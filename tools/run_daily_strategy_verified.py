@@ -5,7 +5,7 @@ Safety invariants:
 1) Historical factor bars are capped at TARGET_DATE; no future bars are visible.
 2) Production Official cohorts must be generated from a frozen same-day gateway history file.
 3) Every selected stock's displayed selectionPrice is the target-day *raw* close,
-   independently confirmed by Tencent + Eastmoney within 0.1%.
+   independently confirmed by at least two providers within 0.1% OHLC tolerance.
 4) Existing Official cohorts are immutable unless FORCE_REBUILD=1; manual historical
    reconstruction is refused when point-in-time constituent membership cannot be proven.
 """
@@ -14,19 +14,19 @@ from __future__ import annotations
 import json
 import math
 import os
-import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 import run_daily_strategy_fast as base
+import yunai_tail_overlay as yunai
 
 CN = timezone(timedelta(hours=8))
 ROOT = Path(__file__).resolve().parents[1]
 GATEWAY = ROOT / "astock_gateway"
 SNAPS = ROOT / "astock_snapshots" / "index.json"
-VERSION = "v1.7.0-verified-point-in-time"
+VERSION = "v1.8.0-verified-point-in-time-3source"
 TARGET_DAY: str | None = None
 
 
@@ -40,7 +40,7 @@ def finite(v):
 
 def get_json(url, referer, timeout=12):
     req = Request(url, headers={
-        "User-Agent": "Mozilla/5.0 AStockStrategy-Verified/1.7",
+        "User-Agent": "Mozilla/5.0 AStockStrategy-Verified/1.8",
         "Accept": "application/json,*/*",
         "Referer": referer,
         "Cache-Control": "no-cache",
@@ -55,7 +55,7 @@ def safe_kline(secid: str, lmt: int = 80):
     q = {
         "secid": secid,
         "klt": 101,
-        "fqt": 1,  # adjusted bars are only for factors/returns
+        "fqt": 1,
         "lmt": lmt,
         "end": TARGET_DAY.replace("-", ""),
         "fields1": "f1,f2,f3,f4,f5,f6",
@@ -116,31 +116,101 @@ def eastmoney_raw_day(code, day):
     return None
 
 
+def _yunai_date(value):
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        try:
+            x = float(value)
+            if x > 1e12: x /= 1000.0
+            return datetime.fromtimestamp(x, tz=CN).strftime("%Y-%m-%d")
+        except Exception:
+            return None
+    text = str(value).strip()
+    if len(text) >= 10 and text[4:5] == "-" and text[7:8] == "-":
+        return text[:10]
+    if len(text) >= 8 and text[:8].isdigit():
+        return f"{text[:4]}-{text[4:6]}-{text[6:8]}"
+    try:
+        return datetime.fromisoformat(text.replace("Z", "+00:00")).astimezone(CN).strftime("%Y-%m-%d")
+    except Exception:
+        return None
+
+
+def yunai_raw_day(code, day):
+    if str(code).startswith(("8", "9")) or not os.environ.get("YUNAI_TOKEN", "").strip():
+        return None
+    status, _, payload = yunai.post(yunai.PREFIX + "/real-time-quotes", {"symbols": [code]})
+    if not (200 <= status < 300):
+        return None
+    obj = yunai.obj(yunai.symbol_map(payload).get(code))
+    if not isinstance(obj, dict):
+        return None
+    quote_day = None
+    for key in ("timestamp", "latestTime", "time", "tradeDate", "date"):
+        quote_day = _yunai_date(obj.get(key))
+        if quote_day:
+            break
+    if quote_day != day:
+        return None
+    row = {
+        "open": finite(obj.get("open")),
+        "close": finite(obj.get("latestPrice")),
+        "high": finite(obj.get("high")),
+        "low": finite(obj.get("low")),
+    }
+    if any(row[k] is None for k in ("open", "close", "high", "low")):
+        return None
+    return row
+
+
 def rel_diff(a, b):
     if a is None or b is None or min(abs(a), abs(b)) == 0: return None
     return abs(a-b) / min(abs(a), abs(b))
 
 
-def verify_price(code, day):
-    checks = []
-    for name, fn in (("腾讯", tencent_raw_day), ("东方财富", eastmoney_raw_day)):
-        try:
-            row = fn(code, day)
-            checks.append({"provider":name,"row":row})
-        except Exception as e:
-            checks.append({"provider":name,"row":None,"error":e.__class__.__name__})
-    valid = [x for x in checks if x.get("row") and finite(x["row"].get("close")) is not None]
-    if len(valid) < 2:
-        return {"verified":False,"checks":checks,"reason":"fewer-than-two-raw-providers"}
+def pair_diff(a, b):
     diffs=[]
     for field in ("open","close","high","low"):
-        d=rel_diff(finite(valid[0]["row"].get(field)), finite(valid[1]["row"].get(field)))
-        if d is not None: diffs.append(d)
-    mx=max(diffs) if diffs else None
-    verified=mx is not None and mx <= 0.001
-    close=finite(valid[0]["row"].get("close")) if verified else None
-    return {"verified":verified,"rawClose":close,"maxRelDiff":mx,"checks":checks,
-            "rule":"腾讯+东方财富未复权OHLC最大相对差<=0.1%"}
+        d=rel_diff(finite(a.get(field)), finite(b.get(field)))
+        if d is None:
+            return None
+        diffs.append(d)
+    return max(diffs) if diffs else None
+
+
+def verify_price(code, day):
+    providers = [("腾讯", tencent_raw_day), ("东方财富", eastmoney_raw_day)]
+    if os.environ.get("YUNAI_TOKEN", "").strip() and not str(code).startswith(("8", "9")):
+        providers.append(("Yunai", yunai_raw_day))
+    checks=[]
+    valid=[]
+    for name, fn in providers:
+        try:
+            row=fn(code, day)
+            checks.append({"provider":name,"row":row})
+            if row and all(finite(row.get(k)) is not None for k in ("open","close","high","low")):
+                valid.append((name,row))
+        except Exception as e:
+            checks.append({"provider":name,"row":None,"error":e.__class__.__name__})
+    best=None
+    for i in range(len(valid)):
+        for j in range(i+1,len(valid)):
+            mx=pair_diff(valid[i][1], valid[j][1])
+            if mx is not None and (best is None or mx < best[0]):
+                best=(mx,valid[i],valid[j])
+    if not best or best[0] > 0.001:
+        return {"verified":False,"checks":checks,"reason":"fewer-than-two-agreeing-raw-providers",
+                "bestMaxRelDiff":best[0] if best else None}
+    mx,a,b=best
+    return {
+        "verified":True,
+        "rawClose":finite(a[1].get("close")),
+        "maxRelDiff":mx,
+        "providers":[a[0],b[0]],
+        "checks":checks,
+        "rule":"至少两个独立源未复权OHLC最大相对差<=0.1%",
+    }
 
 
 def existing_official(day):
@@ -179,9 +249,6 @@ def main():
         return
 
     payload=load_frozen_payload(TARGET_DAY)
-
-    # A historical board membership snapshot is not currently persisted. Therefore
-    # only same-session production runs may promote a newly computed cohort to Official.
     now=datetime.now(CN)
     target=datetime.strptime(TARGET_DAY, "%Y-%m-%d").date()
     if now.date() != target:
@@ -193,22 +260,20 @@ def main():
     stocks,pools=base.choose_stocks(selected)
 
     required=sorted({c for values in pools.values() for c in (values or [])})
-    validations={}
-    for code in required:
-        validations[code]=verify_price(code, TARGET_DAY)
+    validations={code:verify_price(code,TARGET_DAY) for code in required}
     failed=[c for c,v in validations.items() if not v.get("verified")]
     if failed:
-        raise RuntimeError("未通过双源收盘价校验: " + ",".join(failed))
+        raise RuntimeError("未通过至少双源收盘价校验: " + ",".join(failed))
 
     by_code={s["code"]:s for s in stocks}
     for code,v in validations.items():
         if code in by_code:
             by_code[code]["price"]=v["rawClose"]
-            by_code[code]["priceValidation"]={k:v.get(k) for k in ("verified","maxRelDiff","rule")}
+            by_code[code]["priceValidation"]={k:v.get(k) for k in ("verified","maxRelDiff","providers","rule")}
 
-    cohort=base.freeze(TARGET_DAY,payload,selected,stocks,pools)
-    # freeze() writes the immutable signal; now attach validation metadata without changing membership.
+    base.freeze(TARGET_DAY,payload,selected,stocks,pools)
     arr=json.loads(SNAPS.read_text(encoding="utf-8"))
+    used_providers=sorted({p for v in validations.values() for p in (v.get("providers") or [])})
     for item in arr:
         if item.get("date") != TARGET_DAY: continue
         item["strategyVersion"]=VERSION
@@ -217,28 +282,28 @@ def main():
             "priceBasis":"未复权实际收盘价",
             "factorPriceBasis":"前复权，仅用于RS/MTA等因子",
             "factorBarsCutoff":TARGET_DAY,
-            "priceProviders":["腾讯","东方财富"],
+            "priceProviders":used_providers,
             "stockCount":len(required),
-            "rule":"所有入池股票未复权OHLC双源最大相对差<=0.1%",
+            "rule":"所有入池股票至少两个独立源未复权OHLC最大相对差<=0.1%",
         }
         item["audit"]={
             "status":"Verified",
             "eligibleForPerformanceComparison":True,
             "issues":[],
             "auditedAt":datetime.now(CN).isoformat(timespec="seconds"),
-            "note":"生产扫描通过目标日时点和双源价格门禁。",
+            "note":"生产扫描通过目标日时点和至少双源价格门禁。",
         }
         for code,v in validations.items():
             meta=(item.get("stocks") or {}).get(code)
             if meta is not None:
                 meta["selectionPrice"]=v["rawClose"]
                 meta["priceValidation"]={
-                    "status":"Verified","providers":["腾讯","东方财富"],
+                    "status":"Verified","providers":v.get("providers") or [],
                     "maxRelDiff":v.get("maxRelDiff"),"basis":"raw-close"
                 }
         break
     SNAPS.write_text(json.dumps(arr,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(json.dumps({"state":"verified-official","date":TARGET_DAY,"stocks":len(required),"version":VERSION},ensure_ascii=False))
+    print(json.dumps({"state":"verified-official","date":TARGET_DAY,"stocks":len(required),"version":VERSION,"providers":used_providers},ensure_ascii=False))
 
 
 if __name__ == "__main__":
