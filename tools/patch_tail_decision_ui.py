@@ -15,9 +15,3 @@ gs = g.read_text(encoding='utf-8')
 gs = gs.replace('versionCode = 17', 'versionCode = 19')
 gs = gs.replace('versionName = "1.6.0"', 'versionName = "1.8.0"')
 g.write_text(gs, encoding='utf-8')
-
-# Keep old/re-runnable v1.8 workflow jobs able to produce the current Official
-# returns UI even if the workflow definition itself predates v1.9.
-official = Path('tools/patch_official_returns_ui.py')
-if official.exists():
-    exec(compile(official.read_text(encoding='utf-8'), str(official), 'exec'))
