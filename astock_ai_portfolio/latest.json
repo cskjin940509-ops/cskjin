@@ -4,8 +4,8 @@
   "mode": "AI影子实盘",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-08-20T11:30:48+08:00",
-  "radarCapturedAt": "2026-08-20T11:29:10+08:00",
+  "updatedAt": "2026-08-20T11:33:45+08:00",
+  "radarCapturedAt": "2026-08-20T11:32:42+08:00",
   "radarStatus": "RadarLive",
   "summary": {
     "initialCapital": 1000000.0,
@@ -297,6 +297,17 @@
       "positionCount": 3,
       "cumulativeReturnPct": 0.0985,
       "radarCapturedAt": "2026-08-20T11:29:10+08:00"
+    },
+    {
+      "timestamp": "2026-08-20T11:33:43+08:00",
+      "date": "2026-08-20",
+      "time": "11:33:43",
+      "nav": 1000985.05,
+      "cash": 661674.05,
+      "marketValue": 339311.0,
+      "positionCount": 3,
+      "cumulativeReturnPct": 0.0985,
+      "radarCapturedAt": "2026-08-20T11:32:42+08:00"
     }
   ],
   "rulesZh": {
@@ -304,5 +315,34 @@
     "position": "单股最高15%，单板块最高25%，总仓位最高60%，最多5只；没有合格机会允许100%现金。",
     "exit": "遵守普通A股T+1；止损、信号失效、资金转负、分批止盈和时间退出共同决定卖出。",
     "audit": "每笔决策按当时时间、价格、仓位和理由永久记录，后续行情不得回改历史决策。"
+  },
+  "benchmarkComparison": {
+    "startedAt": "2026-08-20T11:33:45+08:00",
+    "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
+    "portfolioReturnPct": 0.0,
+    "indexes": [
+      {
+        "name": "沪深300",
+        "returnPct": 0.0,
+        "alphaPct": 0.0
+      },
+      {
+        "name": "中证A500",
+        "returnPct": 0.0,
+        "alphaPct": 0.0
+      },
+      {
+        "name": "创业板指",
+        "returnPct": 0.0,
+        "alphaPct": 0.0
+      }
+    ],
+    "candidatePool": {
+      "name": "原始候选池固定等权",
+      "memberCount": 30,
+      "returnPct": 0.0,
+      "alphaPct": 0.0,
+      "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
+    }
   }
 }
