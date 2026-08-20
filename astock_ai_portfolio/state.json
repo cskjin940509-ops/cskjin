@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "strategyVersion": "v1.0-ai-shadow-point-in-time",
+  "strategyVersion": "v2.0-dynamic-rebalance-point-in-time",
   "mode": "AI影子实盘",
   "simulated": true,
   "initialCapital": 1000000.0,
@@ -171,17 +171,28 @@
       "positionCount": 3,
       "cumulativeReturnPct": -0.0503,
       "radarCapturedAt": "2026-08-20T14:13:41+08:00"
+    },
+    {
+      "timestamp": "2026-08-20T15:06:10+08:00",
+      "date": "2026-08-20",
+      "time": "15:06:10",
+      "nav": 999695.05,
+      "cash": 661674.05,
+      "marketValue": 338021.0,
+      "positionCount": 3,
+      "cumulativeReturnPct": -0.0305,
+      "radarCapturedAt": "2026-08-20T14:13:41+08:00"
     }
   ],
   "dailyControl": {
     "2026-08-20": {
       "newBuys": 3,
       "sells": 0,
-      "lastDecisionAt": "2026-08-20T14:14:42+08:00"
+      "lastDecisionAt": "2026-08-20T15:06:10+08:00"
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-08-20T14:14:44+08:00",
+  "updatedAt": "2026-08-20T15:06:12+08:00",
   "benchmarkTracking": {
     "startedAt": "2026-08-20T11:33:45+08:00",
     "portfolioBaseNav": 1000985.05,
@@ -189,17 +200,17 @@
       "沪深300": {
         "symbol": "sh000300",
         "basePrice": 4598.14,
-        "lastPrice": 4580.18
+        "lastPrice": 4592.75
       },
       "中证A500": {
         "symbol": "sh000510",
         "basePrice": 5708.49,
-        "lastPrice": 5678.07
+        "lastPrice": 5694.08
       },
       "创业板指": {
         "symbol": "sz399006",
         "basePrice": 3509.44,
-        "lastPrice": 3476.32
+        "lastPrice": 3495.59
       }
     },
     "candidatePool": {
@@ -209,97 +220,97 @@
           "code": "300139",
           "name": "晓程科技",
           "basePrice": 50.01,
-          "lastPrice": 49.87
+          "lastPrice": 49.45
         },
         "001337": {
           "code": "001337",
           "name": "四川黄金",
           "basePrice": 49.0,
-          "lastPrice": 48.74
+          "lastPrice": 48.57
         },
         "300413": {
           "code": "300413",
           "name": "芒果超媒",
           "basePrice": 15.2,
-          "lastPrice": 15.24
+          "lastPrice": 15.25
         },
         "600711": {
           "code": "600711",
           "name": "盛屯矿业",
           "basePrice": 11.74,
-          "lastPrice": 11.59
+          "lastPrice": 11.64
         },
         "300418": {
           "code": "300418",
           "name": "昆仑万维",
           "basePrice": 46.18,
-          "lastPrice": 44.99
+          "lastPrice": 45.05
         },
         "000060": {
           "code": "000060",
           "name": "中金岭南",
           "basePrice": 6.52,
-          "lastPrice": 6.5
+          "lastPrice": 6.51
         },
         "600170": {
           "code": "600170",
           "name": "上海建工",
           "basePrice": 2.25,
-          "lastPrice": 2.26
+          "lastPrice": 2.27
         },
         "601212": {
           "code": "601212",
           "name": "白银有色",
           "basePrice": 5.59,
-          "lastPrice": 5.51
+          "lastPrice": 5.54
         },
         "600489": {
           "code": "600489",
           "name": "中金黄金",
           "basePrice": 26.38,
-          "lastPrice": 26.32
+          "lastPrice": 26.37
         },
         "000630": {
           "code": "000630",
           "name": "铜陵有色",
           "basePrice": 6.45,
-          "lastPrice": 6.39
+          "lastPrice": 6.41
         },
         "600531": {
           "code": "600531",
           "name": "豫光金铅",
           "basePrice": 13.23,
-          "lastPrice": 13.05
+          "lastPrice": 13.09
         },
         "301500": {
           "code": "301500",
           "name": "飞南资源",
           "basePrice": 22.95,
-          "lastPrice": 22.7
+          "lastPrice": 22.73
         },
         "000975": {
           "code": "000975",
           "name": "山金国际",
           "basePrice": 27.83,
-          "lastPrice": 27.79
+          "lastPrice": 27.9
         },
         "601020": {
           "code": "601020",
           "name": "华钰矿业",
           "basePrice": 21.56,
-          "lastPrice": 21.23
+          "lastPrice": 21.27
         },
         "601899": {
           "code": "601899",
           "name": "紫金矿业",
           "basePrice": 34.35,
-          "lastPrice": 34.12
+          "lastPrice": 34.25
         },
         "000681": {
           "code": "000681",
           "name": "视觉中国",
           "basePrice": 17.2,
-          "lastPrice": 17.03
+          "lastPrice": 17.01
         },
         "920038": {
           "code": "920038",
@@ -311,79 +322,79 @@
           "code": "601069",
           "name": "西部黄金",
           "basePrice": 30.88,
-          "lastPrice": 30.77
+          "lastPrice": 30.9
         },
         "002716": {
           "code": "002716",
           "name": "湖南白银",
           "basePrice": 9.52,
-          "lastPrice": 9.36
+          "lastPrice": 9.47
         },
         "603993": {
           "code": "603993",
           "name": "洛阳钼业",
           "basePrice": 18.39,
-          "lastPrice": 18.19
+          "lastPrice": 18.27
         },
         "300364": {
           "code": "300364",
           "name": "中文在线",
           "basePrice": 23.58,
-          "lastPrice": 23.0
+          "lastPrice": 23.1
         },
         "600961": {
           "code": "600961",
           "name": "株冶集团",
           "basePrice": 27.76,
-          "lastPrice": 27.12
+          "lastPrice": 27.09
         },
         "300945": {
           "code": "300945",
           "name": "曼卡龙",
           "basePrice": 12.4,
-          "lastPrice": 12.33
+          "lastPrice": 12.36
         },
         "600490": {
           "code": "600490",
           "name": "鹏欣资源",
           "basePrice": 7.31,
-          "lastPrice": 7.26
+          "lastPrice": 7.25
         },
         "600362": {
           "code": "600362",
           "name": "江西铜业",
           "basePrice": 44.9,
-          "lastPrice": 44.53
+          "lastPrice": 44.57
         },
         "300697": {
           "code": "300697",
           "name": "电工合金",
           "basePrice": 14.87,
-          "lastPrice": 14.97
+          "lastPrice": 15.16
         },
         "002132": {
           "code": "002132",
           "name": "恒星科技",
           "basePrice": 4.45,
-          "lastPrice": 4.42
+          "lastPrice": 4.46
         },
         "000878": {
           "code": "000878",
           "name": "云南铜业",
           "basePrice": 16.16,
-          "lastPrice": 16.1
+          "lastPrice": 16.09
         },
         "601168": {
           "code": "601168",
           "name": "西部矿业",
           "basePrice": 37.12,
-          "lastPrice": 36.57
+          "lastPrice": 36.66
         },
         "002479": {
           "code": "002479",
           "name": "富春环保",
           "basePrice": 5.77,
-          "lastPrice": 5.78
+          "lastPrice": 5.79
         }
       }
     }
