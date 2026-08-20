@@ -33,17 +33,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: 记录影子实盘运行编号
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
-          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-ai-shadow-run.txt?ref=main --jq .sha 2>/dev/null || true)
-          if [ -n "$OLD_SHA" ]; then
-            gh api --method PUT repos/${{ github.repository }}/contents/latest-ai-shadow-run.txt -f message='Record latest AI shadow run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
-          else
-            gh api --method PUT repos/${{ github.repository }}/contents/latest-ai-shadow-run.txt -f message='Record latest AI shadow run' -f content="$CONTENT" -f branch='main' >/dev/null
-          fi
       - uses: actions/checkout@v4
         with:
           ref: main
@@ -60,8 +49,32 @@ jobs:
           git add astock_ai_portfolio
           if git diff --cached --quiet; then
             echo 'No AI shadow portfolio changes.'
-            exit 0
+          else
+            git commit -m 'Update AI shadow portfolio point-in-time ledger'
+            pushed=0
+            for i in 1 2 3 4; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                pushed=1
+                break
+              fi
+              sleep 2
+            done
+            if [ "$pushed" -ne 1 ]; then
+              echo 'Failed to persist AI shadow portfolio after retries.'
+              exit 1
+            fi
           fi
-          git commit -m 'Update AI shadow portfolio point-in-time ledger'
-          git pull --rebase origin main
-          git push origin HEAD:main
+      - name: 记录影子实盘运行编号
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-ai-shadow-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-ai-shadow-run.txt -f message='Record latest AI shadow run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null || true
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-ai-shadow-run.txt -f message='Record latest AI shadow run' -f content="$CONTENT" -f branch='main' >/dev/null || true
+          fi
