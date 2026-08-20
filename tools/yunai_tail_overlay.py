@@ -13,6 +13,19 @@ def finite(v):
         x=float(v); return x if math.isfinite(x) else None
     except Exception: return None
 
+def text(o,names):
+    if not isinstance(o,dict): return None
+    for k in names:
+        v=o.get(k)
+        if v is not None and str(v).strip(): return str(v)
+    return None
+
+def raw_value(o,names):
+    if not isinstance(o,dict): return None
+    for k in names:
+        if k in o and o.get(k) is not None: return o.get(k)
+    return None
+
 def symbol_map(p):
     if not isinstance(p,dict): return {}
     d=p.get('data')
@@ -36,7 +49,7 @@ def scalar(o,names):
 
 def post(path,body):
     token=yg.bearer()
-    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.5'})
+    req=Request(yg.BASE+path,data=json.dumps(body).encode(),method='POST',headers={'Accept':'application/json,*/*','Content-Type':'application/json','Authorization':token,'User-Agent':'AStockStrategy-Yunai/1.6'})
     try:
         with urlopen(req,timeout=12) as r:
             raw=r.read().decode('utf-8','replace'); status=r.status; ctype=r.headers.get('Content-Type','')
@@ -54,7 +67,26 @@ def apply_quote(out,batch,p):
         o=obj(mp.get(c))
         if o is not None:
             out[c]['quoteOk']=True
-            out[c]['quote']={'price':scalar(o,('lastPrice','latestPrice','price','currentPrice','close','last')),'changePct':scalar(o,('changePct','changePercent','changeRate','percentChange','pctChange')),'amount':scalar(o,('amount','turnoverAmount','turnoverValue','value')),'keys':list(o.keys())[:30]}
+            out[c]['quote']={
+                'price':scalar(o,('lastPrice','latestPrice','price','currentPrice','close','last')),
+                'open':scalar(o,('open','openPrice')),
+                'high':scalar(o,('high','highPrice')),
+                'low':scalar(o,('low','lowPrice')),
+                'preClose':scalar(o,('preClose','prevClose','previousClose')),
+                'change':scalar(o,('change','priceChange')),
+                'changePct':scalar(o,('changePct','changePercent','changeRate','percentChange','pctChange')),
+                'volume':scalar(o,('volume','tradeVolume')),
+                'amount':scalar(o,('amount','turnoverAmount','turnoverValue','value')),
+                'turnoverRate':scalar(o,('turnoverRate','turnover')),
+                'askSize':raw_value(o,('askSize','asks')),
+                'bidSize':raw_value(o,('bidSize','bids')),
+                'latestTime':text(o,('latestTime','quoteTime','time')),
+                'timestamp':raw_value(o,('timestamp','latestTimestamp')),
+                'status':text(o,('status',)),
+                'tradeSession':text(o,('tradeSession','session')),
+                'brokerSource':text(o,('brokerSource','source')),
+                'keys':list(o.keys())[:40]
+            }
 
 def apply_capital(out,batch,p):
     mp=symbol_map(p)
@@ -62,7 +94,16 @@ def apply_capital(out,batch,p):
         o=obj(mp.get(c))
         if o is not None:
             out[c]['capitalOk']=True
-            out[c]['capital']={'largeNetInflow':scalar(o,('largeNetInflow','largeOrderNetInflow','largeNetFlow')),'totalNetInflow':scalar(o,('totalNetInflow','netInflow','totalNetFlow')),'keys':list(o.keys())[:30]}
+            out[c]['capital']={
+                'largeNetInflow':scalar(o,('largeNetInflow','largeOrderNetInflow','largeNetFlow')),
+                'totalNetInflow':scalar(o,('totalNetInflow','netInflow','totalNetFlow')),
+                'capitalIn':scalar(o,('capitalIn','inflow')),
+                'capitalOut':scalar(o,('capitalOut','outflow')),
+                'timestamp':raw_value(o,('timestamp',)),
+                'retrievedAt':text(o,('retrievedAt',)),
+                'brokerSource':text(o,('brokerSource','source')),
+                'keys':list(o.keys())[:40]
+            }
 
 def fetch_stock_overlay(codes):
     out={c:{'quoteOk':False,'capitalOk':False} for c in codes}
