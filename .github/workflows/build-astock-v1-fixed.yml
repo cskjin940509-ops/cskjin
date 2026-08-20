@@ -78,6 +78,12 @@ jobs:
           python tools/patch_v2_7_full_chinese_ui.py || python tools/patch_v2_7_full_chinese_ui_finish.py
       - name: 接入AI影子实盘组合
         run: python tools/patch_v2_8_ai_shadow_portfolio.py
+      - name: 输出编译错误附近源码
+        run: |
+          echo '--- V6Activity 870-895 ---'
+          nl -ba app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt | sed -n '870,895p'
+          echo '--- PreviewSector definition ---'
+          grep -n -A10 -B2 'data class PreviewSector' app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt || true
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
