@@ -4,14 +4,19 @@ p = Path('app/src/main/java/com/rui/astockstrategy/v6/V33PersonalAi.kt')
 s = p.read_text(encoding='utf-8')
 
 old = 'val a = data?.optJSONArray("targetPortfolio") ?: return emptyList()'
-new = 'val a = data?.optJSONObject("targetPortfolio")?.optJSONArray("members") ?: return emptyList()'
-if old not in s and new not in s:
+new = '''val rawTarget = data?.opt("targetPortfolio")
+    val a = when (rawTarget) {
+        is JSONArray -> rawTarget
+        is JSONObject -> rawTarget.optJSONArray("members")
+        else -> null
+    } ?: return emptyList()'''
+if old not in s and 'val rawTarget = data?.opt("targetPortfolio")' not in s:
     raise SystemExit('v3.3 targetPortfolio parsing anchor missing')
 s = s.replace(old, new, 1)
 
 old = 'd33(data,"targetGrossPct")?:0.0'
-new = 'd33(data?.optJSONObject("targetPortfolio"),"grossTargetPct")?:0.0'
-if old not in s and new not in s:
+new = 'd33(data,"targetGrossPct") ?: d33(data?.optJSONObject("targetPortfolio"),"grossTargetPct") ?: 0.0'
+if old not in s and 'optJSONObject("targetPortfolio"),"grossTargetPct"' not in s:
     raise SystemExit('v3.3 target gross anchor missing')
 s = s.replace(old, new, 1)
 
@@ -28,6 +33,6 @@ s = s.replace(
 )
 
 p.write_text(s, encoding='utf-8')
-assert 'optJSONObject("targetPortfolio")?.optJSONArray("members")' in s
+assert 'val rawTarget = data?.opt("targetPortfolio")' in s
 assert '并已按当前实时目标立即再平衡' in s
 print('v3.3 dynamic target schema compatibility fixed')
