@@ -10,6 +10,7 @@ on:
       - 'tools/enrich_slow_money_factors.py'
       - 'tools/slow_money_factors.py'
       - 'tools/collect_slow_money_factors.py'
+      - 'tools/collect_slow_money_factors_v2.py'
       - 'astock_factors/latest.json'
       - 'tools/run_ai_shadow_portfolio.py'
       - 'tools/enrich_ai_shadow_benchmarks.py'
@@ -71,7 +72,7 @@ PY
           fi
           if [ "$NEED" = "1" ]; then
             python -m pip install --quiet 'akshare>=1.18.15,<2'
-            python tools/collect_slow_money_factors.py
+            python tools/collect_slow_money_factors_v2.py
           else
             echo 'B1/B2 slow-money data is fresh enough.'
           fi
