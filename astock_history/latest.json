@@ -1,0 +1,423 @@
+{
+  "schemaVersion": 1,
+  "version": "v2.9-dynamic-pattern-lab-1",
+  "updatedAt": "2026-08-20T13:05:20+08:00",
+  "sourcePolicyZh": "当前统计只使用真实冻结 Official 样本；未来历史重建样本将以独立 sourceType 展示，不与样本外记录混算。",
+  "overall": {
+    "sampleCount": 30,
+    "confidenceZh": "中低",
+    "horizons": {
+      "1D": {
+        "members": 30,
+        "mature": true,
+        "meanReturn": -0.01124203,
+        "medianReturn": -0.018307,
+        "hitRate": 0.36666667,
+        "meanAlpha": -0.00361763,
+        "medianAlpha": -0.0106815,
+        "p25": -0.031875,
+        "p75": 0.009091
+      },
+      "5D": {
+        "members": 0,
+        "mature": false
+      },
+      "10D": {
+        "members": 0,
+        "mature": false
+      },
+      "20D": {
+        "members": 0,
+        "mature": false
+      },
+      "60D": {
+        "members": 0,
+        "mature": false
+      }
+    },
+    "medianMFE": 0.0217875,
+    "medianMAE": -0.067171,
+    "medianMaxDrawdown": null
+  },
+  "bestHolding": {
+    "horizon": "1D",
+    "days": 1,
+    "edge": -0.0106815,
+    "members": 30,
+    "reasonZh": "按成熟样本的中位超额收益选择，当前最优为1个交易日"
+  },
+  "edgeTrend": {
+    "full": {
+      "requestedSamples": 30,
+      "actualSamples": 30,
+      "fiveDayMedianAlpha": null,
+      "fiveDayMedianReturn": null,
+      "fiveDayHitRate": null,
+      "fiveDayMembers": 0
+    },
+    "recent20": {
+      "requestedSamples": 20,
+      "actualSamples": 20,
+      "fiveDayMedianAlpha": null,
+      "fiveDayMedianReturn": null,
+      "fiveDayHitRate": null,
+      "fiveDayMembers": 0
+    },
+    "recent60": {
+      "requestedSamples": 60,
+      "actualSamples": 30,
+      "fiveDayMedianAlpha": null,
+      "fiveDayMedianReturn": null,
+      "fiveDayHitRate": null,
+      "fiveDayMembers": 0
+    },
+    "judgement": {
+      "stateZh": "样本不足",
+      "score": 0,
+      "reasonZh": "5日成熟样本不足，暂不对 Edge 强弱下结论"
+    }
+  },
+  "eventPath": [
+    {
+      "day": 0,
+      "meanReturn": 0.0,
+      "medianReturn": 0.0,
+      "meanAlpha": 0.0
+    },
+    {
+      "day": 1,
+      "meanReturn": -0.01124203,
+      "medianReturn": -0.018307,
+      "meanAlpha": -0.00361763,
+      "members": 30
+    }
+  ],
+  "riskScatter": [
+    {
+      "id": "2026-08-18-920087",
+      "date": "2026-08-18",
+      "code": "920087",
+      "name": "秋乐种业",
+      "mfe": 0.153107,
+      "mae": -0.040359,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-600737",
+      "date": "2026-08-18",
+      "code": "600737",
+      "name": "中粮糖业",
+      "mfe": 0.029948,
+      "mae": -0.042318,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-600598",
+      "date": "2026-08-18",
+      "code": "600598",
+      "name": "北大荒",
+      "mfe": 0.0479,
+      "mae": -0.050111,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-600313",
+      "date": "2026-08-18",
+      "code": "600313",
+      "name": "农发种业",
+      "mfe": 0.0,
+      "mae": -0.058981,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-600108",
+      "date": "2026-08-18",
+      "code": "600108",
+      "name": "亚盛集团",
+      "mfe": 0.056757,
+      "mae": -0.072973,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-300511",
+      "date": "2026-08-18",
+      "code": "300511",
+      "name": "雪榕生物",
+      "mfe": 0.008065,
+      "mae": -0.064516,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-300189",
+      "date": "2026-08-18",
+      "code": "300189",
+      "name": "神农种业",
+      "mfe": 0.057722,
+      "mae": -0.063963,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-002385",
+      "date": "2026-08-18",
+      "code": "002385",
+      "name": "大北农",
+      "mfe": 0.041916,
+      "mae": -0.032934,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-002124",
+      "date": "2026-08-18",
+      "code": "002124",
+      "name": "天邦食品",
+      "mfe": 0.0,
+      "mae": -0.072289,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-002041",
+      "date": "2026-08-18",
+      "code": "002041",
+      "name": "登海种业",
+      "mfe": 0.067745,
+      "mae": -0.021234,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-000998",
+      "date": "2026-08-18",
+      "code": "000998",
+      "name": "隆平高科",
+      "mfe": 0.047619,
+      "mae": -0.062434,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-000716",
+      "date": "2026-08-18",
+      "code": "000716",
+      "name": "黑芝麻",
+      "mfe": 0.021661,
+      "mae": -0.055957,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-18-000019",
+      "date": "2026-08-18",
+      "code": "000019",
+      "name": "深粮控股",
+      "mfe": 0.067919,
+      "mae": -0.043353,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-688981",
+      "date": "2026-08-17",
+      "code": "688981",
+      "name": "688981",
+      "mfe": 0.010882,
+      "mae": -0.073456,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-688361",
+      "date": "2026-08-17",
+      "code": "688361",
+      "name": "688361",
+      "mfe": 0.021914,
+      "mae": -0.06991,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-688200",
+      "date": "2026-08-17",
+      "code": "688200",
+      "name": "688200",
+      "mfe": 0.00836,
+      "mae": -0.028987,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-688120",
+      "date": "2026-08-17",
+      "code": "688120",
+      "name": "688120",
+      "mfe": 0.043304,
+      "mae": -0.040888,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-688072",
+      "date": "2026-08-17",
+      "code": "688072",
+      "name": "688072",
+      "mfe": 0.049671,
+      "mae": -0.050824,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-688017",
+      "date": "2026-08-17",
+      "code": "688017",
+      "name": "688017",
+      "mfe": 0.064558,
+      "mae": -0.143646,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-688012",
+      "date": "2026-08-17",
+      "code": "688012",
+      "name": "688012",
+      "mfe": 0.030323,
+      "mae": -0.057166,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-688008",
+      "date": "2026-08-17",
+      "code": "688008",
+      "name": "688008",
+      "mfe": 0.005774,
+      "mae": -0.120586,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-600183",
+      "date": "2026-08-17",
+      "code": "600183",
+      "name": "600183",
+      "mfe": 0.010208,
+      "mae": -0.128681,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-300604",
+      "date": "2026-08-17",
+      "code": "300604",
+      "name": "300604",
+      "mfe": 0.004873,
+      "mae": -0.110965,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-300502",
+      "date": "2026-08-17",
+      "code": "300502",
+      "name": "300502",
+      "mfe": 0.00572,
+      "mae": -0.124707,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-300476",
+      "date": "2026-08-17",
+      "code": "300476",
+      "name": "300476",
+      "mfe": 0.013401,
+      "mae": -0.113106,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-300394",
+      "date": "2026-08-17",
+      "code": "300394",
+      "name": "300394",
+      "mfe": 0.024306,
+      "mae": -0.069826,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-300308",
+      "date": "2026-08-17",
+      "code": "300308",
+      "name": "300308",
+      "mfe": 0.009,
+      "mae": -0.114,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-002916",
+      "date": "2026-08-17",
+      "code": "002916",
+      "name": "002916",
+      "mfe": 0.0,
+      "mae": -0.125522,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-002384",
+      "date": "2026-08-17",
+      "code": "002384",
+      "name": "002384",
+      "mfe": 0.004227,
+      "mae": -0.108702,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-08-17-002371",
+      "date": "2026-08-17",
+      "code": "002371",
+      "name": "002371",
+      "mfe": 0.020649,
+      "mae": -0.080377,
+      "fiveDayReturn": null
+    }
+  ],
+  "conditions": {
+    "byRegime": [
+      {
+        "name": "震荡上行",
+        "sampleCount": 30,
+        "confidenceZh": "中低",
+        "fiveDayMedianReturn": null,
+        "fiveDayMedianAlpha": null,
+        "fiveDayHitRate": null,
+        "fiveDayMembers": 0
+      }
+    ],
+    "byPool": [
+      {
+        "name": "B3",
+        "sampleCount": 6,
+        "confidenceZh": "低",
+        "fiveDayMedianReturn": null,
+        "fiveDayMedianAlpha": null,
+        "fiveDayHitRate": null,
+        "fiveDayMembers": 0
+      },
+      {
+        "name": "B0/B3/B4",
+        "sampleCount": 6,
+        "confidenceZh": "低",
+        "fiveDayMedianReturn": null,
+        "fiveDayMedianAlpha": null,
+        "fiveDayHitRate": null,
+        "fiveDayMembers": 0
+      },
+      {
+        "name": "B0/B1/B2/B3/B4",
+        "sampleCount": 4,
+        "confidenceZh": "低",
+        "fiveDayMedianReturn": null,
+        "fiveDayMedianAlpha": null,
+        "fiveDayHitRate": null,
+        "fiveDayMembers": 0
+      }
+    ],
+    "byMainlineState": [],
+    "byChaseRisk": []
+  },
+  "vitals": {
+    "longTermValidityZh": "偏弱",
+    "recentTrendZh": "样本不足",
+    "sampleConfidenceZh": "中低",
+    "bestHoldingZh": "1个交易日",
+    "currentAdviceZh": "维持权重并继续样本外验证"
+  },
+  "limitationsZh": [
+    "样本数量不足时不输出高置信结论。",
+    "主线阶段、追高风险只有在原始冻结快照真实记录时才参与条件统计，不做代理补造。",
+    "历史重建与实时冻结样本必须分口径展示，避免把回看结果伪装成样本外。"
+  ]
+}
