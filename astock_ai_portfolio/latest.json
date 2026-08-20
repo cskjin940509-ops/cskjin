@@ -4,7 +4,7 @@
   "mode": "智能影子实盘",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-08-20T15:07:27+08:00",
+  "updatedAt": "2026-08-20T15:09:58+08:00",
   "radarCapturedAt": "2026-08-20T14:13:41+08:00",
   "radarStatus": "RadarLive",
   "summary": {
@@ -385,6 +385,17 @@
       "positionCount": 3,
       "cumulativeReturnPct": -0.0305,
       "radarCapturedAt": "2026-08-20T14:13:41+08:00"
+    },
+    {
+      "timestamp": "2026-08-20T15:09:56+08:00",
+      "date": "2026-08-20",
+      "time": "15:09:56",
+      "nav": 999695.05,
+      "cash": 661674.05,
+      "marketValue": 338021.0,
+      "positionCount": 3,
+      "cumulativeReturnPct": -0.0305,
+      "radarCapturedAt": "2026-08-20T14:13:41+08:00"
     }
   ],
   "rulesZh": {
@@ -394,8 +405,99 @@
     "audit": "上午已经发生的成交永久保留；v2动态再平衡只影响启用后的新决策，不回写历史。",
     "rebalance": "目标组合每轮重算；新机会可买入/加仓，旧持仓相对变弱可减仓/卖出，并设置约1.8个百分点缓冲减少噪声交易。"
   },
-  "targetPortfolio": [],
-  "targetGrossPct": 0,
+  "targetPortfolio": [
+    {
+      "code": "600415",
+      "name": "小商品城",
+      "sector": "退税商店",
+      "score": 78.55,
+      "targetWeightPct": 12.44,
+      "referencePrice": 12.515,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分68；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；价格开始扩张+1；追高风险中-5；两融结构弱-2"
+    },
+    {
+      "code": "000572",
+      "name": "海马汽车",
+      "sector": "综合乘用车",
+      "score": 75.91,
+      "targetWeightPct": 11.04,
+      "referencePrice": 3.8449999999999998,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分60；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2"
+    },
+    {
+      "code": "600104",
+      "name": "上汽集团",
+      "sector": "综合乘用车",
+      "score": 74.39,
+      "targetWeightPct": 10.24,
+      "referencePrice": 10.145,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分55；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5"
+    },
+    {
+      "code": "601127",
+      "name": "赛力斯",
+      "sector": "汽车整车",
+      "score": 74.04,
+      "targetWeightPct": 10.05,
+      "referencePrice": 51.34,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分55；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5"
+    },
+    {
+      "code": "002594",
+      "name": "比亚迪",
+      "sector": "汽车整车",
+      "score": 73.38,
+      "targetWeightPct": 9.71,
+      "referencePrice": 90.375,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分57；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2"
+    },
+    {
+      "code": "000417",
+      "name": "合百集团",
+      "sector": "退税商店",
+      "score": 68.44,
+      "targetWeightPct": 7.1,
+      "referencePrice": 5.63,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分50；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2"
+    },
+    {
+      "code": "600827",
+      "name": "百联股份",
+      "sector": "退税商店",
+      "score": 67.48,
+      "targetWeightPct": 5.47,
+      "referencePrice": 7.585,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；两融结构强+2"
+    },
+    {
+      "code": "600733",
+      "name": "北汽蓝谷",
+      "sector": "汽车整车",
+      "score": 72.93,
+      "targetWeightPct": 5.24,
+      "referencePrice": 5.225,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分59；主线潜在形成+3；形成分改善+2；资金强度高+5；资金评分高+3；价格开始扩张+1；追高风险中-5；Yunai独立资金正确认+5"
+    },
+    {
+      "code": "000625",
+      "name": "长安汽车",
+      "sector": "综合乘用车",
+      "score": 71.98,
+      "targetWeightPct": 3.72,
+      "referencePrice": 7.135,
+      "priceSource": "东方财富+Yunai双源均价",
+      "reasonZh": "提前分56；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2"
+    }
+  ],
+  "targetGrossPct": 75.01,
   "decisionCycle": {
     "frequencyZh": "每次盘中雷达刷新重新评分与再平衡",
     "actionsThisCycle": 0,
