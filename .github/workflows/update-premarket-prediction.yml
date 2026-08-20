@@ -29,6 +29,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
+      - name: 记录开盘前预测运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-premarket-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-premarket-run.txt -f message='Record latest premarket run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-premarket-run.txt -f message='Record latest premarket run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
       - uses: actions/checkout@v4
         with:
           ref: main
@@ -43,7 +54,6 @@ jobs:
           NEED=$(python - <<'PY'
 import json
 from datetime import datetime, timezone, timedelta
-from pathlib import Path
 CN=timezone(timedelta(hours=8))
 now=datetime.now(CN)
 target=now.date().isoformat()
