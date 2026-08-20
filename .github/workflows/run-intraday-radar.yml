@@ -14,6 +14,7 @@ on:
       - 'astock_factors/latest.json'
       - 'tools/run_ai_shadow_portfolio.py'
       - 'tools/run_ai_shadow_portfolio_flexible.py'
+      - 'tools/run_ai_dynamic_portfolio_v2.py'
       - 'tools/enrich_ai_shadow_benchmarks.py'
       - '.github/workflows/run-intraday-radar.yml'
   schedule:
@@ -92,9 +93,9 @@ PY
       - name: 接入B1两融与B2 ETF慢资金因子
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_slow_money_factors.py
-      - name: 智能影子实盘同步决策与净值
+      - name: 智能实盘动态目标组合与实时再平衡
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: python tools/run_ai_shadow_portfolio_flexible.py
+        run: python tools/run_ai_dynamic_portfolio_v2.py
       - name: 更新大盘与原始候选池同期基准
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_ai_shadow_benchmarks.py
@@ -108,7 +109,7 @@ PY
             echo 'No radar, slow-money or shadow portfolio changes.'
             exit 0
           fi
-          git commit -m 'Update radar, B1/B2 slow-money and AI shadow portfolio'
+          git commit -m 'Update radar, B1/B2 slow-money and dynamic AI portfolio'
           pushed=0
           for i in 1 2 3 4; do
             git fetch origin main
