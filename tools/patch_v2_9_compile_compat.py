@@ -19,6 +19,7 @@ repls = {
         val ymax=max(0.01,points.maxOf{it.mfe})''',
     '''            fun x(v:Double)=((v-xmin)/(xmax-xmin)*size.width).toFloat(); fun y(v:Double)=((ymax-v)/(ymax-ymin)*size.height).toFloat()''': '''            fun x(v:Double)=((v-xmin)/(xmax-xmin)*size.width).toFloat()
             fun y(v:Double)=((ymax-v)/(ymax-ymin)*size.height).toFloat()''',
+    '''        Text(o.optString("definitionZh"), color = HMuted29, fontSize = 8.sp)''': '''        Text(o?.optString("definitionZh") ?: "", color = HMuted29, fontSize = 8.sp)''',
 }
 
 for old, new in repls.items():
