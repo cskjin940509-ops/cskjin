@@ -6,9 +6,10 @@ on:
     branches: [ main ]
     paths:
       - 'tools/update_history_pattern_lab.py'
+      - 'tools/merge_history_reconstruction.py'
       - '.github/workflows/update-history-pattern-lab.yml'
   schedule:
-    # 北京时间工作日16:45，在正式收益跟踪完成后重算历史形态。
+    # 北京时间工作日16:45，在正式收益跟踪完成后重算真实冻结历史形态。
     - cron: '45 8 * * 1-5'
 
 permissions:
@@ -41,8 +42,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 重算动态历史形态
+      - name: 重算真实冻结动态历史形态
         run: python tools/update_history_pattern_lab.py
+      - name: 挂载独立历史重建摘要
+        run: python tools/merge_history_reconstruction.py
       - name: 保存动态历史研究结果
         run: |
           if [ -z "$(git status --porcelain -- astock_history)" ]; then
