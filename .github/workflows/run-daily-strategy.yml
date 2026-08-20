@@ -11,13 +11,14 @@ on:
     branches: [ main ]
     paths:
       - '.github/workflows/run-daily-strategy.yml'
+      - 'tools/ensure_daily_close_snapshot.py'
       - 'tools/run_daily_strategy_verified.py'
       - 'tools/run_daily_strategy_verified_bse.py'
       - 'tools/update_strategy_tracking_display_ready.py'
       - 'tools/enrich_official_trade_metrics.py'
   schedule:
-    # 北京时间收盘后尽快冻结：15:05首次尝试，15:15/15:25仅做数据延迟兜底。
-    # 任一轮通过当日冻结快照 + 至少双源未复权OHLC校验后即生成正式池；后续不改写原始名单。
+    # 北京时间收盘后自动生成正式池：15:05首次，15:15/15:25兜底。
+    # 每一轮都先自行补抓并验证收盘快照，不再依赖另一个workflow先完成。
     - cron: '5,15,25 7 * * 1-5'
 
 permissions:
@@ -30,7 +31,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - name: 记录策略运行编号
         env:
@@ -50,11 +51,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: 自动补抓并锁定当天收盘快照
+        if: github.event_name != 'workflow_dispatch' || inputs.target_date == ''
+        run: python tools/ensure_daily_close_snapshot.py
+
       - name: 运行时点安全 + 至少双源校验的日终扫描
         env:
           TARGET_DATE: ${{ inputs.target_date }}
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/run_daily_strategy_verified_bse.py
+
       - name: 生成两两资金确认池
         env:
           TARGET_DATE: ${{ inputs.target_date }}
@@ -64,24 +71,36 @@ jobs:
           else
             python tools/augment_pairwise_pools.py
           fi
+
       - name: 补全正式池当日交易事实
         env:
           TARGET_DATE: ${{ inputs.target_date }}
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/enrich_official_trade_metrics.py
+
       - name: 更新正式与参考批次后续表现
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/update_strategy_tracking_display_ready.py
-      - name: 保存正式股票池与收益跟踪
+
+      - name: 保存当天冻结快照、正式股票池与收益跟踪
         run: |
-          if git diff --quiet -- astock_snapshots/index.json; then
-            echo 'No strategy/tracking changes.'
+          if [ -z "$(git status --porcelain -- astock_gateway astock_snapshots/index.json)" ]; then
+            echo 'No gateway, strategy or tracking changes.'
             exit 0
           fi
           git config user.name 'astock-strategy-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_snapshots/index.json
-          git commit -m 'Update verified daily A-share cohort and tracking'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          git add astock_gateway astock_snapshots/index.json
+          git commit -m 'Update verified daily A-share close snapshot, cohort and tracking'
+          pushed=0
+          for i in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          test "$pushed" -eq 1
