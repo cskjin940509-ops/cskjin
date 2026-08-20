@@ -1,0 +1,62 @@
+name: Run AStock Live Execution Assistant
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/update_trade_execution_signals.py'
+      - 'tools/update_trade_execution_signals_strict.py'
+      - '.github/workflows/run-execution-assistant.yml'
+  schedule:
+    # 北京时间交易时段5分钟一轮；strict wrapper会过滤盘外时点。
+    - cron: '*/5 1-3 * * 1-5'
+    - cron: '*/5 5-7 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-live-execution-assistant
+  cancel-in-progress: true
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: 记录执行辅助运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-execution-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-execution-run.txt -f message='Record latest execution run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-execution-run.txt -f message='Record latest execution run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 计算介入/持有/离场条件
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+          ALLOW_ANY_TIME: ${{ github.event_name == 'push' && '1' || '0' }}
+        run: python tools/update_trade_execution_signals_strict.py
+      - name: 保存执行辅助快照
+        run: |
+          if git status --porcelain -- astock_execution | grep -q .; then
+            git config user.name 'astock-execution-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add astock_execution
+            git commit -m 'Update live A-share execution assistant'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          else
+            echo 'No execution-assistant changes.'
+          fi
