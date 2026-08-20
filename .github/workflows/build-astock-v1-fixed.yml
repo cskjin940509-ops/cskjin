@@ -1,4 +1,4 @@
-name: Build AStock v2.8 全中文智能影子实盘 APK
+name: Build AStock v2.9 动态历史形态实验室 APK
 
 on:
   workflow_dispatch:
@@ -82,6 +82,8 @@ jobs:
         run: python tools/patch_v2_8_benchmark_cn_cleanup.py
       - name: 修复v2.8内部变量编译兼容
         run: python tools/patch_v2_8_compile_compat.py
+      - name: 接入动态历史形态实验室
+        run: python tools/patch_v2_9_dynamic_history_lab.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -104,6 +106,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v2.8-full-chinese-smart-shadow-portfolio-debug
+          name: AStockStrategy-v2.9-dynamic-history-pattern-lab-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
