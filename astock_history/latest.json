@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
-  "version": "v2.9-dynamic-pattern-lab-1",
-  "updatedAt": "2026-08-20T13:05:20+08:00",
+  "schemaVersion": 2,
+  "version": "v2.9-dynamic-pattern-lab-2",
+  "updatedAt": "2026-08-20T13:07:40+08:00",
   "sourcePolicyZh": "当前统计只使用真实冻结 Official 样本；未来历史重建样本将以独立 sourceType 展示，不与样本外记录混算。",
   "overall": {
     "sampleCount": 30,
@@ -15,8 +15,18 @@
         "hitRate": 0.36666667,
         "meanAlpha": -0.00361763,
         "medianAlpha": -0.0106815,
-        "p25": -0.031875,
-        "p75": 0.009091
+        "p10": -0.0560065,
+        "p25": -0.0318455,
+        "p75": 0.01123075,
+        "p90": 0.0381052
+      },
+      "2D": {
+        "members": 0,
+        "mature": false
+      },
+      "3D": {
+        "members": 0,
+        "mature": false
       },
       "5D": {
         "members": 0,
@@ -30,7 +40,19 @@
         "members": 0,
         "mature": false
       },
+      "40D": {
+        "members": 0,
+        "mature": false
+      },
       "60D": {
+        "members": 0,
+        "mature": false
+      },
+      "120D": {
+        "members": 0,
+        "mature": false
+      },
+      "250D": {
         "members": 0,
         "mature": false
       }
@@ -39,12 +61,37 @@
     "medianMAE": -0.067171,
     "medianMaxDrawdown": null
   },
+  "horizonGroups": {
+    "shortTerm": [
+      "1D",
+      "2D",
+      "3D",
+      "5D",
+      "10D",
+      "20D"
+    ],
+    "mediumLongTerm": [
+      "20D",
+      "40D",
+      "60D",
+      "120D",
+      "250D"
+    ]
+  },
   "bestHolding": {
-    "horizon": "1D",
-    "days": 1,
-    "edge": -0.0106815,
-    "members": 30,
-    "reasonZh": "按成熟样本的中位超额收益选择，当前最优为1个交易日"
+    "horizon": null,
+    "stateZh": "暂无正向历史优势",
+    "reasonZh": "已有成熟周期，但目前没有一个周期呈现正向中位历史优势；不强行挑选所谓最佳持有期。"
+  },
+  "bestHoldingShort": {
+    "horizon": null,
+    "stateZh": "暂无正向历史优势",
+    "reasonZh": "已有成熟周期，但目前没有一个周期呈现正向中位历史优势；不强行挑选所谓最佳持有期。"
+  },
+  "bestHoldingLong": {
+    "horizon": null,
+    "stateZh": "样本不足",
+    "reasonZh": "成熟样本不足，暂不判断最佳持有周期。"
   },
   "edgeTrend": {
     "full": {
@@ -71,12 +118,48 @@
       "fiveDayHitRate": null,
       "fiveDayMembers": 0
     },
+    "calendarViews": {
+      "all": {
+        "sampleCount": 30,
+        "fiveDayMembers": 0,
+        "fiveDayMedianAlpha": null,
+        "fiveDayMedianReturn": null,
+        "fiveDayHitRate": null
+      },
+      "recentOneYear": {
+        "sampleCount": 30,
+        "fiveDayMembers": 0,
+        "fiveDayMedianAlpha": null,
+        "fiveDayMedianReturn": null,
+        "fiveDayHitRate": null
+      },
+      "recentThreeMonths": {
+        "sampleCount": 30,
+        "fiveDayMembers": 0,
+        "fiveDayMedianAlpha": null,
+        "fiveDayMedianReturn": null,
+        "fiveDayHitRate": null
+      }
+    },
+    "rolling20": [],
     "judgement": {
       "stateZh": "样本不足",
       "score": 0,
-      "reasonZh": "5日成熟样本不足，暂不对 Edge 强弱下结论"
+      "reasonZh": "5日成熟样本不足，暂不对历史优势强弱下结论。"
     }
   },
+  "sampleGrowth": [
+    {
+      "date": "2026-08-17",
+      "newSamples": 17,
+      "cumulativeSamples": 17
+    },
+    {
+      "date": "2026-08-18",
+      "newSamples": 13,
+      "cumulativeSamples": 30
+    }
+  ],
   "eventPath": [
     {
       "day": 0,
@@ -92,6 +175,365 @@
       "members": 30
     }
   ],
+  "returnDistributions": {
+    "1D": {
+      "horizon": "1D",
+      "members": 30,
+      "bins": [
+        {
+          "label": "<-5%",
+          "count": 4,
+          "share": 0.13333333
+        },
+        {
+          "label": "-5~-3%",
+          "count": 5,
+          "share": 0.16666667
+        },
+        {
+          "label": "-3~-1%",
+          "count": 8,
+          "share": 0.26666667
+        },
+        {
+          "label": "-1~0%",
+          "count": 2,
+          "share": 0.06666667
+        },
+        {
+          "label": "0~1%",
+          "count": 3,
+          "share": 0.1
+        },
+        {
+          "label": "1~3%",
+          "count": 4,
+          "share": 0.13333333
+        },
+        {
+          "label": "3~5%",
+          "count": 3,
+          "share": 0.1
+        },
+        {
+          "label": "5~10%",
+          "count": 1,
+          "share": 0.03333333
+        },
+        {
+          "label": ">10%",
+          "count": 0,
+          "share": 0.0
+        }
+      ]
+    },
+    "3D": {
+      "horizon": "3D",
+      "members": 0,
+      "bins": [
+        {
+          "label": "<-5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-5~-3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-3~-1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-1~0%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "0~1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "1~3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "3~5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "5~10%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": ">10%",
+          "count": 0,
+          "share": null
+        }
+      ]
+    },
+    "5D": {
+      "horizon": "5D",
+      "members": 0,
+      "bins": [
+        {
+          "label": "<-5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-5~-3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-3~-1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-1~0%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "0~1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "1~3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "3~5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "5~10%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": ">10%",
+          "count": 0,
+          "share": null
+        }
+      ]
+    },
+    "10D": {
+      "horizon": "10D",
+      "members": 0,
+      "bins": [
+        {
+          "label": "<-5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-5~-3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-3~-1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-1~0%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "0~1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "1~3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "3~5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "5~10%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": ">10%",
+          "count": 0,
+          "share": null
+        }
+      ]
+    },
+    "20D": {
+      "horizon": "20D",
+      "members": 0,
+      "bins": [
+        {
+          "label": "<-5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-5~-3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-3~-1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-1~0%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "0~1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "1~3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "3~5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "5~10%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": ">10%",
+          "count": 0,
+          "share": null
+        }
+      ]
+    },
+    "60D": {
+      "horizon": "60D",
+      "members": 0,
+      "bins": [
+        {
+          "label": "<-5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-5~-3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-3~-1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-1~0%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "0~1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "1~3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "3~5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "5~10%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": ">10%",
+          "count": 0,
+          "share": null
+        }
+      ]
+    },
+    "120D": {
+      "horizon": "120D",
+      "members": 0,
+      "bins": [
+        {
+          "label": "<-5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-5~-3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-3~-1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "-1~0%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "0~1%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "1~3%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "3~5%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": "5~10%",
+          "count": 0,
+          "share": null
+        },
+        {
+          "label": ">10%",
+          "count": 0,
+          "share": null
+        }
+      ]
+    }
+  },
   "riskScatter": [
     {
       "id": "2026-08-18-920087",
@@ -364,6 +806,37 @@
       "fiveDayReturn": null
     }
   ],
+  "pathClusters": {
+    "methodZh": "第一期使用透明规则分型；样本量充足后再升级为无监督路径聚类，并保留版本号避免事后改口径。",
+    "matureSamples": 0,
+    "clusters": []
+  },
+  "successFailure": {
+    "definitionZh": "成功：5日收益≥+3%；失败：5日收益≤-3%。中间样本不强行归类。",
+    "matureFiveDaySamples": 0,
+    "success": {
+      "sampleCount": 0,
+      "averageScore": null,
+      "averageAccumulation": null,
+      "highChaseRatio": null,
+      "stageDistribution": {},
+      "chaseDistribution": {},
+      "medianMFE": null,
+      "medianMAE": null
+    },
+    "failure": {
+      "sampleCount": 0,
+      "averageScore": null,
+      "averageAccumulation": null,
+      "highChaseRatio": null,
+      "stageDistribution": {},
+      "chaseDistribution": {},
+      "medianMFE": null,
+      "medianMAE": null
+    },
+    "topExamples": [],
+    "bottomExamples": []
+  },
   "conditions": {
     "byRegime": [
       {
@@ -406,18 +879,23 @@
       }
     ],
     "byMainlineState": [],
-    "byChaseRisk": []
+    "byChaseRisk": [],
+    "stageByChase": []
   },
   "vitals": {
-    "longTermValidityZh": "偏弱",
+    "longTermValidityZh": "待更多5日成熟样本",
     "recentTrendZh": "样本不足",
     "sampleConfidenceZh": "中低",
-    "bestHoldingZh": "1个交易日",
-    "currentAdviceZh": "维持权重并继续样本外验证"
+    "bestHoldingZh": "暂无正向历史优势",
+    "bestShortHoldingZh": "暂无正向历史优势",
+    "bestLongHoldingZh": "样本不足",
+    "currentAdviceZh": "继续积累成熟样本，不因早期少量结果提高策略权重"
   },
   "limitationsZh": [
-    "样本数量不足时不输出高置信结论。",
+    "样本数量或目标周期未成熟时不输出高置信结论。",
+    "没有正向历史优势时不从负收益周期中硬选所谓最佳持有期。",
     "主线阶段、追高风险只有在原始冻结快照真实记录时才参与条件统计，不做代理补造。",
+    "路径分型第一期采用透明规则；未来若切换统计聚类，必须新版本并保留旧结果。",
     "历史重建与实时冻结样本必须分口径展示，避免把回看结果伪装成样本外。"
   ]
 }
