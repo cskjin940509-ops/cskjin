@@ -15,6 +15,7 @@ on:
       - 'tools/run_ai_shadow_portfolio.py'
       - 'tools/run_ai_shadow_portfolio_flexible.py'
       - 'tools/run_ai_dynamic_portfolio_v2.py'
+      - 'tools/run_ai_dynamic_portfolio_v2_1.py'
       - 'tools/enrich_ai_shadow_benchmarks.py'
       - '.github/workflows/run-intraday-radar.yml'
   schedule:
@@ -95,7 +96,7 @@ PY
         run: python tools/enrich_slow_money_factors.py
       - name: 智能实盘动态目标组合与实时再平衡
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: python tools/run_ai_dynamic_portfolio_v2.py
+        run: python tools/run_ai_dynamic_portfolio_v2_1.py
       - name: 更新大盘与原始候选池同期基准
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_ai_shadow_benchmarks.py
