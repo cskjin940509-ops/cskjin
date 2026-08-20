@@ -7,6 +7,7 @@ on:
     paths:
       - 'tools/run_intraday_radar.py'
       - 'tools/enrich_intraday_radar_yunai.py'
+      - 'tools/run_ai_shadow_portfolio.py'
       - '.github/workflows/run-intraday-radar.yml'
   schedule:
     # A股上午 09:30-11:30 CST = 01:30-03:30 UTC，每5分钟。
@@ -15,7 +16,7 @@ on:
     - cron: '0,5,10,15,20,25,30 3 * * 1-5'
     # A股下午 13:00-14:55 CST = 05:00-06:55 UTC，每5分钟。
     - cron: '*/5 5-6 * * 1-5'
-    # 15:00 Final + 延迟兜底。
+    # 15:00 Final + 延迟兜底；AI账户此时只更新净值，不允许产生收盘后成交。
     - cron: '0,5,10,20 7 * * 1-5'
 
 permissions:
@@ -48,15 +49,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 修复嵌入策略载荷兼容
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('tools/run_intraday_radar.py')
-          s = p.read_text(encoding='utf-8')
-          s = s.replace('base64.b64decode(_SRC)', 'base64.b64decode(_SRC + "=" * (-len(_SRC) % 4))')
-          p.write_text(s, encoding='utf-8')
-          PY
       - name: 从开盘起滚动主线形成雷达
         id: radar
         run: |
@@ -69,16 +61,31 @@ jobs:
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/enrich_intraday_radar_yunai.py
-      - name: 保存盘中时点与收盘最终雷达
+      - name: AI影子实盘同步决策与净值
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        run: python tools/run_ai_shadow_portfolio.py
+      - name: 原子保存雷达与AI影子实盘账本
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: |
-          git config user.name 'astock-radar-bot'
+          git config user.name 'astock-radar-ai-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_radar
+          git add astock_radar astock_ai_portfolio
           if git diff --cached --quiet; then
-            echo 'No radar changes.'
+            echo 'No radar or AI portfolio changes.'
             exit 0
           fi
-          git commit -m 'Update all-day A-share early mainline radar'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          git commit -m 'Update all-day radar and AI shadow portfolio'
+          pushed=0
+          for i in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo 'Failed to persist radar + AI shadow portfolio after retries.'
+            exit 1
+          fi
