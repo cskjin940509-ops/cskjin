@@ -6,10 +6,10 @@ on:
     branches: [ main ]
     paths:
       - 'tools/collect_slow_money_factors.py'
+      - 'tools/collect_slow_money_factors_v2.py'
       - 'tools/slow_money_factors.py'
       - '.github/workflows/update-slow-money-factors.yml'
   schedule:
-    # 北京时间工作日 08:55，使用上一已发布交易日的交易所慢资金数据。
     - cron: '55 0 * * 1-5'
 
 permissions:
@@ -45,7 +45,7 @@ jobs:
       - name: 安装交易所数据适配器
         run: python -m pip install --quiet 'akshare>=1.18.15,<2'
       - name: 拉取两融与ETF份额慢资金数据
-        run: python tools/collect_slow_money_factors.py
+        run: python tools/collect_slow_money_factors_v2.py
       - name: 保存慢资金因子
         run: |
           git config user.name 'astock-slow-money-bot'
