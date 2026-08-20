@@ -6,6 +6,10 @@ OHLC validation keeps the >=2 independent-provider rule. This wrapper also fills
 compatibility/diff metadata during the *same freeze operation* so future Official
 cohorts never expose an empty mainlines field when selectedSectors is non-empty.
 Existing Official cohorts remain immutable.
+
+v1.9 adds exchange-published slow-money factors. B1 uses prior-published margin
+financing data; B2 uses prior-published ETF share changes. Both are strictly T+1
+and can never consume same-signal-day data.
 """
 from datetime import datetime
 import json
@@ -14,10 +18,12 @@ from urllib.request import Request, urlopen
 
 import run_daily_strategy_fast as base
 import run_daily_strategy_verified as verified
+import slow_money_factors as slow
 from bse_market_mapping import eastmoney_secid, tencent_symbol
 
 _original_verify_price = verified.verify_price
 _original_freeze = base.freeze
+_original_choose_stocks = base.choose_stocks
 
 
 def secid(code):
@@ -26,6 +32,11 @@ def secid(code):
 
 def symbol(code):
     return tencent_symbol(code)
+
+
+def choose_stocks_with_slow_money(selected):
+    stocks, pools = _original_choose_stocks(selected)
+    return slow.apply_to_stock_candidates(stocks, pools, verified.TARGET_DAY)[:2]
 
 
 def tencent_same_day_snapshot(code, day):
@@ -86,12 +97,7 @@ def verify_price_bse(code, day):
 
 
 def freeze_with_compat(day, payload, selected, stocks, pools):
-    """Finalize compatibility fields atomically with the original signal freeze.
-
-    This function is reached only when verified.main() is creating today's new
-    Official. If an Official for the date already exists, verified.main() exits
-    before calling freeze, so historical signals are never rewritten here.
-    """
+    """Finalize compatibility and slow-money fields atomically with signal freeze."""
     cohort = _original_freeze(day, payload, selected, stocks, pools)
     path = base.SNAPS
     arr = json.loads(path.read_text(encoding="utf-8"))
@@ -102,8 +108,6 @@ def freeze_with_compat(day, payload, selected, stocks, pools):
     if item.get("status") != "Official":
         return cohort
 
-    # mainlines is a compatibility field: selectedSectors remains the canonical
-    # structured source, while mainlines must not be empty when sectors were selected.
     if not item.get("mainlines"):
         item["mainlines"] = [x.get("name") for x in (item.get("selectedSectors") or []) if x.get("name")]
 
@@ -121,7 +125,32 @@ def freeze_with_compat(day, payload, selected, stocks, pools):
     item["upgraded"] = sorted((cur_b4 - prev_b4) & prev_any)
     item["downgraded"] = sorted((prev_b4 - cur_b4) & cur_any)
 
-    # Availability timestamp belongs to the freeze metadata, not to future tracking.
+    factors = slow.load_for_signal_date(day)
+    item.setdefault("factorAvailability", {}).update(slow.availability_strings(factors))
+    item["slowMoneyFactor"] = {
+        "state": "ready" if factors else "unavailable",
+        "dataDate": factors.get("dataDate") if factors else None,
+        "latency": "T+1日频",
+        "B1Members": len(cur_pools.get("B1") or []),
+        "B2Members": len(cur_pools.get("B2") or []),
+        "principle": "只使用信号日前已经发布的交易所两融与ETF份额数据；缺失不填补。",
+    }
+    if factors:
+        item["confidence"] = "中高" if cur_pools.get("B1") and cur_pools.get("B2") else "中"
+        item["note"] = "日终扫描已冻结；B1两融与B2 ETF一级份额均按T+1已发布数据参与，B4为基础/主力/慢资金综合排序。"
+
+    by_code = {str(s.get("code")): s for s in stocks}
+    slow_keys = (
+        "marginScore", "marginFactorScore", "marginData",
+        "etfScore", "etfFlowScore", "etfData",
+        "slowCompositeScore", "slowFactorDataDate",
+    )
+    for code, meta in (item.get("stocks") or {}).items():
+        src = by_code.get(code) or {}
+        for key in slow_keys:
+            if key in src:
+                meta[key] = src[key]
+
     available_at = item.get("availableAt") or datetime.now(base.CN).isoformat(timespec="seconds")
     for sector in item.get("selectedSectors") or []:
         sector.setdefault("availableAt", available_at)
@@ -133,11 +162,12 @@ def freeze_with_compat(day, payload, selected, stocks, pools):
 
 
 base.sid = secid
+base.choose_stocks = choose_stocks_with_slow_money
 base.freeze = freeze_with_compat
 verified.secid = secid
 verified.symbol = symbol
 verified.verify_price = verify_price_bse
-verified.VERSION = "v1.8.2-verified-point-in-time-bse-3source"
+verified.VERSION = "v1.9.0-verified-point-in-time-bse-slow-money"
 
 if __name__ == "__main__":
     verified.main()
