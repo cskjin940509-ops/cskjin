@@ -1,4 +1,4 @@
-name: Update AStock B1 Margin and B2 ETF Factors
+name: Update AStock B1 Margin / B2 ETF / 开盘前预测池
 
 on:
   workflow_dispatch:
@@ -8,10 +8,12 @@ on:
       - 'tools/collect_slow_money_factors.py'
       - 'tools/collect_slow_money_factors_v2.py'
       - 'tools/slow_money_factors.py'
+      - 'tools/generate_premarket_prediction.py'
       - '.github/workflows/update-slow-money-factors.yml'
   schedule:
-    # 北京时间工作日 08:55：统一使用 robust v2 采集器更新上一已发布交易日慢资金数据。
+    # 北京时间工作日 08:55 首次更新；09:05 / 09:15 重试，保证开盘前尽量拿到上一交易日B1/B2。
     - cron: '55 0 * * 1-5'
+    - cron: '5,15 1 * * 1-5'
 
 permissions:
   contents: write
@@ -47,16 +49,18 @@ jobs:
         run: python -m pip install --quiet 'akshare>=1.18.15,<2'
       - name: 拉取两融与ETF份额慢资金数据
         run: python tools/collect_slow_money_factors_v2.py
-      - name: 保存慢资金因子
+      - name: 生成开盘前提前预测池
+        run: python tools/generate_premarket_prediction.py
+      - name: 保存慢资金因子与开盘前预测池
         run: |
           git config user.name 'astock-slow-money-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_factors
+          git add astock_factors astock_premarket
           if git diff --cached --quiet; then
-            echo 'No slow-money factor changes.'
+            echo 'No slow-money or premarket prediction changes.'
             exit 0
           fi
-          git commit -m 'Update B1 margin and B2 ETF slow-money factors'
+          git commit -m 'Update B1/B2 slow-money and premarket prediction pool'
           pushed=0
           for i in 1 2 3 4; do
             git fetch origin main
