@@ -1,4 +1,4 @@
-name: Build AStock v2.4 交易日志 APK
+name: Build AStock v2.6 全中文个股交易与持仓 APK
 
 on:
   workflow_dispatch:
@@ -46,7 +46,7 @@ jobs:
         run: python tools/patch_board_source_failover.py
       - name: 修复北交所代码映射
         run: python tools/patch_bse_market_mapping.py
-      - name: 接入14:30-15:00滚动尾盘池
+      - name: 接入尾盘滚动池
         run: python tools/patch_tail_decision_ui.py
       - name: 完整解析正式数据并打通板块个股下钻
         run: python tools/patch_v1_9_data_display.py
@@ -58,16 +58,20 @@ jobs:
         run: python tools/patch_chinese_trade_assistant.py
       - name: 清理剩余英文展示词
         run: python tools/patch_chinese_ui_cleanup.py
-      - name: 接入v2.2实盘执行辅助面板
+      - name: 接入实盘执行辅助面板
         run: python tools/patch_execution_panel_v2.py
-      - name: v2.3统一股票池布局并接入历史同形态候选
+      - name: 统一股票池布局并接入历史同形态候选
         run: python tools/patch_v2_3_setup_and_pool_layout.py
-      - name: v2.3最终编译兼容检查
+      - name: 最终编译兼容检查
         run: python tools/patch_v2_3_compile_compat.py
-      - name: v2.4持久化买卖与收益日志
+      - name: 持久化买卖与收益日志
         run: |
           python tools/patch_v2_4_trade_journal.py || true
           python tools/patch_v2_4_trade_journal_finish.py
+      - name: 接入全天提前主线雷达与逐日收益/组合净值
+        run: python tools/patch_v2_5_early_radar_tracking.py
+      - name: 接入全中文个股交易与持仓收益界面
+        run: python tools/patch_v2_6_stock_trading_cn.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -90,6 +94,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v2.4-trade-journal-debug
+          name: AStockStrategy-v2.6-chinese-stock-trading-holdings-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
