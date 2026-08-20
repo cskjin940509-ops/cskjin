@@ -16,7 +16,7 @@ if 'StockTradingPanel26(' not in ds:
             StockTradingPanel26(
                 code = code,
                 name = name,
-                fallbackPrice = current,
+                fallbackPrice = null,
                 sourceDate = date,
                 poolLabels = pools,
                 signal = null
