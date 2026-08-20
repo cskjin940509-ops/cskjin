@@ -10,6 +10,7 @@ on:
       - 'tools/slow_money_factors.py'
       - '.github/workflows/update-slow-money-factors.yml'
   schedule:
+    # 北京时间工作日 08:55：统一使用 robust v2 采集器更新上一已发布交易日慢资金数据。
     - cron: '55 0 * * 1-5'
 
 permissions:
