@@ -1,6 +1,345 @@
 #!/usr/bin/env python3
-# Source SHA256: de7b67f674a8617458cc97fd63963f5bc5721a312a82e1f4f5dfb87d632f4c46
-# The source is embedded gzip+base64 to preserve the generated v2.5 implementation exactly.
-import base64, gzip
-_SRC = "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"
-exec(compile(gzip.decompress(base64.b64decode(_SRC)).decode('utf-8'), __file__, 'exec'), globals(), globals())
+"""逐日跟踪所有已冻结 Official 股票与固定成员组合净值。
+
+原则：
+- 只在已有可审计入场价的 stockPerformance 上扩展逐日路径；
+- Official 入场仍沿用“信号日后一交易日可成交开盘”；
+- 个股退出当前池后历史记录继续保留；
+- 固定成员组合中停牌/缺少当日 bar 的成员使用上一净值，不从分母删除；
+- 平均个股累计收益是诊断指标，strategyNavReturn 才是固定成员组合收益。
+"""
+from __future__ import annotations
+
+import json
+import math
+import statistics
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timedelta
+from pathlib import Path
+
+# Importing display_ready installs the current three-source / BSE-aware verified
+# history functions onto update_strategy_backtest without executing its main().
+import update_strategy_tracking_display_ready as display_ready  # noqa: F401
+import update_strategy_backtest as legacy
+
+CN = legacy.CN
+ROOT = Path(__file__).resolve().parents[1]
+SNAPSHOTS = ROOT / "astock_snapshots" / "index.json"
+TRACK_DIR = ROOT / "astock_tracking"
+TRACK_LATEST = TRACK_DIR / "latest.json"
+VERSION = "v2.6-daily-path-fixed-member-nav"
+MAX_DAYS = 540
+
+
+def finite(v):
+    try:
+        x = float(v)
+        return x if math.isfinite(x) else None
+    except Exception:
+        return None
+
+
+def rounded(v):
+    return round(v, 8) if v is not None and math.isfinite(v) else None
+
+
+def cohort_codes(item):
+    codes = set((item.get("stocks") or {}).keys())
+    for values in (item.get("pools") or {}).values():
+        codes.update(str(c) for c in (values or []) if c)
+    return sorted(codes)
+
+
+def official_trackable(item, now):
+    if item.get("status") != "Official" or not cohort_codes(item):
+        return False
+    try:
+        selected = datetime.strptime(item["date"], "%Y-%m-%d").replace(tzinfo=CN)
+    except Exception:
+        return False
+    return timedelta(days=-2) <= now - selected <= timedelta(days=MAX_DAYS)
+
+
+def bar_map(rows):
+    return {str(x.get("date")): x for x in rows if x.get("date")}
+
+
+def entry_adjusted(perf, rows):
+    p = finite(perf.get("returnEntryPriceAdjusted"))
+    if p:
+        return p
+    entry_date = perf.get("entryDate")
+    row = next((x for x in rows if x.get("date") == entry_date), None)
+    return finite((row or {}).get("open")) or finite((row or {}).get("close"))
+
+
+def daily_stock_path(rows, perf, benchmark):
+    entry_date = perf.get("entryDate")
+    if not entry_date:
+        return None
+    entry = entry_adjusted(perf, rows)
+    if not entry:
+        return None
+    future = [x for x in rows if str(x.get("date") or "") >= entry_date]
+    if not future:
+        return None
+
+    bench_future = [x for x in benchmark if str(x.get("date") or "") >= entry_date]
+    bench_entry = None
+    if bench_future:
+        bench_entry = finite(bench_future[0].get("open")) or finite(bench_future[0].get("close"))
+    bmap = bar_map(bench_future)
+
+    series = []
+    prev_close = entry
+    prev_bench_close = bench_entry
+    last_bench_close = bench_entry
+    peak_nav = 1.0
+    max_dd = 0.0
+    max_high = None
+    min_low = None
+
+    for bar in future:
+        day = str(bar.get("date"))
+        close = finite(bar.get("close"))
+        high = finite(bar.get("high"))
+        low = finite(bar.get("low"))
+        if close is None:
+            continue
+        daily_ret = close / prev_close - 1.0 if prev_close else None
+        cum_ret = close / entry - 1.0
+        prev_close = close
+        if high is not None:
+            max_high = high if max_high is None else max(max_high, high)
+        if low is not None:
+            min_low = low if min_low is None else min(min_low, low)
+
+        brow = bmap.get(day)
+        if brow is not None and finite(brow.get("close")) is not None:
+            last_bench_close = finite(brow.get("close"))
+        bench_daily = None
+        bench_cum = None
+        if last_bench_close is not None and bench_entry:
+            bench_cum = last_bench_close / bench_entry - 1.0
+            if prev_bench_close:
+                bench_daily = last_bench_close / prev_bench_close - 1.0
+            prev_bench_close = last_bench_close
+
+        nav = 1.0 + cum_ret
+        peak_nav = max(peak_nav, nav)
+        dd = nav / peak_nav - 1.0 if peak_nav else 0.0
+        max_dd = min(max_dd, dd)
+        series.append({
+            "date": day,
+            "close": rounded(close),
+            "dailyReturn": rounded(daily_ret),
+            "cumulativeReturn": rounded(cum_ret),
+            "benchmarkDailyReturn": rounded(bench_daily),
+            "benchmarkCumulativeReturn": rounded(bench_cum),
+            "cumulativeAlpha": rounded(cum_ret - bench_cum) if bench_cum is not None else None,
+            "drawdown": rounded(dd),
+        })
+
+    if not series:
+        return None
+    last = series[-1]
+    return {
+        "dailySeries": series,
+        "dailyReturn": last.get("dailyReturn"),
+        "cumulativeReturn": last.get("cumulativeReturn"),
+        "cumulativeAlpha": last.get("cumulativeAlpha"),
+        "maxDrawdown": rounded(max_dd),
+        "dailyPathMFE": rounded(max_high / entry - 1.0) if max_high is not None else None,
+        "dailyPathMAE": rounded(min_low / entry - 1.0) if min_low is not None else None,
+        "dailyPathAsOf": last.get("date"),
+        "dailyPathVersion": VERSION,
+    }
+
+
+def component_map(perf):
+    out = {}
+    for x in perf.get("dailySeries") or []:
+        day = x.get("date")
+        cum = finite(x.get("cumulativeReturn"))
+        if day and cum is not None:
+            out[str(day)] = 1.0 + cum
+    return out
+
+
+def pool_nav(item, members, stock_perf, benchmark):
+    members = list(dict.fromkeys(str(c) for c in members if c))
+    if not members:
+        return None
+    cohort_date = item.get("date")
+    calendar = [x for x in benchmark if str(x.get("date") or "") > str(cohort_date or "")]
+    if not calendar:
+        return None
+
+    maps = {code: component_map(stock_perf.get(code) or {}) for code in members}
+    entered = [code for code in members if maps.get(code)]
+    if not entered:
+        return None
+
+    first_bench = calendar[0]
+    bench_entry = finite(first_bench.get("open")) or finite(first_bench.get("close"))
+    last_component = {code: 1.0 for code in members}
+    prev_pool = 1.0
+    peak_pool = 1.0
+    max_dd = 0.0
+    series = []
+
+    for bar in calendar:
+        day = str(bar.get("date"))
+        # Missing/suspended members stay at their previous component NAV. Members
+        # whose verified entry is not available yet remain cash at 1.0.
+        for code in members:
+            value = (maps.get(code) or {}).get(day)
+            if value is not None:
+                last_component[code] = value
+        nav = statistics.fmean(last_component.values())
+        daily_ret = nav / prev_pool - 1.0 if prev_pool else None
+        prev_pool = nav
+        peak_pool = max(peak_pool, nav)
+        dd = nav / peak_pool - 1.0 if peak_pool else 0.0
+        max_dd = min(max_dd, dd)
+        bench_close = finite(bar.get("close"))
+        bench_cum = bench_close / bench_entry - 1.0 if bench_close is not None and bench_entry else None
+        series.append({
+            "date": day,
+            "nav": rounded(nav),
+            "dailyReturn": rounded(daily_ret),
+            "cumulativeReturn": rounded(nav - 1.0),
+            "benchmarkCumulativeReturn": rounded(bench_cum),
+            "alpha": rounded((nav - 1.0) - bench_cum) if bench_cum is not None else None,
+            "drawdown": rounded(dd),
+        })
+
+    if not series:
+        return None
+    current_returns = {code: last_component[code] - 1.0 for code in entered}
+    values = list(current_returns.values())
+    n_all = len(members)
+    contributions = sorted(
+        ({"code": code, "return": rounded(ret), "contribution": rounded(ret / n_all)} for code, ret in current_returns.items()),
+        key=lambda x: x["contribution"],
+        reverse=True,
+    )
+    last = series[-1]
+    return {
+        "strategyNav": last.get("nav"),
+        "strategyNavReturn": last.get("cumulativeReturn"),
+        "dailyReturn": last.get("dailyReturn"),
+        "benchmarkCumulativeReturn": last.get("benchmarkCumulativeReturn"),
+        "navAlpha": last.get("alpha"),
+        "averageCumReturn": rounded(statistics.fmean(values)),
+        "medianCumReturn": rounded(statistics.median(values)),
+        "winRateCurrent": rounded(sum(v > 0 for v in values) / len(values)),
+        "maxDrawdown": rounded(max_dd),
+        "coverage": rounded(len(entered) / n_all),
+        "membersFixed": n_all,
+        "membersWithVerifiedEntry": len(entered),
+        "dailySeries": series,
+        "topContributors": contributions[:3],
+        "bottomContributors": list(reversed(contributions[-3:])),
+        "navAsOf": last.get("date"),
+        "navRuleZh": "信号日后一交易日起固定成员等权；未形成可审计入场的成员保留现金；停牌/缺bar成员沿用上一净值，不从分母删除。",
+        "navVersion": VERSION,
+    }
+
+
+def main():
+    if not SNAPSHOTS.exists():
+        print(json.dumps({"state": "skip", "reason": "snapshot index missing"}, ensure_ascii=False))
+        return
+    snapshots = json.loads(SNAPSHOTS.read_text(encoding="utf-8"))
+    now = datetime.now(CN)
+    tracked = [x for x in snapshots if official_trackable(x, now)]
+    if not tracked:
+        print(json.dumps({"state": "skip", "reason": "no trackable official cohorts"}, ensure_ascii=False))
+        return
+
+    codes = sorted({c for item in tracked for c in cohort_codes(item)})
+    requested = ["000300", *codes]
+    histories = {}
+    failures = {}
+    with ThreadPoolExecutor(max_workers=12) as ex:
+        futures = {ex.submit(legacy.fetch_kline, code): code for code in requested}
+        for future in as_completed(futures):
+            code = futures[future]
+            try:
+                rows = future.result()
+                if rows:
+                    histories[code] = rows
+                else:
+                    failures[code] = "empty"
+            except Exception as e:
+                failures[code] = e.__class__.__name__
+
+    benchmark = histories.get("000300") or []
+    if not benchmark:
+        print(json.dumps({"state": "skip", "reason": "benchmark unavailable", "failures": failures}, ensure_ascii=False))
+        return
+
+    updated = 0
+    cohort_summary = []
+    stamp = now.isoformat(timespec="seconds")
+    for item in tracked:
+        stock_perf = dict(item.get("stockPerformance") or {})
+        changed_stocks = 0
+        for code in cohort_codes(item):
+            perf = dict(stock_perf.get(code) or {})
+            # Do not invent an entry: the verified tracker must have established it.
+            if not perf.get("entryDate") or finite(perf.get("entryPrice")) is None:
+                continue
+            path = daily_stock_path(histories.get(code) or [], perf, benchmark)
+            if path:
+                perf.update(path)
+                stock_perf[code] = perf
+                changed_stocks += 1
+        if not changed_stocks:
+            continue
+
+        pool_perf = dict(item.get("poolPerformance") or {})
+        for pool, members in (item.get("pools") or {}).items():
+            nav = pool_nav(item, members or [], stock_perf, benchmark)
+            if nav:
+                existing = dict(pool_perf.get(pool) or {})
+                existing.update(nav)
+                pool_perf[pool] = existing
+
+        item["stockPerformance"] = stock_perf
+        item["poolPerformance"] = pool_perf
+        item["dailyTrackingUpdatedAt"] = stamp
+        item["dailyTrackingMethod"] = {
+            "individual": "可审计入场价起逐交易日收益、累计收益、MFE/MAE与最大回撤",
+            "portfolio": "冻结批次固定成员等权净值；停牌成员净值延续，缺失成员不删除",
+            "version": VERSION,
+        }
+        updated += 1
+        cohort_summary.append({
+            "date": item.get("date"),
+            "trackingUse": item.get("trackingUse"),
+            "stocksUpdated": changed_stocks,
+            "pools": {k: {"累计组合收益": v.get("strategyNavReturn"), "今日组合收益": v.get("dailyReturn")} for k, v in pool_perf.items() if isinstance(v, dict) and v.get("strategyNavReturn") is not None},
+        })
+
+    if updated:
+        SNAPSHOTS.write_text(json.dumps(snapshots, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    TRACK_DIR.mkdir(parents=True, exist_ok=True)
+    summary = {
+        "schemaVersion": 1,
+        "updatedAt": stamp,
+        "method": VERSION,
+        "cohortsUpdated": updated,
+        "symbolsRequested": len(codes),
+        "symbolsWithHistory": max(0, len(histories) - 1),
+        "failures": failures,
+        "cohorts": cohort_summary,
+        "noteZh": "个股逐日收益与固定成员组合净值持续保留历史失败/退出成员，避免幸存者偏差。",
+    }
+    TRACK_LATEST.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"state": "updated" if updated else "unchanged", **summary}, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()
