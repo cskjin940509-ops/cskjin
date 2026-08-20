@@ -30,3 +30,5 @@ def main():
     print(json.dumps({"state":"radar-slow-money-enriched","dataDate":factors.get("dataDate") if factors else None,"B1":pools.get("B1") or [],"B2":pools.get("B2") or []},ensure_ascii=False))
 
 if __name__ == "__main__": main()
+
+# v1.0 production trigger: bootstrap exchange slow-money snapshot before enrichment.
