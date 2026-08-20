@@ -1,0 +1,66 @@
+name: Rebuild AStock 历史行业板块重建层
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/reconstruct_history_boards.py'
+      - 'tools/merge_history_reconstruction.py'
+      - '.github/workflows/rebuild-history-boards.yml'
+  schedule:
+    # 北京时间每周五16:40，收盘数据稳定后重建多年行业板块研究样本。
+    - cron: '40 8 * * 5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-history-board-reconstruction
+  cancel-in-progress: false
+
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - name: 记录历史重建运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-history-reconstruction-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-history-reconstruction-run.txt -f message='Record latest history reconstruction run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-history-reconstruction-run.txt -f message='Record latest history reconstruction run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 多年行业板块周频历史重建
+        run: python tools/reconstruct_history_boards.py
+      - name: 先重算真实冻结历史实验室
+        run: python tools/update_history_pattern_lab.py
+      - name: 独立挂载历史重建摘要
+        run: python tools/merge_history_reconstruction.py
+      - name: 保存历史重建结果
+        run: |
+          if [ -z "$(git status --porcelain -- astock_history)" ]; then
+            echo 'No reconstruction changes.'
+            exit 0
+          fi
+          git config user.name 'astock-history-reconstruction-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- astock_history/reconstruction astock_history/latest.json
+          git commit -m 'Update audited A-share board history reconstruction'
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            echo "Retry reconstruction push $i"
+            sleep $((i*3))
+          done
+          exit 1
