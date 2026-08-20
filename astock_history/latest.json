@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-08-20T13:26:39+08:00",
-  "sourcePolicyZh": "当前统计只使用真实冻结 Official 样本；未来历史重建样本将以独立 sourceType 展示，不与样本外记录混算。",
+  "updatedAt": "2026-08-20T13:30:47+08:00",
+  "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
     "sampleCount": 30,
     "confidenceZh": "中低",
@@ -901,8 +901,5169 @@
   "sourceModes": {
     "default": "实时冻结",
     "available": [
-      "实时冻结"
+      "实时冻结",
+      "历史重建"
     ],
-    "noteZh": "历史重建尚未生成；当前页面只展示真实冻结样本。"
+    "strictlySeparated": true,
+    "noteZh": "两套样本独立统计。历史重建仅用于研究和参数校准，不计入样本外战绩。"
+  },
+  "reconstruction": {
+    "schemaVersion": 1,
+    "version": "v3.0-weekly-board-reconstruction-1",
+    "updatedAt": "2026-08-20T13:30:47+08:00",
+    "sourceType": "历史重建",
+    "sourcePolicyZh": "研究用历史重建：行业板块周频、信号后一交易日开盘、严格使用当时及以前K线。与真实冻结样本完全分开，不得冒充样本外记录。",
+    "coverage": {
+      "startDate": "2019-09-27",
+      "endDate": "2026-08-14",
+      "industryUniverseCurrent": 100,
+      "boardsWithHistory": 56,
+      "boardFailures": 44,
+      "weeklyCohorts": 353,
+      "samples": 1762,
+      "topNPerWeek": 5,
+      "benchmark": "沪深300",
+      "priceSource": "东方财富前复权行业板块指数/沪深300"
+    },
+    "overall": {
+      "sampleCount": 1762,
+      "confidenceZh": "高",
+      "horizons": {
+        "1D": {
+          "members": 1762,
+          "mature": true,
+          "meanReturn": 0.0047041,
+          "medianReturn": 0.00435281,
+          "hitRate": 0.59875142,
+          "meanAlpha": 0.00367534,
+          "medianAlpha": 0.00277603,
+          "p10": -0.02290736,
+          "p25": -0.0084379,
+          "p75": 0.0176592,
+          "p90": 0.03304154
+        },
+        "2D": {
+          "members": 1762,
+          "mature": true,
+          "meanReturn": 0.00383738,
+          "medianReturn": 0.00310218,
+          "hitRate": 0.54824064,
+          "meanAlpha": 0.0019432,
+          "medianAlpha": 0.00092344,
+          "p10": -0.03624876,
+          "p25": -0.01527421,
+          "p75": 0.02189889,
+          "p90": 0.04617262
+        },
+        "3D": {
+          "members": 1762,
+          "mature": true,
+          "meanReturn": 0.00394607,
+          "medianReturn": 0.00285031,
+          "hitRate": 0.53632236,
+          "meanAlpha": 0.00231862,
+          "medianAlpha": 0.00075903,
+          "p10": -0.04543269,
+          "p25": -0.02026667,
+          "p75": 0.02695102,
+          "p90": 0.05493837
+        },
+        "5D": {
+          "members": 1757,
+          "mature": true,
+          "meanReturn": 0.00374211,
+          "medianReturn": 0.00132483,
+          "hitRate": 0.51565168,
+          "meanAlpha": 0.00247064,
+          "medianAlpha": 6.08e-06,
+          "p10": -0.05924545,
+          "p25": -0.02902043,
+          "p75": 0.03491741,
+          "p90": 0.07198161
+        },
+        "10D": {
+          "members": 1752,
+          "mature": true,
+          "meanReturn": 0.00629948,
+          "medianReturn": 0.000234,
+          "hitRate": 0.50228311,
+          "meanAlpha": 0.00336933,
+          "medianAlpha": -0.00056989,
+          "p10": -0.08525872,
+          "p25": -0.03982925,
+          "p75": 0.05115097,
+          "p90": 0.10015517
+        },
+        "20D": {
+          "members": 1743,
+          "mature": true,
+          "meanReturn": 0.01303436,
+          "medianReturn": 0.00205147,
+          "hitRate": 0.51004016,
+          "meanAlpha": 0.00857505,
+          "medianAlpha": 0.0009174,
+          "p10": -0.11991188,
+          "p25": -0.06134971,
+          "p75": 0.07300198,
+          "p90": 0.15601968
+        },
+        "40D": {
+          "members": 1723,
+          "mature": true,
+          "meanReturn": 0.02390877,
+          "medianReturn": -0.00292345,
+          "hitRate": 0.49042368,
+          "meanAlpha": 0.01593205,
+          "medianAlpha": 0.00185741,
+          "p10": -0.15585519,
+          "p25": -0.07984401,
+          "p75": 0.10378808,
+          "p90": 0.23746502
+        },
+        "60D": {
+          "members": 1703,
+          "mature": true,
+          "meanReturn": 0.03706271,
+          "medianReturn": 0.00186532,
+          "hitRate": 0.5020552,
+          "meanAlpha": 0.02449378,
+          "medianAlpha": -0.00122328,
+          "p10": -0.15821565,
+          "p25": -0.08921431,
+          "p75": 0.13184892,
+          "p90": 0.28721327
+        },
+        "120D": {
+          "members": 1636,
+          "mature": true,
+          "meanReturn": 0.07639934,
+          "medianReturn": 0.02578171,
+          "hitRate": 0.54828851,
+          "meanAlpha": 0.05569572,
+          "medianAlpha": 0.02518716,
+          "p10": -0.20534412,
+          "p25": -0.09780781,
+          "p75": 0.20186959,
+          "p90": 0.41681392
+        },
+        "250D": {
+          "members": 1503,
+          "mature": true,
+          "meanReturn": 0.1504586,
+          "medianReturn": 0.06129937,
+          "hitRate": 0.58483034,
+          "meanAlpha": 0.11133969,
+          "medianAlpha": 0.05930565,
+          "p10": -0.25468079,
+          "p25": -0.1142127,
+          "p75": 0.3058289,
+          "p90": 0.68765949
+        }
+      },
+      "medianMFE": 0.06783588,
+      "medianMAE": -0.05781994,
+      "medianMaxDrawdown": -0.08502158
+    },
+    "horizonGroups": {
+      "shortTerm": [
+        "1D",
+        "2D",
+        "3D",
+        "5D",
+        "10D",
+        "20D"
+      ],
+      "mediumLongTerm": [
+        "20D",
+        "40D",
+        "60D",
+        "120D",
+        "250D"
+      ]
+    },
+    "bestHolding": {
+      "horizon": "1D",
+      "days": 1,
+      "edge": 0.00277603,
+      "members": 1762,
+      "stateZh": "存在正向历史优势",
+      "reasonZh": "按历史重建成熟样本的中位超额收益选择。"
+    },
+    "bestHoldingShort": {
+      "horizon": "1D",
+      "days": 1,
+      "edge": 0.00277603,
+      "members": 1762,
+      "stateZh": "存在正向历史优势",
+      "reasonZh": "按历史重建成熟样本的中位超额收益选择。"
+    },
+    "bestHoldingLong": {
+      "horizon": "250D",
+      "days": 250,
+      "edge": 0.05930565,
+      "members": 1503,
+      "stateZh": "存在正向历史优势",
+      "reasonZh": "按历史重建成熟样本的中位超额收益选择。"
+    },
+    "edgeTrend": {
+      "full": {
+        "requestedSamples": 1762,
+        "actualSamples": 1762,
+        "fiveDayMedianAlpha": 6.08e-06,
+        "fiveDayMedianReturn": 0.00132483,
+        "fiveDayHitRate": 0.51565168,
+        "fiveDayMembers": 1757
+      },
+      "recent20": {
+        "requestedSamples": 20,
+        "actualSamples": 20,
+        "fiveDayMedianAlpha": -0.00831222,
+        "fiveDayMedianReturn": 0.02075951,
+        "fiveDayHitRate": 0.53333333,
+        "fiveDayMembers": 15
+      },
+      "recent60": {
+        "requestedSamples": 60,
+        "actualSamples": 60,
+        "fiveDayMedianAlpha": -0.00831222,
+        "fiveDayMedianReturn": -0.01259707,
+        "fiveDayHitRate": 0.38181818,
+        "fiveDayMembers": 55
+      },
+      "calendarViews": {
+        "all": {
+          "requestedSamples": 1762,
+          "actualSamples": 1762,
+          "fiveDayMedianAlpha": 6.08e-06,
+          "fiveDayMedianReturn": 0.00132483,
+          "fiveDayHitRate": 0.51565168,
+          "fiveDayMembers": 1757
+        },
+        "recentOneYear": {
+          "requestedSamples": 100000,
+          "actualSamples": 259,
+          "fiveDayMedianAlpha": 0.00367501,
+          "fiveDayMedianReturn": 0.01058152,
+          "fiveDayHitRate": 0.56692913,
+          "fiveDayMembers": 254
+        },
+        "recentThreeMonths": {
+          "requestedSamples": 100000,
+          "actualSamples": 64,
+          "fiveDayMedianAlpha": -0.02015311,
+          "fiveDayMedianReturn": -0.01370903,
+          "fiveDayHitRate": 0.3559322,
+          "fiveDayMembers": 59
+        }
+      },
+      "rolling20": [],
+      "judgement": {
+        "stateZh": "相对稳定",
+        "score": 0,
+        "delta": -0.0083183,
+        "reasonZh": "最近60个重建样本与全历史差异小于1个百分点。"
+      }
+    },
+    "sampleGrowth": [
+      {
+        "date": "2019-09-27",
+        "newSamples": 5,
+        "cumulativeSamples": 5
+      },
+      {
+        "date": "2019-09-30",
+        "newSamples": 5,
+        "cumulativeSamples": 10
+      },
+      {
+        "date": "2019-10-11",
+        "newSamples": 5,
+        "cumulativeSamples": 15
+      },
+      {
+        "date": "2019-10-18",
+        "newSamples": 5,
+        "cumulativeSamples": 20
+      },
+      {
+        "date": "2019-10-25",
+        "newSamples": 5,
+        "cumulativeSamples": 25
+      },
+      {
+        "date": "2019-11-01",
+        "newSamples": 5,
+        "cumulativeSamples": 30
+      },
+      {
+        "date": "2019-11-08",
+        "newSamples": 5,
+        "cumulativeSamples": 35
+      },
+      {
+        "date": "2019-11-15",
+        "newSamples": 5,
+        "cumulativeSamples": 40
+      },
+      {
+        "date": "2019-11-22",
+        "newSamples": 5,
+        "cumulativeSamples": 45
+      },
+      {
+        "date": "2019-11-29",
+        "newSamples": 5,
+        "cumulativeSamples": 50
+      },
+      {
+        "date": "2019-12-06",
+        "newSamples": 5,
+        "cumulativeSamples": 55
+      },
+      {
+        "date": "2019-12-13",
+        "newSamples": 5,
+        "cumulativeSamples": 60
+      },
+      {
+        "date": "2019-12-20",
+        "newSamples": 5,
+        "cumulativeSamples": 65
+      },
+      {
+        "date": "2019-12-27",
+        "newSamples": 5,
+        "cumulativeSamples": 70
+      },
+      {
+        "date": "2020-01-03",
+        "newSamples": 5,
+        "cumulativeSamples": 75
+      },
+      {
+        "date": "2020-01-10",
+        "newSamples": 5,
+        "cumulativeSamples": 80
+      },
+      {
+        "date": "2020-01-17",
+        "newSamples": 5,
+        "cumulativeSamples": 85
+      },
+      {
+        "date": "2020-01-23",
+        "newSamples": 5,
+        "cumulativeSamples": 90
+      },
+      {
+        "date": "2020-02-07",
+        "newSamples": 5,
+        "cumulativeSamples": 95
+      },
+      {
+        "date": "2020-02-14",
+        "newSamples": 5,
+        "cumulativeSamples": 100
+      },
+      {
+        "date": "2020-02-21",
+        "newSamples": 5,
+        "cumulativeSamples": 105
+      },
+      {
+        "date": "2020-02-28",
+        "newSamples": 5,
+        "cumulativeSamples": 110
+      },
+      {
+        "date": "2020-03-06",
+        "newSamples": 5,
+        "cumulativeSamples": 115
+      },
+      {
+        "date": "2020-03-13",
+        "newSamples": 5,
+        "cumulativeSamples": 120
+      },
+      {
+        "date": "2020-03-20",
+        "newSamples": 5,
+        "cumulativeSamples": 125
+      },
+      {
+        "date": "2020-03-27",
+        "newSamples": 5,
+        "cumulativeSamples": 130
+      },
+      {
+        "date": "2020-04-03",
+        "newSamples": 5,
+        "cumulativeSamples": 135
+      },
+      {
+        "date": "2020-04-10",
+        "newSamples": 5,
+        "cumulativeSamples": 140
+      },
+      {
+        "date": "2020-04-17",
+        "newSamples": 5,
+        "cumulativeSamples": 145
+      },
+      {
+        "date": "2020-04-24",
+        "newSamples": 5,
+        "cumulativeSamples": 150
+      },
+      {
+        "date": "2020-04-30",
+        "newSamples": 5,
+        "cumulativeSamples": 155
+      },
+      {
+        "date": "2020-05-08",
+        "newSamples": 5,
+        "cumulativeSamples": 160
+      },
+      {
+        "date": "2020-05-15",
+        "newSamples": 5,
+        "cumulativeSamples": 165
+      },
+      {
+        "date": "2020-05-22",
+        "newSamples": 5,
+        "cumulativeSamples": 170
+      },
+      {
+        "date": "2020-05-29",
+        "newSamples": 5,
+        "cumulativeSamples": 175
+      },
+      {
+        "date": "2020-06-05",
+        "newSamples": 5,
+        "cumulativeSamples": 180
+      },
+      {
+        "date": "2020-06-12",
+        "newSamples": 5,
+        "cumulativeSamples": 185
+      },
+      {
+        "date": "2020-06-19",
+        "newSamples": 5,
+        "cumulativeSamples": 190
+      },
+      {
+        "date": "2020-06-24",
+        "newSamples": 5,
+        "cumulativeSamples": 195
+      },
+      {
+        "date": "2020-07-03",
+        "newSamples": 5,
+        "cumulativeSamples": 200
+      },
+      {
+        "date": "2020-07-10",
+        "newSamples": 5,
+        "cumulativeSamples": 205
+      },
+      {
+        "date": "2020-07-17",
+        "newSamples": 5,
+        "cumulativeSamples": 210
+      },
+      {
+        "date": "2020-07-24",
+        "newSamples": 5,
+        "cumulativeSamples": 215
+      },
+      {
+        "date": "2020-07-31",
+        "newSamples": 5,
+        "cumulativeSamples": 220
+      },
+      {
+        "date": "2020-08-07",
+        "newSamples": 5,
+        "cumulativeSamples": 225
+      },
+      {
+        "date": "2020-08-14",
+        "newSamples": 5,
+        "cumulativeSamples": 230
+      },
+      {
+        "date": "2020-08-21",
+        "newSamples": 5,
+        "cumulativeSamples": 235
+      },
+      {
+        "date": "2020-08-28",
+        "newSamples": 5,
+        "cumulativeSamples": 240
+      },
+      {
+        "date": "2020-09-04",
+        "newSamples": 5,
+        "cumulativeSamples": 245
+      },
+      {
+        "date": "2020-09-11",
+        "newSamples": 5,
+        "cumulativeSamples": 250
+      },
+      {
+        "date": "2020-09-18",
+        "newSamples": 5,
+        "cumulativeSamples": 255
+      },
+      {
+        "date": "2020-09-25",
+        "newSamples": 5,
+        "cumulativeSamples": 260
+      },
+      {
+        "date": "2020-09-30",
+        "newSamples": 5,
+        "cumulativeSamples": 265
+      },
+      {
+        "date": "2020-10-09",
+        "newSamples": 5,
+        "cumulativeSamples": 270
+      },
+      {
+        "date": "2020-10-16",
+        "newSamples": 5,
+        "cumulativeSamples": 275
+      },
+      {
+        "date": "2020-10-23",
+        "newSamples": 5,
+        "cumulativeSamples": 280
+      },
+      {
+        "date": "2020-10-30",
+        "newSamples": 5,
+        "cumulativeSamples": 285
+      },
+      {
+        "date": "2020-11-06",
+        "newSamples": 5,
+        "cumulativeSamples": 290
+      },
+      {
+        "date": "2020-11-13",
+        "newSamples": 5,
+        "cumulativeSamples": 295
+      },
+      {
+        "date": "2020-11-20",
+        "newSamples": 5,
+        "cumulativeSamples": 300
+      },
+      {
+        "date": "2020-11-27",
+        "newSamples": 5,
+        "cumulativeSamples": 305
+      },
+      {
+        "date": "2020-12-04",
+        "newSamples": 5,
+        "cumulativeSamples": 310
+      },
+      {
+        "date": "2020-12-11",
+        "newSamples": 5,
+        "cumulativeSamples": 315
+      },
+      {
+        "date": "2020-12-18",
+        "newSamples": 5,
+        "cumulativeSamples": 320
+      },
+      {
+        "date": "2020-12-25",
+        "newSamples": 5,
+        "cumulativeSamples": 325
+      },
+      {
+        "date": "2020-12-31",
+        "newSamples": 5,
+        "cumulativeSamples": 330
+      },
+      {
+        "date": "2021-01-08",
+        "newSamples": 5,
+        "cumulativeSamples": 335
+      },
+      {
+        "date": "2021-01-15",
+        "newSamples": 5,
+        "cumulativeSamples": 340
+      },
+      {
+        "date": "2021-01-22",
+        "newSamples": 5,
+        "cumulativeSamples": 345
+      },
+      {
+        "date": "2021-01-29",
+        "newSamples": 5,
+        "cumulativeSamples": 350
+      },
+      {
+        "date": "2021-02-05",
+        "newSamples": 5,
+        "cumulativeSamples": 355
+      },
+      {
+        "date": "2021-02-10",
+        "newSamples": 5,
+        "cumulativeSamples": 360
+      },
+      {
+        "date": "2021-02-19",
+        "newSamples": 5,
+        "cumulativeSamples": 365
+      },
+      {
+        "date": "2021-02-26",
+        "newSamples": 5,
+        "cumulativeSamples": 370
+      },
+      {
+        "date": "2021-03-05",
+        "newSamples": 5,
+        "cumulativeSamples": 375
+      },
+      {
+        "date": "2021-03-12",
+        "newSamples": 5,
+        "cumulativeSamples": 380
+      },
+      {
+        "date": "2021-03-19",
+        "newSamples": 5,
+        "cumulativeSamples": 385
+      },
+      {
+        "date": "2021-03-26",
+        "newSamples": 5,
+        "cumulativeSamples": 390
+      },
+      {
+        "date": "2021-04-02",
+        "newSamples": 5,
+        "cumulativeSamples": 395
+      },
+      {
+        "date": "2021-04-09",
+        "newSamples": 5,
+        "cumulativeSamples": 400
+      },
+      {
+        "date": "2021-04-16",
+        "newSamples": 5,
+        "cumulativeSamples": 405
+      },
+      {
+        "date": "2021-04-23",
+        "newSamples": 5,
+        "cumulativeSamples": 410
+      },
+      {
+        "date": "2021-04-30",
+        "newSamples": 5,
+        "cumulativeSamples": 415
+      },
+      {
+        "date": "2021-05-07",
+        "newSamples": 5,
+        "cumulativeSamples": 420
+      },
+      {
+        "date": "2021-05-14",
+        "newSamples": 5,
+        "cumulativeSamples": 425
+      },
+      {
+        "date": "2021-05-21",
+        "newSamples": 5,
+        "cumulativeSamples": 430
+      },
+      {
+        "date": "2021-05-28",
+        "newSamples": 5,
+        "cumulativeSamples": 435
+      },
+      {
+        "date": "2021-06-04",
+        "newSamples": 5,
+        "cumulativeSamples": 440
+      },
+      {
+        "date": "2021-06-11",
+        "newSamples": 5,
+        "cumulativeSamples": 445
+      },
+      {
+        "date": "2021-06-18",
+        "newSamples": 5,
+        "cumulativeSamples": 450
+      },
+      {
+        "date": "2021-06-25",
+        "newSamples": 5,
+        "cumulativeSamples": 455
+      },
+      {
+        "date": "2021-07-02",
+        "newSamples": 5,
+        "cumulativeSamples": 460
+      },
+      {
+        "date": "2021-07-09",
+        "newSamples": 5,
+        "cumulativeSamples": 465
+      },
+      {
+        "date": "2021-07-16",
+        "newSamples": 5,
+        "cumulativeSamples": 470
+      },
+      {
+        "date": "2021-07-23",
+        "newSamples": 5,
+        "cumulativeSamples": 475
+      },
+      {
+        "date": "2021-07-30",
+        "newSamples": 5,
+        "cumulativeSamples": 480
+      },
+      {
+        "date": "2021-08-06",
+        "newSamples": 5,
+        "cumulativeSamples": 485
+      },
+      {
+        "date": "2021-08-13",
+        "newSamples": 5,
+        "cumulativeSamples": 490
+      },
+      {
+        "date": "2021-08-20",
+        "newSamples": 5,
+        "cumulativeSamples": 495
+      },
+      {
+        "date": "2021-08-27",
+        "newSamples": 5,
+        "cumulativeSamples": 500
+      },
+      {
+        "date": "2021-09-03",
+        "newSamples": 5,
+        "cumulativeSamples": 505
+      },
+      {
+        "date": "2021-09-10",
+        "newSamples": 5,
+        "cumulativeSamples": 510
+      },
+      {
+        "date": "2021-09-17",
+        "newSamples": 5,
+        "cumulativeSamples": 515
+      },
+      {
+        "date": "2021-09-24",
+        "newSamples": 5,
+        "cumulativeSamples": 520
+      },
+      {
+        "date": "2021-09-30",
+        "newSamples": 5,
+        "cumulativeSamples": 525
+      },
+      {
+        "date": "2021-10-08",
+        "newSamples": 5,
+        "cumulativeSamples": 530
+      },
+      {
+        "date": "2021-10-15",
+        "newSamples": 5,
+        "cumulativeSamples": 535
+      },
+      {
+        "date": "2021-10-22",
+        "newSamples": 5,
+        "cumulativeSamples": 540
+      },
+      {
+        "date": "2021-10-29",
+        "newSamples": 5,
+        "cumulativeSamples": 545
+      },
+      {
+        "date": "2021-11-05",
+        "newSamples": 5,
+        "cumulativeSamples": 550
+      },
+      {
+        "date": "2021-11-12",
+        "newSamples": 5,
+        "cumulativeSamples": 555
+      },
+      {
+        "date": "2021-11-19",
+        "newSamples": 5,
+        "cumulativeSamples": 560
+      },
+      {
+        "date": "2021-11-26",
+        "newSamples": 5,
+        "cumulativeSamples": 565
+      },
+      {
+        "date": "2021-12-03",
+        "newSamples": 5,
+        "cumulativeSamples": 570
+      },
+      {
+        "date": "2021-12-10",
+        "newSamples": 5,
+        "cumulativeSamples": 575
+      },
+      {
+        "date": "2021-12-17",
+        "newSamples": 5,
+        "cumulativeSamples": 580
+      },
+      {
+        "date": "2021-12-24",
+        "newSamples": 5,
+        "cumulativeSamples": 585
+      },
+      {
+        "date": "2021-12-31",
+        "newSamples": 5,
+        "cumulativeSamples": 590
+      },
+      {
+        "date": "2022-01-07",
+        "newSamples": 5,
+        "cumulativeSamples": 595
+      },
+      {
+        "date": "2022-01-14",
+        "newSamples": 5,
+        "cumulativeSamples": 600
+      },
+      {
+        "date": "2022-01-21",
+        "newSamples": 5,
+        "cumulativeSamples": 605
+      },
+      {
+        "date": "2022-01-28",
+        "newSamples": 5,
+        "cumulativeSamples": 610
+      },
+      {
+        "date": "2022-02-11",
+        "newSamples": 5,
+        "cumulativeSamples": 615
+      },
+      {
+        "date": "2022-02-18",
+        "newSamples": 5,
+        "cumulativeSamples": 620
+      },
+      {
+        "date": "2022-02-25",
+        "newSamples": 5,
+        "cumulativeSamples": 625
+      },
+      {
+        "date": "2022-03-04",
+        "newSamples": 5,
+        "cumulativeSamples": 630
+      },
+      {
+        "date": "2022-03-11",
+        "newSamples": 5,
+        "cumulativeSamples": 635
+      },
+      {
+        "date": "2022-03-18",
+        "newSamples": 5,
+        "cumulativeSamples": 640
+      },
+      {
+        "date": "2022-03-25",
+        "newSamples": 5,
+        "cumulativeSamples": 645
+      },
+      {
+        "date": "2022-04-01",
+        "newSamples": 5,
+        "cumulativeSamples": 650
+      },
+      {
+        "date": "2022-04-08",
+        "newSamples": 5,
+        "cumulativeSamples": 655
+      },
+      {
+        "date": "2022-04-15",
+        "newSamples": 5,
+        "cumulativeSamples": 660
+      },
+      {
+        "date": "2022-04-22",
+        "newSamples": 5,
+        "cumulativeSamples": 665
+      },
+      {
+        "date": "2022-04-29",
+        "newSamples": 4,
+        "cumulativeSamples": 669
+      },
+      {
+        "date": "2022-05-06",
+        "newSamples": 5,
+        "cumulativeSamples": 674
+      },
+      {
+        "date": "2022-05-13",
+        "newSamples": 5,
+        "cumulativeSamples": 679
+      },
+      {
+        "date": "2022-05-20",
+        "newSamples": 5,
+        "cumulativeSamples": 684
+      },
+      {
+        "date": "2022-05-27",
+        "newSamples": 5,
+        "cumulativeSamples": 689
+      },
+      {
+        "date": "2022-06-02",
+        "newSamples": 5,
+        "cumulativeSamples": 694
+      },
+      {
+        "date": "2022-06-10",
+        "newSamples": 5,
+        "cumulativeSamples": 699
+      },
+      {
+        "date": "2022-06-17",
+        "newSamples": 5,
+        "cumulativeSamples": 704
+      },
+      {
+        "date": "2022-06-24",
+        "newSamples": 5,
+        "cumulativeSamples": 709
+      },
+      {
+        "date": "2022-07-01",
+        "newSamples": 5,
+        "cumulativeSamples": 714
+      },
+      {
+        "date": "2022-07-08",
+        "newSamples": 5,
+        "cumulativeSamples": 719
+      },
+      {
+        "date": "2022-07-15",
+        "newSamples": 5,
+        "cumulativeSamples": 724
+      },
+      {
+        "date": "2022-07-22",
+        "newSamples": 5,
+        "cumulativeSamples": 729
+      },
+      {
+        "date": "2022-07-29",
+        "newSamples": 5,
+        "cumulativeSamples": 734
+      },
+      {
+        "date": "2022-08-05",
+        "newSamples": 5,
+        "cumulativeSamples": 739
+      },
+      {
+        "date": "2022-08-12",
+        "newSamples": 5,
+        "cumulativeSamples": 744
+      },
+      {
+        "date": "2022-08-19",
+        "newSamples": 5,
+        "cumulativeSamples": 749
+      },
+      {
+        "date": "2022-08-26",
+        "newSamples": 5,
+        "cumulativeSamples": 754
+      },
+      {
+        "date": "2022-09-02",
+        "newSamples": 5,
+        "cumulativeSamples": 759
+      },
+      {
+        "date": "2022-09-09",
+        "newSamples": 5,
+        "cumulativeSamples": 764
+      },
+      {
+        "date": "2022-09-16",
+        "newSamples": 5,
+        "cumulativeSamples": 769
+      },
+      {
+        "date": "2022-09-23",
+        "newSamples": 5,
+        "cumulativeSamples": 774
+      },
+      {
+        "date": "2022-09-30",
+        "newSamples": 5,
+        "cumulativeSamples": 779
+      },
+      {
+        "date": "2022-10-14",
+        "newSamples": 5,
+        "cumulativeSamples": 784
+      },
+      {
+        "date": "2022-10-21",
+        "newSamples": 5,
+        "cumulativeSamples": 789
+      },
+      {
+        "date": "2022-10-28",
+        "newSamples": 5,
+        "cumulativeSamples": 794
+      },
+      {
+        "date": "2022-11-04",
+        "newSamples": 5,
+        "cumulativeSamples": 799
+      },
+      {
+        "date": "2022-11-11",
+        "newSamples": 5,
+        "cumulativeSamples": 804
+      },
+      {
+        "date": "2022-11-18",
+        "newSamples": 5,
+        "cumulativeSamples": 809
+      },
+      {
+        "date": "2022-11-25",
+        "newSamples": 5,
+        "cumulativeSamples": 814
+      },
+      {
+        "date": "2022-12-02",
+        "newSamples": 5,
+        "cumulativeSamples": 819
+      },
+      {
+        "date": "2022-12-09",
+        "newSamples": 5,
+        "cumulativeSamples": 824
+      },
+      {
+        "date": "2022-12-16",
+        "newSamples": 5,
+        "cumulativeSamples": 829
+      },
+      {
+        "date": "2022-12-23",
+        "newSamples": 5,
+        "cumulativeSamples": 834
+      },
+      {
+        "date": "2022-12-30",
+        "newSamples": 5,
+        "cumulativeSamples": 839
+      },
+      {
+        "date": "2023-01-06",
+        "newSamples": 5,
+        "cumulativeSamples": 844
+      },
+      {
+        "date": "2023-01-13",
+        "newSamples": 5,
+        "cumulativeSamples": 849
+      },
+      {
+        "date": "2023-01-20",
+        "newSamples": 5,
+        "cumulativeSamples": 854
+      },
+      {
+        "date": "2023-02-03",
+        "newSamples": 5,
+        "cumulativeSamples": 859
+      },
+      {
+        "date": "2023-02-10",
+        "newSamples": 5,
+        "cumulativeSamples": 864
+      },
+      {
+        "date": "2023-02-17",
+        "newSamples": 5,
+        "cumulativeSamples": 869
+      },
+      {
+        "date": "2023-02-24",
+        "newSamples": 5,
+        "cumulativeSamples": 874
+      },
+      {
+        "date": "2023-03-03",
+        "newSamples": 5,
+        "cumulativeSamples": 879
+      },
+      {
+        "date": "2023-03-10",
+        "newSamples": 5,
+        "cumulativeSamples": 884
+      },
+      {
+        "date": "2023-03-17",
+        "newSamples": 5,
+        "cumulativeSamples": 889
+      },
+      {
+        "date": "2023-03-24",
+        "newSamples": 5,
+        "cumulativeSamples": 894
+      },
+      {
+        "date": "2023-03-31",
+        "newSamples": 5,
+        "cumulativeSamples": 899
+      },
+      {
+        "date": "2023-04-07",
+        "newSamples": 5,
+        "cumulativeSamples": 904
+      },
+      {
+        "date": "2023-04-14",
+        "newSamples": 5,
+        "cumulativeSamples": 909
+      },
+      {
+        "date": "2023-04-21",
+        "newSamples": 5,
+        "cumulativeSamples": 914
+      },
+      {
+        "date": "2023-04-28",
+        "newSamples": 5,
+        "cumulativeSamples": 919
+      },
+      {
+        "date": "2023-05-05",
+        "newSamples": 5,
+        "cumulativeSamples": 924
+      },
+      {
+        "date": "2023-05-12",
+        "newSamples": 5,
+        "cumulativeSamples": 929
+      },
+      {
+        "date": "2023-05-19",
+        "newSamples": 5,
+        "cumulativeSamples": 934
+      },
+      {
+        "date": "2023-05-26",
+        "newSamples": 5,
+        "cumulativeSamples": 939
+      },
+      {
+        "date": "2023-06-02",
+        "newSamples": 5,
+        "cumulativeSamples": 944
+      },
+      {
+        "date": "2023-06-09",
+        "newSamples": 5,
+        "cumulativeSamples": 949
+      },
+      {
+        "date": "2023-06-16",
+        "newSamples": 5,
+        "cumulativeSamples": 954
+      },
+      {
+        "date": "2023-06-21",
+        "newSamples": 5,
+        "cumulativeSamples": 959
+      },
+      {
+        "date": "2023-06-30",
+        "newSamples": 5,
+        "cumulativeSamples": 964
+      },
+      {
+        "date": "2023-07-07",
+        "newSamples": 5,
+        "cumulativeSamples": 969
+      },
+      {
+        "date": "2023-07-14",
+        "newSamples": 5,
+        "cumulativeSamples": 974
+      },
+      {
+        "date": "2023-07-21",
+        "newSamples": 5,
+        "cumulativeSamples": 979
+      },
+      {
+        "date": "2023-07-28",
+        "newSamples": 5,
+        "cumulativeSamples": 984
+      },
+      {
+        "date": "2023-08-04",
+        "newSamples": 5,
+        "cumulativeSamples": 989
+      },
+      {
+        "date": "2023-08-11",
+        "newSamples": 5,
+        "cumulativeSamples": 994
+      },
+      {
+        "date": "2023-08-18",
+        "newSamples": 5,
+        "cumulativeSamples": 999
+      },
+      {
+        "date": "2023-08-25",
+        "newSamples": 5,
+        "cumulativeSamples": 1004
+      },
+      {
+        "date": "2023-09-01",
+        "newSamples": 5,
+        "cumulativeSamples": 1009
+      },
+      {
+        "date": "2023-09-08",
+        "newSamples": 5,
+        "cumulativeSamples": 1014
+      },
+      {
+        "date": "2023-09-15",
+        "newSamples": 5,
+        "cumulativeSamples": 1019
+      },
+      {
+        "date": "2023-09-22",
+        "newSamples": 5,
+        "cumulativeSamples": 1024
+      },
+      {
+        "date": "2023-09-28",
+        "newSamples": 5,
+        "cumulativeSamples": 1029
+      },
+      {
+        "date": "2023-10-13",
+        "newSamples": 5,
+        "cumulativeSamples": 1034
+      },
+      {
+        "date": "2023-10-20",
+        "newSamples": 5,
+        "cumulativeSamples": 1039
+      },
+      {
+        "date": "2023-10-27",
+        "newSamples": 5,
+        "cumulativeSamples": 1044
+      },
+      {
+        "date": "2023-11-03",
+        "newSamples": 5,
+        "cumulativeSamples": 1049
+      },
+      {
+        "date": "2023-11-10",
+        "newSamples": 5,
+        "cumulativeSamples": 1054
+      },
+      {
+        "date": "2023-11-17",
+        "newSamples": 5,
+        "cumulativeSamples": 1059
+      },
+      {
+        "date": "2023-11-24",
+        "newSamples": 5,
+        "cumulativeSamples": 1064
+      },
+      {
+        "date": "2023-12-01",
+        "newSamples": 5,
+        "cumulativeSamples": 1069
+      },
+      {
+        "date": "2023-12-08",
+        "newSamples": 5,
+        "cumulativeSamples": 1074
+      },
+      {
+        "date": "2023-12-15",
+        "newSamples": 5,
+        "cumulativeSamples": 1079
+      },
+      {
+        "date": "2023-12-22",
+        "newSamples": 5,
+        "cumulativeSamples": 1084
+      },
+      {
+        "date": "2023-12-29",
+        "newSamples": 5,
+        "cumulativeSamples": 1089
+      },
+      {
+        "date": "2024-01-05",
+        "newSamples": 5,
+        "cumulativeSamples": 1094
+      },
+      {
+        "date": "2024-01-12",
+        "newSamples": 5,
+        "cumulativeSamples": 1099
+      },
+      {
+        "date": "2024-01-19",
+        "newSamples": 5,
+        "cumulativeSamples": 1104
+      },
+      {
+        "date": "2024-01-26",
+        "newSamples": 5,
+        "cumulativeSamples": 1109
+      },
+      {
+        "date": "2024-02-02",
+        "newSamples": 5,
+        "cumulativeSamples": 1114
+      },
+      {
+        "date": "2024-02-08",
+        "newSamples": 5,
+        "cumulativeSamples": 1119
+      },
+      {
+        "date": "2024-02-23",
+        "newSamples": 5,
+        "cumulativeSamples": 1124
+      },
+      {
+        "date": "2024-03-01",
+        "newSamples": 5,
+        "cumulativeSamples": 1129
+      },
+      {
+        "date": "2024-03-08",
+        "newSamples": 5,
+        "cumulativeSamples": 1134
+      },
+      {
+        "date": "2024-03-15",
+        "newSamples": 5,
+        "cumulativeSamples": 1139
+      },
+      {
+        "date": "2024-03-22",
+        "newSamples": 5,
+        "cumulativeSamples": 1144
+      },
+      {
+        "date": "2024-03-29",
+        "newSamples": 5,
+        "cumulativeSamples": 1149
+      },
+      {
+        "date": "2024-04-03",
+        "newSamples": 5,
+        "cumulativeSamples": 1154
+      },
+      {
+        "date": "2024-04-12",
+        "newSamples": 5,
+        "cumulativeSamples": 1159
+      },
+      {
+        "date": "2024-04-19",
+        "newSamples": 5,
+        "cumulativeSamples": 1164
+      },
+      {
+        "date": "2024-04-26",
+        "newSamples": 5,
+        "cumulativeSamples": 1169
+      },
+      {
+        "date": "2024-04-30",
+        "newSamples": 5,
+        "cumulativeSamples": 1174
+      },
+      {
+        "date": "2024-05-10",
+        "newSamples": 5,
+        "cumulativeSamples": 1179
+      },
+      {
+        "date": "2024-05-17",
+        "newSamples": 5,
+        "cumulativeSamples": 1184
+      },
+      {
+        "date": "2024-05-24",
+        "newSamples": 5,
+        "cumulativeSamples": 1189
+      },
+      {
+        "date": "2024-05-31",
+        "newSamples": 5,
+        "cumulativeSamples": 1194
+      },
+      {
+        "date": "2024-06-07",
+        "newSamples": 5,
+        "cumulativeSamples": 1199
+      },
+      {
+        "date": "2024-06-14",
+        "newSamples": 5,
+        "cumulativeSamples": 1204
+      },
+      {
+        "date": "2024-06-21",
+        "newSamples": 5,
+        "cumulativeSamples": 1209
+      },
+      {
+        "date": "2024-06-28",
+        "newSamples": 5,
+        "cumulativeSamples": 1214
+      },
+      {
+        "date": "2024-07-05",
+        "newSamples": 4,
+        "cumulativeSamples": 1218
+      },
+      {
+        "date": "2024-07-12",
+        "newSamples": 5,
+        "cumulativeSamples": 1223
+      },
+      {
+        "date": "2024-07-19",
+        "newSamples": 5,
+        "cumulativeSamples": 1228
+      },
+      {
+        "date": "2024-07-26",
+        "newSamples": 5,
+        "cumulativeSamples": 1233
+      },
+      {
+        "date": "2024-08-02",
+        "newSamples": 5,
+        "cumulativeSamples": 1238
+      },
+      {
+        "date": "2024-08-09",
+        "newSamples": 5,
+        "cumulativeSamples": 1243
+      },
+      {
+        "date": "2024-08-16",
+        "newSamples": 5,
+        "cumulativeSamples": 1248
+      },
+      {
+        "date": "2024-08-23",
+        "newSamples": 5,
+        "cumulativeSamples": 1253
+      },
+      {
+        "date": "2024-08-30",
+        "newSamples": 5,
+        "cumulativeSamples": 1258
+      },
+      {
+        "date": "2024-09-06",
+        "newSamples": 5,
+        "cumulativeSamples": 1263
+      },
+      {
+        "date": "2024-09-13",
+        "newSamples": 5,
+        "cumulativeSamples": 1268
+      },
+      {
+        "date": "2024-09-20",
+        "newSamples": 5,
+        "cumulativeSamples": 1273
+      },
+      {
+        "date": "2024-09-27",
+        "newSamples": 5,
+        "cumulativeSamples": 1278
+      },
+      {
+        "date": "2024-09-30",
+        "newSamples": 5,
+        "cumulativeSamples": 1283
+      },
+      {
+        "date": "2024-10-11",
+        "newSamples": 5,
+        "cumulativeSamples": 1288
+      },
+      {
+        "date": "2024-10-18",
+        "newSamples": 5,
+        "cumulativeSamples": 1293
+      },
+      {
+        "date": "2024-10-25",
+        "newSamples": 5,
+        "cumulativeSamples": 1298
+      },
+      {
+        "date": "2024-11-01",
+        "newSamples": 5,
+        "cumulativeSamples": 1303
+      },
+      {
+        "date": "2024-11-08",
+        "newSamples": 5,
+        "cumulativeSamples": 1308
+      },
+      {
+        "date": "2024-11-15",
+        "newSamples": 5,
+        "cumulativeSamples": 1313
+      },
+      {
+        "date": "2024-11-22",
+        "newSamples": 5,
+        "cumulativeSamples": 1318
+      },
+      {
+        "date": "2024-11-29",
+        "newSamples": 5,
+        "cumulativeSamples": 1323
+      },
+      {
+        "date": "2024-12-06",
+        "newSamples": 5,
+        "cumulativeSamples": 1328
+      },
+      {
+        "date": "2024-12-13",
+        "newSamples": 5,
+        "cumulativeSamples": 1333
+      },
+      {
+        "date": "2024-12-20",
+        "newSamples": 5,
+        "cumulativeSamples": 1338
+      },
+      {
+        "date": "2024-12-27",
+        "newSamples": 5,
+        "cumulativeSamples": 1343
+      },
+      {
+        "date": "2025-01-03",
+        "newSamples": 5,
+        "cumulativeSamples": 1348
+      },
+      {
+        "date": "2025-01-10",
+        "newSamples": 5,
+        "cumulativeSamples": 1353
+      },
+      {
+        "date": "2025-01-17",
+        "newSamples": 5,
+        "cumulativeSamples": 1358
+      },
+      {
+        "date": "2025-01-24",
+        "newSamples": 5,
+        "cumulativeSamples": 1363
+      },
+      {
+        "date": "2025-01-27",
+        "newSamples": 5,
+        "cumulativeSamples": 1368
+      },
+      {
+        "date": "2025-02-07",
+        "newSamples": 5,
+        "cumulativeSamples": 1373
+      },
+      {
+        "date": "2025-02-14",
+        "newSamples": 5,
+        "cumulativeSamples": 1378
+      },
+      {
+        "date": "2025-02-21",
+        "newSamples": 5,
+        "cumulativeSamples": 1383
+      },
+      {
+        "date": "2025-02-28",
+        "newSamples": 5,
+        "cumulativeSamples": 1388
+      },
+      {
+        "date": "2025-03-07",
+        "newSamples": 5,
+        "cumulativeSamples": 1393
+      },
+      {
+        "date": "2025-03-14",
+        "newSamples": 5,
+        "cumulativeSamples": 1398
+      },
+      {
+        "date": "2025-03-21",
+        "newSamples": 5,
+        "cumulativeSamples": 1403
+      },
+      {
+        "date": "2025-03-28",
+        "newSamples": 5,
+        "cumulativeSamples": 1408
+      },
+      {
+        "date": "2025-04-03",
+        "newSamples": 5,
+        "cumulativeSamples": 1413
+      },
+      {
+        "date": "2025-04-11",
+        "newSamples": 5,
+        "cumulativeSamples": 1418
+      },
+      {
+        "date": "2025-04-18",
+        "newSamples": 5,
+        "cumulativeSamples": 1423
+      },
+      {
+        "date": "2025-04-25",
+        "newSamples": 5,
+        "cumulativeSamples": 1428
+      },
+      {
+        "date": "2025-04-30",
+        "newSamples": 5,
+        "cumulativeSamples": 1433
+      },
+      {
+        "date": "2025-05-09",
+        "newSamples": 5,
+        "cumulativeSamples": 1438
+      },
+      {
+        "date": "2025-05-16",
+        "newSamples": 5,
+        "cumulativeSamples": 1443
+      },
+      {
+        "date": "2025-05-23",
+        "newSamples": 5,
+        "cumulativeSamples": 1448
+      },
+      {
+        "date": "2025-05-30",
+        "newSamples": 5,
+        "cumulativeSamples": 1453
+      },
+      {
+        "date": "2025-06-06",
+        "newSamples": 5,
+        "cumulativeSamples": 1458
+      },
+      {
+        "date": "2025-06-13",
+        "newSamples": 5,
+        "cumulativeSamples": 1463
+      },
+      {
+        "date": "2025-06-20",
+        "newSamples": 5,
+        "cumulativeSamples": 1468
+      },
+      {
+        "date": "2025-06-27",
+        "newSamples": 5,
+        "cumulativeSamples": 1473
+      },
+      {
+        "date": "2025-07-04",
+        "newSamples": 5,
+        "cumulativeSamples": 1478
+      },
+      {
+        "date": "2025-07-11",
+        "newSamples": 5,
+        "cumulativeSamples": 1483
+      },
+      {
+        "date": "2025-07-18",
+        "newSamples": 5,
+        "cumulativeSamples": 1488
+      },
+      {
+        "date": "2025-07-25",
+        "newSamples": 5,
+        "cumulativeSamples": 1493
+      },
+      {
+        "date": "2025-08-01",
+        "newSamples": 5,
+        "cumulativeSamples": 1498
+      },
+      {
+        "date": "2025-08-08",
+        "newSamples": 5,
+        "cumulativeSamples": 1503
+      },
+      {
+        "date": "2025-08-15",
+        "newSamples": 5,
+        "cumulativeSamples": 1508
+      },
+      {
+        "date": "2025-08-22",
+        "newSamples": 5,
+        "cumulativeSamples": 1513
+      },
+      {
+        "date": "2025-08-29",
+        "newSamples": 5,
+        "cumulativeSamples": 1518
+      },
+      {
+        "date": "2025-09-05",
+        "newSamples": 5,
+        "cumulativeSamples": 1523
+      },
+      {
+        "date": "2025-09-12",
+        "newSamples": 5,
+        "cumulativeSamples": 1528
+      },
+      {
+        "date": "2025-09-19",
+        "newSamples": 5,
+        "cumulativeSamples": 1533
+      },
+      {
+        "date": "2025-09-26",
+        "newSamples": 5,
+        "cumulativeSamples": 1538
+      },
+      {
+        "date": "2025-09-30",
+        "newSamples": 5,
+        "cumulativeSamples": 1543
+      },
+      {
+        "date": "2025-10-10",
+        "newSamples": 5,
+        "cumulativeSamples": 1548
+      },
+      {
+        "date": "2025-10-17",
+        "newSamples": 5,
+        "cumulativeSamples": 1553
+      },
+      {
+        "date": "2025-10-24",
+        "newSamples": 5,
+        "cumulativeSamples": 1558
+      },
+      {
+        "date": "2025-10-31",
+        "newSamples": 5,
+        "cumulativeSamples": 1563
+      },
+      {
+        "date": "2025-11-07",
+        "newSamples": 5,
+        "cumulativeSamples": 1568
+      },
+      {
+        "date": "2025-11-14",
+        "newSamples": 5,
+        "cumulativeSamples": 1573
+      },
+      {
+        "date": "2025-11-21",
+        "newSamples": 5,
+        "cumulativeSamples": 1578
+      },
+      {
+        "date": "2025-11-28",
+        "newSamples": 5,
+        "cumulativeSamples": 1583
+      },
+      {
+        "date": "2025-12-05",
+        "newSamples": 5,
+        "cumulativeSamples": 1588
+      },
+      {
+        "date": "2025-12-12",
+        "newSamples": 5,
+        "cumulativeSamples": 1593
+      },
+      {
+        "date": "2025-12-19",
+        "newSamples": 5,
+        "cumulativeSamples": 1598
+      },
+      {
+        "date": "2025-12-26",
+        "newSamples": 5,
+        "cumulativeSamples": 1603
+      },
+      {
+        "date": "2025-12-31",
+        "newSamples": 5,
+        "cumulativeSamples": 1608
+      },
+      {
+        "date": "2026-01-09",
+        "newSamples": 5,
+        "cumulativeSamples": 1613
+      },
+      {
+        "date": "2026-01-16",
+        "newSamples": 5,
+        "cumulativeSamples": 1618
+      },
+      {
+        "date": "2026-01-23",
+        "newSamples": 5,
+        "cumulativeSamples": 1623
+      },
+      {
+        "date": "2026-01-30",
+        "newSamples": 5,
+        "cumulativeSamples": 1628
+      },
+      {
+        "date": "2026-02-06",
+        "newSamples": 5,
+        "cumulativeSamples": 1633
+      },
+      {
+        "date": "2026-02-13",
+        "newSamples": 5,
+        "cumulativeSamples": 1638
+      },
+      {
+        "date": "2026-02-27",
+        "newSamples": 5,
+        "cumulativeSamples": 1643
+      },
+      {
+        "date": "2026-03-06",
+        "newSamples": 5,
+        "cumulativeSamples": 1648
+      },
+      {
+        "date": "2026-03-13",
+        "newSamples": 5,
+        "cumulativeSamples": 1653
+      },
+      {
+        "date": "2026-03-20",
+        "newSamples": 5,
+        "cumulativeSamples": 1658
+      },
+      {
+        "date": "2026-03-27",
+        "newSamples": 5,
+        "cumulativeSamples": 1663
+      },
+      {
+        "date": "2026-04-03",
+        "newSamples": 5,
+        "cumulativeSamples": 1668
+      },
+      {
+        "date": "2026-04-10",
+        "newSamples": 5,
+        "cumulativeSamples": 1673
+      },
+      {
+        "date": "2026-04-17",
+        "newSamples": 5,
+        "cumulativeSamples": 1678
+      },
+      {
+        "date": "2026-04-24",
+        "newSamples": 5,
+        "cumulativeSamples": 1683
+      },
+      {
+        "date": "2026-04-30",
+        "newSamples": 5,
+        "cumulativeSamples": 1688
+      },
+      {
+        "date": "2026-05-08",
+        "newSamples": 5,
+        "cumulativeSamples": 1693
+      },
+      {
+        "date": "2026-05-15",
+        "newSamples": 5,
+        "cumulativeSamples": 1698
+      },
+      {
+        "date": "2026-05-22",
+        "newSamples": 5,
+        "cumulativeSamples": 1703
+      },
+      {
+        "date": "2026-05-29",
+        "newSamples": 5,
+        "cumulativeSamples": 1708
+      },
+      {
+        "date": "2026-06-05",
+        "newSamples": 5,
+        "cumulativeSamples": 1713
+      },
+      {
+        "date": "2026-06-12",
+        "newSamples": 5,
+        "cumulativeSamples": 1718
+      },
+      {
+        "date": "2026-06-18",
+        "newSamples": 5,
+        "cumulativeSamples": 1723
+      },
+      {
+        "date": "2026-06-26",
+        "newSamples": 5,
+        "cumulativeSamples": 1728
+      },
+      {
+        "date": "2026-07-03",
+        "newSamples": 5,
+        "cumulativeSamples": 1733
+      },
+      {
+        "date": "2026-07-10",
+        "newSamples": 5,
+        "cumulativeSamples": 1738
+      },
+      {
+        "date": "2026-07-17",
+        "newSamples": 5,
+        "cumulativeSamples": 1743
+      },
+      {
+        "date": "2026-07-24",
+        "newSamples": 4,
+        "cumulativeSamples": 1747
+      },
+      {
+        "date": "2026-07-31",
+        "newSamples": 5,
+        "cumulativeSamples": 1752
+      },
+      {
+        "date": "2026-08-07",
+        "newSamples": 5,
+        "cumulativeSamples": 1757
+      },
+      {
+        "date": "2026-08-14",
+        "newSamples": 5,
+        "cumulativeSamples": 1762
+      }
+    ],
+    "eventPath": [
+      {
+        "day": 0,
+        "meanReturn": 0.0,
+        "medianReturn": 0.0,
+        "meanAlpha": 0.0
+      },
+      {
+        "day": 1,
+        "meanReturn": 0.0047041,
+        "medianReturn": 0.00435281,
+        "meanAlpha": 0.00367534,
+        "members": 1762
+      },
+      {
+        "day": 2,
+        "meanReturn": 0.00383738,
+        "medianReturn": 0.00310218,
+        "meanAlpha": 0.0019432,
+        "members": 1762
+      },
+      {
+        "day": 3,
+        "meanReturn": 0.00394607,
+        "medianReturn": 0.00285031,
+        "meanAlpha": 0.00231862,
+        "members": 1762
+      },
+      {
+        "day": 5,
+        "meanReturn": 0.00374211,
+        "medianReturn": 0.00132483,
+        "meanAlpha": 0.00247064,
+        "members": 1757
+      },
+      {
+        "day": 10,
+        "meanReturn": 0.00629948,
+        "medianReturn": 0.000234,
+        "meanAlpha": 0.00336933,
+        "members": 1752
+      },
+      {
+        "day": 20,
+        "meanReturn": 0.01303436,
+        "medianReturn": 0.00205147,
+        "meanAlpha": 0.00857505,
+        "members": 1743
+      },
+      {
+        "day": 40,
+        "meanReturn": 0.02390877,
+        "medianReturn": -0.00292345,
+        "meanAlpha": 0.01593205,
+        "members": 1723
+      },
+      {
+        "day": 60,
+        "meanReturn": 0.03706271,
+        "medianReturn": 0.00186532,
+        "meanAlpha": 0.02449378,
+        "members": 1703
+      },
+      {
+        "day": 120,
+        "meanReturn": 0.07639934,
+        "medianReturn": 0.02578171,
+        "meanAlpha": 0.05569572,
+        "members": 1636
+      },
+      {
+        "day": 250,
+        "meanReturn": 0.1504586,
+        "medianReturn": 0.06129937,
+        "meanAlpha": 0.11133969,
+        "members": 1503
+      }
+    ],
+    "returnDistributions": {
+      "1D": {
+        "horizon": "1D",
+        "members": 1762,
+        "bins": [
+          {
+            "label": "<-5%",
+            "count": 31,
+            "share": 0.01759364
+          },
+          {
+            "label": "-5~-3%",
+            "count": 82,
+            "share": 0.04653802
+          },
+          {
+            "label": "-3~-1%",
+            "count": 281,
+            "share": 0.15947787
+          },
+          {
+            "label": "-1~0%",
+            "count": 312,
+            "share": 0.17707151
+          },
+          {
+            "label": "0~1%",
+            "count": 388,
+            "share": 0.22020431
+          },
+          {
+            "label": "1~3%",
+            "count": 457,
+            "share": 0.25936436
+          },
+          {
+            "label": "3~5%",
+            "count": 144,
+            "share": 0.08172531
+          },
+          {
+            "label": "5~10%",
+            "count": 67,
+            "share": 0.03802497
+          },
+          {
+            "label": ">10%",
+            "count": 0,
+            "share": 0.0
+          }
+        ]
+      },
+      "3D": {
+        "horizon": "3D",
+        "members": 1762,
+        "bins": [
+          {
+            "label": "<-5%",
+            "count": 144,
+            "share": 0.08172531
+          },
+          {
+            "label": "-5~-3%",
+            "count": 169,
+            "share": 0.09591373
+          },
+          {
+            "label": "-3~-1%",
+            "count": 297,
+            "share": 0.16855846
+          },
+          {
+            "label": "-1~0%",
+            "count": 207,
+            "share": 0.11748014
+          },
+          {
+            "label": "0~1%",
+            "count": 202,
+            "share": 0.11464245
+          },
+          {
+            "label": "1~3%",
+            "count": 343,
+            "share": 0.19466515
+          },
+          {
+            "label": "3~5%",
+            "count": 199,
+            "share": 0.11293984
+          },
+          {
+            "label": "5~10%",
+            "count": 161,
+            "share": 0.09137344
+          },
+          {
+            "label": ">10%",
+            "count": 40,
+            "share": 0.02270148
+          }
+        ]
+      },
+      "5D": {
+        "horizon": "5D",
+        "members": 1757,
+        "bins": [
+          {
+            "label": "<-5%",
+            "count": 236,
+            "share": 0.13431986
+          },
+          {
+            "label": "-5~-3%",
+            "count": 189,
+            "share": 0.10756972
+          },
+          {
+            "label": "-3~-1%",
+            "count": 289,
+            "share": 0.16448492
+          },
+          {
+            "label": "-1~0%",
+            "count": 136,
+            "share": 0.07740467
+          },
+          {
+            "label": "0~1%",
+            "count": 154,
+            "share": 0.0876494
+          },
+          {
+            "label": "1~3%",
+            "count": 266,
+            "share": 0.15139442
+          },
+          {
+            "label": "3~5%",
+            "count": 181,
+            "share": 0.10301651
+          },
+          {
+            "label": "5~10%",
+            "count": 227,
+            "share": 0.1291975
+          },
+          {
+            "label": ">10%",
+            "count": 79,
+            "share": 0.04496301
+          }
+        ]
+      },
+      "10D": {
+        "horizon": "10D",
+        "members": 1752,
+        "bins": [
+          {
+            "label": "<-5%",
+            "count": 355,
+            "share": 0.20262557
+          },
+          {
+            "label": "-5~-3%",
+            "count": 175,
+            "share": 0.09988584
+          },
+          {
+            "label": "-3~-1%",
+            "count": 223,
+            "share": 0.12728311
+          },
+          {
+            "label": "-1~0%",
+            "count": 118,
+            "share": 0.0673516
+          },
+          {
+            "label": "0~1%",
+            "count": 97,
+            "share": 0.0553653
+          },
+          {
+            "label": "1~3%",
+            "count": 178,
+            "share": 0.10159817
+          },
+          {
+            "label": "3~5%",
+            "count": 166,
+            "share": 0.09474886
+          },
+          {
+            "label": "5~10%",
+            "count": 264,
+            "share": 0.15068493
+          },
+          {
+            "label": ">10%",
+            "count": 176,
+            "share": 0.10045662
+          }
+        ]
+      },
+      "20D": {
+        "horizon": "20D",
+        "members": 1743,
+        "bins": [
+          {
+            "label": "<-5%",
+            "count": 505,
+            "share": 0.28973035
+          },
+          {
+            "label": "-5~-3%",
+            "count": 142,
+            "share": 0.08146873
+          },
+          {
+            "label": "-3~-1%",
+            "count": 128,
+            "share": 0.0734366
+          },
+          {
+            "label": "-1~0%",
+            "count": 79,
+            "share": 0.04532415
+          },
+          {
+            "label": "0~1%",
+            "count": 80,
+            "share": 0.04589788
+          },
+          {
+            "label": "1~3%",
+            "count": 136,
+            "share": 0.07802639
+          },
+          {
+            "label": "3~5%",
+            "count": 110,
+            "share": 0.06310958
+          },
+          {
+            "label": "5~10%",
+            "count": 240,
+            "share": 0.13769363
+          },
+          {
+            "label": ">10%",
+            "count": 323,
+            "share": 0.18531268
+          }
+        ]
+      },
+      "60D": {
+        "horizon": "60D",
+        "members": 1703,
+        "bins": [
+          {
+            "label": "<-5%",
+            "count": 608,
+            "share": 0.35701703
+          },
+          {
+            "label": "-5~-3%",
+            "count": 104,
+            "share": 0.0610687
+          },
+          {
+            "label": "-3~-1%",
+            "count": 94,
+            "share": 0.05519671
+          },
+          {
+            "label": "-1~0%",
+            "count": 42,
+            "share": 0.02466236
+          },
+          {
+            "label": "0~1%",
+            "count": 39,
+            "share": 0.02290076
+          },
+          {
+            "label": "1~3%",
+            "count": 93,
+            "share": 0.05460951
+          },
+          {
+            "label": "3~5%",
+            "count": 79,
+            "share": 0.04638873
+          },
+          {
+            "label": "5~10%",
+            "count": 142,
+            "share": 0.08338227
+          },
+          {
+            "label": ">10%",
+            "count": 502,
+            "share": 0.29477393
+          }
+        ]
+      },
+      "120D": {
+        "horizon": "120D",
+        "members": 1636,
+        "bins": [
+          {
+            "label": "<-5%",
+            "count": 574,
+            "share": 0.35085575
+          },
+          {
+            "label": "-5~-3%",
+            "count": 66,
+            "share": 0.0403423
+          },
+          {
+            "label": "-3~-1%",
+            "count": 61,
+            "share": 0.03728606
+          },
+          {
+            "label": "-1~0%",
+            "count": 38,
+            "share": 0.02322738
+          },
+          {
+            "label": "0~1%",
+            "count": 31,
+            "share": 0.01894866
+          },
+          {
+            "label": "1~3%",
+            "count": 65,
+            "share": 0.03973105
+          },
+          {
+            "label": "3~5%",
+            "count": 51,
+            "share": 0.03117359
+          },
+          {
+            "label": "5~10%",
+            "count": 128,
+            "share": 0.07823961
+          },
+          {
+            "label": ">10%",
+            "count": 622,
+            "share": 0.3801956
+          }
+        ]
+      },
+      "250D": {
+        "horizon": "250D",
+        "members": 1503,
+        "bins": [
+          {
+            "label": "<-5%",
+            "count": 500,
+            "share": 0.332668
+          },
+          {
+            "label": "-5~-3%",
+            "count": 42,
+            "share": 0.02794411
+          },
+          {
+            "label": "-3~-1%",
+            "count": 61,
+            "share": 0.0405855
+          },
+          {
+            "label": "-1~0%",
+            "count": 21,
+            "share": 0.01397206
+          },
+          {
+            "label": "0~1%",
+            "count": 27,
+            "share": 0.01796407
+          },
+          {
+            "label": "1~3%",
+            "count": 23,
+            "share": 0.01530273
+          },
+          {
+            "label": "3~5%",
+            "count": 51,
+            "share": 0.03393214
+          },
+          {
+            "label": "5~10%",
+            "count": 105,
+            "share": 0.06986028
+          },
+          {
+            "label": ">10%",
+            "count": 673,
+            "share": 0.44777112
+          }
+        ]
+      }
+    },
+    "riskScatter": [
+      {
+        "id": "recon-2026-08-14-BK1607",
+        "date": "2026-08-14",
+        "code": "BK1607",
+        "name": "医药流通",
+        "mfe": 0.00623896,
+        "mae": -0.03772891,
+        "fiveDayReturn": null
+      },
+      {
+        "id": "recon-2026-08-14-BK1602",
+        "date": "2026-08-14",
+        "code": "BK1602",
+        "name": "诊断服务",
+        "mfe": 0.04704139,
+        "mae": -0.06941377,
+        "fiveDayReturn": null
+      },
+      {
+        "id": "recon-2026-08-14-BK1601",
+        "date": "2026-08-14",
+        "code": "BK1601",
+        "name": "医院",
+        "mfe": 0.00637957,
+        "mae": -0.06155462,
+        "fiveDayReturn": null
+      },
+      {
+        "id": "recon-2026-08-14-BK1044",
+        "date": "2026-08-14",
+        "code": "BK1044",
+        "name": "生物制品",
+        "mfe": 0.06515744,
+        "mae": -0.03911936,
+        "fiveDayReturn": null
+      },
+      {
+        "id": "recon-2026-08-14-BK1042",
+        "date": "2026-08-14",
+        "code": "BK1042",
+        "name": "医药商业",
+        "mfe": 0.00459373,
+        "mae": -0.03848729,
+        "fiveDayReturn": null
+      },
+      {
+        "id": "recon-2026-08-07-BK1617",
+        "date": "2026-08-07",
+        "code": "BK1617",
+        "name": "黄金",
+        "mfe": 0.0959481,
+        "mae": -0.07042484,
+        "fiveDayReturn": -0.03583936
+      },
+      {
+        "id": "recon-2026-08-07-BK1607",
+        "date": "2026-08-07",
+        "code": "BK1607",
+        "name": "医药流通",
+        "mfe": 0.06770198,
+        "mae": 0.0,
+        "fiveDayReturn": 0.05985066
+      },
+      {
+        "id": "recon-2026-08-07-BK1602",
+        "date": "2026-08-07",
+        "code": "BK1602",
+        "name": "诊断服务",
+        "mfe": 0.1114831,
+        "mae": -0.01213947,
+        "fiveDayReturn": 0.06849572
+      },
+      {
+        "id": "recon-2026-08-07-BK1412",
+        "date": "2026-08-07",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.0182892,
+        "mae": -0.08478697,
+        "fiveDayReturn": -0.07481164
+      },
+      {
+        "id": "recon-2026-08-07-BK1042",
+        "date": "2026-08-07",
+        "code": "BK1042",
+        "name": "医药商业",
+        "mfe": 0.07578169,
+        "mae": 0.0,
+        "fiveDayReturn": 0.06333576
+      },
+      {
+        "id": "recon-2026-07-31-BK1520",
+        "date": "2026-07-31",
+        "code": "BK1520",
+        "name": "综合乘用车",
+        "mfe": 0.00624385,
+        "mae": -0.07723624,
+        "fiveDayReturn": -0.04324955
+      },
+      {
+        "id": "recon-2026-07-31-BK1500",
+        "date": "2026-07-31",
+        "code": "BK1500",
+        "name": "医美耗材",
+        "mfe": 0.00916577,
+        "mae": -0.10902511,
+        "fiveDayReturn": -0.01370903
+      },
+      {
+        "id": "recon-2026-07-31-BK1498",
+        "date": "2026-07-31",
+        "code": "BK1498",
+        "name": "品牌化妆品",
+        "mfe": 0.02803302,
+        "mae": -0.05300986,
+        "fiveDayReturn": -0.01158239
+      },
+      {
+        "id": "recon-2026-07-31-BK1496",
+        "date": "2026-07-31",
+        "code": "BK1496",
+        "name": "洗护用品",
+        "mfe": 0.02026031,
+        "mae": -0.03359554,
+        "fiveDayReturn": -0.00973063
+      },
+      {
+        "id": "recon-2026-07-31-BK1253",
+        "date": "2026-07-31",
+        "code": "BK1253",
+        "name": "医疗美容",
+        "mfe": 0.03360063,
+        "mae": -0.06838856,
+        "fiveDayReturn": 0.02075951
+      },
+      {
+        "id": "recon-2026-07-24-BK1617",
+        "date": "2026-07-24",
+        "code": "BK1617",
+        "name": "黄金",
+        "mfe": 0.31630848,
+        "mae": -0.03110555,
+        "fiveDayReturn": 0.05705716
+      },
+      {
+        "id": "recon-2026-07-24-BK1608",
+        "date": "2026-07-24",
+        "code": "BK1608",
+        "name": "中药Ⅲ",
+        "mfe": 0.12522516,
+        "mae": -0.0009847,
+        "fiveDayReturn": 0.05229323
+      },
+      {
+        "id": "recon-2026-07-24-BK1040",
+        "date": "2026-07-24",
+        "code": "BK1040",
+        "name": "中药Ⅱ",
+        "mfe": 0.12522516,
+        "mae": -0.0009847,
+        "fiveDayReturn": 0.05229323
+      },
+      {
+        "id": "recon-2026-07-24-BK0732",
+        "date": "2026-07-24",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.31541592,
+        "mae": -0.03058178,
+        "fiveDayReturn": 0.04854674
+      },
+      {
+        "id": "recon-2026-07-17-BK1608",
+        "date": "2026-07-17",
+        "code": "BK1608",
+        "name": "中药Ⅲ",
+        "mfe": 0.08430473,
+        "mae": -0.03731533,
+        "fiveDayReturn": -0.03254002
+      },
+      {
+        "id": "recon-2026-07-17-BK1607",
+        "date": "2026-07-17",
+        "code": "BK1607",
+        "name": "医药流通",
+        "mfe": 0.13361018,
+        "mae": -0.04312359,
+        "fiveDayReturn": -0.03951678
+      },
+      {
+        "id": "recon-2026-07-17-BK1595",
+        "date": "2026-07-17",
+        "code": "BK1595",
+        "name": "原料药",
+        "mfe": 0.1196747,
+        "mae": -0.06655584,
+        "fiveDayReturn": -0.05590455
+      },
+      {
+        "id": "recon-2026-07-17-BK1042",
+        "date": "2026-07-17",
+        "code": "BK1042",
+        "name": "医药商业",
+        "mfe": 0.13400068,
+        "mae": -0.04150078,
+        "fiveDayReturn": -0.03763319
+      },
+      {
+        "id": "recon-2026-07-17-BK1040",
+        "date": "2026-07-17",
+        "code": "BK1040",
+        "name": "中药Ⅱ",
+        "mfe": 0.08430473,
+        "mae": -0.03731533,
+        "fiveDayReturn": -0.03254002
+      },
+      {
+        "id": "recon-2026-07-10-BK1594",
+        "date": "2026-07-10",
+        "code": "BK1594",
+        "name": "化学制剂",
+        "mfe": 0.08510762,
+        "mae": -0.06131298,
+        "fiveDayReturn": -0.00811079
+      },
+      {
+        "id": "recon-2026-07-10-BK1453",
+        "date": "2026-07-10",
+        "code": "BK1453",
+        "name": "彩电",
+        "mfe": 0.02598355,
+        "mae": -0.11619513,
+        "fiveDayReturn": -0.08470913
+      },
+      {
+        "id": "recon-2026-07-10-BK1337",
+        "date": "2026-07-10",
+        "code": "BK1337",
+        "name": "品牌消费电子",
+        "mfe": 0.03608553,
+        "mae": -0.09213431,
+        "fiveDayReturn": -0.03080702
+      },
+      {
+        "id": "recon-2026-07-10-BK1330",
+        "date": "2026-07-10",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.02055868,
+        "mae": -0.31762781,
+        "fiveDayReturn": -0.21773592
+      },
+      {
+        "id": "recon-2026-07-10-BK0465",
+        "date": "2026-07-10",
+        "code": "BK0465",
+        "name": "化学制药",
+        "mfe": 0.08709801,
+        "mae": -0.06214152,
+        "fiveDayReturn": -0.00412023
+      },
+      {
+        "id": "recon-2026-07-03-BK1595",
+        "date": "2026-07-03",
+        "code": "BK1595",
+        "name": "原料药",
+        "mfe": 0.05969919,
+        "mae": -0.10226779,
+        "fiveDayReturn": -0.02564864
+      },
+      {
+        "id": "recon-2026-07-03-BK1409",
+        "date": "2026-07-03",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.01247107,
+        "mae": -0.3734461,
+        "fiveDayReturn": -0.08569723
+      },
+      {
+        "id": "recon-2026-07-03-BK1330",
+        "date": "2026-07-03",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.04067557,
+        "mae": -0.34397037,
+        "fiveDayReturn": -0.02405856
+      },
+      {
+        "id": "recon-2026-07-03-BK0465",
+        "date": "2026-07-03",
+        "code": "BK0465",
+        "name": "化学制药",
+        "mfe": 0.07039131,
+        "mae": -0.07655468,
+        "fiveDayReturn": -0.01261906
+      },
+      {
+        "id": "recon-2026-07-03-BK0458",
+        "date": "2026-07-03",
+        "code": "BK0458",
+        "name": "仪器仪表",
+        "mfe": 0.00423981,
+        "mae": -0.27169094,
+        "fiveDayReturn": -0.06241249
+      },
+      {
+        "id": "recon-2026-06-26-BK1592",
+        "date": "2026-06-26",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.00273334,
+        "mae": -0.43231065,
+        "fiveDayReturn": -0.11873389
+      },
+      {
+        "id": "recon-2026-06-26-BK1412",
+        "date": "2026-06-26",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.09932521,
+        "mae": -0.1051113,
+        "fiveDayReturn": 0.0077135
+      },
+      {
+        "id": "recon-2026-06-26-BK1409",
+        "date": "2026-06-26",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.01899108,
+        "mae": -0.4434736,
+        "fiveDayReturn": -0.11853611
+      },
+      {
+        "id": "recon-2026-06-26-BK1330",
+        "date": "2026-06-26",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.11576838,
+        "mae": -0.32596045,
+        "fiveDayReturn": 0.01939763
+      },
+      {
+        "id": "recon-2026-06-26-BK0458",
+        "date": "2026-06-26",
+        "code": "BK0458",
+        "name": "仪器仪表",
+        "mfe": 0.0522112,
+        "mae": -0.24629477,
+        "fiveDayReturn": 0.03408923
+      },
+      {
+        "id": "recon-2026-06-18-BK1592",
+        "date": "2026-06-18",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.06019611,
+        "mae": -0.38120477,
+        "fiveDayReturn": -0.03893972
+      },
+      {
+        "id": "recon-2026-06-18-BK1591",
+        "date": "2026-06-18",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.00698997,
+        "mae": -0.29049711,
+        "fiveDayReturn": -0.08732079
+      },
+      {
+        "id": "recon-2026-06-18-BK1409",
+        "date": "2026-06-18",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.06080712,
+        "mae": -0.32125871,
+        "fiveDayReturn": 0.02395149
+      },
+      {
+        "id": "recon-2026-06-18-BK1330",
+        "date": "2026-06-18",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.10697641,
+        "mae": -0.23576602,
+        "fiveDayReturn": -0.0088106
+      },
+      {
+        "id": "recon-2026-06-18-BK0458",
+        "date": "2026-06-18",
+        "code": "BK0458",
+        "name": "仪器仪表",
+        "mfe": 0.01485322,
+        "mae": -0.18379122,
+        "fiveDayReturn": -0.03451207
+      },
+      {
+        "id": "recon-2026-06-12-BK1592",
+        "date": "2026-06-12",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.25400204,
+        "mae": -0.16621315,
+        "fiveDayReturn": 0.20105037
+      },
+      {
+        "id": "recon-2026-06-12-BK1591",
+        "date": "2026-06-12",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.1387517,
+        "mae": -0.087672,
+        "fiveDayReturn": 0.12236965
+      },
+      {
+        "id": "recon-2026-06-12-BK1563",
+        "date": "2026-06-12",
+        "code": "BK1563",
+        "name": "自然景区",
+        "mfe": 0.01130943,
+        "mae": -0.11215245,
+        "fiveDayReturn": -0.04970252
+      },
+      {
+        "id": "recon-2026-06-12-BK1330",
+        "date": "2026-06-12",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.27387547,
+        "mae": -0.01203665,
+        "fiveDayReturn": 0.14111334
+      },
+      {
+        "id": "recon-2026-06-12-BK0448",
+        "date": "2026-06-12",
+        "code": "BK0448",
+        "name": "通信设备",
+        "mfe": 0.10762428,
+        "mae": -0.09226463,
+        "fiveDayReturn": 0.09616963
+      },
+      {
+        "id": "recon-2026-06-05-BK1592",
+        "date": "2026-06-05",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.23040326,
+        "mae": -0.09154067,
+        "fiveDayReturn": -0.02999704
+      },
+      {
+        "id": "recon-2026-06-05-BK1591",
+        "date": "2026-06-05",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.13529852,
+        "mae": -0.04653643,
+        "fiveDayReturn": -0.01469659
+      },
+      {
+        "id": "recon-2026-06-05-BK1410",
+        "date": "2026-06-05",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.10128268,
+        "mae": -0.02843718,
+        "fiveDayReturn": -0.02454962
+      },
+      {
+        "id": "recon-2026-06-05-BK1409",
+        "date": "2026-06-05",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.28315449,
+        "mae": -0.01317971,
+        "fiveDayReturn": -0.00451672
+      },
+      {
+        "id": "recon-2026-06-05-BK0458",
+        "date": "2026-06-05",
+        "code": "BK0458",
+        "name": "仪器仪表",
+        "mfe": 0.06278704,
+        "mae": -0.0280769,
+        "fiveDayReturn": -0.01259707
+      },
+      {
+        "id": "recon-2026-05-29-BK1592",
+        "date": "2026-05-29",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.26083449,
+        "mae": -0.04103291,
+        "fiveDayReturn": 0.09354254
+      },
+      {
+        "id": "recon-2026-05-29-BK1591",
+        "date": "2026-05-29",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.12467009,
+        "mae": -0.03662431,
+        "fiveDayReturn": 0.04106296
+      },
+      {
+        "id": "recon-2026-05-29-BK1410",
+        "date": "2026-05-29",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.09094573,
+        "mae": -0.03755655,
+        "fiveDayReturn": 0.02940834
+      },
+      {
+        "id": "recon-2026-05-29-BK1409",
+        "date": "2026-05-29",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.235556,
+        "mae": -0.05430154,
+        "fiveDayReturn": 0.01786157
+      },
+      {
+        "id": "recon-2026-05-29-BK0448",
+        "date": "2026-05-29",
+        "code": "BK0448",
+        "name": "通信设备",
+        "mfe": 0.08979203,
+        "mae": -0.04506048,
+        "fiveDayReturn": 0.03828158
+      },
+      {
+        "id": "recon-2026-05-22-BK1591",
+        "date": "2026-05-22",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.09736723,
+        "mae": -0.06001154,
+        "fiveDayReturn": -0.01978807
+      },
+      {
+        "id": "recon-2026-05-22-BK1410",
+        "date": "2026-05-22",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.04166173,
+        "mae": -0.080065,
+        "fiveDayReturn": -0.03996172
+      },
+      {
+        "id": "recon-2026-05-22-BK1409",
+        "date": "2026-05-22",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.11725129,
+        "mae": -0.10438715,
+        "fiveDayReturn": -0.05656853
+      },
+      {
+        "id": "recon-2026-05-22-BK1330",
+        "date": "2026-05-22",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.05695446,
+        "mae": -0.15691418,
+        "fiveDayReturn": -0.06790853
+      },
+      {
+        "id": "recon-2026-05-22-BK0458",
+        "date": "2026-05-22",
+        "code": "BK0458",
+        "name": "仪器仪表",
+        "mfe": 0.00251356,
+        "mae": -0.09494572,
+        "fiveDayReturn": -0.07689617
+      },
+      {
+        "id": "recon-2026-05-15-BK1478",
+        "date": "2026-05-15",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.01564618,
+        "mae": -0.14937184,
+        "fiveDayReturn": -0.02322826
+      },
+      {
+        "id": "recon-2026-05-15-BK1410",
+        "date": "2026-05-15",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.04962657,
+        "mae": -0.05170328,
+        "fiveDayReturn": 0.02652953
+      },
+      {
+        "id": "recon-2026-05-15-BK1409",
+        "date": "2026-05-15",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.13902193,
+        "mae": -0.00567794,
+        "fiveDayReturn": 0.10141749
+      },
+      {
+        "id": "recon-2026-05-15-BK1330",
+        "date": "2026-05-15",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.07539621,
+        "mae": -0.1266719,
+        "fiveDayReturn": 0.03190053
+      },
+      {
+        "id": "recon-2026-05-15-BK0725",
+        "date": "2026-05-15",
+        "code": "BK0725",
+        "name": "装修装饰Ⅱ",
+        "mfe": 0.01564618,
+        "mae": -0.14937184,
+        "fiveDayReturn": -0.02322826
+      },
+      {
+        "id": "recon-2026-05-08-BK1478",
+        "date": "2026-05-08",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.01881055,
+        "mae": -0.11783585,
+        "fiveDayReturn": 0.00056461
+      },
+      {
+        "id": "recon-2026-05-08-BK1410",
+        "date": "2026-05-08",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.08917806,
+        "mae": -0.01423442,
+        "fiveDayReturn": 0.03912331
+      },
+      {
+        "id": "recon-2026-05-08-BK1409",
+        "date": "2026-05-08",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.17352299,
+        "mae": -0.00970765,
+        "fiveDayReturn": 0.03501034
+      },
+      {
+        "id": "recon-2026-05-08-BK1330",
+        "date": "2026-05-08",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.11679595,
+        "mae": -0.06338361,
+        "fiveDayReturn": 0.04857932
+      },
+      {
+        "id": "recon-2026-05-08-BK0725",
+        "date": "2026-05-08",
+        "code": "BK0725",
+        "name": "装修装饰Ⅱ",
+        "mfe": 0.01881055,
+        "mae": -0.11783585,
+        "fiveDayReturn": 0.00056461
+      },
+      {
+        "id": "recon-2026-04-30-BK1591",
+        "date": "2026-04-30",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.16066937,
+        "mae": 0.0,
+        "fiveDayReturn": 0.12772918
+      },
+      {
+        "id": "recon-2026-04-30-BK1410",
+        "date": "2026-04-30",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.1585341,
+        "mae": -0.00547647,
+        "fiveDayReturn": 0.07424902
+      },
+      {
+        "id": "recon-2026-04-30-BK1409",
+        "date": "2026-04-30",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.26533904,
+        "mae": -0.0102708,
+        "fiveDayReturn": 0.09372243
+      },
+      {
+        "id": "recon-2026-04-30-BK1330",
+        "date": "2026-04-30",
+        "code": "BK1330",
+        "name": "模拟芯片设计",
+        "mfe": 0.16127612,
+        "mae": -0.02607969,
+        "fiveDayReturn": 0.07406537
+      },
+      {
+        "id": "recon-2026-04-30-BK0458",
+        "date": "2026-04-30",
+        "code": "BK0458",
+        "name": "仪器仪表",
+        "mfe": 0.08748144,
+        "mae": -0.01940887,
+        "fiveDayReturn": 0.04162209
+      },
+      {
+        "id": "recon-2026-04-24-BK1592",
+        "date": "2026-04-24",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.18211852,
+        "mae": -0.06451591,
+        "fiveDayReturn": -0.00777054
+      },
+      {
+        "id": "recon-2026-04-24-BK1591",
+        "date": "2026-04-24",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.16702952,
+        "mae": -0.02531325,
+        "fiveDayReturn": 0.02148347
+      },
+      {
+        "id": "recon-2026-04-24-BK1453",
+        "date": "2026-04-24",
+        "code": "BK1453",
+        "name": "彩电",
+        "mfe": 0.09311209,
+        "mae": -0.00884618,
+        "fiveDayReturn": 0.01144094
+      },
+      {
+        "id": "recon-2026-04-24-BK1409",
+        "date": "2026-04-24",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.32486326,
+        "mae": -0.01533267,
+        "fiveDayReturn": 0.05016669
+      },
+      {
+        "id": "recon-2026-04-24-BK0448",
+        "date": "2026-04-24",
+        "code": "BK0448",
+        "name": "通信设备",
+        "mfe": 0.12911702,
+        "mae": -0.02503409,
+        "fiveDayReturn": 0.01726867
+      },
+      {
+        "id": "recon-2026-04-17-BK1592",
+        "date": "2026-04-17",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.20238663,
+        "mae": -0.04847649,
+        "fiveDayReturn": 0.01281215
+      },
+      {
+        "id": "recon-2026-04-17-BK1591",
+        "date": "2026-04-17",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.15543215,
+        "mae": -0.03499921,
+        "fiveDayReturn": -0.01278435
+      },
+      {
+        "id": "recon-2026-04-17-BK1453",
+        "date": "2026-04-17",
+        "code": "BK1453",
+        "name": "彩电",
+        "mfe": 0.1162723,
+        "mae": -0.00638597,
+        "fiveDayReturn": 0.03710275
+      },
+      {
+        "id": "recon-2026-04-17-BK1409",
+        "date": "2026-04-17",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.28470453,
+        "mae": -0.0081821,
+        "fiveDayReturn": 0.01513806
+      },
+      {
+        "id": "recon-2026-04-17-BK0448",
+        "date": "2026-04-17",
+        "code": "BK0448",
+        "name": "通信设备",
+        "mfe": 0.11751268,
+        "mae": -0.03505416,
+        "fiveDayReturn": -0.01151122
+      },
+      {
+        "id": "recon-2026-04-10-BK1592",
+        "date": "2026-04-10",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.24862406,
+        "mae": -0.02140719,
+        "fiveDayReturn": 0.04196928
+      },
+      {
+        "id": "recon-2026-04-10-BK1591",
+        "date": "2026-04-10",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.25120978,
+        "mae": 0.0,
+        "fiveDayReturn": 0.09378975
+      },
+      {
+        "id": "recon-2026-04-10-BK1410",
+        "date": "2026-04-10",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.14659537,
+        "mae": -0.01041718,
+        "fiveDayReturn": 0.04892659
+      },
+      {
+        "id": "recon-2026-04-10-BK1409",
+        "date": "2026-04-10",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.28919193,
+        "mae": 0.0,
+        "fiveDayReturn": 0.07567932
+      },
+      {
+        "id": "recon-2026-04-10-BK0448",
+        "date": "2026-04-10",
+        "code": "BK0448",
+        "name": "通信设备",
+        "mfe": 0.19060343,
+        "mae": -9.515e-05,
+        "fiveDayReturn": 0.07031522
+      },
+      {
+        "id": "recon-2026-04-03-BK1607",
+        "date": "2026-04-03",
+        "code": "BK1607",
+        "name": "医药流通",
+        "mfe": 0.0232473,
+        "mae": -0.06413444,
+        "fiveDayReturn": -0.02931033
+      },
+      {
+        "id": "recon-2026-04-03-BK1595",
+        "date": "2026-04-03",
+        "code": "BK1595",
+        "name": "原料药",
+        "mfe": 0.03496311,
+        "mae": -0.01311761,
+        "fiveDayReturn": 0.00860666
+      },
+      {
+        "id": "recon-2026-04-03-BK1592",
+        "date": "2026-04-03",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.20374065,
+        "mae": -0.00020846,
+        "fiveDayReturn": 0.06672679
+      },
+      {
+        "id": "recon-2026-04-03-BK1216",
+        "date": "2026-04-03",
+        "code": "BK1216",
+        "name": "医药生物",
+        "mfe": 0.02889327,
+        "mae": -0.01690483,
+        "fiveDayReturn": 0.00013947
+      },
+      {
+        "id": "recon-2026-04-03-BK1042",
+        "date": "2026-04-03",
+        "code": "BK1042",
+        "name": "医药商业",
+        "mfe": 0.02538892,
+        "mae": -0.0470827,
+        "fiveDayReturn": -0.02981177
+      },
+      {
+        "id": "recon-2026-03-27-BK1595",
+        "date": "2026-03-27",
+        "code": "BK1595",
+        "name": "原料药",
+        "mfe": 0.0634184,
+        "mae": -6.844e-05,
+        "fiveDayReturn": 0.01598688
+      },
+      {
+        "id": "recon-2026-03-27-BK1591",
+        "date": "2026-03-27",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.27840122,
+        "mae": -0.00216715,
+        "fiveDayReturn": 0.04395734
+      },
+      {
+        "id": "recon-2026-03-27-BK1543",
+        "date": "2026-03-27",
+        "code": "BK1543",
+        "name": "娱乐用品",
+        "mfe": 0.07456918,
+        "mae": -0.02515732,
+        "fiveDayReturn": -0.02471262
+      },
+      {
+        "id": "recon-2026-03-27-BK1476",
+        "date": "2026-03-27",
+        "code": "BK1476",
+        "name": "化学工程",
+        "mfe": 0.08308932,
+        "mae": -0.03341982,
+        "fiveDayReturn": -0.03159699
+      },
+      {
+        "id": "recon-2026-03-27-BK1416",
+        "date": "2026-03-27",
+        "code": "BK1416",
+        "name": "粘胶",
+        "mfe": 0.08382107,
+        "mae": -0.07732842,
+        "fiveDayReturn": -0.06241414
+      },
+      {
+        "id": "recon-2026-03-20-BK1591",
+        "date": "2026-03-20",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.24606978,
+        "mae": -0.03802078,
+        "fiveDayReturn": 0.02454838
+      },
+      {
+        "id": "recon-2026-03-20-BK1563",
+        "date": "2026-03-20",
+        "code": "BK1563",
+        "name": "自然景区",
+        "mfe": 0.04350151,
+        "mae": -0.06746714,
+        "fiveDayReturn": -0.000556
+      },
+      {
+        "id": "recon-2026-03-20-BK1543",
+        "date": "2026-03-20",
+        "code": "BK1543",
+        "name": "娱乐用品",
+        "mfe": 0.09284896,
+        "mae": -0.04202028,
+        "fiveDayReturn": 0.03408076
+      },
+      {
+        "id": "recon-2026-03-20-BK1476",
+        "date": "2026-03-20",
+        "code": "BK1476",
+        "name": "化学工程",
+        "mfe": 0.08936433,
+        "mae": -0.04036385,
+        "fiveDayReturn": 0.0162958
+      },
+      {
+        "id": "recon-2026-03-20-BK1409",
+        "date": "2026-03-20",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.24149683,
+        "mae": -0.04377837,
+        "fiveDayReturn": 0.03435747
+      },
+      {
+        "id": "recon-2026-03-13-BK1604",
+        "date": "2026-03-13",
+        "code": "BK1604",
+        "name": "医疗耗材",
+        "mfe": 0.00615903,
+        "mae": -0.10824298,
+        "fiveDayReturn": -0.05197005
+      },
+      {
+        "id": "recon-2026-03-13-BK1592",
+        "date": "2026-03-13",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.2054541,
+        "mae": -0.15253488,
+        "fiveDayReturn": -0.08924956
+      },
+      {
+        "id": "recon-2026-03-13-BK1476",
+        "date": "2026-03-13",
+        "code": "BK1476",
+        "name": "化学工程",
+        "mfe": 0.00704768,
+        "mae": -0.1261342,
+        "fiveDayReturn": -0.07506344
+      },
+      {
+        "id": "recon-2026-03-13-BK1453",
+        "date": "2026-03-13",
+        "code": "BK1453",
+        "name": "彩电",
+        "mfe": 0.00511934,
+        "mae": -0.10820175,
+        "fiveDayReturn": -0.05806027
+      },
+      {
+        "id": "recon-2026-03-13-BK1416",
+        "date": "2026-03-13",
+        "code": "BK1416",
+        "name": "粘胶",
+        "mfe": 0.05638658,
+        "mae": -0.12090907,
+        "fiveDayReturn": -0.05508214
+      },
+      {
+        "id": "recon-2026-03-06-BK1591",
+        "date": "2026-03-06",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.10152905,
+        "mae": -0.0591549,
+        "fiveDayReturn": 0.03453435
+      },
+      {
+        "id": "recon-2026-03-06-BK1476",
+        "date": "2026-03-06",
+        "code": "BK1476",
+        "name": "化学工程",
+        "mfe": 0.01916773,
+        "mae": -0.12518702,
+        "fiveDayReturn": -0.00170232
+      },
+      {
+        "id": "recon-2026-03-06-BK1410",
+        "date": "2026-03-06",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.04320124,
+        "mae": -0.1260645,
+        "fiveDayReturn": 0.01052764
+      },
+      {
+        "id": "recon-2026-03-06-BK1409",
+        "date": "2026-03-06",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.07967107,
+        "mae": -0.12140877,
+        "fiveDayReturn": 0.01534145
+      },
+      {
+        "id": "recon-2026-03-06-BK1305",
+        "date": "2026-03-06",
+        "code": "BK1305",
+        "name": "燃料电池",
+        "mfe": 0.04052919,
+        "mae": -0.31442381,
+        "fiveDayReturn": -0.01712097
+      },
+      {
+        "id": "recon-2026-02-27-BK1592",
+        "date": "2026-02-27",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.07404807,
+        "mae": -0.15605903,
+        "fiveDayReturn": -0.01253306
+      },
+      {
+        "id": "recon-2026-02-27-BK1410",
+        "date": "2026-02-27",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.0189289,
+        "mae": -0.15324731,
+        "fiveDayReturn": -0.00829686
+      },
+      {
+        "id": "recon-2026-02-27-BK1409",
+        "date": "2026-02-27",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.06040749,
+        "mae": -0.13708466,
+        "fiveDayReturn": 0.0229264
+      },
+      {
+        "id": "recon-2026-02-27-BK1360",
+        "date": "2026-02-27",
+        "code": "BK1360",
+        "name": "金融信息服务",
+        "mfe": 0.01335502,
+        "mae": -0.1652599,
+        "fiveDayReturn": -0.02213485
+      },
+      {
+        "id": "recon-2026-02-27-BK0732",
+        "date": "2026-02-27",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.08013814,
+        "mae": -0.27552029,
+        "fiveDayReturn": -0.05281858
+      },
+      {
+        "id": "recon-2026-02-13-BK1592",
+        "date": "2026-02-13",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.1090189,
+        "mae": -0.12858046,
+        "fiveDayReturn": 0.07808791
+      },
+      {
+        "id": "recon-2026-02-13-BK1539",
+        "date": "2026-02-13",
+        "code": "BK1539",
+        "name": "定制家居",
+        "mfe": 0.03109148,
+        "mae": -0.1202303,
+        "fiveDayReturn": -0.02262573
+      },
+      {
+        "id": "recon-2026-02-13-BK1453",
+        "date": "2026-02-13",
+        "code": "BK1453",
+        "name": "彩电",
+        "mfe": 0.02987423,
+        "mae": -0.09761365,
+        "fiveDayReturn": -0.02751367
+      },
+      {
+        "id": "recon-2026-02-13-BK1410",
+        "date": "2026-02-13",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.01865068,
+        "mae": -0.15347852,
+        "fiveDayReturn": 0.00018728
+      },
+      {
+        "id": "recon-2026-02-13-BK1409",
+        "date": "2026-02-13",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.16718259,
+        "mae": -0.05019555,
+        "fiveDayReturn": 0.13165717
+      },
+      {
+        "id": "recon-2026-02-06-BK1592",
+        "date": "2026-02-06",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.18297629,
+        "mae": -0.01955419,
+        "fiveDayReturn": 0.03490934
+      },
+      {
+        "id": "recon-2026-02-06-BK1543",
+        "date": "2026-02-06",
+        "code": "BK1543",
+        "name": "娱乐用品",
+        "mfe": 0.02150387,
+        "mae": -0.06565076,
+        "fiveDayReturn": -0.01932103
+      },
+      {
+        "id": "recon-2026-02-06-BK1478",
+        "date": "2026-02-06",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.02246412,
+        "mae": -0.05922556,
+        "fiveDayReturn": -0.00936908
+      },
+      {
+        "id": "recon-2026-02-06-BK1410",
+        "date": "2026-02-06",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.05473837,
+        "mae": -0.02612947,
+        "fiveDayReturn": 0.02305054
+      },
+      {
+        "id": "recon-2026-02-06-BK0732",
+        "date": "2026-02-06",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.19444544,
+        "mae": -0.0641657,
+        "fiveDayReturn": -0.04135937
+      },
+      {
+        "id": "recon-2026-01-30-BK1617",
+        "date": "2026-01-30",
+        "code": "BK1617",
+        "name": "黄金",
+        "mfe": 0.14534376,
+        "mae": -0.1228888,
+        "fiveDayReturn": -0.06611344
+      },
+      {
+        "id": "recon-2026-01-30-BK1616",
+        "date": "2026-01-30",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.04562802,
+        "mae": -0.22210733,
+        "fiveDayReturn": -0.17384627
+      },
+      {
+        "id": "recon-2026-01-30-BK1478",
+        "date": "2026-01-30",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.05027815,
+        "mae": -0.03363373,
+        "fiveDayReturn": 0.01279484
+      },
+      {
+        "id": "recon-2026-01-30-BK1412",
+        "date": "2026-01-30",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.01724252,
+        "mae": -0.12695677,
+        "fiveDayReturn": -0.06034252
+      },
+      {
+        "id": "recon-2026-01-30-BK0732",
+        "date": "2026-01-30",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.11958322,
+        "mae": -0.13665134,
+        "fiveDayReturn": -0.08370886
+      },
+      {
+        "id": "recon-2026-01-23-BK1617",
+        "date": "2026-01-23",
+        "code": "BK1617",
+        "name": "黄金",
+        "mfe": 0.34872645,
+        "mae": -0.06200984,
+        "fiveDayReturn": 0.20159549
+      },
+      {
+        "id": "recon-2026-01-23-BK1616",
+        "date": "2026-01-23",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.23268403,
+        "mae": -0.26465869,
+        "fiveDayReturn": 0.05022587
+      },
+      {
+        "id": "recon-2026-01-23-BK1453",
+        "date": "2026-01-23",
+        "code": "BK1453",
+        "name": "彩电",
+        "mfe": 0.01786754,
+        "mae": -0.09137355,
+        "fiveDayReturn": -0.04895962
+      },
+      {
+        "id": "recon-2026-01-23-BK1412",
+        "date": "2026-01-23",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.09920401,
+        "mae": -0.10396912,
+        "fiveDayReturn": 0.02222017
+      },
+      {
+        "id": "recon-2026-01-23-BK0732",
+        "date": "2026-01-23",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.33673308,
+        "mae": -0.08354541,
+        "fiveDayReturn": 0.19147934
+      },
+      {
+        "id": "recon-2026-01-16-BK1616",
+        "date": "2026-01-16",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.68390993,
+        "mae": -0.05182237,
+        "fiveDayReturn": 0.26269238
+      },
+      {
+        "id": "recon-2026-01-16-BK1602",
+        "date": "2026-01-16",
+        "code": "BK1602",
+        "name": "诊断服务",
+        "mfe": 0.03772224,
+        "mae": -0.07736496,
+        "fiveDayReturn": 0.02290572
+      },
+      {
+        "id": "recon-2026-01-16-BK1546",
+        "date": "2026-01-16",
+        "code": "BK1546",
+        "name": "电商服务",
+        "mfe": 0.07367293,
+        "mae": -0.02366866,
+        "fiveDayReturn": 0.04005466
+      },
+      {
+        "id": "recon-2026-01-16-BK1453",
+        "date": "2026-01-16",
+        "code": "BK1453",
+        "name": "彩电",
+        "mfe": 0.1129795,
+        "mae": -0.00867195,
+        "fiveDayReturn": 0.08601029
+      },
+      {
+        "id": "recon-2026-01-16-BK1360",
+        "date": "2026-01-16",
+        "code": "BK1360",
+        "name": "金融信息服务",
+        "mfe": 0.03459129,
+        "mae": -0.02636657,
+        "fiveDayReturn": 0.0210157
+      },
+      {
+        "id": "recon-2026-01-09-BK1616",
+        "date": "2026-01-09",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 1.03552855,
+        "mae": -0.02621776,
+        "fiveDayReturn": 0.18371969
+      },
+      {
+        "id": "recon-2026-01-09-BK1412",
+        "date": "2026-01-09",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.16373047,
+        "mae": -0.05205623,
+        "fiveDayReturn": 0.00083907
+      },
+      {
+        "id": "recon-2026-01-09-BK1410",
+        "date": "2026-01-09",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.1067247,
+        "mae": -0.00563215,
+        "fiveDayReturn": 0.03504798
+      },
+      {
+        "id": "recon-2026-01-09-BK1409",
+        "date": "2026-01-09",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.12251631,
+        "mae": -0.02551033,
+        "fiveDayReturn": 0.0451876
+      },
+      {
+        "id": "recon-2026-01-09-BK0448",
+        "date": "2026-01-09",
+        "code": "BK0448",
+        "name": "通信设备",
+        "mfe": 0.0434099,
+        "mae": -0.07491164,
+        "fiveDayReturn": -0.01398093
+      },
+      {
+        "id": "recon-2025-12-31-BK1616",
+        "date": "2025-12-31",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 1.38507627,
+        "mae": -0.00738052,
+        "fiveDayReturn": 0.10235172
+      },
+      {
+        "id": "recon-2025-12-31-BK1412",
+        "date": "2025-12-31",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.26923176,
+        "mae": -0.00366424,
+        "fiveDayReturn": 0.09890146
+      },
+      {
+        "id": "recon-2025-12-31-BK1410",
+        "date": "2025-12-31",
+        "code": "BK1410",
+        "name": "其他自动化设备",
+        "mfe": 0.16957681,
+        "mae": 0.0,
+        "fiveDayReturn": 0.06460111
+      },
+      {
+        "id": "recon-2025-12-31-BK1406",
+        "date": "2025-12-31",
+        "code": "BK1406",
+        "name": "印刷包装机械",
+        "mfe": 0.11701451,
+        "mae": -0.00557794,
+        "fiveDayReturn": 0.05731763
+      },
+      {
+        "id": "recon-2025-12-31-BK0448",
+        "date": "2025-12-31",
+        "code": "BK0448",
+        "name": "通信设备",
+        "mfe": 0.14029643,
+        "mae": -0.01210416,
+        "fiveDayReturn": 0.07924974
+      },
+      {
+        "id": "recon-2025-12-26-BK1617",
+        "date": "2025-12-26",
+        "code": "BK1617",
+        "name": "黄金",
+        "mfe": 0.5963914,
+        "mae": -0.05332752,
+        "fiveDayReturn": 0.00974972
+      },
+      {
+        "id": "recon-2025-12-26-BK1616",
+        "date": "2025-12-26",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 1.13953625,
+        "mae": -0.05570658,
+        "fiveDayReturn": 0.10577222
+      },
+      {
+        "id": "recon-2025-12-26-BK1592",
+        "date": "2025-12-26",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.10154268,
+        "mae": -0.02238625,
+        "fiveDayReturn": -0.00555802
+      },
+      {
+        "id": "recon-2025-12-26-BK1412",
+        "date": "2025-12-26",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.23639618,
+        "mae": -0.03211428,
+        "fiveDayReturn": 0.01159623
+      },
+      {
+        "id": "recon-2025-12-26-BK0732",
+        "date": "2025-12-26",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.68137515,
+        "mae": -0.05633531,
+        "fiveDayReturn": 0.01976855
+      },
+      {
+        "id": "recon-2025-12-19-BK1607",
+        "date": "2025-12-19",
+        "code": "BK1607",
+        "name": "医药流通",
+        "mfe": 0.07807529,
+        "mae": -0.0419323,
+        "fiveDayReturn": -0.00829403
+      },
+      {
+        "id": "recon-2025-12-19-BK1592",
+        "date": "2025-12-19",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.11599604,
+        "mae": -0.00955896,
+        "fiveDayReturn": 0.01862955
+      },
+      {
+        "id": "recon-2025-12-19-BK1539",
+        "date": "2025-12-19",
+        "code": "BK1539",
+        "name": "定制家居",
+        "mfe": 0.04071174,
+        "mae": -0.01164715,
+        "fiveDayReturn": 0.01285879
+      },
+      {
+        "id": "recon-2025-12-19-BK1412",
+        "date": "2025-12-19",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.28803893,
+        "mae": -0.03349361,
+        "fiveDayReturn": 0.06985613
+      },
+      {
+        "id": "recon-2025-12-19-BK1042",
+        "date": "2025-12-19",
+        "code": "BK1042",
+        "name": "医药商业",
+        "mfe": 0.06943466,
+        "mae": -0.05128931,
+        "fiveDayReturn": -0.01190549
+      },
+      {
+        "id": "recon-2025-12-12-BK1616",
+        "date": "2025-12-12",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.41297437,
+        "mae": -0.03774412,
+        "fiveDayReturn": 0.02090596
+      },
+      {
+        "id": "recon-2025-12-12-BK1592",
+        "date": "2025-12-12",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.18877666,
+        "mae": -0.05039699,
+        "fiveDayReturn": 0.04561856
+      },
+      {
+        "id": "recon-2025-12-12-BK1591",
+        "date": "2025-12-12",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.1604006,
+        "mae": -0.03095201,
+        "fiveDayReturn": 0.02346544
+      },
+      {
+        "id": "recon-2025-12-12-BK1215",
+        "date": "2025-12-12",
+        "code": "BK1215",
+        "name": "通信",
+        "mfe": 0.17261861,
+        "mae": -0.03055073,
+        "fiveDayReturn": 0.0067595
+      },
+      {
+        "id": "recon-2025-12-12-BK0448",
+        "date": "2025-12-12",
+        "code": "BK0448",
+        "name": "通信设备",
+        "mfe": 0.24684541,
+        "mae": -0.0319172,
+        "fiveDayReturn": 0.01505605
+      },
+      {
+        "id": "recon-2025-12-05-BK1616",
+        "date": "2025-12-05",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.21802766,
+        "mae": -0.04152908,
+        "fiveDayReturn": 0.02906049
+      },
+      {
+        "id": "recon-2025-12-05-BK1607",
+        "date": "2025-12-05",
+        "code": "BK1607",
+        "name": "医药流通",
+        "mfe": 0.0,
+        "mae": -0.07511067,
+        "fiveDayReturn": -0.06580568
+      },
+      {
+        "id": "recon-2025-12-05-BK1543",
+        "date": "2025-12-05",
+        "code": "BK1543",
+        "name": "娱乐用品",
+        "mfe": 0.02852336,
+        "mae": -0.07513512,
+        "fiveDayReturn": -0.0317432
+      },
+      {
+        "id": "recon-2025-12-05-BK1539",
+        "date": "2025-12-05",
+        "code": "BK1539",
+        "name": "定制家居",
+        "mfe": 0.04936935,
+        "mae": -0.02751287,
+        "fiveDayReturn": -0.02020262
+      },
+      {
+        "id": "recon-2025-12-05-BK1042",
+        "date": "2025-12-05",
+        "code": "BK1042",
+        "name": "医药商业",
+        "mfe": 0.02133845,
+        "mae": -0.07337744,
+        "fiveDayReturn": -0.06359121
+      },
+      {
+        "id": "recon-2025-11-28-BK1546",
+        "date": "2025-11-28",
+        "code": "BK1546",
+        "name": "电商服务",
+        "mfe": 0.0,
+        "mae": -0.0939517,
+        "fiveDayReturn": -0.06548958
+      },
+      {
+        "id": "recon-2025-11-28-BK1543",
+        "date": "2025-11-28",
+        "code": "BK1543",
+        "name": "娱乐用品",
+        "mfe": 0.05821117,
+        "mae": -0.04843935,
+        "fiveDayReturn": 0.02536094
+      },
+      {
+        "id": "recon-2025-11-28-BK1539",
+        "date": "2025-11-28",
+        "code": "BK1539",
+        "name": "定制家居",
+        "mfe": 0.07866502,
+        "mae": -0.01426403,
+        "fiveDayReturn": 0.02234116
+      },
+      {
+        "id": "recon-2025-11-28-BK1478",
+        "date": "2025-11-28",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.03259905,
+        "mae": -0.05817638,
+        "fiveDayReturn": -0.00775685
+      },
+      {
+        "id": "recon-2025-11-28-BK1042",
+        "date": "2025-11-28",
+        "code": "BK1042",
+        "name": "医药商业",
+        "mfe": 0.09730312,
+        "mae": -0.00445752,
+        "fiveDayReturn": 0.06181698
+      },
+      {
+        "id": "recon-2025-11-21-BK1546",
+        "date": "2025-11-21",
+        "code": "BK1546",
+        "name": "电商服务",
+        "mfe": 0.10133515,
+        "mae": -0.04778024,
+        "fiveDayReturn": 0.05562888
+      },
+      {
+        "id": "recon-2025-11-21-BK1539",
+        "date": "2025-11-21",
+        "code": "BK1539",
+        "name": "定制家居",
+        "mfe": 0.10881357,
+        "mae": -0.01522929,
+        "fiveDayReturn": 0.03562804
+      },
+      {
+        "id": "recon-2025-11-21-BK1520",
+        "date": "2025-11-21",
+        "code": "BK1520",
+        "name": "综合乘用车",
+        "mfe": 0.05249633,
+        "mae": -0.01942612,
+        "fiveDayReturn": 0.02381003
+      },
+      {
+        "id": "recon-2025-11-21-BK1305",
+        "date": "2025-11-21",
+        "code": "BK1305",
+        "name": "燃料电池",
+        "mfe": 0.11809802,
+        "mae": -0.10169298,
+        "fiveDayReturn": 0.09836178
+      },
+      {
+        "id": "recon-2025-11-21-BK1268",
+        "date": "2025-11-21",
+        "code": "BK1268",
+        "name": "互联网电商",
+        "mfe": 0.07444241,
+        "mae": -0.04716978,
+        "fiveDayReturn": 0.04666975
+      },
+      {
+        "id": "recon-2025-11-14-BK1607",
+        "date": "2025-11-14",
+        "code": "BK1607",
+        "name": "医药流通",
+        "mfe": 0.0193978,
+        "mae": -0.0990817,
+        "fiveDayReturn": -0.0990817
+      },
+      {
+        "id": "recon-2025-11-14-BK1539",
+        "date": "2025-11-14",
+        "code": "BK1539",
+        "name": "定制家居",
+        "mfe": 0.10105391,
+        "mae": -0.00815212,
+        "fiveDayReturn": 0.00232295
+      },
+      {
+        "id": "recon-2025-11-14-BK1412",
+        "date": "2025-11-14",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.00997147,
+        "mae": -0.12063798,
+        "fiveDayReturn": -0.06978829
+      },
+      {
+        "id": "recon-2025-11-14-BK1305",
+        "date": "2025-11-14",
+        "code": "BK1305",
+        "name": "燃料电池",
+        "mfe": 0.08151248,
+        "mae": -0.16126054,
+        "fiveDayReturn": -0.10650171
+      },
+      {
+        "id": "recon-2025-11-14-BK1042",
+        "date": "2025-11-14",
+        "code": "BK1042",
+        "name": "医药商业",
+        "mfe": 0.00235307,
+        "mae": -0.10682158,
+        "fiveDayReturn": -0.10655927
+      },
+      {
+        "id": "recon-2025-11-07-BK1520",
+        "date": "2025-11-07",
+        "code": "BK1520",
+        "name": "综合乘用车",
+        "mfe": 0.01308507,
+        "mae": -0.06310675,
+        "fiveDayReturn": -0.0002495
+      },
+      {
+        "id": "recon-2025-11-07-BK1478",
+        "date": "2025-11-07",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.03911341,
+        "mae": -0.04585754,
+        "fiveDayReturn": 0.02846678
+      },
+      {
+        "id": "recon-2025-11-07-BK1474",
+        "date": "2025-11-07",
+        "code": "BK1474",
+        "name": "钢结构",
+        "mfe": 0.03714186,
+        "mae": -0.07080615,
+        "fiveDayReturn": 0.02657567
+      },
+      {
+        "id": "recon-2025-11-07-BK1406",
+        "date": "2025-11-07",
+        "code": "BK1406",
+        "name": "印刷包装机械",
+        "mfe": 0.03503796,
+        "mae": -0.05940084,
+        "fiveDayReturn": 0.02245372
+      },
+      {
+        "id": "recon-2025-11-07-BK0725",
+        "date": "2025-11-07",
+        "code": "BK0725",
+        "name": "装修装饰Ⅱ",
+        "mfe": 0.03911341,
+        "mae": -0.04585754,
+        "fiveDayReturn": 0.02846678
+      },
+      {
+        "id": "recon-2025-10-31-BK1539",
+        "date": "2025-10-31",
+        "code": "BK1539",
+        "name": "定制家居",
+        "mfe": 0.09351327,
+        "mae": -0.01088691,
+        "fiveDayReturn": 0.0032161
+      },
+      {
+        "id": "recon-2025-10-31-BK1478",
+        "date": "2025-10-31",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.07107802,
+        "mae": -0.01650676,
+        "fiveDayReturn": 0.02630928
+      },
+      {
+        "id": "recon-2025-10-31-BK1474",
+        "date": "2025-10-31",
+        "code": "BK1474",
+        "name": "钢结构",
+        "mfe": 0.06058817,
+        "mae": -0.04814495,
+        "fiveDayReturn": 0.01992417
+      },
+      {
+        "id": "recon-2025-10-31-BK1305",
+        "date": "2025-10-31",
+        "code": "BK1305",
+        "name": "燃料电池",
+        "mfe": 0.20033701,
+        "mae": -0.03472538,
+        "fiveDayReturn": 0.04408416
+      },
+      {
+        "id": "recon-2025-10-31-BK0725",
+        "date": "2025-10-31",
+        "code": "BK0725",
+        "name": "装修装饰Ⅱ",
+        "mfe": 0.07107802,
+        "mae": -0.01650676,
+        "fiveDayReturn": 0.02630928
+      },
+      {
+        "id": "recon-2025-10-24-BK1478",
+        "date": "2025-10-24",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.09211941,
+        "mae": -0.00833588,
+        "fiveDayReturn": 0.01142865
+      },
+      {
+        "id": "recon-2025-10-24-BK1474",
+        "date": "2025-10-24",
+        "code": "BK1474",
+        "name": "钢结构",
+        "mfe": 0.06258634,
+        "mae": -0.04635164,
+        "fiveDayReturn": -0.00049579
+      },
+      {
+        "id": "recon-2025-10-24-BK1406",
+        "date": "2025-10-24",
+        "code": "BK1406",
+        "name": "印刷包装机械",
+        "mfe": 0.01922114,
+        "mae": -0.0709131,
+        "fiveDayReturn": -0.00976122
+      },
+      {
+        "id": "recon-2025-10-24-BK1035",
+        "date": "2025-10-24",
+        "code": "BK1035",
+        "name": "美容护理",
+        "mfe": 0.0300022,
+        "mae": -0.03977356,
+        "fiveDayReturn": -0.02325859
+      },
+      {
+        "id": "recon-2025-10-24-BK0725",
+        "date": "2025-10-24",
+        "code": "BK0725",
+        "name": "装修装饰Ⅱ",
+        "mfe": 0.09211941,
+        "mae": -0.00833588,
+        "fiveDayReturn": 0.01142865
+      },
+      {
+        "id": "recon-2025-10-17-BK1617",
+        "date": "2025-10-17",
+        "code": "BK1617",
+        "name": "黄金",
+        "mfe": 0.01036814,
+        "mae": -0.11688487,
+        "fiveDayReturn": -0.06499417
+      },
+      {
+        "id": "recon-2025-10-17-BK1616",
+        "date": "2025-10-17",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.01363954,
+        "mae": -0.14603927,
+        "fiveDayReturn": -0.07535491
+      },
+      {
+        "id": "recon-2025-10-17-BK1478",
+        "date": "2025-10-17",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.16374551,
+        "mae": -0.00217135,
+        "fiveDayReturn": 0.06399103
+      },
+      {
+        "id": "recon-2025-10-17-BK0732",
+        "date": "2025-10-17",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.01088389,
+        "mae": -0.12222411,
+        "fiveDayReturn": -0.06965192
+      },
+      {
+        "id": "recon-2025-10-17-BK0725",
+        "date": "2025-10-17",
+        "code": "BK0725",
+        "name": "装修装饰Ⅱ",
+        "mfe": 0.16374551,
+        "mae": -0.00217135,
+        "fiveDayReturn": 0.06399103
+      },
+      {
+        "id": "recon-2025-10-10-BK1617",
+        "date": "2025-10-10",
+        "code": "BK1617",
+        "name": "黄金",
+        "mfe": 0.10786484,
+        "mae": -0.13946178,
+        "fiveDayReturn": 0.02899526
+      },
+      {
+        "id": "recon-2025-10-10-BK1616",
+        "date": "2025-10-10",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.1174655,
+        "mae": -0.19697679,
+        "fiveDayReturn": 0.00132483
+      },
+      {
+        "id": "recon-2025-10-10-BK1412",
+        "date": "2025-10-10",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.03375268,
+        "mae": -0.09223429,
+        "fiveDayReturn": -0.05885327
+      },
+      {
+        "id": "recon-2025-10-10-BK1305",
+        "date": "2025-10-10",
+        "code": "BK1305",
+        "name": "燃料电池",
+        "mfe": 0.15050617,
+        "mae": -0.10312198,
+        "fiveDayReturn": -0.06956604
+      },
+      {
+        "id": "recon-2025-10-10-BK0732",
+        "date": "2025-10-10",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.11188042,
+        "mae": -0.1403236,
+        "fiveDayReturn": 0.03885328
+      },
+      {
+        "id": "recon-2025-09-30-BK1616",
+        "date": "2025-09-30",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.10661549,
+        "mae": -0.20477373,
+        "fiveDayReturn": -0.00219616
+      },
+      {
+        "id": "recon-2025-09-30-BK1478",
+        "date": "2025-09-30",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.15250216,
+        "mae": -0.02498499,
+        "fiveDayReturn": 0.0383855
+      },
+      {
+        "id": "recon-2025-09-30-BK1305",
+        "date": "2025-09-30",
+        "code": "BK1305",
+        "name": "燃料电池",
+        "mfe": 0.08005728,
+        "mae": -0.14959837,
+        "fiveDayReturn": -0.04461549
+      },
+      {
+        "id": "recon-2025-09-30-BK1296",
+        "date": "2025-09-30",
+        "code": "BK1296",
+        "name": "视频媒体",
+        "mfe": 0.00981006,
+        "mae": -0.18695597,
+        "fiveDayReturn": -0.12637052
+      },
+      {
+        "id": "recon-2025-09-30-BK0725",
+        "date": "2025-09-30",
+        "code": "BK0725",
+        "name": "装修装饰Ⅱ",
+        "mfe": 0.15250216,
+        "mae": -0.02498499,
+        "fiveDayReturn": 0.0383855
+      },
+      {
+        "id": "recon-2025-09-26-BK1616",
+        "date": "2025-09-26",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.23189616,
+        "mae": -0.09205615,
+        "fiveDayReturn": 0.17037731
+      },
+      {
+        "id": "recon-2025-09-26-BK1478",
+        "date": "2025-09-26",
+        "code": "BK1478",
+        "name": "装修装饰Ⅲ",
+        "mfe": 0.15320584,
+        "mae": -0.01775219,
+        "fiveDayReturn": 0.03620551
+      },
+      {
+        "id": "recon-2025-09-26-BK1453",
+        "date": "2025-09-26",
+        "code": "BK1453",
+        "name": "彩电",
+        "mfe": 0.02569534,
+        "mae": -0.03374518,
+        "fiveDayReturn": 0.01063541
+      },
+      {
+        "id": "recon-2025-09-26-BK1305",
+        "date": "2025-09-26",
+        "code": "BK1305",
+        "name": "燃料电池",
+        "mfe": 0.19707866,
+        "mae": -0.05745958,
+        "fiveDayReturn": 0.07127269
+      },
+      {
+        "id": "recon-2025-09-26-BK1296",
+        "date": "2025-09-26",
+        "code": "BK1296",
+        "name": "视频媒体",
+        "mfe": 0.02571552,
+        "mae": -0.19485449,
+        "fiveDayReturn": -0.09256987
+      },
+      {
+        "id": "recon-2025-09-19-BK1563",
+        "date": "2025-09-19",
+        "code": "BK1563",
+        "name": "自然景区",
+        "mfe": 0.0,
+        "mae": -0.15692521,
+        "fiveDayReturn": -0.10551147
+      },
+      {
+        "id": "recon-2025-09-19-BK1561",
+        "date": "2025-09-19",
+        "code": "BK1561",
+        "name": "旅游综合",
+        "mfe": 0.0,
+        "mae": -0.15099168,
+        "fiveDayReturn": -0.08592925
+      },
+      {
+        "id": "recon-2025-09-19-BK1409",
+        "date": "2025-09-19",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.04327742,
+        "mae": -0.12818273,
+        "fiveDayReturn": -0.02684371
+      },
+      {
+        "id": "recon-2025-09-19-BK1296",
+        "date": "2025-09-19",
+        "code": "BK1296",
+        "name": "视频媒体",
+        "mfe": 0.11127989,
+        "mae": -0.13604094,
+        "fiveDayReturn": 0.08162714
+      },
+      {
+        "id": "recon-2025-09-19-BK1272",
+        "date": "2025-09-19",
+        "code": "BK1272",
+        "name": "旅游及景区",
+        "mfe": 0.00128051,
+        "mae": -0.159065,
+        "fiveDayReturn": -0.10335648
+      },
+      {
+        "id": "recon-2025-09-12-BK1617",
+        "date": "2025-09-12",
+        "code": "BK1617",
+        "name": "黄金",
+        "mfe": 0.21116933,
+        "mae": -0.06791435,
+        "fiveDayReturn": -0.05428722
+      },
+      {
+        "id": "recon-2025-09-12-BK1616",
+        "date": "2025-09-12",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.39636097,
+        "mae": -0.07161962,
+        "fiveDayReturn": -0.04346449
+      },
+      {
+        "id": "recon-2025-09-12-BK1412",
+        "date": "2025-09-12",
+        "code": "BK1412",
+        "name": "氨纶",
+        "mfe": 0.11376536,
+        "mae": -0.02161514,
+        "fiveDayReturn": 0.0159255
+      },
+      {
+        "id": "recon-2025-09-12-BK1409",
+        "date": "2025-09-12",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.07211392,
+        "mae": -0.10408544,
+        "fiveDayReturn": 0.02833598
+      },
+      {
+        "id": "recon-2025-09-12-BK0732",
+        "date": "2025-09-12",
+        "code": "BK0732",
+        "name": "贵金属",
+        "mfe": 0.21497115,
+        "mae": -0.06874866,
+        "fiveDayReturn": -0.05441868
+      },
+      {
+        "id": "recon-2025-09-05-BK1616",
+        "date": "2025-09-05",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.43556073,
+        "mae": -0.03395255,
+        "fiveDayReturn": 0.08733724
+      },
+      {
+        "id": "recon-2025-09-05-BK1563",
+        "date": "2025-09-05",
+        "code": "BK1563",
+        "name": "自然景区",
+        "mfe": 0.0652235,
+        "mae": -0.12144339,
+        "fiveDayReturn": -0.00444699
+      },
+      {
+        "id": "recon-2025-09-05-BK1561",
+        "date": "2025-09-05",
+        "code": "BK1561",
+        "name": "旅游综合",
+        "mfe": 0.06040057,
+        "mae": -0.12704142,
+        "fiveDayReturn": 0.01242684
+      },
+      {
+        "id": "recon-2025-09-05-BK1409",
+        "date": "2025-09-05",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.12247095,
+        "mae": -0.03162524,
+        "fiveDayReturn": 0.0480985
+      },
+      {
+        "id": "recon-2025-09-05-BK1272",
+        "date": "2025-09-05",
+        "code": "BK1272",
+        "name": "旅游及景区",
+        "mfe": 0.07646352,
+        "mae": -0.11158956,
+        "fiveDayReturn": 5.213e-05
+      },
+      {
+        "id": "recon-2025-08-29-BK1616",
+        "date": "2025-08-29",
+        "code": "BK1616",
+        "name": "白银",
+        "mfe": 0.24991376,
+        "mae": -0.03512801,
+        "fiveDayReturn": 0.03302107
+      },
+      {
+        "id": "recon-2025-08-29-BK1592",
+        "date": "2025-08-29",
+        "code": "BK1592",
+        "name": "通信线缆及配套",
+        "mfe": 0.0619101,
+        "mae": -0.11166219,
+        "fiveDayReturn": -0.06158988
+      },
+      {
+        "id": "recon-2025-08-29-BK1591",
+        "date": "2025-08-29",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.03815571,
+        "mae": -0.11417391,
+        "fiveDayReturn": -0.0592084
+      },
+      {
+        "id": "recon-2025-08-29-BK1409",
+        "date": "2025-08-29",
+        "code": "BK1409",
+        "name": "激光设备",
+        "mfe": 0.11607636,
+        "mae": -0.09472427,
+        "fiveDayReturn": -0.01770812
+      },
+      {
+        "id": "recon-2025-08-29-BK1215",
+        "date": "2025-08-29",
+        "code": "BK1215",
+        "name": "通信",
+        "mfe": 0.01527082,
+        "mae": -0.09842143,
+        "fiveDayReturn": -0.05638835
+      },
+      {
+        "id": "recon-2025-08-22-BK1591",
+        "date": "2025-08-22",
+        "code": "BK1591",
+        "name": "通信网络设备及器件",
+        "mfe": 0.09784503,
+        "mae": -0.05689435,
+        "fiveDayReturn": 0.05737762
+      }
+    ],
+    "pathClusters": {
+      "methodZh": "透明规则分型；历史重建和真实冻结使用相同路径定义，但不混合统计。",
+      "matureSamples": 1757,
+      "clusters": [
+        {
+          "name": "横盘蓄势型",
+          "sampleCount": 550,
+          "share": 0.31303358,
+          "medianFiveDayReturn": -0.00080467
+        },
+        {
+          "name": "其他演化型",
+          "sampleCount": 452,
+          "share": 0.25725669,
+          "medianFiveDayReturn": 0.02821607
+        },
+        {
+          "name": "失败下跌型",
+          "sampleCount": 425,
+          "share": 0.24188958,
+          "medianFiveDayReturn": -0.05389091
+        },
+        {
+          "name": "快速启动型",
+          "sampleCount": 220,
+          "share": 0.12521343,
+          "medianFiveDayReturn": 0.0552246
+        },
+        {
+          "name": "回踩再涨型",
+          "sampleCount": 110,
+          "share": 0.06260672,
+          "medianFiveDayReturn": 0.05302664
+        }
+      ]
+    },
+    "successFailure": {
+      "definitionZh": "历史重建成功：5日收益≥+3%；失败：5日收益≤-3%。",
+      "matureFiveDaySamples": 1757,
+      "success": {
+        "sampleCount": 487,
+        "averageScore": 75.99673039,
+        "averageAccumulation": null,
+        "highChaseRatio": 0.31622177,
+        "medianMAE": -0.01941531
+      },
+      "failure": {
+        "sampleCount": 425,
+        "averageScore": 77.42044141,
+        "averageAccumulation": null,
+        "highChaseRatio": 0.4,
+        "medianMAE": -0.11215245
+      },
+      "topExamples": [
+        {
+          "date": "2026-01-16",
+          "code": "BK1616",
+          "name": "白银",
+          "sector": "行业板块",
+          "regime": "进攻",
+          "fiveDayReturn": 0.26269238,
+          "fiveDayAlpha": 0.26644011,
+          "mfe": 0.68390993,
+          "mae": -0.05182237
+        },
+        {
+          "date": "2022-01-07",
+          "code": "BK1603",
+          "name": "体外诊断",
+          "sector": "行业板块",
+          "regime": "防御",
+          "fiveDayReturn": 0.23686653,
+          "fiveDayAlpha": 0.25463376,
+          "mfe": 0.25104387,
+          "mae": -0.15239121
+        },
+        {
+          "date": "2021-04-23",
+          "code": "BK1253",
+          "name": "医疗美容",
+          "sector": "行业板块",
+          "regime": "中性",
+          "fiveDayReturn": 0.22288958,
+          "fiveDayAlpha": 0.22930855,
+          "mfe": 0.44544049,
+          "mae": 0.0
+        },
+        {
+          "date": "2020-12-31",
+          "code": "BK1412",
+          "name": "氨纶",
+          "sector": "行业板块",
+          "regime": "进攻",
+          "fiveDayReturn": 0.21950845,
+          "fiveDayAlpha": 0.16531627,
+          "mfe": 0.45268045,
+          "mae": -0.04097749
+        },
+        {
+          "date": "2025-02-07",
+          "code": "BK1602",
+          "name": "诊断服务",
+          "sector": "行业板块",
+          "regime": "中性",
+          "fiveDayReturn": 0.20590802,
+          "fiveDayAlpha": 0.19541317,
+          "mfe": 0.41685166,
+          "mae": 0.0
+        }
+      ],
+      "bottomExamples": [
+        {
+          "date": "2026-07-10",
+          "code": "BK1330",
+          "name": "模拟芯片设计",
+          "sector": "行业板块",
+          "regime": "中性",
+          "fiveDayReturn": -0.21773592,
+          "fiveDayAlpha": -0.17214689,
+          "mfe": 0.02055868,
+          "mae": -0.31762781
+        },
+        {
+          "date": "2022-01-14",
+          "code": "BK1603",
+          "name": "体外诊断",
+          "sector": "行业板块",
+          "regime": "防御",
+          "fiveDayReturn": -0.23424535,
+          "fiveDayAlpha": -0.24493526,
+          "mfe": 0.0,
+          "mae": -0.32497187
+        },
+        {
+          "date": "2021-02-10",
+          "code": "BK1500",
+          "name": "医美耗材",
+          "sector": "行业板块",
+          "regime": "进攻",
+          "fiveDayReturn": -0.23438505,
+          "fiveDayAlpha": -0.15257244,
+          "mfe": 0.0566419,
+          "mae": -0.41850182
+        },
+        {
+          "date": "2024-09-30",
+          "code": "BK1500",
+          "name": "医美耗材",
+          "sector": "行业板块",
+          "regime": "中性",
+          "fiveDayReturn": -0.24055553,
+          "fiveDayAlpha": -0.13067029,
+          "mfe": 0.0,
+          "mae": -0.27038979
+        },
+        {
+          "date": "2024-09-30",
+          "code": "BK1296",
+          "name": "视频媒体",
+          "sector": "行业板块",
+          "regime": "中性",
+          "fiveDayReturn": -0.24271367,
+          "fiveDayAlpha": -0.13282842,
+          "mfe": 0.0,
+          "mae": -0.27661769
+        }
+      ]
+    },
+    "conditions": {
+      "byRegime": [
+        {
+          "name": "进攻",
+          "sampleCount": 295,
+          "confidenceZh": "中高",
+          "fiveDayMedianReturn": 0.0017671,
+          "fiveDayMedianAlpha": 0.00097038,
+          "fiveDayHitRate": 0.5220339,
+          "fiveDayMembers": 295
+        },
+        {
+          "name": "中性",
+          "sampleCount": 968,
+          "confidenceZh": "高",
+          "fiveDayMedianReturn": 0.0041895,
+          "fiveDayMedianAlpha": 0.00082679,
+          "fiveDayHitRate": 0.53271028,
+          "fiveDayMembers": 963
+        },
+        {
+          "name": "防御",
+          "sampleCount": 499,
+          "confidenceZh": "中高",
+          "fiveDayMedianReturn": -0.00235277,
+          "fiveDayMedianAlpha": -0.00200478,
+          "fiveDayHitRate": 0.47895792,
+          "fiveDayMembers": 499
+        }
+      ],
+      "byPool": [
+        {
+          "name": "历史重建Top5",
+          "sampleCount": 1762,
+          "confidenceZh": "高",
+          "fiveDayMedianReturn": 0.00132483,
+          "fiveDayMedianAlpha": 6.08e-06,
+          "fiveDayHitRate": 0.51565168,
+          "fiveDayMembers": 1757
+        }
+      ],
+      "byMainlineState": [
+        {
+          "name": "正在形成",
+          "sampleCount": 924,
+          "confidenceZh": "高",
+          "fiveDayMedianReturn": 0.0041895,
+          "fiveDayMedianAlpha": 0.00309641,
+          "fiveDayHitRate": 0.53420195,
+          "fiveDayMembers": 921
+        },
+        {
+          "name": "潜在主线雷达",
+          "sampleCount": 334,
+          "confidenceZh": "中高",
+          "fiveDayMedianReturn": 0.00285984,
+          "fiveDayMedianAlpha": -0.00505876,
+          "fiveDayHitRate": 0.52852853,
+          "fiveDayMembers": 333
+        },
+        {
+          "name": "过热",
+          "sampleCount": 342,
+          "confidenceZh": "中高",
+          "fiveDayMedianReturn": -0.01042272,
+          "fiveDayMedianAlpha": -0.00569091,
+          "fiveDayHitRate": 0.44281525,
+          "fiveDayMembers": 341
+        },
+        {
+          "name": "确认中",
+          "sampleCount": 148,
+          "confidenceZh": "中",
+          "fiveDayMedianReturn": -0.0035635,
+          "fiveDayMedianAlpha": -0.00899025,
+          "fiveDayHitRate": 0.49324324,
+          "fiveDayMembers": 148
+        }
+      ],
+      "byChaseRisk": [
+        {
+          "name": "低",
+          "sampleCount": 640,
+          "confidenceZh": "高",
+          "fiveDayMedianReturn": 0.00562575,
+          "fiveDayMedianAlpha": 0.00039052,
+          "fiveDayHitRate": 0.5421875,
+          "fiveDayMembers": 640
+        },
+        {
+          "name": "中",
+          "sampleCount": 582,
+          "confidenceZh": "中高",
+          "fiveDayMedianReturn": 0.0008078,
+          "fiveDayMedianAlpha": 0.00015311,
+          "fiveDayHitRate": 0.51030928,
+          "fiveDayMembers": 582
+        },
+        {
+          "name": "高",
+          "sampleCount": 540,
+          "confidenceZh": "中高",
+          "fiveDayMedianReturn": -0.00219616,
+          "fiveDayMedianAlpha": -0.00050941,
+          "fiveDayHitRate": 0.48971963,
+          "fiveDayMembers": 535
+        }
+      ],
+      "stageByChase": [
+        {
+          "mainlineState": "正在形成",
+          "chaseRisk": "中",
+          "sampleCount": 412,
+          "fiveDayMembers": 412,
+          "fiveDayMedianReturn": 0.00339198,
+          "fiveDayMedianAlpha": 0.00368026,
+          "fiveDayHitRate": 0.53883495
+        },
+        {
+          "mainlineState": "正在形成",
+          "chaseRisk": "低",
+          "sampleCount": 371,
+          "fiveDayMembers": 371,
+          "fiveDayMedianReturn": 0.00340269,
+          "fiveDayMedianAlpha": 0.00071073,
+          "fiveDayHitRate": 0.52291105
+        },
+        {
+          "mainlineState": "正在形成",
+          "chaseRisk": "高",
+          "sampleCount": 141,
+          "fiveDayMembers": 138,
+          "fiveDayMedianReturn": 0.00553248,
+          "fiveDayMedianAlpha": 0.00688663,
+          "fiveDayHitRate": 0.55072464
+        },
+        {
+          "mainlineState": "潜在主线雷达",
+          "chaseRisk": "中",
+          "sampleCount": 92,
+          "fiveDayMembers": 92,
+          "fiveDayMedianReturn": 0.00244768,
+          "fiveDayMedianAlpha": -0.00534629,
+          "fiveDayHitRate": 0.51086957
+        },
+        {
+          "mainlineState": "潜在主线雷达",
+          "chaseRisk": "低",
+          "sampleCount": 224,
+          "fiveDayMembers": 224,
+          "fiveDayMedianReturn": 0.00312871,
+          "fiveDayMedianAlpha": -0.00544628,
+          "fiveDayHitRate": 0.53125
+        },
+        {
+          "mainlineState": "潜在主线雷达",
+          "chaseRisk": "高",
+          "sampleCount": 18,
+          "fiveDayMembers": 17,
+          "fiveDayMedianReturn": 0.00105434,
+          "fiveDayMedianAlpha": 0.00958,
+          "fiveDayHitRate": 0.58823529
+        },
+        {
+          "mainlineState": "确认中",
+          "chaseRisk": "中",
+          "sampleCount": 78,
+          "fiveDayMembers": 78,
+          "fiveDayMedianReturn": -0.01745091,
+          "fiveDayMedianAlpha": -0.02498191,
+          "fiveDayHitRate": 0.35897436
+        },
+        {
+          "mainlineState": "确认中",
+          "chaseRisk": "低",
+          "sampleCount": 32,
+          "fiveDayMembers": 32,
+          "fiveDayMedianReturn": 0.02274594,
+          "fiveDayMedianAlpha": 0.0260655,
+          "fiveDayHitRate": 0.65625
+        },
+        {
+          "mainlineState": "确认中",
+          "chaseRisk": "高",
+          "sampleCount": 38,
+          "fiveDayMembers": 38,
+          "fiveDayMedianReturn": 0.01585825,
+          "fiveDayMedianAlpha": 0.01904884,
+          "fiveDayHitRate": 0.63157895
+        },
+        {
+          "mainlineState": "观察",
+          "chaseRisk": "低",
+          "sampleCount": 13,
+          "fiveDayMembers": 13,
+          "fiveDayMedianReturn": 0.04285408,
+          "fiveDayMedianAlpha": 0.01291087,
+          "fiveDayHitRate": 1.0
+        },
+        {
+          "mainlineState": "过热",
+          "chaseRisk": "高",
+          "sampleCount": 342,
+          "fiveDayMembers": 341,
+          "fiveDayMedianReturn": -0.01042272,
+          "fiveDayMedianAlpha": -0.00569091,
+          "fiveDayHitRate": 0.44281525
+        }
+      ]
+    },
+    "vitals": {
+      "longTermValidityZh": "偏强",
+      "recentTrendZh": "相对稳定",
+      "sampleConfidenceZh": "高",
+      "bestHoldingZh": "1个交易日",
+      "bestShortHoldingZh": "1个交易日",
+      "bestLongHoldingZh": "250个交易日",
+      "currentAdviceZh": "历史重建只用于研究/校准；真实交易权重仍以持续样本外验证为准。"
+    },
+    "limitationsZh": [
+      "历史重建不是当时真实推荐，也不是样本外收益。",
+      "行业宇宙来自当前东方财富行业分类，存在分类变迁与幸存者偏差。",
+      "历史主力资金与真实历史上涨扩散度无法可靠逐日重建，因此未伪造这两个因子。",
+      "概念板块第一期不纳入历史重建，避免使用今天的概念分类穿越到过去。",
+      "周频样本仍存在相邻持有期重叠；样本量不能直接等同于完全独立事件数。"
+    ]
   }
 }
