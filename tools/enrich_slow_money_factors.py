@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+"""Apply the authoritative T+1 B1 margin and B2 ETF-share factors to live radar.
+
+This enrichment never treats these exchange-published daily factors as intraday
+money flow. An empty B1/B2 pool means no current radar candidate passed the
+factor threshold, not that the source data is necessarily unavailable.
+"""
 from __future__ import annotations
 
 import json
@@ -29,7 +35,7 @@ def main():
     availability.pop("ETF一级申赎B2", None)
     availability.update(availability_strings(factors))
     radar["slowMoneyFactor"]={"state":"ready" if factors else "unavailable","dataDate":factors.get("dataDate") if factors else None,"latency":"T+1日频",
-        "B1Members":len(pools.get("B1") or []),"B2Members":len(pools.get("B2") or []),"note":"两融与ETF份额是上一已发布交易日的慢资金结构因子，不冒充盘中实时。"}
+        "B1Members":len(pools.get("B1") or []),"B2Members":len(pools.get("B2") or []),"note":"两融与ETF份额是上一已发布交易日的慢资金结构因子，不冒充盘中实时；空池表示当前候选未达阈值。"}
     RADAR.write_text(json.dumps(radar,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(json.dumps({"state":"radar-slow-money-enriched","dataDate":factors.get("dataDate") if factors else None,"B1":pools.get("B1") or [],"B2":pools.get("B2") or []},ensure_ascii=False))
 
