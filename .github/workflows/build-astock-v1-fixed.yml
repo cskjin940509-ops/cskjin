@@ -71,7 +71,8 @@ jobs:
       - name: 接入全天提前主线雷达与逐日收益/组合净值
         run: python tools/patch_v2_5_early_radar_tracking.py
       - name: 接入全中文个股交易与持仓收益界面
-        run: python tools/patch_v2_6_stock_trading_cn.py
+        run: |
+          python tools/patch_v2_6_stock_trading_cn.py || python tools/patch_v2_6_stock_ui_hotfix.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
