@@ -1050,9 +1050,7 @@
     "AvoidChase": [
       "603123",
       "601238"
-    ],
-    "B1": [],
-    "B2": []
+    ]
   },
   "marketSnapshot": {
     "sourceDate": "2026-08-20",
@@ -1101,9 +1099,7 @@
     "东方财富主力资金": "可用时参与",
     "Yunai独立大单资金": "由后置独立确认层补充",
     "两融B1": "未接入真实专用数据，不伪造",
-    "ETF一级申赎B2": "未接入真实专用数据，不伪造",
-    "B1": "两融T+1日频数据暂未取得，保持为空",
-    "B2": "ETF份额T+1日频数据暂未取得，保持为空"
+    "ETF一级申赎B2": "未接入真实专用数据，不伪造"
   },
   "scoreMeaningZh": "形成分是研究排序分，不代表上涨概率；当日涨幅只进入价格延伸惩罚，不作为形成分正向奖励。",
   "note": "从开盘起每5分钟滚动识别潜在主线和提前介入候选；14:30以后进入尾盘执行/确认阶段，15:00形成当日最终雷达快照。",
@@ -1137,13 +1133,5 @@
     "quoteAvailable": 22,
     "capitalResponseAvailable": 8,
     "role": "独立确认层；不直接改写formationScore/earlyEntryScore"
-  },
-  "slowMoneyFactor": {
-    "state": "unavailable",
-    "dataDate": null,
-    "latency": "T+1日频",
-    "B1Members": 0,
-    "B2Members": 0,
-    "note": "两融与ETF份额是上一已发布交易日的慢资金结构因子，不冒充盘中实时。"
   }
 }
