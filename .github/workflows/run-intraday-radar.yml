@@ -13,6 +13,7 @@ on:
       - 'tools/collect_slow_money_factors_v2.py'
       - 'astock_factors/latest.json'
       - 'tools/run_ai_shadow_portfolio.py'
+      - 'tools/run_ai_shadow_portfolio_flexible.py'
       - 'tools/enrich_ai_shadow_benchmarks.py'
       - '.github/workflows/run-intraday-radar.yml'
   schedule:
@@ -93,7 +94,7 @@ PY
         run: python tools/enrich_slow_money_factors.py
       - name: 智能影子实盘同步决策与净值
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: python tools/run_ai_shadow_portfolio.py
+        run: python tools/run_ai_shadow_portfolio_flexible.py
       - name: 更新大盘与原始候选池同期基准
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_ai_shadow_benchmarks.py
