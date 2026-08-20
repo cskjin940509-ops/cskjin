@@ -1,4 +1,4 @@
-name: Build AStock v2.8 全中文AI影子实盘 APK
+name: Build AStock v2.8 全中文智能影子实盘 APK
 
 on:
   workflow_dispatch:
@@ -76,8 +76,10 @@ jobs:
       - name: 强制执行最终全中文显示层
         run: |
           python tools/patch_v2_7_full_chinese_ui.py || python tools/patch_v2_7_full_chinese_ui_finish.py
-      - name: 接入AI影子实盘组合
+      - name: 接入智能影子实盘组合
         run: python tools/patch_v2_8_ai_shadow_portfolio.py
+      - name: 接入同期基准比较并清理剩余英文展示
+        run: python tools/patch_v2_8_benchmark_cn_cleanup.py
       - name: 修复v2.8内部变量编译兼容
         run: python tools/patch_v2_8_compile_compat.py
       - uses: actions/setup-java@v4
@@ -102,6 +104,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v2.8-full-chinese-ai-shadow-portfolio-debug
+          name: AStockStrategy-v2.8-full-chinese-smart-shadow-portfolio-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
