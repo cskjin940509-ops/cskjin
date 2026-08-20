@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths:
       - 'tools/reconstruct_history_boards.py'
+      - 'tools/reconstruct_history_boards_v2.py'
       - 'tools/merge_history_reconstruction.py'
       - '.github/workflows/rebuild-history-boards.yml'
   schedule:
@@ -43,7 +44,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: 多年行业板块周频历史重建
-        run: python tools/reconstruct_history_boards.py
+        run: python tools/reconstruct_history_boards_v2.py
       - name: 先重算真实冻结历史实验室
         run: python tools/update_history_pattern_lab.py
       - name: 独立挂载历史重建摘要
