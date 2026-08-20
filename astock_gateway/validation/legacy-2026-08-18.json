@@ -4,13 +4,13 @@
   "fullyReproducible": false,
   "eligibleForPerformanceComparison": false,
   "issues": [
-    "raw-price-cross-source-incomplete:1/14",
+    "raw-price-cross-source-incomplete:0/14",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
     "total": 14,
-    "verified": 1,
-    "coveragePct": 7.14,
+    "verified": 0,
+    "coveragePct": 0.0,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
@@ -24,13 +24,12 @@
         ]
       },
       "000716": {
-        "verified": true,
-        "rawClose": 5.81,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "000998": {
@@ -244,5 +243,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-08-19T17:36:20+08:00"
+  "auditedAt": "2026-08-20T17:53:42+08:00"
 }

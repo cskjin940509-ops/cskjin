@@ -1997,7 +1997,7 @@
       "version": "v1.4-next-open-verified-3source-display"
     },
     "audit": {
-      "status": "PartiallyVerified",
+      "status": "LegacyUnverified",
       "eligibleForPerformanceComparison": false,
       "issues": [
         "missing-original-strategy-version",
@@ -2007,7 +2007,7 @@
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-08-19T17:36:20+08:00",
+      "auditedAt": "2026-08-20T17:53:42+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -2018,9 +2018,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 3,
+          "available": 0,
           "total": 17,
-          "coveragePct": 17.65,
+          "coveragePct": 0.0,
           "cutoff": "2026-08-17",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -5237,76 +5237,7 @@
           "hitRate": 0.0,
           "members": 9,
           "asOf": "2026-08-19"
-        },
-        "strategyNav": 0.99481587,
-        "strategyNavReturn": -0.00518413,
-        "dailyReturn": 0.01540761,
-        "benchmarkCumulativeReturn": -0.01444402,
-        "navAlpha": 0.00925989,
-        "averageCumReturn": -0.00576014,
-        "medianCumReturn": -0.01092044,
-        "winRateCurrent": 0.44444444,
-        "maxDrawdown": -0.02027928,
-        "coverage": 0.9,
-        "membersFixed": 10,
-        "membersWithVerifiedEntry": 9,
-        "dailySeries": [
-          {
-            "date": "2026-08-19",
-            "nav": 0.97972072,
-            "dailyReturn": -0.02027928,
-            "cumulativeReturn": -0.02027928,
-            "benchmarkCumulativeReturn": -0.01531311,
-            "alpha": -0.00496617,
-            "drawdown": -0.02027928
-          },
-          {
-            "date": "2026-08-20",
-            "nav": 0.99481587,
-            "dailyReturn": 0.01540761,
-            "cumulativeReturn": -0.00518413,
-            "benchmarkCumulativeReturn": -0.01444402,
-            "alpha": 0.00925989,
-            "drawdown": -0.00518413
-          }
-        ],
-        "topContributors": [
-          {
-            "code": "920087",
-            "return": 0.07815503,
-            "contribution": 0.0078155
-          },
-          {
-            "code": "600737",
-            "return": 0.03190104,
-            "contribution": 0.0031901
-          },
-          {
-            "code": "002041",
-            "return": 0.02932255,
-            "contribution": 0.00293226
-          }
-        ],
-        "bottomContributors": [
-          {
-            "code": "600313",
-            "return": -0.07238606,
-            "contribution": -0.00723861
-          },
-          {
-            "code": "000998",
-            "return": -0.06455026,
-            "contribution": -0.00645503
-          },
-          {
-            "code": "300511",
-            "return": -0.04516129,
-            "contribution": -0.00451613
-          }
-        ],
-        "navAsOf": "2026-08-20",
-        "navRuleZh": "信号日后一交易日起固定成员等权；未形成可审计入场的成员保留现金；停牌/缺bar成员沿用上一净值，不从分母删除。",
-        "navVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "B1": {},
       "B2": {},
@@ -5342,76 +5273,7 @@
           "hitRate": 0.0,
           "members": 10,
           "asOf": "2026-08-19"
-        },
-        "strategyNav": 0.98358775,
-        "strategyNavReturn": -0.01641225,
-        "dailyReturn": 0.01708247,
-        "benchmarkCumulativeReturn": -0.01444402,
-        "navAlpha": -0.00196823,
-        "averageCumReturn": -0.01641225,
-        "medianCumReturn": -0.00979548,
-        "winRateCurrent": 0.4,
-        "maxDrawdown": -0.03293215,
-        "coverage": 1.0,
-        "membersFixed": 10,
-        "membersWithVerifiedEntry": 10,
-        "dailySeries": [
-          {
-            "date": "2026-08-19",
-            "nav": 0.96706785,
-            "dailyReturn": -0.03293215,
-            "cumulativeReturn": -0.03293215,
-            "benchmarkCumulativeReturn": -0.01531311,
-            "alpha": -0.01761905,
-            "drawdown": -0.03293215
-          },
-          {
-            "date": "2026-08-20",
-            "nav": 0.98358775,
-            "dailyReturn": 0.01708247,
-            "cumulativeReturn": -0.01641225,
-            "benchmarkCumulativeReturn": -0.01444402,
-            "alpha": -0.00196823,
-            "drawdown": -0.01641225
-          }
-        ],
-        "topContributors": [
-          {
-            "code": "920087",
-            "return": 0.07815503,
-            "contribution": 0.0078155
-          },
-          {
-            "code": "600737",
-            "return": 0.03190104,
-            "contribution": 0.0031901
-          },
-          {
-            "code": "002041",
-            "return": 0.02932255,
-            "contribution": 0.00293226
-          }
-        ],
-        "bottomContributors": [
-          {
-            "code": "000716",
-            "return": -0.09386282,
-            "contribution": -0.00938628
-          },
-          {
-            "code": "600108",
-            "return": -0.07837838,
-            "contribution": -0.00783784
-          },
-          {
-            "code": "600313",
-            "return": -0.07238606,
-            "contribution": -0.00723861
-          }
-        ],
-        "navAsOf": "2026-08-20",
-        "navRuleZh": "信号日后一交易日起固定成员等权；未形成可审计入场的成员保留现金；停牌/缺bar成员沿用上一净值，不从分母删除。",
-        "navVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "B4": {
         "1D": {
@@ -5445,76 +5307,7 @@
           "hitRate": 0.0,
           "members": 9,
           "asOf": "2026-08-19"
-        },
-        "strategyNav": 0.99149416,
-        "strategyNavReturn": -0.00850584,
-        "dailyReturn": 0.01204866,
-        "benchmarkCumulativeReturn": -0.01444402,
-        "navAlpha": 0.00593819,
-        "averageCumReturn": -0.00945093,
-        "medianCumReturn": -0.01092044,
-        "winRateCurrent": 0.44444444,
-        "maxDrawdown": -0.02030979,
-        "coverage": 0.9,
-        "membersFixed": 10,
-        "membersWithVerifiedEntry": 9,
-        "dailySeries": [
-          {
-            "date": "2026-08-19",
-            "nav": 0.97969021,
-            "dailyReturn": -0.02030979,
-            "cumulativeReturn": -0.02030979,
-            "benchmarkCumulativeReturn": -0.01531311,
-            "alpha": -0.00499668,
-            "drawdown": -0.02030979
-          },
-          {
-            "date": "2026-08-20",
-            "nav": 0.99149416,
-            "dailyReturn": 0.01204866,
-            "cumulativeReturn": -0.00850584,
-            "benchmarkCumulativeReturn": -0.01444402,
-            "alpha": 0.00593819,
-            "drawdown": -0.00850584
-          }
-        ],
-        "topContributors": [
-          {
-            "code": "920087",
-            "return": 0.07815503,
-            "contribution": 0.0078155
-          },
-          {
-            "code": "600737",
-            "return": 0.03190104,
-            "contribution": 0.0031901
-          },
-          {
-            "code": "002041",
-            "return": 0.02932255,
-            "contribution": 0.00293226
-          }
-        ],
-        "bottomContributors": [
-          {
-            "code": "600108",
-            "return": -0.07837838,
-            "contribution": -0.00783784
-          },
-          {
-            "code": "600313",
-            "return": -0.07238606,
-            "contribution": -0.00723861
-          },
-          {
-            "code": "000998",
-            "return": -0.06455026,
-            "contribution": -0.00645503
-          }
-        ],
-        "navAsOf": "2026-08-20",
-        "navRuleZh": "信号日后一交易日起固定成员等权；未形成可审计入场的成员保留现金；停牌/缺bar成员沿用上一净值，不从分母删除。",
-        "navVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       }
     },
     "sectorPerformance": {
@@ -6527,16 +6320,16 @@
       "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
-        "raw-price-cross-source-incomplete:1/14",
+        "raw-price-cross-source-incomplete:0/14",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-08-19T17:36:20+08:00",
+      "auditedAt": "2026-08-20T17:53:42+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 14,
-          "verified": 1,
-          "coveragePct": 7.14,
+          "verified": 0,
+          "coveragePct": 0.0,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
@@ -6593,14 +6386,14 @@
         }
       }
     },
-    "trackingUpdatedAt": "2026-08-20T17:18:18+08:00",
+    "trackingUpdatedAt": "2026-08-20T17:56:02+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4-next-open-verified-3source-display"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingDisplayStatus": "ReferenceOnly",
     "trackingDisplayNote": "价格路径通过入场价验证后可展示参考跟踪；该批次仍不进入胜率、Alpha或因子有效性统计。",
@@ -7139,67 +6932,7 @@
           "hitRate": 0.0,
           "members": 3,
           "asOf": "2026-08-20"
-        },
-        "strategyNav": 0.99687927,
-        "strategyNavReturn": -0.00312073,
-        "dailyReturn": -0.00312073,
-        "benchmarkCumulativeReturn": -0.00445451,
-        "navAlpha": 0.00133379,
-        "averageCumReturn": -0.01040242,
-        "medianCumReturn": -0.01104972,
-        "winRateCurrent": 0.0,
-        "maxDrawdown": -0.00312073,
-        "coverage": 0.3,
-        "membersFixed": 10,
-        "membersWithVerifiedEntry": 3,
-        "dailySeries": [
-          {
-            "date": "2026-08-20",
-            "nav": 0.99687927,
-            "dailyReturn": -0.00312073,
-            "cumulativeReturn": -0.00312073,
-            "benchmarkCumulativeReturn": -0.00445451,
-            "alpha": 0.00133379,
-            "drawdown": -0.00312073
-          }
-        ],
-        "topContributors": [
-          {
-            "code": "000059",
-            "return": -0.00612245,
-            "contribution": -0.00061225
-          },
-          {
-            "code": "600740",
-            "return": -0.01104972,
-            "contribution": -0.00110497
-          },
-          {
-            "code": "600408",
-            "return": -0.01403509,
-            "contribution": -0.00140351
-          }
-        ],
-        "bottomContributors": [
-          {
-            "code": "600408",
-            "return": -0.01403509,
-            "contribution": -0.00140351
-          },
-          {
-            "code": "600740",
-            "return": -0.01104972,
-            "contribution": -0.00110497
-          },
-          {
-            "code": "000059",
-            "return": -0.00612245,
-            "contribution": -0.00061225
-          }
-        ],
-        "navAsOf": "2026-08-20",
-        "navRuleZh": "信号日后一交易日起固定成员等权；未形成可审计入场的成员保留现金；停牌/缺bar成员沿用上一净值，不从分母删除。",
-        "navVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "B1": {},
       "B2": {},
@@ -7235,67 +6968,7 @@
           "hitRate": 0.0,
           "members": 4,
           "asOf": "2026-08-20"
-        },
-        "strategyNav": 0.99687927,
-        "strategyNavReturn": -0.00312073,
-        "dailyReturn": -0.00312073,
-        "benchmarkCumulativeReturn": -0.00445451,
-        "navAlpha": 0.00133379,
-        "averageCumReturn": -0.00780182,
-        "medianCumReturn": -0.00858609,
-        "winRateCurrent": 0.0,
-        "maxDrawdown": -0.00312073,
-        "coverage": 0.4,
-        "membersFixed": 10,
-        "membersWithVerifiedEntry": 4,
-        "dailySeries": [
-          {
-            "date": "2026-08-20",
-            "nav": 0.99687927,
-            "dailyReturn": -0.00312073,
-            "cumulativeReturn": -0.00312073,
-            "benchmarkCumulativeReturn": -0.00445451,
-            "alpha": 0.00133379,
-            "drawdown": -0.00312073
-          }
-        ],
-        "topContributors": [
-          {
-            "code": "600028",
-            "return": 0.0,
-            "contribution": 0.0
-          },
-          {
-            "code": "000059",
-            "return": -0.00612245,
-            "contribution": -0.00061225
-          },
-          {
-            "code": "600740",
-            "return": -0.01104972,
-            "contribution": -0.00110497
-          }
-        ],
-        "bottomContributors": [
-          {
-            "code": "600408",
-            "return": -0.01403509,
-            "contribution": -0.00140351
-          },
-          {
-            "code": "600740",
-            "return": -0.01104972,
-            "contribution": -0.00110497
-          },
-          {
-            "code": "000059",
-            "return": -0.00612245,
-            "contribution": -0.00061225
-          }
-        ],
-        "navAsOf": "2026-08-20",
-        "navRuleZh": "信号日后一交易日起固定成员等权；未形成可审计入场的成员保留现金；停牌/缺bar成员沿用上一净值，不从分母删除。",
-        "navVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "B4": {
         "1D": {
@@ -7329,67 +7002,7 @@
           "hitRate": 0.0,
           "members": 3,
           "asOf": "2026-08-20"
-        },
-        "strategyNav": 0.99687927,
-        "strategyNavReturn": -0.00312073,
-        "dailyReturn": -0.00312073,
-        "benchmarkCumulativeReturn": -0.00445451,
-        "navAlpha": 0.00133379,
-        "averageCumReturn": -0.01040242,
-        "medianCumReturn": -0.01104972,
-        "winRateCurrent": 0.0,
-        "maxDrawdown": -0.00312073,
-        "coverage": 0.3,
-        "membersFixed": 10,
-        "membersWithVerifiedEntry": 3,
-        "dailySeries": [
-          {
-            "date": "2026-08-20",
-            "nav": 0.99687927,
-            "dailyReturn": -0.00312073,
-            "cumulativeReturn": -0.00312073,
-            "benchmarkCumulativeReturn": -0.00445451,
-            "alpha": 0.00133379,
-            "drawdown": -0.00312073
-          }
-        ],
-        "topContributors": [
-          {
-            "code": "000059",
-            "return": -0.00612245,
-            "contribution": -0.00061225
-          },
-          {
-            "code": "600740",
-            "return": -0.01104972,
-            "contribution": -0.00110497
-          },
-          {
-            "code": "600408",
-            "return": -0.01403509,
-            "contribution": -0.00140351
-          }
-        ],
-        "bottomContributors": [
-          {
-            "code": "600408",
-            "return": -0.01403509,
-            "contribution": -0.00140351
-          },
-          {
-            "code": "600740",
-            "return": -0.01104972,
-            "contribution": -0.00110497
-          },
-          {
-            "code": "000059",
-            "return": -0.00612245,
-            "contribution": -0.00061225
-          }
-        ],
-        "navAsOf": "2026-08-20",
-        "navRuleZh": "信号日后一交易日起固定成员等权；未形成可审计入场的成员保留现金；停牌/缺bar成员沿用上一净值，不从分母删除。",
-        "navVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "B12": {},
       "B13": {},
@@ -10495,14 +10108,14 @@
       "state": "可更新后续收益",
       "note": "信号日当天涨跌属于当日行情表现，不计作策略可交易收益。"
     },
-    "trackingUpdatedAt": "2026-08-20T17:18:18+08:00",
+    "trackingUpdatedAt": "2026-08-20T17:56:02+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4-next-open-verified-3source-display"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-08-20T17:18:49+08:00",
@@ -14703,13 +14316,74 @@
       "rule": "正式入池股票必须通过至少两个独立源未复权OHLC最大相对差<=0.1%；孤立失败股票剔除，不阻断其余已验证股票。"
     },
     "audit": {
-      "status": "VerifiedWithExclusions",
-      "eligibleForPerformanceComparison": true,
+      "status": "PartiallyVerified",
+      "eligibleForPerformanceComparison": false,
       "issues": [
-        "000566因双源收盘价校验失败已从当日正式池剔除"
+        "raw-price-cross-source-incomplete:0/18",
+        "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-08-20T15:43:48+08:00",
-      "note": "生产扫描通过目标日时点门禁；只有通过双源价格校验的股票进入Official。"
+      "auditedAt": "2026-08-20T17:53:42+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "reverification": {
+        "rawPrice": {
+          "total": 18,
+          "verified": 0,
+          "coveragePct": 0.0,
+          "bseSingleSource": 0,
+          "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
+        },
+        "factorRecompute": {
+          "available": 0,
+          "total": 18,
+          "coveragePct": 0.0,
+          "cutoff": "2026-08-20",
+          "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
+        },
+        "frozenMarket": {
+          "available": true,
+          "sourceDate": "2026-08-20",
+          "availableAt": "2026-08-20T17:06:15+08:00",
+          "boardCount": 200,
+          "sameDay": true
+        },
+        "factorProvenance": {
+          "complete": true,
+          "checks": {
+            "B0": {
+              "used": true,
+              "proven": true,
+              "evidence": "strategyVersion+stockMetadata"
+            },
+            "B1": {
+              "used": true,
+              "proven": true,
+              "evidence": "可用：交易所两融T+1日频，数据日 2026-08-19，覆盖 4108 只股票",
+              "requiredSource": "margin"
+            },
+            "B2": {
+              "used": false,
+              "proven": true,
+              "evidence": "可用：交易所ETF份额T+1日频，数据日 2026-08-19，覆盖 1610 只ETF；净申赎金额为份额变化×价格的估算",
+              "requiredSource": "etf"
+            },
+            "B3": {
+              "used": true,
+              "proven": true,
+              "evidence": "frozen-stock-main-flow-fields"
+            }
+          }
+        },
+        "pointInTimeMembership": {
+          "available": false,
+          "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
+        },
+        "originalMetadata": {
+          "strategyVersion": "v1.9.0-verified-point-in-time-bse-slow-money",
+          "symbols": 18,
+          "stockMetadataPresent": 18,
+          "stockMetadataMissing": 0
+        }
+      }
     },
     "comboPools": {
       "B12": {

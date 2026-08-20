@@ -1,14 +1,14 @@
 {
-  "auditedAt": "2026-08-19T17:36:20+08:00",
+  "auditedAt": "2026-08-20T17:53:42+08:00",
   "summary": {
     "Verified": 1,
     "PartiallyVerified": 2,
-    "LegacyUnverified": 0
+    "LegacyUnverified": 1
   },
   "reports": [
     {
       "date": "2026-08-17",
-      "status": "PartiallyVerified",
+      "status": "LegacyUnverified",
       "fullyReproducible": false,
       "eligibleForPerformanceComparison": false,
       "issues": [
@@ -26,7 +26,17 @@
       "fullyReproducible": false,
       "eligibleForPerformanceComparison": false,
       "issues": [
-        "raw-price-cross-source-incomplete:1/14",
+        "raw-price-cross-source-incomplete:0/14",
+        "point-in-time-constituent-snapshot-missing"
+      ]
+    },
+    {
+      "date": "2026-08-20",
+      "status": "PartiallyVerified",
+      "fullyReproducible": false,
+      "eligibleForPerformanceComparison": false,
+      "issues": [
+        "raw-price-cross-source-incomplete:0/18",
         "point-in-time-constituent-snapshot-missing"
       ]
     }
