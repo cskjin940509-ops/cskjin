@@ -1,0 +1,58 @@
+name: Update AStock B1 Margin and B2 ETF Factors
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/collect_slow_money_factors.py'
+      - 'tools/slow_money_factors.py'
+      - '.github/workflows/update-slow-money-factors.yml'
+  schedule:
+    # 北京时间工作日 08:55，使用上一已发布交易日的交易所慢资金数据。
+    - cron: '55 0 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-slow-money-factors
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 安装交易所数据适配器
+        run: python -m pip install --quiet 'akshare>=1.18.15,<2'
+      - name: 拉取两融与ETF份额慢资金数据
+        run: python tools/collect_slow_money_factors.py
+      - name: 保存慢资金因子
+        run: |
+          git config user.name 'astock-slow-money-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_factors
+          if git diff --cached --quiet; then
+            echo 'No slow-money factor changes.'
+            exit 0
+          fi
+          git commit -m 'Update B1 margin and B2 ETF slow-money factors'
+          pushed=0
+          for i in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          test "$pushed" -eq 1
