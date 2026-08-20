@@ -1,0 +1,57 @@
+name: Update AStock B1 B2 Funding Factors
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/update_b1_b2_factors.py'
+      - '.github/workflows/update-b1-b2-factors.yml'
+  schedule:
+    # 北京时间工作日 08:45。交易所通常已发布上一交易日两融与ETF份额数据。
+    - cron: '45 0 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-b1-b2-factors
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 安装交易所公开数据适配器
+        run: pip install --disable-pip-version-check 'akshare>=1.18.40' pandas
+      - name: 更新两融与ETF一级份额因子
+        run: python tools/update_b1_b2_factors.py
+      - name: 保存资金因子快照
+        run: |
+          git config user.name 'astock-funding-factor-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_factors
+          if git diff --cached --quiet; then
+            echo 'No funding-factor changes.'
+            exit 0
+          fi
+          git commit -m 'Update B1 margin and B2 ETF funding factors'
+          pushed=0
+          for i in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          test "$pushed" -eq 1
