@@ -9,18 +9,16 @@ on:
       - 'tools/enrich_intraday_radar_yunai.py'
       - 'tools/enrich_slow_money_factors.py'
       - 'tools/slow_money_factors.py'
+      - 'tools/collect_slow_money_factors.py'
       - 'astock_factors/latest.json'
       - 'tools/run_ai_shadow_portfolio.py'
       - 'tools/enrich_ai_shadow_benchmarks.py'
       - '.github/workflows/run-intraday-radar.yml'
   schedule:
-    # A股上午 09:30-11:30 CST = 01:30-03:30 UTC，每5分钟。
     - cron: '30,35,40,45,50,55 1 * * 1-5'
     - cron: '*/5 2 * * 1-5'
     - cron: '0,5,10,15,20,25,30 3 * * 1-5'
-    # A股下午 13:00-14:55 CST = 05:00-06:55 UTC，每5分钟。
     - cron: '*/5 5-6 * * 1-5'
-    # 15:00 Final + 延迟兜底；智能账户此时只更新净值，不允许产生收盘后成交。
     - cron: '0,5,10,20 7 * * 1-5'
 
 permissions:
@@ -33,7 +31,7 @@ concurrency:
 jobs:
   radar:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: 记录雷达运行编号
         env:
@@ -53,6 +51,30 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: 确保B1/B2慢资金数据已就绪
+        run: |
+          NEED=1
+          if [ -f astock_factors/latest.json ]; then
+            NEED=$(python - <<'PY'
+import json
+from datetime import datetime, timezone, timedelta
+p=json.load(open('astock_factors/latest.json',encoding='utf-8'))
+d=p.get('dataDate')
+now=datetime.now(timezone(timedelta(hours=8))).date()
+try:
+    age=(now-datetime.strptime(d,'%Y-%m-%d').date()).days
+    print(0 if age <= 4 else 1)
+except Exception:
+    print(1)
+PY
+)
+          fi
+          if [ "$NEED" = "1" ]; then
+            python -m pip install --quiet 'akshare>=1.18.15,<2'
+            python tools/collect_slow_money_factors.py
+          else
+            echo 'B1/B2 slow-money data is fresh enough.'
+          fi
       - name: 从开盘起滚动主线形成雷达
         id: radar
         run: |
@@ -74,17 +96,17 @@ jobs:
       - name: 更新大盘与原始候选池同期基准
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_ai_shadow_benchmarks.py
-      - name: 原子保存雷达与智能影子实盘账本
+      - name: 原子保存雷达、慢资金与智能影子实盘账本
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: |
           git config user.name 'astock-radar-ai-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_radar astock_ai_portfolio
+          git add astock_radar astock_ai_portfolio astock_factors
           if git diff --cached --quiet; then
-            echo 'No radar or shadow portfolio changes.'
+            echo 'No radar, slow-money or shadow portfolio changes.'
             exit 0
           fi
-          git commit -m 'Update all-day radar and AI shadow portfolio'
+          git commit -m 'Update radar, B1/B2 slow-money and AI shadow portfolio'
           pushed=0
           for i in 1 2 3 4; do
             git fetch origin main
@@ -95,7 +117,4 @@ jobs:
             fi
             sleep 2
           done
-          if [ "$pushed" -ne 1 ]; then
-            echo 'Failed to persist radar + shadow portfolio after retries.'
-            exit 1
-          fi
+          test "$pushed" -eq 1
