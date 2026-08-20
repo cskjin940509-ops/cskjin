@@ -1,4 +1,4 @@
-name: Validate Dynamic AI Portfolio v2 Now
+name: Validate Dynamic AI Portfolio v2.1 Now
 
 on:
   push:
@@ -24,9 +24,9 @@ jobs:
           python-version: '3.12'
       - name: 语法检查
         run: |
-          python -m py_compile tools/run_ai_shadow_portfolio.py tools/run_ai_dynamic_portfolio_v2.py
+          python -m py_compile tools/run_ai_shadow_portfolio.py tools/run_ai_dynamic_portfolio_v2.py tools/run_ai_dynamic_portfolio_v2_1.py
       - name: 运行动态组合引擎
-        run: python tools/run_ai_dynamic_portfolio_v2.py
+        run: python tools/run_ai_dynamic_portfolio_v2_1.py
       - name: 更新同期基准
         run: python tools/enrich_ai_shadow_benchmarks.py
       - name: 保存验证后的智能组合状态
@@ -38,7 +38,7 @@ jobs:
             echo 'No AI portfolio changes.'
             exit 0
           fi
-          git commit -m 'Validate dynamic AI portfolio v2 state'
+          git commit -m 'Validate dynamic AI portfolio v2.1 state'
           for i in 1 2 3 4; do
             git fetch origin main
             git rebase origin/main
@@ -46,4 +46,4 @@ jobs:
             sleep 2
           done
           exit 1
-# trigger: 2026-08-20T15:06+08:00
+# trigger: close-target-validation
