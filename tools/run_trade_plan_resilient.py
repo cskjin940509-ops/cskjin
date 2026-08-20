@@ -32,4 +32,6 @@ def history(code,end_day,limit=140):
     except Exception:return []
 
 base.em_kline=history
-base.main()
+
+if __name__=='__main__':
+    base.main()
