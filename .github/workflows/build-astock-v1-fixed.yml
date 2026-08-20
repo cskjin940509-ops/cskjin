@@ -1,4 +1,4 @@
-name: Build AStock v2.6 全中文个股交易与持仓 APK
+name: Build AStock v2.7 全中文交易持仓与主线雷达 APK
 
 on:
   workflow_dispatch:
@@ -70,9 +70,11 @@ jobs:
           python tools/patch_v2_4_trade_journal_finish.py
       - name: 接入全天提前主线雷达与逐日收益/组合净值
         run: python tools/patch_v2_5_early_radar_tracking.py
-      - name: 接入全中文个股交易与持仓收益界面
+      - name: 接入个股交易与持仓收益界面
         run: |
           python tools/patch_v2_6_stock_trading_cn.py || python tools/patch_v2_6_stock_ui_hotfix.py
+      - name: 强制执行最终全中文显示层
+        run: python tools/patch_v2_7_full_chinese_ui.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -95,6 +97,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v2.6-chinese-stock-trading-holdings-debug
+          name: AStockStrategy-v2.7-full-chinese-trading-holdings-radar-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
