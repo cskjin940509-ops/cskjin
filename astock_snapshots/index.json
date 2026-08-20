@@ -5501,7 +5501,8 @@
       "breadthSampleCount": 100,
       "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
       "coreIndexCoverage": "6/6",
-      "coreIndexSource": "腾讯当日收盘快照"
+      "coreIndexSource": "腾讯当日收盘快照",
+      "marketStatusProvider": "Yunai Quant API"
     },
     "boardHeatmap": {
       "industry": [
@@ -8174,10 +8175,22 @@
     "poolSchemaVersion": "v2-pairwise",
     "yunai": {
       "configured": true,
-      "connected": false,
+      "connected": true,
       "marketStatus": {
-        "connected": false,
-        "error": "HTTPError"
+        "connected": true,
+        "provider": "Yunai Quant API",
+        "checkedAt": "2026-08-20T09:06:47+08:00",
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
+        "responseDigest": "e8ff569f1e6fcfc5",
+        "data": [
+          {
+            "market": "CN",
+            "status": "NOT_YET_OPEN",
+            "marketStatus": "Not Yet Opened"
+          }
+        ]
       },
       "openapiState": "ready",
       "endpointCount": 38,
