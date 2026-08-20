@@ -1,0 +1,94 @@
+name: Update AStock 开盘前预测池
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: '目标交易日 YYYY-MM-DD，留空则自动判断'
+        required: false
+        type: string
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/generate_premarket_prediction.py'
+      - '.github/workflows/update-premarket-prediction.yml'
+  schedule:
+    # 北京时间工作日 09:05 / 09:10 / 09:15 三次尝试。
+    # 第一次可先生成等待慢资金的预览；B1/B2一旦更新到上一交易日即自动升级为ready。
+    - cron: '5,10,15 1 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-premarket-prediction
+  cancel-in-progress: false
+
+jobs:
+  premarket:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 检查并补抓上一交易日B1/B2慢资金
+        if: github.event_name != 'workflow_dispatch' || inputs.target_date == ''
+        run: |
+          NEED=$(python - <<'PY'
+import json
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+CN=timezone(timedelta(hours=8))
+now=datetime.now(CN)
+target=now.date().isoformat()
+snaps=json.load(open('astock_snapshots/index.json',encoding='utf-8'))
+rows=[x for x in snaps if x.get('status')=='Official' and str(x.get('date') or '') < target]
+expected=max(rows,key=lambda x:x.get('date','')).get('date') if rows else ''
+try:
+    factors=json.load(open('astock_factors/latest.json',encoding='utf-8'))
+    actual=str(factors.get('dataDate') or '')
+except Exception:
+    actual=''
+print(0 if expected and actual==expected else 1)
+PY
+)
+          if [ "$NEED" = "1" ]; then
+            echo 'B1/B2未更新到上一Official日，尝试主动补抓。'
+            python -m pip install --quiet 'akshare>=1.18.15,<2'
+            python tools/collect_slow_money_factors_v2.py || echo '慢资金补抓未完成；预测池将明确标记等待状态。'
+          else
+            echo 'B1/B2已经是上一交易日最新数据。'
+          fi
+
+      - name: 生成开盘前提前预测池
+        env:
+          TARGET_DATE: ${{ inputs.target_date }}
+        run: python tools/generate_premarket_prediction.py
+
+      - name: 保存开盘前预测池与必要的慢资金更新
+        run: |
+          if [ -z "$(git status --porcelain -- astock_premarket astock_factors)" ]; then
+            echo 'No premarket prediction changes.'
+            exit 0
+          fi
+          git config user.name 'astock-premarket-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_premarket astock_factors
+          git commit -m 'Update premarket prediction pool'
+          pushed=0
+          for i in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          test "$pushed" -eq 1
