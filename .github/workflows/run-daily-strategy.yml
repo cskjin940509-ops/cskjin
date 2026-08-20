@@ -14,6 +14,7 @@ on:
       - 'tools/ensure_daily_close_snapshot.py'
       - 'tools/run_daily_strategy_verified.py'
       - 'tools/run_daily_strategy_verified_bse.py'
+      - 'tools/run_daily_strategy_resilient_bse.py'
       - 'tools/update_strategy_tracking_display_ready.py'
       - 'tools/enrich_official_trade_metrics.py'
   schedule:
@@ -56,11 +57,11 @@ jobs:
         if: github.event_name != 'workflow_dispatch' || inputs.target_date == ''
         run: python tools/ensure_daily_close_snapshot.py
 
-      - name: 运行时点安全 + 至少双源校验的日终扫描
+      - name: 运行时点安全 + 双源校验 + 孤立失败自动剔除的日终扫描
         env:
           TARGET_DATE: ${{ inputs.target_date }}
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-        run: python tools/run_daily_strategy_verified_bse.py
+        run: python tools/run_daily_strategy_resilient_bse.py
 
       - name: 生成两两资金确认池
         env:
