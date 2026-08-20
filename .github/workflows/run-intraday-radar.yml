@@ -8,6 +8,7 @@ on:
       - 'tools/run_intraday_radar.py'
       - 'tools/enrich_intraday_radar_yunai.py'
       - 'tools/run_ai_shadow_portfolio.py'
+      - 'tools/enrich_ai_shadow_benchmarks.py'
       - '.github/workflows/run-intraday-radar.yml'
   schedule:
     # A股上午 09:30-11:30 CST = 01:30-03:30 UTC，每5分钟。
@@ -16,7 +17,7 @@ on:
     - cron: '0,5,10,15,20,25,30 3 * * 1-5'
     # A股下午 13:00-14:55 CST = 05:00-06:55 UTC，每5分钟。
     - cron: '*/5 5-6 * * 1-5'
-    # 15:00 Final + 延迟兜底；AI账户此时只更新净值，不允许产生收盘后成交。
+    # 15:00 Final + 延迟兜底；智能账户此时只更新净值，不允许产生收盘后成交。
     - cron: '0,5,10,20 7 * * 1-5'
 
 permissions:
@@ -61,17 +62,20 @@ jobs:
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/enrich_intraday_radar_yunai.py
-      - name: AI影子实盘同步决策与净值
+      - name: 智能影子实盘同步决策与净值
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/run_ai_shadow_portfolio.py
-      - name: 原子保存雷达与AI影子实盘账本
+      - name: 更新大盘与原始候选池同期基准
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        run: python tools/enrich_ai_shadow_benchmarks.py
+      - name: 原子保存雷达与智能影子实盘账本
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: |
           git config user.name 'astock-radar-ai-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add astock_radar astock_ai_portfolio
           if git diff --cached --quiet; then
-            echo 'No radar or AI portfolio changes.'
+            echo 'No radar or shadow portfolio changes.'
             exit 0
           fi
           git commit -m 'Update all-day radar and AI shadow portfolio'
@@ -86,6 +90,6 @@ jobs:
             sleep 2
           done
           if [ "$pushed" -ne 1 ]; then
-            echo 'Failed to persist radar + AI shadow portfolio after retries.'
+            echo 'Failed to persist radar + shadow portfolio after retries.'
             exit 1
           fi
