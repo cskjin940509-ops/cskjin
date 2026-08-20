@@ -48,6 +48,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: 修复嵌入策略载荷兼容
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/run_intraday_radar.py')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('base64.b64decode(_SRC)', 'base64.b64decode(_SRC + "=" * (-len(_SRC) % 4))')
+          p.write_text(s, encoding='utf-8')
+          PY
       - name: 从开盘起滚动主线形成雷达
         id: radar
         run: |
