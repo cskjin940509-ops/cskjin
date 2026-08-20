@@ -25,6 +25,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
+      - name: 记录收益跟踪运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-tracking-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-tracking-run.txt -f message='Record latest tracking run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-tracking-run.txt -f message='Record latest tracking run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
       - uses: actions/checkout@v4
         with:
           ref: main
@@ -32,15 +43,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: 检查是否已过收盘数据安全窗口
+        id: gate
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo('Asia/Shanghai'))
+          safe = now.weekday() < 5 and (now.hour > 15 or (now.hour == 15 and now.minute >= 20))
+          print('run=' + ('true' if safe else 'false'))
+          print('china_time=' + now.isoformat(timespec='seconds'))
+          PY
       - name: 更新正式与参考批次收益跟踪
+        if: steps.gate.outputs.run == 'true'
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/update_strategy_tracking_display_ready.py
       - name: 补齐逐交易日个股收益与固定成员组合净值
+        if: steps.gate.outputs.run == 'true'
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/update_daily_signal_tracking.py
       - name: 保存逐日跟踪结果
+        if: steps.gate.outputs.run == 'true'
         run: |
           if git diff --quiet -- astock_snapshots/index.json astock_tracking; then
             echo 'No tracking changes.'
