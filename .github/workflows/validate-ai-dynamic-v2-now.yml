@@ -1,0 +1,48 @@
+name: Validate Dynamic AI Portfolio v2 Now
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/validate-ai-dynamic-v2-now.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 语法检查
+        run: |
+          python -m py_compile tools/run_ai_shadow_portfolio.py tools/run_ai_dynamic_portfolio_v2.py
+      - name: 运行动态组合引擎
+        run: python tools/run_ai_dynamic_portfolio_v2.py
+      - name: 更新同期基准
+        run: python tools/enrich_ai_shadow_benchmarks.py
+      - name: 保存验证后的智能组合状态
+        run: |
+          git config user.name 'astock-ai-v2-validator'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_ai_portfolio
+          if git diff --cached --quiet; then
+            echo 'No AI portfolio changes.'
+            exit 0
+          fi
+          git commit -m 'Validate dynamic AI portfolio v2 state'
+          for i in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 2
+          done
+          exit 1
