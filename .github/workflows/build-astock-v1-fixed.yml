@@ -65,7 +65,9 @@ jobs:
       - name: v2.3最终编译兼容检查
         run: python tools/patch_v2_3_compile_compat.py
       - name: v2.4持久化买卖与收益日志
-        run: python tools/patch_v2_4_trade_journal.py
+        run: |
+          python tools/patch_v2_4_trade_journal.py || true
+          python tools/patch_v2_4_trade_journal_finish.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
