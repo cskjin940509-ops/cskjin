@@ -1,4 +1,4 @@
-name: Build AStock v2.9 动态历史形态实验室 APK
+name: Build AStock v3.0 历史重建分层研究 APK
 
 on:
   workflow_dispatch:
@@ -88,6 +88,8 @@ jobs:
         run: python tools/patch_v2_9_history_lab_complete.py
       - name: 修复v2.9历史图表编译兼容
         run: python tools/patch_v2_9_compile_compat.py
+      - name: 接入真实样本与历史重建分层切换
+        run: python tools/patch_v3_0_history_reconstruction_ui.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -110,6 +112,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v2.9-dynamic-history-pattern-lab-debug
+          name: AStockStrategy-v3.0-separated-history-reconstruction-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
