@@ -133,3 +133,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+# Production trigger marker: resilient daily Official is active.
