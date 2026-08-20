@@ -45,7 +45,7 @@ jobs:
         run: python tools/update_history_pattern_lab.py
       - name: 保存动态历史研究结果
         run: |
-          if git diff --quiet -- astock_history; then
+          if [ -z "$(git status --porcelain -- astock_history)" ]; then
             echo 'No history changes.'
             exit 0
           fi
