@@ -85,7 +85,7 @@ jobs:
       - name: 接入动态历史形态实验室
         run: python tools/patch_v2_9_dynamic_history_lab.py
       - name: 完善中短线与中长线历史研究视图
-        run: python tools/patch_v2_9_history_lab_enhance.py
+        run: python tools/patch_v2_9_history_lab_complete.py
       - name: 修复v2.9历史图表编译兼容
         run: python tools/patch_v2_9_compile_compat.py
       - uses: actions/setup-java@v4
