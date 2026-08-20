@@ -1,4 +1,4 @@
-name: Build AStock v2.3 实盘形态增强 APK
+name: Build AStock v2.4 交易日志 APK
 
 on:
   workflow_dispatch:
@@ -64,6 +64,8 @@ jobs:
         run: python tools/patch_v2_3_setup_and_pool_layout.py
       - name: v2.3最终编译兼容检查
         run: python tools/patch_v2_3_compile_compat.py
+      - name: v2.4持久化买卖与收益日志
+        run: python tools/patch_v2_4_trade_journal.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -86,6 +88,6 @@ jobs:
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v2.3-live-shape-execution-debug
+          name: AStockStrategy-v2.4-trade-journal-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
