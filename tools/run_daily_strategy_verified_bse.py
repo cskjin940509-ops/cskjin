@@ -126,7 +126,10 @@ def freeze_with_compat(day, payload, selected, stocks, pools):
     item["downgraded"] = sorted((prev_b4 - cur_b4) & cur_any)
 
     factors = slow.load_for_signal_date(day)
-    item.setdefault("factorAvailability", {}).update(slow.availability_strings(factors))
+    availability = item.setdefault("factorAvailability", {})
+    availability.pop("两融B1", None)
+    availability.pop("ETF一级申赎B2", None)
+    availability.update(slow.availability_strings(factors))
     item["slowMoneyFactor"] = {
         "state": "ready" if factors else "unavailable",
         "dataDate": factors.get("dataDate") if factors else None,
