@@ -1,0 +1,588 @@
+from pathlib import Path
+import re
+
+root = Path("app/src/main/java/com/rui/astockstrategy/v6")
+root.mkdir(parents=True, exist_ok=True)
+
+ui = root / "V29DynamicHistoryLab.kt"
+ui.write_text(r'''package com.rui.astockstrategy.v6
+
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
+
+private val HistBg29 = Color(0xFFF5F7FB)
+private val HistInk29 = Color(0xFF172036)
+private val HistMuted29 = Color(0xFF747B8D)
+private val HistBlue29 = Color(0xFF3557D4)
+private val HistRed29 = Color(0xFFD84343)
+private val HistGreen29 = Color(0xFF15966A)
+private val HistAmber29 = Color(0xFFAE6A00)
+private val HistSoftBlue29 = Color(0xFFEFF3FF)
+private val HistSoftRed29 = Color(0xFFFFEEEE)
+private val HistSoftGreen29 = Color(0xFFEAF7F1)
+
+private const val HISTORY_URL_29 =
+    "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_history/latest.json"
+
+private suspend fun fetchHistory29(): JSONObject = withContext(Dispatchers.IO) {
+    val c = URL(HISTORY_URL_29).openConnection() as HttpURLConnection
+    c.connectTimeout = 8000
+    c.readTimeout = 8000
+    c.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 16)")
+    c.setRequestProperty("Cache-Control", "no-cache")
+    try {
+        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
+        JSONObject(c.inputStream.bufferedReader().use { it.readText() })
+    } finally {
+        c.disconnect()
+    }
+}
+
+private fun num29(o: JSONObject?, key: String): Double? {
+    if (o == null || !o.has(key) || o.isNull(key)) return null
+    return when (val v = o.opt(key)) {
+        is Number -> v.toDouble()
+        else -> v?.toString()?.toDoubleOrNull()
+    }
+}
+
+private fun pct29(v: Double?): String =
+    v?.let { String.format("%+.2f%%", it * 100.0) } ?: "—"
+
+private fun ratio29(v: Double?): String =
+    v?.let { String.format("%.1f%%", it * 100.0) } ?: "—"
+
+private fun valueColor29(v: Double?): Color =
+    if ((v ?: 0.0) >= 0.0) HistRed29 else HistGreen29
+
+private fun arrObjects29(a: JSONArray?): List<JSONObject> {
+    if (a == null) return emptyList()
+    return (0 until a.length()).mapNotNull { a.optJSONObject(it) }
+}
+
+private fun arrStrings29(a: JSONArray?): List<String> {
+    if (a == null) return emptyList()
+    return (0 until a.length()).mapNotNull { a.optString(it).takeIf(String::isNotBlank) }
+}
+
+@Composable
+fun HistoryLabScreen29() {
+    var data by remember { mutableStateOf<JSONObject?>(null) }
+    var error by remember { mutableStateOf<String?>(null) }
+    var horizon by remember { mutableStateOf("中短线") }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            runCatching { fetchHistory29() }
+                .onSuccess { data = it; error = null }
+                .onFailure { error = "动态历史统计尚未生成或网络暂不可用" }
+            delay(60000)
+        }
+    }
+
+    val root = data
+    val coverage = root?.optJSONObject("coverage")
+    val view = if (horizon == "中短线") root?.optJSONObject("shortTerm") else root?.optJSONObject("longTerm")
+    val metrics = arrObjects29(view?.optJSONArray("metrics"))
+    val eventPath = arrObjects29(view?.optJSONArray("eventPath"))
+    val edgeTrend = arrObjects29(view?.optJSONArray("edgeTrend"))
+    val vitals = view?.optJSONObject("vitals")
+    val risk = view?.optJSONObject("risk")
+    val heatmap = view?.optJSONObject("heatmap")
+    val sf = view?.optJSONObject("successFailure")
+    val cases = view?.optJSONObject("cases")
+    val best = view?.optJSONObject("bestHolding")
+    val policy = root?.optJSONObject("dataPolicy")
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().background(HistBg29),
+        contentPadding = PaddingValues(14.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        item {
+            Card(
+                shape = RoundedCornerShape(18.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White)
+            ) {
+                Column(
+                    Modifier.fillMaxWidth().padding(15.dp),
+                    verticalArrangement = Arrangement.spacedBy(7.dp)
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f)) {
+                            Text("动态历史形态实验室", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                            Text("每日新增冻结样本 · 路径持续成熟 · 统计与形态趋势自动更新", color = HistMuted29, fontSize = 10.sp)
+                        }
+                        Text(
+                            root?.optString("updatedAt")?.replace("T", " ")?.take(16) ?: "等待数据",
+                            color = HistBlue29,
+                            fontSize = 9.sp
+                        )
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        HistMetric29("冻结交易日", coverage?.optInt("frozenSignalDays")?.takeIf { it > 0 }?.toString() ?: "0", HistBlue29, Modifier.weight(1f))
+                        HistMetric29("形态样本", coverage?.optInt("rawSamples")?.toString() ?: "0", HistInk29, Modifier.weight(1f))
+                        HistMetric29("历史重建", coverage?.optInt("reconstructedSamples")?.toString() ?: "0", HistAmber29, Modifier.weight(1f))
+                    }
+                    Text(
+                        "冻结范围 ${coverage?.optString("firstFrozenDate").orEmpty().ifBlank { "—" }} → ${coverage?.optString("lastFrozenDate").orEmpty().ifBlank { "—" }}",
+                        color = HistMuted29, fontSize = 9.sp
+                    )
+                    Surface(color = HistSoftBlue29, shape = RoundedCornerShape(10.dp)) {
+                        Text(
+                            policy?.optString("lookAheadZh").orEmpty().ifBlank { "只在结果已经成熟后纳入统计，禁止未来数据倒填。" },
+                            Modifier.fillMaxWidth().padding(9.dp), fontSize = 9.sp, color = HistInk29
+                        )
+                    }
+                }
+            }
+        }
+
+        item {
+            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+                listOf("中短线", "中长线").forEachIndexed { index, item ->
+                    SegmentedButton(
+                        selected = horizon == item,
+                        onClick = { horizon = item },
+                        shape = SegmentedButtonDefaults.itemShape(index, 2),
+                        label = { Text(item, fontSize = 11.sp) }
+                    )
+                }
+            }
+        }
+
+        if (error != null) {
+            item {
+                Surface(color = Color(0xFFFFF4E2), shape = RoundedCornerShape(12.dp)) {
+                    Text(error!!, Modifier.fillMaxWidth().padding(10.dp), color = HistAmber29, fontSize = 10.sp)
+                }
+            }
+        }
+
+        item { HistSectionTitle29("形态生命体征") }
+        item { VitalsCard29(vitals, best, horizon) }
+
+        item { HistSectionTitle29("多周期历史表现") }
+        item {
+            Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                    MetricBarChart29(metrics)
+                    MetricsTable29(metrics)
+                }
+            }
+        }
+
+        item { HistSectionTitle29("历史累计路径") }
+        item {
+            Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                    Text("中位收益路径 + 25%~75%历史区间 + 沪深300同期路径", fontSize = 9.sp, color = HistMuted29)
+                    EventPathChart29(eventPath)
+                    if (eventPath.isNotEmpty()) {
+                        val last = eventPath.last()
+                        Text(
+                            "当前最远成熟至第${last.optInt("day")}个交易日 · 该点样本${last.optInt("sampleCount")}个",
+                            fontSize = 9.sp, color = HistMuted29
+                        )
+                    } else {
+                        Text("后续路径尚未形成足够成熟样本。", fontSize = 10.sp, color = HistMuted29)
+                    }
+                }
+            }
+        }
+
+        item { HistSectionTitle29("历史优势变化趋势") }
+        item {
+            Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                    Text("只在对应持有周期已经成熟的日期后加入结果，观察形态是否增强、稳定或弱化。", fontSize = 9.sp, color = HistMuted29)
+                    EdgeTrendChart29(edgeTrend)
+                    if (edgeTrend.size < 3) Text("当前成熟观察点较少，趋势判断以“样本积累中”为主。", fontSize = 9.sp, color = HistAmber29)
+                }
+            }
+        }
+
+        item { HistSectionTitle29("风险与正常回撤") }
+        item { RiskCard29(risk) }
+
+        item { HistSectionTitle29("追高风险 × 股票池条件") }
+        item { HeatmapCard29(heatmap) }
+
+        item { HistSectionTitle29("成功与失败形态差异") }
+        item { SuccessFailureCard29(sf) }
+
+        item { HistSectionTitle29("具体历史案例") }
+        item { CasesCard29(cases) }
+
+        item {
+            Card(shape = RoundedCornerShape(14.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("数据口径", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    Text(policy?.optString("liveFrozenZh").orEmpty().ifBlank { "实时冻结样本永久保留失败与退出成员。" }, fontSize = 9.sp)
+                    Text(policy?.optString("entryZh").orEmpty(), fontSize = 9.sp, color = HistMuted29)
+                    Text(policy?.optString("reconstructionZh").orEmpty(), fontSize = 9.sp, color = HistAmber29)
+                    Text(coverage?.optString("reconstructionStatusZh").orEmpty(), fontSize = 9.sp, color = HistMuted29)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun HistMetric29(label: String, value: String, color: Color, modifier: Modifier = Modifier) {
+    Column(modifier) {
+        Text(label, fontSize = 9.sp, color = HistMuted29)
+        Text(value, fontSize = 14.sp, color = color, fontWeight = FontWeight.Bold)
+    }
+}
+
+@Composable
+private fun HistSectionTitle29(text: String) {
+    Text(text, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = HistInk29)
+}
+
+@Composable
+private fun VitalsCard29(v: JSONObject?, best: JSONObject?, horizon: String) {
+    val state = v?.optString("state").orEmpty().ifBlank { "样本积累中" }
+    val stateColor = when {
+        state.contains("增强") -> HistRed29
+        state.contains("弱化") || state.contains("暂无") -> HistGreen29
+        state.contains("积累") -> HistAmber29
+        else -> HistBlue29
+    }
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(state, color = stateColor, fontWeight = FontWeight.Bold, fontSize = 17.sp)
+                    Text("可信度 ${v?.optString("confidence").orEmpty().ifBlank { "低" }}", color = HistMuted29, fontSize = 9.sp)
+                }
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        best?.optInt("sessions")?.takeIf { it > 0 }?.let { "${it}日" } ?: "待积累",
+                        fontWeight = FontWeight.Bold, fontSize = 16.sp, color = HistBlue29
+                    )
+                    Text("当前最佳持有周期", color = HistMuted29, fontSize = 8.sp)
+                }
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                HistMetric29("累计中位超额", pct29(num29(v, "longMedianAlpha")), valueColor29(num29(v, "longMedianAlpha")), Modifier.weight(1f))
+                HistMetric29("近期中位超额", pct29(num29(v, "recentMedianAlpha")), valueColor29(num29(v, "recentMedianAlpha")), Modifier.weight(1f))
+                HistMetric29("近期胜率", ratio29(num29(v, "recentHitRate")), HistBlue29, Modifier.weight(1f))
+            }
+            Text(v?.optString("reasonZh").orEmpty().ifBlank { "$horizon历史样本正在持续成熟。" }, fontSize = 9.sp, color = HistMuted29)
+        }
+    }
+}
+
+@Composable
+private fun MetricBarChart29(metrics: List<JSONObject>) {
+    val rows = metrics.filter { (it.optInt("sampleCount") > 0) && num29(it, "medianReturn") != null }
+    if (rows.isEmpty()) {
+        Text("尚无成熟多周期样本。", color = HistMuted29, fontSize = 10.sp)
+        return
+    }
+    val vals = rows.flatMap { listOfNotNull(num29(it, "medianReturn"), num29(it, "medianAlpha")) }
+    val maxAbs = max(0.01, vals.maxOfOrNull { abs(it) } ?: 0.01)
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        rows.forEach { m ->
+            val ret = num29(m, "medianReturn") ?: 0.0
+            val alpha = num29(m, "medianAlpha")
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("${m.optInt("sessions")}日", Modifier.width(34.dp), fontSize = 9.sp, color = HistMuted29)
+                Box(Modifier.weight(1f).height(11.dp).background(Color(0xFFF0F2F6), RoundedCornerShape(5.dp))) {
+                    val frac = (abs(ret) / maxAbs).coerceIn(0.0, 1.0).toFloat()
+                    Box(
+                        Modifier.fillMaxHeight().fillMaxWidth(frac)
+                            .background(if (ret >= 0) HistSoftRed29 else HistSoftGreen29, RoundedCornerShape(5.dp))
+                    )
+                }
+                Spacer(Modifier.width(7.dp))
+                Text(pct29(ret), Modifier.width(58.dp), color = valueColor29(ret), fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                Text(alpha?.let { "超额 ${pct29(it)}" } ?: "超额 —", Modifier.width(78.dp), color = valueColor29(alpha), fontSize = 8.sp)
+            }
+        }
+    }
+}
+
+@Composable
+private fun MetricsTable29(metrics: List<JSONObject>) {
+    HorizontalDivider()
+    Row(Modifier.fillMaxWidth().padding(vertical = 2.dp)) {
+        listOf("周期", "样本", "中位收益", "胜率", "中位超额").forEachIndexed { i, t ->
+            Text(t, fontSize = 8.sp, color = HistMuted29, modifier = Modifier.weight(if (i == 0) .65f else 1f))
+        }
+    }
+    metrics.forEach { m ->
+        Row(Modifier.fillMaxWidth().padding(vertical = 2.dp)) {
+            Text("${m.optInt("sessions")}日", fontSize = 8.sp, modifier = Modifier.weight(.65f))
+            Text(m.optInt("sampleCount").toString(), fontSize = 8.sp, modifier = Modifier.weight(1f))
+            Text(pct29(num29(m, "medianReturn")), fontSize = 8.sp, color = valueColor29(num29(m, "medianReturn")), modifier = Modifier.weight(1f))
+            Text(ratio29(num29(m, "hitRate")), fontSize = 8.sp, modifier = Modifier.weight(1f))
+            Text(pct29(num29(m, "medianAlpha")), fontSize = 8.sp, color = valueColor29(num29(m, "medianAlpha")), modifier = Modifier.weight(1f))
+        }
+    }
+}
+
+@Composable
+private fun EventPathChart29(points: List<JSONObject>) {
+    if (points.size < 2) return
+    val med = points.mapNotNull { num29(it, "median") }
+    val q25 = points.mapNotNull { num29(it, "q25") }
+    val q75 = points.mapNotNull { num29(it, "q75") }
+    val bench = points.mapNotNull { num29(it, "benchmarkMedian") }
+    val all = med + q25 + q75 + bench + listOf(0.0)
+    val lo = all.minOrNull() ?: -0.01
+    val hi = all.maxOrNull() ?: 0.01
+    val span = max(0.02, hi - lo)
+    Canvas(Modifier.fillMaxWidth().height(190.dp)) {
+        fun y(v: Double): Float = size.height - (((v - lo) / span).toFloat() * size.height)
+        fun x(i: Int): Float = if (points.size <= 1) 0f else i.toFloat() / (points.size - 1) * size.width
+
+        val zeroY = y(0.0)
+        drawLine(Color(0xFFD7DBE5), Offset(0f, zeroY), Offset(size.width, zeroY), strokeWidth = 1.5f)
+
+        val band = Path()
+        points.forEachIndexed { i, p ->
+            val v = num29(p, "q75") ?: num29(p, "median") ?: 0.0
+            if (i == 0) band.moveTo(x(i), y(v)) else band.lineTo(x(i), y(v))
+        }
+        for (i in points.indices.reversed()) {
+            val p = points[i]
+            val v = num29(p, "q25") ?: num29(p, "median") ?: 0.0
+            band.lineTo(x(i), y(v))
+        }
+        band.close()
+        drawPath(band, HistBlue29.copy(alpha = .10f))
+
+        fun drawSeries(key: String, color: Color, width: Float) {
+            val path = Path()
+            var started = false
+            points.forEachIndexed { i, p ->
+                val v = num29(p, key) ?: return@forEachIndexed
+                if (!started) { path.moveTo(x(i), y(v)); started = true } else path.lineTo(x(i), y(v))
+            }
+            if (started) drawPath(path, color, style = androidx.compose.ui.graphics.drawscope.Stroke(width = width))
+        }
+        drawSeries("median", HistBlue29, 4f)
+        drawSeries("benchmarkMedian", HistMuted29, 2f)
+    }
+    Row(horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+        Text("● 形态中位路径", color = HistBlue29, fontSize = 8.sp)
+        Text("● 沪深300同期", color = HistMuted29, fontSize = 8.sp)
+        Text("阴影：25%~75%区间", color = HistMuted29, fontSize = 8.sp)
+    }
+}
+
+@Composable
+private fun EdgeTrendChart29(points: List<JSONObject>) {
+    if (points.size < 2) {
+        Text("成熟观察点不足，继续每日累计。", color = HistMuted29, fontSize = 10.sp)
+        return
+    }
+    val shown = points.takeLast(60)
+    val vals = shown.mapNotNull { num29(it, "medianAlpha") } + listOf(0.0)
+    val lo = min(-0.01, vals.minOrNull() ?: -0.01)
+    val hi = max(0.01, vals.maxOrNull() ?: 0.01)
+    val span = max(0.02, hi - lo)
+    Canvas(Modifier.fillMaxWidth().height(140.dp)) {
+        fun y(v: Double): Float = size.height - (((v - lo) / span).toFloat() * size.height)
+        fun x(i: Int): Float = i.toFloat() / max(1, shown.size - 1) * size.width
+        drawLine(Color(0xFFD7DBE5), Offset(0f, y(0.0)), Offset(size.width, y(0.0)), strokeWidth = 1.5f)
+        val path = Path()
+        var started = false
+        shown.forEachIndexed { i, p ->
+            val v = num29(p, "medianAlpha") ?: return@forEachIndexed
+            if (!started) { path.moveTo(x(i), y(v)); started = true } else path.lineTo(x(i), y(v))
+        }
+        if (started) drawPath(path, HistBlue29, style = androidx.compose.ui.graphics.drawscope.Stroke(width = 4f))
+    }
+    val last = shown.last()
+    Row {
+        Text(shown.first().optString("date"), color = HistMuted29, fontSize = 8.sp, modifier = Modifier.weight(1f))
+        Text("最新滚动中位超额 ${pct29(num29(last, "medianAlpha"))}", color = valueColor29(num29(last, "medianAlpha")), fontSize = 9.sp, fontWeight = FontWeight.Bold)
+    }
+}
+
+@Composable
+private fun RiskCard29(risk: JSONObject?) {
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                HistMetric29("中位最大有利涨幅", pct29(num29(risk, "medianMfe")), HistRed29, Modifier.weight(1f))
+                HistMetric29("中位最大不利跌幅", pct29(num29(risk, "medianMae")), HistGreen29, Modifier.weight(1f))
+                HistMetric29("中位最大回撤", pct29(num29(risk, "medianMaxDrawdown")), HistGreen29, Modifier.weight(1f))
+            }
+            Text("当前风险统计按每个冻结样本“截至最新跟踪日”的路径计算；后续会随着样本成熟持续变化。", color = HistMuted29, fontSize = 9.sp)
+        }
+    }
+}
+
+@Composable
+private fun HeatmapCard29(hm: JSONObject?) {
+    val rows = arrStrings29(hm?.optJSONArray("rows"))
+    val cols = arrStrings29(hm?.optJSONArray("cols"))
+    val cells = arrObjects29(hm?.optJSONArray("cells"))
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+            if (rows.isEmpty() || cols.isEmpty()) {
+                Text("条件组合样本尚未形成。", color = HistMuted29, fontSize = 10.sp)
+            } else {
+                Row {
+                    Text("追高", Modifier.width(38.dp), fontSize = 8.sp, color = HistMuted29)
+                    cols.forEach { Text(it, Modifier.weight(1f), fontSize = 8.sp, color = HistMuted29) }
+                }
+                rows.forEach { r ->
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(r, Modifier.width(38.dp), fontSize = 9.sp)
+                        cols.forEach { c ->
+                            val cell = cells.firstOrNull { it.optString("row") == r && it.optString("col") == c }
+                            val a = num29(cell, "medianAlpha")
+                            val n = cell?.optInt("sampleCount") ?: 0
+                            val bg = when {
+                                a == null -> Color(0xFFF2F3F6)
+                                a >= .02 -> Color(0xFFFFD7D7)
+                                a > 0 -> Color(0xFFFFEEEE)
+                                a <= -.02 -> Color(0xFFDCEFE7)
+                                else -> Color(0xFFEEF7F3)
+                            }
+                            Surface(modifier = Modifier.weight(1f).padding(2.dp), color = bg, shape = RoundedCornerShape(8.dp)) {
+                                Column(Modifier.padding(vertical = 7.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text(a?.let(::pct29) ?: "—", fontSize = 8.sp, fontWeight = FontWeight.Bold, color = valueColor29(a))
+                                    Text("N=$n", fontSize = 7.sp, color = HistMuted29)
+                                }
+                            }
+                        }
+                    }
+                }
+                Text("格子显示核心持有周期的中位超额收益；样本数同时展示，避免小样本误导。", fontSize = 8.sp, color = HistMuted29)
+            }
+        }
+    }
+}
+
+@Composable
+private fun SuccessFailureCard29(sf: JSONObject?) {
+    val good = sf?.optJSONObject("success")
+    val bad = sf?.optJSONObject("failure")
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+            Text("${sf?.optString("successDefinitionZh").orEmpty()} / ${sf?.optString("failureDefinitionZh").orEmpty()}", fontSize = 9.sp, color = HistMuted29)
+            Row {
+                Text("指标", Modifier.weight(1.2f), fontSize = 8.sp, color = HistMuted29)
+                Text("成功样本", Modifier.weight(1f), fontSize = 8.sp, color = HistRed29)
+                Text("失败样本", Modifier.weight(1f), fontSize = 8.sp, color = HistGreen29)
+            }
+            CompareRow29("样本数", good?.optInt("sampleCount")?.toString() ?: "0", bad?.optInt("sampleCount")?.toString() ?: "0")
+            CompareRow29("平均信号评分", num29(good, "avgScore")?.let { String.format("%.1f", it) } ?: "—", num29(bad, "avgScore")?.let { String.format("%.1f", it) } ?: "—")
+            CompareRow29("平均资金强度", num29(good, "avgMainFlowPct")?.let { String.format("%+.1f%%", it) } ?: "—", num29(bad, "avgMainFlowPct")?.let { String.format("%+.1f%%", it) } ?: "—")
+            CompareRow29("高追高占比", ratio29(num29(good, "highChasePct")), ratio29(num29(bad, "highChasePct")))
+            CompareRow29("高置信占比", ratio29(num29(good, "highConfidencePct")), ratio29(num29(bad, "highConfidencePct")))
+        }
+    }
+}
+
+@Composable
+private fun CompareRow29(name: String, good: String, bad: String) {
+    Row(Modifier.fillMaxWidth().padding(vertical = 2.dp)) {
+        Text(name, Modifier.weight(1.2f), fontSize = 8.sp)
+        Text(good, Modifier.weight(1f), fontSize = 8.sp, color = HistRed29)
+        Text(bad, Modifier.weight(1f), fontSize = 8.sp, color = HistGreen29)
+    }
+}
+
+@Composable
+private fun CasesCard29(cases: JSONObject?) {
+    val good = arrObjects29(cases?.optJSONArray("success"))
+    val bad = arrObjects29(cases?.optJSONArray("failure"))
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+            if (good.isEmpty() && bad.isEmpty()) {
+                Text("成熟案例尚不足。", color = HistMuted29, fontSize = 10.sp)
+            } else {
+                Text("典型成功案例", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = HistRed29)
+                good.forEach { CaseRow29(it) }
+                HorizontalDivider()
+                Text("典型失败案例", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = HistGreen29)
+                bad.forEach { CaseRow29(it) }
+            }
+            Text("成功和失败同时展示，禁止只挑漂亮案例。", fontSize = 8.sp, color = HistMuted29)
+        }
+    }
+}
+
+@Composable
+private fun CaseRow29(x: JSONObject) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("${x.optString("name")} ${x.optString("code")}", fontWeight = FontWeight.Bold, fontSize = 9.sp)
+            Text("${x.optString("signalDate")} · ${x.optString("sector")} · ${x.optString("pool")} · 追高${x.optString("chaseRisk")}", color = HistMuted29, fontSize = 7.sp)
+        }
+        Column(horizontalAlignment = Alignment.End) {
+            Text(pct29(num29(x, "return")), color = valueColor29(num29(x, "return")), fontWeight = FontWeight.Bold, fontSize = 10.sp)
+            Text("超额 ${pct29(num29(x, "alpha"))}", color = valueColor29(num29(x, "alpha")), fontSize = 7.sp)
+        }
+    }
+}
+''', encoding="utf-8")
+
+v6 = root / "V6Activity.kt"
+s = v6.read_text(encoding="utf-8")
+old = 'Tab.HISTORY -> HistoryScreen(snapshots, active, quotes, selectedDate) { selectedDate = it }'
+if old in s:
+    s = s.replace(old, 'Tab.HISTORY -> HistoryLabScreen29()', 1)
+else:
+    s, n = re.subn(r'Tab\.HISTORY\s*->\s*HistoryScreen\([^\n]+', 'Tab.HISTORY -> HistoryLabScreen29()', s, count=1)
+    if n != 1:
+        raise SystemExit("cannot replace history route with dynamic history lab")
+v6.write_text(s, encoding="utf-8")
+
+manifest = Path("app/src/main/AndroidManifest.xml")
+ms = manifest.read_text(encoding="utf-8")
+if 'android:icon="@drawable/app_icon"' not in ms:
+    ms = ms.replace(
+        '<application android:allowBackup="true" android:label="A股主线研究"',
+        '<application android:allowBackup="true" android:label="A股主线研究" android:icon="@drawable/app_icon" android:roundIcon="@drawable/app_icon"',
+        1,
+    )
+manifest.write_text(ms, encoding="utf-8")
+
+g = Path("app/build.gradle.kts")
+gs = g.read_text(encoding="utf-8")
+gs = gs.replace("versionCode = 30", "versionCode = 31")
+gs = gs.replace('versionName = "2.8.0"', 'versionName = "2.9.0"')
+if 'versionName = "2.9.0"' not in gs:
+    raise SystemExit("v2.9 version bump failed")
+g.write_text(gs, encoding="utf-8")
+
+icon = Path("app/src/main/res/drawable/app_icon.png")
+if not icon.exists():
+    raise SystemExit("financial app icon missing from source branch")
+
+assert ui.exists()
+assert "HistoryLabScreen29()" in v6.read_text(encoding="utf-8")
+assert 'android:icon="@drawable/app_icon"' in manifest.read_text(encoding="utf-8")
+print("v2.9 dynamic history lab + financial app icon integrated")
