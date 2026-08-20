@@ -15,7 +15,7 @@ on:
     - cron: '0,5,10,15,20,25,30 3 * * 1-5'
     # A股下午 13:00-14:55 CST = 05:00-06:55 UTC，每5分钟。
     - cron: '*/5 5-6 * * 1-5'
-    # 15:00 Final + 延迟兜底；脚本只接受当日有效收盘附近行情。
+    # 15:00 Final + 延迟兜底。
     - cron: '0,5,10,20 7 * * 1-5'
 
 permissions:
@@ -30,6 +30,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - name: 记录雷达运行编号
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-radar-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          if [ -n "$OLD_SHA" ]; then
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-radar-run.txt -f message='Record latest radar run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+          else
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-radar-run.txt -f message='Record latest radar run' -f content="$CONTENT" -f branch='main' >/dev/null
+          fi
       - uses: actions/checkout@v4
         with:
           ref: main
