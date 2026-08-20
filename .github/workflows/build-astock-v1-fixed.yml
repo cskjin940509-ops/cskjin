@@ -96,6 +96,8 @@ jobs:
         run: python tools/patch_v3_2_restore_pool_history.py
       - name: 接入可调资金与动态智能实盘
         run: python tools/patch_v3_3_dynamic_ai_personal_capital.py
+      - name: 修复动态目标组合结构并支持资金即时再平衡
+        run: python tools/patch_v3_3_dynamic_target_compat.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
