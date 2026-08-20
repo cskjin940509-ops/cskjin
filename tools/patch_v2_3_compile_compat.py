@@ -17,25 +17,23 @@ fun tradeAssist(code: String, s: Snapshot, meta: StockMeta?, q: Quote?): TradeAs
     val high = q?.high ?: meta?.dayHigh
     val low = q?.low ?: meta?.dayLow
     val chg = q?.change ?: meta?.dayChangePct
-    val flow = meta?.mainFlowPct
     if (price == null || high == null || low == null || low <= 0) {
         return TradeAssist("条件不足，暂不介入", "条件不足，暂不判断离场", "缺少可靠价格区间时不生成交易提示。")
     }
     val nearHigh = high > 0 && price / high >= 0.985
     val nearLow = price / low <= 1.015
     val rangePosition = if (high > low) (price - low) / (high - low) else 0.5
-    val strongFlow = (flow ?: 0.0) >= 5.0
     val entry = when {
         (chg ?: 0.0) >= 8.0 && nearHigh -> "涨幅较大且接近日内高位，不宜追高"
         (chg ?: 0.0) <= -4.0 || nearLow -> "价格处于弱势区，等待重新企稳"
-        strongFlow && rangePosition in 0.30..0.72 && (chg ?: 0.0) in -1.5..5.0 -> "资金与价格结构尚可，可观察分批介入"
+        rangePosition in 0.30..0.68 && (chg ?: 0.0) in -1.5..4.0 -> "价格结构尚可，可观察分批介入"
         rangePosition > 0.80 -> "价格位置偏高，等待回踩确认"
-        else -> "保持观察，等待价格与资金共振"
+        else -> "保持观察，等待价格结构确认"
     }
     val holding = when {
         (chg ?: 0.0) >= 7.0 && nearHigh -> "已有可卖持仓：接近日内高位，可考虑分批保护利润"
         (chg ?: 0.0) <= -4.0 && nearLow -> "已有可卖持仓：弱势接近日内低位，关注保护性减仓"
-        strongFlow && rangePosition >= 0.45 -> "已有可卖持仓：趋势未明显破坏，可继续观察"
+        rangePosition >= 0.45 -> "已有可卖持仓：价格结构未明显破坏，可继续观察"
         else -> "已有可卖持仓：暂未触发明确保护条件"
     }
     val today = java.time.LocalDate.now(CnZone).toString()
@@ -101,14 +99,13 @@ fun DataCoverageCard(s: Snapshot) {
     val allCodes = s.pools.values.flatten().distinct()
     val metas = allCodes.mapNotNull { s.stocks[it] }
     val priceVerified = metas.count { it.priceProviders.size >= 2 || it.priceMaxRelDiff != null }
-    val withFlow = metas.count { it.mainNetFlow != null || it.mainFlowPct != null }
     val withOhlc = metas.count { it.dayHigh != null && it.dayLow != null }
     CardBlock {
         Text("数据完整性", fontWeight = FontWeight.Bold)
         Key("入池股票", "${allCodes.size}只")
         Key("价格核对", if (allCodes.isEmpty()) "—" else "$priceVerified/${allCodes.size}")
-        Key("资金字段", if (allCodes.isEmpty()) "—" else "$withFlow/${allCodes.size}")
         Key("当日高低", if (allCodes.isEmpty()) "—" else "$withOhlc/${allCodes.size}")
+        Key("主力资金因子", s.factorAvailability["B3"] ?: "未标注")
         if (s.factorAvailability.isNotEmpty()) {
             val missing = s.factorAvailability.filterValues { it.contains("未同步") || it.contains("留空") }
             if (missing.isNotEmpty()) Text(missing.entries.joinToString(" · ") { "${it.key}: ${it.value}" }, fontSize = 8.sp, color = Muted, maxLines = 3)
@@ -133,7 +130,6 @@ fun OfficialSectorRow(x: OfficialSector, date: String) {
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text("涨跌 ${x.changePct?.let(::pct) ?: "—"}", fontSize = 9.sp, color = x.changePct?.let(::pnl) ?: Muted)
                 Text("广度 ${x.breadthPct?.let { String.format("%.0f%%", it) } ?: "—"}", fontSize = 9.sp, color = Muted)
-                Text("资金 ${x.mainFlowPct?.let { String.format("%+.2f%%", it) } ?: "—"}", fontSize = 9.sp, color = Muted)
             }
             x.reason?.let { Text(it, fontSize = 8.sp, color = Muted, maxLines = 2) }
         }
@@ -205,9 +201,6 @@ if blocks:
 
 p.write_text(s,encoding='utf-8')
 
-# DetailScreens calls the package-level tradeAssist helper; make sure no stale local
-# declaration shadows it and leave the actual UI logic intact.
 d=Path('app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt')
 ds=d.read_text(encoding='utf-8')
-# No stub here: successful compilation proves the shared package helper is visible.
 d.write_text(ds,encoding='utf-8')
