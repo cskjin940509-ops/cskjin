@@ -40,7 +40,6 @@ def all_a_rows():
                 try:
                     _,rows=f.result();collected.extend(rows)
                 except Exception:pass
-    # Never present duplicate page artifacts as market breadth.
     unique={}
     for x in collected:
         c=str(x.get('f12') or '')
@@ -72,6 +71,12 @@ def setup_rank(p):
     h=((p.get('setup') or {}).get('historical') or {})
     samples=int(h.get('samples') or 0); win=float(h.get('win5D') or 0.5); avg=float(h.get('avg5D') or 0)
     return float((p.get('setup') or {}).get('score') or 0)+min(samples,12)*0.5+(win-0.5)*18+avg*80
+
+def has_historical_edge(p):
+    h=((p.get('setup') or {}).get('historical') or {})
+    samples=int(h.get('samples') or 0); win=float(h.get('win5D') or 0); avg=float(h.get('avg5D') or 0)
+    mfe=float(h.get('avgMFE5D') or 0); mae=abs(float(h.get('avgMAE5D') or 0))
+    return samples>=3 and win>=0.55 and avg>0 and (mae==0 or mfe>=mae*0.8)
 
 def main():
     if not OUT.exists():raise RuntimeError('trade plan latest missing')
@@ -105,15 +110,17 @@ def main():
         if payload.get('phase')=='PREOPEN':p['action']='盘前形态候选'
         plans.append(p)
     plans.sort(key=setup_rank,reverse=True)
-    strong=[p for p in plans if int(((p.get('setup') or {}).get('historical') or {}).get('samples') or 0)>=3]
-    chosen=(strong if strong else plans)[:12]
+    edged=[p for p in plans if has_historical_edge(p)]
+    chosen=edged[:8]
     payload['setupCandidates']=chosen
     sm=payload.setdefault('summary',{});sm['expandedSetupCandidates']=len(chosen);sm['marketPrefilterCount']=len(pre);sm['marketScannedCount']=len(histories)
     coverage=(len(rows)/reported_total if reported_total else None)
     payload['marketSetupScan']={'state':'ready' if not reported_total or len(rows)>=reported_total*0.95 else 'partial',
         'scope':'沪深A股；北交所未使用未验证的列表参数，单独留待补充','reportedTotal':reported_total,'uniqueRows':len(rows),'pagesRequested':pages,
         'coveragePct':round(coverage*100,2) if coverage is not None else None,'prefiltered':len(pre),'historyLoaded':sum(bool(v) for v in histories.values()),
-        'setupMatches':len(plans),'selected':len(chosen),'method':'沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→历史5D/MFE/MAE排序'}
+        'setupMatches':len(plans),'historicalEdgeMatches':len(edged),'selected':len(chosen),
+        'historicalGate':'样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE',
+        'method':'沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序'}
     OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(payload['marketSetupScan'],ensure_ascii=False))
 
