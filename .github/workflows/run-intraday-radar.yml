@@ -1,0 +1,64 @@
+name: Run AStock All-Day Early Mainline Radar
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/run_intraday_radar.py'
+      - 'tools/enrich_intraday_radar_yunai.py'
+      - '.github/workflows/run-intraday-radar.yml'
+  schedule:
+    # A股上午 09:30-11:30 CST = 01:30-03:30 UTC，每5分钟。
+    - cron: '30,35,40,45,50,55 1 * * 1-5'
+    - cron: '*/5 2 * * 1-5'
+    - cron: '0,5,10,15,20,25,30 3 * * 1-5'
+    # A股下午 13:00-14:55 CST = 05:00-06:55 UTC，每5分钟。
+    - cron: '*/5 5-6 * * 1-5'
+    # 15:00 Final + 延迟兜底；脚本只接受当日有效收盘附近行情。
+    - cron: '0,5,10,20 7 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-intraday-radar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 从开盘起滚动主线形成雷达
+        id: radar
+        run: |
+          OUT=$(python tools/run_intraday_radar.py)
+          echo "$OUT"
+          STATE=$(printf '%s\n' "$OUT" | tail -n 1 | python -c 'import json,sys; print(json.load(sys.stdin).get("state", "unknown"))')
+          echo "state=$STATE" >> "$GITHUB_OUTPUT"
+      - name: 云AI独立行情与资金确认
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen'
+        env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+        run: python tools/enrich_intraday_radar_yunai.py
+      - name: 保存盘中时点与收盘最终雷达
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        run: |
+          git config user.name 'astock-radar-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_radar
+          if git diff --cached --quiet; then
+            echo 'No radar changes.'
+            exit 0
+          fi
+          git commit -m 'Update all-day A-share early mainline radar'
+          git pull --rebase origin main
+          git push origin HEAD:main
