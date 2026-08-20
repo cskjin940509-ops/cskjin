@@ -74,7 +74,8 @@ jobs:
         run: |
           python tools/patch_v2_6_stock_trading_cn.py || python tools/patch_v2_6_stock_ui_hotfix.py
       - name: 强制执行最终全中文显示层
-        run: python tools/patch_v2_7_full_chinese_ui.py
+        run: |
+          python tools/patch_v2_7_full_chinese_ui.py || python tools/patch_v2_7_full_chinese_ui_finish.py
       - name: 接入AI影子实盘组合
         run: python tools/patch_v2_8_ai_shadow_portfolio.py
       - uses: actions/setup-java@v4
