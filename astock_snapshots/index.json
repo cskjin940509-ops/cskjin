@@ -2212,23 +2212,23 @@
       "version": "v1.4-next-open-verified-3source-display"
     },
     "audit": {
-      "status": "LegacyUnverified",
+      "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
         "missing-original-strategy-version",
         "missing-original-stock-metadata:17",
         "same-day-frozen-market-snapshot-missing",
-        "raw-price-cross-source-incomplete:0/17",
+        "raw-price-cross-source-incomplete:9/17",
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-08-21T17:55:56+08:00",
+      "auditedAt": "2026-08-23T12:23:46+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 17,
-          "verified": 0,
-          "coveragePct": 0.0,
+          "verified": 9,
+          "coveragePct": 52.94,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
@@ -6892,7 +6892,7 @@
         "raw-price-cross-source-incomplete:0/14",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-08-21T17:55:56+08:00",
+      "auditedAt": "2026-08-23T12:23:46+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -16841,7 +16841,7 @@
         "raw-price-cross-source-incomplete:0/18",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-08-21T17:55:56+08:00",
+      "auditedAt": "2026-08-23T12:23:46+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
