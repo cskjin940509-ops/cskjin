@@ -11,7 +11,7 @@
     "availableAt": "2026-08-25T16:23:24+08:00",
     "confidence": "高",
     "verifiedToday": true,
-    "dataSource": "Yunai Quant API（市场状态） + 腾讯行情 + 东方财富",
+    "dataSource": "腾讯行情 + 东方财富",
     "indices": {
       "sh000001": {
         "name": "上证指数",
@@ -66,8 +66,7 @@
     "breadthSampleCount": 100,
     "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
     "coreIndexCoverage": "6/6",
-    "coreIndexSource": "腾讯当日收盘快照",
-    "marketStatusProvider": "Yunai Quant API"
+    "coreIndexSource": "腾讯当日收盘快照"
   },
   "boardHeatmap": {
     "industry": [
@@ -3026,65 +3025,7 @@
   },
   "errors": [],
   "dataSources": [
-    "Yunai Quant API",
     "腾讯行情",
     "东方财富实时/延迟板块"
-  ],
-  "yunai": {
-    "configured": true,
-    "connected": true,
-    "marketStatus": {
-      "connected": true,
-      "provider": "Yunai Quant API",
-      "checkedAt": "2026-08-25T16:23:54+08:00",
-      "httpStatus": 200,
-      "contentType": "application/json",
-      "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
-      "responseDigest": "67c4b5f8c662f29e",
-      "data": [
-        {
-          "market": "CN",
-          "status": "CLOSING",
-          "marketStatus": "Closed"
-        }
-      ]
-    },
-    "openapiState": "ready",
-    "endpointCount": 38,
-    "categories": [
-      "K线",
-      "行情"
-    ]
-  },
-  "yunaiProduction": {
-    "checkedAt": "2026-08-25T16:23:58+08:00",
-    "provider": "Yunai Quant API",
-    "connected": true,
-    "marketStatus": {
-      "httpStatus": 200,
-      "type": "list",
-      "count": 1
-    },
-    "checkedSymbols": [
-      "300009",
-      "300363",
-      "301047",
-      "300109",
-      "301080",
-      "300122",
-      "002821",
-      "300601",
-      "688238",
-      "300841",
-      "300142",
-      "300149"
-    ],
-    "quoteAvailable": 12,
-    "capitalResponseAvailable": 12,
-    "roles": {
-      "realTimeQuotes": "第二实时行情源",
-      "capitalDistribution": "独立大单资金分布，不等同东方财富主力净流入",
-      "barsRange": "已验证可用，按需用于历史K线/RS校验"
-    }
-  }
+  ]
 }
