@@ -787,113 +787,342 @@
   ],
   "setupCandidates": [
     {
-      "code": "002428",
-      "name": "云南锗业",
-      "sector": "沪深市场形态扫描",
+      "code": "002099",
+      "name": "海翔药业",
+      "sector": "生物疫苗",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "盘前观察",
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 86.5,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 5.65,
+        "changePct": 4.24,
+        "open": 5.35,
+        "high": 5.85,
+        "low": 5.32,
+        "dayLowToHighPct": 9.96,
+        "quoteTime": "20260831145230"
+      },
+      "entryZone": [
+        5.593,
+        5.677
+      ],
+      "triggerPrice": 5.61,
+      "stopLoss": 5.443,
+      "takeProfit1": 5.923,
+      "takeProfit2": 6.116,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 5.443",
+      "reasons": [
+        "突破回踩",
+        "形态分 87",
+        "距MA20 +1.40 ATR",
+        "主力资金占比 +12.53%"
+      ]
+    },
+    {
+      "code": "300318",
+      "name": "博晖创新",
+      "sector": "生物制品",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 82.7,
+        "score": 83.1,
         "historical": {
           "samples": 3,
           "win5D": 0.6667,
-          "avg5D": 0.2261,
-          "avgMFE5D": 0.2663,
-          "avgMAE5D": -0.0259
+          "avg5D": 0.0197,
+          "avgMFE5D": 0.1408,
+          "avgMAE5D": -0.0286
         }
       },
       "quote": {
-        "price": 100.57,
-        "changePct": 0.91,
-        "open": null,
-        "high": 101.75,
-        "low": 95.03,
-        "dayLowToHighPct": 7.07,
-        "quoteTime": null
+        "price": 5.11,
+        "changePct": -0.58,
+        "open": 5.24,
+        "high": 5.3,
+        "low": 5.11,
+        "dayLowToHighPct": 3.72,
+        "quoteTime": "20260831145230"
       },
       "entryZone": [
-        100.107,
-        102.129
+        5.022,
+        5.124
       ],
-      "triggerPrice": 101.118,
-      "stopLoss": 95.051,
-      "takeProfit1": 110.219,
-      "takeProfit2": 116.286,
+      "triggerPrice": 5.073,
+      "stopLoss": 4.807,
+      "takeProfit1": 5.471,
+      "takeProfit2": 5.737,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 95.051",
+      "invalidation": "收盘/有效价格跌破 4.807",
       "reasons": [
         "趋势回踩",
         "形态分 83",
-        "距MA20 +0.50 ATR",
-        "主力资金占比 +1.63%"
-      ],
-      "source": "沪深市场历史形态精筛"
+        "距MA20 +0.33 ATR",
+        "主力资金占比 +3.63%"
+      ]
     },
     {
-      "code": "002365",
-      "name": "永安药业",
-      "sector": "沪深市场形态扫描",
+      "code": "000650",
+      "name": "仁和药业",
+      "sector": "生物疫苗",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "盘前观察",
+      "action": "买入候选",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 84.3,
+        "score": 80.2,
         "historical": {
-          "samples": 5,
-          "win5D": 1.0,
-          "avg5D": 0.1094,
-          "avgMFE5D": 0.1458,
-          "avgMAE5D": -0.0177
+          "samples": 20,
+          "win5D": 0.6,
+          "avg5D": 0.0023,
+          "avgMFE5D": 0.0246,
+          "avgMAE5D": -0.0247
         }
       },
       "quote": {
-        "price": 15.28,
-        "changePct": -0.71,
-        "open": null,
-        "high": 15.72,
-        "low": 14.71,
-        "dayLowToHighPct": 6.87,
-        "quoteTime": null
+        "price": 5.46,
+        "changePct": -1.97,
+        "open": 5.57,
+        "high": 5.58,
+        "low": 5.44,
+        "dayLowToHighPct": 2.57,
+        "quoteTime": "20260831145230"
       },
       "entryZone": [
-        15.103,
-        15.409
+        5.46,
+        5.536
       ],
-      "triggerPrice": 15.256,
-      "stopLoss": 14.341,
-      "takeProfit1": 16.629,
-      "takeProfit2": 17.544,
+      "triggerPrice": 5.481,
+      "stopLoss": 5.335,
+      "takeProfit1": 5.742,
+      "takeProfit2": 5.906,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 14.341",
+      "invalidation": "收盘/有效价格跌破 5.335",
       "reasons": [
         "趋势回踩",
-        "形态分 84",
-        "距MA20 +0.92 ATR",
-        "主力资金占比 +1.40%"
+        "形态分 80",
+        "距MA20 +0.00 ATR",
+        "主力资金占比 -3.78%"
+      ]
+    },
+    {
+      "code": "002880",
+      "name": "卫光生物",
+      "sector": "生物制品",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 79.1,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 22.01,
+        "changePct": -3.0,
+        "open": 22.47,
+        "high": 22.47,
+        "low": 21.85,
+        "dayLowToHighPct": 2.84,
+        "quoteTime": "20260831145230"
+      },
+      "entryZone": [
+        21.506,
+        21.94
       ],
-      "source": "沪深市场历史形态精筛"
+      "triggerPrice": 21.723,
+      "stopLoss": 20.646,
+      "takeProfit1": 23.339,
+      "takeProfit2": 24.416,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 20.646",
+      "reasons": [
+        "趋势回踩",
+        "形态分 79",
+        "距MA20 +0.77 ATR",
+        "主力资金占比 +0.64%"
+      ]
+    },
+    {
+      "code": "600739",
+      "name": "辽宁成大",
+      "sector": "生物制品",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_READY",
+        "label": "临界突破",
+        "score": 72.2,
+        "historical": {
+          "samples": 2,
+          "win5D": 0.0,
+          "avg5D": -0.0352,
+          "avgMFE5D": 0.0123,
+          "avgMAE5D": -0.0424
+        }
+      },
+      "quote": {
+        "price": 11.12,
+        "changePct": -0.98,
+        "open": 11.23,
+        "high": 11.28,
+        "low": 11.07,
+        "dayLowToHighPct": 1.9,
+        "quoteTime": "20260831145232"
+      },
+      "entryZone": [
+        11.18,
+        11.326
+      ],
+      "triggerPrice": 11.27,
+      "stopLoss": 11.064,
+      "takeProfit1": 11.536,
+      "takeProfit2": 11.725,
+      "riskReward1": 1.5,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 11.064",
+      "reasons": [
+        "临界突破",
+        "形态分 72",
+        "距MA20 +1.31 ATR",
+        "主力资金占比 +0.89%"
+      ]
+    },
+    {
+      "code": "002622",
+      "name": "皓宸医疗",
+      "sector": "医疗服务",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_READY",
+        "label": "临界突破",
+        "score": 72.1,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 2.7,
+        "changePct": 2.66,
+        "open": 2.62,
+        "high": 2.71,
+        "low": 2.62,
+        "dayLowToHighPct": 3.44,
+        "quoteTime": "20260831145230"
+      },
+      "entryZone": [
+        2.698,
+        2.734
+      ],
+      "triggerPrice": 2.72,
+      "stopLoss": 2.627,
+      "takeProfit1": 2.85,
+      "takeProfit2": 2.939,
+      "riskReward1": 1.5,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 2.627",
+      "reasons": [
+        "临界突破",
+        "形态分 72",
+        "距MA20 +1.72 ATR",
+        "主力资金占比 +0.37%"
+      ]
+    },
+    {
+      "code": "002524",
+      "name": "光正眼科",
+      "sector": "医疗服务",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_READY",
+        "label": "临界突破",
+        "score": 72.0,
+        "historical": {
+          "samples": 1,
+          "win5D": 1.0,
+          "avg5D": 0.0312,
+          "avgMFE5D": 0.0573,
+          "avgMAE5D": -0.0104
+        }
+      },
+      "quote": {
+        "price": 4.09,
+        "changePct": 1.24,
+        "open": 4.01,
+        "high": 4.09,
+        "low": 4.01,
+        "dayLowToHighPct": 2.0,
+        "quoteTime": "20260831145227"
+      },
+      "entryZone": [
+        4.107,
+        4.161
+      ],
+      "triggerPrice": 4.14,
+      "stopLoss": 4.033,
+      "takeProfit1": 4.285,
+      "takeProfit2": 4.385,
+      "riskReward1": 1.5,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 4.033",
+      "reasons": [
+        "临界突破",
+        "形态分 72",
+        "距MA20 +1.07 ATR",
+        "主力资金占比 -0.15%"
+      ]
     }
   ],
   "summary": {
     "official": 18,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 2,
-    "marketPrefilterCount": 220,
-    "marketScannedCount": 220
+    "expandedSetupCandidates": 7
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -906,20 +1135,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "ready",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5554,
-    "uniqueRows": 5511,
-    "pagesRequested": 56,
-    "coveragePct": 99.23,
-    "prefiltered": 220,
-    "historyLoaded": 220,
-    "setupMatches": 14,
-    "historicalEdgeMatches": 2,
-    "selected": 2,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
