@@ -27025,7 +27025,7 @@
     "note": "日终扫描已冻结；B1两融与B2 ETF一级份额均按T+1已发布数据参与，B4为基础/主力/慢资金综合排序。",
     "marketSnapshot": {
       "sourceDate": "2026-09-01",
-      "availableAt": "2026-09-01T15:16:47+08:00",
+      "availableAt": "2026-09-01T15:20:23+08:00",
       "confidence": "高",
       "verifiedToday": true,
       "dataSource": "腾讯行情 + 东方财富",
@@ -27035,42 +27035,42 @@
           "close": 3979.89,
           "changePct": -0.16,
           "amount": 944307560000.0,
-          "quoteTime": "151600"
+          "quoteTime": "152000"
         },
         "sz399006": {
           "name": "创业板指",
           "close": 3393.43,
           "changePct": -1.32,
           "amount": 507083390000.0,
-          "quoteTime": "151621"
+          "quoteTime": "152021"
         },
         "sh000688": {
           "name": "科创50",
           "close": 1647.53,
           "changePct": -2.19,
           "amount": 71081910000.0,
-          "quoteTime": "151600"
+          "quoteTime": "152000"
         },
         "sh000300": {
           "name": "沪深300",
           "close": 4611.44,
           "changePct": -0.3,
           "amount": 535708360000.0,
-          "quoteTime": "151600"
+          "quoteTime": "152000"
         },
         "sh000852": {
           "name": "中证1000",
           "close": 7691.37,
           "changePct": -1.02,
           "amount": 434667490000.0,
-          "quoteTime": "151600"
+          "quoteTime": "152000"
         },
         "sz399001": {
           "name": "深证成指",
           "close": 13872.38,
           "changePct": -1.02,
           "amount": 1089095260000.0,
-          "quoteTime": "151606"
+          "quoteTime": "152006"
         }
       },
       "totalAmount": null,
@@ -27083,7 +27083,8 @@
       "breadthSampleCount": 100,
       "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
       "coreIndexCoverage": "6/6",
-      "coreIndexSource": "腾讯当日收盘快照"
+      "coreIndexSource": "腾讯当日收盘快照",
+      "marketStatusProvider": "Yunai Quant API"
     },
     "boardHeatmap": {
       "industry": [
@@ -29691,12 +29692,15 @@
         }
       ],
       "sourceDate": "2026-09-01",
-      "availableAt": "2026-09-01T15:16:47+08:00"
+      "availableAt": "2026-09-01T15:20:23+08:00"
     },
     "syncStatus": {
       "officialCohort": "ready",
       "officialUpdatedAt": "2026-09-01T15:18:24+08:00",
-      "strategyVersion": "v1.9.0-verified-point-in-time-bse-slow-money"
+      "strategyVersion": "v1.9.0-verified-point-in-time-bse-slow-money",
+      "marketSnapshot": "ready",
+      "boardHeatmap": "ready",
+      "marketUpdatedAt": "2026-09-01T15:20:23+08:00"
     },
     "upgraded": [],
     "downgraded": [],
@@ -29921,6 +29925,32 @@
       "entryRule": "信号日后一交易日开盘",
       "state": "等待下一交易日可成交开盘",
       "note": "信号日当天涨跌属于当日行情表现，不计作策略可交易收益。"
+    },
+    "yunai": {
+      "configured": true,
+      "connected": true,
+      "marketStatus": {
+        "connected": true,
+        "provider": "Yunai Quant API",
+        "checkedAt": "2026-09-01T15:20:54+08:00",
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
+        "responseDigest": "67c4b5f8c662f29e",
+        "data": [
+          {
+            "market": "CN",
+            "status": "CLOSING",
+            "marketStatus": "Closed"
+          }
+        ]
+      },
+      "openapiState": "ready",
+      "endpointCount": 38,
+      "categories": [
+        "K线",
+        "行情"
+      ]
     }
   }
 ]
