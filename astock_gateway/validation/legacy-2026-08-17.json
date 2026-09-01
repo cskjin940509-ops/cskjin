@@ -7,14 +7,14 @@
     "missing-original-strategy-version",
     "missing-original-stock-metadata:17",
     "same-day-frozen-market-snapshot-missing",
-    "raw-price-cross-source-incomplete:5/17",
+    "raw-price-cross-source-incomplete:1/17",
     "original-factor-provenance-incomplete",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
     "total": 17,
-    "verified": 5,
-    "coveragePct": 29.41,
+    "verified": 1,
+    "coveragePct": 5.88,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
@@ -25,18 +25,16 @@
         "reason": null,
         "providersWithRow": [
           "腾讯",
-          "东方财富",
           "Yunai"
         ]
       },
       "002384": {
-        "verified": true,
-        "rawClose": 217.66,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "002916": {
@@ -49,13 +47,12 @@
         ]
       },
       "300308": {
-        "verified": true,
-        "rawClose": 1001.03,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300394": {
@@ -68,23 +65,21 @@
         ]
       },
       "300476": {
-        "verified": true,
-        "rawClose": 276.0,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300502": {
-        "verified": true,
-        "rawClose": 466.68,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300604": {
@@ -291,5 +286,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-08-31T16:08:48+08:00"
+  "auditedAt": "2026-09-01T16:17:51+08:00"
 }
