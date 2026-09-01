@@ -96,3 +96,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# recovery-trigger: 2026-09-01T15:07+08:00
