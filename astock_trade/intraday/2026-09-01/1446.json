@@ -786,163 +786,493 @@
   ],
   "setupCandidates": [
     {
-      "code": "300602",
-      "name": "飞荣达",
-      "sector": "沪深市场形态扫描",
+      "code": "605168",
+      "name": "三人行",
+      "sector": "传媒",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "盘前观察",
+      "action": "买入候选",
       "setup": {
         "type": "BREAKOUT_RETEST",
         "label": "突破回踩",
-        "score": 90.1,
+        "score": 87.0,
         "historical": {
-          "samples": 3,
-          "win5D": 1.0,
-          "avg5D": 0.0974,
-          "avgMFE5D": 0.1305,
-          "avgMAE5D": -0.051
+          "samples": 0
         }
       },
       "quote": {
-        "price": 46.21,
-        "changePct": 0.02,
-        "open": null,
-        "high": 46.55,
-        "low": 45.17,
-        "dayLowToHighPct": 3.06,
-        "quoteTime": null
+        "price": 48.91,
+        "changePct": 1.6,
+        "open": 49.33,
+        "high": 49.8,
+        "low": 47.5,
+        "dayLowToHighPct": 4.84,
+        "quoteTime": "20260901144618"
       },
       "entryZone": [
-        46.231,
-        46.926
+        48.654,
+        49.386
       ],
-      "triggerPrice": 46.37,
-      "stopLoss": 43.935,
-      "takeProfit1": 50.545,
-      "takeProfit2": 53.189,
+      "triggerPrice": 48.8,
+      "stopLoss": 46.979,
+      "takeProfit1": 52.081,
+      "takeProfit2": 54.121,
       "riskReward1": 1.5,
       "preferredWindow": "09:35-10:45 / 13:30-14:50",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 43.935",
+      "invalidation": "收盘/有效价格跌破 46.979",
       "reasons": [
         "突破回踩",
-        "形态分 90",
-        "距MA20 +1.96 ATR",
-        "主力资金占比 +5.58%"
-      ],
-      "source": "沪深市场历史形态精筛"
+        "形态分 87",
+        "距MA20 +1.93 ATR",
+        "主力资金占比 +15.01%"
+      ]
     },
     {
-      "code": "600186",
-      "name": "莲花控股",
-      "sector": "沪深市场形态扫描",
+      "code": "600959",
+      "name": "江苏有线",
+      "sector": "传媒",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "盘前观察",
+      "action": "买入候选",
       "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 83.2,
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 85.3,
         "historical": {
-          "samples": 3,
+          "samples": 2,
+          "win5D": 0.0,
+          "avg5D": -0.0208,
+          "avgMFE5D": 0.0145,
+          "avgMAE5D": -0.0384
+        }
+      },
+      "quote": {
+        "price": 3.17,
+        "changePct": 1.28,
+        "open": 3.12,
+        "high": 3.19,
+        "low": 3.11,
+        "dayLowToHighPct": 2.57,
+        "quoteTime": "20260901144616"
+      },
+      "entryZone": [
+        3.16,
+        3.208
+      ],
+      "triggerPrice": 3.17,
+      "stopLoss": 3.117,
+      "takeProfit1": 3.285,
+      "takeProfit2": 3.351,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 3.117",
+      "reasons": [
+        "突破回踩",
+        "形态分 85",
+        "距MA20 +1.64 ATR",
+        "主力资金占比 +6.66%"
+      ]
+    },
+    {
+      "code": "002095",
+      "name": "生 意 宝",
+      "sector": "数字媒体",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 84.6,
+        "historical": {
+          "samples": 2,
+          "win5D": 0.5,
+          "avg5D": 0.0243,
+          "avgMFE5D": 0.0631,
+          "avgMAE5D": -0.0135
+        }
+      },
+      "quote": {
+        "price": 15.03,
+        "changePct": 2.11,
+        "open": 14.65,
+        "high": 15.12,
+        "low": 14.65,
+        "dayLowToHighPct": 3.21,
+        "quoteTime": "20260901144612"
+      },
+      "entryZone": [
+        14.825,
+        15.048
+      ],
+      "triggerPrice": 14.87,
+      "stopLoss": 14.606,
+      "takeProfit1": 15.433,
+      "takeProfit2": 15.764,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 14.606",
+      "reasons": [
+        "突破回踩",
+        "形态分 85",
+        "距MA20 +2.10 ATR",
+        "主力资金占比 +2.87%"
+      ]
+    },
+    {
+      "code": "301299",
+      "name": "卓创资讯",
+      "sector": "数字媒体",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 83.9,
+        "historical": {
+          "samples": 2,
+          "win5D": 0.5,
+          "avg5D": -0.0025,
+          "avgMFE5D": 0.0222,
+          "avgMAE5D": -0.0399
+        }
+      },
+      "quote": {
+        "price": 46.48,
+        "changePct": 0.91,
+        "open": 45.8,
+        "high": 47.22,
+        "low": 45.46,
+        "dayLowToHighPct": 3.87,
+        "quoteTime": "20260901144615"
+      },
+      "entryZone": [
+        45.982,
+        46.673
+      ],
+      "triggerPrice": 46.12,
+      "stopLoss": 44.871,
+      "takeProfit1": 48.512,
+      "takeProfit2": 49.968,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 44.871",
+      "reasons": [
+        "突破回踩",
+        "形态分 84",
+        "距MA20 +1.52 ATR",
+        "主力资金占比 -0.50%"
+      ]
+    },
+    {
+      "code": "600637",
+      "name": "东方明珠",
+      "sector": "传媒",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 83.8,
+        "historical": {
+          "samples": 1,
+          "win5D": 0.0,
+          "avg5D": -0.0263,
+          "avgMFE5D": 0.0072,
+          "avgMAE5D": -0.043
+        }
+      },
+      "quote": {
+        "price": 8.59,
+        "changePct": 0.82,
+        "open": 8.47,
+        "high": 8.65,
+        "low": 8.46,
+        "dayLowToHighPct": 2.25,
+        "quoteTime": "20260901144614"
+      },
+      "entryZone": [
+        8.524,
+        8.653
+      ],
+      "triggerPrice": 8.55,
+      "stopLoss": 8.376,
+      "takeProfit1": 8.907,
+      "takeProfit2": 9.119,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 8.376",
+      "reasons": [
+        "突破回踩",
+        "形态分 84",
+        "距MA20 +1.75 ATR",
+        "主力资金占比 -0.93%"
+      ]
+    },
+    {
+      "code": "002878",
+      "name": "元隆雅图",
+      "sector": "传媒",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 83.5,
+        "historical": {
+          "samples": 1,
           "win5D": 1.0,
-          "avg5D": 0.1162,
-          "avgMFE5D": 0.166,
-          "avgMAE5D": -0.0379
+          "avg5D": 0.0115,
+          "avgMFE5D": 0.0468,
+          "avgMAE5D": -0.0181
         }
       },
       "quote": {
-        "price": 11.59,
-        "changePct": 0.17,
-        "open": null,
-        "high": 12.16,
-        "low": 11.37,
-        "dayLowToHighPct": 6.95,
-        "quoteTime": null
+        "price": 13.11,
+        "changePct": 2.9,
+        "open": 12.74,
+        "high": 13.18,
+        "low": 12.66,
+        "dayLowToHighPct": 4.11,
+        "quoteTime": "20260901144612"
       },
       "entryZone": [
-        11.541,
-        11.775
+        13.101,
+        13.298
       ],
-      "triggerPrice": 11.658,
-      "stopLoss": 10.959,
-      "takeProfit1": 12.707,
-      "takeProfit2": 13.407,
+      "triggerPrice": 13.14,
+      "stopLoss": 12.833,
+      "takeProfit1": 13.748,
+      "takeProfit2": 14.114,
       "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 10.959",
+      "invalidation": "收盘/有效价格跌破 12.833",
       "reasons": [
-        "趋势回踩",
+        "突破回踩",
         "形态分 83",
-        "距MA20 +0.44 ATR",
-        "主力资金占比 -4.10%"
-      ],
-      "source": "沪深市场历史形态精筛"
+        "距MA20 +1.59 ATR",
+        "主力资金占比 -2.67%"
+      ]
     },
     {
-      "code": "600881",
-      "name": "亚泰集团",
-      "sector": "沪深市场形态扫描",
+      "code": "300987",
+      "name": "川网传媒",
+      "sector": "传媒",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "盘前观察",
+      "action": "买入候选",
       "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 86.0,
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 82.8,
         "historical": {
-          "samples": 6,
-          "win5D": 0.6667,
-          "avg5D": 0.0946,
-          "avgMFE5D": 0.1407,
-          "avgMAE5D": -0.0486
+          "samples": 1,
+          "win5D": 0.0,
+          "avg5D": -0.0058,
+          "avgMFE5D": 0.0197,
+          "avgMAE5D": -0.0466
         }
       },
       "quote": {
-        "price": 1.97,
-        "changePct": 3.14,
-        "open": null,
-        "high": 1.98,
-        "low": 1.87,
-        "dayLowToHighPct": 5.88,
-        "quoteTime": null
+        "price": 14.35,
+        "changePct": 1.49,
+        "open": 14.1,
+        "high": 14.58,
+        "low": 14.04,
+        "dayLowToHighPct": 3.85,
+        "quoteTime": "20260901144615"
       },
       "entryZone": [
-        1.943,
-        1.98
+        14.157,
+        14.37
       ],
-      "triggerPrice": 1.96,
-      "stopLoss": 1.844,
-      "takeProfit1": 2.138,
-      "takeProfit2": 2.255,
+      "triggerPrice": 14.2,
+      "stopLoss": 13.863,
+      "takeProfit1": 14.865,
+      "takeProfit2": 15.267,
       "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 1.844",
+      "invalidation": "收盘/有效价格跌破 13.863",
       "reasons": [
-        "趋势回踩",
-        "形态分 86",
-        "距MA20 +0.16 ATR",
-        "主力资金占比 +18.42%"
+        "突破回踩",
+        "形态分 83",
+        "距MA20 +1.89 ATR",
+        "主力资金占比 -6.18%"
+      ]
+    },
+    {
+      "code": "600825",
+      "name": "新华传媒",
+      "sector": "AI语料",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 82.7,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 5.29,
+        "changePct": 2.32,
+        "open": 5.16,
+        "high": 5.32,
+        "low": 5.14,
+        "dayLowToHighPct": 3.5,
+        "quoteTime": "20260901144616"
+      },
+      "entryZone": [
+        5.234,
+        5.313
       ],
-      "source": "沪深市场历史形态精筛"
+      "triggerPrice": 5.25,
+      "stopLoss": 5.15,
+      "takeProfit1": 5.459,
+      "takeProfit2": 5.583,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 5.150",
+      "reasons": [
+        "突破回踩",
+        "形态分 83",
+        "距MA20 +1.96 ATR",
+        "主力资金占比 -6.58%"
+      ]
+    },
+    {
+      "code": "600831",
+      "name": "广电网络",
+      "sector": "短剧互动游戏",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 82.6,
+        "historical": {
+          "samples": 1,
+          "win5D": 1.0,
+          "avg5D": 0.0462,
+          "avgMFE5D": 0.0646,
+          "avgMAE5D": -0.0062
+        }
+      },
+      "quote": {
+        "price": 3.54,
+        "changePct": 1.43,
+        "open": 3.49,
+        "high": 3.56,
+        "low": 3.45,
+        "dayLowToHighPct": 3.19,
+        "quoteTime": "20260901144614"
+      },
+      "entryZone": [
+        3.499,
+        3.552
+      ],
+      "triggerPrice": 3.51,
+      "stopLoss": 3.42,
+      "takeProfit1": 3.684,
+      "takeProfit2": 3.79,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 3.420",
+      "reasons": [
+        "突破回踩",
+        "形态分 83",
+        "距MA20 +1.54 ATR",
+        "主力资金占比 -7.03%"
+      ]
+    },
+    {
+      "code": "300299",
+      "name": "富春股份",
+      "sector": "传媒",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 88.5,
+        "historical": {
+          "samples": 4,
+          "win5D": 1.0,
+          "avg5D": 0.0214,
+          "avgMFE5D": 0.0439,
+          "avgMAE5D": -0.0179
+        }
+      },
+      "quote": {
+        "price": 5.76,
+        "changePct": 4.16,
+        "open": 5.53,
+        "high": 5.78,
+        "low": 5.5,
+        "dayLowToHighPct": 5.09,
+        "quoteTime": "20260901144615"
+      },
+      "entryZone": [
+        5.663,
+        5.748
+      ],
+      "triggerPrice": 5.68,
+      "stopLoss": 5.549,
+      "takeProfit1": 5.941,
+      "takeProfit2": 6.098,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 5.549",
+      "reasons": [
+        "突破回踩",
+        "形态分 88",
+        "距MA20 +1.98 ATR",
+        "主力资金占比 -2.50%"
+      ]
     }
   ],
   "summary": {
     "official": 18,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 3,
-    "marketPrefilterCount": 220,
-    "marketScannedCount": 220
+    "expandedSetupCandidates": 10
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -955,20 +1285,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "ready",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5555,
-    "uniqueRows": 5551,
-    "pagesRequested": 56,
-    "coveragePct": 99.93,
-    "prefiltered": 220,
-    "historyLoaded": 220,
-    "setupMatches": 15,
-    "historicalEdgeMatches": 3,
-    "selected": 3,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
