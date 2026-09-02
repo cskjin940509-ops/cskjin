@@ -743,213 +743,403 @@
   ],
   "setupCandidates": [
     {
-      "code": "002040",
-      "name": "南 京 港",
-      "sector": "沪深市场形态扫描",
+      "code": "002419",
+      "name": "天虹股份",
+      "sector": "粮食概念",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "盘前观察",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 87.3,
-        "historical": {
-          "samples": 5,
-          "win5D": 1.0,
-          "avg5D": 0.087,
-          "avgMFE5D": 0.1324,
-          "avgMAE5D": -0.0074
-        }
-      },
-      "quote": {
-        "price": 8.91,
-        "changePct": -0.45,
-        "open": null,
-        "high": 9.26,
-        "low": 8.9,
-        "dayLowToHighPct": 4.04,
-        "quoteTime": null
-      },
-      "entryZone": [
-        8.761,
-        8.938
-      ],
-      "triggerPrice": 8.85,
-      "stopLoss": 8.457,
-      "takeProfit1": 9.439,
-      "takeProfit2": 9.831,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 8.457",
-      "reasons": [
-        "趋势回踩",
-        "形态分 87",
-        "距MA20 +1.08 ATR",
-        "主力资金占比 +16.64%"
-      ],
-      "source": "沪深市场历史形态精筛"
-    },
-    {
-      "code": "002033",
-      "name": "丽江股份",
-      "sector": "沪深市场形态扫描",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "盘前观察",
+      "action": "买入候选",
       "setup": {
         "type": "BREAKOUT_RETEST",
         "label": "突破回踩",
-        "score": 90.9,
+        "score": 84.3,
         "historical": {
-          "samples": 3,
-          "win5D": 1.0,
-          "avg5D": 0.0126,
-          "avgMFE5D": 0.021,
-          "avgMAE5D": -0.0178
+          "samples": 1,
+          "win5D": 0.0,
+          "avg5D": -0.0107,
+          "avgMFE5D": 0.0172,
+          "avgMAE5D": -0.0429
         }
       },
       "quote": {
-        "price": 9.26,
-        "changePct": 1.42,
-        "open": null,
-        "high": 9.34,
-        "low": 9.02,
-        "dayLowToHighPct": 3.55,
-        "quoteTime": null
+        "price": 4.8,
+        "changePct": 0.42,
+        "open": 4.75,
+        "high": 4.83,
+        "low": 4.72,
+        "dayLowToHighPct": 2.33,
+        "quoteTime": "20260902135612"
       },
       "entryZone": [
-        9.252,
-        9.391
+        4.796,
+        4.868
       ],
-      "triggerPrice": 9.28,
-      "stopLoss": 9.139,
-      "takeProfit1": 9.596,
-      "takeProfit2": 9.779,
+      "triggerPrice": 4.81,
+      "stopLoss": 4.707,
+      "takeProfit1": 5.019,
+      "takeProfit2": 5.144,
       "riskReward1": 1.5,
       "preferredWindow": "09:35-10:45 / 13:30-14:50",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 9.139",
+      "invalidation": "收盘/有效价格跌破 4.707",
       "reasons": [
         "突破回踩",
-        "形态分 91",
-        "距MA20 +1.84 ATR",
-        "主力资金占比 +9.54%"
-      ],
-      "source": "沪深市场历史形态精筛"
+        "形态分 84",
+        "距MA20 +1.30 ATR",
+        "主力资金占比 +1.29%"
+      ]
     },
     {
-      "code": "300601",
-      "name": "康泰生物",
-      "sector": "沪深市场形态扫描",
+      "code": "002539",
+      "name": "云图控股",
+      "sector": "农业种植",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "盘前观察",
+      "action": "等待触发",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 87.0,
+        "score": 81.2,
         "historical": {
-          "samples": 16,
-          "win5D": 0.8125,
-          "avg5D": 0.0249,
-          "avgMFE5D": 0.0785,
+          "samples": 5,
+          "win5D": 0.6,
+          "avg5D": 0.0022,
+          "avgMFE5D": 0.05,
+          "avgMAE5D": -0.0362
+        }
+      },
+      "quote": {
+        "price": 13.34,
+        "changePct": -2.63,
+        "open": 13.68,
+        "high": 13.74,
+        "low": 13.16,
+        "dayLowToHighPct": 4.41,
+        "quoteTime": "20260902135615"
+      },
+      "entryZone": [
+        13.038,
+        13.302
+      ],
+      "triggerPrice": 13.17,
+      "stopLoss": 12.639,
+      "takeProfit1": 13.966,
+      "takeProfit2": 14.496,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 12.639",
+      "reasons": [
+        "趋势回踩",
+        "形态分 81",
+        "距MA20 +1.04 ATR",
+        "主力资金占比 +1.12%"
+      ]
+    },
+    {
+      "code": "600300",
+      "name": "维维股份",
+      "sector": "粮食概念",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 81.1,
+        "historical": {
+          "samples": 15,
+          "win5D": 0.6,
+          "avg5D": -0.0004,
+          "avgMFE5D": 0.0251,
+          "avgMAE5D": -0.0283
+        }
+      },
+      "quote": {
+        "price": 3.25,
+        "changePct": -2.11,
+        "open": 3.3,
+        "high": 3.32,
+        "low": 3.22,
+        "dayLowToHighPct": 3.11,
+        "quoteTime": "20260902135616"
+      },
+      "entryZone": [
+        3.21,
+        3.249
+      ],
+      "triggerPrice": 3.217,
+      "stopLoss": 3.137,
+      "takeProfit1": 3.369,
+      "takeProfit2": 3.462,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 3.137",
+      "reasons": [
+        "趋势回踩",
+        "形态分 81",
+        "距MA20 +0.43 ATR",
+        "主力资金占比 +0.53%"
+      ]
+    },
+    {
+      "code": "600704",
+      "name": "物产中大",
+      "sector": "粮食概念",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 78.5,
+        "historical": {
+          "samples": 12,
+          "win5D": 0.5,
+          "avg5D": -0.0008,
+          "avgMFE5D": 0.0216,
+          "avgMAE5D": -0.0156
+        }
+      },
+      "quote": {
+        "price": 4.92,
+        "changePct": -1.6,
+        "open": 4.99,
+        "high": 4.99,
+        "low": 4.9,
+        "dayLowToHighPct": 1.84,
+        "quoteTime": "20260902135617"
+      },
+      "entryZone": [
+        4.923,
+        4.973
+      ],
+      "triggerPrice": 4.924,
+      "stopLoss": 4.865,
+      "takeProfit1": 5.072,
+      "takeProfit2": 5.154,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 4.865",
+      "reasons": [
+        "趋势回踩",
+        "形态分 78",
+        "距MA20 -0.04 ATR",
+        "主力资金占比 -2.66%"
+      ]
+    },
+    {
+      "code": "600675",
+      "name": "中华企业",
+      "sector": "粮食概念",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 77.9,
+        "historical": {
+          "samples": 6,
+          "win5D": 0.1667,
+          "avg5D": -0.0029,
+          "avgMFE5D": 0.0399,
+          "avgMAE5D": -0.0389
+        }
+      },
+      "quote": {
+        "price": 2.28,
+        "changePct": -0.87,
+        "open": 2.29,
+        "high": 2.33,
+        "low": 2.23,
+        "dayLowToHighPct": 4.48,
+        "quoteTime": "20260902135615"
+      },
+      "entryZone": [
+        2.266,
+        2.293
+      ],
+      "triggerPrice": 2.27,
+      "stopLoss": 2.192,
+      "takeProfit1": 2.411,
+      "takeProfit2": 2.498,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 2.192",
+      "reasons": [
+        "趋势回踩",
+        "形态分 78",
+        "距MA20 +0.15 ATR",
+        "主力资金占比 +14.32%"
+      ]
+    },
+    {
+      "code": "600737",
+      "name": "中粮糖业",
+      "sector": "农业种植",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 76.6,
+        "historical": {
+          "samples": 3,
+          "win5D": 0.3333,
+          "avg5D": -0.0517,
+          "avgMFE5D": 0.1044,
+          "avgMAE5D": -0.1021
+        }
+      },
+      "quote": {
+        "price": 14.98,
+        "changePct": -1.38,
+        "open": 15.33,
+        "high": 15.93,
+        "low": 14.65,
+        "dayLowToHighPct": 8.74,
+        "quoteTime": "20260902135615"
+      },
+      "entryZone": [
+        14.925,
+        15.227
+      ],
+      "triggerPrice": 15.076,
+      "stopLoss": 14.171,
+      "takeProfit1": 16.433,
+      "takeProfit2": 17.337,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 14.171",
+      "reasons": [
+        "趋势回踩",
+        "形态分 77",
+        "距MA20 +0.68 ATR",
+        "主力资金占比 +4.67%"
+      ]
+    },
+    {
+      "code": "000623",
+      "name": "吉林敖东",
+      "sector": "农业种植",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 74.6,
+        "historical": {
+          "samples": 17,
+          "win5D": 0.4118,
+          "avg5D": 0.001,
+          "avgMFE5D": 0.021,
           "avgMAE5D": -0.0257
         }
       },
       "quote": {
-        "price": 13.08,
-        "changePct": 1.16,
-        "open": null,
-        "high": 13.11,
-        "low": 12.68,
-        "dayLowToHighPct": 3.39,
-        "quoteTime": null
+        "price": 18.3,
+        "changePct": -2.19,
+        "open": 18.6,
+        "high": 18.66,
+        "low": 18.25,
+        "dayLowToHighPct": 2.25,
+        "quoteTime": "20260902135615"
       },
       "entryZone": [
-        12.949,
-        13.211
+        18.212,
+        18.478
       ],
-      "triggerPrice": 13.08,
-      "stopLoss": 12.321,
-      "takeProfit1": 14.218,
-      "takeProfit2": 14.977,
+      "triggerPrice": 18.295,
+      "stopLoss": 17.936,
+      "takeProfit1": 18.958,
+      "takeProfit2": 19.366,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 12.321",
+      "invalidation": "收盘/有效价格跌破 17.936",
       "reasons": [
         "趋势回踩",
-        "形态分 87",
-        "距MA20 +0.30 ATR",
-        "主力资金占比 +14.83%"
-      ],
-      "source": "沪深市场历史形态精筛"
+        "形态分 75",
+        "距MA20 +0.26 ATR",
+        "主力资金占比 -13.19%"
+      ]
     },
     {
-      "code": "000968",
-      "name": "蓝焰控股",
-      "sector": "沪深市场形态扫描",
+      "code": "002566",
+      "name": "益盛药业",
+      "sector": "农业种植",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "盘前观察",
+      "action": "等待触发",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 84.5,
+        "score": 73.5,
         "historical": {
-          "samples": 9,
-          "win5D": 0.6667,
-          "avg5D": 0.0101,
-          "avgMFE5D": 0.0588,
-          "avgMAE5D": -0.0273
+          "samples": 3,
+          "win5D": 0.3333,
+          "avg5D": -0.0338,
+          "avgMFE5D": 0.0186,
+          "avgMAE5D": -0.0572
         }
       },
       "quote": {
-        "price": 7.29,
-        "changePct": -1.22,
-        "open": null,
-        "high": 7.66,
-        "low": 7.26,
-        "dayLowToHighPct": 5.51,
-        "quoteTime": null
+        "price": 7.07,
+        "changePct": -1.81,
+        "open": 7.19,
+        "high": 7.25,
+        "low": 7.01,
+        "dayLowToHighPct": 3.42,
+        "quoteTime": "20260902135612"
       },
       "entryZone": [
-        7.102,
-        7.246
+        6.906,
+        7.046
       ],
-      "triggerPrice": 7.174,
-      "stopLoss": 6.894,
-      "takeProfit1": 7.594,
-      "takeProfit2": 7.875,
+      "triggerPrice": 6.976,
+      "stopLoss": 6.687,
+      "takeProfit1": 7.409,
+      "takeProfit2": 7.698,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 6.894",
+      "invalidation": "收盘/有效价格跌破 6.687",
       "reasons": [
         "趋势回踩",
-        "形态分 84",
-        "距MA20 +0.75 ATR",
-        "主力资金占比 +10.79%"
-      ],
-      "source": "沪深市场历史形态精筛"
+        "形态分 74",
+        "距MA20 +0.79 ATR",
+        "主力资金占比 -10.60%"
+      ]
     }
   ],
   "summary": {
     "official": 17,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 4,
-    "marketPrefilterCount": 220,
-    "marketScannedCount": 220
+    "expandedSetupCandidates": 8
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -962,20 +1152,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "ready",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5556,
-    "uniqueRows": 5551,
-    "pagesRequested": 56,
-    "coveragePct": 99.91,
-    "prefiltered": 220,
-    "historyLoaded": 220,
-    "setupMatches": 17,
-    "historicalEdgeMatches": 4,
-    "selected": 4,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
