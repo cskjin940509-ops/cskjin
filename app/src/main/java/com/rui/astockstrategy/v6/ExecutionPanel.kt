@@ -110,7 +110,7 @@ fun ExecutionPanel() {
                 Text("信号时间 ${shortTime(s.generatedAt)} · ${s.date}", fontSize = 9.sp, color = Color(0xFF6D7480))
                 Text("只把昨日正式池和当日尾盘核心池作为交易候选；信号会失效，不能视为保证成交或保证收益。", fontSize = 9.sp, color = Color(0xFF6D7480))
                 s.stocks.take(8).forEach { st ->
-                    ExecutionStockCard(st, quotes[symbol(st.code)])
+                    ExecutionStockCard(st, quotes[symbol(st.code)], s.date)
                 }
                 if (s.stocks.isEmpty()) Text("当前没有进入执行监控的股票", fontSize = 11.sp, color = Color(0xFF6D7480))
             }
@@ -119,18 +119,19 @@ fun ExecutionPanel() {
 }
 
 @Composable
-private fun ExecutionStockCard(st: ExecStock, q: Quote?) {
+private fun ExecutionStockCard(st: ExecStock, q: Quote?, signalDate: String) {
     val context = LocalContext.current
-    val prefs = remember { context.getSharedPreferences("astock_local_positions", Context.MODE_PRIVATE) }
-    var pos by remember(st.code) { mutableStateOf(loadPosition(prefs, st.code)) }
+    var ledgerVersion by remember(st.code) { mutableIntStateOf(0) }
+    var dialogSide by remember(st.code) { mutableStateOf<String?>(null) }
+    val realPos = remember(st.code, ledgerVersion) { TradeLedger.position(context, st.code, "REAL") }
+    val paperPos = remember(st.code, ledgerVersion) { TradeLedger.position(context, st.code, "PAPER") }
+    val pos = realPos ?: paperPos
 
     val live = q?.price ?: st.price
     val change = q?.change ?: st.changePct
     val high = q?.high ?: st.dayHigh
     val low = q?.low ?: st.dayLow
-    val today = LocalDate.now(CnZone).toString()
-    val sellable = pos != null && pos!!.date < today
-    val pnlPct = if (pos != null && live != null && pos!!.price > 0) (live / pos!!.price - 1.0) * 100.0 else null
+    val pnlPct = if (pos != null && live != null && pos.costBasis > 0) (live * pos.qty / pos.costBasis - 1.0) * 100.0 else null
 
     val actionColor = when (st.entryAction) {
         "介入候选" -> Color(0xFFB23A2A)
@@ -179,37 +180,48 @@ private fun ExecutionStockCard(st: ExecStock, q: Quote?) {
 
             if (pos == null) {
                 Button(
-                    onClick = {
-                        if (live != null && live > 0) {
-                            val now = java.time.LocalTime.now(CnZone).toString().take(8)
-                            val p = LocalPosition(live, today, now)
-                            savePosition(prefs, st.code, p)
-                            pos = p
-                        }
-                    },
+                    onClick = { if (live != null && live > 0) dialogSide = "BUY" },
                     enabled = live != null && live > 0,
                     contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
                     modifier = Modifier.height(32.dp)
-                ) { Text("记录我已买入", fontSize = 9.sp) }
+                ) { Text("记录我的买入", fontSize = 9.sp) }
             } else {
                 Surface(color = Color(0xFFFFF7E7), shape = RoundedCornerShape(9.dp)) {
                     Column(Modifier.fillMaxWidth().padding(7.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                        Text("我的记录成本 ${fmt(pos!!.price)} · ${pos!!.date} ${pos!!.time}", fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                        Text("我的${if (pos.mode == "REAL") "实盘" else "模拟"}持仓 ${pos.qty}股 · 成本 ${fmt(pos.avgCost)}", fontSize = 9.sp, fontWeight = FontWeight.Bold)
                         Text("当前浮动收益 ${signedPct(pnlPct)}", fontSize = 10.sp, color = if ((pnlPct ?: 0.0) >= 0) Color(0xFFD54432) else Color(0xFF16855B))
                         Text(
-                            if (!sellable) "今日新仓：按普通A股T+1约束，今天不把离场提示当作可执行卖出。"
+                            if (pos.sellableQty <= 0) "今日没有可卖数量：普通A股按T+1约束。"
                             else "持仓判断：${st.holdingAction ?: "持有观察"} · ${st.holdingReason ?: "未触发保护条件"}",
                             fontSize = 9.sp,
                             color = Color(0xFF5F6874)
                         )
-                        TextButton(
-                            onClick = { clearPosition(prefs, st.code); pos = null },
-                            contentPadding = PaddingValues(0.dp),
-                            modifier = Modifier.height(28.dp)
-                        ) { Text("清除持仓记录", fontSize = 9.sp) }
+                        Text("今日可卖 ${pos.sellableQty}股", fontSize = 8.sp, color = Color(0xFF6D7480))
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            TextButton(onClick = { dialogSide = "BUY" }, contentPadding = PaddingValues(0.dp), modifier = Modifier.height(28.dp)) { Text("记录加仓", fontSize = 9.sp) }
+                            TextButton(onClick = { if (pos.sellableQty > 0) dialogSide = "SELL" }, enabled = pos.sellableQty > 0, contentPadding = PaddingValues(0.dp), modifier = Modifier.height(28.dp)) { Text("记录卖出", fontSize = 9.sp) }
+                        }
                     }
                 }
             }
+
+            if (dialogSide != null) {
+                val side = dialogSide!!
+                TradeRecordDialog(
+                    initialCode = st.code,
+                    initialName = st.name,
+                    initialPrice = live,
+                    side = side,
+                    fixedMode = if (side == "SELL") pos?.mode else null,
+                    maxQty = if (side == "SELL") pos?.sellableQty else null,
+                    source = sourceZh(st.source),
+                    sourceDate = signalDate,
+                    signal = if (side == "BUY") st.entryAction else st.holdingAction,
+                    onDismiss = { dialogSide = null },
+                    onSaved = { dialogSide = null; ledgerVersion++ }
+                )
+            }
+
         }
     }
 }
@@ -227,7 +239,7 @@ private suspend fun fetchExecutionSnapshot(): ExecSnapshot? = withContext(Dispat
         val ranking = root.optJSONArray("ranking")
         val codes = mutableListOf<String>()
         if (ranking != null) for (i in 0 until ranking.length()) ranking.optString(i).takeIf { it.isNotBlank() }?.let(codes::add)
-        if (codes.isEmpty()) stocksObj.keys().forEachRemaining(codes::add)
+        if (codes.isEmpty()) stocksObj.keys().asSequence().forEach { codes.add(it) }
         val rows = codes.mapNotNull { code ->
             val x = stocksObj.optJSONObject(code) ?: return@mapNotNull null
             ExecStock(

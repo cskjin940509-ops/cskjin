@@ -1,5 +1,7 @@
 package com.rui.astockstrategy.v6
 
+import androidx.compose.foundation.clickable
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,7 +37,7 @@ fun PostCloseDashboard(
     val available = indices.mapNotNull { (sym, label) -> quotes[sym]?.let { label to it } }
     val totalAmount = available.mapNotNull { it.second.amount }.sum()
 
-    Text("Post-close Market Snapshot（收盘市场截面）", fontWeight = FontWeight.Bold, fontSize = 17.sp)
+    Text("收盘市场截面", fontWeight = FontWeight.Bold, fontSize = 17.sp)
     Card(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
@@ -61,7 +63,7 @@ fun PostCloseDashboard(
                 Text("主要指数成交额口径合计 ${formatCnMoney(totalAmount)}", fontSize = 10.sp)
             }
             Text(
-                if (official == null) "Official Daily Cohort：策略计算中" else "Official Daily Cohort：${official.date} ${official.status}",
+                if (official == null) "正式每日股票池：策略计算中" else "正式每日股票池：${official.date} ${zhStatus(official.status)}",
                 fontSize = 11.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -76,16 +78,16 @@ fun PostCloseDashboard(
         }
     } else {
         preview.take(8).forEach { p ->
-            Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) {
+            Card(Modifier.fillMaxWidth().clickable { DetailNav.openSector(p.board) }, shape = RoundedCornerShape(14.dp)) {
                 Row(Modifier.fillMaxWidth().padding(11.dp), horizontalArrangement = Arrangement.SpaceBetween) {
                     Column(Modifier.weight(1f)) {
                         Text(p.board.name, fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                        Text("${p.state} · Breadth ${String.format("%.0f%%", p.breadth)}", fontSize = 10.sp)
+                        Text("${p.state} · 上涨扩散度 ${String.format("%.0f%%", p.breadth)} · 点开详情", fontSize = 10.sp)
                     }
                     Spacer(Modifier.width(8.dp))
                     Column {
                         Text(p.board.change?.let { String.format("%+.2f%%", it) } ?: "—", fontWeight = FontWeight.Bold)
-                        Text("Score ${String.format("%.0f", p.score)}", fontSize = 9.sp)
+                        Text("综合强度 ${String.format("%.0f", p.score)}", fontSize = 9.sp)
                     }
                 }
             }

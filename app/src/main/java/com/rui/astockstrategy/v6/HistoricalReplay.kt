@@ -1,6 +1,7 @@
 package com.rui.astockstrategy.v6
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -91,7 +92,7 @@ fun HistoricalMarketReplay(date: String) {
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
-        Text("Historical Market Replay（历史市场回放）", fontSize = 17.sp, fontWeight = FontWeight.Bold)
+        Text("历史市场回放", fontSize = 17.sp, fontWeight = FontWeight.Bold)
         Text("恢复 $date 当天市场截面；历史行情与当日策略名单相互独立，不用今天数据覆盖过去。", fontSize = 10.sp, color = HistMuted)
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
             listOf("市场概览", "行业热力", "概念热力").forEachIndexed { index, item ->
@@ -105,11 +106,11 @@ fun HistoricalMarketReplay(date: String) {
         }
         when {
             loading -> HistNotice("正在读取 $date 历史市场快照…")
-            error != null -> HistNotice("历史数据读取失败：$error。不会拿当前实时行情冒充历史。")
-            data == null -> HistNotice("$date 尚未保存 marketSnapshot / boardHeatmap。后台完成历史回填后这里会自动出现，不需要重装 APK。")
+            error != null -> HistNotice("历史数据源读取失败（$error）。不会拿当前行情冒充历史。")
+            data == null -> HistNotice("$date 的市场快照和板块热力图尚未同步；后台补齐后会自动出现。")
             mode == "市场概览" -> HistOverview(data!!)
-            mode == "行业热力" -> HistHeatmap(data!!.industry, "行业")
-            else -> HistHeatmap(data!!.concept, "概念")
+            mode == "行业热力" -> HistHeatmap(data!!.industry, "行业", data!!.date)
+            else -> HistHeatmap(data!!.concept, "概念", data!!.date)
         }
     }
 }
@@ -117,7 +118,7 @@ fun HistoricalMarketReplay(date: String) {
 @Composable
 private fun HistOverview(m: HistMarket) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        if (m.backfilled) HistNotice("Backfill（历史回填）数据 · ${m.source ?: "公开历史行情"}；只回填可验证市场字段，不改写当日主线/B0-B4。")
+        if (m.backfilled) HistNotice("历史回填数据 · ${m.source ?: "公开历史行情"}；只回填可验证市场字段，不改写当日主线/B0-B4。")
         if (m.indices.isNotEmpty()) {
             m.indices.chunked(2).forEach { pair ->
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -152,17 +153,17 @@ private fun HistOverview(m: HistMarket) {
 }
 
 @Composable
-private fun HistHeatmap(items: List<HistBoard>, title: String) {
+private fun HistHeatmap(items: List<HistBoard>, title: String, date: String) {
     var sort by remember { mutableStateOf("涨跌") }
     val sorted = when (sort) {
         "资金" -> items.sortedByDescending { it.mainNetFlow ?: Double.NEGATIVE_INFINITY }
         "广度" -> items.sortedByDescending { it.breadthPct ?: Double.NEGATIVE_INFINITY }
-        "RS20" -> items.sortedByDescending { it.rs20 ?: Double.NEGATIVE_INFINITY }
+        "20日相对强弱" -> items.sortedByDescending { it.rs20 ?: Double.NEGATIVE_INFINITY }
         else -> items.sortedByDescending { it.changePct ?: Double.NEGATIVE_INFINITY }
     }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-            listOf("涨跌", "资金", "广度", "RS20").forEachIndexed { index, item ->
+            listOf("涨跌", "资金", "广度", "20日相对强弱").forEachIndexed { index, item ->
                 SegmentedButton(
                     selected = sort == item,
                     onClick = { sort = item },
@@ -172,11 +173,11 @@ private fun HistHeatmap(items: List<HistBoard>, title: String) {
             }
         }
         if (sorted.isEmpty()) {
-            HistNotice("该日$title热力图尚未冻结/回填。不会显示今天的实时板块数据。")
+            HistNotice("该日${title}热力图数据尚未同步，不会拿今天行情冒充历史。")
         } else {
             sorted.take(120).chunked(2).forEach { pair ->
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    pair.forEach { b -> HistHeatTile(b, Modifier.weight(1f)) }
+                    pair.forEach { b -> HistHeatTile(b, date, Modifier.weight(1f)) }
                     if (pair.size == 1) Spacer(Modifier.weight(1f))
                 }
             }
@@ -185,7 +186,7 @@ private fun HistHeatmap(items: List<HistBoard>, title: String) {
 }
 
 @Composable
-private fun HistHeatTile(b: HistBoard, modifier: Modifier) {
+private fun HistHeatTile(b: HistBoard, date: String, modifier: Modifier) {
     val ch = b.changePct ?: 0.0
     val bg = when {
         ch > 2 -> HistSoftRed
@@ -194,13 +195,13 @@ private fun HistHeatTile(b: HistBoard, modifier: Modifier) {
         ch < 0 -> Color(0xFFEEF8F4)
         else -> Color.White
     }
-    Card(modifier, colors = CardDefaults.cardColors(containerColor = bg), shape = RoundedCornerShape(14.dp)) {
+    Card(modifier.clickable { DetailNav.openSectorName(b.name, date) }, colors = CardDefaults.cardColors(containerColor = bg), shape = RoundedCornerShape(14.dp)) {
         Column(Modifier.padding(10.dp)) {
             Text(b.name, fontWeight = FontWeight.Bold, fontSize = 12.sp, maxLines = 1)
             Text(b.changePct?.let { String.format("%+.2f%%", it) } ?: "—", color = histPnl(b.changePct), fontWeight = FontWeight.Bold)
-            Text("广度 ${b.breadthPct?.let { String.format("%.0f%%", it) } ?: "—"} · RS20 ${b.rs20?.let { String.format("%.0f", it) } ?: "—"}", fontSize = 8.sp, color = HistMuted)
-            Text(b.mainNetFlow?.let { "资金 ${histSignedMoney(it)}" } ?: "资金 —", fontSize = 8.sp, color = HistMuted, maxLines = 1)
-            if (!b.mta.isNullOrBlank()) Text("MTA ${b.mta}", fontSize = 8.sp, color = HistBlue)
+            Text("广度 ${b.breadthPct?.let { String.format("%.0f%%", it) } ?: "—"} · 20日相对强弱 ${b.rs20?.let { String.format("%.0f", it) } ?: "—"}", fontSize = 8.sp, color = HistMuted)
+            Text(b.mainNetFlow?.let { "资金 ${histSignedMoney(it)} · 点开详情" } ?: "资金未同步 · 点开详情", fontSize = 8.sp, color = HistMuted, maxLines = 1)
+            if (!b.mta.isNullOrBlank()) Text("多周期趋势 ${b.mta}", fontSize = 8.sp, color = HistBlue)
         }
     }
 }
@@ -299,8 +300,8 @@ object HistApi {
                 changePct = num(x, "changePct") ?: num(x, "change"), amount = num(x, "amount"),
                 up = up, down = down, flat = flat, breadthPct = breadth,
                 mainNetFlow = num(x, "mainNetFlow") ?: num(x, "flow"), mainFlowPct = num(x, "mainFlowPct") ?: num(x, "flowPct"),
-                rs5 = num(x, "RS5") ?: num(x, "rs5"), rs20 = num(x, "RS20") ?: num(x, "rs20"), rs60 = num(x, "RS60") ?: num(x, "rs60"),
-                mta = x.optString("MTA").takeIf { it.isNotBlank() } ?: x.optString("mta").takeIf { it.isNotBlank() },
+                rs5 = num(x, "RS5") ?: num(x, "rs5"), rs20 = num(x, "20日相对强弱") ?: num(x, "rs20"), rs60 = num(x, "60日相对强弱") ?: num(x, "rs60"),
+                mta = x.optString("多周期趋势一致性").takeIf { it.isNotBlank() } ?: x.optString("mta").takeIf { it.isNotBlank() },
                 confidence = x.optString("confidence").takeIf { it.isNotBlank() }
             )
         }

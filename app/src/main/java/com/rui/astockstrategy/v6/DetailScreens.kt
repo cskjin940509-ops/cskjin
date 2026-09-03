@@ -24,6 +24,8 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
+import java.time.LocalDate
+import java.time.ZoneId
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -42,28 +44,39 @@ object DetailNav {
     var sector by mutableStateOf<DetailSectorRef?>(null)
     var stockCode by mutableStateOf<String?>(null)
     var stockDate by mutableStateOf<String?>(null)
+    var tailStock by mutableStateOf<TailStock?>(null)
 
     fun openSector(board: Board, date: String? = null) {
         sector = DetailSectorRef(board.name, board, date)
         stockCode = null
         stockDate = null
+        tailStock = null
     }
 
     fun openSectorName(name: String, date: String?) {
         sector = DetailSectorRef(name, null, date)
         stockCode = null
         stockDate = null
+        tailStock = null
     }
 
     fun openStock(code: String, date: String?) {
         stockCode = code
         stockDate = date
+        tailStock = null
+    }
+
+    fun openTailStock(stock: TailStock, date: String?) {
+        stockCode = stock.code
+        stockDate = date
+        tailStock = stock
     }
 
     fun back() {
         if (stockCode != null) {
             stockCode = null
             stockDate = null
+            tailStock = null
         } else {
             sector = null
         }
@@ -73,6 +86,7 @@ object DetailNav {
         sector = null
         stockCode = null
         stockDate = null
+        tailStock = null
     }
 }
 
@@ -114,7 +128,14 @@ data class StockFacts(
     val turnover: Double?,
     val mainNetFlow: Double?,
     val mainFlowPct: Double?,
-    val pools: List<String>
+    val dayOpen: Double?,
+    val dayClose: Double?,
+    val dayHigh: Double?,
+    val dayLow: Double?,
+    val dayRangePct: Double?,
+    val pools: List<String>,
+    val priceProviders: List<String>,
+    val priceMaxRelDiff: Double?
 )
 
 data class KBar(
@@ -156,10 +177,10 @@ private object DetailApi {
             val o = all.optJSONObject(i) ?: continue
             if (o.optString("date") == date) { day = o; break }
         }
-        day ?: return@withContext null
+        val dayObj = day ?: return@withContext null
 
         var selected: JSONObject? = null
-        val selectedArr = day.optJSONArray("selectedSectors")
+        val selectedArr = dayObj.optJSONArray("selectedSectors")
         if (selectedArr != null) {
             for (i in 0 until selectedArr.length()) {
                 val x = selectedArr.optJSONObject(i) ?: continue
@@ -169,7 +190,7 @@ private object DetailApi {
 
         var heat: JSONObject? = null
         var kind: String? = selected?.optString("type")?.takeIf { it.isNotBlank() }
-        val hm = day.optJSONObject("boardHeatmap")
+        val hm = dayObj.optJSONObject("boardHeatmap")
         for ((key, zh) in listOf("industry" to "行业", "concept" to "概念")) {
             val a = hm?.optJSONArray(key) ?: continue
             for (i in 0 until a.length()) {
@@ -197,9 +218,9 @@ private object DetailApi {
             amount = jsonNum(h, "amount") ?: jsonNum(base, "amount"),
             mainNetFlow = jsonNum(h, "mainNetFlow") ?: jsonNum(base, "mainNetFlow"),
             mainFlowPct = jsonNum(h, "mainFlowPct") ?: jsonNum(base, "mainFlowPct"),
-            up = h?.optInt("up")?.takeIf { h.has("up") },
-            down = h?.optInt("down")?.takeIf { h.has("down") },
-            flat = h?.optInt("flat")?.takeIf { h.has("flat") },
+            up = if (h?.has("up") == true) h.optInt("up") else null,
+            down = if (h?.has("down") == true) h.optInt("down") else null,
+            flat = if (h?.has("flat") == true) h.optInt("flat") else null,
             breadthPct = jsonNum(h, "breadthPct") ?: jsonNum(base, "breadthPct"),
             rs20 = jsonNum(selected, "RS20"),
             rs60 = jsonNum(selected, "RS60"),
@@ -216,13 +237,14 @@ private object DetailApi {
             val o = all.optJSONObject(i) ?: continue
             if (o.optString("date") == date) { day = o; break }
         }
-        val x = day?.optJSONObject("stocks")?.optJSONObject(code) ?: return@withContext null
+        val dayObj = day ?: return@withContext null
+        val x = dayObj.optJSONObject("stocks")?.optJSONObject(code) ?: return@withContext null
         val ps = mutableListOf<String>()
         val pa = x.optJSONArray("pools")
         if (pa != null) for (i in 0 until pa.length()) pa.optString(i).takeIf { it.isNotBlank() }?.let(ps::add)
         if (ps.isEmpty()) {
-            val po = day.optJSONObject("pools")
-            listOf("B0", "B1", "B2", "B3", "B4").forEach { p ->
+            val po = dayObj.optJSONObject("pools")
+            listOf("B0", "B1", "B2", "B3", "B12", "B13", "B23", "B123", "B4").forEach { p ->
                 val a = po?.optJSONArray(p) ?: return@forEach
                 for (i in 0 until a.length()) if (a.optString(i) == code) { ps.add(p); break }
             }
@@ -243,12 +265,23 @@ private object DetailApi {
             turnover = jsonNum(x, "turnover"),
             mainNetFlow = jsonNum(x, "mainNetFlow"),
             mainFlowPct = jsonNum(x, "mainFlowPct"),
-            pools = ps.distinct().sorted()
+            dayOpen = jsonNum(x, "dayOpen"),
+            dayClose = jsonNum(x, "dayClose") ?: jsonNum(x, "selectionPrice"),
+            dayHigh = jsonNum(x, "dayHigh"),
+            dayLow = jsonNum(x, "dayLow"),
+            dayRangePct = jsonNum(x, "dayRangePct"),
+            pools = ps.distinct().sorted(),
+            priceProviders = run {
+                val a = x.optJSONObject("priceValidation")?.optJSONArray("providers")
+                if (a == null) emptyList() else (0 until a.length()).mapNotNull { i -> a.optString(i).takeIf { it.isNotBlank() } }
+            },
+            priceMaxRelDiff = jsonNum(x.optJSONObject("priceValidation"), "maxRelDiff")
         )
     }
 
-    suspend fun fetchKline(secid: String, limit: Int = 90): List<KBar> = withContext(Dispatchers.IO) {
-        val query = "secid=${enc(secid)}&klt=101&fqt=1&lmt=$limit&end=20500101&fields1=f1,f2,f3,f4,f5,f6&fields2=f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61&ut=fa5fd1943c7b386f172d6893dbfba10b"
+    suspend fun fetchKline(secid: String, limit: Int = 90, endDate: String? = null): List<KBar> = withContext(Dispatchers.IO) {
+        val end = endDate?.replace("-", "") ?: "20500101"
+        val query = "secid=${enc(secid)}&klt=101&fqt=1&lmt=$limit&end=$end&fields1=f1,f2,f3,f4,f5,f6&fields2=f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61&ut=fa5fd1943c7b386f172d6893dbfba10b"
         val root = JSONObject(getText("https://push2his.eastmoney.com/api/qt/stock/kline/get?$query"))
         val a = root.optJSONObject("data")?.optJSONArray("klines") ?: return@withContext emptyList()
         (0 until a.length()).mapNotNull { i ->
@@ -302,7 +335,7 @@ private fun sectorFromBoard(b: Board): SectorFacts = SectorFacts(
     rs20 = null, rs60 = null, mta = null, reason = null, confidence = null
 )
 
-private fun stockSecid(code: String): String = (if (code.startsWith("5") || code.startsWith("6") || code.startsWith("9")) "1." else "0.") + code
+private fun stockSecid(code: String): String = (if (code.startsWith("5") || code.startsWith("6")) "1." else "0.") + code
 private fun boardSecid(code: String): String = "90.$code"
 
 private fun kReturn(bars: List<KBar>, n: Int): Double? {
@@ -342,7 +375,7 @@ fun SectorDetailScreen(ref: DetailSectorRef, snapshot: Snapshot?, onBack: () -> 
         if (hist != null) facts = hist
         val code = hist?.code?.takeIf { it.isNotBlank() } ?: ref.board?.code.orEmpty()
         if (code.isNotBlank()) {
-            bars = runCatching { DetailApi.fetchKline(boardSecid(code)) }.getOrElse { emptyList() }
+            bars = runCatching { DetailApi.fetchKline(boardSecid(code), 90, historicalDate) }.getOrElse { emptyList() }
             members = runCatching { DetailApi.fetchMembers(code) }.getOrElse { emptyList() }
         }
         if (facts == null) error = "没有找到该板块的冻结数据或当前行情"
@@ -352,6 +385,7 @@ fun SectorDetailScreen(ref: DetailSectorRef, snapshot: Snapshot?, onBack: () -> 
     val f = facts
     val isFrozenMainline = historicalDate != null && snapshot?.date == historicalDate && snapshot.mainlines.contains(ref.name)
     val state = f?.status ?: if (isFrozenMainline) "正式主线" else "板块观察"
+    val sectorPerf = snapshot?.sectorPerformance?.get(ref.name)
     val r5 = kReturn(bars, 5); val r20 = kReturn(bars, 20); val r60 = kReturn(bars, 60)
     val close = bars.lastOrNull()?.close
     val ma20 = kMa(bars, 20); val ma60 = kMa(bars, 60)
@@ -421,6 +455,25 @@ fun SectorDetailScreen(ref: DetailSectorRef, snapshot: Snapshot?, onBack: () -> 
                     Text("扩散度越高，越接近板块普涨；只靠少数权重拉升时这里会明显偏低。", color = DetailMuted, fontSize = 9.sp)
                 }
             }
+            item { DetailSectionTitle("策略后续跟踪") }
+            item {
+                DetailCard {
+                    Text("从正式信号后的下一交易日可成交开盘起算，不把信号日涨幅计入策略收益。", color = DetailMuted, fontSize = 9.sp)
+                    Spacer(Modifier.height(7.dp))
+                    if (sectorPerf == null || sectorPerf.length() == 0) {
+                        Text("当前尚未成熟 / 尚未同步", color = DetailMuted, fontSize = 10.sp)
+                    } else {
+                        TrackingStrip(sectorPerf)
+                        Spacer(Modifier.height(6.dp))
+                        DetailKey("当前跟踪收益", detailValue(sectorPerf, "current"))
+                        DetailKey("最大浮盈", detailValue(sectorPerf, "MFE"))
+                        DetailKey("最大回撤", detailValue(sectorPerf, "MAE"))
+                        if (snapshot != null && !snapshot.performanceEligible) {
+                            Text("参考收益跟踪 · 该批次不进入胜率、超额收益或因子成绩统计。", color = DetailMuted, fontSize = 9.sp)
+                        }
+                    }
+                }
+            }
             item { DetailSectionTitle("成分股") }
             if (members.isEmpty()) item { DetailNotice("当前成分股列表暂未读到") }
             else {
@@ -447,120 +500,178 @@ fun SectorDetailScreen(ref: DetailSectorRef, snapshot: Snapshot?, onBack: () -> 
 @Composable
 fun StockDetailScreen(code: String, snapshot: Snapshot?, initialQuote: Quote?, onBack: () -> Unit) {
     var facts by remember(code, snapshot?.date) { mutableStateOf<StockFacts?>(null) }
-    var bars by remember(code) { mutableStateOf<List<KBar>>(emptyList()) }
+    var bars by remember(code, snapshot?.date) { mutableStateOf<List<KBar>>(emptyList()) }
     var quote by remember(code) { mutableStateOf(initialQuote) }
     var loading by remember(code) { mutableStateOf(true) }
     var error by remember(code) { mutableStateOf<String?>(null) }
     val date = DetailNav.stockDate ?: snapshot?.date
+    val tail = DetailNav.tailStock?.takeIf { it.code == code }
+    val today = LocalDate.now(ZoneId.of("Asia/Shanghai")).toString()
+    val historical = date != null && date < today
 
     LaunchedEffect(code, date) {
         loading = true
         error = null
         facts = date?.let { runCatching { DetailApi.fetchStock(it, code) }.getOrNull() }
-        bars = runCatching { DetailApi.fetchKline(stockSecid(code)) }.getOrElse { emptyList() }
-        if (quote == null) quote = runCatching { DataApi.fetchQuotes(listOf(symbol(code)))[symbol(code)] }.getOrNull()
-        if (facts == null && quote == null) error = "该股票不在所选批次且实时行情暂不可用"
+        bars = runCatching { DetailApi.fetchKline(stockSecid(code), 90, date) }.getOrElse { emptyList() }
+        if (!historical && quote == null) quote = runCatching { DataApi.fetchQuotes(listOf(symbol(code)))[symbol(code)] }.getOrNull()
+        if (facts == null && quote == null && tail == null && bars.isEmpty()) error = "该股票的策略元数据和行情均暂不可用"
         loading = false
     }
 
     val meta = snapshot?.stocks?.get(code)
     val f = facts
-    val name = f?.name ?: meta?.name ?: quote?.name ?: code
-    val sector = f?.sector ?: meta?.sector
+    val name = f?.name ?: meta?.name ?: tail?.name ?: quote?.name ?: code
+    val sector = f?.sector ?: meta?.sector ?: tail?.sector
     val pools = if (!f?.pools.isNullOrEmpty()) f!!.pools else snapshot?.pools?.filterValues { code in it }?.keys?.sorted().orEmpty()
     val selection = f?.selectionPrice ?: meta?.selectionPrice
-    val current = quote?.price ?: bars.lastOrNull()?.close
-    val since = if (selection != null && selection > 0 && current != null) (current / selection - 1.0) * 100.0 else null
+    val displayPrice = if (historical) bars.lastOrNull()?.close ?: selection else quote?.price ?: bars.lastOrNull()?.close ?: selection
+    val signalDayMove = f?.changePct ?: meta?.dayChangePct ?: tail?.changePct
     val perf = snapshot?.stockPerformance?.get(code)
+    val providers = if (!f?.priceProviders.isNullOrEmpty()) f!!.priceProviders else meta?.priceProviders.orEmpty()
+    val maxDiff = f?.priceMaxRelDiff ?: meta?.priceMaxRelDiff
 
     LazyColumn(modifier = Modifier.fillMaxSize().background(DetailBg), contentPadding = PaddingValues(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         item { DetailBackHeader("个股详情", "$name · $code", onBack) }
-        if (loading) item { DetailNotice("正在读取个股行情、K线和策略因子…") }
+        item {
+            StockTradingPanel26(
+                code = code,
+                name = name,
+                fallbackPrice = null,
+                sourceDate = date,
+                poolLabels = pools,
+                signal = null
+            )
+        }
+        if (loading) item { DetailNotice("正在读取行情、策略因子、价格走势和收益跟踪数据…") }
         error?.let { item { DetailNotice(it) } }
+
         item {
             DetailCard {
                 Row(verticalAlignment = Alignment.Top) {
                     Column(Modifier.weight(1f)) {
                         Text(name, fontSize = 22.sp, fontWeight = FontWeight.Bold)
-                        Text("$code · ${sector ?: "未关联主线"}", color = DetailMuted, fontSize = 11.sp)
+                        Text("$code · ${sector ?: "未关联板块"}", color = DetailMuted, fontSize = 11.sp)
                     }
                     Column(horizontalAlignment = Alignment.End) {
-                        Text(current?.let { String.format("%.2f", it) } ?: "—", fontSize = 22.sp, fontWeight = FontWeight.Bold)
-                        Text(quote?.change?.let { String.format("%+.2f%%", it) } ?: f?.changePct?.let { String.format("%+.2f%%", it) } ?: "—", color = if ((quote?.change ?: f?.changePct ?: 0.0) >= 0) DetailUp else DetailDown, fontSize = 11.sp)
+                        Text(displayPrice?.let { String.format("%.2f", it) } ?: "数据未同步", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                        Text(signalDayMove?.let { String.format("%+.2f%%", it) } ?: "当日涨跌未同步", color = if ((signalDayMove ?: 0.0) >= 0) DetailUp else DetailDown, fontSize = 11.sp)
                     }
                 }
                 if (pools.isNotEmpty()) {
                     Spacer(Modifier.height(8.dp))
-                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) { pools.forEach { DetailTag(it, it == "B4") } }
-                }
-                Spacer(Modifier.height(8.dp))
-                DetailKey("综合评分", f?.score?.let { String.format("%.1f / 100", it) } ?: meta?.score?.let { String.format("%.1f / 100", it) } ?: "—")
-                DetailKey("入池日期", date ?: "—")
-                DetailKey("入池价", selection?.let { String.format("%.2f", it) } ?: "—")
-                DetailKey("入池后至今", since?.let { String.format("%+.2f%%", it) } ?: "—")
-                DetailKey("置信度", f?.confidence ?: meta?.confidence ?: "—")
-            }
-        }
-        val reason = f?.reason ?: meta?.reason
-        item { DetailExplain("为什么入选", reason ?: "该股票不是当前所选 Daily Cohort 的冻结入选股；仍可查看行情和趋势。") }
-
-        item { DetailSectionTitle("因子") }
-        item {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    DetailMetric("20日相对强弱", f?.rs20?.let { String.format("%+.1f%%", it) } ?: meta?.rs?.let { String.format("%+.1f%%", it) } ?: "—", Modifier.weight(1f))
-                    DetailMetric("60日相对强弱", f?.rs60?.let { String.format("%+.1f%%", it) } ?: "—", Modifier.weight(1f))
-                }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    DetailMetric("多周期趋势", f?.mta ?: meta?.mta ?: "—", Modifier.weight(1f))
-                    DetailMetric("主力资金占比", f?.mainFlowPct?.let { String.format("%+.1f%%", it) } ?: "—", Modifier.weight(1f))
-                }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    DetailMetric("换手率", f?.turnover?.let { String.format("%.1f%%", it) } ?: "—", Modifier.weight(1f))
-                    DetailMetric("成交额", f?.amount?.let(::money) ?: "—", Modifier.weight(1f))
+                    Text("正式池：${pools.joinToString(" / ") { poolTitle(it) }}", color = DetailBlue, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
         }
-        item { DetailCard { DetailKey("主力净流入", f?.mainNetFlow?.let(::signedMoney) ?: "—"); DetailKey("两融增强 B1", if ("B1" in pools) "已入池" else "—"); DetailKey("ETF增强 B2", if ("B2" in pools) "已入池" else "—"); Text("B1/B2没有正式数据时保持空值，不用其他口径代替。", color = DetailMuted, fontSize = 9.sp) } }
 
-        item { DetailSectionTitle("K线") }
+        if (tail != null) {
+            item { DetailSectionTitle("尾盘决策上下文") }
+            item {
+                DetailCard {
+                    DetailKey("尾盘捕获价", tail.price?.let { String.format("%.2f", it) } ?: "未同步")
+                    DetailKey("尾盘评分", tail.tailScore?.let { String.format("%.1f", it) } ?: "未同步")
+                    DetailKey("主力占比", tail.mainFlowPct?.let { String.format("%+.2f%%", it) } ?: "未同步")
+                    DetailKey("风险", tail.risk)
+                    DetailKey("云AI量化行情核对", if (tail.yunaiVerified == true) "通过" else "未确认")
+                    DetailKey("云AI量化大单净流入", tail.yunaiLargeNetInflow?.let { String.format("%+.2f", it) } ?: "未同步")
+                    tail.reason?.let { Text(it, fontSize = 9.sp, color = DetailMuted) }
+                }
+            }
+        }
+
+        item { DetailSectionTitle("信号日事实") }
         item {
             DetailCard {
-                if (bars.size < 5) Text("K线数据暂不可用", color = DetailMuted)
+                DetailKey("信号/入池日期", date ?: "未关联正式批次")
+                DetailKey("未复权入池收盘价", selection?.let { String.format("%.2f", it) } ?: "未同步")
+                DetailKey("信号日涨跌", signalDayMove?.let { String.format("%+.2f%%", it) } ?: "未同步")
+                DetailKey("成交额", (f?.amount ?: meta?.amount ?: tail?.amount)?.let(::money) ?: "未同步")
+                DetailKey("换手率", (f?.turnover ?: meta?.turnover ?: tail?.turnover)?.let { String.format("%.2f%%", it) } ?: "未同步")
+                DetailKey("主力净流入", (f?.mainNetFlow ?: f?.mainNetFlow ?: tail?.mainNetFlow)?.let(::signedMoney) ?: "未同步")
+                DetailKey("主力资金占比", (f?.mainFlowPct ?: f?.mainFlowPct ?: tail?.mainFlowPct)?.let { String.format("%+.2f%%", it) } ?: "未同步")
+                if (providers.isNotEmpty()) DetailKey("入池价核验", providers.joinToString(" + "))
+                if (maxDiff != null) DetailKey("开高低收最大源差", String.format("%.4f%%", maxDiff * 100.0))
+            }
+        }
+
+        item { DetailSectionTitle("当日交易事实") }
+        item {
+            DetailCard {
+                val hi = if (historical) f?.dayHigh ?: meta?.dayHigh else quote?.high ?: f?.dayHigh ?: meta?.dayHigh
+                val lo = if (historical) f?.dayLow ?: meta?.dayLow else quote?.low ?: f?.dayLow ?: meta?.dayLow
+                val op = f?.dayOpen ?: meta?.dayOpen
+                val cl = if (historical) f?.dayClose ?: meta?.dayClose ?: selection else quote?.price ?: f?.dayClose ?: meta?.dayClose ?: selection
+                val range = if (hi != null && lo != null && lo > 0) (hi / lo - 1.0) * 100.0 else f?.dayRangePct ?: meta?.dayRangePct
+                DetailKey("当日开盘", op?.let { String.format("%.2f", it) } ?: "未同步")
+                DetailKey("当日最高", hi?.let { String.format("%.2f", it) } ?: "未同步")
+                DetailKey("当日最低", lo?.let { String.format("%.2f", it) } ?: "未同步")
+                DetailKey("当前/收盘", cl?.let { String.format("%.2f", it) } ?: "未同步")
+                DetailKey("理论高低区间", range?.let { String.format("%.2f%%", it) } ?: "未同步")
+                Text("理论高低区间只描述最高与最低的价格跨度，不代表按时间顺序可实现的交易利润。", color = DetailMuted, fontSize = 9.sp)
+            }
+        }
+        item { DetailSectionTitle("交易辅助") }
+        item {
+            if (snapshot != null) {
+                val a = tradeAssist(code, snapshot, meta, if (historical) null else quote)
+                DetailCard {
+                    DetailKey("介入参考", a.entry)
+                    DetailKey("持仓保护", a.holding)
+                    Text(a.note, color = DetailMuted, fontSize = 9.sp)
+                    Text("尚未录入你的实际成交价与持仓数量，因此离场提示目前只依据行情结构；加入“我的持仓”后再按真实成本计算止盈、止损和仓位。", color = DetailMuted, fontSize = 9.sp)
+                }
+            } else {
+                DetailNotice("没有对应冻结批次，暂不生成交易辅助提示。")
+            }
+        }
+
+        item { DetailSectionTitle("因子与模型") }
+        item {
+            DetailCard {
+                DetailKey("综合评分", (f?.score ?: meta?.score)?.let { String.format("%.1f / 100", it) } ?: "未同步")
+                DetailKey("20日相对强弱", (f?.rs20 ?: meta?.rs)?.let { String.format("%+.2f%%", it) } ?: "未同步")
+                DetailKey("60日相对强弱", (f?.rs60 ?: meta?.rs60)?.let { String.format("%+.2f%%", it) } ?: "未同步")
+                DetailKey("多周期趋势", f?.mta ?: meta?.mta ?: tail?.mta ?: "未同步")
+                DetailKey("置信度", f?.confidence ?: meta?.confidence ?: "未标注")
+                DetailKey("两融增强", if ("B1" in pools) "已确认" else "未入池/数据不足")
+                DetailKey("指数基金一级申赎", if ("B2" in pools) "已确认" else "未入池/数据不足")
+                DetailKey("主力资金确认", if ("B3" in pools) "已确认" else "未入池")
+                (f?.reason ?: meta?.reason)?.let { Text(it, fontSize = 9.sp, color = DetailMuted) }
+            }
+        }
+
+        item { DetailSectionTitle("价格走势（历史详情截止所选日期）") }
+        item {
+            DetailCard {
+                if (bars.size < 5) Text("价格走势数据暂不可用", color = DetailMuted)
                 else {
                     CandleChart(bars.takeLast(40))
                     Spacer(Modifier.height(8.dp))
-                    DetailKey("20日涨跌", kReturn(bars, 20)?.let { String.format("%+.2f%%", it) } ?: "—")
-                    DetailKey("60日涨跌", kReturn(bars, 60)?.let { String.format("%+.2f%%", it) } ?: "—")
-                    DetailKey("距20日高点", distHigh(bars, 20)?.let { String.format("%+.2f%%", it) } ?: "—")
+                    DetailKey("5日涨跌", kReturn(bars, 5)?.let { String.format("%+.2f%%", it) } ?: "未成熟")
+                    DetailKey("20日涨跌", kReturn(bars, 20)?.let { String.format("%+.2f%%", it) } ?: "未成熟")
+                    DetailKey("60日涨跌", kReturn(bars, 60)?.let { String.format("%+.2f%%", it) } ?: "未成熟")
+                    DetailKey("距20日高点", distHigh(bars, 20)?.let { String.format("%+.2f%%", it) } ?: "未成熟")
                 }
             }
         }
 
-        item { DetailSectionTitle("资金") }
+        item { DetailSectionTitle("策略 后续收益跟踪") }
         item {
             DetailCard {
-                DetailKey("当日主力净流入", f?.mainNetFlow?.let(::signedMoney) ?: "—")
-                DetailKey("主力资金占比", f?.mainFlowPct?.let { String.format("%+.2f%%", it) } ?: "—")
-                DetailKey("成交额", f?.amount?.let(::money) ?: "—")
-                DetailKey("融资余额变化", "—")
-                DetailKey("ETF申赎关联", "—")
-            }
-        }
-
-        item { DetailSectionTitle("入池后表现") }
-        item {
-            DetailCard {
-                DetailKey("入池价", selection?.let { String.format("%.2f", it) } ?: "—")
-                DetailKey("当前/最近价", current?.let { String.format("%.2f", it) } ?: "—")
-                DetailKey("累计收益", since?.let { String.format("%+.2f%%", it) } ?: "—")
-                Spacer(Modifier.height(8.dp))
-                TrackingStrip(perf)
-                Spacer(Modifier.height(8.dp))
-                DetailKey("最大有利涨幅", detailValue(perf, "MFE"))
-                DetailKey("最大不利跌幅", detailValue(perf, "MAE"))
-                DetailKey("超额收益", detailValue(perf, "alpha"))
-                DetailKey("趋势存续期", detailValue(perf, "trendSurvival"))
+                if (perf == null || perf.length() == 0) {
+                    Text(if (date == today) "该信号今天收盘形成；策略收益从下一交易日可成交开盘开始，因此今天不会把信号日前涨幅冒充策略收益。" else "后续收益跟踪 尚未同步或入场价尚未通过验证。", fontSize = 10.sp, color = DetailMuted)
+                } else {
+                    DetailKey("入场规则", perf.optString("entryRule", "次一交易日开盘"))
+                    DetailKey("实际入场日", perf.optString("entryDate", "—"))
+                    DetailKey("验证入场价", if (perf.has("entryPrice")) String.format("%.2f", perf.optDouble("entryPrice")) else "—")
+                    TrackingStrip(perf)
+                    Spacer(Modifier.height(8.dp))
+                    DetailKey("当前跟踪", detailValue(perf, "current"))
+                    DetailKey("最大浮盈", detailValue(perf, "MFE"))
+                    DetailKey("最大回撤", detailValue(perf, "MAE"))
+                    Text(if (snapshot?.performanceEligible == true) "该批次已通过审计，可纳入策略统计。" else "该批次为参考跟踪，不纳入胜率/Alpha或因子有效性统计。", fontSize = 9.sp, color = if (snapshot?.performanceEligible == true) DetailBlue else DetailMuted)
+                }
             }
         }
     }

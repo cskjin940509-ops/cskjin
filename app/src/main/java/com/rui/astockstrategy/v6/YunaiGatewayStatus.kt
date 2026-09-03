@@ -30,10 +30,17 @@ fun YunaiGatewayStatusLine() {
         s.connected -> "已连接 · 市场状态已启用"
         else -> "连接异常，继续使用备用源"
     }
-    Key("Yunai Quant API", label)
+    Key("云AI量化数据接口", label)
     if (s?.configured == true) {
-        Key("Yunai市场状态", if (s.marketStatusConnected) "已启用" else "未启用")
-        if (!s.openapiState.isNullOrBlank()) Key("Yunai接口发现", s.openapiState)
+        Key("云AI量化市场状态", if (s.marketStatusConnected) "已启用" else "未启用")
+        if (!s.openapiState.isNullOrBlank()) {
+            val discovery = when (s.openapiState.lowercase()) {
+                "ready", "ok", "success" -> "已就绪"
+                "unavailable", "failed", "error" -> "不可用"
+                else -> "已读取"
+            }
+            Key("云AI量化接口发现", discovery)
+        }
     }
 }
 

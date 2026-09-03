@@ -1,6 +1,7 @@
 package com.rui.astockstrategy.v6
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -37,7 +38,33 @@ data class TailStock(
     val rs20: Double?,
     val mta: String?,
     val pools: List<String>,
-    val risk: String
+    val risk: String,
+    val amount: Double?,
+    val turnover: Double?,
+    val mainNetFlow: Double?,
+    val reason: String?,
+    val yunaiVerified: Boolean?,
+    val yunaiPrice: Double?,
+    val yunaiLargeNetInflow: Double?,
+    val yunaiTotalNetInflow: Double?
+)
+
+data class TailSectorDetail(
+    val boardCode: String,
+    val name: String,
+    val type: String,
+    val score: Double?,
+    val status: String,
+    val changePct: Double?,
+    val amount: Double?,
+    val mainNetFlow: Double?,
+    val mainFlowPct: Double?,
+    val breadthPct: Double?,
+    val rs20: Double?,
+    val rs60: Double?,
+    val mta: String?,
+    val confidence: String?,
+    val reason: String?
 )
 
 data class TailDecision(
@@ -52,6 +79,8 @@ data class TailDecision(
     val confidence: String,
     val confirmedMainlines: List<String>,
     val candidateMainlines: List<String>,
+    val confirmedSectorDetails: List<TailSectorDetail>,
+    val candidateSectorDetails: List<TailSectorDetail>,
     val pools: Map<String, List<String>>,
     val stocks: Map<String, TailStock>,
     val noTrade: Boolean
@@ -136,6 +165,16 @@ fun TailDecisionPanel() {
             }
         }
 
+        val tailSectors = if (current.confirmedSectorDetails.isNotEmpty()) current.confirmedSectorDetails else current.candidateSectorDetails
+        if (tailSectors.isNotEmpty()) {
+            Text(
+                if (current.confirmedSectorDetails.isNotEmpty()) "尾盘确认主线详情" else "尾盘候选板块详情",
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp
+            )
+            tailSectors.take(6).forEach { sector -> TailSectorDetailRow(sector, current.date) }
+        }
+
         if (current.noTrade) {
             Notice(
                 if (current.isFinal) "15:00最终锁定时没有同时满足“确认主线 + 基础强度 + 主力资金确认”的核心股票，今日尾盘最终池为空。"
@@ -143,28 +182,28 @@ fun TailDecisionPanel() {
             )
         } else {
             val core = current.pools["TailCore"].orEmpty()
-            Text(if (current.isFinal) "尾盘最终核心池 TailCore" else "尾盘实时核心池 TailCore", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-            Text("TB0基础强度 ∩ TB3主力资金确认；每轮按当时数据重新排序。", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(if (current.isFinal) "尾盘最终核心池" else "尾盘实时核心池", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("基础强度与主力资金同时确认；每轮按当时数据重新排序。", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             core.take(8).forEach { code ->
-                current.stocks[code]?.let { TailStockRow(it) }
+                current.stocks[code]?.let { TailStockRow(it, current.date) }
             }
         }
 
         Notice(
-            if (current.isFinal) "这是15:00后第一次成功计算并锁定的 TailFinal（尾盘最终池），后续不会用盘后数据或未来表现改写。收盘 Official（正式池）仍会独立计算。"
-            else "当前是 TailLive（尾盘滚动池），不是最终结果。14:30后每5分钟重新计算一次，15:00后第一次成功结果会切换为 TailFinal 并锁定。"
+            if (current.isFinal) "这是15:00后第一次成功计算并锁定的尾盘最终池，后续不会用盘后数据或未来表现改写。收盘正式股票池仍会独立计算。"
+            else "当前是尾盘滚动池，不是最终结果。14:30后每5分钟重新计算一次，15:00后第一次成功结果会切换为尾盘最终池并锁定。"
         )
     }
 }
 
 @Composable
-private fun TailStockRow(s: TailStock) {
-    Card(shape = RoundedCornerShape(14.dp)) {
+private fun TailStockRow(s: TailStock, date: String) {
+    Card(Modifier.fillMaxWidth().clickable { DetailNav.openTailStock(s, date) }, shape = RoundedCornerShape(14.dp)) {
         Column(Modifier.fillMaxWidth().padding(11.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
             Row(verticalAlignment = Alignment.Top) {
                 Column(Modifier.weight(1f)) {
                     Text(s.name.ifBlank { s.code }, fontWeight = FontWeight.Bold)
-                    Text("${s.code} · ${s.sector}", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("${s.code} · ${s.sector} · 点开详情", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Column(horizontalAlignment = Alignment.End) {
                     Text(s.price?.let { String.format("%.2f", it) } ?: "—", fontWeight = FontWeight.Bold)
@@ -174,9 +213,51 @@ private fun TailStockRow(s: TailStock) {
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 MiniMetric("尾盘分", s.tailScore?.let { String.format("%.1f", it) } ?: "—", Modifier.weight(1f))
                 MiniMetric("主力占比", s.mainFlowPct?.let { String.format("%+.1f%%", it) } ?: "—", Modifier.weight(1f))
-                MiniMetric("RS20", s.rs20?.let { String.format("%+.1f%%", it) } ?: "—", Modifier.weight(1f))
+                MiniMetric("20日相对强弱", s.rs20?.let { String.format("%+.1f%%", it) } ?: "—", Modifier.weight(1f))
             }
-            Text("${s.pools.joinToString(" · ")} · ${s.mta ?: "趋势待同步"} · ${s.risk}", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("${s.pools.joinToString(" · ") { tailPoolLabel(it) }} · ${s.mta ?: "趋势待同步"} · ${s.risk}", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("云AI量化 ${if (s.yunaiVerified == true) "行情已核对" else "核对未确认"} · 大单净流入 ${s.yunaiLargeNetInflow?.let { String.format("%+.0f", it) } ?: "未同步"}", fontSize = 8.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun TailSectorDetailRow(x: TailSectorDetail, date: String) {
+    val breadth = x.breadthPct?.coerceIn(0.0, 100.0)
+    val up = breadth?.toInt() ?: 0
+    val down = if (breadth != null) 100 - up else 0
+    val board = Board(
+        code = x.boardCode,
+        name = x.name,
+        change = x.changePct,
+        amount = x.amount,
+        flow = x.mainNetFlow,
+        flowPct = x.mainFlowPct,
+        up = up,
+        down = down,
+        flat = 0,
+        type = if (x.type == "概念") "concept" else "industry"
+    )
+    Card(
+        Modifier.fillMaxWidth().clickable { DetailNav.openSector(board, date) },
+        shape = RoundedCornerShape(14.dp)
+    ) {
+        Column(Modifier.fillMaxWidth().padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(verticalAlignment = Alignment.Top) {
+                Column(Modifier.weight(1f)) {
+                    Text(x.name, fontWeight = FontWeight.Bold)
+                    Text("${x.status} · ${x.type} · 点开查看趋势/资金/成分股", fontSize = 9.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Text(x.score?.let { String.format("%.1f", it) } ?: "—", fontWeight = FontWeight.Bold)
+            }
+            Text(
+                "涨跌 ${x.changePct?.let { String.format("%+.2f%%", it) } ?: "—"} · " +
+                    "主力占比 ${x.mainFlowPct?.let { String.format("%+.2f%%", it) } ?: "—"} · " +
+                    "广度 ${x.breadthPct?.let { String.format("%.0f%%", it) } ?: "—"}",
+                fontSize = 9.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text("${x.mta ?: "趋势待同步"} · 置信度 ${x.confidence ?: "—"}", fontSize = 8.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -187,6 +268,13 @@ private fun MiniMetric(label: String, value: String, modifier: Modifier) {
         Text(label, fontSize = 8.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(value, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
     }
+}
+
+private fun tailPoolLabel(v: String): String = when (v) {
+    "TB0" -> "基础强度"
+    "TB3" -> "主力资金确认"
+    "TailCore" -> "尾盘核心"
+    else -> v
 }
 
 private fun tailTime(v: String): String = if (v.length >= 19) v.substring(11, 19) else v
@@ -210,7 +298,7 @@ private fun tailTimeline(d: TailDecision): String {
         val label = "${s.substring(0, 2)}:${s.substring(2, 4)}"
         if (!d.isFinal && s == current) "[$label]" else label
     }
-    return if (d.isFinal) "$intraday  [15:00 Final]" else "$intraday  15:00 Final"
+    return if (d.isFinal) "$intraday  [15:00 最终]" else "$intraday  15:00 最终"
 }
 
 private suspend fun fetchTailDecision(): TailDecision = withContext(Dispatchers.IO) {
@@ -232,6 +320,28 @@ private fun parseTail(o: JSONObject): TailDecision {
     fun strings(a: org.json.JSONArray?): List<String> = if (a == null) emptyList() else (0 until a.length()).mapNotNull { i -> a.optString(i).takeIf { it.isNotBlank() } }
     fun names(a: org.json.JSONArray?): List<String> = if (a == null) emptyList() else (0 until a.length()).mapNotNull { i -> a.optJSONObject(i)?.optString("name")?.takeIf { it.isNotBlank() } }
     fun number(x: JSONObject, k: String): Double? = if (!x.has(k) || x.isNull(k)) null else runCatching { x.getDouble(k) }.getOrNull()
+    fun sectorDetails(a: org.json.JSONArray?): List<TailSectorDetail> = if (a == null) emptyList() else (0 until a.length()).mapNotNull { i ->
+        val x = a.optJSONObject(i) ?: return@mapNotNull null
+        val name = x.optString("name")
+        if (name.isBlank()) return@mapNotNull null
+        TailSectorDetail(
+            boardCode = x.optString("boardCode"),
+            name = name,
+            type = x.optString("type", "板块"),
+            score = number(x, "score"),
+            status = x.optString("status", "观察"),
+            changePct = number(x, "changePct"),
+            amount = number(x, "amount"),
+            mainNetFlow = number(x, "mainNetFlow"),
+            mainFlowPct = number(x, "mainFlowPct"),
+            breadthPct = number(x, "breadthPct"),
+            rs20 = number(x, "RS20"),
+            rs60 = number(x, "RS60"),
+            mta = x.optString("MTA").takeIf { it.isNotBlank() },
+            confidence = x.optString("confidence").takeIf { it.isNotBlank() },
+            reason = x.optString("reason").takeIf { it.isNotBlank() }
+        )
+    }
 
     val poolsObj = o.optJSONObject("pools") ?: JSONObject()
     val pools = listOf("TB0", "TB3", "TailCore").associateWith { strings(poolsObj.optJSONArray(it)) }
@@ -252,7 +362,15 @@ private fun parseTail(o: JSONObject): TailDecision {
             rs20 = number(x, "RS20"),
             mta = x.optString("MTA").takeIf { it.isNotBlank() },
             pools = strings(x.optJSONArray("pools")),
-            risk = x.optString("risk", "—")
+            risk = x.optString("risk", "—"),
+            amount = number(x, "amount"),
+            turnover = number(x, "turnover"),
+            mainNetFlow = number(x, "mainNetFlow"),
+            reason = x.optString("reason").takeIf { it.isNotBlank() },
+            yunaiVerified = x.optJSONObject("yunaiQuote")?.let { if (it.has("verifiedWithin1Pct")) it.optBoolean("verifiedWithin1Pct") else null },
+            yunaiPrice = x.optJSONObject("yunaiQuote")?.let { number(it, "price") },
+            yunaiLargeNetInflow = x.optJSONObject("yunaiCapital")?.let { number(it, "largeNetInflow") },
+            yunaiTotalNetInflow = x.optJSONObject("yunaiCapital")?.let { number(it, "totalNetInflow") }
         )
     }
     return TailDecision(
@@ -267,6 +385,8 @@ private fun parseTail(o: JSONObject): TailDecision {
         confidence = o.optString("confidence", "—"),
         confirmedMainlines = names(o.optJSONArray("confirmedMainlines")),
         candidateMainlines = names(o.optJSONArray("candidateMainlines")),
+        confirmedSectorDetails = sectorDetails(o.optJSONArray("confirmedMainlines")),
+        candidateSectorDetails = sectorDetails(o.optJSONArray("candidateMainlines")),
         pools = pools,
         stocks = stocks,
         noTrade = o.optBoolean("noTrade", true)

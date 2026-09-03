@@ -5,6 +5,8 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
+import java.time.LocalDate
+import java.time.ZoneId
 
 /**
  * 手机直连腾讯/东方财富失败时的只读兜底。
@@ -16,7 +18,9 @@ object ResilientDataApi {
 
     @Volatile var quoteSource: String = "腾讯行情"
         private set
-    @Volatile var boardSource: String = "东方财富"
+    @Volatile var boardSource: String = "东方财富实时"
+        private set
+    @Volatile var boardIsCurrent: Boolean = false
         private set
     @Volatile var gatewayGeneratedAt: String? = null
         private set
@@ -33,22 +37,44 @@ object ResilientDataApi {
     }
 
     suspend fun fetchBoardsPair(): Pair<List<Board>, List<Board>> {
-        val directIndustry = runCatching { DataApi.fetchBoards("industry") }.getOrNull().orEmpty()
-        val directConcept = runCatching { DataApi.fetchBoards("concept") }.getOrNull().orEmpty()
+        // Tier 1: Eastmoney realtime.
+        val directIndustry = runCatching { DataApi.fetchBoards("industry", delayed = false) }.getOrNull().orEmpty()
+        val directConcept = runCatching { DataApi.fetchBoards("concept", delayed = false) }.getOrNull().orEmpty()
         if (directIndustry.isNotEmpty() || directConcept.isNotEmpty()) {
-            boardSource = "东方财富"
+            boardSource = "东方财富实时"
+            boardIsCurrent = true
             return directIndustry to directConcept
         }
+
+        // Tier 2: Eastmoney delayed host. It is current-session data but may lag roughly 15 minutes.
+        val delayedIndustry = runCatching { DataApi.fetchBoards("industry", delayed = true) }.getOrNull().orEmpty()
+        val delayedConcept = runCatching { DataApi.fetchBoards("concept", delayed = true) }.getOrNull().orEmpty()
+        if (delayedIndustry.isNotEmpty() || delayedConcept.isNotEmpty()) {
+            boardSource = "东方财富延迟源（约15分钟）"
+            boardIsCurrent = true
+            return delayedIndustry to delayedConcept
+        }
+
+        // Tier 3: frozen GitHub gateway. Never label an old snapshot as realtime.
         val root = runCatching { gatewayRoot() }.getOrNull()
         if (root == null) {
             boardSource = "板块源不可用"
+            boardIsCurrent = false
             return emptyList<Board>() to emptyList()
         }
         val heat = root.optJSONObject("boardHeatmap")
         val industry = parseBoards(heat?.optJSONArray("industry"), "industry")
         val concept = parseBoards(heat?.optJSONArray("concept"), "concept")
-        boardSource = if (industry.isNotEmpty() || concept.isNotEmpty()) "备用市场快照" else "板块源不可用"
         gatewayGeneratedAt = root.optString("generatedAt").takeIf { it.isNotBlank() }
+        val sourceDate = root.optJSONObject("marketSnapshot")?.optString("sourceDate")?.takeIf { it.isNotBlank() }
+        val today = LocalDate.now(ZoneId.of("Asia/Shanghai")).toString()
+        boardIsCurrent = sourceDate == today
+        val time = gatewayGeneratedAt?.let { v -> if (v.length >= 16) v.substring(11, 16) else null }
+        boardSource = if (industry.isNotEmpty() || concept.isNotEmpty()) {
+            "备用快照 ${sourceDate ?: "日期未知"}${time?.let { " $it" } ?: ""}"
+        } else {
+            "板块源不可用"
+        }
         return industry to concept
     }
 
