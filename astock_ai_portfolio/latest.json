@@ -4,25 +4,25 @@
   "mode": "智能影子实盘",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-04T00:42:29+08:00",
+  "updatedAt": "2026-09-04T00:44:26+08:00",
   "radarCapturedAt": "2026-09-03T14:59:16+08:00",
   "radarStatus": "RadarLive",
   "summary": {
     "initialCapital": 20000000.0,
     "capitalCapacity": 20000000.0,
     "inceptionCapital": 1000000.0,
-    "totalAssets": 20034177.89,
+    "totalAssets": 20035902.89,
     "fundUnits": 19341487.5886677,
-    "unitNav": 1.035814,
-    "cumulativeNav": 1.035814,
+    "unitNav": 1.035903,
+    "cumulativeNav": 1.035903,
     "cash": 19000289.89,
-    "marketValue": 1033888.0,
-    "positionPct": 5.16,
-    "cashPct": 94.84,
+    "marketValue": 1035613.0,
+    "positionPct": 5.17,
+    "cashPct": 94.83,
     "todayReturnPct": null,
-    "cumulativeReturnPct": 3.581,
+    "cumulativeReturnPct": 3.59,
     "realizedPnl": 45045.01,
-    "floatingPnl": -10865.09,
+    "floatingPnl": -9140.09,
     "maxDrawdownPct": -0.0305,
     "maxDrawdownFrequency": "DAILY_CLOSE_UNIT_NAV",
     "intradayObservedMaxDrawdownPct": -1.0322,
@@ -107,6 +107,38 @@
       "currentActionZh": "继续滚动评估持有/减仓/卖出条件"
     },
     {
+      "code": "601696",
+      "name": "中银证券",
+      "sector": "非银金融",
+      "qty": 12800,
+      "avgCost": 12.1631,
+      "costAmount": 155687.55,
+      "entryPrice": 12.16,
+      "entryReferencePrice": 12.155,
+      "entryPriceSource": "东方财富+Yunai双源均价",
+      "entryTimestamp": "2026-09-03T10:27:42+08:00",
+      "entryDate": "2026-09-03",
+      "initialWeightTarget": 0.15,
+      "lastPrice": 11.94,
+      "lastPriceAt": "2026-09-03T14:50:19+08:00",
+      "missingRadarCount": 7,
+      "partialProfitTaken": false,
+      "seenTradeDates": [
+        "2026-09-03"
+      ],
+      "buyScore": 90.15,
+      "buyReasonZh": "提前分67；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；价格尚未充分扩张+4；追高风险低+2",
+      "invalidationZh": "主线连续退出雷达、资金显著转负，或相对持仓成本跌幅达到4%",
+      "expectedHorizonZh": "次日优先验证，正常持有1-3个交易日，最长约5个交易日",
+      "currentPrice": 11.94,
+      "marketValue": 152832.0,
+      "floatingPnl": -2855.68,
+      "floatingReturnPct": -1.83,
+      "currentWeightPct": 0.76,
+      "tradingDaysObserved": 1,
+      "currentActionZh": "继续滚动评估持有/减仓/卖出条件"
+    },
+    {
       "code": "002271",
       "name": "东方雨虹",
       "sector": "防水材料",
@@ -137,38 +169,6 @@
       "marketValue": 153267.0,
       "floatingPnl": -2436.48,
       "floatingReturnPct": -1.56,
-      "currentWeightPct": 0.77,
-      "tradingDaysObserved": 1,
-      "currentActionZh": "继续滚动评估持有/减仓/卖出条件"
-    },
-    {
-      "code": "601696",
-      "name": "中银证券",
-      "sector": "非银金融",
-      "qty": 12800,
-      "avgCost": 12.1631,
-      "costAmount": 155687.55,
-      "entryPrice": 12.16,
-      "entryReferencePrice": 12.155,
-      "entryPriceSource": "东方财富+Yunai双源均价",
-      "entryTimestamp": "2026-09-03T10:27:42+08:00",
-      "entryDate": "2026-09-03",
-      "initialWeightTarget": 0.15,
-      "lastPrice": 11.94,
-      "lastPriceAt": "2026-09-03T14:50:19+08:00",
-      "missingRadarCount": 7,
-      "partialProfitTaken": false,
-      "seenTradeDates": [
-        "2026-09-03"
-      ],
-      "buyScore": 90.15,
-      "buyReasonZh": "提前分67；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；价格尚未充分扩张+4；追高风险低+2",
-      "invalidationZh": "主线连续退出雷达、资金显著转负，或相对持仓成本跌幅达到4%",
-      "expectedHorizonZh": "次日优先验证，正常持有1-3个交易日，最长约5个交易日",
-      "currentPrice": 11.94,
-      "marketValue": 152832.0,
-      "floatingPnl": -2855.68,
-      "floatingReturnPct": -1.83,
       "currentWeightPct": 0.76,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续滚动评估持有/减仓/卖出条件"
@@ -1513,14 +1513,14 @@
   "performanceReport": {
     "valuation": {
       "method": "UNIT_NAV_SUBSCRIPTION_REDEMPTION",
-      "unitNav": 1.035814,
-      "cumulativeNav": 1.035814,
+      "unitNav": 1.035903,
+      "cumulativeNav": 1.035903,
       "fundUnits": 19341487.5886677,
       "netSubscriptions": 19000000.0,
       "noteZh": "增资按增资前单位净值申购新增份额，单位净值和历史收益不重置。"
     },
     "returns": {
-      "cumulativeReturnPct": 3.5814,
+      "cumulativeReturnPct": 3.5903,
       "daily": [
         {
           "date": "2026-08-20",
@@ -1586,11 +1586,11 @@
       "missingBackendBusinessDays": 9
     },
     "exposure": {
-      "grossExposurePct": 5.16,
-      "netExposurePct": 5.16,
-      "cashPct": 94.84,
+      "grossExposurePct": 5.17,
+      "netExposurePct": 5.17,
+      "cashPct": 94.83,
       "top1ConcentrationPct": 0.78,
-      "top5ConcentrationPct": 3.83,
+      "top5ConcentrationPct": 3.82,
       "sectorExposure": [
         {
           "sector": "保险Ⅱ",
@@ -1605,11 +1605,11 @@
           "weightPct": 0.78
         },
         {
-          "sector": "防水材料",
-          "weightPct": 0.77
+          "sector": "非银金融",
+          "weightPct": 0.76
         },
         {
-          "sector": "非银金融",
+          "sector": "防水材料",
           "weightPct": 0.76
         },
         {
@@ -1639,7 +1639,7 @@
       "partialFillCount": 0,
       "averageSlippageBps": null,
       "grossTradedAmount": 1766380.0,
-      "turnoverPctOfCurrentAssets": 8.817,
+      "turnoverPctOfCurrentAssets": 8.816,
       "recentRejections": [],
       "constraintsZh": [
         "买入按100股整手，卖出清仓允许处理剩余零股；普通A股T+1。",
@@ -1650,6 +1650,12 @@
       ],
       "legacyNoteZh": "v3启用前成交永久保留，但仍标记为旧版固定滑点模型，不事后伪造容量字段。"
     }
+  },
+  "valuationStatus": {
+    "mode": "CARRY_FORWARD_LAST_VERIFIED_NAV",
+    "nav": 20035902.89,
+    "asOf": "2026-09-03T23:23:35+08:00",
+    "noteZh": "没有当日新行情时沿用最后一个已验证组合净值，不用陈旧个股价格重新估值。"
   },
   "rulesZh": {
     "newEntry": "每轮行情把现有持仓和全部实时新候选统一评分；通过信号后仍须通过涨跌停、行情新鲜度和成交容量检查。",
@@ -1832,9 +1838,9 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "33780176192-1",
-    "lastRunAt": "2026-09-04T00:42:27+08:00",
-    "lastSuccessAt": "2026-09-04T00:42:27+08:00",
+    "cycleId": "33780380103-1",
+    "lastRunAt": "2026-09-04T00:44:25+08:00",
+    "lastSuccessAt": "2026-09-04T00:44:25+08:00",
     "lastTradeAt": "2026-09-03T10:29:18+08:00",
     "status": "BLOCKED_STALE_RADAR",
     "statusZh": "后台已运行并更新基金报表，但雷达不是当日数据，拒绝使用旧数据交易",
@@ -1842,7 +1848,7 @@
     "sessionOpen": false,
     "radarCapturedAt": "2026-09-03T14:59:16+08:00",
     "radarFresh": false,
-    "radarAgeSeconds": 34991.7,
+    "radarAgeSeconds": 35109.5,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -1869,29 +1875,29 @@
     "startedAt": "2026-09-03T23:23:37+08:00",
     "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
     "portfolioMetric": "UNIT_NAV_RETURN",
-    "portfolioReturnPct": -0.009,
+    "portfolioReturnPct": 0.0,
     "indexes": [
       {
         "name": "沪深300",
         "returnPct": 0.0,
-        "alphaPct": -0.009
+        "alphaPct": 0.0
       },
       {
         "name": "中证A500",
         "returnPct": 0.0,
-        "alphaPct": -0.009
+        "alphaPct": 0.0
       },
       {
         "name": "创业板指",
         "returnPct": 0.0,
-        "alphaPct": -0.009
+        "alphaPct": 0.0
       }
     ],
     "candidatePool": {
       "name": "原始候选池固定等权",
       "memberCount": 30,
       "returnPct": 0.0,
-      "alphaPct": -0.009,
+      "alphaPct": 0.0,
       "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
     }
   }
