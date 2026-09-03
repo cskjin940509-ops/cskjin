@@ -5,8 +5,8 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 > Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :app:checkDebugAarMetadata
 > Task :app:processDebugNavigationResources
-> Task :app:compileDebugNavigationResources
 > Task :app:generateDebugResValues
+> Task :app:compileDebugNavigationResources
 > Task :app:mapDebugSourceSetPaths
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
@@ -26,8 +26,8 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 > Task :app:desugarDebugFileDependencies
 > Task :app:mergeDebugJniLibFolders
 > Task :app:checkDebugDuplicateClasses
-> Task :app:mergeDebugNativeLibs
 > Task :app:processDebugResources
+> Task :app:mergeDebugNativeLibs
 > Task :app:mergeLibDexDebug
 
 > Task :app:stripDebugDebugSymbols
@@ -43,19 +43,19 @@ w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrate
 w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v4/V4Activity.kt:200:32 'val Icons.Filled.ShowChart: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ShowChart.
 w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v4/V4Activity.kt:202:32 'val Icons.Filled.ViewList: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ViewList.
 w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v4/V4Activity.kt:669:71 'val Icons.Filled.ArrowBack: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ArrowBack.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:471:29 Condition is always 'true'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:526:49 Unnecessary non-null assertion (!!) on a non-null receiver of type 'StockFacts'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:531:62 Unnecessary non-null assertion (!!) on a non-null receiver of type 'StockFacts'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:673:38 Unnecessary safe call on a non-null receiver of type 'Snapshot'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:673:164 Unnecessary safe call on a non-null receiver of type 'Snapshot'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:682:51 Condition is always 'true'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:682:84 Condition is always 'true'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V25RadarTracking.kt:215:58 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'Any?'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:469:29 Condition is always 'true'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:524:49 Unnecessary non-null assertion (!!) on a non-null receiver of type 'StockFacts'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:529:62 Unnecessary non-null assertion (!!) on a non-null receiver of type 'StockFacts'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:671:38 Unnecessary safe call on a non-null receiver of type 'Snapshot'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:671:164 Unnecessary safe call on a non-null receiver of type 'Snapshot'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:680:51 Condition is always 'true'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/DetailScreens.kt:680:84 Condition is always 'true'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V25RadarTracking.kt:200:58 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'Any?'.
 w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V27ChineseDisplay.kt:17:15 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
 w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V27ChineseDisplay.kt:70:15 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V31SlowMoney.kt:156:58 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'Any?'.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt:165:31 'val Icons.Filled.ViewList: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ViewList.
-w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt:166:32 'val Icons.Filled.ViewList: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ViewList.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V31SlowMoney.kt:143:58 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'Any?'.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt:166:31 'val Icons.Filled.ViewList: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ViewList.
+w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt:167:32 'val Icons.Filled.ViewList: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ViewList.
 
 > Task :app:compileDebugJavaWithJavac NO-SOURCE
 > Task :app:dexBuilderDebug
@@ -66,7 +66,7 @@ w: file:///home/runner/work/cskjin/cskjin/app/src/main/java/com/rui/astockstrate
 > Task :app:packageDebug
 > Task :app:createDebugApkListingFileRedirect
 > Task :app:assembleDebug
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1788425364814.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_3-1788446639233.json
 
-BUILD SUCCESSFUL in 1m 3s
+BUILD SUCCESSFUL in 1m 10s
 37 actionable tasks: 37 executed
