@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import run_ai_shadow_portfolio as base  # noqa: E402
 import run_ai_dynamic_portfolio_v2 as dynamic  # noqa: E402
+import shadow_fund_v3 as fund  # noqa: E402
 
 
 class ShadowPortfolioTests(unittest.TestCase):
@@ -30,8 +31,11 @@ class ShadowPortfolioTests(unittest.TestCase):
         self.assertEqual(state["initialCapital"], 20_000_000.0)
         self.assertEqual(state["cash"], 19_300_000.0)
         self.assertEqual(state["positions"]["000001"]["qty"], 10_000)
-        self.assertEqual(len(state["legacyNavHistory"]), 1)
+        self.assertEqual(len(state["navHistory"]), 1)
+        self.assertNotIn("legacyNavHistory", state)
         self.assertFalse(event["retroactive"])
+        self.assertTrue(event["unitNavUnchanged"])
+        self.assertAlmostEqual(state["fundAccounting"]["unitNav"], 1.01, places=6)
         self.assertIsNone(base.migrate_capital_capacity(state, when))
         self.assertEqual(len(state["capitalEvents"]), 1)
 
@@ -58,14 +62,21 @@ class ShadowPortfolioTests(unittest.TestCase):
         }
         day_one = datetime.fromisoformat("2026-09-03T10:00:00+08:00")
         day_two = datetime.fromisoformat("2026-09-04T10:00:00+08:00")
+        base.EXECUTION_MARKET = {
+            "000001": {"amount": 100_000_000.0, "prevClose": 9.5, "amountSource": "test"}
+        }
         with patch.object(base, "now_cn", return_value=day_one), patch.object(
             dynamic, "target_rows", return_value=[target]
         ):
             first = dynamic.dynamic_entries(state, ledger, {}, prices)
             second = dynamic.dynamic_entries(state, ledger, {}, prices)
+            third = dynamic.dynamic_entries(state, ledger, {}, prices)
         self.assertEqual(len(first), 1)
-        self.assertEqual(len(second), 0)
-        self.assertEqual(len(ledger), 1)
+        self.assertEqual(len(second), 1)
+        self.assertEqual(len(third), 0)
+        self.assertEqual(len(ledger), 2)
+        self.assertTrue(first[0]["partialFill"])
+        self.assertLessEqual(first[0]["participationPct"], 0.81)
 
         with patch.object(base, "now_cn", return_value=day_one), patch.object(
             dynamic, "target_rows", return_value=[]
@@ -80,7 +91,62 @@ class ShadowPortfolioTests(unittest.TestCase):
             next_day_exit = dynamic.dynamic_entries(state, ledger, {}, prices)
         self.assertEqual(len(next_day_exit), 1)
         self.assertEqual(next_day_exit[0]["side"], "SELL")
-        self.assertNotIn("000001", state["positions"])
+        self.assertTrue(next_day_exit[0]["partialFill"])
+        self.assertIn("000001", state["positions"])
+
+    def test_existing_twenty_million_state_recovers_lifetime_unit_nav(self):
+        state = {
+            "initialCapital": 20_000_000.0,
+            "cash": 19_000_000.0,
+            "createdAt": "2026-08-20T11:14:42+08:00",
+            "legacyNavHistory": [
+                {"timestamp": "2026-08-20T15:00:00+08:00", "date": "2026-08-20", "nav": 1_000_000.0},
+                {"timestamp": "2026-09-03T15:00:00+08:00", "date": "2026-09-03", "nav": 1_035_902.89},
+            ],
+            "navHistory": [
+                {"timestamp": "2026-09-03T23:23:35+08:00", "date": "2026-09-03", "nav": 20_035_902.89},
+            ],
+            "capitalEvents": [{
+                "eventId": "capital-test",
+                "timestamp": "2026-09-03T23:23:35+08:00",
+                "fromCapital": 1_000_000.0,
+                "toCapital": 20_000_000.0,
+                "cashContribution": 19_000_000.0,
+            }],
+        }
+        perf = fund.fund_performance(state, [], 20_035_902.89)
+        self.assertAlmostEqual(perf["currentUnitNav"], 1.03590289, places=6)
+        self.assertAlmostEqual(perf["cumulativeReturnPct"], 3.590289, places=4)
+        self.assertEqual(len(perf["history"]), 3)
+        self.assertEqual(perf["daily"][-1]["coverageStatus"], "MISSING_BACKEND_CYCLES")
+        self.assertIsNone(perf["daily"][-1]["dailyReturnPct"])
+
+    def test_daily_and_intraday_drawdown_are_separate(self):
+        state = {
+            "initialCapital": 1_000_000.0,
+            "createdAt": "2026-09-01T09:30:00+08:00",
+            "capitalEvents": [],
+            "navHistory": [
+                {"timestamp": "2026-09-01T10:00:00+08:00", "date": "2026-09-01", "nav": 1_100_000.0},
+                {"timestamp": "2026-09-01T15:00:00+08:00", "date": "2026-09-01", "nav": 1_000_000.0},
+                {"timestamp": "2026-09-02T15:00:00+08:00", "date": "2026-09-02", "nav": 980_000.0},
+            ],
+        }
+        perf = fund.fund_performance(state, [], 980_000.0)
+        self.assertAlmostEqual(perf["dailyCloseMaxDrawdownPct"], -2.0, places=3)
+        self.assertLess(perf["intradayObservedMaxDrawdownPct"], -10.0)
+        self.assertFalse(perf["risk"]["sampleSufficient"])
+        self.assertIsNone(perf["risk"]["sharpeRatio"])
+
+    def test_limit_up_is_not_assumed_fillable(self):
+        state = {"initialCapital": 20_000_000.0}
+        plan = fund.plan_execution(
+            state, side="BUY", code="600000", name="测试", requested_qty=1000,
+            reference_price=11.0, market={"prevClose": 10.0, "amount": 1_000_000_000.0},
+            day="2026-09-03",
+        )
+        self.assertFalse(plan["allowed"])
+        self.assertEqual(plan["rejectCode"], "LIMIT_UP")
 
     def test_stale_radar_is_rejected(self):
         now = datetime.fromisoformat("2026-09-03T10:30:01+08:00")

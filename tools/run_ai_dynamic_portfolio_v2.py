@@ -135,20 +135,33 @@ def add_or_buy(state: dict, ledger: list, t: dict, qty: int, prices: dict[str, f
         return None
     code = t["code"]
     ref = float(t["referencePrice"])
-    px = base.exec_price(ref, "BUY")
+    cash = float(state.get("cash", 0.0))
+    target_requested_qty = qty
+    cash_qty = int(max(0.0, cash - base.MIN_COMMISSION) / ref / 100) * 100
+    qty = min(qty, cash_qty)
+    dt = base.now_cn(); today = dt.date().isoformat()
+    plan = base.fund.plan_execution(
+        state,
+        side="BUY",
+        code=code,
+        name=t["name"],
+        requested_qty=qty,
+        reference_price=ref,
+        market=base.EXECUTION_MARKET.get(code) or {},
+        day=today,
+    )
+    plan["targetRequestedQty"] = target_requested_qty
+    if not plan.get("allowed"):
+        base.fund.record_rejection(
+            state, code=code, name=t["name"], side="BUY", plan=plan, timestamp=base.iso(dt)
+        )
+        return None
+    qty = int(plan["filledQty"])
+    px = float(plan["executionPrice"])
     amount = round(px * qty, 2)
     fee = base.fees(amount, "BUY")
-    cash = float(state.get("cash", 0.0))
-    if amount + fee > cash:
-        qty = int(max(0.0, cash - base.MIN_COMMISSION) / px / 100) * 100
-        if qty < 100:
-            return None
-        amount = round(px * qty, 2)
-        fee = base.fees(amount, "BUY")
     if amount + fee > cash:
         return None
-
-    dt = base.now_cn(); today = dt.date().isoformat()
     pos = (state.get("positions") or {}).get(code)
     side_zh = "加仓" if pos else "买入"
     if pos:
@@ -179,11 +192,22 @@ def add_or_buy(state: dict, ledger: list, t: dict, qty: int, prices: dict[str, f
     daily = pos.setdefault("dailyBuyQty", {})
     daily[today] = int(daily.get(today, 0) or 0) + qty
     state["cash"] = round(cash - amount - fee, 2)
+    base.fund.commit_execution(state, code, today, plan)
     return base.append_decision(
         ledger, side="BUY", sideZh=side_zh, code=code, name=t["name"], sector=t["sector"], qty=qty,
         price=px, referencePrice=round(ref, 4), priceSource=t["priceSource"], amount=amount, fee=fee,
         targetWeightPct=t["targetWeightPct"], decisionScore=t["score"], reasonZh=reason + "；" + t["reasonZh"],
         invalidationZh=pos["invalidationZh"], expectedHorizonZh=pos["expectedHorizonZh"],
+        executionModel=plan.get("executionModel"), requestedQty=target_requested_qty,
+        capacityRequestedQty=plan.get("requestedQty"), filledQty=plan.get("filledQty"),
+        partialFill=plan.get("filledQty") < target_requested_qty,
+        fillRatioPct=round(plan.get("filledQty") / target_requested_qty * 100.0, 2) if target_requested_qty else None,
+        slippageBps=plan.get("slippageBps"), marketImpactBps=plan.get("marketImpactBps"),
+        participationPct=plan.get("participationPct"), intradayAmount=plan.get("intradayAmount"),
+        adv20Amount=plan.get("adv20Amount"), advSampleDays=plan.get("advSampleDays"),
+        capacityAmount=plan.get("capacityAmount"), dailyCapacityAmount=plan.get("dailyCapacityAmount"),
+        liquidityBasisZh=plan.get("liquidityBasisZh"), priceLimitPct=plan.get("limitPct"),
+        upperLimit=plan.get("upperLimit"), lowerLimit=plan.get("lowerLimit"),
     )
 
 
@@ -193,10 +217,32 @@ def reduce_or_sell(state: dict, ledger: list, pos: dict, qty: int, ref: float, t
     qty = int(qty // 100) * 100
     if qty <= 0:
         return None
-    d = base.sell_position(state, ledger, pos, qty, float(ref), reason, {})
+    target_requested_qty = qty
+    plan = base.fund.plan_execution(
+        state,
+        side="SELL",
+        code=pos["code"],
+        name=pos.get("name") or pos["code"],
+        requested_qty=qty,
+        reference_price=float(ref),
+        market=base.EXECUTION_MARKET.get(pos["code"]) or {},
+        day=today,
+        total_position_qty=int(pos.get("qty") or 0),
+    )
+    plan["targetRequestedQty"] = target_requested_qty
+    if not plan.get("allowed"):
+        base.fund.record_rejection(
+            state, code=pos["code"], name=pos.get("name") or pos["code"],
+            side="SELL", plan=plan, timestamp=base.iso()
+        )
+        return None
+    d = base.sell_position(state, ledger, pos, int(plan["filledQty"]), float(ref), reason, {}, plan)
     if d is not None:
         d["sideZh"] = "卖出" if int(d.get("remainingQty") or 0) <= 0 else "减仓"
         d["targetWeightPct"] = round(float(target_pct), 2)
+        d["requestedQty"] = target_requested_qty
+        d["partialFill"] = int(plan.get("filledQty") or 0) < target_requested_qty
+        d["fillRatioPct"] = round(int(plan.get("filledQty") or 0) / target_requested_qty * 100.0, 2)
     return d
 
 
@@ -302,7 +348,7 @@ def dynamic_entries(state: dict, ledger: list, radar: dict, prices: dict[str, fl
 
 def dynamic_build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dict) -> dict:
     out = ORIGINAL_BUILD_LATEST(state, ledger, prices, radar)
-    out["schemaVersion"] = 2
+    out["schemaVersion"] = 3
     out["strategyVersion"] = STRATEGY_VERSION
     out["mode"] = "智能影子实盘"
     out["targetPortfolio"] = [
@@ -317,13 +363,15 @@ def dynamic_build_latest(state: dict, ledger: list, prices: dict[str, float], ra
         "grossLimitPct": 100,
         "singleStockLimitPct": 15,
         "sectorLimitPct": 25,
+        "executionModel": "v3-liquidity-capacity-point-in-time",
+        "capacityNoteZh": "目标仓位不等于保证成交；每轮按当时累计成交额、ADV20、涨跌停和冲击成本计算可成交数量。",
     }
     rules = out.setdefault("rulesZh", {})
-    rules["newEntry"] = "每轮行情把现有持仓和全部实时新候选统一重新评分；满足条件即可新买，不限制股票只数或每日买入次数。"
+    rules["newEntry"] = "每轮行情把现有持仓和全部实时新候选统一评分；通过信号后仍须通过涨跌停、行情新鲜度和成交容量检查。"
     rules["position"] = "允许0%到100%动态总仓位，不强制满仓；单股最高15%、单板块最高25%，总仓位由实时机会质量决定。"
-    rules["rebalance"] = "目标组合每轮重算；新机会可买入/加仓，旧持仓相对变弱可减仓/卖出，并设置约1.8个百分点缓冲减少噪声交易。"
-    rules["exit"] = "普通A股遵守T+1；保护性止损、资金快速失效和持续离开候选可优先退出。"
-    rules["audit"] = "上午已经发生的成交永久保留；v2动态再平衡只影响启用后的新决策，不回写历史。"
+    rules["rebalance"] = "目标组合每轮重算；约1.8个百分点缓冲减少噪声，容量不足时部分成交并在后续轮次继续计算剩余目标。"
+    rules["exit"] = "普通A股遵守T+1；退出信号也受跌停和流动性约束，不假设止损价一定可以全部卖出。"
+    rules["audit"] = "全部旧成交永久保留；v3容量模型只影响启用后的新成交，不回写或美化历史。"
     return out
 
 

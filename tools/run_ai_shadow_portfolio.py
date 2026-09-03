@@ -12,6 +12,8 @@ from datetime import datetime, time
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import shadow_fund_v3 as fund
+
 CN = ZoneInfo("Asia/Shanghai")
 ROOT = Path(__file__).resolve().parents[1]
 RADAR = ROOT / "astock_radar" / "latest.json"
@@ -40,6 +42,10 @@ BROKER_COMMISSION_RATE = 0.0002
 MIN_COMMISSION = 5.0
 REGULATORY_FEE_RATE = 0.0000541
 STAMP_DUTY_SELL_RATE = 0.0005
+
+# Current point-in-time market data is registered once per cycle and consumed by
+# the dynamic execution layer.  It is never persisted as an assumed future fill.
+EXECUTION_MARKET: dict[str, dict] = {}
 
 
 def now_cn() -> datetime:
@@ -83,7 +89,9 @@ def write_json(path: Path, obj) -> None:
 
 
 def symbol(code: str) -> str:
-    return ("sh" if code.startswith(("5", "6", "9")) else "sz") + code
+    if code.startswith(("8", "9")):
+        return "bj" + code
+    return ("sh" if code.startswith(("5", "6")) else "sz") + code
 
 
 def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
@@ -107,7 +115,7 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
         return {}
     out: dict[str, dict] = {}
     for line in raw.split(";"):
-        m = re.search(r'v_(sh|sz)(\d{6})="([^"]*)"', line)
+        m = re.search(r'v_(sh|sz|bj)(\d{6})="([^"]*)"', line)
         if not m:
             continue
         code = m.group(2)
@@ -117,6 +125,8 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
             prev = float(f[4]) if len(f) > 4 and f[4] else None
             name = f[1] if len(f) > 1 else code
             quote_time = f[30] if len(f) > 30 else None
+            amount = float(f[37]) * 10000.0 if len(f) > 37 and f[37] else None
+            volume = float(f[6]) * 100.0 if len(f) > 6 and f[6] else None
             change_pct = ((price / prev - 1) * 100) if price and prev else None
             out[code] = {
                 "code": code,
@@ -125,6 +135,9 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
                 "prevClose": prev,
                 "changePct": change_pct,
                 "quoteTime": quote_time,
+                "quoteTimestamp": quote_time,
+                "amount": amount,
+                "volumeShares": volume,
                 "source": "腾讯实时行情",
             }
         except Exception:
@@ -150,7 +163,7 @@ def fees(amount: float, side: str) -> float:
 
 def new_state() -> dict:
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 3,
         "strategyVersion": STRATEGY_VERSION,
         "mode": "AI影子实盘",
         "simulated": True,
@@ -172,7 +185,7 @@ def capital_base(state: dict) -> float:
 
 
 def migrate_capital_capacity(state: dict, dt: datetime | None = None) -> dict | None:
-    """Increase capacity without rewriting any historical simulated fill."""
+    """Increase capacity without rewriting fills or resetting the unit NAV."""
     dt = dt or now_cn()
     old = capital_base(state)
     target = float(INITIAL_CAPITAL)
@@ -180,20 +193,17 @@ def migrate_capital_capacity(state: dict, dt: datetime | None = None) -> dict | 
     if math.isclose(old, target, rel_tol=0.0, abs_tol=0.01):
         state["initialCapital"] = target
         state["capitalCapacity"] = target
+        fund.ensure_fund_accounting(state)
         return None
 
     delta = round(target - old, 2)
     if delta < 0 and float(state.get("cash") or 0.0) + delta < -0.01:
         raise RuntimeError("目标资金容量低于当前已占用资金，拒绝自动缩减")
 
-    legacy_nav = list(state.get("navHistory") or [])
-    if legacy_nav:
-        state.setdefault("legacyNavHistory", []).extend(legacy_nav)
-    state["navHistory"] = []
-    old_benchmark = state.pop("benchmarkTracking", None)
-    if old_benchmark:
-        state["legacyBenchmarkTracking"] = old_benchmark
-
+    # Capture the pre-subscription account value before adding cash.  Existing
+    # history and benchmark series remain intact.
+    old_history = list(state.get("legacyNavHistory") or []) + list(state.get("navHistory") or [])
+    pre_assets = float(old_history[-1].get("nav") or old) if old_history else old
     state["cash"] = round(float(state.get("cash") or 0.0) + delta, 2)
     state["initialCapital"] = target
     state["capitalCapacity"] = target
@@ -205,10 +215,12 @@ def migrate_capital_capacity(state: dict, dt: datetime | None = None) -> dict | 
         "fromCapital": round(old, 2),
         "toCapital": round(target, 2),
         "cashContribution": delta,
+        "preContributionAssets": round(pre_assets, 2),
         "retroactive": False,
         "noteZh": "资金容量按当前时点调整；保留此前成交审计，不倒改历史股数、价格或盈亏。",
     }
     state["capitalEvents"].append(event)
+    fund.ensure_fund_accounting(state, pre_assets + delta)
     return event
 
 
@@ -550,12 +562,12 @@ def buy_position(state: dict, ledger: list, stock: dict, score: float, reasons: 
 
 
 def sell_position(state: dict, ledger: list, pos: dict, qty: int, ref_price: float,
-                  reason: str, prices: dict[str, float]) -> dict | None:
+                  reason: str, prices: dict[str, float], execution_plan: dict | None = None) -> dict | None:
     qty = min(int(qty), int(pos.get("qty", 0)))
     qty = (qty // 100) * 100
     if qty <= 0:
         return None
-    px = exec_price(ref_price, "SELL")
+    px = float(execution_plan.get("executionPrice")) if execution_plan else exec_price(ref_price, "SELL")
     amount = round(px * qty, 2)
     fee = fees(amount, "SELL")
     avg_cost = float(pos.get("avgCost") or 0.0)
@@ -583,6 +595,23 @@ def sell_position(state: dict, ledger: list, pos: dict, qty: int, ref_price: flo
         realizedReturnPct=round((px / avg_cost - 1) * 100, 2) if avg_cost else None,
         reasonZh=reason,
         remainingQty=remain,
+        **({
+            "executionModel": execution_plan.get("executionModel"),
+            "capacityRequestedQty": execution_plan.get("requestedQty"),
+            "filledQty": execution_plan.get("filledQty"),
+            "slippageBps": execution_plan.get("slippageBps"),
+            "marketImpactBps": execution_plan.get("marketImpactBps"),
+            "participationPct": execution_plan.get("participationPct"),
+            "intradayAmount": execution_plan.get("intradayAmount"),
+            "adv20Amount": execution_plan.get("adv20Amount"),
+            "advSampleDays": execution_plan.get("advSampleDays"),
+            "capacityAmount": execution_plan.get("capacityAmount"),
+            "dailyCapacityAmount": execution_plan.get("dailyCapacityAmount"),
+            "liquidityBasisZh": execution_plan.get("liquidityBasisZh"),
+            "priceLimitPct": execution_plan.get("limitPct"),
+            "upperLimit": execution_plan.get("upperLimit"),
+            "lowerLimit": execution_plan.get("lowerLimit"),
+        } if execution_plan else {}),
     )
 
     if remain <= 0:
@@ -592,6 +621,8 @@ def sell_position(state: dict, ledger: list, pos: dict, qty: int, ref_price: flo
         pos["costAmount"] = round(avg_cost * remain, 2)
         if "止盈" in reason:
             pos["partialProfitTaken"] = True
+    if execution_plan:
+        fund.commit_execution(state, pos["code"], now_cn().date().isoformat(), execution_plan)
     get_daily_control(state, now_cn().date().isoformat())["sells"] += 1
     return decision
 
@@ -769,33 +800,53 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
         })
     positions.sort(key=lambda x: x.get("currentWeightPct", 0), reverse=True)
 
-    hist = state.get("navHistory", [])
-    day = daily_series(hist, initial_capital)
+    performance = fund.fund_performance(state, ledger, nav)
+    hist = performance["history"]
+    day = performance["daily"]
     today = now_cn().date().isoformat()
-    today_rows = [x for x in hist if x.get("date") == today]
-    today_ret = None
-    if today_rows:
-        start = float(today_rows[0].get("nav") or nav)
-        today_ret = (nav / start - 1) * 100 if start else None
+    today_row = next((x for x in reversed(day) if x.get("date") == today), None)
+    today_ret = today_row.get("dailyReturnPct") if today_row else None
+
+    sector_exposure: dict[str, float] = {}
+    for p in positions:
+        sector = str(p.get("sector") or "未知")
+        sector_exposure[sector] = sector_exposure.get(sector, 0.0) + float(p.get("currentWeightPct") or 0.0)
+    sector_rows = [
+        {"sector": key, "weightPct": round(value, 2)}
+        for key, value in sorted(sector_exposure.items(), key=lambda x: x[1], reverse=True)
+    ]
+    top_weights = [float(x.get("currentWeightPct") or 0.0) for x in positions]
+    fee_total = sum(float(x.get("fee") or 0.0) for x in ledger)
+    buy_amount = sum(float(x.get("amount") or 0.0) for x in ledger if x.get("side") == "BUY")
+    sell_amount = sum(float(x.get("amount") or 0.0) for x in ledger if x.get("side") == "SELL")
+    execution = fund.execution_report(state, ledger, nav)
+    accounting = performance["accounting"]
 
     summary = {
         "initialCapital": initial_capital,
         "capitalCapacity": initial_capital,
+        "inceptionCapital": accounting.get("inceptionCapital"),
         "totalAssets": round(nav, 2),
+        "fundUnits": accounting.get("fundUnits"),
+        "unitNav": performance.get("currentUnitNav"),
+        "cumulativeNav": performance.get("cumulativeNav"),
         "cash": round(float(state.get("cash", 0.0)), 2),
         "marketValue": round(mv, 2),
         "positionPct": round(mv / nav * 100, 2) if nav else 0.0,
         "cashPct": round(float(state.get("cash", 0.0)) / nav * 100, 2) if nav else 0.0,
         "todayReturnPct": round(today_ret, 3) if today_ret is not None else None,
-        "cumulativeReturnPct": round((nav / initial_capital - 1) * 100, 3),
+        "cumulativeReturnPct": round(float(performance.get("cumulativeReturnPct") or 0.0), 3),
         "realizedPnl": round(float(state.get("realizedPnl", 0.0)), 2),
         "floatingPnl": round(sum(float(x.get("floatingPnl") or 0) for x in positions), 2),
-        "maxDrawdownPct": max_drawdown_pct(hist),
+        "maxDrawdownPct": performance.get("dailyCloseMaxDrawdownPct"),
+        "maxDrawdownFrequency": "DAILY_CLOSE_UNIT_NAV",
+        "intradayObservedMaxDrawdownPct": performance.get("intradayObservedMaxDrawdownPct"),
+        "missingBackendBusinessDays": performance.get("missingBackendBusinessDays"),
         "positionCount": len(positions),
         **closed_sell_stats(ledger),
     }
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 3,
         "strategyVersion": STRATEGY_VERSION,
         "mode": "AI影子实盘",
         "simulated": True,
@@ -806,20 +857,68 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
         "summary": summary,
         "positions": positions,
         "todayDecisions": [x for x in ledger if str(x.get("timestamp", "")).startswith(today)],
-        "recentDecisions": ledger[-30:],
+        "recentDecisions": ledger[-100:],
+        "allDecisions": ledger,
         "capitalEvents": (state.get("capitalEvents") or [])[-10:],
-        "dailyPerformance": day[-90:],
-        "navHistory": hist[-300:],
+        "capitalStages": accounting.get("unitEvents"),
+        "dailyPerformance": day[-250:],
+        "weeklyPerformance": performance.get("weekly", [])[-104:],
+        "monthlyPerformance": performance.get("monthly", [])[-60:],
+        "navHistory": hist[-1000:],
+        "performanceReport": {
+            "valuation": {
+                "method": accounting.get("method"),
+                "unitNav": performance.get("currentUnitNav"),
+                "cumulativeNav": performance.get("cumulativeNav"),
+                "fundUnits": accounting.get("fundUnits"),
+                "netSubscriptions": performance.get("netSubscriptions"),
+                "noteZh": accounting.get("noteZh"),
+            },
+            "returns": {
+                "cumulativeReturnPct": performance.get("cumulativeReturnPct"),
+                "daily": day[-250:],
+                "weekly": performance.get("weekly", [])[-104:],
+                "monthly": performance.get("monthly", [])[-60:],
+            },
+            "risk": {
+                **performance.get("risk", {}),
+                "dailyCloseMaxDrawdownPct": performance.get("dailyCloseMaxDrawdownPct"),
+                "intradayObservedMaxDrawdownPct": performance.get("intradayObservedMaxDrawdownPct"),
+                "drawdownFrequencyZh": performance.get("drawdownFrequencyZh"),
+                "missingBackendBusinessDays": performance.get("missingBackendBusinessDays"),
+            },
+            "exposure": {
+                "grossExposurePct": round(mv / nav * 100, 2) if nav else 0.0,
+                "netExposurePct": round(mv / nav * 100, 2) if nav else 0.0,
+                "cashPct": round(float(state.get("cash", 0.0)) / nav * 100, 2) if nav else 0.0,
+                "top1ConcentrationPct": round(sum(top_weights[:1]), 2),
+                "top5ConcentrationPct": round(sum(top_weights[:5]), 2),
+                "sectorExposure": sector_rows,
+            },
+            "transactions": {
+                "decisionCount": len(ledger),
+                "buyDecisionCount": sum(1 for x in ledger if x.get("side") == "BUY"),
+                "sellDecisionCount": sum(1 for x in ledger if x.get("side") == "SELL"),
+                "grossBuyAmount": round(buy_amount, 2),
+                "grossSellAmount": round(sell_amount, 2),
+                "totalFees": round(fee_total, 2),
+                **closed_sell_stats(ledger),
+            },
+            "liquidityAndCapacity": execution,
+        },
         "rulesZh": {
             "newEntry": "只从全天提前雷达候选中择优，优先潜在形成/确认中、价格未充分扩张、资金正向且追高风险低的股票。",
-            "position": "单股最高15%，单板块最高25%，总仓位最高60%，最多5只；没有合格机会允许100%现金。",
-            "exit": "遵守普通A股T+1；止损、信号失效、资金转负、分批止盈和时间退出共同决定卖出。",
-            "audit": "每笔决策按当时时间、价格、仓位和理由永久记录，后续行情不得回改历史决策。",
+            "position": "资金容量2000万元；单股最高15%、单板块最高25%，总仓位由机会质量决定，容量不足只部分成交。",
+            "exit": "遵守A股T+1；涨停不假设能买入、跌停不假设能卖出，止损和目标调仓也受真实流动性容量约束。",
+            "valuation": "采用基金份额净值法；增资按增资前单位净值发行份额，不重置历史收益。",
+            "drawdown": "正式最大回撤按日终单位净值计算；盘中已观测最大回撤单独显示，周频和月频只用于收益归因。",
+            "audit": "全部历史成交永久保留；旧版成交明确标记为固定滑点模型，不事后伪造容量字段。",
         },
     }
 
 
 def _main_impl() -> int:
+    global EXECUTION_MARKET
     OUT.mkdir(parents=True, exist_ok=True)
     dt = now_cn()
     if not RADAR.exists():
@@ -846,12 +945,16 @@ def _main_impl() -> int:
     codes += list((radar.get("stocks") or {}).keys())
     quotes = fetch_tencent_quotes(codes)
     prices: dict[str, float] = {}
+    EXECUTION_MARKET = {}
     for code in set(codes):
         q = quotes.get(code) or {}
         st = (radar.get("stocks") or {}).get(code) or {}
         p = q.get("price") or st.get("price")
         if p:
             prices[code] = float(p)
+        fallback = (state.get("positions") or {}).get(code, {}).get("lastPrice")
+        EXECUTION_MARKET[code] = fund.market_data(st, q, fallback)
+    fund.update_liquidity_profiles(state, radar, quotes, dt.date().isoformat())
 
     actions: list[dict] = []
     radar_fresh, radar_age = radar_freshness(radar, dt)
@@ -863,6 +966,8 @@ def _main_impl() -> int:
         actions += evaluate_entries(state, ledger, radar, prices)
 
     nav, mv = portfolio_nav(state, prices)
+    accounting = fund.ensure_fund_accounting(state, nav)
+    unit_nav = float(accounting.get("unitNav") or 1.0)
     nav_point = {
         "timestamp": iso(dt),
         "date": dt.date().isoformat(),
@@ -871,13 +976,19 @@ def _main_impl() -> int:
         "cash": round(float(state.get("cash", 0.0)), 2),
         "marketValue": round(mv, 2),
         "positionCount": len(state.get("positions", {})),
-        "cumulativeReturnPct": round((nav / capital_base(state) - 1) * 100, 4),
+        "fundUnits": accounting.get("fundUnits"),
+        "unitNav": round(unit_nav, 8),
+        "cumulativeNav": round(unit_nav, 8),
+        "cumulativeReturnPct": round((unit_nav - 1) * 100, 4),
         "radarCapturedAt": radar.get("capturedAt"),
     }
     hist = state.setdefault("navHistory", [])
     hist.append(nav_point)
     if len(hist) > 6000:
         state["navHistory"] = hist[-6000:]
+    # Keep bounded operational controls while retaining all actual decisions.
+    controls = state.get("executionControl") or {}
+    state["executionControl"] = {k: controls[k] for k in sorted(controls)[-40:]}
 
     get_daily_control(state, dt.date().isoformat())["lastDecisionAt"] = iso(dt)
     state["updatedAt"] = iso(dt)

@@ -41,11 +41,13 @@ def write_json(path: Path, obj) -> None:
 
 
 def stock_symbol(code: str) -> str:
-    return ("sh" if code.startswith(("5", "6", "9")) else "sz") + code
+    if code.startswith(("8", "9")):
+        return "bj" + code
+    return ("sh" if code.startswith(("5", "6")) else "sz") + code
 
 
 def fetch_symbols(symbols: list[str]) -> dict[str, dict]:
-    symbols = [s for s in dict.fromkeys(symbols) if re.fullmatch(r"(?:sh|sz)\d{6}", s or "")]
+    symbols = [s for s in dict.fromkeys(symbols) if re.fullmatch(r"(?:sh|sz|bj)\d{6}", s or "")]
     if not symbols:
         return {}
     req = urllib.request.Request(
@@ -58,7 +60,7 @@ def fetch_symbols(symbols: list[str]) -> dict[str, dict]:
         return {}
     out: dict[str, dict] = {}
     for line in raw.split(";"):
-        m = re.search(r'v_((?:sh|sz)\d{6})="([^"]*)"', line)
+        m = re.search(r'v_((?:sh|sz|bj)\d{6})="([^"]*)"', line)
         if not m:
             continue
         sym = m.group(1)
@@ -77,6 +79,14 @@ def pct(current: float | None, base: float | None) -> float | None:
     if not current or not base:
         return None
     return round((float(current) / float(base) - 1.0) * 100.0, 3)
+
+
+def unit_nav_at(latest: dict, timestamp: str | None) -> float | None:
+    rows = [
+        x for x in latest.get("navHistory") or []
+        if x.get("unitNav") is not None and (not timestamp or str(x.get("timestamp") or "") <= timestamp)
+    ]
+    return float(rows[-1]["unitNav"]) if rows else None
 
 
 def main() -> int:
@@ -121,6 +131,7 @@ def main() -> int:
         tracking = {
             "startedAt": iso(),
             "portfolioBaseNav": float((latest.get("summary") or {}).get("totalAssets") or state.get("initialCapital") or 1_000_000.0),
+            "portfolioBaseUnitNav": float((latest.get("summary") or {}).get("unitNav") or 1.0),
             "indexes": items,
             "candidatePool": {
                 "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员",
@@ -142,9 +153,13 @@ def main() -> int:
                 item["lastPrice"] = q["price"]
 
     summary = latest.get("summary") or {}
-    current_nav = float(summary.get("totalAssets") or 0.0)
-    base_nav = float(tracking.get("portfolioBaseNav") or 0.0)
-    port_ret = pct(current_nav, base_nav)
+    current_nav = float(summary.get("unitNav") or 0.0)
+    base_nav = tracking.get("portfolioBaseUnitNav")
+    if base_nav is None:
+        base_nav = unit_nav_at(latest, tracking.get("startedAt")) or current_nav
+        tracking["portfolioBaseUnitNav"] = float(base_nav)
+        tracking["unitNavMigrationZh"] = "原资金净值基准已迁移为同一时点单位净值，避免增资扭曲收益。"
+    port_ret = pct(current_nav, float(base_nav or 0.0))
 
     index_result = []
     for name, item in (tracking.get("indexes") or {}).items():
@@ -165,6 +180,7 @@ def main() -> int:
     latest["benchmarkComparison"] = {
         "startedAt": tracking.get("startedAt"),
         "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
+        "portfolioMetric": "UNIT_NAV_RETURN",
         "portfolioReturnPct": port_ret,
         "indexes": index_result,
         "candidatePool": {

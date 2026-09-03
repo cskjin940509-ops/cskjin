@@ -9,6 +9,7 @@ on:
       - 'tools/run_ai_dynamic_portfolio_v2.py'
       - 'tools/run_ai_dynamic_portfolio_v2_1.py'
       - 'tools/run_ai_dynamic_portfolio_v2_2.py'
+      - 'tools/shadow_fund_v3.py'
       - 'tools/enrich_ai_shadow_benchmarks.py'
       - 'tools/test_ai_shadow_portfolio.py'
       - 'tools/validate_ai_shadow_contract.py'
@@ -41,7 +42,7 @@ jobs:
           python-version: '3.12'
       - name: 检查引擎与回归测试
         run: |
-          python -m py_compile tools/run_ai_shadow_portfolio.py tools/run_ai_dynamic_portfolio_v2.py tools/run_ai_dynamic_portfolio_v2_1.py tools/run_ai_dynamic_portfolio_v2_2.py
+          python -m py_compile tools/shadow_fund_v3.py tools/run_ai_shadow_portfolio.py tools/run_ai_dynamic_portfolio_v2.py tools/run_ai_dynamic_portfolio_v2_1.py tools/run_ai_dynamic_portfolio_v2_2.py
           python -m unittest tools/test_ai_shadow_portfolio.py
       - name: 后台自动模拟买卖
         id: engine

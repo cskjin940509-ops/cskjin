@@ -54,6 +54,27 @@ def main() -> int:
         require(all(x.get("simulated") is True for x in ledger), "ledger contains a non-simulated fill")
         require(all(x.get("side") in {"BUY", "SELL"} for x in ledger), "ledger contains an invalid side")
         require(float(state.get("cash") or 0) >= -0.01, "cash is negative")
+        require(float(summary.get("unitNav") or 0) > 0, "unit NAV is missing")
+        require(float(summary.get("cumulativeNav") or 0) > 0, "cumulative NAV is missing")
+        require(summary.get("maxDrawdownFrequency") == "DAILY_CLOSE_UNIT_NAV", "drawdown frequency is not daily close")
+        require(isinstance(latest.get("allDecisions"), list), "full decision ledger is not exposed")
+        require(len(latest.get("allDecisions") or []) == len(ledger), "full decision ledger count mismatch")
+        require(any(str(x.get("timestamp") or "").startswith("2026-08-20") for x in ledger), "100W-stage trades disappeared")
+
+        accounting = state.get("fundAccounting") or {}
+        require(accounting.get("method") == "UNIT_NAV_SUBSCRIPTION_REDEMPTION", "unit NAV accounting is disabled")
+        require(float(accounting.get("inceptionCapital") or 0) == 1_000_000.0, "1M inception stage is missing")
+        subscriptions = [x for x in accounting.get("unitEvents") or [] if x.get("type") == "SUBSCRIPTION"]
+        require(subscriptions, "19M subscription units are missing")
+        require(any(float(x.get("cashFlow") or 0) == 19_000_000.0 for x in subscriptions), "19M subscription amount mismatch")
+        require(all(x.get("unitNav") for x in subscriptions), "subscription unit NAV is missing")
+
+        report = latest.get("performanceReport") or {}
+        risk = report.get("risk") or {}
+        liquidity = report.get("liquidityAndCapacity") or {}
+        require(risk.get("drawdownFrequencyZh"), "drawdown disclosure is missing")
+        require(liquidity.get("executionModel") == "v3-liquidity-capacity-point-in-time", "capacity model is disabled")
+        require(int(liquidity.get("legacyFixedSlippageFillCount") or 0) >= 16, "legacy fills were rewritten")
 
         positions = state.get("positions") or {}
         require(isinstance(positions, dict), "positions must be an object")
@@ -68,6 +89,8 @@ def main() -> int:
             "positions": len(positions),
             "automationStatus": automation.get("status"),
             "lastRunAt": automation.get("lastRunAt"),
+            "unitNav": summary.get("unitNav"),
+            "dailyCloseMaxDrawdownPct": summary.get("maxDrawdownPct"),
         }, ensure_ascii=False))
         return 0
     except Exception as exc:
