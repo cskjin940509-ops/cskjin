@@ -105,7 +105,7 @@ data class LayerRadar40(
 )
 
 /**
- * v4.1 does not create a new score. It turns the persisted cloud feeds into an
+ * v4.2 does not create a new score. It turns the persisted cloud feeds into an
  * auditable four-layer decision chain and explicitly blocks real execution
  * while the market-level risk budget is not yet validated out of sample.
  */
@@ -158,7 +158,7 @@ private fun FrameworkHeader40(data: LayerRadar40?, error: String?) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text("分层决策 v4.1", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                    Text("分层决策 v4.2", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
                     Text("市场 → 板块 → 个股 → 执行", color = Color(0xFFD7DFFF), fontSize = 11.sp)
                 }
                 Surface(color = if (data != null) Color(0xFF295E53) else Color(0xFF6A4A1E), shape = RoundedCornerShape(20.dp)) {
@@ -224,7 +224,7 @@ private fun MarketLayer40(snapshot: Snapshot?, quotes: Map<String, Quote>) {
         EvidenceStatus40("两融情绪", "原始T+1数据已接；市场层阈值未冻结", "待验证")
         EvidenceStatus40("ETF资金强弱", "份额变化口径已接；托底/进攻结构待区分", "待验证")
         EvidenceStatus40("综合资金情绪", "仅保留研究标签，不沿用漂移权重", "不生产")
-        Notice40("市场风险预算尚未完成滚动样本外验证，因此 v4.1 不显示伪精确仓位百分比，也不授权真实自动交易。")
+        Notice40("市场风险预算尚未完成滚动样本外验证，因此 v4.2 不显示伪精确仓位百分比，也不授权真实自动交易。")
     }
 }
 
@@ -330,7 +330,7 @@ private fun StockLayer40(stocks: List<LayerStock40>, date: String?) {
                 if (index < minOf(7, stocks.lastIndex)) HorizontalDivider(color = Color(0xFFF0F1F4))
             }
         }
-        Notice40("成交量是个股层已确认的核心研究方向；若量比/历史成交基准显示“—”，表示后端尚未提供，v4.1 不用当天成交额冒充已验证的放量信号。")
+        Notice40("成交量是个股层已确认的核心研究方向；若量比/历史成交基准显示“—”，表示后端尚未提供，v4.2 不用当天成交额冒充已验证的放量信号。")
     }
 }
 

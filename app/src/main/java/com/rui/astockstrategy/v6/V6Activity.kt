@@ -259,7 +259,7 @@ fun AStockV6() {
                 TopAppBar(
                     title = {
                         Column {
-                            Text("A股分层研究 v4.1", fontWeight = FontWeight.Bold)
+                            Text("A股分层研究 v4.2", fontWeight = FontWeight.Bold)
                             Text(
                                 active?.let { "${it.date} · ${snapshotAuditLabel(it)} · ${it.regime}" } ?: "等待策略快照",
                                 fontSize = 11.sp,
@@ -347,7 +347,7 @@ fun TodayScreen(
             Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                 Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                     Text("兼容工具", fontWeight = FontWeight.Bold)
-                    Text("保留v3.4盘前池、尾盘判断和执行记录，但它们不覆盖v4.1分层准入。", color = Muted, fontSize = 9.sp)
+                    Text("保留v3.4盘前池、尾盘判断和执行记录，但它们不覆盖v4.2分层准入。", color = Muted, fontSize = 9.sp)
                     OutlinedButton(onClick = { showLegacyTools = !showLegacyTools }, modifier = Modifier.fillMaxWidth()) {
                         Text(if (showLegacyTools) "收起旧版辅助模块" else "展开旧版辅助模块")
                     }
@@ -380,7 +380,7 @@ fun TodayScreen(
                 if (!s.performanceEligible) item { AuditWarning(s) }
                 val legacy = s.pools["B4"].orEmpty()
                 if (legacy.isNotEmpty()) {
-                    item { Notice("旧B4名单只作为历史证据标签展示，不等于v4.1买入池。") }
+                    item { Notice("旧B4名单只作为历史证据标签展示，不等于v4.2买入池。") }
                     items(legacy.take(10)) { code -> StockLiveRow(code, s, quotes[symbol(code)]) }
                 }
             }

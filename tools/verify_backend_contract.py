@@ -21,6 +21,8 @@ CONTRACTS = {
     "astock_tail/latest.json": (dict, ("date", "capturedAt", "status", "stocks")),
     "astock_ai_portfolio/latest.json": (dict, ("updatedAt", "summary", "positions", "targetPortfolio")),
     "astock_ai_portfolio/ledger.json": (list, ()),
+    "astock_ai_portfolio/automation.json": (dict, ("enabled", "executionMode", "appRequired", "lastRunAt", "status", "capitalCapacity")),
+    "astock_ai_portfolio/cycle_log.json": (list, ()),
     "astock_factors/latest.json": (dict, ("dataDate", "margin", "etf", "provenance")),
     "astock_premarket/latest.json": (dict, ("generatedAt", "targetDate", "state", "candidates")),
     "astock_history/latest.json": (dict, ("updatedAt", "overall", "conditions")),
@@ -31,7 +33,7 @@ def fetch(path: str):
     last = None
     for base in BASES:
         try:
-            req = Request(base + path, headers={"User-Agent": "AStockStrategy-contract/4.1", "Cache-Control": "no-cache"})
+            req = Request(base + path, headers={"User-Agent": "AStockStrategy-contract/4.2", "Cache-Control": "no-cache"})
             with urlopen(req, timeout=20) as response:
                 if response.status < 200 or response.status >= 300:
                     raise RuntimeError(f"HTTP {response.status}")
@@ -67,6 +69,15 @@ def main() -> int:
             missing = [key for key in keys if key not in payload]
             if missing:
                 raise KeyError("missing keys: " + ", ".join(missing))
+            if path == "astock_ai_portfolio/latest.json":
+                summary = payload.get("summary") or {}
+                if float(summary.get("capitalCapacity") or 0) != 20_000_000:
+                    raise ValueError("shadow portfolio capitalCapacity is not 20M")
+            if path == "astock_ai_portfolio/automation.json":
+                if payload.get("enabled") is not True or payload.get("appRequired") is not False:
+                    raise ValueError("cloud automation is not independently enabled")
+                if payload.get("executionMode") != "SIMULATED_ONLY" or payload.get("brokerConnected") is not False:
+                    raise ValueError("shadow execution safety contract changed")
             marker = None
             if isinstance(payload, dict):
                 marker = next((payload.get(k) for k in ("generatedAt", "updatedAt", "capturedAt", "dataDate", "date") if payload.get(k)), None)

@@ -14,8 +14,8 @@ android {
         applicationId = "com.rui.astockstrategy"
         minSdk = 26
         targetSdk = 36
-        versionCode = 41
-        versionName = "4.1.0"
+        versionCode = 42
+        versionName = "4.2.0"
     }
 
     buildFeatures { compose = true }

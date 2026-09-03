@@ -22,6 +22,8 @@ import java.time.ZonedDateTime
 import kotlin.math.abs
 
 private const val P33_PATH = "astock_ai_portfolio/latest.json"
+private const val P33_DEFAULT_CAPITAL = 20000000.0
+private const val P33_SCHEMA = 42
 private val P33Blue = Color(0xFF3557D4)
 private val P33Muted = Color(0xFF747B8D)
 private val P33Red = Color(0xFFD84343)
@@ -47,10 +49,26 @@ private object PersonalStore33 {
     private const val PREF = "ai_personal_dynamic_v33"
     private const val KEY = "state"
     fun load(ctx: Context): JSONObject {
-        val raw = ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).getString(KEY, null)
-        if (!raw.isNullOrBlank()) runCatching { return JSONObject(raw) }
+        val prefs = ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE)
+        val raw = prefs.getString(KEY, null)
+        if (!raw.isNullOrBlank()) {
+            val saved = runCatching { JSONObject(raw) }.getOrNull()
+            if (saved != null) {
+                if (saved.optInt("schemaVersion", 0) < P33_SCHEMA) {
+                    val old = d33(saved, "configuredCapital") ?: 1000000.0
+                    if (old == 1000000.0) {
+                        saved.put("configuredCapital", P33_DEFAULT_CAPITAL)
+                        saved.put("cash", (d33(saved, "cash") ?: old) + (P33_DEFAULT_CAPITAL - old))
+                        appendDecision33(saved, "资金调整", "本机手动账户", "", 0, null, "模拟容量升级为${money33(P33_DEFAULT_CAPITAL)}；不改写旧持仓和盈亏")
+                    }
+                    saved.put("schemaVersion", P33_SCHEMA)
+                    prefs.edit().putString(KEY, saved.toString()).apply()
+                }
+                return saved
+            }
+        }
         return JSONObject().apply {
-            put("configuredCapital", 1000000.0); put("cash", 1000000.0); put("realizedPnl", 0.0)
+            put("schemaVersion", P33_SCHEMA); put("configuredCapital", P33_DEFAULT_CAPITAL); put("cash", P33_DEFAULT_CAPITAL); put("realizedPnl", 0.0)
             put("positions", JSONObject()); put("decisions", JSONArray()); put("tradeDate", "")
             put("createdAt", System.currentTimeMillis())
         }
@@ -71,7 +89,7 @@ private fun appendDecision33(s: JSONObject, side: String, name: String, code: St
 
 private fun applyCapital33(s0: JSONObject, newCapital: Double): JSONObject {
     val s = JSONObject(s0.toString())
-    val old = d33(s, "configuredCapital") ?: 1000000.0
+    val old = d33(s, "configuredCapital") ?: P33_DEFAULT_CAPITAL
     val delta = newCapital - old
     s.put("configuredCapital", newCapital)
     s.put("cash", (d33(s, "cash") ?: old) + delta)
@@ -111,7 +129,7 @@ fun PersonalAiPanel33() {
     val ctx=LocalContext.current
     var state by remember { mutableStateOf(PersonalStore33.load(ctx)) }
     var data by remember { mutableStateOf<JSONObject?>(null) }
-    var capitalText by remember { mutableStateOf(String.format("%.0f",d33(state,"configuredCapital")?:1000000.0)) }
+    var capitalText by remember { mutableStateOf(String.format("%.0f",d33(state,"configuredCapital")?:P33_DEFAULT_CAPITAL)) }
     var status by remember { mutableStateOf("等待影子目标组合") }
 
     LaunchedEffect(Unit){
@@ -120,13 +138,13 @@ fun PersonalAiPanel33() {
             delay(30000)
         }
     }
-    val prices=priceMap33(data); val nav=nav33(state,prices); val capital=d33(state,"configuredCapital")?:1000000.0; val cash=d33(state,"cash")?:0.0; val pnl=nav-capital
+    val prices=priceMap33(data); val nav=nav33(state,prices); val capital=d33(state,"configuredCapital")?:P33_DEFAULT_CAPITAL; val cash=d33(state,"cash")?:0.0; val pnl=nav-capital
     val pos=state.optJSONObject("positions")?:JSONObject(); val targets=targets33(data); val tmap=targets.associateBy{it.code}; val positionPct=if(nav>0)(nav-cash)/nav*100 else 0.0
 
     Card(shape=RoundedCornerShape(18.dp),colors=CardDefaults.cardColors(containerColor=Color.White)){
         Column(Modifier.fillMaxWidth().padding(14.dp),verticalArrangement=Arrangement.spacedBy(8.dp)){
-            Text("个人影子组合（模拟）",fontWeight=FontWeight.Bold,fontSize=17.sp)
-            Text("只在本机模拟持仓与费用 · 不连接券商 · 不会发送真实订单",color=P33Muted,fontSize=9.sp)
+            Text("本机手动试算账户",fontWeight=FontWeight.Bold,fontSize=17.sp)
+            Text("与上方2000万元后台自动账户分开记账 · 不连接券商",color=P33Muted,fontSize=9.sp)
             Row(horizontalArrangement=Arrangement.spacedBy(8.dp),verticalAlignment=Alignment.CenterVertically){
                 OutlinedTextField(value=capitalText,onValueChange={capitalText=it.filter{ch->ch.isDigit()||ch=='.'}},label={Text("投入本金（元）")},singleLine=true,modifier=Modifier.weight(1f))
                 Button(onClick={ val v=capitalText.toDoubleOrNull(); if(v!=null&&v>=10000){state=applyCapital33(state,v); PersonalStore33.save(ctx,state); status="模拟本金已调整；策略目标仍以云端预计算结果为准"}else{status="请输入不少于1万元的有效金额"} }){Text("应用")}

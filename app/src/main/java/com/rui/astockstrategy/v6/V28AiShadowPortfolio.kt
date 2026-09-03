@@ -16,6 +16,11 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import org.json.JSONArray
 import org.json.JSONObject
+import java.time.DayOfWeek
+import java.time.Duration
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 private val AiBg28 = Color(0xFFF5F7FB)
 private val AiMuted28 = Color(0xFF747B8D)
@@ -26,6 +31,7 @@ private val AiAmber28 = Color(0xFFAE6A00)
 
 private const val AI_PORTFOLIO_PATH_28 = "astock_ai_portfolio/latest.json"
 private const val AI_LEDGER_PATH_28 = "astock_ai_portfolio/ledger.json"
+private const val AI_AUTOMATION_PATH_28 = "astock_ai_portfolio/automation.json"
 
 private fun n28(o: JSONObject?, key: String): Double? {
     if (o == null || !o.has(key) || o.isNull(key)) return null
@@ -50,6 +56,23 @@ private suspend fun fetchAiShadow28(): JSONObject =
 
 private suspend fun fetchAiLedger28(): JSONArray =
     JSONArray(BackendClient.fetchText(AI_LEDGER_PATH_28))
+
+private suspend fun fetchAiAutomation28(): JSONObject =
+    JSONObject(BackendClient.fetchText(AI_AUTOMATION_PATH_28))
+
+private fun displayTime28(value: String?): String =
+    value?.replace("T", " ")?.take(19)?.ifBlank { "—" } ?: "—"
+
+private fun automationHealthy28(o: JSONObject?): Boolean {
+    if (o == null || !o.optBoolean("enabled") || o.optString("status") == "ERROR") return false
+    val now = ZonedDateTime.now(ZoneId.of("Asia/Shanghai"))
+    val tradingDay = now.dayOfWeek !in setOf(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY)
+    val tradingTime = (now.toLocalTime() >= java.time.LocalTime.of(9, 30) && now.toLocalTime() <= java.time.LocalTime.of(11, 30)) ||
+        (now.toLocalTime() >= java.time.LocalTime.of(13, 0) && now.toLocalTime() <= java.time.LocalTime.of(15, 0))
+    if (!tradingDay || !tradingTime) return true
+    val last = runCatching { OffsetDateTime.parse(o.optString("lastRunAt")) }.getOrNull() ?: return false
+    return Duration.between(last, now.toOffsetDateTime()).toMinutes() in 0..20
+}
 
 private data class AiPosition28(
     val code: String, val name: String, val sector: String, val qty: Int,
@@ -108,18 +131,27 @@ private fun decisions28(a: JSONArray?): List<AiDecision28> {
 fun AiShadowPortfolioScreen28() {
     var data by remember { mutableStateOf<JSONObject?>(null) }
     var ledger by remember { mutableStateOf<JSONArray?>(null) }
+    var automation by remember { mutableStateOf<JSONObject?>(null) }
     var error by remember { mutableStateOf<String?>(null) }
     var ledgerError by remember { mutableStateOf<String?>(null) }
+    var automationError by remember { mutableStateOf<String?>(null) }
     var ledgerFilter by remember { mutableStateOf("全部") }
+    var refreshGeneration by remember { mutableIntStateOf(0) }
+    var refreshing by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(refreshGeneration) {
         while (true) {
+            refreshing = true
             runCatching { fetchAiShadow28() }
                 .onSuccess { data = it; error = null }
                 .onFailure { error = "影子组合数据暂未同步：${it.message ?: it.javaClass.simpleName}" }
             runCatching { fetchAiLedger28() }
                 .onSuccess { ledger = it; ledgerError = null }
                 .onFailure { ledgerError = "完整成交账本暂未同步：${it.message ?: it.javaClass.simpleName}" }
+            runCatching { fetchAiAutomation28() }
+                .onSuccess { automation = it; automationError = null }
+                .onFailure { automationError = "后台自动运行状态暂未同步：${it.message ?: it.javaClass.simpleName}" }
+            refreshing = false
             delay(30000)
         }
     }
@@ -134,22 +166,24 @@ fun AiShadowPortfolioScreen28() {
     }
     val daily = d?.optJSONArray("dailyPerformance")
     val rules = d?.optJSONObject("rulesZh")
+    val capital = n28(summary, "capitalCapacity") ?: n28(summary, "initialCapital")
 
     LazyColumn(
         modifier = Modifier.fillMaxSize().background(AiBg28),
         contentPadding = PaddingValues(14.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        item { PersonalAiPanel33() }
         item {
             Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                 Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
-                            Text("样本外影子组合", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                            Text("固定100万元模拟参考 · 与个人模拟账户分开记账", color = AiMuted28, fontSize = 10.sp)
+                            Text("后台自动影子组合", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                            Text("${money28(capital)}模拟容量 · 关闭APK仍由云端运行", color = AiMuted28, fontSize = 10.sp)
                         }
-                        Text(d?.optString("updatedAt")?.substringAfter("T")?.take(5) ?: "—", color = AiBlue28, fontSize = 11.sp)
+                        OutlinedButton(onClick = { refreshGeneration++ }, enabled = !refreshing, contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)) {
+                            Text(if (refreshing) "刷新中" else "立即刷新", fontSize = 10.sp)
+                        }
                     }
                     Spacer(Modifier.height(4.dp))
                     Text(money28(n28(summary, "totalAssets")), fontWeight = FontWeight.Bold, fontSize = 27.sp)
@@ -184,6 +218,8 @@ fun AiShadowPortfolioScreen28() {
             }
         }
 
+        item { AiAutomationCard28(automation, automationError) }
+
         item { AiBenchmarkCard28(d) }
 
         item { AiTitle28("当前模拟持仓") }
@@ -191,7 +227,10 @@ fun AiShadowPortfolioScreen28() {
         else items(pos, key = { it.code }) { p -> AiPositionCard28(p) }
 
         item { AiTitle28("今日影子模拟动作") }
-        if (today.isEmpty()) item { AiEmpty28("今天尚未产生买入或卖出动作。没有合格机会时允许不交易。") }
+        if (today.isEmpty()) item {
+            AiEmpty28(automation?.optString("statusZh")?.takeIf { it.isNotBlank() }
+                ?: "今天尚未产生买入或卖出动作；请结合后台运行状态区分无信号与任务异常。")
+        }
         else items(today, key = { "today-${it.id}" }) { x -> AiDecisionCard28(x) }
 
         item { AiTitle28("完整成交账本（${allDecisions.size}笔）") }
@@ -248,6 +287,52 @@ fun AiShadowPortfolioScreen28() {
                 }
             }
         }
+
+        item { AiTitle28("本机手动试算（可选）") }
+        item { PersonalAiPanel33() }
+    }
+}
+
+@Composable
+private fun AiAutomationCard28(o: JSONObject?, fetchError: String?) {
+    val healthy = automationHealthy28(o)
+    val incident = o?.optJSONObject("knownIncident")
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("后台自动运行状态", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text("策略计算和模拟买卖均在云端完成，打开软件只读取结果", color = AiMuted28, fontSize = 9.sp)
+                }
+                Surface(color = if (healthy) Color(0xFFE8F6F0) else Color(0xFFFFECEC), shape = RoundedCornerShape(20.dp)) {
+                    Text(if (healthy) "运行正常" else "需要检查", color = if (healthy) AiDown28 else AiUp28, fontWeight = FontWeight.Bold, fontSize = 9.sp, modifier = Modifier.padding(horizontal = 9.dp, vertical = 5.dp))
+                }
+            }
+            AiAutoRow28("最近运行", displayTime28(o?.optString("lastRunAt")))
+            AiAutoRow28("最近成交", displayTime28(o?.optString("lastTradeAt")))
+            AiAutoRow28("本轮结果", o?.optString("statusZh")?.ifBlank { "等待后台首次运行" } ?: "等待后台首次运行")
+            AiAutoRow28("运行方式", o?.optString("scheduleZh")?.ifBlank { "等待后台配置" } ?: "等待后台配置")
+            AiAutoRow28("真实券商", if (o?.optBoolean("brokerConnected") == true) "已连接" else "未连接（仅模拟）")
+            if (!fetchError.isNullOrBlank()) Text(fetchError, color = AiAmber28, fontSize = 9.sp)
+            if (incident != null) {
+                Surface(color = Color(0xFFFFF4E2), shape = RoundedCornerShape(10.dp)) {
+                    Column(Modifier.fillMaxWidth().padding(9.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                        Text("历史运行空档已披露", color = AiAmber28, fontWeight = FontWeight.Bold, fontSize = 9.sp)
+                        Text("${displayTime28(incident.optString("from"))} 至 ${displayTime28(incident.optString("to"))}", fontSize = 8.sp)
+                        Text(incident.optString("causeZh"), color = AiMuted28, fontSize = 8.sp)
+                        Text("该区间未补造买卖记录。", color = AiMuted28, fontSize = 8.sp)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AiAutoRow28(label: String, value: String) {
+    Row(Modifier.fillMaxWidth()) {
+        Text(label, color = AiMuted28, fontSize = 9.sp, modifier = Modifier.width(66.dp))
+        Text(value, fontSize = 9.sp, modifier = Modifier.weight(1f))
     }
 }
 
