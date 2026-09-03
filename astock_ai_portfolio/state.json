@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "strategyVersion": "v2.2-cloud-auto-20m-point-in-time",
+  "schemaVersion": 3,
+  "strategyVersion": "v3.0-fund-nav-capacity-point-in-time",
   "mode": "AI影子实盘",
   "simulated": true,
   "initialCapital": 20000000.0,
@@ -305,7 +305,7 @@
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-09-03T23:23:37+08:00",
+  "updatedAt": "2026-09-04T00:40:44+08:00",
   "capitalEvents": [
     {
       "eventId": "capital-20260903-232335",
@@ -315,7 +315,12 @@
       "toCapital": 20000000.0,
       "cashContribution": 19000000.0,
       "retroactive": false,
-      "noteZh": "资金容量按当前时点调整；保留此前成交审计，不倒改历史股数、价格或盈亏。"
+      "noteZh": "资金容量按当前时点调整；保留此前成交审计，不倒改历史股数、价格或盈亏。",
+      "preContributionAssets": 1035902.89,
+      "preContributionUnitNav": 1.03590289,
+      "unitsIssued": 18341487.5886677,
+      "unitsAfter": 19341487.5886677,
+      "unitNavUnchanged": true
     }
   ],
   "legacyNavHistory": [
@@ -963,6 +968,39 @@
           "lastPrice": 13.45
         }
       }
-    }
+    },
+    "portfolioBaseUnitNav": 1.03590289,
+    "unitNavMigrationZh": "原资金净值基准已迁移为同一时点单位净值，避免增资扭曲收益。"
+  },
+  "fundAccounting": {
+    "schemaVersion": 3,
+    "method": "UNIT_NAV_SUBSCRIPTION_REDEMPTION",
+    "inceptionCapital": 1000000.0,
+    "inceptionUnitNav": 1.0,
+    "fundUnits": 19341487.5886677,
+    "unitNav": 1.0358137,
+    "cumulativeNav": 1.0358137,
+    "currentAssets": 20034177.89,
+    "unitEvents": [
+      {
+        "type": "INCEPTION",
+        "timestamp": "2026-08-20T11:14:42+08:00",
+        "cashFlow": 1000000.0,
+        "unitNav": 1.0,
+        "unitsIssued": 1000000.0,
+        "unitsAfter": 1000000.0
+      },
+      {
+        "type": "SUBSCRIPTION",
+        "timestamp": "2026-09-03T23:23:35+08:00",
+        "cashFlow": 19000000.0,
+        "preCashFlowAssets": 1035902.89,
+        "unitNav": 1.03590289,
+        "unitsIssued": 18341487.5886677,
+        "unitsAfter": 19341487.5886677,
+        "capitalEventId": "capital-20260903-232335"
+      }
+    ],
+    "noteZh": "增资按增资前单位净值申购新增份额，单位净值和历史收益不重置。"
   }
 }
