@@ -17,15 +17,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
-import java.time.DayOfWeek
-import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import kotlin.math.abs
 
-private const val P33_URL = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_ai_portfolio/latest.json"
+private const val P33_PATH = "astock_ai_portfolio/latest.json"
 private val P33Blue = Color(0xFF3557D4)
 private val P33Muted = Color(0xFF747B8D)
 private val P33Red = Color(0xFFD84343)
@@ -42,18 +38,9 @@ private fun money33(v: Double): String = when {
     else -> String.format("¥%.2f", v)
 }
 private fun pct33(v: Double): String = String.format("%+.2f%%", v)
-private fun fee33(amount: Double, sell: Boolean): Double = maxOf(5.0, amount * 0.0002) + amount * 0.0000541 + if (sell) amount * 0.0005 else 0.0
-private fun px33(v: Double): Double = kotlin.math.round(v * 100.0) / 100.0
 
 private suspend fun fetch33(): JSONObject = withContext(Dispatchers.IO) {
-    val c = URL(P33_URL).openConnection() as HttpURLConnection
-    c.connectTimeout = 8000; c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/3.3")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    try {
-        c.connect(); if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        JSONObject(c.inputStream.bufferedReader().use { it.readText() })
-    } finally { c.disconnect() }
+    JSONObject(BackendClient.fetchText(P33_PATH))
 }
 
 private object PersonalStore33 {
@@ -72,13 +59,6 @@ private object PersonalStore33 {
 }
 
 private fun cnNow33(): ZonedDateTime = ZonedDateTime.now(ZoneId.of("Asia/Shanghai"))
-private fun trading33(): Boolean {
-    val z = cnNow33(); val d = z.dayOfWeek
-    if (d == DayOfWeek.SATURDAY || d == DayOfWeek.SUNDAY) return false
-    val t = z.toLocalTime()
-    return (t >= LocalTime.of(9,30) && t <= LocalTime.of(11,30)) || (t >= LocalTime.of(13,0) && t <= LocalTime.of(15,0))
-}
-private fun today33(): String = cnNow33().toLocalDate().toString()
 
 private fun appendDecision33(s: JSONObject, side: String, name: String, code: String, qty: Int, price: Double?, text: String) {
     val a = s.optJSONArray("decisions") ?: JSONArray().also { s.put("decisions", it) }
@@ -126,58 +106,6 @@ private fun nav33(s: JSONObject, prices: Map<String,Double>): Double {
     return n
 }
 
-private fun resetT1Day33(s: JSONObject) {
-    val today=today33(); if(s.optString("tradeDate")==today) return
-    val ps=s.optJSONObject("positions")?:JSONObject(); val it=ps.keys(); while(it.hasNext()){ ps.optJSONObject(it.next())?.put("todayBuyQty",0) }
-    s.put("tradeDate",today)
-}
-
-private fun rebalance33(ctx: Context, s0: JSONObject, data: JSONObject?): JSONObject {
-    val s=JSONObject(s0.toString()); resetT1Day33(s)
-    if(!trading33()) { PersonalStore33.save(ctx,s); return s }
-    val targets=targets33(data); if(targets.isEmpty()) { PersonalStore33.save(ctx,s); return s }
-    val tmap=targets.associateBy{it.code}; val prices=priceMap33(data); val ps=s.optJSONObject("positions")?:JSONObject().also{s.put("positions",it)}
-    var nav=nav33(s,prices).coerceAtLeast(1.0)
-
-    // 先卖：目标仓位下降、移出目标组合或缩减资金后现金为负。
-    val codes=mutableListOf<String>(); val it=ps.keys(); while(it.hasNext()) codes+=it.next()
-    for(c in codes){
-        val p=ps.optJSONObject(c)?:continue; val qty=p.optInt("qty"); if(qty<=0) continue
-        val px=prices[c]?:d33(p,"avgCost")?:continue; val tw=tmap[c]?.weight?:0.0; val cw=qty*px/nav; val cash=d33(s,"cash")?:0.0
-        val need = tw==0.0 || cw-tw>=0.018 || cash<0
-        if(!need) continue
-        val targetValue=nav*tw; var sellValue=maxOf(0.0,qty*px-targetValue); if(cash<0) sellValue=maxOf(sellValue,-cash)
-        var sq=(sellValue/px/100.0).toInt()*100; if(tw==0.0) sq=qty
-        val sellable=maxOf(0,qty-p.optInt("todayBuyQty")); sq=minOf(sq,sellable); sq=(sq/100)*100
-        if(sq<=0 || (sq*px<5000 && tw>0)) continue
-        val ex=px33(px*0.9995); val amount=ex*sq; val fee=fee33(amount,true); val avg=d33(p,"avgCost")?:px
-        s.put("cash",(d33(s,"cash")?:0.0)+amount-fee); s.put("realizedPnl",(d33(s,"realizedPnl")?:0.0)+(ex-avg)*sq-fee)
-        val remain=qty-sq
-        if(remain<=0) ps.remove(c) else { p.put("qty",remain); p.put("costAmount",avg*remain) }
-        appendDecision33(s,if(remain<=0)"卖出" else "减仓",p.optString("name",c),c,sq,ex,if(tw==0.0)"影子目标仓位降为0" else "模拟仓位高于影子目标，执行再平衡")
-        nav=nav33(s,prices).coerceAtLeast(1.0)
-    }
-
-    // 再买：不限制持股数量，也不限制当天新买次数；现金与目标权重决定是否成交。
-    for(t in targets){
-        val px=t.price; nav=nav33(s,prices).coerceAtLeast(1.0); val p=ps.optJSONObject(t.code); val qty=p?.optInt("qty")?:0; val cw=qty*px/nav; val delta=t.weight-cw
-        if(delta<0.018) continue
-        val cash=d33(s,"cash")?:0.0; if(cash<100.0*px) continue
-        val budget=minOf(delta*nav,cash*0.98); var bq=(budget/(px*1.0005)/100.0).toInt()*100; if(bq<100) continue
-        val ex=px33(px*1.0005); var amount=ex*bq; var fee=fee33(amount,false)
-        while(bq>=100 && amount+fee>cash){ bq-=100; amount=ex*bq; fee=if(bq>0)fee33(amount,false)else 0.0 }
-        if(bq<100) continue
-        if(p==null){
-            ps.put(t.code,JSONObject().apply{put("code",t.code);put("name",t.name);put("sector",t.sector);put("qty",bq);put("avgCost",(amount+fee)/bq);put("costAmount",amount+fee);put("todayBuyQty",bq);put("entryDate",today33())})
-        } else {
-            val oq=p.optInt("qty"); val oc=d33(p,"costAmount")?:((d33(p,"avgCost")?:px)*oq); val nq=oq+bq; val nc=oc+amount+fee
-            p.put("qty",nq);p.put("costAmount",nc);p.put("avgCost",nc/nq);p.put("todayBuyQty",p.optInt("todayBuyQty")+bq)
-        }
-        s.put("cash",cash-amount-fee); appendDecision33(s,if(qty>0)"加仓" else "买入",t.name,t.code,bq,ex,"影子目标仓位${String.format("%.1f%%",t.weight*100)}；旧模型参考分${String.format("%.0f",t.score)}")
-    }
-    PersonalStore33.save(ctx,s); return s
-}
-
 @Composable
 fun PersonalAiPanel33() {
     val ctx=LocalContext.current
@@ -188,7 +116,7 @@ fun PersonalAiPanel33() {
 
     LaunchedEffect(Unit){
         while(true){
-            runCatching{fetch33()}.onSuccess{ d-> data=d; state=rebalance33(ctx,state,d); status="已按最新目标完成模拟再平衡检查" }.onFailure{status="影子目标组合暂未同步"}
+            runCatching{fetch33()}.onSuccess{ d-> data=d; status="已读取云端影子目标；打开App不会触发策略重算" }.onFailure{status="影子目标组合暂未同步：${it.message ?: it.javaClass.simpleName}"}
             delay(30000)
         }
     }
@@ -201,7 +129,7 @@ fun PersonalAiPanel33() {
             Text("只在本机模拟持仓与费用 · 不连接券商 · 不会发送真实订单",color=P33Muted,fontSize=9.sp)
             Row(horizontalArrangement=Arrangement.spacedBy(8.dp),verticalAlignment=Alignment.CenterVertically){
                 OutlinedTextField(value=capitalText,onValueChange={capitalText=it.filter{ch->ch.isDigit()||ch=='.'}},label={Text("投入本金（元）")},singleLine=true,modifier=Modifier.weight(1f))
-                Button(onClick={ val v=capitalText.toDoubleOrNull(); if(v!=null&&v>=10000){state=applyCapital33(state,v); if(trading33()) state=rebalance33(ctx,state,data); PersonalStore33.save(ctx,state); status=if(trading33())"模拟本金已调整，并已检查影子目标" else "模拟本金已调整，下个交易时段再检查"} }){Text("应用")}
+                Button(onClick={ val v=capitalText.toDoubleOrNull(); if(v!=null&&v>=10000){state=applyCapital33(state,v); PersonalStore33.save(ctx,state); status="模拟本金已调整；策略目标仍以云端预计算结果为准"}else{status="请输入不少于1万元的有效金额"} }){Text("应用")}
             }
             Row(horizontalArrangement=Arrangement.spacedBy(10.dp)){
                 PMetric33("总资产",money33(nav),P33Blue,Modifier.weight(1f)); PMetric33("持仓",String.format("%.1f%%",positionPct),P33Blue,Modifier.weight(1f)); PMetric33("现金",money33(cash),P33Muted,Modifier.weight(1f))

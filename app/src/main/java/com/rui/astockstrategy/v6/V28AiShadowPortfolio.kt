@@ -13,13 +13,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 
 private val AiBg28 = Color(0xFFF5F7FB)
 private val AiMuted28 = Color(0xFF747B8D)
@@ -28,8 +24,8 @@ private val AiUp28 = Color(0xFFD84343)
 private val AiDown28 = Color(0xFF15966A)
 private val AiAmber28 = Color(0xFFAE6A00)
 
-private const val AI_PORTFOLIO_URL_28 =
-    "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_ai_portfolio/latest.json"
+private const val AI_PORTFOLIO_PATH_28 = "astock_ai_portfolio/latest.json"
+private const val AI_LEDGER_PATH_28 = "astock_ai_portfolio/ledger.json"
 
 private fun n28(o: JSONObject?, key: String): Double? {
     if (o == null || !o.has(key) || o.isNull(key)) return null
@@ -49,17 +45,11 @@ private fun money28(v: Double?): String = v?.let {
 private fun price28(v: Double?): String = v?.let { String.format("%.2f", it) } ?: "—"
 private fun pnlColor28(v: Double?): Color = if ((v ?: 0.0) >= 0) AiUp28 else AiDown28
 
-private suspend fun fetchAiShadow28(): JSONObject = withContext(Dispatchers.IO) {
-    val c = URL(AI_PORTFOLIO_URL_28).openConnection() as HttpURLConnection
-    c.connectTimeout = 8000
-    c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 16)")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    try {
-        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        JSONObject(c.inputStream.bufferedReader().use { it.readText() })
-    } finally { c.disconnect() }
-}
+private suspend fun fetchAiShadow28(): JSONObject =
+    JSONObject(BackendClient.fetchText(AI_PORTFOLIO_PATH_28))
+
+private suspend fun fetchAiLedger28(): JSONArray =
+    JSONArray(BackendClient.fetchText(AI_LEDGER_PATH_28))
 
 private data class AiPosition28(
     val code: String, val name: String, val sector: String, val qty: Int,
@@ -68,8 +58,8 @@ private data class AiPosition28(
     val entryTimestamp: String, val reason: String, val action: String, val invalidation: String
 )
 private data class AiDecision28(
-    val time: String, val side: String, val code: String, val name: String, val qty: Int,
-    val price: Double?, val weight: Double?, val realizedReturn: Double?, val reason: String
+    val id: String, val time: String, val side: String, val code: String, val name: String, val qty: Int,
+    val price: Double?, val weight: Double?, val realizedPnl: Double?, val realizedReturn: Double?, val reason: String
 )
 
 private fun positions28(a: JSONArray?): List<AiPosition28> {
@@ -99,6 +89,7 @@ private fun decisions28(a: JSONArray?): List<AiDecision28> {
     return (0 until a.length()).mapNotNull { i ->
         val x = a.optJSONObject(i) ?: return@mapNotNull null
         AiDecision28(
+            id = x.optString("decisionId").ifBlank { "${x.optString("timestamp")}-${x.optString("code")}-${x.optString("side")}" },
             time = x.optString("timestamp"),
             side = x.optString("sideZh").ifBlank { if (x.optString("side") == "BUY") "买入" else "卖出" },
             code = x.optString("code"),
@@ -106,6 +97,7 @@ private fun decisions28(a: JSONArray?): List<AiDecision28> {
             qty = x.optInt("qty"),
             price = n28(x, "price"),
             weight = n28(x, "targetWeightPct"),
+            realizedPnl = n28(x, "realizedPnl"),
             realizedReturn = n28(x, "realizedReturnPct"),
             reason = x.optString("reasonZh")
         )
@@ -115,13 +107,19 @@ private fun decisions28(a: JSONArray?): List<AiDecision28> {
 @Composable
 fun AiShadowPortfolioScreen28() {
     var data by remember { mutableStateOf<JSONObject?>(null) }
+    var ledger by remember { mutableStateOf<JSONArray?>(null) }
     var error by remember { mutableStateOf<String?>(null) }
+    var ledgerError by remember { mutableStateOf<String?>(null) }
+    var ledgerFilter by remember { mutableStateOf("全部") }
 
     LaunchedEffect(Unit) {
         while (true) {
             runCatching { fetchAiShadow28() }
                 .onSuccess { data = it; error = null }
-                .onFailure { error = "影子组合数据暂未同步" }
+                .onFailure { error = "影子组合数据暂未同步：${it.message ?: it.javaClass.simpleName}" }
+            runCatching { fetchAiLedger28() }
+                .onSuccess { ledger = it; ledgerError = null }
+                .onFailure { ledgerError = "完整成交账本暂未同步：${it.message ?: it.javaClass.simpleName}" }
             delay(30000)
         }
     }
@@ -130,6 +128,10 @@ fun AiShadowPortfolioScreen28() {
     val summary = d?.optJSONObject("summary")
     val pos = positions28(d?.optJSONArray("positions"))
     val today = decisions28(d?.optJSONArray("todayDecisions")).asReversed()
+    val allDecisions = decisions28(ledger).asReversed()
+    val visibleDecisions = allDecisions.filter {
+        ledgerFilter == "全部" || it.side == ledgerFilter
+    }
     val daily = d?.optJSONArray("dailyPerformance")
     val rules = d?.optJSONObject("rulesZh")
 
@@ -190,7 +192,28 @@ fun AiShadowPortfolioScreen28() {
 
         item { AiTitle28("今日影子模拟动作") }
         if (today.isEmpty()) item { AiEmpty28("今天尚未产生买入或卖出动作。没有合格机会时允许不交易。") }
-        else items(today, key = { "${it.time}-${it.code}-${it.side}" }) { x -> AiDecisionCard28(x) }
+        else items(today, key = { "today-${it.id}" }) { x -> AiDecisionCard28(x) }
+
+        item { AiTitle28("完整成交账本（${allDecisions.size}笔）") }
+        item {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+                listOf("全部", "买入", "卖出").forEach { value ->
+                    FilterChip(
+                        selected = ledgerFilter == value,
+                        onClick = { ledgerFilter = value },
+                        label = { Text(value) },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+        }
+        if (ledgerError != null && allDecisions.isEmpty()) {
+            item { AiEmpty28(ledgerError!!) }
+        } else if (visibleDecisions.isEmpty()) {
+            item { AiEmpty28("当前筛选条件下没有成交记录。") }
+        } else {
+            items(visibleDecisions, key = { "ledger-${it.id}" }) { x -> AiDecisionCard28(x) }
+        }
 
         item { AiTitle28("组合逐日收益") }
         if (daily == null || daily.length() == 0) {
@@ -283,6 +306,7 @@ private fun AiDecisionCard28(x: AiDecision28) {
                 Text(x.time.replace("T", " ").take(16), color = AiMuted28, fontSize = 8.sp)
             }
             Text("${x.qty}股 · 成交模拟价 ${price28(x.price)}${x.weight?.let { " · 目标仓位 ${pct28(it)}" } ?: ""}", fontSize = 9.sp)
+            x.realizedPnl?.let { Text("本次实现盈亏 ${money28(it)}", color = pnlColor28(it), fontWeight = FontWeight.Bold, fontSize = 10.sp) }
             x.realizedReturn?.let { Text("本次实现收益 ${pct28(it)}", color = pnlColor28(it), fontWeight = FontWeight.Bold, fontSize = 10.sp) }
             if (x.reason.isNotBlank()) Text("理由：${x.reason}", color = AiMuted28, fontSize = 9.sp)
         }

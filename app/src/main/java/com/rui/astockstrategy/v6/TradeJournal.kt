@@ -229,7 +229,7 @@ fun TradeJournalScreen() {
     LaunchedEffect(version, mode) {
         while (true) {
             val codes = TradeLedger.summary(context, mode).positions.map { symbol(it.code) }
-            if (codes.isNotEmpty()) runCatching { DataApi.fetchQuotes(codes) }.onSuccess { if (it.isNotEmpty()) quotes = it }
+            if (codes.isNotEmpty()) runCatching { ResilientDataApi.fetchQuotes(codes) }.onSuccess { if (it.isNotEmpty()) quotes = it }
             delay(5_000)
         }
     }

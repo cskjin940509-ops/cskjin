@@ -18,8 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 import kotlin.math.abs
 
 private val HistMuted = Color(0xFF747B8D)
@@ -231,10 +229,8 @@ private fun histMoney(v: Double): String = when {
 private fun histSignedMoney(v: Double): String = (if (v >= 0) "+" else "") + histMoney(v)
 
 object HistApi {
-    private const val SNAP = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_snapshots/index.json"
-
     suspend fun fetch(date: String): HistMarket? = withContext(Dispatchers.IO) {
-        val arr = JSONArray(getText(SNAP))
+        val arr = JSONArray(BackendClient.fetchText("astock_snapshots/index.json"))
         var root: JSONObject? = null
         for (i in 0 until arr.length()) {
             val x = arr.optJSONObject(i) ?: continue
@@ -314,15 +310,4 @@ object HistApi {
     }
     private fun int(o: JSONObject?, key: String): Int? = num(o, key)?.toInt()
 
-    private fun getText(url: String): String {
-        val c = URL(url).openConnection() as HttpURLConnection
-        c.connectTimeout = 8000; c.readTimeout = 8000
-        c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/0.7")
-        c.setRequestProperty("Cache-Control", "no-cache")
-        c.connect()
-        try {
-            if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-            return c.inputStream.bufferedReader().use { it.readText() }
-        } finally { c.disconnect() }
-    }
 }

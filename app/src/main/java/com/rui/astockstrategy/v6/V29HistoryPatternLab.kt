@@ -21,12 +21,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 import kotlin.math.max
 import kotlin.math.min
 
-private const val HISTORY_URL_29 = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_history/latest.json"
+private const val HISTORY_PATH_29 = "astock_history/latest.json"
 private val HBg29 = Color(0xFFF5F7FB)
 private val HBlue29 = Color(0xFF3557D4)
 private val HRed29 = Color(0xFFD84343)
@@ -47,15 +45,7 @@ private fun n29(v: Double?): String = v?.let { String.format("%.2f", it) } ?: "â
 private fun c29(v: Double?): Color = if ((v ?: 0.0) >= 0) HRed29 else HGreen29
 
 private suspend fun fetchHistory29(): JSONObject = withContext(Dispatchers.IO) {
-    val c = URL(HISTORY_URL_29).openConnection() as HttpURLConnection
-    c.connectTimeout = 8000
-    c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 16)")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    try {
-        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        JSONObject(c.inputStream.bufferedReader().use { it.readText() })
-    } finally { c.disconnect() }
+    JSONObject(BackendClient.fetchText(HISTORY_PATH_29))
 }
 
 private data class Horizon29(val label: String, val days: Int, val members: Int, val mean: Double?, val median: Double?, val hit: Double?, val alpha: Double?, val p25: Double?, val p75: Double?)

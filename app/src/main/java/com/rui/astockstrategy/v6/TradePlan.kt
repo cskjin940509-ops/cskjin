@@ -16,8 +16,6 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 import java.time.LocalDateTime
 import java.time.ZoneId
 import kotlin.math.abs
@@ -87,10 +85,10 @@ fun TradePlanPanel(visibleCodes: Set<String>) {
     LaunchedEffect(trackedCodes.joinToString(",")) {
         while (true) {
             if (trackedCodes.isNotEmpty()) {
-                runCatching { DataApi.fetchQuotes(trackedCodes.map(::symbol)) }
+                runCatching { ResilientDataApi.fetchQuotes(trackedCodes.map(::symbol)) }
                     .onSuccess { if (it.isNotEmpty()) liveQuotes = it }
             }
-            delay(5000)
+            delay(30000)
         }
     }
 
@@ -106,7 +104,7 @@ fun TradePlanPanel(visibleCodes: Set<String>) {
         Surface(color = Color(0xFFE9EDFF), shape = RoundedCornerShape(14.dp)) {
             Column(Modifier.fillMaxWidth().padding(11.dp)) {
                 Text("${p.date} · ${phaseZh(p.phase)} · 基于 Official ${p.officialDate}", fontWeight = FontWeight.Bold, fontSize = 11.sp)
-                Text("形态与价格区间同时满足才给买入候选；普通A股按T+1设计卖出条件。App每5秒看价格，后台每5分钟重算形态。", fontSize = 9.sp, color = TradeMuted)
+                Text("形态与价格区间同时满足才给买入候选；普通A股按T+1设计卖出条件。APK约30秒同步行情，后台按计划独立重算形态。", fontSize = 9.sp, color = TradeMuted)
             }
         }
 
@@ -185,21 +183,12 @@ private fun effectiveAction(row: TradePlanRow, q: Quote?): String {
     return row.action
 }
 
-private fun fetchTradePlan(): TradePlanPayload {
-    val url = URL("https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_trade/latest.json?t=${System.currentTimeMillis()}")
-    val c = url.openConnection() as HttpURLConnection
-    c.connectTimeout = 8000; c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy-TradePlan-App/1.0")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    c.connect()
-    try {
-        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        val o = JSONObject(c.inputStream.bufferedReader().use { it.readText() })
+private suspend fun fetchTradePlan(): TradePlanPayload {
+        val o = JSONObject(BackendClient.fetchText("astock_trade/latest.json"))
         return TradePlanPayload(
             date=o.optString("date"), generatedAt=o.optString("generatedAt"), phase=o.optString("phase"), officialDate=o.optString("officialDate"),
             official=parseRows(o.optJSONArray("officialPlans")), setupCandidates=parseRows(o.optJSONArray("setupCandidates"))
         )
-    } finally { c.disconnect() }
 }
 
 private fun parseRows(a: JSONArray?): List<TradePlanRow> {

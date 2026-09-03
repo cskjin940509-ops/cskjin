@@ -4,8 +4,6 @@ import androidx.compose.runtime.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 
 private data class YunaiGatewayState(
     val configured: Boolean,
@@ -45,16 +43,7 @@ fun YunaiGatewayStatusLine() {
 }
 
 private suspend fun fetchYunaiGatewayState(): YunaiGatewayState = withContext(Dispatchers.IO) {
-    val url = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_gateway/latest.json?t=${System.currentTimeMillis()}"
-    val c = URL(url).openConnection() as HttpURLConnection
-    c.connectTimeout = 8000
-    c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/1.3")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    c.connect()
-    try {
-        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        val root = JSONObject(c.inputStream.bufferedReader(Charsets.UTF_8).use { it.readText() })
+        val root = JSONObject(BackendClient.fetchText("astock_gateway/latest.json"))
         val y = root.optJSONObject("yunai")
         val market = y?.optJSONObject("marketStatus")
         YunaiGatewayState(
@@ -65,7 +54,4 @@ private suspend fun fetchYunaiGatewayState(): YunaiGatewayState = withContext(Di
             marketStatusConnected = market?.optBoolean("connected", false) ?: false,
             checkedAt = market?.optString("checkedAt")?.takeIf { it.isNotBlank() }
         )
-    } finally {
-        c.disconnect()
-    }
 }

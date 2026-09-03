@@ -82,7 +82,7 @@ fun PostCloseDashboard(
                 Row(Modifier.fillMaxWidth().padding(11.dp), horizontalArrangement = Arrangement.SpaceBetween) {
                     Column(Modifier.weight(1f)) {
                         Text(p.board.name, fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                        Text("${p.state} · 上涨扩散度 ${String.format("%.0f%%", p.breadth)} · 点开详情", fontSize = 10.sp)
+                        Text("${displayPreviewStateZh27(p.state)} · 上涨扩散度 ${String.format("%.0f%%", p.breadth)} · 点开详情", fontSize = 10.sp)
                     }
                     Spacer(Modifier.width(8.dp))
                     Column {

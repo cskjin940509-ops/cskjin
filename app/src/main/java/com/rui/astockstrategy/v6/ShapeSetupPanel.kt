@@ -15,11 +15,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 import kotlin.math.abs
 
-private const val SETUP_URL = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_trade/latest.json"
+private const val SETUP_PATH = "astock_trade/latest.json"
 private val SetupMuted = Color(0xFF6D7480)
 private val SetupBlue = Color(0xFF3567B7)
 private val SetupAmber = Color(0xFFB67800)
@@ -70,7 +68,7 @@ fun ShapeSetupPanel() {
                     snap = it
                     error = null
                     if (it.rows.isNotEmpty()) {
-                        runCatching { DataApi.fetchQuotes(it.rows.map { r -> symbol(r.code) }) }
+                        runCatching { ResilientDataApi.fetchQuotes(it.rows.map { r -> symbol(r.code) }) }
                             .onSuccess { q -> if (q.isNotEmpty()) quotes = q }
                     }
                 }
@@ -79,7 +77,25 @@ fun ShapeSetupPanel() {
         }
     }
     val s = snap
-    if (s == null || s.rows.isEmpty()) return
+
+    if (s == null || s.rows.isEmpty()) {
+        Card(
+            Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(18.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFFFFBF2))
+        ) {
+            Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("历史同形态候选", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                Text(
+                    error?.let { "云端扫描暂未同步：$it" }
+                        ?: if (s == null) "正在读取云端扫描结果…" else "本轮没有符合条件的扩展候选。",
+                    color = SetupMuted,
+                    fontSize = 9.sp
+                )
+            }
+        }
+        return
+    }
 
     Card(
         Modifier.fillMaxWidth(),
@@ -140,20 +156,13 @@ private fun ShapeSetupCard(row: ShapeSetupRow, q: Quote?) {
 }
 
 private suspend fun fetchShapeSetup(): ShapeSetupSnapshot = withContext(Dispatchers.IO) {
-    val c = URL("$SETUP_URL?t=${System.currentTimeMillis()}").openConnection() as HttpURLConnection
-    c.connectTimeout = 8000; c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy-ShapeSetup/2.3")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    try {
-        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        val o = JSONObject(c.inputStream.bufferedReader().use { it.readText() })
+        val o = JSONObject(BackendClient.fetchText(SETUP_PATH))
         val scan = o.optJSONObject("marketSetupScan")
         ShapeSetupSnapshot(
             date=o.optString("date"), generatedAt=o.optString("generatedAt"), phase=o.optString("phase"),
             scope=scan?.optString("scope")?.takeIf { it.isNotBlank() }, coveragePct=jnumSetup(scan,"coveragePct"),
             rows=parseSetupRows(o.optJSONArray("setupCandidates"))
         )
-    } finally { c.disconnect() }
 }
 
 private fun parseSetupRows(a: JSONArray?): List<ShapeSetupRow> {

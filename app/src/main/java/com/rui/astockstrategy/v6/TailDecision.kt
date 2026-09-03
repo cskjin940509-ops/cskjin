@@ -18,13 +18,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
 
-private const val TAIL_URL = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_tail/latest.json"
+private const val TAIL_PATH = "astock_tail/latest.json"
 private val TailZone = ZoneId.of("Asia/Shanghai")
 
 data class TailStock(
@@ -302,18 +300,7 @@ private fun tailTimeline(d: TailDecision): String {
 }
 
 private suspend fun fetchTailDecision(): TailDecision = withContext(Dispatchers.IO) {
-    val c = URL("$TAIL_URL?t=${System.currentTimeMillis()}").openConnection() as HttpURLConnection
-    c.connectTimeout = 8_000
-    c.readTimeout = 8_000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/1.8")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    c.connect()
-    try {
-        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        parseTail(JSONObject(c.inputStream.bufferedReader(Charsets.UTF_8).use { it.readText() }))
-    } finally {
-        c.disconnect()
-    }
+    parseTail(JSONObject(BackendClient.fetchText(TAIL_PATH)))
 }
 
 private fun parseTail(o: JSONObject): TailDecision {

@@ -15,10 +15,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 
-private const val PRE34_URL = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_premarket/latest.json"
+private const val PRE34_PATH = "astock_premarket/latest.json"
 private val Pre34Blue = Color(0xFF3557D4)
 private val Pre34Muted = Color(0xFF747B8D)
 private val Pre34Red = Color(0xFFD84343)
@@ -136,7 +134,7 @@ fun PremarketPredictionPanel34() {
 }
 
 private suspend fun fetchPremarket34(): PremarketData34 = withContext(Dispatchers.IO) {
-    val o = JSONObject(httpPremarket34(PRE34_URL))
+    val o = JSONObject(BackendClient.fetchText(PRE34_PATH))
     val a = o.optJSONArray("candidates") ?: JSONArray()
     val rows = (0 until a.length()).mapNotNull { i ->
         val x = a.optJSONObject(i) ?: return@mapNotNull null
@@ -179,19 +177,6 @@ private suspend fun fetchPremarket34(): PremarketData34 = withContext(Dispatcher
         generatedAt = o.optString("generatedAt", ""),
         candidates = rows
     )
-}
-
-private fun httpPremarket34(url: String): String {
-    val c = URL(url).openConnection() as HttpURLConnection
-    c.connectTimeout = 8000
-    c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/3.4")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    try {
-        c.connect()
-        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        return c.inputStream.bufferedReader().use { it.readText() }
-    } finally { c.disconnect() }
 }
 
 private fun numPremarket34(o: JSONObject, key: String): Double? {

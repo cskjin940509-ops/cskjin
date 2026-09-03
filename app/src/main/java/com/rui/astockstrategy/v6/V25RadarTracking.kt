@@ -17,8 +17,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 import kotlin.math.abs
 
 private val V25Muted = Color(0xFF747B8D)
@@ -26,7 +24,7 @@ private val V25Red = Color(0xFFD84343)
 private val V25Green = Color(0xFF15966A)
 private val V25Amber = Color(0xFFAE6A00)
 private val V25Blue = Color(0xFF3557D4)
-private const val RADAR_URL = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_radar/latest.json"
+private const val RADAR_PATH = "astock_radar/latest.json"
 
 data class RadarLine25(
     val name: String,
@@ -172,7 +170,7 @@ private fun Mini25(label: String, value: String) {
 }
 
 private suspend fun fetchRadar25(): Radar25 = withContext(Dispatchers.IO) {
-    val o = JSONObject(http25(RADAR_URL))
+    val o = JSONObject(BackendClient.fetchText(RADAR_PATH))
     val linesA = o.optJSONArray("mainlines") ?: JSONArray()
     val lines = (0 until linesA.length()).mapNotNull { i ->
         val x = linesA.optJSONObject(i) ?: return@mapNotNull null
@@ -194,19 +192,6 @@ private suspend fun fetchRadar25(): Radar25 = withContext(Dispatchers.IO) {
         RadarStock25(c, x.optString("name", c), x.optString("sector"), num25(x, "earlyEntryScore"), x.optString("actionZh", "观察"), x.optString("chaseRisk"), num25(x, "changePct"))
     }.sortedByDescending { it.score ?: 0.0 }
     Radar25(o.optString("status"), o.optString("capturedAt"), lines, early, o.optString("note"))
-}
-
-private fun http25(url: String): String {
-    val c = URL(url).openConnection() as HttpURLConnection
-    c.connectTimeout = 8000
-    c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/2.5")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    try {
-        c.connect()
-        if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        return c.inputStream.bufferedReader().use { it.readText() }
-    } finally { c.disconnect() }
 }
 
 private fun num25(o: JSONObject, key: String): Double? {

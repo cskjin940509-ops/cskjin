@@ -168,10 +168,8 @@ private fun jsonNum(o: JSONObject?, key: String): Double? {
 }
 
 private object DetailApi {
-    private const val SNAP = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_snapshots/index.json"
-
     suspend fun fetchSector(date: String, name: String): SectorFacts? = withContext(Dispatchers.IO) {
-        val all = JSONArray(getText(SNAP))
+        val all = JSONArray(BackendClient.fetchText("astock_snapshots/index.json"))
         var day: JSONObject? = null
         for (i in 0 until all.length()) {
             val o = all.optJSONObject(i) ?: continue
@@ -231,7 +229,7 @@ private object DetailApi {
     }
 
     suspend fun fetchStock(date: String, code: String): StockFacts? = withContext(Dispatchers.IO) {
-        val all = JSONArray(getText(SNAP))
+        val all = JSONArray(BackendClient.fetchText("astock_snapshots/index.json"))
         var day: JSONObject? = null
         for (i in 0 until all.length()) {
             val o = all.optJSONObject(i) ?: continue
@@ -514,7 +512,7 @@ fun StockDetailScreen(code: String, snapshot: Snapshot?, initialQuote: Quote?, o
         error = null
         facts = date?.let { runCatching { DetailApi.fetchStock(it, code) }.getOrNull() }
         bars = runCatching { DetailApi.fetchKline(stockSecid(code), 90, date) }.getOrElse { emptyList() }
-        if (!historical && quote == null) quote = runCatching { DataApi.fetchQuotes(listOf(symbol(code)))[symbol(code)] }.getOrNull()
+        if (!historical && quote == null) quote = runCatching { ResilientDataApi.fetchQuotes(listOf(symbol(code)))[symbol(code)] }.getOrNull()
         if (facts == null && quote == null && tail == null && bars.isEmpty()) error = "该股票的策略元数据和行情均暂不可用"
         loading = false
     }

@@ -16,12 +16,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 import java.time.LocalDate
 import kotlin.math.abs
 
-private const val EXEC_URL = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_execution/latest.json"
+private const val EXEC_PATH = "astock_execution/latest.json"
 
 private data class ExecStock(
     val code: String,
@@ -78,7 +76,7 @@ fun ExecutionPanel() {
                 val s = fetchExecutionSnapshot()
                 snapshot = s
                 if (s != null && s.stocks.isNotEmpty()) {
-                    quotes = DataApi.fetchQuotes(s.stocks.map { symbol(it.code) })
+                    quotes = ResilientDataApi.fetchQuotes(s.stocks.map { symbol(it.code) })
                 }
                 error = null
             } catch (e: Exception) {
@@ -96,7 +94,7 @@ fun ExecutionPanel() {
         Column(Modifier.padding(13.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row {
                 Column(Modifier.weight(1f)) {
-                    Text("实盘执行辅助", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    Text("执行观察与手动记录", fontWeight = FontWeight.Bold, fontSize = 16.sp)
                     Text("后台5分钟规则信号 · 手机行情约30秒刷新", fontSize = 9.sp, color = Color(0xFF6D7480))
                 }
                 val s = snapshot
@@ -227,14 +225,7 @@ private fun ExecutionStockCard(st: ExecStock, q: Quote?, signalDate: String) {
 }
 
 private suspend fun fetchExecutionSnapshot(): ExecSnapshot? = withContext(Dispatchers.IO) {
-    val c = URL("$EXEC_URL?t=${System.currentTimeMillis()}").openConnection() as HttpURLConnection
-    c.connectTimeout = 8000
-    c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy-Execution/2.2")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    try {
-        if (c.responseCode !in 200..299) return@withContext null
-        val root = JSONObject(c.inputStream.bufferedReader().use { it.readText() })
+        val root = JSONObject(BackendClient.fetchText(EXEC_PATH))
         val stocksObj = root.optJSONObject("stocks") ?: JSONObject()
         val ranking = root.optJSONArray("ranking")
         val codes = mutableListOf<String>()
@@ -264,7 +255,6 @@ private suspend fun fetchExecutionSnapshot(): ExecSnapshot? = withContext(Dispat
             )
         }
         ExecSnapshot(root.optString("date"), root.optString("generatedAt"), root.optString("phase", "交易辅助"), root.optInt("refreshIntervalMin", 5), rows)
-    } finally { c.disconnect() }
 }
 
 private fun n(o: JSONObject, key: String): Double? {

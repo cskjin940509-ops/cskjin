@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
-    <application android:allowBackup="true" android:icon="@drawable/app_icon" android:roundIcon="@drawable/app_icon" android:label="A股分层研究" android:theme="@style/Theme.AStockStrategy">
+    <application android:name=".AStockApplication" android:allowBackup="true" android:icon="@drawable/app_icon" android:roundIcon="@drawable/app_icon" android:label="A股分层研究" android:theme="@style/Theme.AStockStrategy">
         <activity android:name=".v6.V6Activity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

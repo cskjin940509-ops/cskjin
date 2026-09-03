@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Radar
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ViewList
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -179,15 +180,18 @@ fun AStockV6() {
     var concepts by remember { mutableStateOf<List<Board>>(emptyList()) }
     var quoteOkAt by remember { mutableLongStateOf(0L) }
     var boardOkAt by remember { mutableLongStateOf(0L) }
-    var snapshotOkAt by remember { mutableLongStateOf(0L) }
     var tick by remember { mutableLongStateOf(System.currentTimeMillis()) }
     var quoteError by remember { mutableStateOf<String?>(null) }
     var boardError by remember { mutableStateOf<String?>(null) }
+    var snapshotError by remember { mutableStateOf<String?>(null) }
+    var radarError by remember { mutableStateOf<String?>(null) }
+    var preview by remember { mutableStateOf<List<PreviewSector>>(emptyList()) }
+    var refreshGeneration by remember { mutableIntStateOf(0) }
+    val backendHealth by BackendClient.health.collectAsState()
 
     val latest = snapshots.maxByOrNull { it.date }
     val active = selectedDate?.let { date -> snapshots.firstOrNull { it.date == date } } ?: latest
     val activeCodes = active?.pools?.values?.flatten()?.distinct().orEmpty()
-    val preview = remember(industries, concepts) { makePreview((industries + concepts).distinctBy { it.code }) }
     val detailSector = DetailNav.sector
     val detailStock = DetailNav.stockCode
 
@@ -198,13 +202,18 @@ fun AStockV6() {
         }
     }
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(refreshGeneration) {
         while (true) {
             runCatching { DataApi.fetchSnapshots() }
                 .onSuccess {
-                    if (it.isNotEmpty()) snapshots = it
-                    snapshotOkAt = System.currentTimeMillis()
+                    if (it.isNotEmpty()) {
+                        snapshots = it
+                        snapshotError = null
+                    } else {
+                        snapshotError = "后端返回空快照"
+                    }
                 }
+                .onFailure { snapshotError = it.message ?: it.javaClass.simpleName }
             runCatching { ResilientDataApi.fetchBoardsPair() }.onSuccess { pair ->
                 industries = pair.first
                 concepts = pair.second
@@ -213,11 +222,17 @@ fun AStockV6() {
             }.onFailure {
                 boardError = it.javaClass.simpleName
             }
+            runCatching { DataApi.fetchPrecomputedPreview() }
+                .onSuccess {
+                    preview = it
+                    radarError = null
+                }
+                .onFailure { radarError = it.message ?: it.javaClass.simpleName }
             delay(30000)
         }
     }
 
-    LaunchedEffect(activeCodes.joinToString(",")) {
+    LaunchedEffect(activeCodes.joinToString(","), refreshGeneration) {
         while (true) {
             val symbols = (listOf("sh000001", "sz399006", "sh000688", "sh000300", "sh000852") + activeCodes.map(::symbol)).distinct()
             if (symbols.isNotEmpty()) {
@@ -231,7 +246,7 @@ fun AStockV6() {
                     }
                     .onFailure { quoteError = it.javaClass.simpleName }
             }
-            delay(5000)
+            delay(30000)
         }
     }
 
@@ -244,7 +259,7 @@ fun AStockV6() {
                 TopAppBar(
                     title = {
                         Column {
-                            Text("A股分层研究 v4.0", fontWeight = FontWeight.Bold)
+                            Text("A股分层研究 v4.1", fontWeight = FontWeight.Bold)
                             Text(
                                 active?.let { "${it.date} · ${snapshotAuditLabel(it)} · ${it.regime}" } ?: "等待策略快照",
                                 fontSize = 11.sp,
@@ -253,8 +268,17 @@ fun AStockV6() {
                         }
                     },
                     actions = {
-                        LivePill(label = marketStateLabel(tick, quoteOkAt, quotes), ok = marketStateOk(tick, quoteOkAt))
-                        Spacer(Modifier.width(8.dp))
+                        LivePill(
+                            label = when {
+                                backendHealth.usingCache -> "缓存可用"
+                                backendHealth.lastSuccessAt > 0 -> "云端已同步"
+                                else -> "等待后端"
+                            },
+                            ok = backendHealth.lastSuccessAt > 0
+                        )
+                        IconButton(onClick = { refreshGeneration++ }) {
+                            Icon(Icons.Default.Refresh, contentDescription = "立即同步")
+                        }
                     }
                 )
             },
@@ -286,7 +310,7 @@ fun AStockV6() {
                         SectorDetailScreen(detailSector, detailSnapshot) { DetailNav.back() }
                     }
                     else -> when (tab) {
-                        Tab.TODAY -> TodayScreen(active, preview, quotes, tick, quoteOkAt, boardOkAt)
+                        Tab.TODAY -> TodayScreen(active, preview, quotes, tick, quoteOkAt, boardOkAt, backendHealth, snapshotError, radarError, quoteError, boardError)
                         Tab.MARKET -> MarketScreen(quotes, industries, concepts, tick, quoteOkAt, boardOkAt, quoteError, boardError)
                         Tab.MAINLINE -> MainlineScreen(active, preview, tick, boardOkAt)
                         Tab.POOLS -> PoolsScreen(active, quotes, tick, quoteOkAt)
@@ -307,17 +331,23 @@ fun TodayScreen(
     quotes: Map<String, Quote>,
     now: Long,
     quoteOkAt: Long,
-    boardOkAt: Long
+    boardOkAt: Long,
+    backendHealth: BackendHealth,
+    snapshotError: String?,
+    radarError: String?,
+    quoteError: String?,
+    boardError: String?
 ) {
     var showLegacyTools by remember { mutableStateOf(false) }
     LazyColumn(contentPadding = PaddingValues(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        item { BackendStatusCard41(backendHealth, snapshotError, radarError, quoteError, boardError) }
         item { LayeredDecisionHome40(s, preview, quotes) }
 
         item {
             Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                 Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                     Text("兼容工具", fontWeight = FontWeight.Bold)
-                    Text("保留v3.4盘前池、尾盘判断和执行记录，但它们不覆盖v4.0分层准入。", color = Muted, fontSize = 9.sp)
+                    Text("保留v3.4盘前池、尾盘判断和执行记录，但它们不覆盖v4.1分层准入。", color = Muted, fontSize = 9.sp)
                     OutlinedButton(onClick = { showLegacyTools = !showLegacyTools }, modifier = Modifier.fillMaxWidth()) {
                         Text(if (showLegacyTools) "收起旧版辅助模块" else "展开旧版辅助模块")
                     }
@@ -350,9 +380,43 @@ fun TodayScreen(
                 if (!s.performanceEligible) item { AuditWarning(s) }
                 val legacy = s.pools["B4"].orEmpty()
                 if (legacy.isNotEmpty()) {
-                    item { Notice("旧B4名单只作为历史证据标签展示，不等于v4.0买入池。") }
+                    item { Notice("旧B4名单只作为历史证据标签展示，不等于v4.1买入池。") }
                     items(legacy.take(10)) { code -> StockLiveRow(code, s, quotes[symbol(code)]) }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BackendStatusCard41(
+    health: BackendHealth,
+    snapshotError: String?,
+    radarError: String?,
+    quoteError: String?,
+    boardError: String?
+) {
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("后台与数据库", fontWeight = FontWeight.Bold)
+                    Text("定时任务独立运行；打开APK只同步结果，不触发选板块或选股计算", color = Muted, fontSize = 9.sp)
+                }
+                LivePill(
+                    label = if (health.usingCache) "本地缓存" else if (health.lastSuccessAt > 0) "云端正常" else "未连接",
+                    ok = health.lastSuccessAt > 0
+                )
+            }
+            Key("计算位置", "云端定时任务")
+            Key("云端数据时间", health.lastServerTime?.replace('T', ' ')?.take(19) ?: "等待首次同步")
+            Key("当前读取", health.source)
+            if (health.usingCache) {
+                Notice("云端接口暂时不可用，正在展示手机SQLite中最后一次成功数据；不会用空值覆盖旧数据。")
+            }
+            val errors = listOfNotNull(snapshotError, radarError, quoteError, boardError, health.lastError).distinct()
+            if (errors.isNotEmpty()) {
+                Text("异常：${errors.joinToString("；")}", color = Amber, fontSize = 8.sp, maxLines = 3)
             }
         }
     }
@@ -405,8 +469,8 @@ fun MarketScreen(
     LazyColumn(contentPadding = PaddingValues(14.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                LiveBadge("行情", freshnessLabel(now, quoteOkAt, 15000, "实时", "已过期"), marketStateOk(now, quoteOkAt), Modifier.weight(1f))
-                LiveBadge("板块", if (ResilientDataApi.boardIsCurrent) freshnessLabel(now, boardOkAt, 70000, "实时", "已过期") else ResilientDataApi.boardSource, ResilientDataApi.boardIsCurrent && now - boardOkAt <= 70000, Modifier.weight(1f))
+                LiveBadge("行情", ResilientDataApi.quoteSource, quoteOkAt > 0, Modifier.weight(1f))
+                LiveBadge("板块", ResilientDataApi.boardSource, boardOkAt > 0, Modifier.weight(1f))
             }
         }
         if (quoteError != null || boardError != null) {
@@ -441,7 +505,7 @@ fun MainlineScreen(s: Snapshot?, preview: List<PreviewSector>, now: Long, boardO
     LazyColumn(contentPadding = PaddingValues(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         item { Choice(listOf("盘中预览", "正式冻结"), mode) { mode = it } }
         if (mode == "盘中预览") {
-            item { Notice("实时板块候选每30秒重算；状态只用于观察形成、确认、过热与衰退过程，不直接等同于买入信号。") }
+            item { Notice("APK每30秒同步云端板块候选；状态由后台任务预计算，打开软件不会重算股票池。") }
             item { LiveBadge("主线预览", freshnessLabel(now, boardOkAt, 70000, "实时", "已过期"), now - boardOkAt <= 70000, Modifier.fillMaxWidth()) }
             if (preview.isEmpty()) item { EmptyCard("等待实时板块数据") }
             else items(preview.take(12)) { PreviewRadar(it) }
@@ -534,9 +598,9 @@ fun PreviewRow(p: PreviewSector) {
                 }
             }
             Spacer(Modifier.height(8.dp))
-            ProgressLine("动量强度", p.momentum)
+            ProgressLine("后台吸筹分", p.momentum)
             ProgressLine("上涨扩散度", p.breadth)
-            ProgressLine("资金强度", p.flowScore)
+            ProgressLine("资金净流占比", p.flowScore)
         }
     }
 }
@@ -548,14 +612,14 @@ fun PreviewRadar(p: PreviewSector) {
             Row {
                 Column(Modifier.weight(1f)) {
                     Text(p.board.name, fontWeight = FontWeight.Bold)
-                    Text(p.state, color = if (p.state == "确认候选") Down else Amber, fontSize = 10.sp)
+                    Text(displayPreviewStateZh27(p.state), color = if (p.state in setOf("CONFIRMING", "ESTABLISHED")) Down else Amber, fontSize = 10.sp)
                 }
                 Text("${String.format("%.0f", p.score)}", fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.height(8.dp))
-            ProgressLine("动量强度", p.momentum)
+            ProgressLine("后台吸筹分", p.momentum)
             ProgressLine("上涨扩散度", p.breadth)
-            ProgressLine("资金强度", p.flowScore)
+            ProgressLine("资金净流占比", p.flowScore)
             Key("涨跌", p.board.change?.let(::pct) ?: "—")
             Key("成交额", p.board.amount?.let(::money) ?: "—")
             Key("主力净流", p.board.flow?.let(::signedMoney) ?: "—")
@@ -882,23 +946,6 @@ fun Key(name: String, value: String) {
     }
 }
 
-fun makePreview(boards: List<Board>): List<PreviewSector> {
-    return boards.mapNotNull { b ->
-        val change = b.change ?: return@mapNotNull null
-        val br = breadth(b)
-        val momentum = (50.0 + change * 8.0).coerceIn(0.0, 100.0)
-        val flowScore = (50.0 + (b.flowPct ?: 0.0) * 4.0).coerceIn(0.0, 100.0)
-        val score = 0.40 * momentum + 0.35 * br + 0.25 * flowScore
-        val state = when {
-            score >= 78.0 && change > 0 -> "确认候选"
-            score >= 65.0 -> "候选"
-            else -> "观察"
-        }
-        PreviewSector(b, score, state, momentum, br, flowScore)
-    }.filter { it.score >= 60.0 }
-        .sortedByDescending { it.score }
-}
-
 fun normalizeQuoteTime(raw: String?): String? {
     val v = raw?.trim().orEmpty()
     if (!Regex("\\d{14}").matches(v)) return null
@@ -1152,10 +1199,37 @@ fun ForwardTrackingCard(s: Snapshot, pool: String) {
 
 
 object DataApi {
-    private const val SNAP = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_snapshots/index.json"
+    suspend fun fetchPrecomputedPreview(): List<PreviewSector> = withContext(Dispatchers.IO) {
+        val root = JSONObject(BackendClient.fetchText("astock_radar/latest.json"))
+        val a = root.optJSONArray("mainlines") ?: JSONArray()
+        (0 until a.length()).mapNotNull { i ->
+            val x = a.optJSONObject(i) ?: return@mapNotNull null
+            val name = x.optString("name").takeIf { it.isNotBlank() } ?: return@mapNotNull null
+            val board = Board(
+                code = x.optString("boardCode"),
+                name = name,
+                change = num(x, "changePct"),
+                amount = num(x, "amount"),
+                flow = num(x, "mainNetFlow"),
+                flowPct = num(x, "mainFlowPct"),
+                up = 0,
+                down = 0,
+                flat = 0,
+                type = if (x.optString("type") == "行业") "industry" else "concept"
+            )
+            PreviewSector(
+                board = board,
+                score = num(x, "formationScore") ?: 0.0,
+                state = x.optString("stage", "RADAR"),
+                momentum = num(x, "accumulationScore") ?: 0.0,
+                breadth = num(x, "breadthPct") ?: 0.0,
+                flowScore = num(x, "mainFlowPct") ?: 0.0
+            )
+        }
+    }
 
     suspend fun fetchSnapshots(): List<Snapshot> = withContext(Dispatchers.IO) {
-        val a = JSONArray(getText(SNAP))
+        val a = JSONArray(BackendClient.fetchText("astock_snapshots/index.json"))
         (0 until a.length()).mapNotNull { i -> parseSnapshot(a.optJSONObject(i)) }.sortedBy { it.date }
     }
 

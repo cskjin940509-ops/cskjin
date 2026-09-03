@@ -37,11 +37,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 
-private const val RADAR40_URL =
-    "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_radar/latest.json"
+private const val RADAR40_PATH = "astock_radar/latest.json"
 
 private val V40Blue = Color(0xFF3155D6)
 private val V40Ink = Color(0xFF171A22)
@@ -108,7 +105,7 @@ data class LayerRadar40(
 )
 
 /**
- * v4.0 does not create a new score. It turns the existing live feeds into an
+ * v4.1 does not create a new score. It turns the persisted cloud feeds into an
  * auditable four-layer decision chain and explicitly blocks real execution
  * while the market-level risk budget is not yet validated out of sample.
  */
@@ -138,12 +135,9 @@ fun LayeredDecisionHome40(
         val sectors = radar?.sectors.orEmpty()
         SectorLayer40(sectors, preview, radar?.date)
 
-        val activeSectorNames = sectors
-            .filter { it.stage !in setOf("OVERHEATED", "FADING") }
-            .map { it.name }
-            .toSet()
+        // The server has already applied sector membership and stage gates.
+        // The client only orders rows for display; opening the app never recomputes a pool.
         val candidates = radar?.stocks.orEmpty()
-            .filter { it.sector in activeSectorNames }
             .sortedWith(
                 compareByDescending<LayerStock40> { it.evidenceCount }
                     .thenBy { chaseOrder40(it.chaseRisk) }
@@ -164,7 +158,7 @@ private fun FrameworkHeader40(data: LayerRadar40?, error: String?) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text("分层决策 v4.0", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                    Text("分层决策 v4.1", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
                     Text("市场 → 板块 → 个股 → 执行", color = Color(0xFFD7DFFF), fontSize = 11.sp)
                 }
                 Surface(color = if (data != null) Color(0xFF295E53) else Color(0xFF6A4A1E), shape = RoundedCornerShape(20.dp)) {
@@ -184,8 +178,8 @@ private fun FrameworkHeader40(data: LayerRadar40?, error: String?) {
             )
             Text(
                 data?.let { "${it.date} · ${stageStatusZh40(it.status)} · ${shortTime40(it.capturedAt)}" }
-                    ?: error?.let { "实时雷达暂不可用：$it" }
-                    ?: "正在读取实时雷达…",
+                    ?: error?.let { "云端雷达暂不可用：$it" }
+                    ?: "正在读取云端雷达…",
                 color = Color(0xFFBAC6F8),
                 fontSize = 9.sp
             )
@@ -230,7 +224,7 @@ private fun MarketLayer40(snapshot: Snapshot?, quotes: Map<String, Quote>) {
         EvidenceStatus40("两融情绪", "原始T+1数据已接；市场层阈值未冻结", "待验证")
         EvidenceStatus40("ETF资金强弱", "份额变化口径已接；托底/进攻结构待区分", "待验证")
         EvidenceStatus40("综合资金情绪", "仅保留研究标签，不沿用漂移权重", "不生产")
-        Notice40("市场风险预算尚未完成滚动样本外验证，因此 v4.0 不显示伪精确仓位百分比，也不授权真实自动交易。")
+        Notice40("市场风险预算尚未完成滚动样本外验证，因此 v4.1 不显示伪精确仓位百分比，也不授权真实自动交易。")
     }
 }
 
@@ -336,7 +330,7 @@ private fun StockLayer40(stocks: List<LayerStock40>, date: String?) {
                 if (index < minOf(7, stocks.lastIndex)) HorizontalDivider(color = Color(0xFFF0F1F4))
             }
         }
-        Notice40("成交量是个股层已确认的核心研究方向；若量比/历史成交基准显示“—”，表示后端尚未提供，v4.0 不用当天成交额冒充已验证的放量信号。")
+        Notice40("成交量是个股层已确认的核心研究方向；若量比/历史成交基准显示“—”，表示后端尚未提供，v4.1 不用当天成交额冒充已验证的放量信号。")
     }
 }
 
@@ -515,7 +509,7 @@ private fun Notice40(text: String) {
 }
 
 private suspend fun fetchLayerRadar40(): LayerRadar40 = withContext(Dispatchers.IO) {
-    val root = JSONObject(http40("$RADAR40_URL?t=${System.currentTimeMillis()}"))
+    val root = JSONObject(BackendClient.fetchText(RADAR40_PATH))
     val availability = mutableMapOf<String, String>()
     root.optJSONObject("factorAvailability")?.let { o ->
         val keys = o.keys()
@@ -586,21 +580,6 @@ private suspend fun fetchLayerRadar40(): LayerRadar40 = withContext(Dispatchers.
         sectors = sectors,
         stocks = stocks
     )
-}
-
-private fun http40(url: String): String {
-    val connection = URL(url).openConnection() as HttpURLConnection
-    connection.connectTimeout = 8_000
-    connection.readTimeout = 10_000
-    connection.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/4.0")
-    connection.setRequestProperty("Cache-Control", "no-cache")
-    return try {
-        connection.connect()
-        if (connection.responseCode !in 200..299) error("HTTP ${connection.responseCode}")
-        connection.inputStream.bufferedReader().use { it.readText() }
-    } finally {
-        connection.disconnect()
-    }
 }
 
 private fun num40(o: JSONObject, key: String): Double? {

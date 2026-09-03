@@ -39,7 +39,7 @@ fun StockTradingPanel26(
 
     LaunchedEffect(code) {
         while (true) {
-            runCatching { DataApi.fetchQuotes(listOf(symbol(code)))[symbol(code)] }
+            runCatching { ResilientDataApi.fetchQuotes(listOf(symbol(code)))[symbol(code)] }
                 .onSuccess { if (it != null) live = it }
             delay(5_000)
         }

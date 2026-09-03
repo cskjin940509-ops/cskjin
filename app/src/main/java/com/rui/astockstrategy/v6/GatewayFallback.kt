@@ -1,24 +1,19 @@
 package com.rui.astockstrategy.v6
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 import java.time.LocalDate
 import java.time.ZoneId
 
 /**
- * 手机直连腾讯/东方财富失败时的只读兜底。
- * 数据由 GitHub Actions 定时抓取并写入 astock_gateway/latest.json。
- * 它不替代盘中实时源，只负责避免网络/限流时整页空白。
+ * 云端预计算快照是首选数据源。腾讯/东方财富直连只用于补齐网关中
+ * 没有的自定义股票，或云端与本地SQLite缓存都不可用时的降级显示。
  */
 object ResilientDataApi {
-    private const val GATEWAY = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_gateway/latest.json"
+    private const val GATEWAY_PATH = "astock_gateway/latest.json"
 
-    @Volatile var quoteSource: String = "腾讯行情"
+    @Volatile var quoteSource: String = "云端预计算"
         private set
-    @Volatile var boardSource: String = "东方财富实时"
+    @Volatile var boardSource: String = "云端预计算"
         private set
     @Volatile var boardIsCurrent: Boolean = false
         private set
@@ -26,59 +21,76 @@ object ResilientDataApi {
         private set
 
     suspend fun fetchQuotes(symbols: List<String>): Map<String, Quote> {
-        val direct = runCatching { DataApi.fetchQuotes(symbols) }.getOrNull()
-        if (!direct.isNullOrEmpty()) {
-            quoteSource = "腾讯行情"
-            return direct
+        val wanted = symbols.distinct()
+        val cloud = runCatching { fetchGatewayQuotes(wanted) }.getOrElse { emptyMap() }
+        val missing = wanted.filterNot(cloud::containsKey)
+        if (missing.isEmpty() && cloud.isNotEmpty()) {
+            quoteSource = if (BackendClient.health.value.usingCache) "手机数据库缓存" else "云端预计算快照"
+            return cloud
         }
-        val fallback = fetchGatewayQuotes(symbols)
-        quoteSource = if (fallback.isNotEmpty()) "备用市场快照" else "行情源不可用"
-        return fallback
+
+        val direct = if (missing.isNotEmpty()) {
+            runCatching { DataApi.fetchQuotes(missing) }.getOrElse { emptyMap() }
+        } else emptyMap()
+        val merged = linkedMapOf<String, Quote>().apply {
+            putAll(cloud)
+            putAll(direct)
+        }
+        quoteSource = when {
+            cloud.isNotEmpty() && direct.isNotEmpty() -> "云端快照 + 直连补齐"
+            cloud.isNotEmpty() -> if (BackendClient.health.value.usingCache) "手机数据库缓存" else "云端预计算快照"
+            direct.isNotEmpty() -> "第三方直连降级"
+            else -> "行情源不可用"
+        }
+        if (merged.isEmpty()) error("云端、缓存与直连行情均不可用")
+        return merged
     }
 
     suspend fun fetchBoardsPair(): Pair<List<Board>, List<Board>> {
-        // Tier 1: Eastmoney realtime.
+        // Tier 1: scheduled cloud pipeline, then the phone's last-known-good SQLite row.
+        val root = runCatching { gatewayRoot() }.getOrNull()
+        if (root != null) {
+            val heat = root.optJSONObject("boardHeatmap")
+            val industry = parseBoards(heat?.optJSONArray("industry"), "industry")
+            val concept = parseBoards(heat?.optJSONArray("concept"), "concept")
+            gatewayGeneratedAt = root.optString("generatedAt").takeIf { it.isNotBlank() }
+            val sourceDate = root.optJSONObject("marketSnapshot")?.optString("sourceDate")?.takeIf { it.isNotBlank() }
+            val today = LocalDate.now(ZoneId.of("Asia/Shanghai")).toString()
+            boardIsCurrent = sourceDate == today
+            val time = gatewayGeneratedAt?.let { v -> if (v.length >= 16) v.substring(11, 16) else null }
+            if (industry.isNotEmpty() || concept.isNotEmpty()) {
+                boardSource = if (BackendClient.health.value.usingCache) {
+                    "手机数据库缓存 ${sourceDate ?: "日期未知"}"
+                } else {
+                    "云端预计算 ${sourceDate ?: "日期未知"}${time?.let { " $it" } ?: ""}"
+                }
+                return industry to concept
+            }
+        }
+
+        // Tier 2: direct feeds are display-only failover, never a strategy-computation trigger.
         val directIndustry = runCatching { DataApi.fetchBoards("industry", delayed = false) }.getOrNull().orEmpty()
         val directConcept = runCatching { DataApi.fetchBoards("concept", delayed = false) }.getOrNull().orEmpty()
         if (directIndustry.isNotEmpty() || directConcept.isNotEmpty()) {
-            boardSource = "东方财富实时"
+            boardSource = "第三方直连降级"
             boardIsCurrent = true
             return directIndustry to directConcept
         }
 
-        // Tier 2: Eastmoney delayed host. It is current-session data but may lag roughly 15 minutes.
         val delayedIndustry = runCatching { DataApi.fetchBoards("industry", delayed = true) }.getOrNull().orEmpty()
         val delayedConcept = runCatching { DataApi.fetchBoards("concept", delayed = true) }.getOrNull().orEmpty()
         if (delayedIndustry.isNotEmpty() || delayedConcept.isNotEmpty()) {
-            boardSource = "东方财富延迟源（约15分钟）"
+            boardSource = "第三方延迟源降级"
             boardIsCurrent = true
             return delayedIndustry to delayedConcept
         }
 
-        // Tier 3: frozen GitHub gateway. Never label an old snapshot as realtime.
-        val root = runCatching { gatewayRoot() }.getOrNull()
-        if (root == null) {
-            boardSource = "板块源不可用"
-            boardIsCurrent = false
-            return emptyList<Board>() to emptyList()
-        }
-        val heat = root.optJSONObject("boardHeatmap")
-        val industry = parseBoards(heat?.optJSONArray("industry"), "industry")
-        val concept = parseBoards(heat?.optJSONArray("concept"), "concept")
-        gatewayGeneratedAt = root.optString("generatedAt").takeIf { it.isNotBlank() }
-        val sourceDate = root.optJSONObject("marketSnapshot")?.optString("sourceDate")?.takeIf { it.isNotBlank() }
-        val today = LocalDate.now(ZoneId.of("Asia/Shanghai")).toString()
-        boardIsCurrent = sourceDate == today
-        val time = gatewayGeneratedAt?.let { v -> if (v.length >= 16) v.substring(11, 16) else null }
-        boardSource = if (industry.isNotEmpty() || concept.isNotEmpty()) {
-            "备用快照 ${sourceDate ?: "日期未知"}${time?.let { " $it" } ?: ""}"
-        } else {
-            "板块源不可用"
-        }
-        return industry to concept
+        boardSource = "板块源不可用"
+        boardIsCurrent = false
+        error("云端、缓存与板块直连源均不可用")
     }
 
-    suspend fun gatewayStatus(): GatewayStatus? = withContext(Dispatchers.IO) {
+    suspend fun gatewayStatus(): GatewayStatus? =
         runCatching {
             val root = gatewayRoot()
             GatewayStatus(
@@ -91,12 +103,11 @@ object ResilientDataApi {
                 }.orEmpty()
             )
         }.getOrNull()
-    }
 
-    private suspend fun fetchGatewayQuotes(symbols: List<String>): Map<String, Quote> = withContext(Dispatchers.IO) {
+    private suspend fun fetchGatewayQuotes(symbols: List<String>): Map<String, Quote> {
         val root = gatewayRoot()
         gatewayGeneratedAt = root.optString("generatedAt").takeIf { it.isNotBlank() }
-        val q = root.optJSONObject("quotes") ?: return@withContext emptyMap()
+        val q = root.optJSONObject("quotes") ?: return emptyMap()
         val out = linkedMapOf<String, Quote>()
         symbols.distinct().forEach { sym ->
             val x = q.optJSONObject(sym) ?: return@forEach
@@ -113,7 +124,7 @@ object ResilientDataApi {
                 quoteTime = x.optString("quoteTime").takeIf { it.matches(Regex("\\d{2}:\\d{2}:\\d{2}")) }
             )
         }
-        out
+        return out
     }
 
     private fun parseBoards(a: org.json.JSONArray?, type: String): List<Board> {
@@ -136,20 +147,7 @@ object ResilientDataApi {
         }
     }
 
-    private fun gatewayRoot(): JSONObject {
-        val c = URL(GATEWAY + "?t=" + System.currentTimeMillis()).openConnection() as HttpURLConnection
-        c.connectTimeout = 8000
-        c.readTimeout = 8000
-        c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/1.0")
-        c.setRequestProperty("Cache-Control", "no-cache")
-        c.connect()
-        try {
-            if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-            return JSONObject(c.inputStream.bufferedReader(Charsets.UTF_8).use { it.readText() })
-        } finally {
-            c.disconnect()
-        }
-    }
+    private suspend fun gatewayRoot(): JSONObject = JSONObject(BackendClient.fetchText(GATEWAY_PATH))
 
     private fun n(o: JSONObject, k: String): Double? {
         if (!o.has(k) || o.isNull(k)) return null

@@ -15,15 +15,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 
 private val S31Muted = Color(0xFF747B8D)
 private val S31Blue = Color(0xFF3557D4)
 private val S31Red = Color(0xFFD84343)
 private val S31Green = Color(0xFF15966A)
 private val S31Amber = Color(0xFFAE6A00)
-private const val SLOW_RADAR_URL = "https://raw.githubusercontent.com/cskjin940509-ops/cskjin/main/astock_radar/latest.json"
+private const val SLOW_RADAR_PATH = "astock_radar/latest.json"
 
 data class SlowStock31(
     val code: String,
@@ -101,7 +99,7 @@ private fun SlowSection31(title: String, rows: List<SlowStock31>, availability: 
 }
 
 private suspend fun fetchSlow31(): SlowData31 = withContext(Dispatchers.IO) {
-    val o = JSONObject(http31(SLOW_RADAR_URL))
+    val o = JSONObject(BackendClient.fetchText(SLOW_RADAR_PATH))
     val meta = o.optJSONObject("slowMoneyFactor") ?: JSONObject()
     val pools = o.optJSONObject("pools") ?: JSONObject()
     val stocks = o.optJSONObject("stocks") ?: JSONObject()
@@ -137,17 +135,6 @@ private suspend fun fetchSlow31(): SlowData31 = withContext(Dispatchers.IO) {
         b1Availability = avail.optString("B1", avail.optString("两融B1", "")),
         b2Availability = avail.optString("B2", avail.optString("ETF一级申赎B2", ""))
     )
-}
-
-private fun http31(url: String): String {
-    val c = URL(url).openConnection() as HttpURLConnection
-    c.connectTimeout = 8000; c.readTimeout = 8000
-    c.setRequestProperty("User-Agent", "Mozilla/5.0 AStockStrategy/3.1")
-    c.setRequestProperty("Cache-Control", "no-cache")
-    try {
-        c.connect(); if (c.responseCode !in 200..299) error("HTTP ${c.responseCode}")
-        return c.inputStream.bufferedReader().use { it.readText() }
-    } finally { c.disconnect() }
 }
 
 private fun num31(o: JSONObject, key: String): Double? {
