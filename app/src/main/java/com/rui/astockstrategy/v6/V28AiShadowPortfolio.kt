@@ -82,7 +82,9 @@ private data class AiPosition28(
 )
 private data class AiDecision28(
     val id: String, val time: String, val side: String, val code: String, val name: String, val qty: Int,
-    val price: Double?, val weight: Double?, val realizedPnl: Double?, val realizedReturn: Double?, val reason: String
+    val price: Double?, val weight: Double?, val realizedPnl: Double?, val realizedReturn: Double?, val reason: String,
+    val requestedQty: Int?, val partialFill: Boolean, val participationPct: Double?, val slippageBps: Double?,
+    val intradayAmount: Double?, val adv20Amount: Double?, val executionModel: String
 )
 
 private fun positions28(a: JSONArray?): List<AiPosition28> {
@@ -122,7 +124,14 @@ private fun decisions28(a: JSONArray?): List<AiDecision28> {
             weight = n28(x, "targetWeightPct"),
             realizedPnl = n28(x, "realizedPnl"),
             realizedReturn = n28(x, "realizedReturnPct"),
-            reason = x.optString("reasonZh")
+            reason = x.optString("reasonZh"),
+            requestedQty = if (x.has("requestedQty") && !x.isNull("requestedQty")) x.optInt("requestedQty") else null,
+            partialFill = x.optBoolean("partialFill"),
+            participationPct = n28(x, "participationPct"),
+            slippageBps = n28(x, "slippageBps"),
+            intradayAmount = n28(x, "intradayAmount"),
+            adv20Amount = n28(x, "adv20Amount"),
+            executionModel = x.optString("executionModel")
         )
     }
 }
@@ -190,13 +199,14 @@ fun AiShadowPortfolioScreen28() {
                     Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                         AiMetric28("今日收益", pct28(n28(summary, "todayReturnPct")), pnlColor28(n28(summary, "todayReturnPct")), Modifier.weight(1f))
                         AiMetric28("累计收益", pct28(n28(summary, "cumulativeReturnPct")), pnlColor28(n28(summary, "cumulativeReturnPct")), Modifier.weight(1f))
-                        AiMetric28("最大回撤", pct28(n28(summary, "maxDrawdownPct")), AiDown28, Modifier.weight(1f))
+                        AiMetric28("日频最大回撤", pct28(n28(summary, "maxDrawdownPct")), AiDown28, Modifier.weight(1f))
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                        AiMetric28("持仓比例", pct28(n28(summary, "positionPct")), AiBlue28, Modifier.weight(1f))
-                        AiMetric28("现金比例", pct28(n28(summary, "cashPct")), AiMuted28, Modifier.weight(1f))
+                        AiMetric28("单位净值", n28(summary, "unitNav")?.let { String.format("%.6f", it) } ?: "—", AiBlue28, Modifier.weight(1f))
+                        AiMetric28("盘中观测回撤", pct28(n28(summary, "intradayObservedMaxDrawdownPct")), AiDown28, Modifier.weight(1f))
                         AiMetric28("胜率", pct28(n28(summary, "winRatePct")), AiAmber28, Modifier.weight(1f))
                     }
+                    Text("正式回撤按日终单位净值计算；周频、月频仅用于收益报表。", color = AiMuted28, fontSize = 8.sp)
                     HorizontalDivider()
                     Row {
                         Text("已实现盈亏", color = AiMuted28, fontSize = 10.sp, modifier = Modifier.weight(1f))
@@ -219,6 +229,10 @@ fun AiShadowPortfolioScreen28() {
         }
 
         item { AiAutomationCard28(automation, automationError) }
+
+        item { AiCapitalContinuityCard28(d, allDecisions.size) }
+
+        item { AiPrivateFundReport28(d) }
 
         item { AiBenchmarkCard28(d) }
 
@@ -266,8 +280,13 @@ fun AiShadowPortfolioScreen28() {
                             val x = daily.optJSONObject(i) ?: continue
                             Row {
                                 Text(x.optString("date"), Modifier.weight(1f), fontSize = 10.sp)
-                                Text("当日 ${pct28(n28(x, "dailyReturnPct"))}", Modifier.width(100.dp), color = pnlColor28(n28(x, "dailyReturnPct")), fontSize = 10.sp)
-                                Text("累计 ${pct28(n28(x, "cumulativeReturnPct"))}", color = pnlColor28(n28(x, "cumulativeReturnPct")), fontSize = 10.sp)
+                                val dailyReturn = n28(x, "dailyReturnPct")
+                                val gap = x.optString("coverageStatus") == "MISSING_BACKEND_CYCLES"
+                                Text(if (gap) "日收益 缺口" else "当日 ${pct28(dailyReturn)}", Modifier.width(100.dp), color = if (gap) AiAmber28 else pnlColor28(dailyReturn), fontSize = 10.sp)
+                                Text("净值 ${n28(x, "closeUnitNav")?.let { String.format("%.6f", it) } ?: "—"}", color = AiBlue28, fontSize = 10.sp)
+                            }
+                            if (x.optString("coverageStatus") == "MISSING_BACKEND_CYCLES") {
+                                Text("距上个有效日缺少${x.optInt("observationGapBusinessDays")}个后台工作日；区间收益${pct28(n28(x, "periodReturnPct"))}，不冒充单日收益。", color = AiAmber28, fontSize = 8.sp)
                             }
                         }
                     }
@@ -282,6 +301,8 @@ fun AiShadowPortfolioScreen28() {
                     AiRule28("买入", rules?.optString("newEntry"))
                     AiRule28("仓位", rules?.optString("position"))
                     AiRule28("卖出", rules?.optString("exit"))
+                    AiRule28("估值", rules?.optString("valuation"))
+                    AiRule28("回撤", rules?.optString("drawdown"))
                     AiRule28("审计", rules?.optString("audit"))
                     Text("仅用于策略验证，不连接券商，也不会发送真实订单。", color = AiMuted28, fontSize = 9.sp)
                 }
@@ -382,7 +403,7 @@ private fun AiPositionCard28(p: AiPosition28) {
 }
 @Composable
 private fun AiDecisionCard28(x: AiDecision28) {
-    val buy = x.side == "买入"
+    val buy = x.side == "买入" || x.side == "加仓"
     Card(shape = RoundedCornerShape(14.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
         Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -391,9 +412,104 @@ private fun AiDecisionCard28(x: AiDecision28) {
                 Text(x.time.replace("T", " ").take(16), color = AiMuted28, fontSize = 8.sp)
             }
             Text("${x.qty}股 · 成交模拟价 ${price28(x.price)}${x.weight?.let { " · 目标仓位 ${pct28(it)}" } ?: ""}", fontSize = 9.sp)
+            if (x.executionModel == "v3-liquidity-capacity-point-in-time") {
+                val requestText = x.requestedQty?.let { "目标${it}股 · " } ?: ""
+                Text(
+                    "${requestText}${if (x.partialFill) "部分成交" else "容量校验通过"} · 参与率${pct28(x.participationPct)} · 滑点${x.slippageBps?.let { String.format("%.2fbp", it) } ?: "—"}",
+                    color = if (x.partialFill) AiAmber28 else AiBlue28,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 8.sp
+                )
+                Text("当时累计成交额${money28(x.intradayAmount)} · ADV20 ${money28(x.adv20Amount)}", color = AiMuted28, fontSize = 8.sp)
+            } else {
+                Text("历史成交：旧版固定滑点模型，保留原记录，不事后伪造容量数据。", color = AiMuted28, fontSize = 8.sp)
+            }
             x.realizedPnl?.let { Text("本次实现盈亏 ${money28(it)}", color = pnlColor28(it), fontWeight = FontWeight.Bold, fontSize = 10.sp) }
             x.realizedReturn?.let { Text("本次实现收益 ${pct28(it)}", color = pnlColor28(it), fontWeight = FontWeight.Bold, fontSize = 10.sp) }
             if (x.reason.isNotBlank()) Text("理由：${x.reason}", color = AiMuted28, fontSize = 9.sp)
+        }
+    }
+}
+
+@Composable
+private fun AiCapitalContinuityCard28(d: JSONObject?, ledgerCount: Int) {
+    val summary = d?.optJSONObject("summary")
+    val stages = d?.optJSONArray("capitalStages")
+    val inception = n28(summary, "inceptionCapital")
+    val capacity = n28(summary, "capitalCapacity")
+    val unitNav = n28(summary, "unitNav")
+    val legacyCount = d?.optJSONObject("performanceReport")?.optJSONObject("liquidityAndCapacity")
+        ?.optInt("legacyFixedSlippageFillCount", ledgerCount) ?: ledgerCount
+    val subscription = if (stages != null) {
+        (0 until stages.length()).mapNotNull { stages.optJSONObject(it) }
+            .firstOrNull { it.optString("type") == "SUBSCRIPTION" }
+    } else null
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text("资金阶段与历史连续性", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                AiMetric28("初始阶段", money28(inception), AiBlue28, Modifier.weight(1f))
+                AiMetric28("当前容量", money28(capacity), AiBlue28, Modifier.weight(1f))
+                AiMetric28("当前单位净值", unitNav?.let { String.format("%.6f", it) } ?: "—", pnlColor28(n28(summary, "cumulativeReturnPct")), Modifier.weight(1f))
+            }
+            HorizontalDivider()
+            Text("原100万元阶段及v3启用前的${legacyCount}笔完整账本仍保留；2000万元是后续增资，不会删除或按20倍改写旧成交。", fontSize = 9.sp)
+            if (subscription != null) {
+                Text(
+                    "增资 ${money28(n28(subscription, "cashFlow"))} · 按增资前净值 ${n28(subscription, "unitNav")?.let { String.format("%.6f", it) } ?: "—"} 发行新份额",
+                    color = AiMuted28,
+                    fontSize = 8.sp
+                )
+            }
+            Surface(color = Color(0xFFEFF3FF), shape = RoundedCornerShape(9.dp)) {
+                Text("基金份额法：增资只增加份额，单位净值不跳变；历史累计收益保持连续。", Modifier.fillMaxWidth().padding(8.dp), color = AiBlue28, fontSize = 9.sp)
+            }
+        }
+    }
+}
+
+@Composable
+private fun AiPrivateFundReport28(d: JSONObject?) {
+    val report = d?.optJSONObject("performanceReport")
+    if (report == null) return
+    val risk = report.optJSONObject("risk")
+    val exposure = report.optJSONObject("exposure")
+    val tx = report.optJSONObject("transactions")
+    val liq = report.optJSONObject("liquidityAndCapacity")
+    val enough = risk?.optBoolean("sampleSufficient") == true
+    val monthly = report.optJSONObject("returns")?.optJSONArray("monthly")
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+            Text("私募产品式绩效与风控", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                AiMetric28("总仓位", pct28(n28(exposure, "grossExposurePct")), AiBlue28, Modifier.weight(1f))
+                AiMetric28("前五集中度", pct28(n28(exposure, "top5ConcentrationPct")), AiBlue28, Modifier.weight(1f))
+                AiMetric28("累计换手", pct28(n28(liq, "turnoverPctOfCurrentAssets")), AiAmber28, Modifier.weight(1f))
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                AiMetric28("交易费用", money28(n28(tx, "totalFees")), AiMuted28, Modifier.weight(1f))
+                AiMetric28("盈亏比", n28(tx, "profitLossRatio")?.let { String.format("%.2f", it) } ?: "—", AiAmber28, Modifier.weight(1f))
+                AiMetric28("容量部分成交", "${liq?.optInt("partialFillCount") ?: 0}笔", AiAmber28, Modifier.weight(1f))
+            }
+            HorizontalDivider()
+            Text(
+                if (enough) "年化收益 ${pct28(n28(risk, "annualizedReturnPct"))} · 年化波动 ${pct28(n28(risk, "annualizedVolatilityPct"))} · 夏普 ${n28(risk, "sharpeRatio")?.let { String.format("%.2f", it) } ?: "—"}"
+                else "有效日收益仅${risk?.optInt("validDailyReturnCount") ?: 0}个，未达到${risk?.optInt("minimumRequiredDailyReturns") ?: 20}日；年化、波动率、夏普、索提诺和卡玛暂不外推。",
+                color = if (enough) AiBlue28 else AiAmber28,
+                fontSize = 9.sp
+            )
+            if (monthly != null && monthly.length() > 0) {
+                Text("月度净值收益", color = AiMuted28, fontSize = 8.sp)
+                val start = maxOf(0, monthly.length() - 6)
+                for (i in monthly.length() - 1 downTo start) {
+                    val row = monthly.optJSONObject(i) ?: continue
+                    Row {
+                        Text(row.optString("period"), Modifier.weight(1f), fontSize = 9.sp)
+                        Text(pct28(n28(row, "returnPct")), color = pnlColor28(n28(row, "returnPct")), fontWeight = FontWeight.Bold, fontSize = 9.sp)
+                    }
+                }
+            }
+            Text("新成交模型：单笔≤当时成交额0.8%，当日≤1.5%，ADV20样本足够后再受其2%约束；涨停不假设买到、跌停不假设卖出。", color = AiMuted28, fontSize = 8.sp)
         }
     }
 }

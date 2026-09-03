@@ -33,7 +33,7 @@ def fetch(path: str):
     last = None
     for base in BASES:
         try:
-            req = Request(base + path, headers={"User-Agent": "AStockStrategy-contract/4.2", "Cache-Control": "no-cache"})
+            req = Request(base + path, headers={"User-Agent": "AStockStrategy-contract/4.3", "Cache-Control": "no-cache"})
             with urlopen(req, timeout=20) as response:
                 if response.status < 200 or response.status >= 300:
                     raise RuntimeError(f"HTTP {response.status}")
@@ -73,6 +73,16 @@ def main() -> int:
                 summary = payload.get("summary") or {}
                 if float(summary.get("capitalCapacity") or 0) != 20_000_000:
                     raise ValueError("shadow portfolio capitalCapacity is not 20M")
+                if float(summary.get("unitNav") or 0) <= 0:
+                    raise ValueError("fund unit NAV is missing")
+                if summary.get("maxDrawdownFrequency") != "DAILY_CLOSE_UNIT_NAV":
+                    raise ValueError("official drawdown is not daily-close unit NAV")
+                if not isinstance(payload.get("allDecisions"), list):
+                    raise ValueError("full historical ledger is not exposed")
+                report = payload.get("performanceReport") or {}
+                liquidity = report.get("liquidityAndCapacity") or {}
+                if liquidity.get("executionModel") != "v3-liquidity-capacity-point-in-time":
+                    raise ValueError("liquidity capacity model is not active")
             if path == "astock_ai_portfolio/automation.json":
                 if payload.get("enabled") is not True or payload.get("appRequired") is not False:
                     raise ValueError("cloud automation is not independently enabled")
