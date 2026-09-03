@@ -19,8 +19,11 @@ OUT = ROOT / "astock_ai_portfolio"
 STATE_PATH = OUT / "state.json"
 LEDGER_PATH = OUT / "ledger.json"
 LATEST_PATH = OUT / "latest.json"
-INITIAL_CAPITAL = 1_000_000.0
+AUTOMATION_PATH = OUT / "automation.json"
+CYCLE_LOG_PATH = OUT / "cycle_log.json"
+INITIAL_CAPITAL = float(os.environ.get("ASTOCK_SHADOW_CAPITAL", "20000000"))
 STRATEGY_VERSION = "v1.0-ai-shadow-point-in-time"
+RADAR_MAX_AGE_SECONDS = 15 * 60
 
 # Portfolio constraints: this is a simulated shadow account, not broker execution.
 MAX_POSITIONS = 5
@@ -40,6 +43,10 @@ STAMP_DUTY_SELL_RATE = 0.0005
 
 
 def now_cn() -> datetime:
+    fixed = os.environ.get("ASTOCK_NOW")
+    if fixed:
+        parsed = datetime.fromisoformat(fixed)
+        return parsed.replace(tzinfo=CN) if parsed.tzinfo is None else parsed.astimezone(CN)
     return datetime.now(CN)
 
 
@@ -80,6 +87,8 @@ def symbol(code: str) -> str:
 
 
 def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
+    if os.environ.get("ASTOCK_DISABLE_QUOTE_FETCH") == "1":
+        return {}
     codes = sorted({c for c in codes if re.fullmatch(r"\d{6}", c or "")})
     if not codes:
         return {}
@@ -153,7 +162,155 @@ def new_state() -> dict:
         "dailyControl": {},
         "createdAt": iso(),
         "updatedAt": iso(),
+        "capitalEvents": [],
     }
+
+
+def capital_base(state: dict) -> float:
+    value = float(state.get("initialCapital") or INITIAL_CAPITAL)
+    return value if value > 0 else INITIAL_CAPITAL
+
+
+def migrate_capital_capacity(state: dict, dt: datetime | None = None) -> dict | None:
+    """Increase capacity without rewriting any historical simulated fill."""
+    dt = dt or now_cn()
+    old = capital_base(state)
+    target = float(INITIAL_CAPITAL)
+    state.setdefault("capitalEvents", [])
+    if math.isclose(old, target, rel_tol=0.0, abs_tol=0.01):
+        state["initialCapital"] = target
+        state["capitalCapacity"] = target
+        return None
+
+    delta = round(target - old, 2)
+    if delta < 0 and float(state.get("cash") or 0.0) + delta < -0.01:
+        raise RuntimeError("目标资金容量低于当前已占用资金，拒绝自动缩减")
+
+    legacy_nav = list(state.get("navHistory") or [])
+    if legacy_nav:
+        state.setdefault("legacyNavHistory", []).extend(legacy_nav)
+    state["navHistory"] = []
+    old_benchmark = state.pop("benchmarkTracking", None)
+    if old_benchmark:
+        state["legacyBenchmarkTracking"] = old_benchmark
+
+    state["cash"] = round(float(state.get("cash") or 0.0) + delta, 2)
+    state["initialCapital"] = target
+    state["capitalCapacity"] = target
+    state["capitalActivatedAt"] = iso(dt)
+    event = {
+        "eventId": f"capital-{dt.strftime('%Y%m%d-%H%M%S')}",
+        "timestamp": iso(dt),
+        "type": "CAPITAL_CAPACITY_ADJUSTMENT",
+        "fromCapital": round(old, 2),
+        "toCapital": round(target, 2),
+        "cashContribution": delta,
+        "retroactive": False,
+        "noteZh": "资金容量按当前时点调整；保留此前成交审计，不倒改历史股数、价格或盈亏。",
+    }
+    state["capitalEvents"].append(event)
+    return event
+
+
+def parse_time(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        return parsed.replace(tzinfo=CN) if parsed.tzinfo is None else parsed.astimezone(CN)
+    except Exception:
+        return None
+
+
+def radar_freshness(radar: dict, dt: datetime) -> tuple[bool, float | None]:
+    captured = parse_time(str(radar.get("capturedAt") or ""))
+    if captured is None:
+        return False, None
+    raw_age = (dt - captured).total_seconds()
+    if raw_age < -60:
+        return False, raw_age
+    age = max(0.0, raw_age)
+    return age <= RADAR_MAX_AGE_SECONDS, age
+
+
+def record_automation_cycle(
+    status: str,
+    reason_zh: str,
+    dt: datetime | None = None,
+    *,
+    radar: dict | None = None,
+    state: dict | None = None,
+    ledger: list | None = None,
+    actions: list | None = None,
+    error: str | None = None,
+) -> dict:
+    dt = dt or now_cn()
+    radar = radar or {}
+    state = state or {}
+    ledger = ledger or []
+    actions = actions or []
+    previous = read_json(AUTOMATION_PATH, {})
+    fresh, age = radar_freshness(radar, dt)
+    cycle_id = "-".join(filter(None, [
+        os.environ.get("GITHUB_RUN_ID"),
+        os.environ.get("GITHUB_RUN_ATTEMPT"),
+    ])) or dt.strftime("%Y%m%d-%H%M%S")
+    last_trade = next(
+        (str(x.get("timestamp")) for x in reversed(ledger) if x.get("side") in {"BUY", "SELL"}),
+        previous.get("lastTradeAt"),
+    )
+    successful = status != "ERROR"
+    payload = {
+        "schemaVersion": 1,
+        "enabled": True,
+        "executionMode": "SIMULATED_ONLY",
+        "simulated": True,
+        "brokerConnected": False,
+        "appRequired": False,
+        "engineLocation": "GitHub Actions云端定时任务",
+        "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
+        "cycleId": cycle_id,
+        "lastRunAt": iso(dt),
+        "lastSuccessAt": iso(dt) if successful else previous.get("lastSuccessAt"),
+        "lastTradeAt": last_trade,
+        "status": status,
+        "statusZh": reason_zh,
+        "runSource": os.environ.get("ASTOCK_RUN_SOURCE", "manual-or-integrated"),
+        "sessionOpen": trading_session(dt),
+        "radarCapturedAt": radar.get("capturedAt"),
+        "radarFresh": fresh,
+        "radarAgeSeconds": round(age, 1) if age is not None else None,
+        "actionsThisCycle": len(actions),
+        "buyActionsThisCycle": sum(1 for x in actions if x.get("side") == "BUY"),
+        "sellActionsThisCycle": sum(1 for x in actions if x.get("side") == "SELL"),
+        "ledgerDecisionCount": len(ledger),
+        "positionCount": len(state.get("positions") or {}),
+        "capitalCapacity": round(capital_base(state), 2),
+        "error": error,
+        "knownIncident": {
+            "from": "2026-08-20T15:10:00+08:00",
+            "to": "2026-09-03T10:27:19+08:00",
+            "type": "MISSING_BACKEND_CYCLES",
+            "backfilledTrades": False,
+            "causeZh": "盘中雷达工作流的YAML脚本块缩进错误导致定时调度停摆；不能把该区间解释为策略主动不交易。",
+        },
+        "disclaimerZh": "仅为自动模拟影子交易，不连接券商、不发送真实订单。",
+    }
+    log = read_json(CYCLE_LOG_PATH, [])
+    if not isinstance(log, list):
+        log = []
+    entry = {
+        k: payload.get(k) for k in (
+            "cycleId", "lastRunAt", "status", "statusZh", "runSource", "sessionOpen",
+            "radarCapturedAt", "radarFresh", "radarAgeSeconds", "actionsThisCycle",
+            "buyActionsThisCycle", "sellActionsThisCycle", "positionCount", "error",
+        )
+    }
+    if not log or log[-1].get("cycleId") != cycle_id:
+        log.append(entry)
+    write_json(CYCLE_LOG_PATH, log[-2000:])
+    write_json(AUTOMATION_PATH, payload)
+    return payload
 
 
 def get_daily_control(state: dict, date: str) -> dict:
@@ -550,12 +707,12 @@ def max_drawdown_pct(nav_history: list[dict]) -> float:
     return round(mdd, 2)
 
 
-def daily_series(nav_history: list[dict]) -> list[dict]:
+def daily_series(nav_history: list[dict], initial_capital: float = INITIAL_CAPITAL) -> list[dict]:
     by_date: dict[str, list[dict]] = {}
     for x in nav_history:
         by_date.setdefault(x.get("date", ""), []).append(x)
     out = []
-    prev_close = INITIAL_CAPITAL
+    prev_close = initial_capital
     for date in sorted(k for k in by_date if k):
         rows = by_date[date]
         close = float(rows[-1].get("nav") or prev_close)
@@ -564,7 +721,7 @@ def daily_series(nav_history: list[dict]) -> list[dict]:
             "date": date,
             "closeNav": round(close, 2),
             "dailyReturnPct": round(day_ret, 3),
-            "cumulativeReturnPct": round((close / INITIAL_CAPITAL - 1) * 100, 3),
+            "cumulativeReturnPct": round((close / initial_capital - 1) * 100, 3),
         })
         prev_close = close
     return out
@@ -588,6 +745,7 @@ def closed_sell_stats(ledger: list[dict]) -> dict:
 
 def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dict) -> dict:
     nav, mv = portfolio_nav(state, prices)
+    initial_capital = capital_base(state)
     positions = []
     for code, p in state.get("positions", {}).items():
         cur = prices.get(code, p.get("lastPrice") or p.get("avgCost") or 0.0)
@@ -612,7 +770,7 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
     positions.sort(key=lambda x: x.get("currentWeightPct", 0), reverse=True)
 
     hist = state.get("navHistory", [])
-    day = daily_series(hist)
+    day = daily_series(hist, initial_capital)
     today = now_cn().date().isoformat()
     today_rows = [x for x in hist if x.get("date") == today]
     today_ret = None
@@ -621,14 +779,15 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
         today_ret = (nav / start - 1) * 100 if start else None
 
     summary = {
-        "initialCapital": INITIAL_CAPITAL,
+        "initialCapital": initial_capital,
+        "capitalCapacity": initial_capital,
         "totalAssets": round(nav, 2),
         "cash": round(float(state.get("cash", 0.0)), 2),
         "marketValue": round(mv, 2),
         "positionPct": round(mv / nav * 100, 2) if nav else 0.0,
         "cashPct": round(float(state.get("cash", 0.0)) / nav * 100, 2) if nav else 0.0,
         "todayReturnPct": round(today_ret, 3) if today_ret is not None else None,
-        "cumulativeReturnPct": round((nav / INITIAL_CAPITAL - 1) * 100, 3),
+        "cumulativeReturnPct": round((nav / initial_capital - 1) * 100, 3),
         "realizedPnl": round(float(state.get("realizedPnl", 0.0)), 2),
         "floatingPnl": round(sum(float(x.get("floatingPnl") or 0) for x in positions), 2),
         "maxDrawdownPct": max_drawdown_pct(hist),
@@ -648,6 +807,7 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
         "positions": positions,
         "todayDecisions": [x for x in ledger if str(x.get("timestamp", "")).startswith(today)],
         "recentDecisions": ledger[-30:],
+        "capitalEvents": (state.get("capitalEvents") or [])[-10:],
         "dailyPerformance": day[-90:],
         "navHistory": hist[-300:],
         "rulesZh": {
@@ -659,16 +819,20 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
     }
 
 
-def main() -> int:
+def _main_impl() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     dt = now_cn()
     if not RADAR.exists():
+        record_automation_cycle("BLOCKED_NO_RADAR", "后台已运行，但没有可用雷达数据，拒绝交易", dt)
         print(json.dumps({"state": "no-radar", "time": iso(dt)}, ensure_ascii=False))
         return 0
 
     radar = read_json(RADAR, {})
     radar_date = str(radar.get("date") or "")
     if radar_date != dt.date().isoformat():
+        record_automation_cycle(
+            "BLOCKED_STALE_RADAR", "后台已运行，但雷达不是当日数据，拒绝使用旧数据交易", dt, radar=radar
+        )
         print(json.dumps({"state": "stale-radar", "radarDate": radar_date, "time": iso(dt)}, ensure_ascii=False))
         return 0
 
@@ -676,6 +840,7 @@ def main() -> int:
     ledger = read_json(LEDGER_PATH, [])
     if not isinstance(ledger, list):
         ledger = []
+    capital_event = migrate_capital_capacity(state, dt)
 
     codes = list(state.get("positions", {}).keys())
     codes += list((radar.get("stocks") or {}).keys())
@@ -689,9 +854,10 @@ def main() -> int:
             prices[code] = float(p)
 
     actions: list[dict] = []
+    radar_fresh, radar_age = radar_freshness(radar, dt)
     # Buy/sell decisions are only allowed during actual exchange trading hours.
     # Post-close jobs may update NAV but must never invent a fill after the market closes.
-    if trading_session(dt):
+    if trading_session(dt) and radar_fresh:
         # Exits are evaluated before entries, so freed cash can be reused only after an auditable sell.
         actions += evaluate_exits(state, ledger, radar.get("stocks") or {}, quotes, prices)
         actions += evaluate_entries(state, ledger, radar, prices)
@@ -705,7 +871,7 @@ def main() -> int:
         "cash": round(float(state.get("cash", 0.0)), 2),
         "marketValue": round(mv, 2),
         "positionCount": len(state.get("positions", {})),
-        "cumulativeReturnPct": round((nav / INITIAL_CAPITAL - 1) * 100, 4),
+        "cumulativeReturnPct": round((nav / capital_base(state) - 1) * 100, 4),
         "radarCapturedAt": radar.get("capturedAt"),
     }
     hist = state.setdefault("navHistory", [])
@@ -717,6 +883,29 @@ def main() -> int:
     state["updatedAt"] = iso(dt)
     state["strategyVersion"] = STRATEGY_VERSION
     latest = build_latest(state, ledger, prices, radar)
+
+    if trading_session(dt) and not radar_fresh:
+        cycle_status = "BLOCKED_STALE_RADAR"
+        cycle_reason = f"后台已运行，但雷达超过{RADAR_MAX_AGE_SECONDS // 60}分钟，拒绝使用旧信号交易"
+    elif not trading_session(dt):
+        cycle_status = "OUTSIDE_SESSION"
+        cycle_reason = "后台已运行；当前不在A股交易时段，仅更新净值与健康状态"
+    elif actions:
+        cycle_status = "TRADED"
+        cycle_reason = f"后台自动模拟成交{len(actions)}笔"
+    else:
+        cycle_status = "NO_ACTION"
+        cycle_reason = "后台已完成本轮检查，但目标权重变化未达到交易阈值"
+    automation = record_automation_cycle(
+        cycle_status, cycle_reason, dt, radar=radar, state=state, ledger=ledger, actions=actions
+    )
+    latest["automation"] = automation
+    latest["capitalMigrationThisCycle"] = capital_event
+    latest["dataFreshness"] = {
+        "radarFresh": radar_fresh,
+        "radarAgeSeconds": round(radar_age, 1) if radar_age is not None else None,
+        "maxAllowedAgeSeconds": RADAR_MAX_AGE_SECONDS,
+    }
 
     write_json(STATE_PATH, state)
     write_json(LEDGER_PATH, ledger)
@@ -734,6 +923,17 @@ def main() -> int:
         "cash": round(float(state.get("cash", 0.0)), 2),
     }, ensure_ascii=False))
     return 0
+
+
+def main() -> int:
+    try:
+        return _main_impl()
+    except Exception as exc:
+        record_automation_cycle(
+            "ERROR", "后台自动模拟交易引擎运行失败，已明确停止本轮交易", now_cn(), error=str(exc)[:300]
+        )
+        print(json.dumps({"state": "error", "error": str(exc), "time": iso()}, ensure_ascii=False))
+        return 1
 
 
 if __name__ == "__main__":

@@ -16,7 +16,9 @@ on:
       - 'tools/run_ai_shadow_portfolio_flexible.py'
       - 'tools/run_ai_dynamic_portfolio_v2.py'
       - 'tools/run_ai_dynamic_portfolio_v2_1.py'
+      - 'tools/run_ai_dynamic_portfolio_v2_2.py'
       - 'tools/enrich_ai_shadow_benchmarks.py'
+      - 'tools/validate_ai_shadow_contract.py'
       - '.github/workflows/run-intraday-radar.yml'
   schedule:
     - cron: '30,35,40,45,50,55 1 * * 1-5'
@@ -29,7 +31,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: astock-intraday-radar
+  group: astock-radar-ai-shadow-production
   cancel-in-progress: false
 
 jobs:
@@ -84,10 +86,15 @@ jobs:
         run: python tools/enrich_slow_money_factors.py
       - name: 智能实盘动态目标组合与实时再平衡
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: python tools/run_ai_dynamic_portfolio_v2_1.py
+        env:
+          ASTOCK_RUN_SOURCE: integrated-radar-cycle
+        run: python tools/run_ai_dynamic_portfolio_v2_2.py
       - name: 更新大盘与原始候选池同期基准
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_ai_shadow_benchmarks.py
+      - name: 校验自动影子账户数据契约
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        run: python tools/validate_ai_shadow_contract.py
       - name: 原子保存雷达、慢资金与智能影子实盘账本
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: |

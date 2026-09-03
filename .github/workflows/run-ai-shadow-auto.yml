@@ -1,0 +1,84 @@
+name: Run 20M AI Shadow Portfolio Automatically
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tools/run_ai_shadow_portfolio.py'
+      - 'tools/run_ai_dynamic_portfolio_v2.py'
+      - 'tools/run_ai_dynamic_portfolio_v2_1.py'
+      - 'tools/run_ai_dynamic_portfolio_v2_2.py'
+      - 'tools/enrich_ai_shadow_benchmarks.py'
+      - 'tools/test_ai_shadow_portfolio.py'
+      - 'tools/validate_ai_shadow_contract.py'
+      - '.github/workflows/run-ai-shadow-auto.yml'
+  schedule:
+    - cron: '32,37,42,47,52,57 1 * * 1-5'
+    - cron: '2,7,12,17,22,27,32,37,42,47,52,57 2 * * 1-5'
+    - cron: '2,7,12,17,22,27,32 3 * * 1-5'
+    - cron: '2,7,12,17,22,27,32,37,42,47,52,57 5-6 * * 1-5'
+    - cron: '2,7,12,22 7 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astock-radar-ai-shadow-production
+  cancel-in-progress: false
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 检查引擎与回归测试
+        run: |
+          python -m py_compile tools/run_ai_shadow_portfolio.py tools/run_ai_dynamic_portfolio_v2.py tools/run_ai_dynamic_portfolio_v2_1.py tools/run_ai_dynamic_portfolio_v2_2.py
+          python -m unittest tools/test_ai_shadow_portfolio.py
+      - name: 后台自动模拟买卖
+        id: engine
+        env:
+          ASTOCK_RUN_SOURCE: dedicated-auto-scheduler
+        run: |
+          set +e
+          python tools/run_ai_dynamic_portfolio_v2_2.py
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+      - name: 更新同期基准
+        if: steps.engine.outputs.exit_code == '0'
+        run: python tools/enrich_ai_shadow_benchmarks.py
+      - name: 校验自动影子账户数据契约
+        if: steps.engine.outputs.exit_code == '0'
+        run: python tools/validate_ai_shadow_contract.py
+      - name: 保存资金、持仓、账本与每轮心跳
+        run: |
+          git config user.name 'astock-ai-auto-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add astock_ai_portfolio
+          if git diff --cached --quiet; then
+            echo 'No AI shadow portfolio changes.'
+          else
+            git commit -m 'Update 20M automatic AI shadow portfolio'
+            pushed=0
+            for i in 1 2 3 4; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                pushed=1
+                break
+              fi
+              sleep 2
+            done
+            test "$pushed" -eq 1
+          fi
+      - name: 确认引擎成功
+        run: test '${{ steps.engine.outputs.exit_code }}' = '0'
