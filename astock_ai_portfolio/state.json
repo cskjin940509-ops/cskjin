@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "strategyVersion": "v2.0-dynamic-rebalance-point-in-time",
+  "strategyVersion": "v1.0-ai-shadow-point-in-time",
   "mode": "AI影子实盘",
   "simulated": true,
   "initialCapital": 1000000.0,
-  "cash": 661674.05,
-  "realizedPnl": 0.0,
+  "cash": 509808.9,
+  "realizedPnl": 43756.93,
   "positions": {
     "002315": {
       "code": "002315",
@@ -20,65 +20,91 @@
       "entryTimestamp": "2026-08-20T11:14:43+08:00",
       "entryDate": "2026-08-20",
       "initialWeightTarget": 0.12,
-      "lastPrice": 25.35,
-      "lastPriceAt": "2026-08-20T14:14:43+08:00",
-      "missingRadarCount": 1,
+      "lastPrice": 25.78,
+      "lastPriceAt": "2026-09-03T10:27:42+08:00",
+      "missingRadarCount": 2,
       "partialProfitTaken": false,
       "seenTradeDates": [
-        "2026-08-20"
+        "2026-08-20",
+        "2026-09-03"
       ],
       "buyScore": 80.31,
       "buyReasonZh": "提前分61；主线潜在形成+3；形成分改善+2；资金强度高+5；资金评分高+3；价格尚未充分扩张+4；追高风险低+2",
       "invalidationZh": "主线连续退出雷达、资金显著转负，或相对持仓成本跌幅达到4%",
       "expectedHorizonZh": "次日优先验证，正常持有1-3个交易日，最长约5个交易日"
     },
-    "300413": {
-      "code": "300413",
-      "name": "芒果超媒",
-      "sector": "视频媒体",
-      "qty": 7900,
-      "avgCost": 15.1238,
-      "costAmount": 119478.35,
-      "entryPrice": 15.12,
-      "entryReferencePrice": 15.115,
+    "601318": {
+      "code": "601318",
+      "name": "中国平安",
+      "sector": "保险Ⅱ",
+      "qty": 2600,
+      "avgCost": 58.4849,
+      "costAmount": 152060.63,
+      "entryPrice": 58.47,
+      "entryReferencePrice": 58.44,
       "entryPriceSource": "东方财富+Yunai双源均价",
-      "entryTimestamp": "2026-08-20T11:14:43+08:00",
-      "entryDate": "2026-08-20",
-      "initialWeightTarget": 0.12,
-      "lastPrice": 15.23,
-      "lastPriceAt": "2026-08-20T14:14:43+08:00",
-      "missingRadarCount": 3,
+      "entryTimestamp": "2026-09-03T10:27:42+08:00",
+      "entryDate": "2026-09-03",
+      "initialWeightTarget": 0.15,
+      "lastPrice": 58.44,
+      "lastPriceAt": "2026-09-03T10:27:42+08:00",
+      "missingRadarCount": 0,
       "partialProfitTaken": false,
       "seenTradeDates": [
-        "2026-08-20"
+        "2026-09-03"
       ],
-      "buyScore": 78.13,
-      "buyReasonZh": "提前分62；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2",
+      "buyScore": 99.35,
+      "buyReasonZh": "提前分76；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；价格尚未充分扩张+4；追高风险低+2",
       "invalidationZh": "主线连续退出雷达、资金显著转负，或相对持仓成本跌幅达到4%",
       "expectedHorizonZh": "次日优先验证，正常持有1-3个交易日，最长约5个交易日"
     },
-    "300785": {
-      "code": "300785",
-      "name": "值得买",
-      "sector": "门户网站",
-      "qty": 2700,
-      "avgCost": 36.6893,
-      "costAmount": 99061.17,
-      "entryPrice": 36.68,
-      "entryReferencePrice": 36.66,
+    "601696": {
+      "code": "601696",
+      "name": "中银证券",
+      "sector": "非银金融",
+      "qty": 12800,
+      "avgCost": 12.1631,
+      "costAmount": 155687.55,
+      "entryPrice": 12.16,
+      "entryReferencePrice": 12.155,
       "entryPriceSource": "东方财富+Yunai双源均价",
-      "entryTimestamp": "2026-08-20T11:14:43+08:00",
-      "entryDate": "2026-08-20",
-      "initialWeightTarget": 0.1,
-      "lastPrice": 36.43,
-      "lastPriceAt": "2026-08-20T14:14:43+08:00",
-      "missingRadarCount": 4,
+      "entryTimestamp": "2026-09-03T10:27:42+08:00",
+      "entryDate": "2026-09-03",
+      "initialWeightTarget": 0.15,
+      "lastPrice": 12.155000000000001,
+      "lastPriceAt": "2026-09-03T10:27:42+08:00",
+      "missingRadarCount": 0,
       "partialProfitTaken": false,
       "seenTradeDates": [
-        "2026-08-20"
+        "2026-09-03"
       ],
-      "buyScore": 72.69,
-      "buyReasonZh": "提前分54；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5",
+      "buyScore": 90.15,
+      "buyReasonZh": "提前分67；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；价格尚未充分扩张+4；追高风险低+2",
+      "invalidationZh": "主线连续退出雷达、资金显著转负，或相对持仓成本跌幅达到4%",
+      "expectedHorizonZh": "次日优先验证，正常持有1-3个交易日，最长约5个交易日"
+    },
+    "601336": {
+      "code": "601336",
+      "name": "新华保险",
+      "sector": "保险Ⅱ",
+      "qty": 1700,
+      "avgCost": 62.5959,
+      "costAmount": 106413.03,
+      "entryPrice": 62.58,
+      "entryReferencePrice": 62.55,
+      "entryPriceSource": "东方财富+Yunai双源均价",
+      "entryTimestamp": "2026-09-03T10:27:42+08:00",
+      "entryDate": "2026-09-03",
+      "initialWeightTarget": 0.1046,
+      "lastPrice": 62.55,
+      "lastPriceAt": "2026-09-03T10:27:42+08:00",
+      "missingRadarCount": 0,
+      "partialProfitTaken": false,
+      "seenTradeDates": [
+        "2026-09-03"
+      ],
+      "buyScore": 87.5,
+      "buyReasonZh": "提前分68；主线确认中+5；形成分强+4；资金强度高+5；价格尚未充分扩张+4；追高风险低+2",
       "invalidationZh": "主线连续退出雷达、资金显著转负，或相对持仓成本跌幅达到4%",
       "expectedHorizonZh": "次日优先验证，正常持有1-3个交易日，最长约5个交易日"
     }
@@ -204,6 +230,17 @@
       "positionCount": 3,
       "cumulativeReturnPct": -0.0305,
       "radarCapturedAt": "2026-08-20T14:13:41+08:00"
+    },
+    {
+      "timestamp": "2026-09-03T10:27:41+08:00",
+      "date": "2026-09-03",
+      "time": "10:27:41",
+      "nav": 1044837.9,
+      "cash": 509808.9,
+      "marketValue": 535029.0,
+      "positionCount": 4,
+      "cumulativeReturnPct": 4.4838,
+      "radarCapturedAt": "2026-09-03T10:26:13+08:00"
     }
   ],
   "dailyControl": {
@@ -211,10 +248,15 @@
       "newBuys": 3,
       "sells": 0,
       "lastDecisionAt": "2026-08-20T15:09:56+08:00"
+    },
+    "2026-09-03": {
+      "newBuys": 3,
+      "sells": 2,
+      "lastDecisionAt": "2026-09-03T10:27:41+08:00"
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-08-20T15:09:58+08:00",
+  "updatedAt": "2026-09-03T10:27:43+08:00",
   "benchmarkTracking": {
     "startedAt": "2026-08-20T11:33:45+08:00",
     "portfolioBaseNav": 1000985.05,
@@ -222,17 +264,17 @@
       "沪深300": {
         "symbol": "sh000300",
         "basePrice": 4598.14,
-        "lastPrice": 4592.75
+        "lastPrice": 4572.12
       },
       "中证A500": {
         "symbol": "sh000510",
         "basePrice": 5708.49,
-        "lastPrice": 5694.08
+        "lastPrice": 5635.81
       },
       "创业板指": {
         "symbol": "sz399006",
         "basePrice": 3509.44,
-        "lastPrice": 3495.59
+        "lastPrice": 3318.68
       }
     },
     "candidatePool": {
@@ -242,97 +284,97 @@
           "code": "300139",
           "name": "晓程科技",
           "basePrice": 50.01,
-          "lastPrice": 49.45
+          "lastPrice": 52.13
         },
         "001337": {
           "code": "001337",
           "name": "四川黄金",
           "basePrice": 49.0,
-          "lastPrice": 48.57
+          "lastPrice": 53.35
         },
         "300413": {
           "code": "300413",
           "name": "芒果超媒",
           "basePrice": 15.2,
-          "lastPrice": 15.25
+          "lastPrice": 21.07
         },
         "600711": {
           "code": "600711",
           "name": "盛屯矿业",
           "basePrice": 11.74,
-          "lastPrice": 11.64
+          "lastPrice": 11.58
         },
         "300418": {
           "code": "300418",
           "name": "昆仑万维",
           "basePrice": 46.18,
-          "lastPrice": 45.05
+          "lastPrice": 44.58
         },
         "000060": {
           "code": "000060",
           "name": "中金岭南",
           "basePrice": 6.52,
-          "lastPrice": 6.51
+          "lastPrice": 6.61
         },
         "600170": {
           "code": "600170",
           "name": "上海建工",
           "basePrice": 2.25,
-          "lastPrice": 2.27
+          "lastPrice": 2.26
         },
         "601212": {
           "code": "601212",
           "name": "白银有色",
           "basePrice": 5.59,
-          "lastPrice": 5.54
+          "lastPrice": 6.98
         },
         "600489": {
           "code": "600489",
           "name": "中金黄金",
           "basePrice": 26.38,
-          "lastPrice": 26.37
+          "lastPrice": 25.49
         },
         "000630": {
           "code": "000630",
           "name": "铜陵有色",
           "basePrice": 6.45,
-          "lastPrice": 6.41
+          "lastPrice": 6.51
         },
         "600531": {
           "code": "600531",
           "name": "豫光金铅",
           "basePrice": 13.23,
-          "lastPrice": 13.09
+          "lastPrice": 13.39
         },
         "301500": {
           "code": "301500",
           "name": "飞南资源",
           "basePrice": 22.95,
-          "lastPrice": 22.73
+          "lastPrice": 24.98
         },
         "000975": {
           "code": "000975",
           "name": "山金国际",
           "basePrice": 27.83,
-          "lastPrice": 27.9
+          "lastPrice": 26.87
         },
         "601020": {
           "code": "601020",
           "name": "华钰矿业",
           "basePrice": 21.56,
-          "lastPrice": 21.27
+          "lastPrice": 23.05
         },
         "601899": {
           "code": "601899",
           "name": "紫金矿业",
           "basePrice": 34.35,
-          "lastPrice": 34.25
+          "lastPrice": 33.43
         },
         "000681": {
           "code": "000681",
           "name": "视觉中国",
           "basePrice": 17.2,
-          "lastPrice": 17.01
+          "lastPrice": 16.91
         },
         "920038": {
           "code": "920038",
@@ -344,79 +386,79 @@
           "code": "601069",
           "name": "西部黄金",
           "basePrice": 30.88,
-          "lastPrice": 30.9
+          "lastPrice": 30.4
         },
         "002716": {
           "code": "002716",
           "name": "湖南白银",
           "basePrice": 9.52,
-          "lastPrice": 9.47
+          "lastPrice": 11.18
         },
         "603993": {
           "code": "603993",
           "name": "洛阳钼业",
           "basePrice": 18.39,
-          "lastPrice": 18.27
+          "lastPrice": 18.59
         },
         "300364": {
           "code": "300364",
           "name": "中文在线",
           "basePrice": 23.58,
-          "lastPrice": 23.1
+          "lastPrice": 25.59
         },
         "600961": {
           "code": "600961",
           "name": "株冶集团",
           "basePrice": 27.76,
-          "lastPrice": 27.09
+          "lastPrice": 26.31
         },
         "300945": {
           "code": "300945",
           "name": "曼卡龙",
           "basePrice": 12.4,
-          "lastPrice": 12.36
+          "lastPrice": 12.78
         },
         "600490": {
           "code": "600490",
           "name": "鹏欣资源",
           "basePrice": 7.31,
-          "lastPrice": 7.25
+          "lastPrice": 7.7
         },
         "600362": {
           "code": "600362",
           "name": "江西铜业",
           "basePrice": 44.9,
-          "lastPrice": 44.57
+          "lastPrice": 46.91
         },
         "300697": {
           "code": "300697",
           "name": "电工合金",
           "basePrice": 14.87,
-          "lastPrice": 15.16
+          "lastPrice": 14.91
         },
         "002132": {
           "code": "002132",
           "name": "恒星科技",
           "basePrice": 4.45,
-          "lastPrice": 4.46
+          "lastPrice": 4.35
         },
         "000878": {
           "code": "000878",
           "name": "云南铜业",
           "basePrice": 16.16,
-          "lastPrice": 16.09
+          "lastPrice": 17.71
         },
         "601168": {
           "code": "601168",
           "name": "西部矿业",
           "basePrice": 37.12,
-          "lastPrice": 36.66
+          "lastPrice": 40.12
         },
         "002479": {
           "code": "002479",
           "name": "富春环保",
           "basePrice": 5.77,
-          "lastPrice": 5.79
+          "lastPrice": 6.19
         }
       }
     }
