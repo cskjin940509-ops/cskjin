@@ -936,8 +936,14 @@ def _main_impl() -> int:
     if radar_date != dt.date().isoformat():
         # A stale signal must never trade, but accounting, heartbeat and the
         # investor-style report still need to be persisted independently.
+        previous_latest = read_json(LATEST_PATH, {})
+        previous_prices = {
+            str(pos.get("code") or ""): float(pos.get("currentPrice") or 0.0)
+            for pos in (previous_latest.get("positions") or [])
+            if pos.get("code") and float(pos.get("currentPrice") or 0.0) > 0
+        }
         prices = {
-            code: float(pos.get("lastPrice") or pos.get("avgCost") or 0.0)
+            code: previous_prices.get(code, float(pos.get("lastPrice") or pos.get("avgCost") or 0.0))
             for code, pos in (state.get("positions") or {}).items()
         }
         nav, _ = portfolio_nav(state, prices)
