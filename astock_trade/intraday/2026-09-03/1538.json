@@ -705,12 +705,107 @@
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "601336",
+      "name": "新华保险",
+      "sector": "保险Ⅲ",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 84.4,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 61.92,
+        "changePct": 2.26,
+        "open": 60.8,
+        "high": 62.84,
+        "low": 60.58,
+        "dayLowToHighPct": 3.73,
+        "quoteTime": "20260903153832"
+      },
+      "entryZone": [
+        61.814,
+        62.744
+      ],
+      "triggerPrice": 62.0,
+      "stopLoss": 60.991,
+      "takeProfit1": 64.21,
+      "takeProfit2": 65.498,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 60.991",
+      "reasons": [
+        "突破回踩",
+        "形态分 84",
+        "距MA20 +2.00 ATR",
+        "主力资金占比 +1.95%"
+      ]
+    },
+    {
+      "code": "600916",
+      "name": "中国黄金",
+      "sector": "培育钻石",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 79.2,
+        "historical": {
+          "samples": 4,
+          "win5D": 0.5,
+          "avg5D": 0.0101,
+          "avgMFE5D": 0.0556,
+          "avgMAE5D": -0.0303
+        }
+      },
+      "quote": {
+        "price": 8.16,
+        "changePct": 1.62,
+        "open": 8.1,
+        "high": 8.25,
+        "low": 8.1,
+        "dayLowToHighPct": 1.85,
+        "quoteTime": "20260903153838"
+      },
+      "entryZone": [
+        7.978,
+        8.14
+      ],
+      "triggerPrice": 8.059,
+      "stopLoss": 7.679,
+      "takeProfit1": 8.629,
+      "takeProfit2": 9.009,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 7.679",
+      "reasons": [
+        "趋势回踩",
+        "形态分 79",
+        "距MA20 +0.68 ATR",
+        "主力资金占比 +1.07%"
+      ]
+    }
+  ],
   "summary": {
     "official": 16,
     "officialBuy": 1,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 2
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -723,9 +818,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "official-has-live-buy"
-  }
+  ]
 }
