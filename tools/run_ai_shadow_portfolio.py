@@ -927,19 +927,40 @@ def _main_impl() -> int:
         return 0
 
     radar = read_json(RADAR, {})
-    radar_date = str(radar.get("date") or "")
-    if radar_date != dt.date().isoformat():
-        record_automation_cycle(
-            "BLOCKED_STALE_RADAR", "后台已运行，但雷达不是当日数据，拒绝使用旧数据交易", dt, radar=radar
-        )
-        print(json.dumps({"state": "stale-radar", "radarDate": radar_date, "time": iso(dt)}, ensure_ascii=False))
-        return 0
-
     state = read_json(STATE_PATH, new_state())
     ledger = read_json(LEDGER_PATH, [])
     if not isinstance(ledger, list):
         ledger = []
     capital_event = migrate_capital_capacity(state, dt)
+    radar_date = str(radar.get("date") or "")
+    if radar_date != dt.date().isoformat():
+        # A stale signal must never trade, but accounting, heartbeat and the
+        # investor-style report still need to be persisted independently.
+        prices = {
+            code: float(pos.get("lastPrice") or pos.get("avgCost") or 0.0)
+            for code, pos in (state.get("positions") or {}).items()
+        }
+        nav, _ = portfolio_nav(state, prices)
+        fund.ensure_fund_accounting(state, nav)
+        latest = build_latest(state, ledger, prices, radar)
+        automation = record_automation_cycle(
+            "BLOCKED_STALE_RADAR", "后台已运行并更新基金报表，但雷达不是当日数据，拒绝使用旧数据交易",
+            dt, radar=radar, state=state, ledger=ledger
+        )
+        latest["automation"] = automation
+        latest["capitalMigrationThisCycle"] = capital_event
+        latest["dataFreshness"] = {
+            "radarFresh": False,
+            "radarAgeSeconds": None,
+            "maxAllowedAgeSeconds": RADAR_MAX_AGE_SECONDS,
+        }
+        state["updatedAt"] = iso(dt)
+        state["strategyVersion"] = STRATEGY_VERSION
+        write_json(STATE_PATH, state)
+        write_json(LEDGER_PATH, ledger)
+        write_json(LATEST_PATH, latest)
+        print(json.dumps({"state": "stale-radar", "radarDate": radar_date, "time": iso(dt)}, ensure_ascii=False))
+        return 0
 
     codes = list(state.get("positions", {}).keys())
     codes += list((radar.get("stocks") or {}).keys())
