@@ -46,6 +46,7 @@ STAMP_DUTY_SELL_RATE = 0.0005
 # Current point-in-time market data is registered once per cycle and consumed by
 # the dynamic execution layer.  It is never persisted as an assumed future fill.
 EXECUTION_MARKET: dict[str, dict] = {}
+VALUATION_OVERRIDE: dict | None = None
 
 
 def now_cn() -> datetime:
@@ -776,6 +777,9 @@ def closed_sell_stats(ledger: list[dict]) -> dict:
 
 def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dict) -> dict:
     nav, mv = portfolio_nav(state, prices)
+    if VALUATION_OVERRIDE:
+        nav = float(VALUATION_OVERRIDE.get("nav") or nav)
+        mv = max(0.0, nav - float(state.get("cash") or 0.0))
     initial_capital = capital_base(state)
     positions = []
     for code, p in state.get("positions", {}).items():
@@ -837,7 +841,7 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
         "todayReturnPct": round(today_ret, 3) if today_ret is not None else None,
         "cumulativeReturnPct": round(float(performance.get("cumulativeReturnPct") or 0.0), 3),
         "realizedPnl": round(float(state.get("realizedPnl", 0.0)), 2),
-        "floatingPnl": round(sum(float(x.get("floatingPnl") or 0) for x in positions), 2),
+        "floatingPnl": round(mv - sum(float(x.get("avgCost") or 0.0) * int(x.get("qty") or 0) for x in positions), 2),
         "maxDrawdownPct": performance.get("dailyCloseMaxDrawdownPct"),
         "maxDrawdownFrequency": "DAILY_CLOSE_UNIT_NAV",
         "intradayObservedMaxDrawdownPct": performance.get("intradayObservedMaxDrawdownPct"),
@@ -906,6 +910,10 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
             },
             "liquidityAndCapacity": execution,
         },
+        "valuationStatus": VALUATION_OVERRIDE or {
+            "mode": "LIVE_POINT_IN_TIME",
+            "noteZh": "使用本轮当时行情估值。",
+        },
         "rulesZh": {
             "newEntry": "只从全天提前雷达候选中择优，优先潜在形成/确认中、价格未充分扩张、资金正向且追高风险低的股票。",
             "position": "资金容量2000万元；单股最高15%、单板块最高25%，总仓位由机会质量决定，容量不足只部分成交。",
@@ -918,7 +926,8 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
 
 
 def _main_impl() -> int:
-    global EXECUTION_MARKET
+    global EXECUTION_MARKET, VALUATION_OVERRIDE
+    VALUATION_OVERRIDE = None
     OUT.mkdir(parents=True, exist_ok=True)
     dt = now_cn()
     if not RADAR.exists():
@@ -946,7 +955,18 @@ def _main_impl() -> int:
             code: previous_prices.get(code, float(pos.get("lastPrice") or pos.get("avgCost") or 0.0))
             for code, pos in (state.get("positions") or {}).items()
         }
+        raw_history = list(state.get("legacyNavHistory") or []) + list(state.get("navHistory") or [])
+        if raw_history:
+            verified = sorted(raw_history, key=lambda x: str(x.get("timestamp") or ""))[-1]
+            VALUATION_OVERRIDE = {
+                "mode": "CARRY_FORWARD_LAST_VERIFIED_NAV",
+                "nav": float(verified.get("nav") or 0.0),
+                "asOf": verified.get("timestamp"),
+                "noteZh": "没有当日新行情时沿用最后一个已验证组合净值，不用陈旧个股价格重新估值。",
+            }
         nav, _ = portfolio_nav(state, prices)
+        if VALUATION_OVERRIDE:
+            nav = float(VALUATION_OVERRIDE["nav"])
         fund.ensure_fund_accounting(state, nav)
         latest = build_latest(state, ledger, prices, radar)
         automation = record_automation_cycle(
