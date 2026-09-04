@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'astock_tail/watchdog-trigger.txt'
+      - '.github/workflows/run-tail-watchdog-recovery.yml'
 
 permissions:
   contents: write
@@ -25,20 +26,36 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 尾盘滚动/Final恢复扫描
+
+      - name: 尾盘滚动/Final可靠恢复扫描
+        id: rolling
         env:
           ALLOW_ANY_TIME: '1'
           DRY_RUN: '0'
-        run: python tools/run_tail_rolling.py
+        run: |
+          OUT=$(python tools/run_tail_rolling_reliable.py)
+          echo "$OUT"
+          STATE=$(printf '%s\n' "$OUT" | tail -n 1 | python -c 'import json,sys; print(json.load(sys.stdin).get("state", "unknown"))')
+          echo "state=$STATE" >> "$GITHUB_OUTPUT"
+
+      # 恢复任务优先保证核心快照/Final 落盘。外部 Yunai 只在新 Final 冻结时
+      # 尝试补充，失败也不能阻断核心结果保存。已存在的同日 TailFinal 会由
+      # run_tail_rolling.py 的 immutable guard 直接保护，不会被恢复任务改写。
       - name: 刷新 Yunai 候选股确认
+        if: steps.rolling.outputs.state == 'tail-final-frozen'
+        continue-on-error: true
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/sync_yunai_production.py
       - name: 合并 Yunai 二次确认
+        if: steps.rolling.outputs.state == 'tail-final-frozen'
+        continue-on-error: true
         env:
           DRY_RUN: '0'
         run: python tools/enrich_tail_yunai.py
+
       - name: 保存恢复结果
+        if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
         run: |
           git config user.name 'astock-tail-watchdog'
           git config user.email 'actions@users.noreply.github.com'
@@ -48,5 +65,14 @@ jobs:
             exit 0
           fi
           git commit -m 'Recover rolling tail decision result'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          pushed=0
+          for i in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          test "$pushed" -eq 1
