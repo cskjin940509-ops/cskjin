@@ -713,65 +713,12 @@
       ]
     }
   ],
-  "setupCandidates": [
-    {
-      "code": "601899",
-      "name": "紫金矿业",
-      "sector": "沪深市场形态扫描",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "盘前观察",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 85.2,
-        "historical": {
-          "samples": 5,
-          "win5D": 0.8,
-          "avg5D": 0.015,
-          "avgMFE5D": 0.0641,
-          "avgMAE5D": -0.0292
-        }
-      },
-      "quote": {
-        "price": 33.76,
-        "changePct": 1.35,
-        "open": null,
-        "high": 33.93,
-        "low": 33.7,
-        "dayLowToHighPct": 0.68,
-        "quoteTime": null
-      },
-      "entryZone": [
-        33.691,
-        34.371
-      ],
-      "triggerPrice": 34.031,
-      "stopLoss": 32.665,
-      "takeProfit1": 36.08,
-      "takeProfit2": 37.446,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 32.665",
-      "reasons": [
-        "趋势回踩",
-        "形态分 85",
-        "距MA20 +0.12 ATR",
-        "主力资金占比 +5.94%"
-      ],
-      "source": "沪深市场历史形态精筛"
-    }
-  ],
+  "setupCandidates": [],
   "summary": {
     "official": 16,
     "officialBuy": 0,
     "officialWatch": 2,
-    "expandedSetupCandidates": 1,
-    "marketPrefilterCount": 61,
-    "marketScannedCount": 61
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -784,20 +731,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "partial",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5556,
-    "uniqueRows": 4203,
-    "pagesRequested": 56,
-    "coveragePct": 75.65,
-    "prefiltered": 61,
-    "historyLoaded": 61,
-    "setupMatches": 2,
-    "historicalEdgeMatches": 1,
-    "selected": 1,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
