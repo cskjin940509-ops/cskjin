@@ -4,7 +4,7 @@
   "mode": "智能影子实盘",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-04T00:44:26+08:00",
+  "updatedAt": "2026-09-04T09:40:19+08:00",
   "radarCapturedAt": "2026-09-03T14:59:16+08:00",
   "radarStatus": "RadarLive",
   "summary": {
@@ -1838,17 +1838,17 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "33780380103-1",
-    "lastRunAt": "2026-09-04T00:44:25+08:00",
-    "lastSuccessAt": "2026-09-04T00:44:25+08:00",
+    "cycleId": "33826638268-1",
+    "lastRunAt": "2026-09-04T09:40:17+08:00",
+    "lastSuccessAt": "2026-09-04T09:40:17+08:00",
     "lastTradeAt": "2026-09-03T10:29:18+08:00",
     "status": "BLOCKED_STALE_RADAR",
     "statusZh": "后台已运行并更新基金报表，但雷达不是当日数据，拒绝使用旧数据交易",
     "runSource": "dedicated-auto-scheduler",
-    "sessionOpen": false,
+    "sessionOpen": true,
     "radarCapturedAt": "2026-09-03T14:59:16+08:00",
     "radarFresh": false,
-    "radarAgeSeconds": 35109.5,
+    "radarAgeSeconds": 67261.2,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -1879,25 +1879,25 @@
     "indexes": [
       {
         "name": "沪深300",
-        "returnPct": 0.0,
-        "alphaPct": 0.0
+        "returnPct": 0.881,
+        "alphaPct": -0.881
       },
       {
         "name": "中证A500",
-        "returnPct": 0.0,
-        "alphaPct": 0.0
+        "returnPct": 0.863,
+        "alphaPct": -0.863
       },
       {
         "name": "创业板指",
-        "returnPct": 0.0,
-        "alphaPct": 0.0
+        "returnPct": 1.245,
+        "alphaPct": -1.245
       }
     ],
     "candidatePool": {
       "name": "原始候选池固定等权",
       "memberCount": 30,
-      "returnPct": 0.0,
-      "alphaPct": 0.0,
+      "returnPct": 0.422,
+      "alphaPct": -0.422,
       "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
     }
   }
