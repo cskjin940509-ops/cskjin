@@ -59,16 +59,23 @@ jobs:
           echo "$OUT"
           STATE=$(printf '%s\n' "$OUT" | tail -n 1 | python -c 'import json,sys; print(json.load(sys.stdin).get("state", "unknown"))')
           echo "state=$STATE" >> "$GITHUB_OUTPUT"
+
+      # 盘中5分钟任务只做主计算和快照持久化。Yunai 外部调用可能超过一个
+      # 5分钟 slot，放在每个 TailLive run 会让后续 14:50/14:55 排队到收盘后。
+      # 二次确认保留在真正冻结 Final 的 run 中，不影响 TailFinal 的核心生成。
       - name: 刷新 Yunai 候选股实时行情与资金分布
-        if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen'
+        if: steps.rolling.outputs.state == 'tail-final-frozen'
+        continue-on-error: true
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/sync_yunai_production.py
       - name: 合并 Yunai 二次确认
-        if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen'
+        if: steps.rolling.outputs.state == 'tail-final-frozen'
+        continue-on-error: true
         env:
           DRY_RUN: '0'
         run: python tools/enrich_tail_yunai.py
+
       - name: 保存滚动快照或15:00最终结果
         if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
         run: |
@@ -80,7 +87,14 @@ jobs:
             exit 0
           fi
           git commit -m 'Update rolling A-share tail decision pool'
-          git pull --rebase origin main
-          git push origin HEAD:main
-
-# recovery-trigger: 2026-08-31T15:13+08:00
+          pushed=0
+          for i in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          test "$pushed" -eq 1
