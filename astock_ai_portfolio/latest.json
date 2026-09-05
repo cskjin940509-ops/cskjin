@@ -4,7 +4,7 @@
   "mode": "a股筛选池 · 主线持仓＋底仓T研究",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-06T00:53:14+08:00",
+  "updatedAt": "2026-09-06T00:55:15+08:00",
   "radarCapturedAt": "2026-09-04T15:16:35+08:00",
   "radarStatus": "RadarFinal",
   "summary": {
@@ -4622,7 +4622,10 @@
       "allowNew": false,
       "reasonZh": "无当日大盘证据"
     },
-    "portfolioRisk": null,
+    "portfolioRisk": {
+      "allowNew": false,
+      "currentEvidenceReady": false
+    },
     "parameters": {
       "singleLimit": 0.08,
       "leaderLimit": 0.1,
@@ -4686,9 +4689,9 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "33979232702-1",
-    "lastRunAt": "2026-09-06T00:53:13+08:00",
-    "lastSuccessAt": "2026-09-06T00:53:13+08:00",
+    "cycleId": "33979329693-1",
+    "lastRunAt": "2026-09-06T00:55:14+08:00",
+    "lastSuccessAt": "2026-09-06T00:55:14+08:00",
     "lastTradeAt": "2026-09-04T10:41:13+08:00",
     "status": "OUTSIDE_SESSION",
     "statusZh": "休市时段正常运行，沿用最后已验证行情并保留数据日期，不模拟成交",
@@ -4696,7 +4699,7 @@
     "sessionOpen": false,
     "radarCapturedAt": "2026-09-04T15:16:35+08:00",
     "radarFresh": false,
-    "radarAgeSeconds": 120998.4,
+    "radarAgeSeconds": 121119.4,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
