@@ -1,0 +1,214 @@
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+index dc3ae3b..95a2325 100644
+--- a/app/build.gradle.kts
++++ b/app/build.gradle.kts
+@@ -14,8 +14,8 @@ android {
+         applicationId = "com.rui.astockstrategy"
+         minSdk = 26
+         targetSdk = 36
+-        versionCode = 44
+-        versionName = "4.4.0"
++        versionCode = 45
++        versionName = "4.5.0"
+     }
+ 
+     buildFeatures { compose = true }
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+index afa290f..8c632ae 100644
+--- a/app/src/main/AndroidManifest.xml
++++ b/app/src/main/AndroidManifest.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+     <uses-permission android:name="android.permission.INTERNET" />
+-    <application android:name=".AStockApplication" android:allowBackup="true" android:icon="@drawable/app_icon" android:roundIcon="@drawable/app_icon" android:label="A股研究驾驶舱" android:theme="@style/Theme.AStockStrategy">
++    <application android:name=".AStockApplication" android:allowBackup="true" android:icon="@drawable/app_icon" android:roundIcon="@drawable/app_icon" android:label="a股筛选池" android:theme="@style/Theme.AStockStrategy">
+         <activity android:name=".v6.V6Activity" android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+diff --git a/app/src/main/java/com/rui/astockstrategy/v6/V28AiShadowPortfolio.kt b/app/src/main/java/com/rui/astockstrategy/v6/V28AiShadowPortfolio.kt
+index bc40e16..ff2020d 100644
+--- a/app/src/main/java/com/rui/astockstrategy/v6/V28AiShadowPortfolio.kt
++++ b/app/src/main/java/com/rui/astockstrategy/v6/V28AiShadowPortfolio.kt
+@@ -235,18 +235,23 @@ fun AiShadowPortfolioScreen28() {
+ 
+         item {
+             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+-                listOf("概览", "持仓", "成交", "报表").forEachIndexed { index, value ->
++                listOf("概览", "持仓", "成交", "报表", "策略").forEachIndexed { index, value ->
+                     SegmentedButton(
+                         selected = page == value,
+                         onClick = { page = value },
+-                        shape = SegmentedButtonDefaults.itemShape(index, 4),
++                        shape = SegmentedButtonDefaults.itemShape(index, 5),
+                         label = { Text(value, fontSize = 9.sp) }
+                     )
+                 }
+             }
+         }
+ 
++        if (page == "策略") {
++            item { SelectionStrategy45(d) }
++        }
++
+         if (page == "概览") {
++            item { SelectionStatus45(d) }
+             item { AiAutomationCard28(automation, automationError) }
+             item { AiCapitalContinuityCard28(d, allDecisions.size) }
+             item { AiNavChartCard28(daily) }
+diff --git a/app/src/main/java/com/rui/astockstrategy/v6/V44IntegratedUi.kt b/app/src/main/java/com/rui/astockstrategy/v6/V44IntegratedUi.kt
+index 3eb6730..04faa05 100644
+--- a/app/src/main/java/com/rui/astockstrategy/v6/V44IntegratedUi.kt
++++ b/app/src/main/java/com/rui/astockstrategy/v6/V44IntegratedUi.kt
+@@ -155,7 +155,8 @@ fun IntegratedOverview44(
+             }
+         }
+ 
+-        item { DashboardSectionTitle44("今日决策驾驶舱", "四层状态一次看清") }
++        item { SelectionStatus45(cloud.portfolio) }
++        item { DashboardSectionTitle44("今日筛选决策", "四层状态一次看清") }
+         item {
+             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                 DecisionTile44(
+@@ -371,7 +372,7 @@ private fun ExecutiveHeader44(
+         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+             Row(verticalAlignment = Alignment.CenterVertically) {
+                 Column(Modifier.weight(1f)) {
+-                    Text("A股研究驾驶舱", color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.Bold)
++                    Text("a股筛选池", color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.Bold)
+                     Text("市场 → 板块 → 个股 → 执行", color = Color(0xFFDCE4FF), fontSize = 10.sp)
+                 }
+                 Surface(
+diff --git a/app/src/main/java/com/rui/astockstrategy/v6/V45SelectionUi.kt b/app/src/main/java/com/rui/astockstrategy/v6/V45SelectionUi.kt
+new file mode 100644
+index 0000000..55097ca
+--- /dev/null
++++ b/app/src/main/java/com/rui/astockstrategy/v6/V45SelectionUi.kt
+@@ -0,0 +1,114 @@
++package com.rui.astockstrategy.v6
++
++import androidx.compose.foundation.layout.Arrangement
++import androidx.compose.foundation.layout.Column
++import androidx.compose.foundation.layout.fillMaxWidth
++import androidx.compose.foundation.layout.padding
++import androidx.compose.foundation.shape.RoundedCornerShape
++import androidx.compose.material3.Card
++import androidx.compose.material3.CardDefaults
++import androidx.compose.material3.HorizontalDivider
++import androidx.compose.material3.Text
++import androidx.compose.runtime.Composable
++import androidx.compose.ui.Modifier
++import androidx.compose.ui.graphics.Color
++import androidx.compose.ui.text.font.FontWeight
++import androidx.compose.ui.unit.dp
++import androidx.compose.ui.unit.sp
++import org.json.JSONArray
++import org.json.JSONObject
++import java.util.Locale
++
++private fun text45(d: JSONObject?, key: String, fallback: String = "待同步"): String =
++    if (d == null || d.isNull(key)) fallback else d.optString(key).ifBlank { fallback }
++private fun number45(d: JSONObject?, key: String, suffix: String = ""): String =
++    if (d == null || d.isNull(key)) "—" else d.optDouble(key).takeIf { it.isFinite() }
++        ?.let { String.format(Locale.CHINA, "%.2f", it) + suffix } ?: "—"
++private fun rows45(a: JSONArray?): List<JSONObject> =
++    (0 until (a?.length() ?: 0)).mapNotNull { a?.optJSONObject(it) }
++private fun strings45(a: JSONArray?): String =
++    (0 until (a?.length() ?: 0)).joinToString("；") { a?.optString(it).orEmpty() }
++
++@Composable
++fun SelectionStatus45(data: JSONObject?) {
++    val selection = data?.optJSONObject("selection45")
++    val market = selection?.optJSONObject("market")
++    val risk = selection?.optJSONObject("portfolioRisk")
++    Card(shape = RoundedCornerShape(14.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFEAF0FF))) {
++        Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
++            Text("主线持仓 · 智能买点 · 底仓做T", fontWeight = FontWeight.Bold, fontSize = 15.sp)
++            Text(if (selection == null) "客户端 v4.5 · 后台新规则待同步" else "云端规则：${text45(data, "strategyVersion")}", fontSize = 11.sp)
++            Text(if (selection == null) "当前显示的是上次取得的组合；尚不能确认新版交易引擎已生效。" else
++                "${if (risk?.optBoolean("allowNew") == true) "允许条件买入" else "暂停新增风险"} · ${text45(market, "reasonZh")}", fontSize = 11.sp)
++            Text("掉出候选榜不会自动清仓。做T为模拟研究，尚未验证能稳定增加收益。", color = Color(0xFF606A7C), fontSize = 10.sp)
++        }
++    }
++}
++
++@Composable
++fun SelectionStrategy45(data: JSONObject?) {
++    val selection = data?.optJSONObject("selection45")
++    val trading = data?.optJSONObject("tTrading")
++    val risk = selection?.optJSONObject("portfolioRisk")
++    val rules = data?.optJSONObject("rulesZh")
++    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
++        SelectionStatus45(data)
++        Card(shape = RoundedCornerShape(14.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
++            Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
++                Text("交易规则与风险状态", fontWeight = FontWeight.Bold, fontSize = 16.sp)
++                Text("生效时间：${text45(selection, "activatedAt")}", fontSize = 11.sp)
++                Text("当日单位净值收益：${number45(risk, "dailyUnitReturnPct", "%")}\n已确认日终回撤：${number45(risk, "confirmedCloseDrawdownPct", "%")}", fontSize = 12.sp)
++                listOf("newEntry" to "买入", "lowPoint" to "买点", "position" to "仓位", "rebalance" to "执行", "exit" to "持有与退出", "stop" to "止损", "risk" to "组合风控").forEach { (key, title) ->
++                    HorizontalDivider()
++                    Text(title, fontWeight = FontWeight.Bold, fontSize = 12.sp)
++                    Text(if (selection == null) "等待新版云端规则同步" else text45(rules, key), fontSize = 11.sp)
++                }
++            }
++        }
++        Card(shape = RoundedCornerShape(14.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
++            Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
++                Text("底仓做T · 先卖后买", fontWeight = FontWeight.Bold, fontSize = 16.sp)
++                Text("每股每天最多1组；不超过昨日底仓20%、组合净值1%。强趋势保留底仓，风险退出优先。", fontSize = 12.sp)
++                Text("已配对净收益：${number45(trading, "pairedNetPnl", "元")}\n未配对机会损益：${number45(trading, "unpairedOpportunityPnl", "元")}\n相对原股数持有增益：${number45(trading, "incrementalPnlVsUnchangedShares", "元")}", fontSize = 13.sp)
++                Text(text45(trading, "noteZh", "尚无做T研究结果；没有成交不代表任务没有运行。"), fontSize = 10.sp, color = Color(0xFF606A7C))
++                val cycles = rows45(trading?.optJSONArray("cycles"))
++                if (cycles.isEmpty()) Text("暂无做T成交配对，等待满足条件。", fontSize = 11.sp)
++                cycles.asReversed().take(30).forEach { x ->
++                    HorizontalDivider()
++                    val status = when (text45(x, "status")) { "PAIRED" -> "已配对"; "OPEN" -> "等待买回"; "UNPAIRED" -> "当日未买回"; "RISK_CANCELLED" -> "风险取消回补"; else -> text45(x, "status") }
++                    Text("${text45(x, "name")} ${text45(x, "date")} · $status", fontWeight = FontWeight.Bold, fontSize = 12.sp)
++                    Text("卖出${x.optInt("soldQty")}股 / 买回${x.optInt("boughtQty")}股\n配对净收益${number45(x, "realizedPairPnl", "元")} · 未配对损益${number45(x, "unpairedOpportunityPnl", "元")}", fontSize = 11.sp)
++                }
++                rows45(trading?.optJSONArray("signals")).take(20).forEach { x ->
++                    Text("${text45(x, "name")}：${text45(x, "reasonZh")}", fontSize = 11.sp)
++                }
++            }
++        }
++        Card(shape = RoundedCornerShape(14.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
++            Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
++                Text("买点候选与未交易原因", fontWeight = FontWeight.Bold, fontSize = 16.sp)
++                val candidates = rows45(selection?.optJSONArray("candidates"))
++                if (candidates.isEmpty()) Text("尚无当日完整买点数据。缺失数据不会自动放行。", fontSize = 11.sp)
++                candidates.take(60).forEach { x ->
++                    HorizontalDivider()
++                    Text("${text45(x, "name")} ${text45(x, "code")} · ${text45(x, "sector")}", fontWeight = FontWeight.Bold, fontSize = 12.sp)
++                    Text(text45(x.optJSONObject("setup"), "reasonZh"), fontSize = 11.sp)
++                    val rejects = strings45(x.optJSONArray("rejections"))
++                    Text(if (rejects.isBlank()) "个股条件通过，仍需大盘、仓位和交易窗口许可" else "等待：$rejects", fontSize = 11.sp, color = Color(0xFF946000))
++                }
++            }
++        }
++        Card(shape = RoundedCornerShape(14.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
++            Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
++                Text("持仓风险线与待退出订单", fontWeight = FontWeight.Bold, fontSize = 16.sp)
++                rows45(data?.optJSONArray("positions")).forEach { x ->
++                    Text("${text45(x, "name")} · 保护线${number45(x, "hardStopPrice")} / 移动线${number45(x, "trailingStopPrice")}\n完整观察${x.optInt("completeObservedDays")}日 · 连续失效${x.optInt("invalidDayStreak")}日${if (x.optBoolean("atrFallback")) " · ATR缺失，保守保护" else ""}", fontSize = 11.sp)
++                }
++                val pending = rows45(selection?.optJSONArray("pendingExits"))
++                if (pending.isEmpty()) Text("暂无待退出订单", fontSize = 11.sp)
++                pending.forEach { x -> Text("${text45(x, "code")} · 剩余${x.optInt("remainingQty")}股\n${text45(x, "reasonZh")} · ${text45(x, "state")}", fontSize = 11.sp) }
++                Text("阈值为待验证研究参数。软件只运行影子模拟，不连接券商。", color = Color(0xFF606A7C), fontSize = 10.sp)
++            }
++        }
++    }
++}
+diff --git a/app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt b/app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt
+index 97c7adc..852093e 100644
+--- a/app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt
++++ b/app/src/main/java/com/rui/astockstrategy/v6/V6Activity.kt
+@@ -259,7 +259,7 @@ fun AStockV6() {
+                         Column {
+                             Text(
+                                 when (tab) {
+-                                    Tab.TODAY -> "研究驾驶舱"
++                                    Tab.TODAY -> "a股筛选池"
+                                     Tab.MARKET -> "市场全景"
+                                     Tab.OPPORTUNITY -> "板块与个股"
+                                     Tab.PORTFOLIO -> "组合与风控"
