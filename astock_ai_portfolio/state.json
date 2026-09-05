@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "strategyVersion": "v4.5-selection-pool-core-t",
+  "strategyVersion": "v4.6-selection-evidence",
   "mode": "AI影子实盘",
   "simulated": true,
   "initialCapital": 20000000.0,
@@ -935,7 +935,7 @@
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-09-06T00:55:15+08:00",
+  "updatedAt": "2026-09-06T02:38:27+08:00",
   "capitalEvents": [
     {
       "eventId": "capital-20260903-232335",
@@ -5032,5 +5032,56 @@
       "allowNew": false,
       "currentEvidenceReady": false
     }
+  },
+  "research46": {
+    "version": "v4.6-forward-evidence",
+    "activatedAt": "2026-09-06T02:38:25.980418+08:00",
+    "protocol": {
+      "version": "v4.6-forward-evidence",
+      "ruleVersion": "v4.6-selection-evidence",
+      "parameters": {
+        "singleLimit": 0.08,
+        "leaderLimit": 0.1,
+        "sectorLimit": 0.25,
+        "correlationLimit": 0.35,
+        "normalTurnoverLimit": 0.2,
+        "minCompleteHoldingDays": 2,
+        "targetConfirmations": 3,
+        "atrStopMultiple": 1.5,
+        "trailingAtrMultiple": 2.0,
+        "stopMin": 0.04,
+        "stopMax": 0.08,
+        "trailingActivation": 0.08,
+        "tBaseFraction": 0.2,
+        "tNavLimit": 0.01,
+        "tMaxPairsPerDay": 1,
+        "tMinNetEdge": 0.003,
+        "tMaxQuoteGapSeconds": 600,
+        "parameterStatus": "INITIAL_RESEARCH_NOT_OUT_OF_SAMPLE_VALIDATED"
+      },
+      "sourceHashes": {
+        "selection_rules_v45.py": "cdaf64542b5a97898d0ba1c50fd1b209dcc2859e76b0449a5e693a75b3e24a60",
+        "selection_engine_v45.py": "7c536a44f30d110189ac0a28d568a1b41b6c9fb1a5bf80b32a8b54c56db186f5",
+        "selection_data_v45.py": "2aed43e437d10e6167559d38043c91fe0a4621ee4389a79862a9a5a0f5ff5e7a",
+        "selection_research_v46.py": "304b4be1a1cd7b3be8020f2899497e4772959d08d3ed6a60fa66f5aa23431826"
+      },
+      "primaryHorizon": 10,
+      "exploratoryHorizons": [
+        5,
+        20
+      ],
+      "minimumSignalDatesForReview": 60,
+      "selectionBenchmark": "当时完整板块成员等权；B0基线按当时涨幅前20%等权",
+      "returnDefinition": "原始价格观察收益；未扣交易成本及除权分红，不代表可成交收益",
+      "stageOrder": [
+        "SELECTION",
+        "ENTRY_EXIT",
+        "T_INCREMENT"
+      ],
+      "timingBenchmark": "相同候选筛选与执行风控；取消回踩买点及阻力空间过滤，首次可行窗口建仓，持仓起始日起满10个完整交易日退出；保留硬止损和组合风险。",
+      "noteZh": "固定10日主检验、5/20日辅助观察；60个信号日仅是复核门槛，不是盈利认证。"
+    },
+    "protocolHash": "7d2e32ee38df589dfdfbca2a74f86d5ddd353e3c0b1a4f025a3bb57643393fcd",
+    "cohorts": {}
   }
 }
