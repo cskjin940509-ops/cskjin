@@ -1,59 +1,52 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-04T17:37:34+08:00",
+  "generatedAt": "2026-09-06T03:02:28+08:00",
   "state": "可用",
-  "verifiedToday": true,
+  "verifiedToday": false,
   "providerDate": "20260904",
   "activeCohortDate": "2026-09-03",
   "activePoolQuoteCount": 16,
   "marketSnapshot": {
     "sourceDate": "2026-09-04",
-    "availableAt": "2026-09-04T17:37:34+08:00",
-    "confidence": "高",
-    "verifiedToday": true,
-    "dataSource": "Yunai Quant API（市场状态） + 腾讯行情 + 东方财富",
+    "availableAt": "2026-09-06T03:02:28+08:00",
+    "confidence": "中",
+    "verifiedToday": false,
+    "dataSource": "腾讯行情 + 东方财富",
     "indices": {
       "sh000001": {
         "name": "上证指数",
         "close": 3930.12,
         "changePct": -0.3,
         "amount": 938255190000.0,
-        "quoteTime": "161403"
+        "quoteTime": "16:14:03"
       },
       "sz399006": {
         "name": "创业板指",
         "close": 3286.55,
         "changePct": -0.78,
         "amount": 499808880000.0,
-        "quoteTime": "161415"
+        "quoteTime": "16:14:15"
       },
       "sh000688": {
         "name": "科创50",
         "close": 1577.36,
         "changePct": -2.1,
         "amount": 74189840000.0,
-        "quoteTime": "161415"
+        "quoteTime": "16:14:15"
       },
       "sh000300": {
         "name": "沪深300",
         "close": 4548.05,
         "changePct": -0.1,
         "amount": 517509320000.0,
-        "quoteTime": "161415"
+        "quoteTime": "16:14:15"
       },
       "sh000852": {
         "name": "中证1000",
         "close": 7508.09,
         "changePct": -1.21,
         "amount": 445349380000.0,
-        "quoteTime": "161403"
-      },
-      "sz399001": {
-        "name": "深证成指",
-        "close": 13516.97,
-        "changePct": -0.79,
-        "amount": 1092412650000.0,
-        "quoteTime": "161400"
+        "quoteTime": "16:14:03"
       }
     },
     "totalAmount": null,
@@ -64,10 +57,7 @@
     "sampleCount": 100,
     "breadthStatus": "全市场统计待同步",
     "breadthSampleCount": 100,
-    "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
-    "coreIndexCoverage": "6/6",
-    "coreIndexSource": "腾讯当日收盘快照",
-    "marketStatusProvider": "Yunai Quant API"
+    "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。"
   },
   "boardHeatmap": {
     "industry": [
@@ -2675,7 +2665,7 @@
       }
     ],
     "sourceDate": "2026-09-04",
-    "availableAt": "2026-09-04T17:37:34+08:00"
+    "availableAt": "2026-09-06T03:02:28+08:00"
   },
   "quotes": {
     "sh000001": {
@@ -2996,66 +2986,7 @@
   },
   "errors": [],
   "dataSources": [
-    "Yunai Quant API",
     "腾讯行情",
     "东方财富实时/延迟板块"
-  ],
-  "yunai": {
-    "configured": true,
-    "connected": true,
-    "marketStatus": {
-      "connected": true,
-      "provider": "Yunai Quant API",
-      "checkedAt": "2026-09-04T17:38:08+08:00",
-      "httpStatus": 200,
-      "contentType": "application/json",
-      "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
-      "responseDigest": "67c4b5f8c662f29e",
-      "data": [
-        {
-          "market": "CN",
-          "status": "CLOSING",
-          "marketStatus": "Closed"
-        }
-      ]
-    },
-    "openapiState": "ready",
-    "endpointCount": 38,
-    "categories": [
-      "K线",
-      "行情"
-    ]
-  },
-  "yunaiProduction": {
-    "checkedAt": "2026-09-04T17:38:15+08:00",
-    "provider": "Yunai Quant API",
-    "connected": true,
-    "marketStatus": {
-      "httpStatus": 200,
-      "type": "list",
-      "count": 1
-    },
-    "checkedSymbols": [
-      "600172",
-      "301071",
-      "688028",
-      "605580",
-      "300179",
-      "600185",
-      "002171",
-      "301021",
-      "002046",
-      "601628",
-      "601888",
-      "601318",
-      "301008"
-    ],
-    "quoteAvailable": 13,
-    "capitalResponseAvailable": 13,
-    "roles": {
-      "realTimeQuotes": "第二实时行情源",
-      "capitalDistribution": "独立大单资金分布，不等同东方财富主力净流入",
-      "barsRange": "已验证可用，按需用于历史K线/RS校验"
-    }
-  }
+  ]
 }
