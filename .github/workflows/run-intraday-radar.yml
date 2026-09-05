@@ -19,6 +19,8 @@ on:
       - 'tools/run_ai_dynamic_portfolio_v2_2.py'
       - 'tools/selection_*_v45.py'
       - 'tools/test_selection_v45.py'
+      - 'tools/selection_research_v46.py'
+      - 'tools/test_selection_research_v46.py'
       - 'tools/enrich_ai_shadow_benchmarks.py'
       - 'tools/validate_ai_shadow_contract.py'
       - '.github/workflows/run-intraday-radar.yml'
@@ -87,7 +89,7 @@ jobs:
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_slow_money_factors.py
       - name: 验证新持仓和底仓T规则
-        run: python -m unittest tools/test_selection_v45.py
+        run: python -m unittest tools/test_selection_v45.py tools/test_selection_research_v46.py
       - name: a股筛选池证据驱动持仓与底仓T模拟
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         env:

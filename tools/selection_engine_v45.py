@@ -8,15 +8,22 @@ import run_ai_shadow_portfolio as base
 import run_ai_dynamic_portfolio_v2 as execution
 import selection_rules_v45 as rules
 import selection_data_v45 as feeds
+import selection_research_v46 as study
 
 CONTEXT = {}
 LAST_ACTIONS = []
 LAST_TARGETS = []
+NO_T_CONTROL = False
+CONTROL_MODE = None
 ORIGINAL_QUOTES = base.fetch_tencent_quotes
 ORIGINAL_BUILD = base.build_latest
 
 
 def prepare_quotes(codes):
+    stored = base.read_json(base.STATE_PATH, {})
+    control = ((stored.get('research46') or {}).get('noTControl') or {}).get('state') or {}
+    simple = ((stored.get('research46') or {}).get('timingControl') or {}).get('state') or {}
+    codes = sorted(set(codes) | study.pending_codes(stored) | set(control.get('positions') or {}) | set(simple.get('positions') or {}))
     quotes = ORIGINAL_QUOTES(codes)
     radar = base.read_json(base.RADAR, {})
     state = base.read_json(base.STATE_PATH, base.new_state())
@@ -140,6 +147,8 @@ def risk_control(state, prices):
 
 
 def queue_exit(state, pos, qty, code, reason, signal=None):
+    if CONTROL_MODE == 'FIXED_HOLD' and code not in ('HARD_STOP', 'PORTFOLIO_RISK', 'CONFIRMED_EXPOSURE_REDUCTION', 'FIXED_HOLD_EXIT'):
+        return
     obj = metadata(state); pending = obj.setdefault('pendingExits', {})
     old = pending.get(pos['code'])
     # A stronger full exit supersedes a partial order; never repeatedly halve each cycle.
@@ -191,6 +200,8 @@ def estimated_t_cost_pct(price, qty):
 
 
 def evaluate_t(state, ledger, prices, radar):
+    if NO_T_CONTROL:
+        return []
     obj = metadata(state); now = base.now_cn(); today = now.date().isoformat()
     actions = []; risk = risk_control(state, prices); quotes = CONTEXT.get('quotes') or {}
     cycles = obj['tCycles']; sectors = {x.get('name'): x for x in radar.get('mainlines') or []}
@@ -353,6 +364,9 @@ def build_latest(state, ledger, prices, radar):
         for point in reversed(state.get('navHistory') or []):
             if point.get('date') == today and point.get('timestamp') == base.iso():
                 point['isVerifiedClose'] = True; break
+    comparison = update_no_t_control(state, ledger, prices, radar, close_ok)
+    simple_comparison = update_no_t_control(state, ledger, prices, radar, close_ok, 'timingControl', 'FIXED_HOLD')
+    study.mark_cohorts(state, quotes, now)
     out = ORIGINAL_BUILD(state, ledger, prices, radar)
     out.update(strategyVersion=rules.VERSION, mode='a股筛选池 · 主线持仓＋底仓T研究', simulated=True)
     out.setdefault('rulesZh', {}).update(rules.RULES_ZH)
@@ -385,6 +399,7 @@ def build_latest(state, ledger, prices, radar):
                                        'reviewDue': elapsed >= 20,
                                        'statusZh': '已到滚动复核窗口，须样本外检查' if elapsed >= 20 else '正在积累前向影子盘样本；尚不能判断优于旧策略'}
     out['tTrading'] = t_report(state, prices)
+    out['strategyResearch'] = study.report(state, now, comparison, simple_comparison)
     out['targetPortfolio'] = [{k: t[k] for k in ('code', 'name', 'sector', 'score', 'targetWeightPct', 'referencePrice', 'priceSource', 'reasonZh')}
                               for t in LAST_TARGETS if not t['rejections']]
     out['targetGrossPct'] = round(sum(x['targetWeightPct'] for x in out['targetPortfolio']), 2)
@@ -394,6 +409,8 @@ def build_latest(state, ledger, prices, radar):
                             'executionModel': 'v3-liquidity-capacity-point-in-time'}
     for row in out.get('positions') or []:
         pos = held.get(row.get('code'), {})
+        row['decisionPlan'] = study.holding_plan(pos, obj['pendingExits'].get(row.get('code')), own_quote_ok(row.get('code')))
+        row['currentActionZh'] = row['decisionPlan']['actionZh']
         row.update({k: pos.get(k) for k in ('holdingState', 'hardStopPrice', 'trailingStopPrice',
                                            'atrFallback', 'completeObservedDays', 'invalidDayStreak')})
     return out
@@ -412,6 +429,8 @@ def main():
 
 def evaluate_exits(state, ledger, radar_stocks, quotes, prices):
     global LAST_ACTIONS
+    if not NO_T_CONTROL and all(own_quote_ok(c) for c in state.get('positions') or {}):
+        start_no_t_control(state, ledger, prices)
     obj = metadata(state); now = base.now_cn(); today = now.date().isoformat()
     radar = CONTEXT.get('radar') or {'stocks': radar_stocks}
     sectors = {x.get('name'): x for x in radar.get('mainlines') or []}
@@ -486,6 +505,10 @@ def evaluate_exits(state, ledger, radar_stocks, quotes, prices):
             if fraction > 0:
                 queue_exit(state, pos, int(qty * fraction / 100) * 100, 'CONFIRMED_EXPOSURE_REDUCTION',
                            '大盘/集中度上限连续3轮确认，固定窗口分批降仓', risk)
+    if CONTROL_MODE == 'FIXED_HOLD':
+        for pos in state.get('positions', {}).values():
+            if pos.get('completeObservedDays', 0) >= 10:
+                queue_exit(state, pos, int(pos['qty']), 'FIXED_HOLD_EXIT', '简单基线：持仓起始日起满10个完整交易日退出')
     LAST_ACTIONS = execute_pending(state, ledger, prices)
     return list(LAST_ACTIONS)
 
@@ -518,14 +541,14 @@ def build_candidate(state, stock, radar, quotes):
     if not tech.get('adv20'): rejects.append('ADV20不足20个完整交易日')
     samples = sample(state, code, quotes)
     setup = rules.price_setup(price, tech, samples) if price else {'ready': False, 'reasonZh': '无价格'}
-    if not setup['ready']: rejects.append(setup['reasonZh'])
+    if not setup['ready'] and CONTROL_MODE != 'FIXED_HOLD': rejects.append(setup['reasonZh'])
     # Sector-relative 5-day data must be explicitly supplied; cannot substitute daily change.
     sector_r5 = rules.finite(sec.get('return5Pct'))
     if sector_r5 is None: rejects.append('板块5日收益缺失，无法检查相对涨幅')
     elif rules.finite(tech.get('return5Pct'), 99) - sector_r5 > 5: rejects.append('5日相对板块扩张超过5个百分点')
     cost_pct = (base.fees(max(10000, price * 1000), 'BUY') + base.fees(max(10000, price * 1000), 'SELL')) / max(10000, price * 1000) * 100 + .8
     # .8% is the maximum two-leg impact+spread allowance of the conservative model.
-    if setup.get('ready') and setup.get('potentialRewardPct', 0) < cost_pct + .3: rejects.append('近期阻力位空间不足覆盖双边成本及余量')
+    if CONTROL_MODE != 'FIXED_HOLD' and setup.get('ready') and setup.get('potentialRewardPct', 0) < cost_pct + .3: rejects.append('近期阻力位空间不足覆盖双边成本及余量')
     target = .025 if stage == 'EMERGING' else .04
     pos = (state.get('positions') or {}).get(code)
     if pos:
@@ -553,7 +576,11 @@ def evaluate_entries(state, ledger, radar, prices):
     targets = [build_candidate(state, signal_stock(state, code, enriched_radar), enriched_radar, quotes) for code in radar.get('stocks') or {}]
     targets.sort(key=lambda x: x['score'], reverse=True)
     LAST_TARGETS = targets
+    for target in targets:
+        target['decisionPlan'] = study.entry_plan(target)
     obj['signals'] = {t['code']: t for t in targets}
+    if not NO_T_CONTROL:
+        study.freeze_candidates(state, targets, enriched_radar, quotes, now)
     confirmations = obj.setdefault('confirmations', {})
     pending_core = obj.setdefault('pendingBuys', {})
     for t in targets:
@@ -588,9 +615,10 @@ def evaluate_entries(state, ledger, radar, prices):
         if qty < 100: continue
         pending_core.setdefault(code, {'targetWeight': weight, 'startedAt': base.iso(), 'isAdd': bool(pos)})
         order = pending_core[code]
-        row = execution.add_or_buy(state, ledger, t, qty, prices, '回撤确认后的分批建仓/加仓')
+        reason = '简单持有对照：首个可行窗口建仓/加仓' if CONTROL_MODE == 'FIXED_HOLD' else '回撤确认后的分批建仓/加仓'
+        row = execution.add_or_buy(state, ledger, t, qty, prices, reason)
         if row:
-            annotate(state, row, 'CONFIRMED_ENTRY', t)
+            annotate(state, row, 'SIMPLE_ENTRY' if CONTROL_MODE == 'FIXED_HOLD' else 'CONFIRMED_ENTRY', t)
             new_pos = state['positions'][code]
             if not order.get('counted'):
                 if order['isAdd']: new_pos['addCount45'] = int(new_pos.get('addCount45', 0)) + 1
@@ -604,3 +632,88 @@ def evaluate_entries(state, ledger, radar, prices):
     actions.extend(evaluate_t(state, ledger, prices, radar))
     LAST_ACTIONS += actions
     return actions
+
+
+def start_no_t_control(state, ledger, prices):
+    obj = study.research(state, base.now_cn())
+    if obj.get('noTControl'):
+        return
+    book = deepcopy({k: v for k, v in state.items() if k != 'research46'})
+    # Equal cash/positions at activation. Historical T effects before activation stay in both books.
+    selection = book.setdefault('selection45', {})
+    selection['tCycles'] = []
+    selection['tSignals'] = {}
+    nav, _ = base.portfolio_nav(state, prices)
+    units = base.fund.ensure_fund_accounting(state, nav)['unitNav']
+    control_units = base.fund.ensure_fund_accounting(book, nav)['unitNav']
+    obj['noTControl'] = {'startedAt': base.iso(), 'state': book, 'ledger': deepcopy(ledger),
+        'initialLedgerCount': len(ledger), 'primaryStartUnitNav': units,
+        'controlStartUnitNav': control_units, 'closeHistory': [],
+        'capitalEventsHash': study.digest(state.get('capitalEvents') or [])}
+    obj['timingControl'] = deepcopy(obj['noTControl'])
+
+
+def update_no_t_control(state, ledger, prices, radar, primary_close_ok, control_key='noTControl', mode='NO_T'):
+    global NO_T_CONTROL, LAST_ACTIONS, LAST_TARGETS, CONTROL_MODE
+    obj = study.research(state, base.now_cn()); control = obj.get(control_key)
+    if not control:
+        return {'statusZh': '等待下一次有效交易时点初始化同起点对照', 'closeSampleDays': 0}
+    if control['capitalEventsHash'] != study.digest(state.get('capitalEvents') or []):
+        return {'statusZh': '资金事件改变，暂停对比并等待核对两组现金流', 'closeSampleDays': len(control['closeHistory'])}
+    now = base.now_cn(); quotes = CONTEXT.get('quotes') or {}
+    book = control['state']; book_ledger = control['ledger']
+    # One immutable input cycle, independently sized/filled core orders and independent cash.
+    book['selectionData45'] = deepcopy(state.get('selectionData45') or {})
+    enriched = CONTEXT.get('radar') or radar
+    mark_prices = dict(prices)
+    for code in book.get('positions') or {}:
+        p = study.quote_price(quotes.get(code) or {}, now)
+        if p: mark_prices[code] = p
+        base.EXECUTION_MARKET[code] = base.fund.market_data(
+            (enriched.get('stocks') or {}).get(code) or {}, quotes.get(code) or {},
+            (book['positions'][code]).get('lastPrice'))
+    captured = enriched.get('capturedAt')
+    ready = base.trading_session(now) and base.radar_freshness(enriched, now)[0]
+    saved = (LAST_ACTIONS, LAST_TARGETS, NO_T_CONTROL, CONTROL_MODE)
+    try:
+        NO_T_CONTROL = True
+        CONTROL_MODE = mode
+        if ready and control.get('lastCycleAt') != base.iso(now):
+            base.fund.update_liquidity_profiles(book, enriched, quotes, now.date().isoformat())
+            evaluate_exits(book, book_ledger, enriched.get('stocks') or {}, quotes, mark_prices)
+            evaluate_entries(book, book_ledger, enriched, mark_prices)
+            control['lastCycleAt'] = base.iso(now)
+        freeze_daily_signals(book, enriched, mark_prices)
+    finally:
+        LAST_ACTIONS, LAST_TARGETS, NO_T_CONTROL, CONTROL_MODE = saved
+    nav, mv = base.portfolio_nav(book, mark_prices)
+    units = base.fund.ensure_fund_accounting(book, nav)['unitNav']
+    primary_nav, _ = base.portfolio_nav(state, prices)
+    primary_units = base.fund.ensure_fund_accounting(state, primary_nav)['unitNav']
+    close_ok = primary_close_ok and all(study.quote_price(quotes.get(c) or {}, now, True) for c in book.get('positions') or {})
+    if close_ok:
+        point = {'date': now.date().isoformat(), 'timestamp': base.iso(now), 'nav': nav,
+                 'unitNav': units, 'isVerifiedClose': True, 'cash': book['cash'], 'marketValue': mv}
+        history = book.setdefault('navHistory', [])
+        if not history or history[-1].get('timestamp') != point['timestamp']:
+            history.append(point)
+        closes = control['closeHistory']
+        row = {'date': point['date'], 'withT': primary_units / control['primaryStartUnitNav'],
+               'withoutT': units / control['controlStartUnitNav']}
+        if closes and closes[-1]['date'] == row['date']:
+            closes[-1] = row
+        else:
+            closes.append(row)
+    closes = control['closeHistory']; last = closes[-1] if closes else {}
+    new_rows = book_ledger[control['initialLedgerCount']:]
+    return {'statusZh': '积累同起点独立无T对照' if closes else '已初始化，等待两组完整收盘估值',
+        'startedAt': control['startedAt'], 'closeSampleDays': len(closes),
+        'asOfDate': last.get('date'),
+        'withTReturnPct': (last['withT'] - 1) * 100 if last else None,
+        'withoutTReturnPct': (last['withoutT'] - 1) * 100 if last else None,
+        'incrementalReturnPp': (last['withT'] - last['withoutT']) * 100 if last else None,
+        'withTDrawdownPct': base.fund.max_drawdown([1.] + [x['withT'] for x in closes]) if closes else None,
+        'withoutTDrawdownPct': base.fund.max_drawdown([1.] + [x['withoutT'] for x in closes]) if closes else None,
+        'controlFees': sum(rules.finite(x.get('fee'), 0) for x in new_rows),
+        'controlPositionCount': len(book.get('positions') or {}),
+        'noteZh': '自启用起相同资金和持仓，独立执行同一核心买卖及风控，仅关闭做T；使用确认收盘单位净值，包含费用、滑点与卖飞影响。未验证长期增益。'}

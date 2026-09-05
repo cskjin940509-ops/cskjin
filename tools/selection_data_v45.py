@@ -69,7 +69,9 @@ def enrich(state, radar, quotes, now):
     data = state.setdefault('selectionData45', {})
     histories = data.setdefault('histories', {})
     if os.getenv('ASTOCK_DISABLE_QUOTE_FETCH') != '1':
-        codes = set(state.get('positions') or {}) | set(radar.get('stocks') or {})
+        control = ((state.get('research46') or {}).get('noTControl') or {}).get('state') or {}
+        simple = ((state.get('research46') or {}).get('timingControl') or {}).get('state') or {}
+        codes = set(state.get('positions') or {}) | set(radar.get('stocks') or {}) | set(control.get('positions') or {}) | set(simple.get('positions') or {})
         needed = [c for c in codes if (histories.get(c) or {}).get('collectedDate') != today]
         with ThreadPoolExecutor(max_workers=6) as pool:
             futures = {pool.submit(daily_bars, c): c for c in needed}
@@ -85,7 +87,7 @@ def enrich(state, radar, quotes, now):
         sectors = {x['name']: x for x in radar.get('mainlines') or [] if x.get('boardCode') and x.get('name')}
         board_cache = data.setdefault('sectorBoards', {})
         board_cache.update({name: x['boardCode'] for name, x in sectors.items()})
-        for pos in (state.get('positions') or {}).values():
+        for pos in list((state.get('positions') or {}).values()) + list((control.get('positions') or {}).values()) + list((simple.get('positions') or {}).values()):
             name = pos.get('sector')
             if name in board_cache and name not in sectors:
                 sectors[name] = {'name': name, 'boardCode': board_cache[name], 'stage': 'HOLDING_TRACK_ONLY'}

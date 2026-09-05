@@ -1,0 +1,24 @@
+name: Verify strategy evidence and controls
+on:
+  push:
+    branches: [codex/strategy-evidence-stages]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/selection_*.py'
+      - 'tools/test_selection*.py'
+      - '.github/workflows/test-strategy-research.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check syntax and regression suite
+        run: |
+          python -m py_compile tools/selection_engine_v45.py tools/selection_research_v46.py tools/selection_data_v45.py
+          python -m unittest tools/test_selection_research_v46.py tools/test_selection_v45.py tools/test_ai_shadow_portfolio.py
