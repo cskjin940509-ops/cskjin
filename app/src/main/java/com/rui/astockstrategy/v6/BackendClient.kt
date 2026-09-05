@@ -105,7 +105,7 @@ object BackendClient {
         connection.instanceFollowRedirects = true
         connection.connectTimeout = 8_000
         connection.readTimeout = 12_000
-        connection.setRequestProperty("User-Agent", "AStockStrategy-Android/4.3")
+        connection.setRequestProperty("User-Agent", "AStockStrategy-Android/4.4")
         connection.setRequestProperty("Accept", "application/json,text/plain,*/*")
         connection.setRequestProperty("Cache-Control", "no-cache")
         return try {

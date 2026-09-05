@@ -372,24 +372,28 @@ private fun DataTruthCard40(snapshot: Snapshot?, radar: LayerRadar40?) {
 
 @Composable
 fun FrameworkResearchScreen40(snapshot: Snapshot?) {
+    var evidence by remember { mutableStateOf<JSONObject?>(null) }
+    var evidenceError by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            runCatching {
+                withContext(Dispatchers.IO) { JSONObject(BackendClient.fetchText("astock_ai_portfolio/latest.json")) }
+            }.onSuccess { evidence = it; evidenceError = null }
+                .onFailure { evidence = null; evidenceError = "验证报告读取失败，不能确认审核状态" }
+            delay(30_000)
+        }
+    }
     LazyColumn(contentPadding = PaddingValues(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         item {
             Card(colors = CardDefaults.cardColors(containerColor = Color(0xFF1E2A52)), shape = RoundedCornerShape(18.dp)) {
                 Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text("最新版研究准入", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                    Text("策略验证与证据进度", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
                     Text("先验证领先性，再冻结公式；研究结果不能反写历史样本。", color = Color(0xFFD7DFFF), fontSize = 10.sp)
                 }
             }
         }
-        item {
-            LayerCard40("生产与研究分离", "同一份数据可以用于研究，但未经验证不能进入实时决策") {
-                GateRow40("真实原始数据覆盖", false, "2017年至今覆盖审计未完成")
-                GateRow40("历史板块成员", false, "必须使用当日有效成员")
-                GateRow40("可得时间 available_at", true, "两融按T+1处理")
-                GateRow40("滚动样本外验证", false, "权重和阈值尚未冻结")
-                GateRow40("真实冻结样本", snapshot?.performanceEligible == true, snapshot?.let(::snapshotAuditLabel) ?: "未同步")
-            }
-        }
+        evidenceError?.let { message -> item { Text(message, color = V40Amber) } }
+        item { StrategyResearch46(evidence) }
         item {
             LayerCard40("待检验变量", "窗口由数据决定，不预设“看起来合理”的固定参数") {
                 KeyRow40("市场层", "赚钱效应、全市场两融、宽基ETF、美股、中美长债")
@@ -508,7 +512,7 @@ private fun Notice40(text: String) {
     }
 }
 
-private suspend fun fetchLayerRadar40(): LayerRadar40 = withContext(Dispatchers.IO) {
+internal suspend fun fetchLayerRadar40(): LayerRadar40 = withContext(Dispatchers.IO) {
     val root = JSONObject(BackendClient.fetchText(RADAR40_PATH))
     val availability = mutableMapOf<String, String>()
     root.optJSONObject("factorAvailability")?.let { o ->

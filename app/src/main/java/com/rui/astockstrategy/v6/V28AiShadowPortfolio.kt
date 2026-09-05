@@ -1,5 +1,6 @@
 package com.rui.astockstrategy.v6
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,7 +10,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -145,6 +149,7 @@ fun AiShadowPortfolioScreen28() {
     var ledgerError by remember { mutableStateOf<String?>(null) }
     var automationError by remember { mutableStateOf<String?>(null) }
     var ledgerFilter by remember { mutableStateOf("全部") }
+    var page by remember { mutableStateOf("概览") }
     var refreshGeneration by remember { mutableIntStateOf(0) }
     var refreshing by remember { mutableStateOf(false) }
 
@@ -228,51 +233,77 @@ fun AiShadowPortfolioScreen28() {
             }
         }
 
-        item { AiAutomationCard28(automation, automationError) }
-
-        item { AiCapitalContinuityCard28(d, allDecisions.size) }
-
-        item { AiPrivateFundReport28(d) }
-
-        item { AiBenchmarkCard28(d) }
-
-        item { AiTitle28("当前模拟持仓") }
-        if (pos.isEmpty()) item { AiEmpty28("当前没有达到观察准入的股票，影子账户保持现金。") }
-        else items(pos, key = { it.code }) { p -> AiPositionCard28(p) }
-
-        item { AiTitle28("今日影子模拟动作") }
-        if (today.isEmpty()) item {
-            AiEmpty28(automation?.optString("statusZh")?.takeIf { it.isNotBlank() }
-                ?: "今天尚未产生买入或卖出动作；请结合后台运行状态区分无信号与任务异常。")
-        }
-        else items(today, key = { "today-${it.id}" }) { x -> AiDecisionCard28(x) }
-
-        item { AiTitle28("完整成交账本（${allDecisions.size}笔）") }
         item {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
-                listOf("全部", "买入", "卖出").forEach { value ->
-                    FilterChip(
-                        selected = ledgerFilter == value,
-                        onClick = { ledgerFilter = value },
-                        label = { Text(value) },
-                        modifier = Modifier.weight(1f)
+            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+                listOf("概览", "持仓", "成交", "报表", "策略").forEachIndexed { index, value ->
+                    SegmentedButton(
+                        selected = page == value,
+                        onClick = { page = value },
+                        shape = SegmentedButtonDefaults.itemShape(index, 5),
+                        label = { Text(value, fontSize = 9.sp) }
                     )
                 }
             }
         }
-        if (ledgerError != null && allDecisions.isEmpty()) {
-            item { AiEmpty28(ledgerError!!) }
-        } else if (visibleDecisions.isEmpty()) {
-            item { AiEmpty28("当前筛选条件下没有成交记录。") }
-        } else {
-            items(visibleDecisions, key = { "ledger-${it.id}" }) { x -> AiDecisionCard28(x) }
+
+        if (page == "策略") {
+            item { SelectionStrategy45(d) }
         }
 
-        item { AiTitle28("组合逐日收益") }
-        if (daily == null || daily.length() == 0) {
-            item { AiEmpty28("逐日净值将在影子组合运行后持续积累。") }
-        } else {
+        if (page == "概览") {
+            item { SelectionStatus45(d) }
+            item { AiAutomationCard28(automation, automationError) }
+            item { AiCapitalContinuityCard28(d, allDecisions.size) }
+            item { AiNavChartCard28(daily) }
+            item { AiPrivateFundReport28(d) }
+            item { AiBenchmarkCard28(d) }
+        }
+
+        if (page == "持仓") {
+            item { AiPositionRiskSummary28(d, pos) }
+            item { AiTitle28("当前模拟持仓（${pos.size}只）") }
+            if (pos.isEmpty()) item { AiEmpty28("当前没有达到观察准入的股票，影子账户保持现金。") }
+            else items(pos, key = { it.code }) { p -> AiPositionCard28(p) }
+        }
+
+        if (page == "成交") {
+            item { AiTitle28("今日影子模拟动作（${today.size}笔）") }
+            if (today.isEmpty()) item {
+                AiEmpty28(automation?.optString("statusZh")?.takeIf { it.isNotBlank() }
+                    ?: "今天尚未产生买入或卖出动作；请结合后台运行状态区分无信号与任务异常。")
+            }
+            else items(today, key = { "today-${it.id}" }) { x -> AiDecisionCard28(x) }
+
+            item { AiTitle28("完整成交账本（${allDecisions.size}笔）") }
             item {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+                    listOf("全部", "买入", "卖出").forEach { value ->
+                        FilterChip(
+                            selected = ledgerFilter == value,
+                            onClick = { ledgerFilter = value },
+                            label = { Text(value) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+            }
+            if (ledgerError != null && allDecisions.isEmpty()) {
+                item { AiEmpty28(ledgerError!!) }
+            } else if (visibleDecisions.isEmpty()) {
+                item { AiEmpty28("当前筛选条件下没有成交记录。") }
+            } else {
+                items(visibleDecisions, key = { "ledger-${it.id}" }) { x -> AiDecisionCard28(x) }
+            }
+        }
+
+        if (page == "报表") {
+            item { AiNavChartCard28(daily) }
+            item { AiPrivateFundReport28(d) }
+            item { AiBenchmarkCard28(d) }
+            item { AiTitle28("组合逐日收益") }
+            if (daily == null || daily.length() == 0) {
+                item { AiEmpty28("逐日净值将在影子组合运行后持续积累。") }
+            } else item {
                 Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                     Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                         val start = maxOf(0, daily.length() - 12)
@@ -292,25 +323,23 @@ fun AiShadowPortfolioScreen28() {
                     }
                 }
             }
-        }
-
-        item { AiTitle28("影子组合规则") }
-        item {
-            Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
-                Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    AiRule28("买入", rules?.optString("newEntry"))
-                    AiRule28("仓位", rules?.optString("position"))
-                    AiRule28("卖出", rules?.optString("exit"))
-                    AiRule28("估值", rules?.optString("valuation"))
-                    AiRule28("回撤", rules?.optString("drawdown"))
-                    AiRule28("审计", rules?.optString("audit"))
-                    Text("仅用于策略验证，不连接券商，也不会发送真实订单。", color = AiMuted28, fontSize = 9.sp)
+            item { AiTitle28("影子组合规则") }
+            item {
+                Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                    Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        AiRule28("买入", rules?.optString("newEntry"))
+                        AiRule28("仓位", rules?.optString("position"))
+                        AiRule28("卖出", rules?.optString("exit"))
+                        AiRule28("估值", rules?.optString("valuation"))
+                        AiRule28("回撤", rules?.optString("drawdown"))
+                        AiRule28("审计", rules?.optString("audit"))
+                        Text("仅用于策略验证，不连接券商，也不会发送真实订单。", color = AiMuted28, fontSize = 9.sp)
+                    }
                 }
             }
+            item { AiTitle28("本机手动试算（可选）") }
+            item { PersonalAiPanel33() }
         }
-
-        item { AiTitle28("本机手动试算（可选）") }
-        item { PersonalAiPanel33() }
     }
 }
 
@@ -371,6 +400,94 @@ private fun AiEmpty28(s: String) {
         Text(s, Modifier.fillMaxWidth().padding(13.dp), color = AiMuted28, fontSize = 10.sp)
     }
 }
+
+@Composable
+private fun AiNavChartCard28(daily: JSONArray?) {
+    val rows = if (daily == null) emptyList() else (0 until daily.length()).mapNotNull { index ->
+        val row = daily.optJSONObject(index) ?: return@mapNotNull null
+        val nav = n28(row, "closeUnitNav")
+            ?: n28(row, "unitNav")
+            ?: n28(row, "cumulativeReturnPct")?.let { 1.0 + it / 100.0 }
+        nav?.let { row.optString("date") to it }
+    }
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("单位净值曲线", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text("按日终基金份额净值；增资不造成收益跳变", color = AiMuted28, fontSize = 8.sp)
+                }
+                Text(rows.lastOrNull()?.second?.let { String.format("%.6f", it) } ?: "—", color = AiBlue28, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+            }
+            if (rows.isEmpty()) {
+                Text("尚无可绘制的逐日净值", color = AiMuted28, fontSize = 9.sp, modifier = Modifier.padding(vertical = 22.dp))
+            } else {
+                val values = rows.map { it.second }
+                val low = values.minOrNull() ?: 1.0
+                val high = values.maxOrNull() ?: 1.0
+                val span = (high - low).coerceAtLeast(0.002)
+                Canvas(Modifier.fillMaxWidth().height(130.dp)) {
+                    val left = 4.dp.toPx()
+                    val right = size.width - 4.dp.toPx()
+                    val top = 10.dp.toPx()
+                    val bottom = size.height - 10.dp.toPx()
+                    repeat(3) { line ->
+                        val y = top + (bottom - top) * line / 2f
+                        drawLine(Color(0xFFE8ECF4), Offset(left, y), Offset(right, y), strokeWidth = 1.dp.toPx())
+                    }
+                    val points = values.mapIndexed { index, value ->
+                        val x = if (values.size == 1) (left + right) / 2f else left + (right - left) * index / (values.size - 1f)
+                        val y = bottom - ((value - low) / span).toFloat() * (bottom - top)
+                        Offset(x, y)
+                    }
+                    if (points.size == 1) {
+                        drawCircle(AiBlue28, radius = 4.dp.toPx(), center = points.first())
+                    } else {
+                        val path = Path().apply {
+                            moveTo(points.first().x, points.first().y)
+                            points.drop(1).forEach { lineTo(it.x, it.y) }
+                        }
+                        drawPath(path, AiBlue28, style = Stroke(width = 2.5.dp.toPx()))
+                        drawCircle(AiBlue28, radius = 3.5.dp.toPx(), center = points.last())
+                    }
+                }
+                Row(Modifier.fillMaxWidth()) {
+                    Text(rows.first().first, color = AiMuted28, fontSize = 8.sp, modifier = Modifier.weight(1f))
+                    Text("区间 ${(rows.size)}个净值点", color = AiMuted28, fontSize = 8.sp)
+                    Text(rows.last().first, color = AiMuted28, fontSize = 8.sp, modifier = Modifier.weight(1f), textAlign = androidx.compose.ui.text.style.TextAlign.End)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AiPositionRiskSummary28(d: JSONObject?, positions: List<AiPosition28>) {
+    val summary = d?.optJSONObject("summary")
+    val report = d?.optJSONObject("performanceReport")
+    val exposure = report?.optJSONObject("exposure")
+    val liquidity = report?.optJSONObject("liquidityAndCapacity")
+    val gross = n28(exposure, "grossExposurePct") ?: n28(summary, "positionPct")
+    val top5 = n28(exposure, "top5ConcentrationPct")
+    Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(13.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+            Text("持仓结构与容量", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                AiMetric28("总仓位", pct28(gross), AiBlue28, Modifier.weight(1f))
+                AiMetric28("现金", money28(n28(summary, "cash")), AiMuted28, Modifier.weight(1f))
+                AiMetric28("持仓数", "${positions.size}只", AiBlue28, Modifier.weight(1f))
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                AiMetric28("前五集中度", pct28(top5), AiAmber28, Modifier.weight(1f))
+                AiMetric28("部分成交", "${liquidity?.optInt("partialFillCount") ?: 0}笔", AiAmber28, Modifier.weight(1f))
+                AiMetric28("累计换手", pct28(n28(liquidity, "turnoverPctOfCurrentAssets")), AiMuted28, Modifier.weight(1f))
+            }
+            HorizontalDivider()
+            Text("容量约束：100股整数手、T+1、涨跌停不可成交、按当时成交额参与率限制下单量，并计入滑点与费用。", color = AiMuted28, fontSize = 8.sp)
+        }
+    }
+}
+
 @Composable
 private fun AiPositionCard28(p: AiPosition28) {
     Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
