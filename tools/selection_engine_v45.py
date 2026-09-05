@@ -128,6 +128,7 @@ def risk_control(state, prices):
         guard.setdefault('dailyReduction', {}).setdefault(today, max(0., mv / nav * .75))
     cap = min(cap, guard.get('dailyReduction', {}).get(today, 1))
     result = {'cap': cap, 'allowNew': market['allowNew'] and not paused and (daily is None or daily > -.015),
+              'date': today, 'asOf': base.iso(),
               'dailyUnitReturnPct': daily * 100 if daily is not None else None,
               'confirmedCloseDrawdownPct': drawdown * 100 if drawdown is not None else None,
               'dailyRiskDataReady': latest is not None, 'paused': paused,
@@ -333,6 +334,9 @@ def t_report(state, prices):
 
 def build_latest(state, ledger, prices, radar):
     obj = metadata(state)
+    if radar.get('date') != base.now_cn().date().isoformat() or not CONTEXT.get('quotes'):
+        obj['portfolioRisk'] = dict(obj.get('portfolioRisk') or {}, allowNew=False,
+                                    currentEvidenceReady=False)
     for cycle in obj['tCycles']:
         if cycle['status'] == 'OPEN' and (cycle['date'] < base.now_cn().date().isoformat() or base.now_cn().time() > time(14, 50)):
             cycle.update(status='UNPAIRED', reasonZh='当日未完成买回，保留全部未配对机会损益')
@@ -360,7 +364,8 @@ def build_latest(state, ledger, prices, radar):
     out['dailyPerformance'] = strict_daily
     out['summary']['maxDrawdownPct'] = base.fund.max_drawdown(verified_closes) if verified_closes else None
     out['summary']['formalCloseSampleDays'] = len(strict_daily)
-    out['summary']['todayReturnPct'] = (obj.get('portfolioRisk') or {}).get('dailyUnitReturnPct')
+    risk_snapshot = obj.get('portfolioRisk') or {}
+    out['summary']['todayReturnPct'] = risk_snapshot.get('dailyUnitReturnPct') if risk_snapshot.get('date') == today else None
     out['weeklyPerformance'] = base.fund._period_series(strict_daily, 'week')
     out['monthlyPerformance'] = base.fund._period_series(strict_daily, 'month')
     report = out.get('performanceReport') or {}

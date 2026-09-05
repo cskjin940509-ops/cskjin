@@ -139,7 +139,7 @@ def sector_evidence(stock, sector, today, now=None):
     etf = stock.get('etfData') or {}
     etf_day = str(etf.get('dataDate') or '')
     if stamp(etf_day) and etf_day < today and finite(etf.get('netFlow'), 0) > 0:
-        if (datetime.fromisoformat(today) - datetime.fromisoformat(etf_day)).days <= 7:
+        if (datetime.fromisoformat(today) - datetime.fromisoformat(etf_day)).days <= 7 and (not etf.get('availableAt') or (now and stamp(etf['availableAt']) and stamp(etf['availableAt']) <= now)):
             evidence.append('B2')
     return evidence
 
