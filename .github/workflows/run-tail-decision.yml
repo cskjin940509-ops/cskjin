@@ -21,6 +21,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-tail-decision
@@ -63,6 +64,12 @@ jobs:
       # 盘中5分钟任务只做主计算和快照持久化。Yunai 外部调用可能超过一个
       # 5分钟 slot，放在每个 TailLive run 会让后续 14:50/14:55 排队到收盘后。
       # 二次确认保留在真正冻结 Final 的 run 中，不影响 TailFinal 的核心生成。
+      - name: 立即发布尾盘核心结果并通知下游
+        if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py tail
+
       - name: 刷新 Yunai 候选股实时行情与资金分布
         if: steps.rolling.outputs.state == 'tail-final-frozen'
         continue-on-error: true
@@ -76,25 +83,8 @@ jobs:
           DRY_RUN: '0'
         run: python tools/enrich_tail_yunai.py
 
-      - name: 保存滚动快照或15:00最终结果
+      - name: 补充发布尾盘二次确认并通知下游
         if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
-        run: |
-          git config user.name 'astock-tail-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add astock_tail astock_gateway/yunai_live.json astock_gateway/latest.json
-          if git diff --cached --quiet; then
-            echo 'No tail-decision changes.'
-            exit 0
-          fi
-          git commit -m 'Update rolling A-share tail decision pool'
-          pushed=0
-          for i in 1 2 3 4; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then
-              pushed=1
-              break
-            fi
-            sleep 2
-          done
-          test "$pushed" -eq 1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py tail

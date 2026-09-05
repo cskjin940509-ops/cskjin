@@ -8,12 +8,23 @@ factor threshold, not that the source data is necessarily unavailable.
 from __future__ import annotations
 
 import json
+from datetime import date
 from pathlib import Path
 
-from slow_money_factors import apply_to_stock_candidates, availability_strings
+from slow_money_factors import apply_to_stock_candidates, availability_strings, load_for_signal_date
 
 ROOT = Path(__file__).resolve().parents[1]
 RADAR = ROOT / "astock_radar" / "latest.json"
+
+
+def usable_factors(radar):
+    """Keep the old four-day freshness ceiling without blocking live quotes."""
+    factors = load_for_signal_date(radar.get("date"))
+    try:
+        age = (date.fromisoformat(radar["date"]) - date.fromisoformat(factors["dataDate"])).days
+        return bool(0 < age <= 4)
+    except (TypeError, ValueError, KeyError):
+        return False
 
 
 def main():
@@ -23,11 +34,24 @@ def main():
     for code,x in stock_obj.items():
         if not isinstance(x,dict): continue
         row=dict(x); row["code"]=code; row.setdefault("score",row.get("earlyEntryScore") if row.get("earlyEntryScore") is not None else row.get("baseScore")); rows.append(row)
-    rows,pools,factors=apply_to_stock_candidates(rows,radar.get("pools") or {},radar.get("date"))
+    fields=("marginScore","marginFactorScore","marginData","etfScore","etfFlowScore","etfData","slowCompositeScore","slowFactorDataDate")
+    if usable_factors(radar):
+        rows,pools,factors=apply_to_stock_candidates(rows,radar.get("pools") or {},radar.get("date"))
+    else:
+        # A refresh may fail or still be running. Do not recycle old scores as
+        # fresh evidence, and do not stall the independent live-data pipeline.
+        pools=dict(radar.get("pools") or {}); pools.update(B1=[],B2=[],B4=[]); factors=None
+        for row in rows:
+            for key in fields:
+                row.pop(key,None)
+        for stock in stock_obj.values():
+            if isinstance(stock,dict):
+                for key in fields:
+                    stock.pop(key,None)
     for row in rows:
         code=str(row.get("code") or "")
         if code not in stock_obj: continue
-        for key in ("marginScore","marginFactorScore","marginData","etfScore","etfFlowScore","etfData","slowCompositeScore","slowFactorDataDate"):
+        for key in fields:
             if key in row: stock_obj[code][key]=row[key]
     radar["stocks"]=stock_obj; radar["pools"]=pools
     availability=radar.setdefault("factorAvailability",{})

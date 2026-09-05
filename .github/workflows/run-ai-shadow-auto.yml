@@ -27,6 +27,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-radar-ai-shadow-production
@@ -58,32 +59,25 @@ jobs:
           code=$?
           set -e
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-      - name: 更新同期基准
-        if: steps.engine.outputs.exit_code == '0'
-        run: python tools/enrich_ai_shadow_benchmarks.py
+
       - name: 校验自动影子账户数据契约
         if: steps.engine.outputs.exit_code == '0'
         run: python tools/validate_ai_shadow_contract.py
-      - name: 保存资金、持仓、账本与每轮心跳
-        run: |
-          git config user.name 'astock-ai-auto-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add astock_ai_portfolio
-          if git diff --cached --quiet; then
-            echo 'No AI shadow portfolio changes.'
-          else
-            git commit -m 'Update 20M automatic AI shadow portfolio'
-            pushed=0
-            for i in 1 2 3 4; do
-              git fetch origin main
-              git rebase origin/main
-              if git push origin HEAD:main; then
-                pushed=1
-                break
-              fi
-              sleep 2
-            done
-            test "$pushed" -eq 1
-          fi
+      - name: 立即发布资金持仓与运行心跳
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py portfolio
+
       - name: 确认引擎成功
         run: test '${{ steps.engine.outputs.exit_code }}' = '0'
+      - name: 更新同期基准
+        if: steps.engine.outputs.exit_code == '0'
+        run: python tools/enrich_ai_shadow_benchmarks.py
+      - name: 校验补充基准后的账户数据
+        if: steps.engine.outputs.exit_code == '0'
+        run: python tools/validate_ai_shadow_contract.py
+      - name: 补充发布同期基准
+        if: steps.engine.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py portfolio
