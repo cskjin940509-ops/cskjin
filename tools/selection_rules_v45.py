@@ -6,7 +6,7 @@ from statistics import mean
 from zoneinfo import ZoneInfo
 from shadow_fund_v3 import finite
 
-VERSION = 'v4.5-selection-pool-core-t'
+VERSION = 'v4.6-selection-evidence'
 CN = ZoneInfo('Asia/Shanghai')
 PARAMETERS = {
     'singleLimit': .08, 'leaderLimit': .10, 'sectorLimit': .25,
