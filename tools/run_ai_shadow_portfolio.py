@@ -565,7 +565,7 @@ def buy_position(state: dict, ledger: list, stock: dict, score: float, reasons: 
 def sell_position(state: dict, ledger: list, pos: dict, qty: int, ref_price: float,
                   reason: str, prices: dict[str, float], execution_plan: dict | None = None) -> dict | None:
     qty = min(int(qty), int(pos.get("qty", 0)))
-    qty = (qty // 100) * 100
+    qty = qty if qty == int(pos.get("qty", 0)) else (qty // 100) * 100
     if qty <= 0:
         return None
     px = float(execution_plan.get("executionPrice")) if execution_plan else exec_price(ref_price, "SELL")
@@ -1032,6 +1032,7 @@ def _main_impl() -> int:
     hist = state.setdefault("navHistory", [])
     hist.append(nav_point)
     if len(hist) > 6000:
+        state.setdefault("legacyNavHistory", []).extend(hist[:-6000])
         state["navHistory"] = hist[-6000:]
     # Keep bounded operational controls while retaining all actual decisions.
     controls = state.get("executionControl") or {}

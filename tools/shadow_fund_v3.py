@@ -322,7 +322,7 @@ def fund_performance(state: dict, ledger: list[dict], current_assets: float) -> 
     }
 
 
-def board_limit_pct(code: str, name: str = "") -> float:
+def board_limit_pct(code: str, name: str = "", day: str | None = None) -> float:
     code = str(code or "")
     upper_name = str(name or "").upper()
     if code.startswith(("30", "68")):
@@ -330,7 +330,7 @@ def board_limit_pct(code: str, name: str = "") -> float:
     if code.startswith(("8", "9")):
         return 30.0
     if "ST" in upper_name:
-        return 5.0
+        return 10.0 if day and day >= "2026-07-06" else 5.0
     return 10.0
 
 
@@ -338,8 +338,8 @@ def round_tick(price: float) -> float:
     return round(max(price, 0.01) + 1e-9, 2)
 
 
-def price_band(code: str, name: str, prev_close: float | None) -> dict:
-    limit_pct = board_limit_pct(code, name)
+def price_band(code: str, name: str, prev_close: float | None, day: str | None = None) -> dict:
+    limit_pct = board_limit_pct(code, name, day)
     prev = finite(prev_close)
     return {
         "limitPct": limit_pct,
@@ -391,11 +391,15 @@ def market_data(radar_stock: dict | None, quote: dict | None, fallback_price: fl
     }
 
 
-def _round_qty(qty: int, total_qty: int | None, side: str) -> int:
+def _round_qty(qty: int, total_qty: int | None, side: str, code: str = "") -> int:
     qty = max(0, int(qty))
     if side == "SELL" and total_qty is not None and qty >= int(total_qty):
         return int(total_qty)
-    return (qty // 100) * 100
+    rounded = (qty // 100) * 100
+    # Conservatively keep 100-share increments; STAR minimum remains 200.
+    if code.startswith("68") and rounded < 200:
+        return 0
+    return rounded
 
 
 def plan_execution(
@@ -411,7 +415,8 @@ def plan_execution(
     total_position_qty: int | None = None,
 ) -> dict:
     side = str(side).upper()
-    requested_qty = _round_qty(requested_qty, total_position_qty, side)
+    requested_qty = _round_qty(requested_qty, total_position_qty, side, code)
+    requested_qty = min(requested_qty, 50_000 if code.startswith("68") else 1_000_000)
     ref = finite(reference_price)
     result = {
         "allowed": False,
@@ -429,7 +434,7 @@ def plan_execution(
 
     amount = finite(market.get("amount"))
     prev_close = finite(market.get("prevClose"))
-    band = price_band(code, name, prev_close)
+    band = price_band(code, name, prev_close, day)
     result.update(band)
     result["referencePrice"] = round(ref, 4)
     if prev_close is None:
@@ -461,7 +466,7 @@ def plan_execution(
     remaining_daily_cap = max(0.0, daily_cap - traded_today)
     capacity_amount = min(per_order_cap, remaining_daily_cap)
     raw_qty = int(capacity_amount / ref)
-    fill_qty = min(requested_qty, _round_qty(raw_qty, total_position_qty, side))
+    fill_qty = min(requested_qty, _round_qty(raw_qty, total_position_qty, side, code))
     if fill_qty <= 0:
         result.update(
             rejectCode="CAPACITY_EXHAUSTED",
@@ -485,7 +490,7 @@ def plan_execution(
     if side == "SELL" and lower is not None and execution_price <= lower:
         result.update(rejectCode="IMPACT_REACHES_LIMIT_DOWN", rejectReasonZh="考虑冲击成本后达到跌停价，拒绝假设成交")
         return result
-    final_capacity_qty = _round_qty(int(capacity_amount / execution_price), total_position_qty, side)
+    final_capacity_qty = _round_qty(int(capacity_amount / execution_price), total_position_qty, side, code)
     fill_qty = min(fill_qty, final_capacity_qty)
     if fill_qty <= 0:
         result.update(rejectCode="CAPACITY_EXHAUSTED", rejectReasonZh="冲击价格下容量不足100股")

@@ -214,7 +214,7 @@ def add_or_buy(state: dict, ledger: list, t: dict, qty: int, prices: dict[str, f
 def reduce_or_sell(state: dict, ledger: list, pos: dict, qty: int, ref: float, target_pct: float, reason: str):
     today = base.now_cn().date().isoformat()
     qty = min(int(qty), sellable_qty(pos, today))
-    qty = int(qty // 100) * 100
+    qty = qty if qty == int(pos.get("qty", 0)) else int(qty // 100) * 100
     if qty <= 0:
         return None
     target_requested_qty = qty
