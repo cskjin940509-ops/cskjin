@@ -969,8 +969,10 @@ def _main_impl() -> int:
             nav = float(VALUATION_OVERRIDE["nav"])
         fund.ensure_fund_accounting(state, nav)
         latest = build_latest(state, ledger, prices, radar)
+        outside_session = not trading_session(dt)
         automation = record_automation_cycle(
-            "BLOCKED_STALE_RADAR", "后台已运行并更新基金报表，但雷达不是当日数据，拒绝使用旧数据交易",
+            "OUTSIDE_SESSION" if outside_session else "BLOCKED_STALE_RADAR",
+            "休市时段正常运行，沿用最后已验证行情并保留数据日期，不模拟成交" if outside_session else "后台已运行并更新基金报表，但雷达不是当日数据，拒绝使用旧数据交易",
             dt, radar=radar, state=state, ledger=ledger
         )
         latest["automation"] = automation
