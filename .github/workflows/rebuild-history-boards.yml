@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-history-board-reconstruction
@@ -49,19 +50,7 @@ jobs:
         run: python tools/update_history_pattern_lab.py
       - name: 独立挂载历史重建摘要
         run: python tools/merge_history_reconstruction.py
-      - name: 保存历史重建结果
-        run: |
-          if [ -z "$(git status --porcelain -- astock_history)" ]; then
-            echo 'No reconstruction changes.'
-            exit 0
-          fi
-          git config user.name 'astock-history-reconstruction-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add -- astock_history/reconstruction astock_history/latest.json
-          git commit -m 'Update audited A-share board history reconstruction'
-          for i in 1 2 3; do
-            git pull --rebase origin main && git push origin HEAD:main && exit 0
-            echo "Retry reconstruction push $i"
-            sleep $((i*3))
-          done
-          exit 1
+      - name: 保存历史重建结果并即时同步
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py history

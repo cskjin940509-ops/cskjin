@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-history-pattern-lab
@@ -46,19 +47,7 @@ jobs:
         run: python tools/update_history_pattern_lab.py
       - name: 挂载独立历史重建摘要
         run: python tools/merge_history_reconstruction.py
-      - name: 保存动态历史研究结果
-        run: |
-          if [ -z "$(git status --porcelain -- astock_history)" ]; then
-            echo 'No history changes.'
-            exit 0
-          fi
-          git config user.name 'astock-history-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add -- astock_history
-          git commit -m 'Update dynamic A-share history pattern lab'
-          for i in 1 2 3; do
-            git pull --rebase origin main && git push origin HEAD:main && exit 0
-            echo "Retry history push $i"
-            sleep $((i*2))
-          done
-          exit 1
+      - name: 保存动态历史研究结果并即时同步
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py history

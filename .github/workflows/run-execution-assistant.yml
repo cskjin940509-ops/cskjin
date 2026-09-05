@@ -15,10 +15,11 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-live-execution-assistant
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   execute:
@@ -48,15 +49,7 @@ jobs:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
           ALLOW_ANY_TIME: ${{ github.event_name == 'push' && '1' || '0' }}
         run: python tools/update_trade_execution_signals_strict.py
-      - name: 保存执行辅助快照
-        run: |
-          if git status --porcelain -- astock_execution | grep -q .; then
-            git config user.name 'astock-execution-bot'
-            git config user.email 'actions@users.noreply.github.com'
-            git add astock_execution
-            git commit -m 'Update live A-share execution assistant'
-            git pull --rebase origin main
-            git push origin HEAD:main
-          else
-            echo 'No execution-assistant changes.'
-          fi
+      - name: 保存执行辅助快照并即时同步
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py execution

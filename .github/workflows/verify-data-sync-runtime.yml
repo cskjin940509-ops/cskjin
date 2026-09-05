@@ -1,0 +1,32 @@
+name: Verify production data dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/publish_data_on_arrival.py'
+      - '.github/workflows/verify-data-sync-runtime.yml'
+permissions:
+  contents: read
+  actions: write
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify actual token can immediately launch a safe downstream test
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os
+          from tools.publish_data_on_arrival import dispatch
+          dispatch('test-data-on-arrival.yml', os.environ['GITHUB_REPOSITORY'], os.environ['GH_TOKEN'])
+          print('Immediate downstream verification dispatched on main; no market or account data changed.')
+          PY

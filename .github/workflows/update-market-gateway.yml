@@ -27,10 +27,11 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-market-gateway
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -60,33 +61,19 @@ jobs:
           python tools/update_market_gateway.py
           python tools/sanitize_market_gateway.py
           python tools/ensure_market_snapshot_core_indices.py
+      - name: 校验后立即发布市场数据并通知下游
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py gateway
+
       - name: 接入 Yunai Quant API
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: |
           python tools/enrich_yunai_gateway.py
           python tools/sync_yunai_production.py
-      - name: 更新5分钟交易辅助信号
+
+      - name: 独立确认到达后立即发布并通知下游
         env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-          DRY_RUN: ${{ github.event_name == 'push' && '1' || '0' }}
-        run: python tools/update_trade_execution_signals_strict.py
-      - name: 收盘后兜底锁定 TailFinal
-        env:
-          FINAL_ONLY: '1'
-        run: |
-          python tools/run_tail_rolling_reliable.py
-          python tools/enrich_tail_yunai.py
-      - name: 保存数据网关、交易信号、TailFinal与历史市场快照
-        run: |
-          if git diff --quiet -- astock_gateway astock_tail astock_snapshots/index.json && { [ ! -d astock_execution ] || git diff --quiet -- astock_execution; }; then
-            echo 'No market/execution/tail data changes.'
-            exit 0
-          fi
-          git config user.name 'astock-data-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add astock_gateway astock_tail astock_snapshots/index.json
-          if [ -d astock_execution ]; then git add astock_execution; fi
-          git commit -m 'Update A-share market gateway, execution signals and tail snapshot'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py gateway

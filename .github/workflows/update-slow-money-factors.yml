@@ -13,10 +13,13 @@ on:
   schedule:
     # 北京时间工作日 08:55 首次更新；09:05 / 09:15 重试，保证开盘前尽量拿到上一交易日B1/B2。
     - cron: '55 0 * * 1-5'
-    - cron: '5,15 1 * * 1-5'
+    - cron: '5,15,35 1 * * 1-5'
+    # 独立补采延迟发布的日频数据，不占用实时雷达队列。
+    - cron: '5 2,3,5,6,7 * * 1-5'
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-slow-money-factors
@@ -49,26 +52,13 @@ jobs:
         run: python -m pip install --quiet 'akshare>=1.18.15,<2'
       - name: 拉取两融与ETF份额慢资金数据
         run: python tools/collect_slow_money_factors_v2.py
+      - name: 慢资金到达立即发布并通知雷达
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py factors
       - name: 生成开盘前提前预测池
         run: python tools/generate_premarket_prediction.py
-      - name: 保存慢资金因子与开盘前预测池
-        run: |
-          git config user.name 'astock-slow-money-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add astock_factors astock_premarket
-          if git diff --cached --quiet; then
-            echo 'No slow-money or premarket prediction changes.'
-            exit 0
-          fi
-          git commit -m 'Update B1/B2 slow-money and premarket prediction pool'
-          pushed=0
-          for i in 1 2 3 4; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then
-              pushed=1
-              break
-            fi
-            sleep 2
-          done
-          test "$pushed" -eq 1
+      - name: 保存慢资金因子与开盘前预测池并即时同步
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py factors

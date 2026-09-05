@@ -15,10 +15,11 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-forward-tracking
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   track:
@@ -34,15 +35,7 @@ jobs:
           python-version: '3.12'
       - name: 更新参考与已验证Forward Tracking
         run: python tools/update_strategy_backtest_verified_bse.py
-      - name: 保存收益跟踪
-        run: |
-          if git diff --quiet -- astock_snapshots/index.json; then
-            echo 'No tracking changes.'
-            exit 0
-          fi
-          git config user.name 'astock-tracking-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add astock_snapshots/index.json
-          git commit -m 'Update A-share forward tracking'
-          git pull --rebase origin main
-          git push origin HEAD:main
+      - name: 保存收益跟踪并即时同步
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py tracking

@@ -15,10 +15,11 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-live-trade-plan
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   plan:
@@ -47,17 +48,14 @@ jobs:
         env:
           FORCE_SNAPSHOT: ${{ github.event_name == 'push' && '1' || '0' }}
         run: python tools/run_trade_plan_resilient.py
+      - name: 立即发布正式池交易计划
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py trade-plan
+
       - name: Official无买点时做全A历史形态精筛
         run: python tools/augment_trade_plan_market_setups.py
-      - name: 保存交易计划
-        run: |
-          if git status --porcelain -- astock_trade | grep -q .; then
-            git config user.name 'astock-trade-bot'
-            git config user.email 'actions@users.noreply.github.com'
-            git add astock_trade
-            git commit -m 'Update live A-share trade plan'
-            git pull --rebase origin main
-            git push origin HEAD:main
-          else
-            echo 'No trade-plan changes.'
-          fi
+      - name: 补充发布历史形态筛选结果
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py trade-plan

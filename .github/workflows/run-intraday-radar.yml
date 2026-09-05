@@ -33,6 +33,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-radar-ai-shadow-production
@@ -61,18 +62,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 确保B1/B2慢资金数据已就绪
-        run: |
-          NEED=1
-          if [ -f astock_factors/latest.json ]; then
-            NEED=$(python -c "import json; from datetime import datetime, timezone, timedelta; p=json.load(open('astock_factors/latest.json',encoding='utf-8')); d=p.get('dataDate'); now=datetime.now(timezone(timedelta(hours=8))).date(); print(0 if d and (now-datetime.strptime(d,'%Y-%m-%d').date()).days <= 4 else 1)" 2>/dev/null || echo 1)
-          fi
-          if [ "$NEED" = "1" ]; then
-            python -m pip install --quiet 'akshare>=1.18.15,<2'
-            python tools/collect_slow_money_factors_v2.py
-          else
-            echo 'B1/B2 slow-money data is fresh enough.'
-          fi
+      # 慢资金由独立采集任务刷新；其发布会立即通知本工作流。
+
       - name: 从开盘起滚动主线形成雷达
         id: radar
         run: |
@@ -95,33 +86,26 @@ jobs:
         env:
           ASTOCK_RUN_SOURCE: integrated-radar-cycle
         run: python tools/run_ai_dynamic_portfolio_v2_2.py
-      - name: 更新大盘与原始候选池同期基准
-        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: python tools/enrich_ai_shadow_benchmarks.py
+
       - name: 校验自动影子账户数据契约
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/validate_ai_shadow_contract.py
-      - name: 原子保存雷达、慢资金与智能影子实盘账本
+      - name: 校验后立即发布雷达与影子账本
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: |
-          git config user.name 'astock-radar-ai-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add astock_radar astock_ai_portfolio astock_factors
-          if git diff --cached --quiet; then
-            echo 'No radar, slow-money or shadow portfolio changes.'
-            exit 0
-          fi
-          git commit -m 'Update radar, B1/B2 slow-money and dynamic AI portfolio'
-          pushed=0
-          for i in 1 2 3 4; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then
-              pushed=1
-              break
-            fi
-            sleep 2
-          done
-          test "$pushed" -eq 1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py radar
+
+      - name: 更新大盘与原始候选池同期基准
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        run: python tools/enrich_ai_shadow_benchmarks.py
+      - name: 校验补充基准后的账户数据
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        run: python tools/validate_ai_shadow_contract.py
+      - name: 补充发布同期基准
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py portfolio
 
 # recovery-trigger: 2026-09-03T10:27+08:00

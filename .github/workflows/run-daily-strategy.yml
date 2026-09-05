@@ -24,6 +24,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: astock-daily-strategy
@@ -79,29 +80,7 @@ jobs:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/enrich_official_trade_metrics.py
 
-      - name: 更新正式与参考批次后续表现
+      - name: 正式池校验完成立即发布并通知计划与跟踪
         env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-        run: python tools/update_strategy_tracking_display_ready.py
-
-      - name: 保存当天冻结快照、正式股票池与收益跟踪
-        run: |
-          if [ -z "$(git status --porcelain -- astock_gateway astock_snapshots/index.json)" ]; then
-            echo 'No gateway, strategy or tracking changes.'
-            exit 0
-          fi
-          git config user.name 'astock-strategy-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add astock_gateway astock_snapshots/index.json
-          git commit -m 'Update verified daily A-share close snapshot, cohort and tracking'
-          pushed=0
-          for i in 1 2 3 4; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then
-              pushed=1
-              break
-            fi
-            sleep 2
-          done
-          test "$pushed" -eq 1
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py official
