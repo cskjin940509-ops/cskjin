@@ -15,7 +15,7 @@ VERSION = 'v4.6-forward-evidence'
 PROTOCOL = {
     'version': VERSION, 'ruleVersion': rules.VERSION, 'parameters': deepcopy(rules.PARAMETERS),
     'sourceHashes': {name: sha256((Path(__file__).parent / name).read_bytes()).hexdigest()
-                     for name in ('selection_rules_v45.py', 'selection_engine_v45.py', 'selection_data_v45.py')},
+                     for name in ('selection_rules_v45.py', 'selection_engine_v45.py', 'selection_data_v45.py', 'selection_research_v46.py')},
     'primaryHorizon': 10, 'exploratoryHorizons': [5, 20],
     'minimumSignalDatesForReview': 60,
     'selectionBenchmark': '当时完整板块成员等权；B0基线按当时涨幅前20%等权',
@@ -31,8 +31,11 @@ def digest(value):
 
 
 def research(state, now):
-    return state.setdefault('research46', {'version': VERSION, 'activatedAt': now.isoformat(),
+    obj = state.setdefault('research46', {'version': VERSION, 'activatedAt': now.isoformat(),
         'protocol': deepcopy(PROTOCOL), 'protocolHash': digest(PROTOCOL), 'cohorts': {}})
+    if obj['protocolHash'] != digest(PROTOCOL):
+        obj['protocolChanged'] = True
+    return obj
 
 
 def pending_codes(state):
@@ -86,7 +89,7 @@ def freeze_candidates(state, targets, radar, quotes, now):
         universe = ranks.get(sector) or {}
         members = {code: rules.finite(row.get('price')) for code, row in (universe.get('rows') or {}).items()}
         at = rules.stamp(universe.get('availableAt'))
-        if (not universe.get('complete') or not at or not rules.fresh(at.isoformat(), now)
+        if (not universe.get('complete') or len(members) != universe.get('total') or not at or not rules.fresh(at.isoformat(), now)
                 or not members or any(not p or p <= 0 for p in members.values())):
             continue
         selected = [t for t in candidates if t['code'] in members and quote_price(quotes.get(t['code']) or {}, now)]

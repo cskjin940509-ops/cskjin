@@ -43,6 +43,11 @@ class ForwardEvidenceTests(unittest.TestCase):
         self.assertTrue(self.state['research46']['protocolChanged'])
         self.assertEqual(len(self.state['research46']['cohorts']), 1)
 
+    def test_partial_rank_coverage_cannot_claim_complete_sector_benchmark(self):
+        self.state['selectionData45']['sectorRanks']['银行']['total'] = 3
+        study.freeze_candidates(self.state, self.targets, self.radar, self.quotes, self.now)
+        self.assertEqual(self.state['research46']['cohorts'], {})
+
     def test_future_source_or_stale_radar_never_creates_freeze(self):
         self.state['selectionData45']['sectorRanks']['银行']['availableAt'] = (self.now + timedelta(minutes=1)).isoformat()
         study.freeze_candidates(self.state, self.targets, self.radar, self.quotes, self.now)
@@ -144,6 +149,22 @@ class NoTControlTests(unittest.TestCase):
         self.assertEqual(self.state['cash'], before)
         again = engine.update_no_t_control(self.state, self.ledger, self.prices, {}, True)
         self.assertEqual(again['closeSampleDays'], 1)
+
+    def test_control_only_position_uses_actual_close_not_stale_last_price(self):
+        self.state['positions'] = {}
+        self.state['cash'] += 10000
+        self.now = datetime.fromisoformat('2026-09-04T15:10:00+08:00')
+        engine.CONTEXT['quotes'] = {'000001': {'price': 11., 'quoteTime': '2026-09-04T15:00:00+08:00'}}
+        report = engine.update_no_t_control(self.state, self.ledger, {}, {}, True)
+        self.assertAlmostEqual(report['incrementalReturnPp'], -1000 / self.state['initialCapital'] * 100)
+
+    def test_protocol_change_blocks_controls_even_without_new_candidate_freeze(self):
+        self.state['research46']['protocolHash'] = 'old-rules'
+        before = copy.deepcopy(self.state['research46']['noTControl'])
+        report = engine.update_no_t_control(self.state, self.ledger, self.prices, {}, False)
+        self.assertIn('协议已变化', report['statusZh'])
+        self.assertEqual(before, self.state['research46']['noTControl'])
+        self.assertNotIn('incrementalReturnPp', report)
 
     def test_control_has_same_inputs_and_disables_t_without_changing_global_mode(self):
         radar = {'date': '2026-09-04', 'capturedAt': self.now.isoformat(), 'stocks': {}}
