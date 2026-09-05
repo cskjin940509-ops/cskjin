@@ -13,9 +13,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.PieChart
 import androidx.compose.material.icons.filled.Radar
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.ViewList
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -160,12 +160,10 @@ class V6Activity : ComponentActivity() {
 }
 
 enum class Tab(val label: String, val icon: ImageVector) {
-    TODAY("决策", Icons.Default.Home),
+    TODAY("总览", Icons.Default.Home),
     MARKET("市场", Icons.Default.GridView),
-    MAINLINE("板块", Icons.Default.Radar),
-    POOLS("证据", Icons.Default.ViewList),
-    TRADES("模拟", Icons.Default.ViewList),
-    AI_SHADOW("影子", Icons.Default.Radar),
+    OPPORTUNITY("机会", Icons.Default.Radar),
+    PORTFOLIO("组合", Icons.Default.PieChart),
     HISTORY("研究", Icons.Default.CalendarMonth)
 }
 
@@ -259,9 +257,18 @@ fun AStockV6() {
                 TopAppBar(
                     title = {
                         Column {
-                            Text("A股分层研究 v4.3", fontWeight = FontWeight.Bold)
                             Text(
-                                active?.let { "${it.date} · ${snapshotAuditLabel(it)} · ${it.regime}" } ?: "等待策略快照",
+                                when (tab) {
+                                    Tab.TODAY -> "a股筛选池"
+                                    Tab.MARKET -> "市场全景"
+                                    Tab.OPPORTUNITY -> "板块与个股"
+                                    Tab.PORTFOLIO -> "组合与风控"
+                                    Tab.HISTORY -> "历史研究"
+                                },
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                active?.let { "${it.date} · ${snapshotAuditLabel(it)} · ${displayRegimeZh27(it.regime)}" } ?: "等待策略快照",
                                 fontSize = 11.sp,
                                 color = if (active?.auditStatus == "Verified") Down else Amber
                             )
@@ -310,14 +317,12 @@ fun AStockV6() {
                         SectorDetailScreen(detailSector, detailSnapshot) { DetailNav.back() }
                     }
                     else -> when (tab) {
-                        Tab.TODAY -> TodayScreen(active, preview, quotes, tick, quoteOkAt, boardOkAt, backendHealth, snapshotError, radarError, quoteError, boardError)
-                        Tab.MARKET -> MarketScreen(quotes, industries, concepts, tick, quoteOkAt, boardOkAt, quoteError, boardError)
-                        Tab.MAINLINE -> MainlineScreen(active, preview, tick, boardOkAt)
-                        Tab.POOLS -> PoolsScreen(active, quotes, tick, quoteOkAt)
-                        Tab.TRADES -> TradeJournalScreen()
-                        Tab.AI_SHADOW -> AiShadowPortfolioScreen28()
-                        Tab.HISTORY -> HistoryHub32(snapshots, active, quotes, selectedDate) { selectedDate = it }
-                    }
+                    Tab.TODAY -> IntegratedOverview44(active, preview, quotes, backendHealth) { tab = it }
+                    Tab.MARKET -> MarketScreen(quotes, industries, concepts, tick, quoteOkAt, boardOkAt, quoteError, boardError)
+                    Tab.OPPORTUNITY -> OpportunityHub44(active, preview, quotes, tick, quoteOkAt, boardOkAt)
+                    Tab.PORTFOLIO -> PortfolioHub44()
+                    Tab.HISTORY -> HistoryHub32(snapshots, active, quotes, selectedDate) { selectedDate = it }
+                }
                 }
             }
         }

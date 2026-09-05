@@ -2,7 +2,7 @@ name: Build AStock v4 Codex
 
 on:
   push:
-    branches: [ codex/v4-latest-framework ]
+    branches: [ codex/v4-latest-framework, codex/strategy-decision-ui ]
     paths-ignore:
       - ci-output/**
   workflow_dispatch:
@@ -16,10 +16,6 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Apply v4.4 integrated dashboard patch
-        run: git apply --whitespace=nowarn AStockStrategy-v4.4-integrated-dashboard.patch
-      - name: Apply a股筛选池 v4.5 patch
-        run: git apply --whitespace=nowarn selection-v45-android.patch
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -44,9 +40,9 @@ jobs:
           set -e
           printf '%s\n' "$status" > ci-output/build-status.txt
           if [ "$status" -eq 0 ]; then
-            cp app/build/outputs/apk/debug/app-debug.apk ci-output/AStockSelection-v4.5.apk
+            cp app/build/outputs/apk/debug/app-debug.apk ci-output/AStockSelection-v4.6.apk
           else
-            rm -f ci-output/AStockSelection-v4.5.apk
+            rm -f ci-output/AStockSelection-v4.6.apk
           fi
       - name: Publish branch-local build result
         shell: bash
@@ -54,14 +50,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f ci-output/build.log ci-output/build-status.txt
-          if [ -f ci-output/AStockSelection-v4.5.apk ]; then
-            git add -f ci-output/AStockSelection-v4.5.apk
+          if [ -f ci-output/AStockSelection-v4.6.apk ]; then
+            git add -f ci-output/AStockSelection-v4.6.apk
           else
-            git rm --ignore-unmatch ci-output/AStockSelection-v4.5.apk
+            git rm --ignore-unmatch ci-output/AStockSelection-v4.6.apk
           fi
           git diff --cached --quiet && exit 0
           git commit -m "ci: publish v4 build result [skip ci]"
-          git push origin HEAD:codex/v4-latest-framework
+          git push origin HEAD:${{ github.ref_name }}
 
       - name: Fail workflow on compiler error
         run: test "$(cat ci-output/build-status.txt)" = 0

@@ -11,11 +11,11 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.rui.astockstrategy"
+        applicationId = "com.rui.astockstrategy.selection"
         minSdk = 26
         targetSdk = 36
-        versionCode = 43
-        versionName = "4.3.0"
+        versionCode = 46
+        versionName = "4.6.0"
     }
 
     buildFeatures { compose = true }
