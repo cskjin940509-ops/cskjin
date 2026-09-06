@@ -25,13 +25,16 @@ fun main(args: Array<String>) {
         channel.close()
         return
     }
+    val usableScreen = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds
+    val initialWidth = minOf(1120, usableScreen.width - 48).coerceAtLeast(480)
+    val initialHeight = minOf(840, usableScreen.height - 64).coerceAtLeast(480)
     val context = AppContext(root)
     BackendClient.initialize(context)
     try {
         application {
             Window(onCloseRequest = ::exitApplication, title = "A股筛选池 ${AppVersion.name}",
-                state = rememberWindowState(width = 1120.dp, height = 840.dp)) {
-                window.minimumSize = java.awt.Dimension(760, 640)
+                state = rememberWindowState(width = initialWidth.dp, height = initialHeight.dp)) {
+                window.minimumSize = java.awt.Dimension(minOf(760, initialWidth), minOf(640, initialHeight))
                 CompositionLocalProvider(LocalAppContext provides context) { AStockV6() }
                 if ("--smoke-test" in args) {
                     androidx.compose.runtime.LaunchedEffect(Unit) {
