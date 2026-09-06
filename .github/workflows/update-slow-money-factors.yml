@@ -31,6 +31,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - name: 记录慢资金运行编号
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
