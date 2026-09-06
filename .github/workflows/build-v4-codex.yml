@@ -67,7 +67,14 @@ jobs:
             Get-ChildItem 'C:\Program Files (x86)' -Directory -Filter 'WiX Toolset*' | ForEach-Object { "$($_.FullName)\bin" >> $env:GITHUB_PATH }
           }
       - name: Build Windows installer with bundled runtime
-        run: gradle -PdesktopOnly=true :desktop:packageExe :desktop:createDistributable --stacktrace
+        shell: pwsh
+        run: |
+          gradle -PdesktopOnly=true :desktop:packageExe :desktop:createDistributable --stacktrace
+          $buildCode = $LASTEXITCODE
+          if ($buildCode -ne 0) {
+            Get-ChildItem 'desktop/build/compose/logs' -Recurse -Filter '*.txt' | ForEach-Object { Write-Output $_.FullName; Get-Content $_.FullName }
+            exit $buildCode
+          }
       - name: Verify packaged storage and UI launch
         shell: pwsh
         run: |
@@ -81,6 +88,22 @@ jobs:
           $smoke = Start-Process $exe -ArgumentList '--smoke-test' -PassThru
           if (-not $smoke.WaitForExit(90000)) { $smoke.Kill(); throw 'UI launch timed out' }
           if ($smoke.ExitCode -ne 0 -or -not (Test-Path $env:ASTOCK_SMOKE_OUTPUT)) { throw 'UI launch failed' }
+      - name: Verify silent installer and installed application
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem 'desktop/build/compose/binaries/main/exe/*.exe' | Select-Object -First 1
+          $install = Start-Process $installer.FullName -ArgumentList '/quiet','/norestart' -PassThru
+          if (-not $install.WaitForExit(120000)) { $install.Kill(); throw 'Installer timed out' }
+          if ($install.ExitCode -ne 0) { throw "Installer failed: $($install.ExitCode)" }
+          $link = Get-ChildItem "$env:APPDATA/Microsoft/Windows/Start Menu/Programs" -Filter 'AStockSelection.lnk' -Recurse | Select-Object -First 1
+          if (-not $link) { throw 'Installer did not create the Start Menu shortcut' }
+          $shell = New-Object -ComObject WScript.Shell
+          $installed = $shell.CreateShortcut($link.FullName).TargetPath
+          if (-not (Test-Path $installed)) { throw 'Installed executable missing' }
+          $env:ASTOCK_SELF_TEST_OUTPUT = "$pwd/dist/installed-self-test.txt"
+          $test = Start-Process $installed -ArgumentList '--self-test' -PassThru
+          if (-not $test.WaitForExit(90000)) { $test.Kill(); throw 'Installed application timed out' }
+          if ($test.ExitCode -ne 0 -or -not (Test-Path $env:ASTOCK_SELF_TEST_OUTPUT)) { throw 'Installed application test failed' }
       - name: Prepare Windows package
         shell: pwsh
         env:
@@ -112,6 +135,11 @@ jobs:
           cd dist
           sha256sum *.apk *.exe > SHA256SUMS.txt
           cd ..
+          PREVIOUS=$(gh release list --json tagName,isDraft --jq '.[] | select(.isDraft == false and (.tagName | startswith("apps-v"))) | .tagName' | head -n 1)
+          if [ -n "$PREVIOUS" ]; then
+            gh release download "$PREVIOUS" --pattern android-signature.txt --dir previous-signature
+            diff <(grep 'Signer #1 certificate SHA-256 digest:' previous-signature/android-signature.txt) <(grep 'Signer #1 certificate SHA-256 digest:' dist/android-signature.txt)
+          fi
           TAG="apps-v$APP_VERSION"
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo 'Version exists: bump version.properties before releasing new code.'

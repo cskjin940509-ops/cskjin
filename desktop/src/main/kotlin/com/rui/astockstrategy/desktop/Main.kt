@@ -37,9 +37,19 @@ fun main(args: Array<String>) {
                     androidx.compose.runtime.LaunchedEffect(Unit) {
                         kotlinx.coroutines.delay(12000)
                         val output = Path.of(System.getenv("ASTOCK_SMOKE_OUTPUT") ?: "desktop-smoke.png")
-                        val location = window.locationOnScreen
-                        val shot = java.awt.Robot().createScreenCapture(java.awt.Rectangle(location.x, location.y, window.width, window.height))
-                        javax.imageio.ImageIO.write(shot, "png", output.toFile())
+                        val robot = java.awt.Robot()
+                        for (index in 0..4) {
+                            val location = window.locationOnScreen
+                            if (index > 0) {
+                                robot.mouseMove(location.x + (window.width * (index + 0.5) / 5).toInt(), location.y + window.height - 40)
+                                robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK)
+                                robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK)
+                                kotlinx.coroutines.delay(4000)
+                            }
+                            val shot = robot.createScreenCapture(java.awt.Rectangle(location.x, location.y, window.width, window.height))
+                            val target = if (index == 0) output else output.resolveSibling("desktop-smoke-$index.png")
+                            javax.imageio.ImageIO.write(shot, "png", target.toFile())
+                        }
                         exitApplication()
                     }
                 }

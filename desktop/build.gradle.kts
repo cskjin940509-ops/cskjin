@@ -31,7 +31,7 @@ compose.desktop {
             targetFormats(TargetFormat.Exe)
             packageName = "AStockSelection"
             packageVersion = release.getProperty("versionName")
-            description = "A股筛选池 — 市场、机会、组合与研究"
+            description = "A-share research: markets, opportunities, portfolios and evidence"
             vendor = "AStock Research"
             includeAllModules = true
             windows {
