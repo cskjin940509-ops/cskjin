@@ -7,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,7 +29,7 @@ fun StockTradingPanel26(
     poolLabels: List<String>,
     signal: String?,
 ) {
-    val context = LocalContext.current
+    val context = LocalAppContext.current
     var ledgerVersion by remember(code) { mutableIntStateOf(0) }
     var mode by remember(code) { mutableStateOf("REAL") }
     var side by remember(code) { mutableStateOf<String?>(null) }
@@ -167,7 +166,7 @@ private fun StockTradeDialog26(
     onDismiss: () -> Unit,
     onSaved: () -> Unit,
 ) {
-    val context = LocalContext.current
+    val context = LocalAppContext.current
     val isBuy = side == "BUY"
     var priceText by remember(side, livePrice) { mutableStateOf(livePrice?.let { String.format("%.3f", it) } ?: "") }
     var qtyText by remember(side, maxSellQty) {

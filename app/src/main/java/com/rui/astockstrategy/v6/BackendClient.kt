@@ -1,9 +1,5 @@
 package com.rui.astockstrategy.v6
 
-import android.content.ContentValues
-import android.content.Context
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -43,7 +39,7 @@ object BackendClient {
     private val _health = MutableStateFlow(BackendHealth())
     val health: StateFlow<BackendHealth> = _health.asStateFlow()
 
-    fun initialize(context: Context) {
+    fun initialize(context: AppContext) {
         if (cache == null) {
             synchronized(this) {
                 if (cache == null) cache = BackendCache(context.applicationContext)
@@ -83,7 +79,7 @@ object BackendClient {
                 lastSuccessAt = saved.fetchedAt,
                 lastServerTime = saved.serverTime,
                 lastPath = path,
-                source = "手机数据库缓存",
+                source = "本机数据库缓存",
                 usingCache = true,
                 lastError = readableError(lastFailure)
             )
@@ -105,7 +101,7 @@ object BackendClient {
         connection.instanceFollowRedirects = true
         connection.connectTimeout = 8_000
         connection.readTimeout = 12_000
-        connection.setRequestProperty("User-Agent", "AStockStrategy-Android/4.4")
+        connection.setRequestProperty("User-Agent", "AStockStrategy/${AppVersion.name}")
         connection.setRequestProperty("Accept", "application/json,text/plain,*/*")
         connection.setRequestProperty("Cache-Control", "no-cache")
         return try {
@@ -152,67 +148,8 @@ object BackendClient {
 
 class BackendUnavailableException(message: String, cause: Throwable?) : Exception(message, cause)
 
-private data class CachedPayload(
+internal data class CachedPayload(
     val body: String,
     val fetchedAt: Long,
     val serverTime: String?
 )
-
-private class BackendCache(context: Context) : SQLiteOpenHelper(
-    context,
-    "astock_backend_cache.db",
-    null,
-    1
-) {
-    override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL(
-            """
-            CREATE TABLE backend_payload (
-                path TEXT PRIMARY KEY,
-                body TEXT NOT NULL,
-                fetched_at INTEGER NOT NULL,
-                source_url TEXT,
-                server_time TEXT
-            )
-            """.trimIndent()
-        )
-    }
-
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) = Unit
-
-    fun put(path: String, body: String, fetchedAt: Long, sourceUrl: String, serverTime: String?) {
-        val values = ContentValues().apply {
-            put("path", path)
-            put("body", body)
-            put("fetched_at", fetchedAt)
-            put("source_url", sourceUrl)
-            put("server_time", serverTime)
-        }
-        writableDatabase.insertWithOnConflict(
-            "backend_payload",
-            null,
-            values,
-            SQLiteDatabase.CONFLICT_REPLACE
-        )
-    }
-
-    fun get(path: String): CachedPayload? {
-        readableDatabase.query(
-            "backend_payload",
-            arrayOf("body", "fetched_at", "server_time"),
-            "path = ?",
-            arrayOf(path),
-            null,
-            null,
-            null,
-            "1"
-        ).use { cursor ->
-            if (!cursor.moveToFirst()) return null
-            return CachedPayload(
-                body = cursor.getString(0),
-                fetchedAt = cursor.getLong(1),
-                serverTime = cursor.getString(2)
-            )
-        }
-    }
-}

@@ -1,3 +1,4 @@
+import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -14,10 +15,11 @@ android {
         applicationId = "com.rui.astockstrategy.selection"
         minSdk = 26
         targetSdk = 36
-        versionCode = 46
-        versionName = "4.6.0"
+        versionCode = rootProject.file("version.properties").inputStream().use { Properties().apply { load(it) }.getProperty("versionCode").toInt() }
+        versionName = rootProject.file("version.properties").inputStream().use { Properties().apply { load(it) }.getProperty("versionName") }
     }
 
+    sourceSets["main"].java.srcDir(rootProject.layout.buildDirectory.dir("generated/version"))
     buildFeatures { compose = true }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -43,3 +45,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }
+
+tasks.named("preBuild") { dependsOn(rootProject.tasks.named("generateAppVersion")) }

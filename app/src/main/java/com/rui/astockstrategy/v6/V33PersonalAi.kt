@@ -1,6 +1,5 @@
 package com.rui.astockstrategy.v6
 
-import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -8,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,8 +46,8 @@ private suspend fun fetch33(): JSONObject = withContext(Dispatchers.IO) {
 private object PersonalStore33 {
     private const val PREF = "ai_personal_dynamic_v33"
     private const val KEY = "state"
-    fun load(ctx: Context): JSONObject {
-        val prefs = ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE)
+    fun load(ctx: AppContext): JSONObject {
+        val prefs = ctx.getSharedPreferences(PREF, AppContext.MODE_PRIVATE)
         val raw = prefs.getString(KEY, null)
         if (!raw.isNullOrBlank()) {
             val saved = runCatching { JSONObject(raw) }.getOrNull()
@@ -73,7 +71,7 @@ private object PersonalStore33 {
             put("createdAt", System.currentTimeMillis())
         }
     }
-    fun save(ctx: Context, s: JSONObject) { ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).edit().putString(KEY, s.toString()).apply() }
+    fun save(ctx: AppContext, s: JSONObject) { ctx.getSharedPreferences(PREF, AppContext.MODE_PRIVATE).edit().putString(KEY, s.toString()).apply() }
 }
 
 private fun cnNow33(): ZonedDateTime = ZonedDateTime.now(ZoneId.of("Asia/Shanghai"))
@@ -126,7 +124,7 @@ private fun nav33(s: JSONObject, prices: Map<String,Double>): Double {
 
 @Composable
 fun PersonalAiPanel33() {
-    val ctx=LocalContext.current
+    val ctx=LocalAppContext.current
     var state by remember { mutableStateOf(PersonalStore33.load(ctx)) }
     var data by remember { mutableStateOf<JSONObject?>(null) }
     var capitalText by remember { mutableStateOf(String.format("%.0f",d33(state,"configuredCapital")?:P33_DEFAULT_CAPITAL)) }

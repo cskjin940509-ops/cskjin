@@ -1,63 +1,121 @@
-name: Build AStock v4 Codex
-
+name: Build Android and Windows together
 on:
   push:
-    branches: [ codex/v4-latest-framework, codex/strategy-decision-ui ]
-    paths-ignore:
-      - ci-output/**
+    branches: [codex/v4-latest-framework, codex/windows-android-release]
+    paths-ignore: ['ci-output/**']
   workflow_dispatch:
-
 permissions:
-  contents: write
-
+  contents: read
+concurrency:
+  group: astock-apps-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
-  build:
+  verify:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: python tools/verify_shared_release.py
+      - run: python tools/verify_backend_contract.py
+      - id: version
+        run: echo "version=$(sed -n 's/^versionName=//p' version.properties)" >> "$GITHUB_OUTPUT"
+  android:
+    needs: verify
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
+        with: {distribution: temurin, java-version: '17'}
       - uses: android-actions/setup-android@v3
-      - name: Install Android SDK
-        run: |
-          yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager "platforms;android-36" "build-tools;35.0.0" "platform-tools"
-      - uses: gradle/actions/setup-gradle@v4
+      - run: sdkmanager "platforms;android-36" "build-tools;35.0.0"
+      - uses: actions/cache@v4
         with:
-          gradle-version: '8.13'
-      - name: Verify production backend contracts
-        run: python tools/verify_backend_contract.py
-      - name: Assemble and retain diagnostics
-        shell: bash
+          path: ~/.android/debug.keystore
+          key: astock-android-signing-v47
+      - uses: gradle/actions/setup-gradle@v4
+        with: {gradle-version: '8.13'}
+      - name: Build Android from shared sources
+        run: gradle :app:assembleDebug --stacktrace
+      - name: Prepare Android package
+        env:
+          APP_VERSION: ${{ needs.verify.outputs.version }}
         run: |
-          mkdir -p ci-output
-          set +e
-          gradle :app:assembleDebug --stacktrace > ci-output/build.log 2>&1
-          status=$?
-          set -e
-          printf '%s\n' "$status" > ci-output/build-status.txt
-          if [ "$status" -eq 0 ]; then
-            cp app/build/outputs/apk/debug/app-debug.apk ci-output/AStockSelection-v4.6.apk
-          else
-            rm -f ci-output/AStockSelection-v4.6.apk
-          fi
-      - name: Publish branch-local build result
-        shell: bash
+          mkdir -p dist
+          cp app/build/outputs/apk/debug/app-debug.apk "dist/AStockSelection-$APP_VERSION-Android.apk"
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --print-certs "dist/AStockSelection-$APP_VERSION-Android.apk" > dist/android-signature.txt
+          printf '%s\n' "$GITHUB_SHA" > dist/android-source-sha.txt
+      - uses: actions/upload-artifact@v4
+        with: {name: android-package, path: dist/, if-no-files-found: error}
+  windows:
+    needs: verify
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '17'}
+      - uses: gradle/actions/setup-gradle@v4
+        with: {gradle-version: '8.13'}
+      - name: Ensure Windows installer tools
+        shell: pwsh
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f ci-output/build.log ci-output/build-status.txt
-          if [ -f ci-output/AStockSelection-v4.6.apk ]; then
-            git add -f ci-output/AStockSelection-v4.6.apk
-          else
-            git rm --ignore-unmatch ci-output/AStockSelection-v4.6.apk
+          if (-not (Get-Command candle.exe -ErrorAction SilentlyContinue)) {
+            choco install wixtoolset --version=3.14.1 -y --no-progress --allow-downgrade
+            if ($LASTEXITCODE -ne 0) { throw 'WiX installation failed' }
+            Get-ChildItem 'C:\Program Files (x86)' -Directory -Filter 'WiX Toolset*' | ForEach-Object { "$($_.FullName)\bin" >> $env:GITHUB_PATH }
+          }
+      - name: Build Windows installer with bundled runtime
+        run: gradle -PdesktopOnly=true :desktop:packageExe :desktop:createDistributable --stacktrace
+      - name: Verify packaged storage and UI launch
+        shell: pwsh
+        run: |
+          New-Item dist -ItemType Directory -Force | Out-Null
+          $exe = Resolve-Path 'desktop/build/compose/binaries/main/app/AStockSelection/AStockSelection.exe'
+          $env:ASTOCK_SELF_TEST_OUTPUT = "$pwd/dist/desktop-self-test.txt"
+          $test = Start-Process $exe -ArgumentList '--self-test' -PassThru
+          if (-not $test.WaitForExit(90000)) { $test.Kill(); throw 'Storage test timed out' }
+          if ($test.ExitCode -ne 0 -or -not (Test-Path $env:ASTOCK_SELF_TEST_OUTPUT)) { throw 'Runtime test failed' }
+          $env:ASTOCK_SMOKE_OUTPUT = "$pwd/dist/desktop-smoke.png"
+          $smoke = Start-Process $exe -ArgumentList '--smoke-test' -PassThru
+          if (-not $smoke.WaitForExit(90000)) { $smoke.Kill(); throw 'UI launch timed out' }
+          if ($smoke.ExitCode -ne 0 -or -not (Test-Path $env:ASTOCK_SMOKE_OUTPUT)) { throw 'UI launch failed' }
+      - name: Prepare Windows package
+        shell: pwsh
+        env:
+          APP_VERSION: ${{ needs.verify.outputs.version }}
+        run: |
+          Copy-Item (Get-ChildItem 'desktop/build/compose/binaries/main/exe/*.exe' | Select-Object -First 1) "dist/AStockSelection-$env:APP_VERSION-Windows-x64-Setup.exe"
+          Set-Content dist/windows-source-sha.txt $env:GITHUB_SHA
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: windows-package, path: dist/, if-no-files-found: warn}
+  release:
+    needs: [verify, android, windows]
+    if: github.ref == 'refs/heads/codex/v4-latest-framework'
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: {path: dist, merge-multiple: true}
+      - name: Publish both packages as one version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APP_VERSION: ${{ needs.verify.outputs.version }}
+        run: |
+          test "$(cat dist/android-source-sha.txt | tr -d '\r\n')" = "$GITHUB_SHA"
+          test "$(cat dist/windows-source-sha.txt | tr -d '\r\n')" = "$GITHUB_SHA"
+          test -s "dist/AStockSelection-$APP_VERSION-Android.apk"
+          test -s "dist/AStockSelection-$APP_VERSION-Windows-x64-Setup.exe"
+          cd dist
+          sha256sum *.apk *.exe > SHA256SUMS.txt
+          cd ..
+          TAG="apps-v$APP_VERSION"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo 'Version exists: bump version.properties before releasing new code.'
+            exit 1
           fi
-          git diff --cached --quiet && exit 0
-          git commit -m "ci: publish v4 build result [skip ci]"
-          git push origin HEAD:${{ github.ref_name }}
-
-      - name: Fail workflow on compiler error
-        run: test "$(cat ci-output/build-status.txt)" = 0
+          gh release create "$TAG" dist/* --target "$GITHUB_SHA" --title "A股筛选池 $APP_VERSION · Windows + Android" --notes-file RELEASE_NOTES.md --draft
+          gh release edit "$TAG" --draft=false --latest

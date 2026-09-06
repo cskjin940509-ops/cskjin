@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "AStockStrategy"
-include(":app")
+if (!providers.gradleProperty("desktopOnly").isPresent) include(":app")
+include(":desktop")
