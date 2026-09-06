@@ -7,14 +7,14 @@
     "missing-original-strategy-version",
     "missing-original-stock-metadata:17",
     "same-day-frozen-market-snapshot-missing",
-    "raw-price-cross-source-incomplete:7/17",
+    "raw-price-cross-source-incomplete:1/17",
     "original-factor-provenance-incomplete",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
     "total": 17,
-    "verified": 7,
-    "coveragePct": 41.18,
+    "verified": 1,
+    "coveragePct": 5.88,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
@@ -25,27 +25,25 @@
         "reason": null,
         "providersWithRow": [
           "腾讯",
-          "东方财富"
+          "Yunai"
         ]
       },
       "002384": {
-        "verified": true,
-        "rawClose": 217.66,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "002916": {
-        "verified": true,
-        "rawClose": 392.9,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300308": {
@@ -58,13 +56,12 @@
         ]
       },
       "300394": {
-        "verified": true,
-        "rawClose": 286.56,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300476": {
@@ -77,13 +74,12 @@
         ]
       },
       "300502": {
-        "verified": true,
-        "rawClose": 466.68,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "300604": {
@@ -105,13 +101,12 @@
         ]
       },
       "688008": {
-        "verified": true,
-        "rawClose": 224.37,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "688012": {
@@ -133,13 +128,12 @@
         ]
       },
       "688072": {
-        "verified": true,
-        "rawClose": 719.01,
-        "maxRelDiff": 0.0,
-        "reason": null,
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
         "providersWithRow": [
-          "腾讯",
-          "东方财富"
+          "腾讯"
         ]
       },
       "688120": {
@@ -292,5 +286,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-09-06T10:31:09+08:00"
+  "auditedAt": "2026-09-06T11:51:21+08:00"
 }

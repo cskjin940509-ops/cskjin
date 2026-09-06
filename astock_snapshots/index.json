@@ -3593,14 +3593,14 @@
       }
     },
     "sectorPerformance": {},
-    "trackingUpdatedAt": "2026-09-06T03:02:33+08:00",
+    "trackingUpdatedAt": "2026-09-06T11:56:42+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "audit": {
       "status": "PartiallyVerified",
@@ -3609,17 +3609,17 @@
         "missing-original-strategy-version",
         "missing-original-stock-metadata:17",
         "same-day-frozen-market-snapshot-missing",
-        "raw-price-cross-source-incomplete:7/17",
+        "raw-price-cross-source-incomplete:1/17",
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-06T10:31:09+08:00",
+      "auditedAt": "2026-09-06T11:51:21+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 17,
-          "verified": 7,
-          "coveragePct": 41.18,
+          "verified": 1,
+          "coveragePct": 5.88,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
@@ -8867,7 +8867,7 @@
         "raw-price-cross-source-incomplete:0/14",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-06T10:31:09+08:00",
+      "auditedAt": "2026-09-06T11:51:21+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -8930,14 +8930,14 @@
         }
       }
     },
-    "trackingUpdatedAt": "2026-09-06T03:02:33+08:00",
+    "trackingUpdatedAt": "2026-09-06T11:56:42+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingDisplayStatus": "ReferenceOnly",
     "trackingDisplayNote": "价格路径通过入场价验证后可展示参考跟踪；该批次仍不进入胜率、Alpha或因子有效性统计。",
@@ -14345,14 +14345,14 @@
       "state": "可更新后续收益",
       "note": "信号日当天涨跌属于当日行情表现，不计作策略可交易收益。"
     },
-    "trackingUpdatedAt": "2026-09-06T03:02:33+08:00",
+    "trackingUpdatedAt": "2026-09-06T11:56:42+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-09-04T15:47:57+08:00",
@@ -22099,7 +22099,7 @@
         "raw-price-cross-source-incomplete:0/18",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-06T10:31:09+08:00",
+      "auditedAt": "2026-09-06T11:51:21+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -22262,14 +22262,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-06T03:02:33+08:00",
+    "trackingUpdatedAt": "2026-09-06T11:56:42+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-09-04T15:47:57+08:00",
@@ -28190,7 +28190,7 @@
         "raw-price-cross-source-incomplete:0/18",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-06T10:31:09+08:00",
+      "auditedAt": "2026-09-06T11:51:21+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -28353,14 +28353,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-06T03:02:33+08:00",
+    "trackingUpdatedAt": "2026-09-06T11:56:42+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-09-04T15:47:57+08:00",
@@ -33944,7 +33944,7 @@
         "raw-price-cross-source-incomplete:0/17",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-06T10:31:09+08:00",
+      "auditedAt": "2026-09-06T11:51:21+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -34107,14 +34107,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-06T03:02:33+08:00",
+    "trackingUpdatedAt": "2026-09-06T11:56:42+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-09-04T15:47:57+08:00",
@@ -39787,14 +39787,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-06T03:02:33+08:00",
+    "trackingUpdatedAt": "2026-09-06T11:56:42+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-09-04T15:47:57+08:00",
@@ -44236,7 +44236,7 @@
         "raw-price-cross-source-incomplete:0/16",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-06T10:31:09+08:00",
+      "auditedAt": "2026-09-06T11:51:21+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -44399,14 +44399,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-06T03:02:33+08:00",
+    "trackingUpdatedAt": "2026-09-06T11:56:42+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-09-04T15:47:57+08:00",
