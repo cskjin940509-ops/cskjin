@@ -39,6 +39,7 @@ jobs:
     timeout-minutes: 18
     steps:
       - name: 记录市场网关运行编号
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

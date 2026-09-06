@@ -27,6 +27,7 @@ jobs:
     timeout-minutes: 28
     steps:
       - name: 记录历史重建运行编号
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

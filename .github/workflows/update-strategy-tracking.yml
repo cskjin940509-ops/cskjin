@@ -28,6 +28,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - name: 记录收益跟踪运行编号
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

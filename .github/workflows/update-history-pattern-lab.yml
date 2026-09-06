@@ -26,6 +26,7 @@ jobs:
     timeout-minutes: 12
     steps:
       - name: 记录历史研究运行编号
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
