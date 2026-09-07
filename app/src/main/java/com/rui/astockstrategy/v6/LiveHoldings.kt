@@ -39,7 +39,8 @@ object LiveHoldings {
             val at=stamp(q?.quoteTimestamp)
             val baseline=stamp(row.optString("valuationQuoteAt"))?:stamp(snapshot?.optString("updatedAt"))
             val current=q!=null&&usable(q,now)&&at!=null&&baseline!=null&&(at>=baseline||(!trading(now)&&baseline.atZone(zone).toLocalDate().toString()==today))
-            row.put("displayQuoteAt",JSONObject.NULL).put("marketChangePct",JSONObject.NULL)
+            row.put("displayQuoteAt",JSONObject.NULL)
+            if(stamp(row.optString("valuationQuoteAt"))?.atZone(zone)?.toLocalDate()?.toString()!=today) row.put("marketChangePct",JSONObject.NULL)
             if(current) {
                 covered++; if(oldest==null||at!!<oldest) oldest=at
                 val price=q!!.price!!; val qty=row.optInt("qty"); val avg=row.optDouble("avgCost",Double.NaN)
@@ -51,6 +52,11 @@ object LiveHoldings {
         }
         val summary=snapshot?.optJSONObject("summary")?.let { JSONObject(it.toString()) }
         if(summary!=null) {
+            val dailyRows=report?.optJSONArray("rows")
+            val closeRow=(0 until (dailyRows?.length()?:0)).mapNotNull { dailyRows?.optJSONObject(it) }.firstOrNull { it.optString("date")==today }
+            if(closeRow!=null && kotlin.math.abs(closeRow.optDouble("closeAssets",Double.NaN)-summary.optDouble("totalAssets",Double.NaN))<.02) {
+                summary.put("todayPnl",closeRow.opt("dailyPnl")?:JSONObject.NULL).put("todayReturnPct",closeRow.opt("dailyReturnPct")?:JSONObject.NULL)
+            }
             val m=summary.optDouble("marketValue",Double.NaN); val p=summary.optDouble("floatingPnl",Double.NaN)
             if(m.isFinite()&&p.isFinite()&&m-p>0) summary.put("holdingReturnPct",p/(m-p)*100)
         }
@@ -68,7 +74,7 @@ object LiveHoldings {
                     val e=events?.optJSONObject(i)?:continue
                     if(e.optString("timestamp").take(10)==today) flow+=e.optDouble("cashContribution",0.0)
                 }
-                if(denominator.isFinite()&&denominator>0&&snapshot?.optString("updatedAt")?.take(10)==today&&report?.optString("generatedAt")?.take(10)==today&&report.optBoolean("ledgerReconciled")) {
+                if(denominator.isFinite()&&denominator>0&&snapshot?.optString("updatedAt")?.take(10)==today&&report?.optString("generatedAt")?.take(10)==today&&report?.optBoolean("ledgerReconciled")==true) {
                     summary.put("todayPnl",assets-denominator-flow).put("todayReturnPct",(assets-denominator-flow)/denominator*100)
                 } else summary.put("todayPnl",JSONObject.NULL).put("todayReturnPct",JSONObject.NULL)
             }

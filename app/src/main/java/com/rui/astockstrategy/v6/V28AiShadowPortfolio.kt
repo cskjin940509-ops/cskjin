@@ -263,7 +263,7 @@ fun AiShadowPortfolioScreen28() {
         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
         verticalArrangement = Arrangement.spacedBy(if (page == "持仓") 1.dp else 10.dp)
     ) {
-        if (page != "持仓") item {
+        if (page != "持仓" && page != "报表") item {
             Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                 Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
