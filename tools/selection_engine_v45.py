@@ -31,6 +31,14 @@ def prepare_quotes(codes):
     gateway = base.read_json(base.ROOT / 'astock_gateway/latest.json', {})
     market = gateway.get('marketSnapshot') or radar.get('marketSnapshot') or {}
     data = feeds.enrich(state, radar, quotes, now) if radar.get('date') == now.date().isoformat() else {}
+    # Slow evidence collection must not leave the execution price at its earlier timestamp.
+    if (base.now_cn() - now).total_seconds() > 10:
+        refreshed = ORIGINAL_QUOTES(codes)
+        for code, quote in refreshed.items():
+            at = rules.stamp(quote.get('quoteTimestamp') or quote.get('quoteTime'))
+            before = rules.stamp((quotes.get(code) or {}).get('quoteTimestamp'))
+            if at and (not before or at > before): quotes[code] = quote
+        now = base.now_cn()
     CONTEXT.clear()
     CONTEXT.update(radar=radar, quotes=quotes, data=data,
                    market=rules.market_regime(market, now, radar.get('macroEvidence')))
@@ -168,7 +176,7 @@ def execute_pending(state, ledger, prices):
             pending.pop(code, None); continue
         emergency = order['reasonCode'] in ('HARD_STOP', 'TRAIL_STOP', 'PORTFOLIO_RISK', 'EMERGENCY_EXIT')
         if not emergency and not rules.normal_window(now):
-            continue
+            order['state'] = 'WAIT_WINDOW'; continue
         if not own_quote_ok(code):
             order['state'] = 'WAIT_FRESH_QUOTE'; continue
         qty = min(order['remainingQty'], execution.sellable_qty(pos, today))
@@ -178,6 +186,8 @@ def execute_pending(state, ledger, prices):
         if not emergency:
             nav, _ = base.portfolio_nav(state, prices)
             qty = min(qty, int(turnover_room(state, ledger, nav) / (price * 1.01) / 100) * 100)
+        if qty <= 0:
+            order['state'] = 'WAIT_TURNOVER'; continue
         row = execution.reduce_or_sell(state, ledger, pos, qty, price, 0, order['reasonZh'])
         if row:
             annotate(state, row, order['reasonCode'], order['signal'])
@@ -236,7 +246,8 @@ def evaluate_t(state, ledger, prices, radar):
                           for k, p in state.get('positions', {}).items() if p.get('correlationGroup', 'UNVERIFIED_GROUP') == group)
         room = min(room, max(0, .35 * nav - group_value))
         qty = min(remaining, int(room / (price * 1.01) / 100) * 100)
-        if qty < 100: continue
+        if qty < 100:
+            t['executionStatus'] = 'INSUFFICIENT_CASH_OR_RISK_ROOM'; continue
         buy_plan = base.fund.plan_execution(state, side='BUY', code=code, name=pos['name'], requested_qty=qty,
                                            reference_price=price, market=base.EXECUTION_MARKET.get(code) or {}, day=today)
         if not buy_plan.get('allowed'): continue
@@ -360,7 +371,7 @@ def build_latest(state, ledger, prices, radar):
         study.quote_price(quotes.get(c) or {}, now, closing=True) is not None for c in held)
     if close_ok:
         for point in reversed(state.get('navHistory') or []):
-            if point.get('date') == today and point.get('timestamp') == base.iso():
+            if point.get('date') == today and point.get('time', '') >= '15:00:00':
                 point['isVerifiedClose'] = True; break
     comparison = update_no_t_control(state, ledger, prices, radar, close_ok)
     simple_comparison = update_no_t_control(state, ledger, prices, radar, close_ok, 'timingControl', 'FIXED_HOLD')
@@ -408,6 +419,9 @@ def build_latest(state, ledger, prices, radar):
                             'executionModel': 'v3-liquidity-capacity-point-in-time'}
     for row in out.get('positions') or []:
         pos = held.get(row.get('code'), {})
+        quote = quotes.get(row.get('code')) or {}
+        row['valuationQuoteAt'] = quote.get('quoteTimestamp') or quote.get('quoteTime')
+        row['marketChangePct'] = quote.get('changePct')
         row['decisionPlan'] = study.holding_plan(pos, obj['pendingExits'].get(row.get('code')), own_quote_ok(row.get('code')))
         row['currentActionZh'] = row['decisionPlan']['actionZh']
         row.update({k: pos.get(k) for k in ('holdingState', 'hardStopPrice', 'trailingStopPrice',
@@ -584,7 +598,9 @@ def evaluate_entries(state, ledger, radar, prices):
     pending_core = obj.setdefault('pendingBuys', {})
     for t in targets:
         code = t['code']; c = confirmations.setdefault(code, {})
+        t['executionStatus'] = 'EVALUATING'
         if t['rejections'] or not risk['allowNew']:
+            t['executionStatus'] = 'BLOCKED_CONDITIONS_OR_RISK'
             c.clear(); pending_core.pop(code, None); continue
         # Target confirmation counts unique timestamped observations separated >=3 minutes.
         at = rules.stamp((quotes.get(code) or {}).get('quoteTime'))
@@ -594,6 +610,7 @@ def evaluate_entries(state, ledger, radar, prices):
         if at and (not previous or (at - previous).total_seconds() >= 180):
             c.update(at=at.isoformat(), weight=weight, count=int(c.get('count', 0)) + 1)
         if c.get('count', 0) < 3 or not rules.normal_window(now) or code in obj['pendingExits']:
+            t['executionStatus'] = 'WAIT_CONFIRMATION' if c.get('count', 0) < 3 else 'WAIT_WINDOW_OR_EXIT'
             continue
         pos = state.get('positions', {}).get(code)
         if any(x['code'] == code and x.get('remainingQty', 0) > 0 and x['status'] == 'OPEN' for x in obj['tCycles']):
@@ -601,7 +618,8 @@ def evaluate_entries(state, ledger, radar, prices):
         nav, mv = base.portfolio_nav(state, prices)
         cw, sw, _ = base.current_weights(state, prices)
         delta = weight - cw.get(code, 0)
-        if pos and delta < .03 - 1e-7 and code not in pending_core: continue
+        if pos and delta < .03 - 1e-7 and code not in pending_core:
+            t['executionStatus'] = 'BELOW_REBALANCE_THRESHOLD'; continue
         # Unknown correlation groups are conservatively treated as one group.
         group = t.get('correlationGroup', 'UNVERIFIED_GROUP')
         group_value = sum(int(p['qty']) * prices.get(k, p.get('lastPrice', p['avgCost']))
@@ -616,6 +634,7 @@ def evaluate_entries(state, ledger, radar, prices):
         order = pending_core[code]
         reason = '简单持有对照：首个可行窗口建仓/加仓' if CONTROL_MODE == 'FIXED_HOLD' else '回撤确认后的分批建仓/加仓'
         row = execution.add_or_buy(state, ledger, t, qty, prices, reason)
+        t['executionStatus'] = 'FILLED' if row else 'WAIT_CAPACITY_OR_LIMIT'
         if row:
             annotate(state, row, 'SIMPLE_ENTRY' if CONTROL_MODE == 'FIXED_HOLD' else 'CONFIRMED_ENTRY', t)
             new_pos = state['positions'][code]
