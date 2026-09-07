@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-06",
-  "generatedAt": "2026-09-06T11:51:24+08:00",
+  "date": "2026-09-07",
+  "generatedAt": "2026-09-07T09:08:10+08:00",
   "phase": "CLOSED_OR_STALE",
   "officialDate": "2026-09-03",
   "officialPlans": [
@@ -143,6 +143,50 @@
       ]
     },
     {
+      "code": "600185",
+      "name": "珠免集团",
+      "sector": "旅游零售Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "盘前观察",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 51.0,
+        "historical": {}
+      },
+      "quote": {
+        "price": 5.48,
+        "changePct": 3.79,
+        "open": 5.56,
+        "high": 5.77,
+        "low": 5.37,
+        "dayLowToHighPct": 7.45,
+        "quoteTime": "20260904161444"
+      },
+      "entryZone": null,
+      "triggerPrice": 4.838,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 51",
+        "距MA20 +3.56 ATR",
+        "主力资金占比 +25.78%"
+      ]
+    },
+    {
       "code": "605580",
       "name": "恒盛能源",
       "sector": "培育钻石",
@@ -185,50 +229,6 @@
         "距MA20 +4.44 ATR",
         "主力资金占比 +34.06%",
         "接近涨停，按追高风险处理"
-      ]
-    },
-    {
-      "code": "600185",
-      "name": "珠免集团",
-      "sector": "旅游零售Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "盘前观察",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 51.0,
-        "historical": {}
-      },
-      "quote": {
-        "price": 5.48,
-        "changePct": 3.79,
-        "open": 5.56,
-        "high": 5.77,
-        "low": 5.37,
-        "dayLowToHighPct": 7.45,
-        "quoteTime": "20260904161444"
-      },
-      "entryZone": null,
-      "triggerPrice": 4.838,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 51",
-        "距MA20 +3.56 ATR",
-        "主力资金占比 +25.78%"
       ]
     },
     {
@@ -708,215 +708,12 @@
       ]
     }
   ],
-  "setupCandidates": [
-    {
-      "code": "600313",
-      "name": "农发种业",
-      "sector": "沪深市场形态扫描",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "盘前观察",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 84.7,
-        "historical": {
-          "samples": 3,
-          "win5D": 1.0,
-          "avg5D": 0.2153,
-          "avgMFE5D": 0.2714,
-          "avgMAE5D": -0.0268
-        }
-      },
-      "quote": {
-        "price": 7.31,
-        "changePct": 1.67,
-        "open": null,
-        "high": 7.5,
-        "low": 6.8,
-        "dayLowToHighPct": 10.29,
-        "quoteTime": null
-      },
-      "entryZone": [
-        7.118,
-        7.262
-      ],
-      "triggerPrice": 7.19,
-      "stopLoss": 6.759,
-      "takeProfit1": 7.837,
-      "takeProfit2": 8.268,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 6.759",
-      "reasons": [
-        "趋势回踩",
-        "形态分 85",
-        "距MA20 +0.92 ATR",
-        "主力资金占比 +3.69%"
-      ],
-      "source": "沪深市场历史形态精筛"
-    },
-    {
-      "code": "002999",
-      "name": "天禾股份",
-      "sector": "沪深市场形态扫描",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "盘前观察",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 82.7,
-        "historical": {
-          "samples": 4,
-          "win5D": 1.0,
-          "avg5D": 0.0621,
-          "avgMFE5D": 0.085,
-          "avgMAE5D": 0.0029
-        }
-      },
-      "quote": {
-        "price": 6.57,
-        "changePct": -0.45,
-        "open": null,
-        "high": 6.74,
-        "low": 6.11,
-        "dayLowToHighPct": 10.31,
-        "quoteTime": null
-      },
-      "entryZone": [
-        6.431,
-        6.561
-      ],
-      "triggerPrice": 6.496,
-      "stopLoss": 6.176,
-      "takeProfit1": 6.976,
-      "takeProfit2": 7.296,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 6.176",
-      "reasons": [
-        "趋势回踩",
-        "形态分 83",
-        "距MA20 +1.11 ATR",
-        "主力资金占比 -6.43%"
-      ],
-      "source": "沪深市场历史形态精筛"
-    },
-    {
-      "code": "002766",
-      "name": "索菱股份",
-      "sector": "沪深市场形态扫描",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "盘前观察",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 86.2,
-        "historical": {
-          "samples": 6,
-          "win5D": 0.8333,
-          "avg5D": 0.019,
-          "avgMFE5D": 0.065,
-          "avgMAE5D": -0.0384
-        }
-      },
-      "quote": {
-        "price": 4.32,
-        "changePct": -1.14,
-        "open": null,
-        "high": 4.81,
-        "low": 4.27,
-        "dayLowToHighPct": 12.65,
-        "quoteTime": null
-      },
-      "entryZone": [
-        4.234,
-        4.301
-      ],
-      "triggerPrice": 4.258,
-      "stopLoss": 4.08,
-      "takeProfit1": 4.548,
-      "takeProfit2": 4.735,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 4.080",
-      "reasons": [
-        "趋势回踩",
-        "形态分 86",
-        "距MA20 +0.45 ATR",
-        "主力资金占比 +11.18%"
-      ],
-      "source": "沪深市场历史形态精筛"
-    },
-    {
-      "code": "603900",
-      "name": "莱绅通灵",
-      "sector": "沪深市场形态扫描",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "盘前观察",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 84.3,
-        "historical": {
-          "samples": 3,
-          "win5D": 0.6667,
-          "avg5D": 0.0555,
-          "avgMFE5D": 0.0963,
-          "avgMAE5D": -0.0405
-        }
-      },
-      "quote": {
-        "price": 6.96,
-        "changePct": 1.75,
-        "open": null,
-        "high": 7.43,
-        "low": 6.76,
-        "dayLowToHighPct": 9.91,
-        "quoteTime": null
-      },
-      "entryZone": [
-        6.883,
-        7.023
-      ],
-      "triggerPrice": 6.953,
-      "stopLoss": 6.536,
-      "takeProfit1": 7.579,
-      "takeProfit2": 7.996,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 6.536",
-      "reasons": [
-        "趋势回踩",
-        "形态分 84",
-        "距MA20 +0.74 ATR",
-        "主力资金占比 +9.87%"
-      ],
-      "source": "沪深市场历史形态精筛"
-    }
-  ],
+  "setupCandidates": [],
   "summary": {
     "official": 16,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 4,
-    "marketPrefilterCount": 220,
-    "marketScannedCount": 220
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -929,20 +726,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "partial",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5556,
-    "uniqueRows": 5156,
-    "pagesRequested": 56,
-    "coveragePct": 92.8,
-    "prefiltered": 220,
-    "historyLoaded": 220,
-    "setupMatches": 10,
-    "historicalEdgeMatches": 4,
-    "selected": 4,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
