@@ -7,3 +7,5 @@
 - 使用 `Build Android and Windows together` 验证两端；两个安装包都成功且来源提交一致，才能发布统一 Release。不要只交付一个平台而宣称同步更新已完成。
 - Windows 打包后检查实际启动、五个主页面截图、本机账本/缓存重开；Android 保留应用ID和持久数据名称。不能把缺失证据默认成通过。
 - Android 签名必须保持可升级。签名校验失败时修复密钥来源，不能删除签名一致性校验来强行发布。
+
+- 2026-09-07 用户明确要求本次4.8.0先发布安卓，Windows暂不构建；以version.properties的releasePlatforms=android控制本次发布，仍保留共享源代码。后续是否恢复双端以用户要求为准。

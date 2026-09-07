@@ -62,7 +62,8 @@ data class Quote(
     val high: Double?,
     val low: Double?,
     val amount: Double?,
-    val quoteTime: String?
+    val quoteTime: String?,
+    val quoteTimestamp: String? = null
 )
 
 data class Board(
@@ -1250,7 +1251,8 @@ object DataApi {
                     high = f.getOrNull(33)?.toDoubleOrNull(),
                     low = f.getOrNull(34)?.toDoubleOrNull(),
                     amount = f.getOrNull(37)?.toDoubleOrNull()?.times(10000.0),
-                    quoteTime = normalizeQuoteTime(f.getOrNull(30))
+                    quoteTime = normalizeQuoteTime(f.getOrNull(30)),
+                    quoteTimestamp = f.getOrNull(30)
                 )
             }
         }
