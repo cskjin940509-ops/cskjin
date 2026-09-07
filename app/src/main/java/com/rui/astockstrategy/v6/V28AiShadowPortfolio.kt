@@ -165,6 +165,7 @@ fun AiShadowPortfolioScreen28() {
     var automationError by remember { mutableStateOf<String?>(null) }
     var ledgerFilter by remember { mutableStateOf("全部") }
     var page by remember { mutableStateOf("持仓") }
+    var accountDetails by remember { mutableStateOf(false) }
     var selectedCode by remember { mutableStateOf<String?>(null) }
     var refreshGeneration by remember { mutableIntStateOf(0) }
     var refreshing by remember { mutableStateOf(false) }
@@ -270,7 +271,7 @@ fun AiShadowPortfolioScreen28() {
         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
         verticalArrangement = Arrangement.spacedBy(if (page == "持仓") 1.dp else 10.dp)
     ) {
-        if (page != "持仓" && page != "报表") item {
+        if (page == "概览" || page == "策略") item {
             Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                 Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -361,12 +362,20 @@ fun AiShadowPortfolioScreen28() {
                             AiMetric28("持仓市值", money28(n28(summary,"marketValue")), AiBlue28, Modifier.weight(1f))
                             AiMetric28("已实现盈亏", money28(n28(summary,"realizedPnl")), pnlColor28(n28(summary,"realizedPnl")), Modifier.weight(1f))
                         }
-                        Text("仓位 ${pct28(n28(summary,"positionPct"))} · 可用 ${money28(n28(summary, "cash"))} · ${pos.size}只 · 模拟组合", fontSize = 10.sp, color = AiMuted28)
-                        Text("快照 ${d?.optString("updatedAt")?.replace("T", " ")?.take(19) ?: "待同步"}", fontSize = 9.sp, color = AiMuted28)
-                        Text(if(allLive) "${if(LiveHoldings.trading(clock)) "直连行情" else "休市行情"} ${marked.oldest?.atZone(ZoneId.of("Asia/Shanghai"))?.toLocalTime()}" else "有效报价 ${marked.covered}/${marked.total} · 汇总使用快照",fontSize=9.sp,color=if(allLive) AiBlue28 else AiAmber28)
-                        if(!allLive&&liveError!=null) Text(liveError!!,fontSize=9.sp,color=AiAmber28)
-                        Text("今日盈亏 ${money28(n28(summary,"todayPnl"))}",fontSize=11.sp,color=pnlColor28(n28(summary,"todayPnl")))
-                        Text(automation?.optString("statusZh")?.takeIf { it.isNotBlank() } ?: "策略状态待同步",fontSize=10.sp,color=AiMuted28,maxLines=2,overflow=TextOverflow.Ellipsis)
+                        Text("仓位 ${weight49(n28(summary,"positionPct"))} · 可用 ${money28(n28(summary, "cash"))} · ${pos.size}只 · 模拟组合", fontSize = 10.sp, color = AiMuted28)
+                        Text("今日盈亏 ${money28(n28(summary,"todayPnl"))} · ${if(allLive) "行情有效" else "快照估值"}",fontSize=11.sp,color=pnlColor28(n28(summary,"todayPnl")))
+                        Text("${if(accountDetails) "收起" else "展开"}账户金额与同步详情",Modifier.clickable { accountDetails = !accountDetails }.padding(vertical=4.dp),fontSize=11.sp,color=AiBlue28)
+                        if(accountDetails) {
+                            val cost = if(d != null && pos.all { it.avgCost != null }) pos.sumOf { it.avgCost!! * it.qty } else null
+                            Text("持仓总成本 ${exactMoney49(cost)}",fontSize=12.sp)
+                            Text("持仓市值 ${exactMoney49(n28(summary,"marketValue"))}",fontSize=12.sp)
+                            Text("可用现金 ${exactMoney49(n28(summary,"cash"))}",fontSize=12.sp)
+                            Text("总资产 ${exactMoney49(n28(summary,"totalAssets"))}",fontSize=12.sp)
+                            Text("快照 ${displayTime28(d?.optString("updatedAt"))}",fontSize=10.sp,color=AiMuted28)
+                            Text("有效报价 ${marked.covered}/${marked.total}",fontSize=10.sp,color=AiMuted28)
+                            if(!allLive && liveError!=null) Text(liveError!!,fontSize=10.sp,color=AiAmber28)
+                            Text(automation?.optString("statusZh")?.takeIf { it.isNotBlank() } ?: "策略状态待同步",fontSize=10.sp,color=AiMuted28)
+                        }
                         TextButton(onClick={page="报表"}) { Text("2000万阶段 · 每日收益曲线 ›",fontSize=12.sp) }
                     }
                 }
