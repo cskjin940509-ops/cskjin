@@ -87,6 +87,45 @@ class PublicationTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "staged"):
             arrival.publish("trade-plan", self.work)
 
+    def test_official_ignores_dirty_and_concurrent_gateway_preserves_tracking(self):
+        (self.work / "astock_snapshots").mkdir()
+        index = self.work / "astock_snapshots/index.json"
+        original = [{"date": "2026-09-03", "status": "Official", "tracking": 1}]
+        index.write_text(json.dumps(original))
+        (self.work / "astock_gateway").mkdir()
+        gateway = self.work / "astock_gateway/latest.json"
+        gateway.write_text('{"price": 1}')
+        self.git(self.work, "add", ".")
+        self.git(self.work, "commit", "-m", "fixtures")
+        self.git(self.work, "push", "origin", "main")
+        other = self.root / "other"
+        self.git(self.root, "clone", "--branch", "main", str(self.remote), str(other))
+        (other / "astock_gateway/latest.json").write_text('{"price": 99}')
+        (other / "astock_snapshots/index.json").write_text(json.dumps([dict(original[0], tracking=2)]))
+        self.git(other, "add", ".")
+        self.git(other, "-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "-m", "new quotes")
+        self.git(other, "push", "origin", "main")
+        new = {"date": "2026-09-04", "status": "Official", "dataValidation": {"status": "Verified"}}
+        index.write_text(json.dumps(original + [new]))
+        gateway.write_text('{"price": 2}')
+        arrival.publish("official", self.work)
+        self.assertEqual('{"price": 99}', self.git(self.remote, "show", "main:astock_gateway/latest.json"))
+        result = json.loads(self.git(self.remote, "show", "main:astock_snapshots/index.json"))
+        self.assertEqual(result, [dict(original[0], tracking=2), new])
+        self.assertEqual('{"price": 2}', gateway.read_text())
+        self.assertEqual(original + [new], json.loads(index.read_text()))
+
+    def test_official_same_date_conflict_and_deletion_rejected(self):
+        original = {"date": "2026-09-03", "status": "Official"}
+        with self.assertRaisesRegex(RuntimeError, "conflict"):
+            arrival.merge_cohorts([original], [dict(original, stocks=[1])], [dict(original, stocks=[2])])
+        with self.assertRaisesRegex(RuntimeError, "deletion"):
+            arrival.merge_cohorts([original], [], [original])
+
+    def test_unverified_new_official_rejected(self):
+        with self.assertRaisesRegex(RuntimeError, "evidence"):
+            arrival.merge_cohorts([], [{"date": "2026-09-04", "status": "Official"}], [])
+
 
 class EventTests(unittest.TestCase):
     def test_dispatch_occurs_only_after_successful_publication(self):

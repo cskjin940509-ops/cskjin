@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -21,6 +22,34 @@ def require(condition: bool, message: str) -> None:
         raise AssertionError(message)
 
 
+def validate_daily_drawdown(latest: dict) -> list[str]:
+    """Distinguish a valid missing-data state from a valid risk measurement."""
+    summary = latest.get("summary") or {}
+    rows = latest.get("dailyPerformance") or []
+    require(summary.get("formalCloseSampleDays") == len(rows), "formal close sample count mismatch")
+    value = summary.get("maxDrawdownPct")
+    status = summary.get("dailyCloseDrawdownStatus")
+    risk = (latest.get("performanceReport") or {}).get("risk") or {}
+    if not rows:
+        require(value is None, "drawdown must be null without verified closes")
+        require(status == "MISSING_VERIFIED_CLOSES", "missing verified closes must be explicitly disclosed")
+        require(risk.get("dailyCloseMaxDrawdownPct") is None, "risk report contradicts missing closes")
+        return ["MISSING_VERIFIED_CLOSES: formal daily drawdown unavailable; legacy values are not verified closes"]
+    require(status == "VALID", "verified close drawdown status mismatch")
+    peak, worst, previous = 1.0, 0.0, ""
+    for row in rows:
+        day, nav = row.get("date"), row.get("closeUnitNav")
+        require(isinstance(day, str) and day > previous, "daily close dates must be unique and sorted")
+        require(type(nav) in (int, float) and math.isfinite(nav) and nav > 0, "invalid daily close NAV")
+        previous = day
+        peak = max(peak, nav)
+        worst = min(worst, (nav / peak - 1) * 100)
+    require(type(value) in (int, float) and math.isfinite(value), "daily drawdown missing with verified samples")
+    require(abs(value - round(worst, 4)) <= 0.0002, "daily drawdown does not match verified closes")
+    require(risk.get("dailyCloseMaxDrawdownPct") == value, "risk report drawdown mismatch")
+    return []
+
+
 def main() -> int:
     try:
         state = load("state.json")
@@ -29,6 +58,7 @@ def main() -> int:
         automation = load("automation.json")
         cycles = load("cycle_log.json")
         summary = latest.get("summary") or {}
+        warnings = validate_daily_drawdown(latest)
 
         require(isinstance(state, dict), "state.json must be an object")
         require(isinstance(latest, dict), "latest.json must be an object")
@@ -84,6 +114,8 @@ def main() -> int:
 
         print(json.dumps({
             "ok": True,
+            "health": "YELLOW" if warnings else "GREEN",
+            "warnings": warnings,
             "capitalCapacity": EXPECTED_CAPITAL,
             "ledgerDecisions": len(ledger),
             "positions": len(positions),

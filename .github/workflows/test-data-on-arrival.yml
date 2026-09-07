@@ -11,6 +11,8 @@ on:
       - 'tools/tracking_arrival_gate.py'
       - 'tools/enrich_slow_money_factors.py'
       - 'tools/test_data_on_arrival.py'
+      - 'tools/test_daily_drawdown_contract.py'
+      - 'tools/validate_ai_shadow_contract.py'
 permissions:
   contents: read
 jobs:
@@ -25,3 +27,4 @@ jobs:
       - name: Verify publication, event routing and trading regressions offline
         run: |
           python -m unittest tools/test_data_on_arrival.py tools/test_selection_research_v46.py tools/test_selection_v45.py tools/test_ai_shadow_portfolio.py
+          python -m unittest tools/test_daily_drawdown_contract.py

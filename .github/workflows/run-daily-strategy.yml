@@ -76,12 +76,21 @@ jobs:
           fi
 
       - name: 补全正式池当日交易事实
+        continue-on-error: true
         env:
           TARGET_DATE: ${{ inputs.target_date }}
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
         run: python tools/enrich_official_trade_metrics.py
 
-      - name: 正式池校验完成立即发布并通知计划与跟踪
+      - name: 保全已验证正式池证据（发布失败仍可恢复）
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-official-${{ github.run_id }}-${{ github.run_attempt }}
+          path: astock_snapshots/index.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: 立即发布正式池核心结果
         env:
           GH_TOKEN: ${{ github.token }}
         run: python tools/publish_data_on_arrival.py official
