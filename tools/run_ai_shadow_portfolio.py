@@ -993,6 +993,7 @@ def _main_impl() -> int:
     codes = list(state.get("positions", {}).keys())
     codes += list((radar.get("stocks") or {}).keys())
     quotes = fetch_tencent_quotes(codes)
+    dt = now_cn()  # Quote/evidence collection may span a session boundary.
     prices: dict[str, float] = {}
     EXECUTION_MARKET = {}
     for code in set(codes):
@@ -1056,10 +1057,14 @@ def _main_impl() -> int:
         cycle_reason = f"后台自动模拟成交{len(actions)}笔"
     else:
         cycle_status = "NO_ACTION"
-        cycle_reason = "后台已完成本轮检查，但目标权重变化未达到交易阈值"
+        from execution_status_v48 import explain
+        cycle_reason = explain(latest)["reasonZh"]
     automation = record_automation_cycle(
         cycle_status, cycle_reason, dt, radar=radar, state=state, ledger=ledger, actions=actions
     )
+    from execution_status_v48 import explain
+    automation["decisionDetails"] = explain(latest)
+    write_json(AUTOMATION_PATH, automation)
     latest["automation"] = automation
     latest["capitalMigrationThisCycle"] = capital_event
     latest["dataFreshness"] = {

@@ -11,6 +11,9 @@ on:
       - 'tools/run_ai_dynamic_portfolio_v2_2.py'
       - 'tools/shadow_fund_v3.py'
       - 'tools/selection_*_v45.py'
+      - 'tools/portfolio_returns_v48.py'
+      - 'tools/execution_status_v48.py'
+      - 'tools/test_reporting_v48.py'
       - 'tools/test_selection_v45.py'
       - 'tools/selection_research_v46.py'
       - 'tools/test_selection_research_v46.py'
@@ -48,7 +51,7 @@ jobs:
       - name: 检查引擎与回归测试
         run: |
           python -m py_compile tools/shadow_fund_v3.py tools/run_ai_shadow_portfolio.py tools/run_ai_dynamic_portfolio_v2.py tools/run_ai_dynamic_portfolio_v2_1.py tools/run_ai_dynamic_portfolio_v2_2.py
-          python -m unittest tools/test_ai_shadow_portfolio.py tools/test_selection_v45.py tools/test_selection_research_v46.py
+          python -m unittest tools/test_ai_shadow_portfolio.py tools/test_selection_v45.py tools/test_selection_research_v46.py tools/test_reporting_v48.py
       - name: 后台自动模拟买卖
         id: engine
         env:
@@ -78,6 +81,14 @@ jobs:
         run: python tools/validate_ai_shadow_contract.py
       - name: 补充发布同期基准
         if: steps.engine.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py portfolio
+
+      - name: Reconstruct daily 20M returns after core publication
+        if: steps.engine.outputs.exit_code == '0'
+        run: python tools/portfolio_returns_v48.py
+      - name: Publish daily return series
         env:
           GH_TOKEN: ${{ github.token }}
         run: python tools/publish_data_on_arrival.py portfolio
