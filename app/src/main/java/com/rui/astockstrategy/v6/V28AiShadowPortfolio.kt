@@ -21,6 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.CancellationException
+import java.time.Instant
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.DayOfWeek
@@ -85,7 +88,8 @@ private data class AiPosition28(
     val code: String, val name: String, val sector: String, val qty: Int,
     val entryPrice: Double?, val avgCost: Double?, val currentPrice: Double?,
     val currentWeightPct: Double?, val floatingPnl: Double?, val floatingReturnPct: Double?,
-    val entryTimestamp: String, val reason: String, val action: String, val invalidation: String
+    val entryTimestamp: String, val reason: String, val action: String, val invalidation: String,
+    val displayQuoteAt: String?, val marketChangePct: Double?
 )
 private data class AiDecision28(
     val id: String, val time: String, val side: String, val code: String, val name: String, val qty: Int,
@@ -112,7 +116,9 @@ private fun positions28(a: JSONArray?): List<AiPosition28> {
             entryTimestamp = x.optString("entryTimestamp"),
             reason = x.optString("buyReasonZh"),
             action = x.optString("currentActionZh"),
-            invalidation = x.optString("invalidationZh")
+            invalidation = x.optString("invalidationZh"),
+            displayQuoteAt = x.optString("displayQuoteAt").takeIf { it.isNotBlank() && it != "null" },
+            marketChangePct = n28(x,"marketChangePct")
         )
     }
 }
@@ -157,26 +163,62 @@ fun AiShadowPortfolioScreen28() {
     var refreshGeneration by remember { mutableIntStateOf(0) }
     var refreshing by remember { mutableStateOf(false) }
 
+    var liveQuotes by remember { mutableStateOf<Map<String,Quote>>(emptyMap()) }
+    var liveError by remember { mutableStateOf<String?>(null) }
+    var returns by remember { mutableStateOf<JSONObject?>(null) }
+    var returnsError by remember { mutableStateOf<String?>(null) }
+    var clock by remember { mutableStateOf(Instant.now()) }
+    LaunchedEffect(Unit) { while(true) { clock=Instant.now(); delay(1000) } }
     LaunchedEffect(refreshGeneration) {
-        while (true) {
-            refreshing = true
-            runCatching { fetchAiShadow28() }
-                .onSuccess { data = it; error = null }
-                .onFailure { error = "影子组合数据暂未同步：${it.message ?: it.javaClass.simpleName}" }
-            runCatching { fetchAiLedger28() }
-                .onSuccess { ledger = it; ledgerError = null }
-                .onFailure { ledgerError = "完整成交账本暂未同步：${it.message ?: it.javaClass.simpleName}" }
-            runCatching { fetchAiAutomation28() }
-                .onSuccess { automation = it; automationError = null }
-                .onFailure { automationError = "后台自动运行状态暂未同步：${it.message ?: it.javaClass.simpleName}" }
-            refreshing = false
-            delay(30000)
+        launch {
+            while(true) {
+                refreshing=true
+                try {
+                    val next=fetchAiShadow28(); val incoming=LiveHoldings.stamp(next.optString("updatedAt")); val previous=LiveHoldings.stamp(data?.optString("updatedAt"))
+                    if(incoming!=null&&(previous==null||incoming>=previous)) { data=next; error=null }
+                    else error="组合返回旧快照，保留当前版本"
+                } catch(e:CancellationException) { throw e } catch(e:Exception) { error="组合同步失败" } finally { refreshing=false }
+                delay(15000)
+            }
+        }
+        launch {
+            while(true) {
+                try { ledger=fetchAiLedger28(); ledgerError=null } catch(e:CancellationException) { throw e } catch(e:Exception) { ledgerError="成交账本暂未同步" }
+                delay(30000)
+            }
+        }
+        launch {
+            while(true) {
+                try { automation=fetchAiAutomation28(); automationError=null } catch(e:CancellationException) { throw e } catch(e:Exception) { automationError="执行状态暂未同步" }
+                delay(15000)
+            }
+        }
+        launch {
+            while(true) {
+                try { returns=JSONObject(BackendClient.fetchText("astock_ai_portfolio/daily_returns.json")); returnsError=null }
+                catch(e:CancellationException) { throw e } catch(e:Exception) { returnsError="每日收益数据暂未同步" }
+                delay(30000)
+            }
         }
     }
-
-    val d = data
-    val summary = d?.optJSONObject("summary")
-    val pos = positions28(d?.optJSONArray("positions"))
+    val codes=positions28(data?.optJSONArray("positions")).map { symbol(it.code) }.sorted()
+    LaunchedEffect(codes.joinToString(","),refreshGeneration) {
+        while(codes.isNotEmpty()) {
+            val started=System.currentTimeMillis()
+            try {
+                val received=DataApi.fetchQuotes(codes)
+                liveQuotes=LiveHoldings.merge(liveQuotes.filterKeys { it in codes },received,Instant.now())
+                liveError=if(codes.all { received[it]?.let { q -> LiveHoldings.usable(q,Instant.now()) }==true }) null else "部分报价缺失或过期"
+            } catch(e:CancellationException) { throw e } catch(e:Exception) { liveError="直连行情暂不可用" }
+            val interval=if(LiveHoldings.trading(Instant.now())) 5000L else 30000L
+            delay((interval-(System.currentTimeMillis()-started)).coerceAtLeast(1000L))
+        }
+    }
+    val d=data
+    val marked=LiveHoldings.value(d,liveQuotes,returns,clock)
+    val allLive=marked.total>0&&marked.covered==marked.total
+    val summary=if(page=="持仓") marked.summary else d?.optJSONObject("summary")
+    val pos=positions28(marked.positions)
     val today = decisions28(d?.optJSONArray("todayDecisions")).asReversed()
     val allDecisions = decisions28(ledger).asReversed()
     val visibleDecisions = allDecisions.filter {
@@ -221,7 +263,7 @@ fun AiShadowPortfolioScreen28() {
         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
         verticalArrangement = Arrangement.spacedBy(if (page == "持仓") 1.dp else 10.dp)
     ) {
-        if (page != "持仓") item {
+        if (page != "持仓" && page != "报表") item {
             Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                 Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -298,22 +340,27 @@ fun AiShadowPortfolioScreen28() {
                 Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(12.dp)) {
                     Column(Modifier.fillMaxWidth().padding(10.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("总资产 ${money28(n28(summary, "totalAssets"))}", Modifier.weight(1f), fontSize = 19.sp, fontWeight = FontWeight.Bold)
+                            Text("${if(allLive) "估算资产" else "快照资产"} ${money28(n28(summary, "totalAssets"))}", Modifier.weight(1f), fontSize = 19.sp, fontWeight = FontWeight.Bold)
                             Text(if (refreshing) "刷新中" else "刷新", Modifier.clickable(enabled = !refreshing) { refreshGeneration++ }.padding(10.dp), color = AiBlue28, fontSize = 12.sp)
                         }
                         Row {
                             AiMetric28("持仓盈亏", money28(n28(summary, "floatingPnl")), pnlColor28(n28(summary, "floatingPnl")), Modifier.weight(1f))
                             AiMetric28("今日收益", pct28(n28(summary, "todayReturnPct")), pnlColor28(n28(summary, "todayReturnPct")), Modifier.weight(1f))
-                            AiMetric28("总仓位", pct28(n28(summary, "positionPct")), AiBlue28, Modifier.weight(1f))
+                            AiMetric28("持仓收益率", pct28(n28(summary, "holdingReturnPct")), pnlColor28(n28(summary,"holdingReturnPct")), Modifier.weight(1f))
                         }
-                        Text("可用 ${money28(n28(summary, "cash"))} · ${pos.size}只 · 今日${today.size}笔 · 模拟组合", fontSize = 10.sp, color = AiMuted28)
+                        Text("仓位 ${pct28(n28(summary,"positionPct"))} · 可用 ${money28(n28(summary, "cash"))} · ${pos.size}只 · 模拟组合", fontSize = 10.sp, color = AiMuted28)
                         Text("快照 ${d?.optString("updatedAt")?.replace("T", " ")?.take(19) ?: "待同步"}", fontSize = 9.sp, color = AiMuted28)
+                        Text(if(allLive) "${if(LiveHoldings.trading(clock)) "直连行情" else "休市行情"} ${marked.oldest?.atZone(ZoneId.of("Asia/Shanghai"))?.toLocalTime()}" else "有效报价 ${marked.covered}/${marked.total} · 汇总使用快照",fontSize=9.sp,color=if(allLive) AiBlue28 else AiAmber28)
+                        if(!allLive&&liveError!=null) Text(liveError!!,fontSize=9.sp,color=AiAmber28)
+                        Text("今日盈亏 ${money28(n28(summary,"todayPnl"))}",fontSize=11.sp,color=pnlColor28(n28(summary,"todayPnl")))
+                        Text(automation?.optString("statusZh")?.takeIf { it.isNotBlank() } ?: "策略状态待同步",fontSize=10.sp,color=AiMuted28,maxLines=2,overflow=TextOverflow.Ellipsis)
+                        TextButton(onClick={page="报表"}) { Text("2000万阶段 · 每日收益曲线 ›",fontSize=12.sp) }
                     }
                 }
             }
             item {
                 Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp)) {
-                    listOf("名称 / 仓位", "现价 / 成本", "盈亏 / 收益率", "市值 / 股数").forEach { label ->
+                    listOf("名称 / 股数", "现价 / 今日涨幅", "盈亏 / 持仓收益", "成本 / 仓位").forEach { label ->
                         Text(label, Modifier.weight(1f), fontSize = 10.sp, color = AiMuted28, textAlign = if (label.startsWith("名称")) TextAlign.Start else TextAlign.End)
                     }
                 }
@@ -355,6 +402,7 @@ fun AiShadowPortfolioScreen28() {
         }
 
         if (page == "报表") {
+            item { ReturnsCurve48(returns,returnsError) }
             item { AiNavChartCard28(daily) }
             item { AiPrivateFundReport28(d) }
             item { AiBenchmarkCard28(d) }
@@ -565,6 +613,8 @@ private fun AiPositionCard28(p: AiPosition28) {
                 AiMetric28("现价", price28(p.currentPrice), pnlColor28(p.floatingReturnPct), Modifier.weight(1f))
                 AiMetric28("当前仓位", pct28(p.currentWeightPct), AiBlue28, Modifier.weight(1f))
             }
+            Text("今日涨幅 ${pct28(p.marketChangePct)} · 持仓收益 ${pct28(p.floatingReturnPct)}",fontSize=12.sp)
+            Text(p.displayQuoteAt?.let { "报价 $it" } ?: "价格来自组合快照",fontSize=10.sp,color=AiMuted28)
             Text("买入时点 ${p.entryTimestamp.replace("T", " ").take(16)}", color = AiMuted28, fontSize = 9.sp)
             Surface(color = Color(0xFFEFF3FF), shape = RoundedCornerShape(9.dp)) {
                 Column(Modifier.fillMaxWidth().padding(8.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -758,19 +808,19 @@ private fun AiCompactPosition28(p: AiPosition28, onClick: () -> Unit) {
     Row(Modifier.fillMaxWidth().background(Color.White).clickable(onClick = onClick).heightIn(min = 52.dp).padding(horizontal = 8.dp, vertical = 7.dp), verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
             Text(p.name, fontSize = 12.sp, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text("${p.code} · ${pct28(p.currentWeightPct)}", fontSize = 9.sp, color = AiMuted28, maxLines = 1)
+            Text("${p.code} · ${p.qty}股", fontSize = 9.sp, color = AiMuted28, maxLines = 1)
         }
         Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
-            Text(price28(p.currentPrice), fontSize = 12.sp)
-            Text(price28(p.avgCost), fontSize = 10.sp, color = AiMuted28)
+            Text("${price28(p.currentPrice)}${if(p.displayQuoteAt==null) "旧" else ""}", fontSize = 12.sp)
+            Text(pct28(p.marketChangePct), fontSize = 10.sp, color = pnlColor28(p.marketChangePct))
         }
         Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
             Text(money28(p.floatingPnl), fontSize = 12.sp, color = pnlColor28(p.floatingPnl), maxLines = 1)
             Text(pct28(p.floatingReturnPct), fontSize = 10.sp, color = pnlColor28(p.floatingReturnPct))
         }
         Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
-            Text(money28(p.currentPrice?.times(p.qty)), fontSize = 12.sp, maxLines = 1)
-            Text("${p.qty}股 ›", fontSize = 10.sp, color = AiMuted28)
+            Text(price28(p.avgCost), fontSize = 12.sp, maxLines = 1)
+            Text("${pct28(p.currentWeightPct)} ›", fontSize = 10.sp, color = AiMuted28)
         }
     }
 }

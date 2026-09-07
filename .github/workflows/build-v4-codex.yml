@@ -14,10 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
+      platforms: ${{ steps.platforms.outputs.platforms }}
     steps:
       - uses: actions/checkout@v4
       - run: python tools/verify_shared_release.py
       - run: python tools/verify_backend_contract.py
+      - id: platforms
+        run: echo "platforms=$(sed -n 's/^releasePlatforms=//p' version.properties)" >> "$GITHUB_OUTPUT"
       - id: version
         run: echo "version=$(sed -n 's/^versionName=//p' version.properties)" >> "$GITHUB_OUTPUT"
   android:
@@ -44,7 +47,20 @@ jobs:
           fi
           test -s signing/debug.keystore
       - name: Build Android from shared sources
-        run: gradle :app:assembleDebug --stacktrace
+        run: gradle :app:testDebugUnitTest :app:assembleDebug --stacktrace
+      - name: Enable Android emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Verify Android installation and portfolio screens
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          script: python tools/android_ui_smoke.py
       - name: Prepare Android package
         env:
           APP_VERSION: ${{ needs.verify.outputs.version }}
@@ -56,6 +72,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with: {name: android-package, path: dist/, if-no-files-found: error}
   windows:
+    if: needs.verify.outputs.platforms != 'android'
     needs: verify
     runs-on: windows-latest
     timeout-minutes: 35
@@ -123,24 +140,27 @@ jobs:
         with: {name: windows-package, path: dist/, if-no-files-found: warn}
   release:
     needs: [verify, android, windows]
-    if: github.ref == 'refs/heads/codex/v4-latest-framework'
+    if: always() && github.ref == 'refs/heads/codex/v4-latest-framework' && needs.verify.result == 'success' && needs.android.result == 'success' && (needs.windows.result == 'success' || (needs.verify.outputs.platforms == 'android' && needs.windows.result == 'skipped'))
     runs-on: ubuntu-latest
     permissions: {contents: write}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with: {path: dist, merge-multiple: true}
-      - name: Publish both packages as one version
+      - name: Publish selected platforms after tests and signature check
         env:
           GH_TOKEN: ${{ github.token }}
           APP_VERSION: ${{ needs.verify.outputs.version }}
+          PLATFORMS: ${{ needs.verify.outputs.platforms }}
         run: |
           test "$(cat dist/android-source-sha.txt | tr -d '\r\n')" = "$GITHUB_SHA"
-          test "$(cat dist/windows-source-sha.txt | tr -d '\r\n')" = "$GITHUB_SHA"
+          if [ "$PLATFORMS" != android ]; then
+            test "$(cat dist/windows-source-sha.txt | tr -d '\r\n')" = "$GITHUB_SHA"
+            test -s "dist/AStockSelection-$APP_VERSION-Windows-x64-Setup.exe"
+          fi
           test -s "dist/AStockSelection-$APP_VERSION-Android.apk"
-          test -s "dist/AStockSelection-$APP_VERSION-Windows-x64-Setup.exe"
           cd dist
-          sha256sum *.apk *.exe > SHA256SUMS.txt
+          if [ "$PLATFORMS" = android ]; then sha256sum *.apk > SHA256SUMS.txt; else sha256sum *.apk *.exe > SHA256SUMS.txt; fi
           cd ..
           PREVIOUS=$(gh release list --json tagName,isDraft --jq '.[] | select(.isDraft == false and (.tagName | startswith("apps-v"))) | .tagName' | head -n 1)
           if [ -n "$PREVIOUS" ]; then
@@ -152,5 +172,5 @@ jobs:
             echo 'Version exists: bump version.properties before releasing new code.'
             exit 1
           fi
-          gh release create "$TAG" dist/* --target "$GITHUB_SHA" --title "A股筛选池 $APP_VERSION · Windows + Android" --notes-file RELEASE_NOTES.md --draft
+          gh release create "$TAG" dist/* --target "$GITHUB_SHA" --title "A股筛选池 $APP_VERSION · $PLATFORMS" --notes-file RELEASE_NOTES.md --draft
           gh release edit "$TAG" --draft=false --latest
