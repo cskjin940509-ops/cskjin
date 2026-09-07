@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import tempfile
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,7 +26,9 @@ CHANNELS = {
     "trade-plan": ("astock_trade",),
     "execution": ("astock_execution",),
     "tail": ("astock_tail", "astock_gateway/yunai_live.json", "astock_gateway/latest.json"),
-    "official": ("astock_gateway", "astock_snapshots/index.json"),
+    # The market gateway owns its rolling quotes. Publishing a frozen cohort
+    # must not also publish an older copy of those shared quote files.
+    "official": ("astock_snapshots/index.json",),
     "tracking": ("astock_snapshots/index.json", "astock_tracking"),
     "reverify": ("astock_snapshots/index.json", "astock_gateway/validation"),
     "history": ("astock_history",),
@@ -79,6 +82,8 @@ def git(root: Path, *args: str, check: bool = True) -> subprocess.CompletedProce
 
 
 def publish(channel: str, root: Path = ROOT) -> str | None:
+    if channel == "official":
+        return publish_official(root)
     paths = [p for p in CHANNELS[channel]
              if (root / p).exists() or git(root, "ls-files", "--", p).stdout.strip()]
     if not paths:
@@ -100,6 +105,70 @@ def publish(channel: str, root: Path = ROOT) -> str | None:
         if pushed.returncode == 0:
             return git(root, "rev-parse", "HEAD").stdout.strip()
     raise RuntimeError("Publication failed after four bounded attempts; no consumer was dispatched")
+
+
+def merge_cohorts(base: list, local: list, remote: list) -> list:
+    """Merge independently changed dates, never overwrite a concurrent cohort.
+
+    Existing remote dates and their newer tracking survive. Same-date concurrent
+    edits are explicitly rejected, not resolved with an ours/theirs overwrite.
+    """
+    def indexed(rows):
+        result = {}
+        for row in rows:
+            day = row.get("date")
+            if not day or day in result:
+                raise RuntimeError("Invalid or duplicate cohort date")
+            result[day] = row
+        return result
+    before, changed, current = map(indexed, (base, local, remote))
+    if set(before) - set(changed):
+        raise RuntimeError("Refusing deletion of historical cohorts")
+    for day, row in changed.items():
+        old = before.get(day)
+        if row == old:
+            continue
+        if day in current and current[day] != old and current[day] != row:
+            raise RuntimeError(f"Concurrent cohort conflict for {day}; saved snapshot requires review")
+        if day not in before and (row.get("status") != "Official" or
+                (row.get("dataValidation") or {}).get("status") not in
+                {"Verified", "VerifiedWithExclusions"}):
+            raise RuntimeError(f"New cohort {day} lacks verified Official evidence")
+        current[day] = row
+    return [current[day] for day in sorted(current)]
+
+
+def publish_official(root: Path) -> str | None:
+    """Publish in an isolated worktree so dirty gateway outputs cannot block it."""
+    path = "astock_snapshots/index.json"
+    if git(root, "diff", "--cached", "--name-only").stdout.strip():
+        raise RuntimeError("Refusing publication with unrelated staged changes")
+    base = json.loads(git(root, "show", f"HEAD:{path}").stdout)
+    local = json.loads((root / path).read_text(encoding="utf-8"))
+    if base == local:
+        return None
+    for _ in range(4):
+        git(root, "fetch", "origin", "main")
+        with tempfile.TemporaryDirectory(prefix="astock-official-") as temp:
+            work = Path(temp) / "publish"
+            git(root, "worktree", "add", "--detach", str(work), "origin/main")
+            try:
+                remote = json.loads((work / path).read_text(encoding="utf-8"))
+                merged = merge_cohorts(base, local, remote)
+                if merged == remote:
+                    # A previous attempt may have pushed successfully before a
+                    # transport error. Still wake consumers for this local delta.
+                    return git(work, "rev-parse", "HEAD").stdout.strip()
+                (work / path).write_text(json.dumps(merged, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                git(work, "add", "--", path)
+                git(work, "commit", "-m", "Publish verified Official cohort without rolling gateway writes")
+                if git(work, "push", "origin", "HEAD:main", check=False).returncode == 0:
+                    return git(work, "rev-parse", "HEAD").stdout.strip()
+            finally:
+                # Only this temporary clean worktree is removed; the original
+                # computed snapshot remains untouched even after a conflict.
+                git(root, "worktree", "remove", str(work))
+    raise RuntimeError("Official publication failed after four attempts; local evidence retained")
 
 
 def dispatch(workflow: str, repository: str, token: str) -> None:

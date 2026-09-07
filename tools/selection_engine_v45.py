@@ -376,6 +376,7 @@ def build_latest(state, ledger, prices, radar):
     out['dailyPerformance'] = strict_daily
     out['summary']['maxDrawdownPct'] = base.fund.max_drawdown(verified_closes) if verified_closes else None
     out['summary']['formalCloseSampleDays'] = len(strict_daily)
+    out['summary']['dailyCloseDrawdownStatus'] = 'VALID' if strict_daily else 'MISSING_VERIFIED_CLOSES'
     risk_snapshot = obj.get('portfolioRisk') or {}
     out['summary']['todayReturnPct'] = risk_snapshot.get('dailyUnitReturnPct') if risk_snapshot.get('date') == today else None
     out['weeklyPerformance'] = base.fund._period_series(strict_daily, 'week')
