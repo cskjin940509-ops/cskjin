@@ -1,5 +1,8 @@
 package com.rui.astockstrategy.v6
 
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -149,7 +152,8 @@ fun AiShadowPortfolioScreen28() {
     var ledgerError by remember { mutableStateOf<String?>(null) }
     var automationError by remember { mutableStateOf<String?>(null) }
     var ledgerFilter by remember { mutableStateOf("全部") }
-    var page by remember { mutableStateOf("概览") }
+    var page by remember { mutableStateOf("持仓") }
+    var selectedCode by remember { mutableStateOf<String?>(null) }
     var refreshGeneration by remember { mutableIntStateOf(0) }
     var refreshing by remember { mutableStateOf(false) }
 
@@ -182,12 +186,42 @@ fun AiShadowPortfolioScreen28() {
     val rules = d?.optJSONObject("rulesZh")
     val capital = n28(summary, "capitalCapacity") ?: n28(summary, "initialCapital")
 
+    val selected = pos.firstOrNull { it.code == selectedCode }
+    if (selectedCode != null) {
+        LazyColumn(Modifier.fillMaxSize().background(AiBg28), contentPadding = PaddingValues(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            item { TextButton(onClick = { selectedCode = null }) { Text("‹ 返回持仓") } }
+            if (selected != null) {
+                item { AiPositionCard28(selected) }
+                val raw = d?.optJSONArray("positions")
+                val plan = (0 until (raw?.length() ?: 0)).mapNotNull { raw?.optJSONObject(it) }
+                    .firstOrNull { it.optString("code") == selectedCode }?.optJSONObject("decisionPlan")
+                item {
+                    Card(colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                        Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("持有与退出计划", fontWeight = FontWeight.Bold)
+                            Text(plan?.optString("reasonZh")?.takeIf { it.isNotBlank() } ?: "暂无最新判断", fontSize = 12.sp)
+                            Text("保护价 ${price28(n28(plan, "hardStopPrice"))} · 移动保护 ${price28(n28(plan, "trailingStopPrice")?.takeIf { it > 0 })}", fontSize = 12.sp)
+                            listOf("takeProfitZh", "tPolicyZh").forEach { key ->
+                                plan?.optString(key)?.takeIf { it.isNotBlank() }?.let { Text(it, fontSize = 12.sp, color = AiMuted28) }
+                            }
+                        }
+                    }
+                }
+            } else item { AiEmpty28("该股票已不在当前持仓中，可查看下方历史成交。") }
+            item { AiTitle28("个股成交记录") }
+            val stockDecisions = allDecisions.filter { it.code == selectedCode }
+            if (stockDecisions.isEmpty()) item { AiEmpty28(ledgerError ?: "暂无成交记录") }
+            items(stockDecisions, key = { it.id }) { AiDecisionCard28(it) }
+        }
+        return
+    }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize().background(AiBg28),
-        contentPadding = PaddingValues(14.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
+        verticalArrangement = Arrangement.spacedBy(if (page == "持仓") 1.dp else 10.dp)
     ) {
-        item {
+        if (page != "持仓") item {
             Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                 Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -260,10 +294,34 @@ fun AiShadowPortfolioScreen28() {
         }
 
         if (page == "持仓") {
-            item { AiPositionRiskSummary28(d, pos) }
-            item { AiTitle28("当前模拟持仓（${pos.size}只）") }
-            if (pos.isEmpty()) item { AiEmpty28("当前没有达到观察准入的股票，影子账户保持现金。") }
-            else items(pos, key = { it.code }) { p -> AiPositionCard28(p) }
+            item {
+                Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(12.dp)) {
+                    Column(Modifier.fillMaxWidth().padding(10.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text("总资产 ${money28(n28(summary, "totalAssets"))}", Modifier.weight(1f), fontSize = 19.sp, fontWeight = FontWeight.Bold)
+                            Text(if (refreshing) "刷新中" else "刷新", Modifier.clickable(enabled = !refreshing) { refreshGeneration++ }.padding(10.dp), color = AiBlue28, fontSize = 12.sp)
+                        }
+                        Row {
+                            AiMetric28("持仓盈亏", money28(n28(summary, "floatingPnl")), pnlColor28(n28(summary, "floatingPnl")), Modifier.weight(1f))
+                            AiMetric28("今日收益", pct28(n28(summary, "todayReturnPct")), pnlColor28(n28(summary, "todayReturnPct")), Modifier.weight(1f))
+                            AiMetric28("总仓位", pct28(n28(summary, "positionPct")), AiBlue28, Modifier.weight(1f))
+                        }
+                        Text("可用 ${money28(n28(summary, "cash"))} · ${pos.size}只 · 今日${today.size}笔 · 模拟组合", fontSize = 10.sp, color = AiMuted28)
+                        Text("快照 ${d?.optString("updatedAt")?.replace("T", " ")?.take(19) ?: "待同步"}", fontSize = 9.sp, color = AiMuted28)
+                    }
+                }
+            }
+            item {
+                Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp)) {
+                    listOf("名称 / 仓位", "现价 / 成本", "盈亏 / 收益率", "市值 / 股数").forEach { label ->
+                        Text(label, Modifier.weight(1f), fontSize = 10.sp, color = AiMuted28, textAlign = if (label.startsWith("名称")) TextAlign.Start else TextAlign.End)
+                    }
+                }
+            }
+            if (pos.isEmpty()) item { AiEmpty28(if (d == null) "正在同步持仓…" else "当前空仓") }
+            else items(pos, key = { it.code }) { p -> AiCompactPosition28(p) { selectedCode = p.code } }
+            item { Text("点选个股查看策略、保护价与成交明细", fontSize = 10.sp, color = AiMuted28) }
+
         }
 
         if (page == "成交") {
@@ -691,6 +749,28 @@ private fun AiBenchmarkCard28(d: JSONObject?) {
             }
             val note = b.optString("noteZh")
             if (note.isNotBlank()) Text(note, color = AiMuted28, fontSize = 8.sp)
+        }
+    }
+}
+
+@Composable
+private fun AiCompactPosition28(p: AiPosition28, onClick: () -> Unit) {
+    Row(Modifier.fillMaxWidth().background(Color.White).clickable(onClick = onClick).heightIn(min = 52.dp).padding(horizontal = 8.dp, vertical = 7.dp), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text(p.name, fontSize = 12.sp, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text("${p.code} · ${pct28(p.currentWeightPct)}", fontSize = 9.sp, color = AiMuted28, maxLines = 1)
+        }
+        Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
+            Text(price28(p.currentPrice), fontSize = 12.sp)
+            Text(price28(p.avgCost), fontSize = 10.sp, color = AiMuted28)
+        }
+        Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
+            Text(money28(p.floatingPnl), fontSize = 12.sp, color = pnlColor28(p.floatingPnl), maxLines = 1)
+            Text(pct28(p.floatingReturnPct), fontSize = 10.sp, color = pnlColor28(p.floatingReturnPct))
+        }
+        Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
+            Text(money28(p.currentPrice?.times(p.qty)), fontSize = 12.sp, maxLines = 1)
+            Text("${p.qty}股 ›", fontSize = 10.sp, color = AiMuted28)
         }
     }
 }
