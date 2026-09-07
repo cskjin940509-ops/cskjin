@@ -8,7 +8,7 @@ permissions:
   contents: read
 concurrency:
   group: astock-apps-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -32,10 +32,17 @@ jobs:
       - run: sdkmanager "platforms;android-36" "build-tools;35.0.0"
       - uses: actions/cache@v4
         with:
-          path: ~/.android/debug.keystore
-          key: astock-android-signing-v47
+          path: signing/debug.keystore
+          key: astock-client-signing-v47-explicit
       - uses: gradle/actions/setup-gradle@v4
         with: {gradle-version: '8.13', cache-read-only: false}
+      - name: Ensure persistent Android signing key
+        run: |
+          if [ ! -f signing/debug.keystore ]; then
+            mkdir -p signing
+            keytool -genkeypair -keystore signing/debug.keystore -storepass android -keypass android -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'
+          fi
+          test -s signing/debug.keystore
       - name: Build Android from shared sources
         run: gradle :app:assembleDebug --stacktrace
       - name: Prepare Android package
