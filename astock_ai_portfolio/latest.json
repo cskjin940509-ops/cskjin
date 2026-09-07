@@ -4,25 +4,25 @@
   "mode": "a股筛选池 · 主线持仓＋底仓T研究",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-07T09:41:52+08:00",
-  "radarCapturedAt": "2026-09-04T15:16:35+08:00",
-  "radarStatus": "RadarFinal",
+  "updatedAt": "2026-09-07T09:44:02+08:00",
+  "radarCapturedAt": "2026-09-07T09:42:20+08:00",
+  "radarStatus": "RadarLive",
   "summary": {
     "initialCapital": 20000000.0,
     "capitalCapacity": 20000000.0,
     "inceptionCapital": 1000000.0,
-    "totalAssets": 19817229.29,
+    "totalAssets": 20129696.29,
     "fundUnits": 19341487.5886677,
-    "unitNav": 1.024597,
-    "cumulativeNav": 1.024597,
+    "unitNav": 1.040752,
+    "cumulativeNav": 1.040752,
     "cash": 10.29,
-    "marketValue": 19817219.0,
+    "marketValue": 20129686.0,
     "positionPct": 100.0,
     "cashPct": 0.0,
     "todayReturnPct": null,
-    "cumulativeReturnPct": 2.46,
+    "cumulativeReturnPct": 4.075,
     "realizedPnl": 47713.01,
-    "floatingPnl": -230494.69,
+    "floatingPnl": 81972.31,
     "maxDrawdownPct": null,
     "maxDrawdownFrequency": "DAILY_CLOSE_UNIT_NAV",
     "intradayObservedMaxDrawdownPct": -2.146,
@@ -39,55 +39,6 @@
   },
   "positions": [
     {
-      "code": "600415",
-      "name": "小商品城",
-      "sector": "跨境电商",
-      "qty": 231600,
-      "avgCost": 13.0533,
-      "costAmount": 3023147.98,
-      "entryPrice": 13.05,
-      "entryReferencePrice": 13.035,
-      "entryPriceSource": "东方财富+Yunai双源均价",
-      "entryTimestamp": "2026-09-04T10:13:42+08:00",
-      "entryDate": "2026-09-04",
-      "initialWeightTarget": 0.15,
-      "lastPrice": 13.1,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
-      "missingRadarCount": 2,
-      "partialProfitTaken": false,
-      "seenTradeDates": [
-        "2026-09-04"
-      ],
-      "buyScore": 76.51,
-      "buyReasonZh": "提前分58；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；两融结构弱-2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
-      "dailyBuyQty": {
-        "2026-09-04": 231600
-      },
-      "currentPrice": 13.12,
-      "marketValue": 3038592.0,
-      "floatingPnl": 15447.72,
-      "floatingReturnPct": 0.51,
-      "currentWeightPct": 15.33,
-      "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
-      "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
-        "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
-        "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
-    },
-    {
       "code": "603083",
       "name": "剑桥科技",
       "sector": "通信终端及配件",
@@ -100,8 +51,8 @@
       "entryTimestamp": "2026-09-04T09:42:17+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.15,
-      "lastPrice": 188.15,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 207.21,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 26,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -109,32 +60,91 @@
       ],
       "buyScore": 74.82,
       "buyReasonZh": "提前分55；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；两融结构强+2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 15800
       },
-      "currentPrice": 188.37,
-      "marketValue": 2976246.0,
-      "floatingPnl": -14821.98,
-      "floatingReturnPct": -0.5,
-      "currentWeightPct": 15.02,
+      "riskBasis": 189.3081,
+      "hardStopPrice": 174.1635,
+      "peakPrice": 207.21,
+      "trailingStopPrice": 190.6332,
+      "atrFallback": false,
+      "atr14": 13.147857142857145,
+      "stopDistancePct": 8.0,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 207.21,
+      "marketValue": 3273918.0,
+      "floatingPnl": 282850.02,
+      "floatingReturnPct": 9.46,
+      "currentWeightPct": 16.26,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 174.1635,
+        "trailingStopPrice": 190.6332,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
+      }
+    },
+    {
+      "code": "600415",
+      "name": "小商品城",
+      "sector": "跨境电商",
+      "qty": 231600,
+      "avgCost": 13.0533,
+      "costAmount": 3023147.98,
+      "entryPrice": 13.05,
+      "entryReferencePrice": 13.035,
+      "entryPriceSource": "东方财富+Yunai双源均价",
+      "entryTimestamp": "2026-09-04T10:13:42+08:00",
+      "entryDate": "2026-09-04",
+      "initialWeightTarget": 0.15,
+      "lastPrice": 12.93,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
+      "missingRadarCount": 2,
+      "partialProfitTaken": false,
+      "seenTradeDates": [
+        "2026-09-04"
+      ],
+      "buyScore": 76.51,
+      "buyReasonZh": "提前分58；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；两融结构弱-2",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
+      "dailyBuyQty": {
+        "2026-09-04": 231600
       },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      "riskBasis": 13.0533,
+      "hardStopPrice": 12.361,
+      "peakPrice": 13.0533,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.4571428571428573,
+      "stopDistancePct": 5.303281405369574,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 12.93,
+      "marketValue": 2994588.0,
+      "floatingPnl": -28556.28,
+      "floatingReturnPct": -0.94,
+      "currentWeightPct": 14.88,
+      "tradingDaysObserved": 1,
+      "currentActionZh": "继续持有并跟踪",
+      "decisionPlan": {
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 12.361,
+        "trailingStopPrice": 0,
+        "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
+        "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
+      }
     },
     {
       "code": "300166",
@@ -149,8 +159,8 @@
       "entryTimestamp": "2026-09-04T10:11:38+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.15,
-      "lastPrice": 12.67,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 12.6,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 8,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -158,32 +168,37 @@
       ],
       "buyScore": 69.01,
       "buyReasonZh": "提前分51；主线确认中+5；形成分强+4；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；两融结构弱-2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 228600
       },
-      "currentPrice": 12.66,
-      "marketValue": 2894076.0,
-      "floatingPnl": -131833.62,
-      "floatingReturnPct": -4.36,
-      "currentWeightPct": 14.6,
+      "riskBasis": 13.2367,
+      "hardStopPrice": 12.298,
+      "peakPrice": 13.2367,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.5957142857142855,
+      "stopDistancePct": 7.091836734693875,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 12.6,
+      "marketValue": 2880360.0,
+      "floatingPnl": -145549.62,
+      "floatingReturnPct": -4.81,
+      "currentWeightPct": 14.31,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 12.298,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "002517",
@@ -198,8 +213,8 @@
       "entryTimestamp": "2026-09-04T10:27:06+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.088272,
-      "lastPrice": 17.38,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 17.57,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 2,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -207,32 +222,37 @@
       ],
       "buyScore": 69.69,
       "buyReasonZh": "提前分54；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；两融结构弱-2；ETF一级资金强+2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 101000
       },
-      "currentPrice": 17.41,
-      "marketValue": 1758410.0,
-      "floatingPnl": -17624.5,
-      "floatingReturnPct": -0.99,
-      "currentWeightPct": 8.87,
+      "riskBasis": 17.5845,
+      "hardStopPrice": 16.762,
+      "peakPrice": 17.5845,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.5478571428571429,
+      "stopDistancePct": 4.677209529230019,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 17.57,
+      "marketValue": 1774570.0,
+      "floatingPnl": -1464.5,
+      "floatingReturnPct": -0.08,
+      "currentWeightPct": 8.82,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 16.762,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "000564",
@@ -247,8 +267,8 @@
       "entryTimestamp": "2026-09-04T10:27:06+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.08635,
-      "lastPrice": 1.6,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 1.65,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 4,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -256,32 +276,37 @@
       ],
       "buyScore": 69.37,
       "buyReasonZh": "提前分53；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；两融结构弱-2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 1072800
       },
-      "currentPrice": 1.6,
-      "marketValue": 1716480.0,
-      "floatingPnl": -21885.12,
-      "floatingReturnPct": -1.26,
-      "currentWeightPct": 8.66,
+      "riskBasis": 1.6204,
+      "hardStopPrice": 1.4973,
+      "peakPrice": 1.65,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.0835714285714286,
+      "stopDistancePct": 7.5974025974026,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 1.65,
+      "marketValue": 1770120.0,
+      "floatingPnl": 31754.88,
+      "floatingReturnPct": 1.83,
+      "currentWeightPct": 8.79,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 1.4973,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "002558",
@@ -296,8 +321,8 @@
       "entryTimestamp": "2026-09-04T10:27:06+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.077336,
-      "lastPrice": 27.67,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 27.85,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 2,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -305,32 +330,37 @@
       ],
       "buyScore": 67.87,
       "buyReasonZh": "提前分52；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；两融结构弱-2；ETF一级资金强+2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 56600
       },
-      "currentPrice": 27.67,
-      "marketValue": 1566122.0,
-      "floatingPnl": 9791.8,
-      "floatingReturnPct": 0.63,
-      "currentWeightPct": 7.9,
+      "riskBasis": 27.497,
+      "hardStopPrice": 26.0721,
+      "peakPrice": 27.85,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.9621428571428573,
+      "stopDistancePct": 5.182097973839447,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 27.85,
+      "marketValue": 1576310.0,
+      "floatingPnl": 19979.8,
+      "floatingReturnPct": 1.28,
+      "currentWeightPct": 7.83,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 26.0721,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "002027",
@@ -345,8 +375,8 @@
       "entryTimestamp": "2026-09-04T10:27:06+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.076495,
-      "lastPrice": 4.88,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 4.86,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 0,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -354,32 +384,37 @@
       ],
       "buyScore": 67.73,
       "buyReasonZh": "提前分50；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；ETF一级资金强+2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 312900
       },
-      "currentPrice": 4.88,
-      "marketValue": 1526952.0,
-      "floatingPnl": -12922.77,
-      "floatingReturnPct": -0.84,
-      "currentWeightPct": 7.71,
+      "riskBasis": 4.9213,
+      "hardStopPrice": 4.7244,
+      "peakPrice": 4.9213,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.1121428571428573,
+      "stopDistancePct": 4.0,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 4.86,
+      "marketValue": 1520694.0,
+      "floatingPnl": -19180.77,
+      "floatingReturnPct": -1.25,
+      "currentWeightPct": 7.55,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 4.7244,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "001979",
@@ -394,8 +429,8 @@
       "entryTimestamp": "2026-09-04T09:42:17+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.1,
-      "lastPrice": 6.99,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 7.0,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 11,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -403,32 +438,37 @@
       ],
       "buyScore": 64.36,
       "buyReasonZh": "提前分51；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；两融结构弱-2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 210900
       },
-      "currentPrice": 6.97,
-      "marketValue": 1469973.0,
-      "floatingPnl": -8815.62,
-      "floatingReturnPct": -0.6,
-      "currentWeightPct": 7.42,
+      "riskBasis": 7.0118,
+      "hardStopPrice": 6.5106,
+      "peakPrice": 7.0118,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.3335714285714286,
+      "stopDistancePct": 7.1479591836734695,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 7.0,
+      "marketValue": 1476300.0,
+      "floatingPnl": -2488.62,
+      "floatingReturnPct": -0.17,
+      "currentWeightPct": 7.33,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 6.5106,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "603236",
@@ -443,8 +483,8 @@
       "entryTimestamp": "2026-09-04T09:42:17+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.1,
-      "lastPrice": 62.1,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 62.38,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 26,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -452,32 +492,37 @@
       ],
       "buyScore": 68.88,
       "buyReasonZh": "提前分56；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；两融结构弱-2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 23300
       },
-      "currentPrice": 62.17,
-      "marketValue": 1448561.0,
-      "floatingPnl": -32764.46,
-      "floatingReturnPct": -2.21,
-      "currentWeightPct": 7.31,
+      "riskBasis": 63.5762,
+      "hardStopPrice": 58.9091,
+      "peakPrice": 63.5762,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 3.0528571428571425,
+      "stopDistancePct": 7.340951770256034,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 62.38,
+      "marketValue": 1453454.0,
+      "floatingPnl": -27871.46,
+      "floatingReturnPct": -1.88,
+      "currentWeightPct": 7.22,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 58.9091,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "000011",
@@ -492,8 +537,8 @@
       "entryTimestamp": "2026-09-04T09:51:22+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.15,
-      "lastPrice": 8.5,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 8.44,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 11,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -501,32 +546,37 @@
       ],
       "buyScore": 64.9,
       "buyReasonZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 86500
       },
-      "currentPrice": 8.5,
-      "marketValue": 735250.0,
-      "floatingPnl": -10570.3,
-      "floatingReturnPct": -1.42,
-      "currentWeightPct": 3.71,
+      "riskBasis": 8.6222,
+      "hardStopPrice": 7.9324,
+      "peakPrice": 8.6222,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.49928571428571444,
+      "stopDistancePct": 8.0,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 8.44,
+      "marketValue": 730060.0,
+      "floatingPnl": -15760.3,
+      "floatingReturnPct": -2.11,
+      "currentWeightPct": 3.63,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 7.9324,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "600895",
@@ -541,8 +591,8 @@
       "entryTimestamp": "2026-09-04T09:42:17+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.15,
-      "lastPrice": 29.62,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 29.35,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 11,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -550,32 +600,37 @@
       ],
       "buyScore": 78.43,
       "buyReasonZh": "提前分58；主线确认中+5；形成分强+4；资金强度高+5；价格尚未充分扩张+4；追高风险低+2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 19500
       },
-      "currentPrice": 29.82,
-      "marketValue": 581490.0,
-      "floatingPnl": -343.2,
-      "floatingReturnPct": -0.06,
-      "currentWeightPct": 2.93,
+      "riskBasis": 29.8376,
+      "hardStopPrice": 28.4554,
+      "peakPrice": 29.8376,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.9064285714285722,
+      "stopDistancePct": 4.632513993672431,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 29.35,
+      "marketValue": 572325.0,
+      "floatingPnl": -9508.2,
+      "floatingReturnPct": -1.63,
+      "currentWeightPct": 2.84,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 28.4554,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "300209",
@@ -590,8 +645,8 @@
       "entryTimestamp": "2026-09-04T10:27:06+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.062133,
-      "lastPrice": 34.9,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPrice": 35.45,
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 4,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -599,32 +654,37 @@
       ],
       "buyScore": 65.34,
       "buyReasonZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 3000
       },
-      "currentPrice": 34.81,
-      "marketValue": 104430.0,
-      "floatingPnl": -4137.6,
-      "floatingReturnPct": -3.81,
+      "riskBasis": 36.1892,
+      "hardStopPrice": 33.2941,
+      "peakPrice": 36.1892,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 2.347857142857142,
+      "stopDistancePct": 8.0,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "currentPrice": 35.45,
+      "marketValue": 106350.0,
+      "floatingPnl": -2217.6,
+      "floatingReturnPct": -2.04,
       "currentWeightPct": 0.53,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 33.2941,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     },
     {
       "code": "002195",
@@ -640,7 +700,7 @@
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.068532,
       "lastPrice": 6.37,
-      "lastPriceAt": "2026-09-04T14:54:19+08:00",
+      "lastPriceAt": "2026-09-07T09:44:02+08:00",
       "missingRadarCount": 16,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -648,32 +708,37 @@
       ],
       "buyScore": 65.51,
       "buyReasonZh": "提前分48；主线潜在形成+3；形成分强+4；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；两融结构弱-2；ETF一级资金强+2",
-      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
-      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
       "dailyBuyQty": {
         "2026-09-04": 100
       },
+      "riskBasis": 6.5204,
+      "hardStopPrice": 6.2243,
+      "peakPrice": 6.5204,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 0.19285714285714287,
+      "stopDistancePct": 4.541376990356582,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
       "currentPrice": 6.37,
       "marketValue": 637.0,
       "floatingPnl": -15.04,
       "floatingReturnPct": -2.31,
       "currentWeightPct": 0.0,
       "tradingDaysObserved": 1,
-      "currentActionZh": "等待新行情",
+      "currentActionZh": "继续持有并跟踪",
       "decisionPlan": {
-        "actionZh": "等待新行情",
-        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
-        "hardStopPrice": null,
-        "trailingStopPrice": null,
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 6.2243,
+        "trailingStopPrice": 0,
         "takeProfitZh": "趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。",
         "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
-      },
-      "holdingState": null,
-      "hardStopPrice": null,
-      "trailingStopPrice": null,
-      "atrFallback": null,
-      "completeObservedDays": null,
-      "invalidDayStreak": null
+      }
     }
   ],
   "todayDecisions": [],
@@ -4343,19 +4408,33 @@
       "cumulativeNav": 1.02459696,
       "cumulativeReturnPct": 2.4597,
       "radarCapturedAt": "2026-09-04T15:16:35+08:00"
+    },
+    {
+      "timestamp": "2026-09-07T09:43:41+08:00",
+      "date": "2026-09-07",
+      "time": "09:43:41",
+      "nav": 20129696.29,
+      "cash": 10.29,
+      "marketValue": 20129686.0,
+      "positionCount": 13,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.04075223,
+      "cumulativeNav": 1.04075223,
+      "cumulativeReturnPct": 4.0752,
+      "radarCapturedAt": "2026-09-07T09:42:20+08:00"
     }
   ],
   "performanceReport": {
     "valuation": {
       "method": "UNIT_NAV_SUBSCRIPTION_REDEMPTION",
-      "unitNav": 1.024597,
-      "cumulativeNav": 1.024597,
+      "unitNav": 1.040752,
+      "cumulativeNav": 1.040752,
       "fundUnits": 19341487.5886677,
       "netSubscriptions": 19000000.0,
       "noteZh": "增资按增资前单位净值申购新增份额，单位净值和历史收益不重置。"
     },
     "returns": {
-      "cumulativeReturnPct": 2.4597,
+      "cumulativeReturnPct": 4.0752,
       "daily": [],
       "weekly": [],
       "monthly": []
@@ -4380,28 +4459,28 @@
       "grossExposurePct": 100.0,
       "netExposurePct": 100.0,
       "cashPct": 0.0,
-      "top1ConcentrationPct": 15.33,
-      "top5ConcentrationPct": 62.48,
+      "top1ConcentrationPct": 16.26,
+      "top5ConcentrationPct": 63.06,
       "sectorExposure": [
         {
           "sector": "跨境电商",
-          "weightPct": 24.52
+          "weightPct": 24.2
         },
         {
           "sector": "传媒",
-          "weightPct": 24.48
+          "weightPct": 24.2
         },
         {
           "sector": "通信终端及配件",
-          "weightPct": 22.33
+          "weightPct": 23.48
         },
         {
           "sector": "电子身份证",
-          "weightPct": 14.6
+          "weightPct": 14.31
         },
         {
           "sector": "租售同权",
-          "weightPct": 14.06
+          "weightPct": 13.8
         },
         {
           "sector": "短剧互动游戏",
@@ -4430,7 +4509,7 @@
       "partialFillCount": 8,
       "averageSlippageBps": 6.666,
       "grossTradedAmount": 22857204.0,
-      "turnoverPctOfCurrentAssets": 115.34,
+      "turnoverPctOfCurrentAssets": 113.55,
       "recentRejections": [
         {
           "timestamp": "2026-09-04T14:34:41+08:00",
@@ -4664,10 +4743,8 @@
     }
   },
   "valuationStatus": {
-    "mode": "CARRY_FORWARD_LAST_VERIFIED_NAV",
-    "nav": 19817229.29,
-    "asOf": "2026-09-04T15:32:49+08:00",
-    "noteZh": "没有当日新行情时沿用最后一个已验证组合净值，不用陈旧个股价格重新估值。"
+    "mode": "LIVE_POINT_IN_TIME",
+    "noteZh": "使用本轮当时行情估值。"
   },
   "rulesZh": {
     "newEntry": "大盘许可→潜在/确认板块至少两类独立证据（含资金）→板块完整样本前20%→回撤企稳/突破回踩；双源偏差≤0.3%，资金滞后时点、ADV20及成本检查通过才分批买入。",
@@ -4716,6 +4793,17 @@
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
       "pointCount": 38
+    },
+    {
+      "date": "2026-09-07",
+      "closeUnitNav": 1.040752,
+      "closeCumulativeNav": 1.040752,
+      "cumulativeReturnPct": 4.0752,
+      "dailyReturnPct": 1.5767,
+      "periodReturnPct": 1.5767,
+      "observationGapBusinessDays": 0,
+      "coverageStatus": "COMPLETE",
+      "pointCount": 1
     }
   ],
   "selection45": {
@@ -4723,13 +4811,21 @@
     "validationStatus": "SHADOW_FORWARD_ONLY",
     "market": {
       "state": "UNKNOWN",
-      "cap": 0,
+      "cap": 0.0,
       "allowNew": false,
-      "reasonZh": "无当日大盘证据"
+      "reasonZh": "全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
+      "missingEvidence": []
     },
     "portfolioRisk": {
+      "cap": 0.9999994888149404,
       "allowNew": false,
-      "currentEvidenceReady": false
+      "date": "2026-09-07",
+      "asOf": "2026-09-07T09:44:02+08:00",
+      "dailyUnitReturnPct": null,
+      "confirmedCloseDrawdownPct": null,
+      "dailyRiskDataReady": false,
+      "paused": false,
+      "forceReduction": false
     },
     "parameters": {
       "singleLimit": 0.08,
@@ -4752,10 +4848,3265 @@
       "parameterStatus": "INITIAL_RESEARCH_NOT_OUT_OF_SAMPLE_VALIDATED"
     },
     "pendingExits": [],
-    "candidates": [],
-    "holdingSignals": {},
+    "candidates": [
+      {
+        "code": "300394",
+        "name": "天孚通信",
+        "sector": "通信网络设备及器件",
+        "score": 92.37,
+        "referencePrice": 256.01,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分72；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；价格开始扩张+1；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 18.255000000000003,
+          "ma20": 258.4185,
+          "high20": 295.0,
+          "low20": 216.68,
+          "previousHigh20": 295.0,
+          "return5Pct": -5.645344866833602,
+          "slope20Pct": 3.9620630003620816,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 295.0,
+          "thesisZh": "提前分72；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；价格开始扩张+1；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "688205",
+        "name": "德科立",
+        "sector": "通信网络设备及器件",
+        "score": 91.47,
+        "referencePrice": 197.33,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分73；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 16.073571428571434,
+          "ma20": 162.804,
+          "high20": 206.88,
+          "low20": 132.0,
+          "previousHigh20": 196.0,
+          "return5Pct": 10.102156640181615,
+          "slope20Pct": 8.769491842488542,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 206.88,
+          "thesisZh": "提前分73；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "920045",
+        "name": "蘅东光",
+        "sector": "通信网络设备及器件",
+        "score": 81.24,
+        "referencePrice": 483.22,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分65；主线确认中+5；形成分强+4；资金强度高+5；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": false,
+          "reasonZh": "已完成日线不足21根",
+          "sampleDays": 0
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": null,
+          "thesisZh": "提前分65；主线确认中+5；形成分强+4；资金强度高+5；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "301307",
+        "name": "美利信",
+        "sector": "通信网络设备及器件",
+        "score": 81.21,
+        "referencePrice": 56.48,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分61；主线确认中+5；形成分强+4；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 4.156428571428572,
+          "ma20": 54.392,
+          "high20": 60.99,
+          "low20": 49.69,
+          "previousHigh20": 60.99,
+          "return5Pct": -1.659018708083304,
+          "slope20Pct": 4.01392155737863,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 60.99,
+          "thesisZh": "提前分61；主线确认中+5；形成分强+4；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300308",
+        "name": "中际旭创",
+        "sector": "通信网络设备及器件",
+        "score": 81.12,
+        "referencePrice": 856.98,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分62；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 47.00428571428572,
+          "ma20": 886.035,
+          "high20": 1014.87,
+          "low20": 804.02,
+          "previousHigh20": 1014.87,
+          "return5Pct": -5.16688996330169,
+          "slope20Pct": -3.203657577346619,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 1014.87,
+          "thesisZh": "提前分62；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "688170",
+        "name": "德龙激光",
+        "sector": "激光设备",
+        "score": 77.6,
+        "referencePrice": 64.84,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分64；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 3.8507142857142855,
+          "ma20": 53.7055,
+          "high20": 63.22,
+          "low20": 49.6,
+          "previousHigh20": 58.3,
+          "return5Pct": 15.270018621973925,
+          "slope20Pct": 3.0133596754548186,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 63.22,
+          "thesisZh": "提前分64；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300570",
+        "name": "太辰光",
+        "sector": "通信网络设备及器件",
+        "score": 77.53,
+        "referencePrice": 191.8,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分66；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 14.882142857142856,
+          "ma20": 185.60750000000002,
+          "high20": 230.46,
+          "low20": 137.0,
+          "previousHigh20": 230.46,
+          "return5Pct": -11.894273127753308,
+          "slope20Pct": 8.316895819230163,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 230.46,
+          "thesisZh": "提前分66；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300502",
+        "name": "新易盛",
+        "sector": "通信网络设备及器件",
+        "score": 76.94,
+        "referencePrice": 401.74,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分60；主线确认中+5；形成分强+4；资金强度高+5；价格开始扩张+1；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 25.012857142857147,
+          "ma20": 414.469,
+          "high20": 472.0,
+          "low20": 378.56,
+          "previousHigh20": 472.0,
+          "return5Pct": -3.2581453634085267,
+          "slope20Pct": -1.7431523249142988,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 472.0,
+          "thesisZh": "提前分60；主线确认中+5；形成分强+4；资金强度高+5；价格开始扩张+1；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300548",
+        "name": "长芯博创",
+        "sector": "通信网络设备及器件",
+        "score": 76.5,
+        "referencePrice": 203.05,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分62；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 15.231428571428575,
+          "ma20": 197.9425,
+          "high20": 223.2,
+          "low20": 165.3,
+          "previousHigh20": 223.2,
+          "return5Pct": -8.980742132456554,
+          "slope20Pct": 5.50406148729321,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 223.2,
+          "thesisZh": "提前分62；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "688668",
+        "name": "鼎通科技",
+        "sector": "通信网络设备及器件",
+        "score": 75.98,
+        "referencePrice": 258.36,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分58；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 20.152142857142856,
+          "ma20": 256.4155,
+          "high20": 295.5,
+          "low20": 230.02,
+          "previousHigh20": 295.5,
+          "return5Pct": -2.791416972743077,
+          "slope20Pct": 3.6499640238331965,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 295.5,
+          "thesisZh": "提前分58；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "688025",
+        "name": "杰普特",
+        "sector": "激光设备",
+        "score": 75.25,
+        "referencePrice": 378.0,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分59；主线确认中+5；形成分强+4；资金强度高+5；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 26.944999999999997,
+          "ma20": 390.0905,
+          "high20": 427.36,
+          "low20": 328.0,
+          "previousHigh20": 427.36,
+          "return5Pct": -10.238509316770184,
+          "slope20Pct": 4.793034760381842,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 427.36,
+          "thesisZh": "提前分59；主线确认中+5；形成分强+4；资金强度高+5；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300227",
+        "name": "光韵达",
+        "sector": "激光设备",
+        "score": 73.4,
+        "referencePrice": 13.46,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分55；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.6135714285714284,
+          "ma20": 12.355,
+          "high20": 13.85,
+          "low20": 11.2,
+          "previousHigh20": 13.85,
+          "return5Pct": 1.9862490450725634,
+          "slope20Pct": 6.830955469087763,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 13.85,
+          "thesisZh": "提前分55；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "301205",
+        "name": "联特科技",
+        "sector": "通信网络设备及器件",
+        "score": 72.65,
+        "referencePrice": 300.6,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分59；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 23.36642857142857,
+          "ma20": 299.08,
+          "high20": 340.88,
+          "low20": 261.13,
+          "previousHigh20": 340.88,
+          "return5Pct": -11.173445535296878,
+          "slope20Pct": 1.9416565689617693,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 340.88,
+          "thesisZh": "提前分59；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "688313",
+        "name": "仕佳光子",
+        "sector": "通信网络设备及器件",
+        "score": 72.36,
+        "referencePrice": 147.95,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分58；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 9.937857142857144,
+          "ma20": 149.7285,
+          "high20": 167.18,
+          "low20": 124.55,
+          "previousHigh20": 167.18,
+          "return5Pct": -8.691166989039322,
+          "slope20Pct": 6.171224353042537,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 167.18,
+          "thesisZh": "提前分58；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "000930",
+        "name": "中粮科技",
+        "sector": "农产品加工",
+        "score": 71.8,
+        "referencePrice": 5.27,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分52；主线确认中+5；形成分强+4；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.21642857142857133,
+          "ma20": 4.9075,
+          "high20": 5.34,
+          "low20": 4.61,
+          "previousHigh20": 5.34,
+          "return5Pct": 0.1945525291829009,
+          "slope20Pct": 1.4784946236559016,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差0.57%",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 5.34,
+          "thesisZh": "提前分52；主线确认中+5；形成分强+4；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差0.57%",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "605277",
+        "name": "新亚电子",
+        "sector": "F5G概念",
+        "score": 71.36,
+        "referencePrice": 16.75,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分57；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.8250000000000002,
+          "ma20": 15.8645,
+          "high20": 18.32,
+          "low20": 14.26,
+          "previousHigh20": 18.32,
+          "return5Pct": 1.3747758517633102,
+          "slope20Pct": 3.5846038327184804,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 18.32,
+          "thesisZh": "提前分57；主线确认中+5；形成分强+4；资金正向+3；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300620",
+        "name": "光库科技",
+        "sector": "通信网络设备及器件",
+        "score": 69.63,
+        "referencePrice": 290.5,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分55；主线确认中+5；形成分强+4；资金正向+3；价格开始扩张+1；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 21.72071428571429,
+          "ma20": 300.5665,
+          "high20": 333.54,
+          "low20": 275.4,
+          "previousHigh20": 333.54,
+          "return5Pct": -9.979672829348562,
+          "slope20Pct": 2.8821156508806345,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 333.54,
+          "thesisZh": "提前分55；主线确认中+5；形成分强+4；资金正向+3；价格开始扩张+1；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "603083",
+        "name": "剑桥科技",
+        "sector": "F5G概念",
+        "score": 69.01,
+        "referencePrice": 207.21,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分52；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.07,
+        "targetWeightPct": 7.000000000000001,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 13.147857142857145,
+          "ma20": 178.765,
+          "high20": 204.5,
+          "low20": 144.39,
+          "previousHigh20": 204.5,
+          "return5Pct": -2.0487754146950254,
+          "slope20Pct": 5.481634459359785,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "尚未经过2个完整交易日观察，不加仓",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照",
+          "追高风险高"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 204.5,
+          "thesisZh": "提前分52；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "尚未经过2个完整交易日观察，不加仓",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照",
+            "追高风险高"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "002396",
+        "name": "星网锐捷",
+        "sector": "通信网络设备及器件",
+        "score": 68.01,
+        "referencePrice": 36.57,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分59；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 2.849285714285713,
+          "ma20": 33.691,
+          "high20": 41.95,
+          "low20": 28.87,
+          "previousHigh20": 41.95,
+          "return5Pct": 0.8721722540201648,
+          "slope20Pct": 9.459217985997181,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 41.95,
+          "thesisZh": "提前分59；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "600127",
+        "name": "金健米业",
+        "sector": "粮油加工",
+        "score": 66.53,
+        "referencePrice": 13.53,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分58；已成主线-3；形成分强+4；资金强度高+5；资金评分高+3；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "ESTABLISHED",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 1.102142857142857,
+          "ma20": 9.0755,
+          "high20": 13.88,
+          "low20": 5.83,
+          "previousHigh20": 13.88,
+          "return5Pct": 4.502973661852172,
+          "slope20Pct": 22.418560733796443,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "板块不处于潜在/确认阶段",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照",
+          "追高风险高"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 13.88,
+          "thesisZh": "提前分58；已成主线-3；形成分强+4；资金强度高+5；资金评分高+3；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "板块不处于潜在/确认阶段",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照",
+            "追高风险高"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "600498",
+        "name": "烽火通信",
+        "sector": "通信网络设备及器件",
+        "score": 65.2,
+        "referencePrice": 38.22,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 2.7942857142857145,
+          "ma20": 39.9415,
+          "high20": 43.75,
+          "low20": 37.01,
+          "previousHigh20": 43.75,
+          "return5Pct": -8.207867897037403,
+          "slope20Pct": 2.465335231718413,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 43.75,
+          "thesisZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "603118",
+        "name": "共进股份",
+        "sector": "F5G概念",
+        "score": 64.07,
+        "referencePrice": 17.89,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分47；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 1.3428571428571423,
+          "ma20": 17.065,
+          "high20": 20.58,
+          "low20": 14.3,
+          "previousHigh20": 20.58,
+          "return5Pct": -8.291032148900157,
+          "slope20Pct": 5.2063746493634655,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照",
+          "追高风险高"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 20.58,
+          "thesisZh": "提前分47；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照",
+            "追高风险高"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "000505",
+        "name": "京粮控股",
+        "sector": "粮油加工",
+        "score": 63.34,
+        "referencePrice": 7.3,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分62；已成主线-3；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "ESTABLISHED",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.7478571428571428,
+          "ma20": 6.704,
+          "high20": 8.51,
+          "low20": 5.5,
+          "previousHigh20": 8.51,
+          "return5Pct": -3.8147138964577665,
+          "slope20Pct": 5.5249488430662685,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "板块不处于潜在/确认阶段",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 8.51,
+          "thesisZh": "提前分62；已成主线-3；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "板块不处于潜在/确认阶段",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "000988",
+        "name": "华工科技",
+        "sector": "F5G概念",
+        "score": 63.26,
+        "referencePrice": 98.01,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分45；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 5.4678571428571425,
+          "ma20": 104.498,
+          "high20": 114.58,
+          "low20": 94.61,
+          "previousHigh20": 114.58,
+          "return5Pct": -7.121344603128355,
+          "slope20Pct": -0.17672401440539387,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 114.58,
+          "thesisZh": "提前分45；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "003030",
+        "name": "祖名股份",
+        "sector": "农产品加工",
+        "score": 60.78,
+        "referencePrice": 25.78,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分52；主线确认中+5；形成分强+4；资金强度高+5；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 1.0114285714285718,
+          "ma20": 22.8405,
+          "high20": 25.0,
+          "low20": 21.33,
+          "previousHigh20": 24.7,
+          "return5Pct": 2.6130236416424646,
+          "slope20Pct": 2.834181261537072,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差4.55%",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 25.0,
+          "thesisZh": "提前分52；主线确认中+5；形成分强+4；资金强度高+5；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差4.55%",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "002281",
+        "name": "光迅科技",
+        "sector": "通信网络设备及器件",
+        "score": 59.36,
+        "referencePrice": 176.34,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分50；主线确认中+5；形成分强+4；资金强度高+5；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 10.737142857142858,
+          "ma20": 178.8795,
+          "high20": 202.38,
+          "low20": 160.31,
+          "previousHigh20": 202.38,
+          "return5Pct": -3.4041817867634494,
+          "slope20Pct": 0.1733213865710903,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 202.38,
+          "thesisZh": "提前分50；主线确认中+5；形成分强+4；资金强度高+5；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "600487",
+        "name": "亨通光电",
+        "sector": "F5G概念",
+        "score": 58.17,
+        "referencePrice": 62.56,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分49；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 4.4628571428571435,
+          "ma20": 63.467,
+          "high20": 72.21,
+          "low20": 56.36,
+          "previousHigh20": 72.21,
+          "return5Pct": -9.432314410480359,
+          "slope20Pct": 5.083903868601669,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 72.21,
+          "thesisZh": "提前分49；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "002852",
+        "name": "道道全",
+        "sector": "粮油加工",
+        "score": 57.67,
+        "referencePrice": 9.24,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分59；已成主线-3；形成分强+4；资金正向+3；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "ESTABLISHED",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.45571428571428585,
+          "ma20": 8.1709,
+          "high20": 9.301,
+          "low20": 7.471,
+          "previousHigh20": 9.301,
+          "return5Pct": -2.864969752311375,
+          "slope20Pct": 2.514271375697885,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差0.89%",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "板块不处于潜在/确认阶段",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 9.301,
+          "thesisZh": "提前分59；已成主线-3；形成分强+4；资金正向+3；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差0.89%",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "板块不处于潜在/确认阶段",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "688559",
+        "name": "海目星",
+        "sector": "激光设备",
+        "score": 56.47,
+        "referencePrice": 54.06,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 3.87,
+          "ma20": 52.979,
+          "high20": 61.5,
+          "low20": 46.15,
+          "previousHigh20": 61.5,
+          "return5Pct": -7.632533241236395,
+          "slope20Pct": 4.069145017924658,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 61.5,
+          "thesisZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "000070",
+        "name": "特发信息",
+        "sector": "F5G概念",
+        "score": 55.65,
+        "referencePrice": 15.41,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.8585714285714282,
+          "ma20": 15.308,
+          "high20": 16.74,
+          "low20": 14.04,
+          "previousHigh20": 16.74,
+          "return5Pct": -2.4512884978001304,
+          "slope20Pct": 3.0876460486885193,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 16.74,
+          "thesisZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "002902",
+        "name": "铭普光磁",
+        "sector": "通信网络设备及器件",
+        "score": 55.51,
+        "referencePrice": 25.25,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 1.4014285714285712,
+          "ma20": 25.307,
+          "high20": 28.13,
+          "low20": 23.32,
+          "previousHigh20": 28.13,
+          "return5Pct": -9.586534943285763,
+          "slope20Pct": 2.409809198146595,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 28.13,
+          "thesisZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300999",
+        "name": "金龙鱼",
+        "sector": "粮油加工",
+        "score": 54.97,
+        "referencePrice": 27.22,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分54；已成主线-3；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "ESTABLISHED",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.8200000000000008,
+          "ma20": 25.8395,
+          "high20": 27.96,
+          "low20": 24.59,
+          "previousHigh20": 27.96,
+          "return5Pct": 0.9066868152625585,
+          "slope20Pct": 0.26580264638547124,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "板块不处于潜在/确认阶段",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 27.96,
+          "thesisZh": "提前分54；已成主线-3；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "板块不处于潜在/确认阶段",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "000019",
+        "name": "深粮控股",
+        "sector": "粮油加工",
+        "score": 54.09,
+        "referencePrice": 7.32,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分53；已成主线-3；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "ESTABLISHED",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.5314285714285717,
+          "ma20": 6.737,
+          "high20": 8.14,
+          "low20": 5.96,
+          "previousHigh20": 8.14,
+          "return5Pct": -2.595628415300555,
+          "slope20Pct": 4.368706429124702,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "板块不处于潜在/确认阶段",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 8.14,
+          "thesisZh": "提前分53；已成主线-3；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "板块不处于潜在/确认阶段",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "603803",
+        "name": "瑞斯康达",
+        "sector": "F5G概念",
+        "score": 53.69,
+        "referencePrice": 11.03,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分45；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.6078571428571425,
+          "ma20": 10.9515,
+          "high20": 12.01,
+          "low20": 10.0,
+          "previousHigh20": 12.01,
+          "return5Pct": -4.085257548845467,
+          "slope20Pct": 2.5133389497332237,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 12.01,
+          "thesisZh": "提前分45；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300252",
+        "name": "金信诺",
+        "sector": "F5G概念",
+        "score": 53.39,
+        "referencePrice": 11.93,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分44；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.6278571428571427,
+          "ma20": 11.820500000000001,
+          "high20": 13.54,
+          "low20": 10.99,
+          "previousHigh20": 13.54,
+          "return5Pct": 1.7857142857143016,
+          "slope20Pct": 1.2635997601302185,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 13.54,
+          "thesisZh": "提前分44；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "600251",
+        "name": "冠农股份",
+        "sector": "农产品加工",
+        "score": 53.33,
+        "referencePrice": 11.14,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分44；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.6328571428571425,
+          "ma20": 10.4215,
+          "high20": 12.26,
+          "low20": 9.43,
+          "previousHigh20": 12.26,
+          "return5Pct": -7.986406117247236,
+          "slope20Pct": 3.939560165561251,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 12.26,
+          "thesisZh": "提前分44；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "600737",
+        "name": "中粮糖业",
+        "sector": "农产品加工",
+        "score": 53.0,
+        "referencePrice": 16.25,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分48；主线确认中+5；形成分强+4；价格开始扩张+1；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 1.1799999999999997,
+          "ma20": 14.5835,
+          "high20": 16.5,
+          "low20": 12.61,
+          "previousHigh20": 16.5,
+          "return5Pct": -2.6200873362445476,
+          "slope20Pct": 4.216243255797325,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 16.5,
+          "thesisZh": "提前分48；主线确认中+5；形成分强+4；价格开始扩张+1；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "002792",
+        "name": "通宇通讯",
+        "sector": "通信网络设备及器件",
+        "score": 51.87,
+        "referencePrice": 30.17,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分43；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 1.6392857142857145,
+          "ma20": 32.535000000000004,
+          "high20": 40.52,
+          "low20": 29.2,
+          "previousHigh20": 40.52,
+          "return5Pct": -1.5842224377626835,
+          "slope20Pct": -0.8638420403126235,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 40.52,
+          "thesisZh": "提前分43；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "300747",
+        "name": "锐科激光",
+        "sector": "激光设备",
+        "score": 51.15,
+        "referencePrice": 38.61,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分42；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 2.117142857142857,
+          "ma20": 36.67,
+          "high20": 40.5,
+          "low20": 34.03,
+          "previousHigh20": 39.99,
+          "return5Pct": 2.9536987759446465,
+          "slope20Pct": 2.5633854028277003,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 40.5,
+          "thesisZh": "提前分42；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "002008",
+        "name": "大族激光",
+        "sector": "激光设备",
+        "score": 49.56,
+        "referencePrice": 91.88,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分41；主线确认中+5；形成分强+4；资金强度高+5；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 5.95142857142857,
+          "ma20": 92.413,
+          "high20": 101.58,
+          "low20": 82.33,
+          "previousHigh20": 101.58,
+          "return5Pct": 0.057064597123934746,
+          "slope20Pct": 0.31642993220908355,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 101.58,
+          "thesisZh": "提前分41；主线确认中+5；形成分强+4；资金强度高+5；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "002897",
+        "name": "意华股份",
+        "sector": "通信网络设备及器件",
+        "score": 49.49,
+        "referencePrice": 60.14,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分45；主线确认中+5；形成分强+4；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 3.6428571428571432,
+          "ma20": 58.155,
+          "high20": 62.12,
+          "low20": 53.45,
+          "previousHigh20": 62.12,
+          "return5Pct": 0.6140350877193113,
+          "slope20Pct": 1.7015844146759385,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 62.12,
+          "thesisZh": "提前分45；主线确认中+5；形成分强+4；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "002796",
+        "name": "世嘉科技",
+        "sector": "通信网络设备及器件",
+        "score": 48.42,
+        "referencePrice": 28.71,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分39；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 1.8185714285714283,
+          "ma20": 30.363,
+          "high20": 32.85,
+          "low20": 28.16,
+          "previousHigh20": 32.85,
+          "return5Pct": -4.208754208754206,
+          "slope20Pct": 1.511149744241247,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 32.85,
+          "thesisZh": "提前分39；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "301021",
+        "name": "英诺激光",
+        "sector": "激光设备",
+        "score": 48.25,
+        "referencePrice": 70.81,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分39；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 6.422142857142858,
+          "ma20": 74.255,
+          "high20": 83.97,
+          "low20": 64.82,
+          "previousHigh20": 83.97,
+          "return5Pct": -11.663504111321943,
+          "slope20Pct": 4.8066676546764775,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 83.97,
+          "thesisZh": "提前分39；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "301165",
+        "name": "锐捷网络",
+        "sector": "通信网络设备及器件",
+        "score": 47.31,
+        "referencePrice": 109.97,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分38；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 9.57214285714286,
+          "ma20": 125.00800000000001,
+          "high20": 149.3,
+          "low20": 108.88,
+          "previousHigh20": 149.3,
+          "return5Pct": -8.123953098827474,
+          "slope20Pct": 1.0888595076074647,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 149.3,
+          "thesisZh": "提前分38；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "000063",
+        "name": "中兴通讯",
+        "sector": "通信网络设备及器件",
+        "score": 45.82,
+        "referencePrice": 33.01,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分37；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.8021428571428574,
+          "ma20": 34.1315,
+          "high20": 36.2,
+          "low20": 32.83,
+          "previousHigh20": 36.2,
+          "return5Pct": -1.6651798988997935,
+          "slope20Pct": -0.6129520703511582,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 36.2,
+          "thesisZh": "提前分37；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "688387",
+        "name": "信科移动-U",
+        "sector": "通信网络设备及器件",
+        "score": 42.8,
+        "referencePrice": 12.46,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分34；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3",
+          "B1"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 0.822142857142857,
+          "ma20": 13.4245,
+          "high20": 15.75,
+          "low20": 11.95,
+          "previousHigh20": 15.75,
+          "return5Pct": -4.287901990811638,
+          "slope20Pct": -0.8823095097460154,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 15.75,
+          "thesisZh": "提前分34；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "603890",
+        "name": "春秋电子",
+        "sector": "F5G概念",
+        "score": 42.68,
+        "referencePrice": 18.84,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分38；主线确认中+5；形成分强+4；资金转负-6；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 1.1935714285714283,
+          "ma20": 19.0315,
+          "high20": 22.42,
+          "low20": 16.8,
+          "previousHigh20": 22.42,
+          "return5Pct": 7.9845814977973495,
+          "slope20Pct": 1.5907331785304457,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日走势明显走弱",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "第二行情缺失/过期",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 22.42,
+          "thesisZh": "提前分38；主线确认中+5；形成分强+4；资金转负-6；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日走势明显走弱",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "第二行情缺失/过期",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      },
+      {
+        "code": "001267",
+        "name": "汇绿生态",
+        "sector": "通信网络设备及器件",
+        "score": 41.55,
+        "referencePrice": 37.27,
+        "priceSource": "当时双源确认行情",
+        "reasonZh": "提前分28；主线确认中+5；形成分强+4；资金强度高+5；等待完整日线与至少3个有效盘中快照",
+        "targetWeight": 0.04,
+        "targetWeightPct": 4.0,
+        "stage": "CONFIRMING",
+        "evidence": [
+          "B0",
+          "B3"
+        ],
+        "setup": {
+          "ready": false,
+          "kind": "WAIT",
+          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+        },
+        "technical": {
+          "ready": true,
+          "dataDate": "2026-09-04",
+          "sampleDays": 65,
+          "atr14": 2.632857142857143,
+          "ma20": 39.0245,
+          "high20": 45.29,
+          "low20": 34.85,
+          "previousHigh20": 45.29,
+          "return5Pct": -9.769230769230774,
+          "slope20Pct": 1.0159971008490531,
+          "adv20": null,
+          "volumeRatio5to20": null
+        },
+        "rejections": [
+          "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "等待完整日线与至少3个有效盘中快照",
+          "综合分不足64",
+          "追高风险高"
+        ],
+        "rankSampleCount": null,
+        "sectorRank": null,
+        "dataAt": "2026-09-07T09:44:02+08:00",
+        "decisionPlan": {
+          "actionZh": "等待条件",
+          "buyZoneLow": null,
+          "buyZoneHigh": null,
+          "initialProtectionPrice": null,
+          "resistanceReference": 45.29,
+          "thesisZh": "提前分28；主线确认中+5；形成分强+4；资金强度高+5；等待完整日线与至少3个有效盘中快照",
+          "waitReasons": [
+            "ADV20不足20个完整交易日",
+            "双源价格偏差超过0.3%或缺数",
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "当日涨幅已超过提前介入上限",
+            "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "涨跌幅超出保守买入区间",
+            "等待完整日线与至少3个有效盘中快照",
+            "综合分不足64",
+            "追高风险高"
+          ],
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
+        }
+      }
+    ],
+    "holdingSignals": {
+      "600895": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "603083": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "603236": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "001979": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "000011": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "300166": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "600415": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "002517": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "000564": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "002558": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "002027": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "300209": {
+        "completedDays": [],
+        "daily": {}
+      },
+      "002195": {
+        "completedDays": [],
+        "daily": {}
+      }
+    },
     "nextReview": {
-      "observedTradingDays": 0,
+      "observedTradingDays": 1,
       "reviewEveryTradingDays": 20,
       "reviewDue": false,
       "statusZh": "正在积累前向影子盘样本；尚不能判断优于旧策略"
@@ -4778,7 +8129,7 @@
   "strategyResearch": {
     "schemaVersion": 1,
     "version": "v4.6-forward-evidence",
-    "updatedAt": "2026-09-07T09:41:49.128422+08:00",
+    "updatedAt": "2026-09-07T09:44:02.198131+08:00",
     "activatedAt": "2026-09-06T02:38:25.980418+08:00",
     "objectiveZh": "提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。",
     "productionStatusZh": "策略参数或代码已变化：暂停新增冻结，需建立新版本研究",
@@ -4867,7 +8218,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-07T09:41:49.128422+08:00",
+        "checkedAt": "2026-09-07T09:44:02.198131+08:00",
         "reasonZh": "仅统计本次启用后的完整成员样本；不等于2017年至今历史覆盖审计。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -4877,7 +8228,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-07T09:41:49.128422+08:00",
+        "checkedAt": "2026-09-07T09:44:02.198131+08:00",
         "reasonZh": "使用首次观察时保存的成员；后续不以今天成员替换。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -4887,7 +8238,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-07T09:41:49.128422+08:00",
+        "checkedAt": "2026-09-07T09:44:02.198131+08:00",
         "reasonZh": "两融/ETF必须具备真实availableAt且不晚于决策；仅写T+1不能通过。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -4897,7 +8248,7 @@
         "status": "PENDING_REVIEW",
         "completed": 0,
         "total": 60,
-        "checkedAt": "2026-09-07T09:41:49.128422+08:00",
+        "checkedAt": "2026-09-07T09:44:02.198131+08:00",
         "reasonZh": "按信号日汇总，重叠窗口仍相关；需补除权、可成交成本、全市场基准与独立样本外验证。",
         "evidencePath": "astock_ai_portfolio/state.json#research46"
       },
@@ -4907,7 +8258,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-07T09:41:49.128422+08:00",
+        "checkedAt": "2026-09-07T09:44:02.198131+08:00",
         "reasonZh": "校验首次冻结内容哈希；仅证明未改写，不等于策略有效。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       }
@@ -4947,17 +8298,17 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "34073839606-1",
-    "lastRunAt": "2026-09-07T09:41:49+08:00",
-    "lastSuccessAt": "2026-09-07T09:41:49+08:00",
+    "cycleId": "34073866588-1",
+    "lastRunAt": "2026-09-07T09:43:41+08:00",
+    "lastSuccessAt": "2026-09-07T09:43:41+08:00",
     "lastTradeAt": "2026-09-04T10:41:13+08:00",
-    "status": "BLOCKED_STALE_RADAR",
-    "statusZh": "后台已运行并更新基金报表，但雷达不是当日数据，拒绝使用旧数据交易",
-    "runSource": "dedicated-auto-scheduler",
+    "status": "NO_ACTION",
+    "statusZh": "后台已完成本轮检查，但目标权重变化未达到交易阈值",
+    "runSource": "integrated-radar-cycle",
     "sessionOpen": true,
-    "radarCapturedAt": "2026-09-04T15:16:35+08:00",
-    "radarFresh": false,
-    "radarAgeSeconds": 239114.1,
+    "radarCapturedAt": "2026-09-07T09:42:20+08:00",
+    "radarFresh": true,
+    "radarAgeSeconds": 81.9,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -4976,38 +8327,8 @@
   },
   "capitalMigrationThisCycle": null,
   "dataFreshness": {
-    "radarFresh": false,
-    "radarAgeSeconds": null,
+    "radarFresh": true,
+    "radarAgeSeconds": 81.9,
     "maxAllowedAgeSeconds": 900
-  },
-  "benchmarkComparison": {
-    "startedAt": "2026-09-03T23:23:37+08:00",
-    "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
-    "portfolioMetric": "UNIT_NAV_RETURN",
-    "portfolioReturnPct": -1.091,
-    "indexes": [
-      {
-        "name": "沪深300",
-        "returnPct": 0.109,
-        "alphaPct": -1.2
-      },
-      {
-        "name": "中证A500",
-        "returnPct": -0.212,
-        "alphaPct": -0.879
-      },
-      {
-        "name": "创业板指",
-        "returnPct": 0.559,
-        "alphaPct": -1.65
-      }
-    ],
-    "candidatePool": {
-      "name": "原始候选池固定等权",
-      "memberCount": 30,
-      "returnPct": -1.085,
-      "alphaPct": -0.006,
-      "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
-    }
   }
 }
