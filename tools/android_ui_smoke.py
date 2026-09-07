@@ -13,12 +13,16 @@ def tap_text(text):
                 x1,y1,x2,y2=map(int,re.findall(r'\d+',n.attrib['bounds']))
                 adb('shell','input','tap',str((x1+x2)//2),str((y1+y2)//2)); time.sleep(3); return
         time.sleep(2)
+    print(ET.tostring(root,encoding='unicode'),flush=True)
+    screenshot('android-ui-failure')
+    print(adb('logcat','-d','-s','AndroidRuntime').decode(errors='replace'),flush=True)
     raise RuntimeError('UI text not found: '+text)
 def screenshot(name):
     Path('dist').mkdir(exist_ok=True); Path('dist/'+name+'.png').write_bytes(adb('exec-out','screencap','-p'))
 adb('install','-r','app/build/outputs/apk/debug/app-debug.apk')
-adb('shell','am','start','-n','com.rui.astockstrategy.selection/com.rui.astockstrategy.v6.V6Activity')
+print(adb('shell','am','start','-W','-n','com.rui.astockstrategy.selection/com.rui.astockstrategy.v6.V6Activity').decode(),flush=True)
 time.sleep(12)
+screenshot('android-startup')
 tap_text('组合'); time.sleep(8); screenshot('android-holdings')
 tap_text('报表'); time.sleep(5); screenshot('android-daily-returns')
 tap_text('累计收益率'); screenshot('android-cumulative-returns')
