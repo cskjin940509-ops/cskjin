@@ -713,7 +713,9 @@
     "official": 16,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 0,
+    "marketPrefilterCount": 0,
+    "marketScannedCount": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -726,5 +728,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "ready",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5556,
+    "uniqueRows": 5556,
+    "pagesRequested": 56,
+    "coveragePct": 100.0,
+    "prefiltered": 0,
+    "historyLoaded": 0,
+    "setupMatches": 0,
+    "historicalEdgeMatches": 0,
+    "selected": 0,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
