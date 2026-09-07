@@ -11,7 +11,7 @@
     "availableAt": "2026-09-07T10:56:45+08:00",
     "confidence": "高",
     "verifiedToday": true,
-    "dataSource": "腾讯行情 + 东方财富",
+    "dataSource": "Yunai Quant API（市场状态） + 腾讯行情 + 东方财富",
     "indices": {
       "sh000001": {
         "name": "上证指数",
@@ -66,7 +66,8 @@
     "breadthSampleCount": 100,
     "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
     "coreIndexCoverage": "6/6",
-    "coreIndexSource": "腾讯当日收盘快照"
+    "coreIndexSource": "腾讯当日收盘快照",
+    "marketStatusProvider": "Yunai Quant API"
   },
   "boardHeatmap": {
     "industry": [
@@ -2995,7 +2996,66 @@
   },
   "errors": [],
   "dataSources": [
+    "Yunai Quant API",
     "腾讯行情",
     "东方财富实时/延迟板块"
-  ]
+  ],
+  "yunai": {
+    "configured": true,
+    "connected": true,
+    "marketStatus": {
+      "connected": true,
+      "provider": "Yunai Quant API",
+      "checkedAt": "2026-09-07T10:58:23+08:00",
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
+      "responseDigest": "21473133aa5731e4",
+      "data": [
+        {
+          "market": "CN",
+          "status": "TRADING",
+          "marketStatus": "Trading"
+        }
+      ]
+    },
+    "openapiState": "ready",
+    "endpointCount": 38,
+    "categories": [
+      "K线",
+      "行情"
+    ]
+  },
+  "yunaiProduction": {
+    "checkedAt": "2026-09-07T10:58:28+08:00",
+    "provider": "Yunai Quant API",
+    "connected": true,
+    "marketStatus": {
+      "httpStatus": 200,
+      "type": "list",
+      "count": 1
+    },
+    "checkedSymbols": [
+      "600172",
+      "301071",
+      "688028",
+      "605580",
+      "300179",
+      "600185",
+      "002171",
+      "301021",
+      "002046",
+      "601628",
+      "601888",
+      "601318",
+      "301008"
+    ],
+    "quoteAvailable": 13,
+    "capitalResponseAvailable": 2,
+    "roles": {
+      "realTimeQuotes": "第二实时行情源",
+      "capitalDistribution": "独立大单资金分布，不等同东方财富主力净流入",
+      "barsRange": "已验证可用，按需用于历史K线/RS校验"
+    }
+  }
 }
