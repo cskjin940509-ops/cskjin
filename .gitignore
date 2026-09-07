@@ -3,3 +3,8 @@
 **/build/
 local.properties
 *.apk
+
+# Private signing material; retained only in the CI cache or secret store.
+signing/
+ci-output/paired-*/
+ci-output/final-check/

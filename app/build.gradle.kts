@@ -20,6 +20,7 @@ android {
     }
 
     sourceSets["main"].java.srcDir(rootProject.layout.buildDirectory.dir("generated/version"))
+    signingConfigs.getByName("debug").storeFile = rootProject.file("signing/debug.keystore")
     buildFeatures { compose = true }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
