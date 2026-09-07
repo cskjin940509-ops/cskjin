@@ -1,8 +1,5 @@
 package com.rui.astockstrategy.v6
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,6 +16,7 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -152,12 +150,6 @@ data class PreviewSector(
     val flowScore: Double
 )
 
-class V6Activity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent { AStockV6() }
-    }
-}
 
 enum class Tab(val label: String, val icon: ImageVector) {
     TODAY("总览", Icons.Default.Home),
@@ -170,6 +162,7 @@ enum class Tab(val label: String, val icon: ImageVector) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AStockV6() {
+    val uriHandler = LocalUriHandler.current
     var tab by remember { mutableStateOf(Tab.TODAY) }
     var snapshots by remember { mutableStateOf<List<Snapshot>>(emptyList()) }
     var selectedDate by remember { mutableStateOf<String?>(null) }
@@ -283,6 +276,7 @@ fun AStockV6() {
                             },
                             ok = backendHealth.lastSuccessAt > 0
                         )
+                        TextButton(onClick = { uriHandler.openUri("https://github.com/cskjin940509-ops/cskjin/releases/latest") }) { Text("更新", fontSize = 12.sp) }
                         IconButton(onClick = { refreshGeneration++ }) {
                             Icon(Icons.Default.Refresh, contentDescription = "立即同步")
                         }
@@ -417,7 +411,7 @@ private fun BackendStatusCard41(
             Key("云端数据时间", health.lastServerTime?.replace('T', ' ')?.take(19) ?: "等待首次同步")
             Key("当前读取", health.source)
             if (health.usingCache) {
-                Notice("云端接口暂时不可用，正在展示手机SQLite中最后一次成功数据；不会用空值覆盖旧数据。")
+                Notice("云端接口暂时不可用，正在展示本机缓存中最后一次成功数据；不会用空值覆盖旧数据。")
             }
             val errors = listOfNotNull(snapshotError, radarError, quoteError, boardError, health.lastError).distinct()
             if (errors.isNotEmpty()) {

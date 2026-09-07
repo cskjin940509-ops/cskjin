@@ -1,6 +1,5 @@
 package com.rui.astockstrategy.v6
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,7 +7,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -118,7 +116,7 @@ fun ExecutionPanel() {
 
 @Composable
 private fun ExecutionStockCard(st: ExecStock, q: Quote?, signalDate: String) {
-    val context = LocalContext.current
+    val context = LocalAppContext.current
     var ledgerVersion by remember(st.code) { mutableIntStateOf(0) }
     var dialogSide by remember(st.code) { mutableStateOf<String?>(null) }
     val realPos = remember(st.code, ledgerVersion) { TradeLedger.position(context, st.code, "REAL") }
@@ -262,18 +260,18 @@ private fun n(o: JSONObject, key: String): Double? {
     return when (v) { null, JSONObject.NULL -> null; is Number -> v.toDouble(); else -> v.toString().toDoubleOrNull() }
 }
 
-private fun loadPosition(prefs: android.content.SharedPreferences, code: String): LocalPosition? {
+private fun loadPosition(prefs: AppPreferences, code: String): LocalPosition? {
     val p = prefs.getFloat("${code}_price", Float.NaN)
     val d = prefs.getString("${code}_date", null)
     val t = prefs.getString("${code}_time", null)
     return if (!p.isNaN() && d != null && t != null) LocalPosition(p.toDouble(), d, t) else null
 }
 
-private fun savePosition(prefs: android.content.SharedPreferences, code: String, p: LocalPosition) {
+private fun savePosition(prefs: AppPreferences, code: String, p: LocalPosition) {
     prefs.edit().putFloat("${code}_price", p.price.toFloat()).putString("${code}_date", p.date).putString("${code}_time", p.time).apply()
 }
 
-private fun clearPosition(prefs: android.content.SharedPreferences, code: String) {
+private fun clearPosition(prefs: AppPreferences, code: String) {
     prefs.edit().remove("${code}_price").remove("${code}_date").remove("${code}_time").apply()
 }
 

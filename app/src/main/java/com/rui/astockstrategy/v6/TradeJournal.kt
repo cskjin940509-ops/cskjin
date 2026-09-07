@@ -1,8 +1,5 @@
 package com.rui.astockstrategy.v6
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,7 +9,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -75,9 +71,9 @@ data class LedgerSummary(
 )
 
 object TradeLedger {
-    private fun prefs(context: Context) = context.getSharedPreferences(JournalPrefs, Context.MODE_PRIVATE)
+    private fun prefs(context: AppContext) = context.getSharedPreferences(JournalPrefs, AppContext.MODE_PRIVATE)
 
-    fun records(context: Context): List<TradeRecord> {
+    fun records(context: AppContext): List<TradeRecord> {
         val raw = prefs(context).getString(JournalKey, "[]") ?: "[]"
         return runCatching {
             val a = JSONArray(raw)
@@ -85,19 +81,19 @@ object TradeLedger {
         }.getOrElse { emptyList() }
     }
 
-    private fun save(context: Context, rows: List<TradeRecord>) {
+    private fun save(context: AppContext, rows: List<TradeRecord>) {
         val a = JSONArray()
         rows.sortedBy { it.timestamp }.forEach { a.put(toJson(it)) }
         prefs(context).edit().putString(JournalKey, a.toString()).apply()
     }
 
-    fun exportJson(context: Context): String {
+    fun exportJson(context: AppContext): String {
         val a = JSONArray()
         records(context).forEach { a.put(toJson(it)) }
         return JSONObject().put("schemaVersion", 1).put("exportedAt", LocalDateTime.now(JournalZone).toString()).put("records", a).toString(2)
     }
 
-    fun importMerge(context: Context, text: String): Int {
+    fun importMerge(context: AppContext, text: String): Int {
         val root = JSONObject(text)
         val a = root.optJSONArray("records") ?: JSONArray()
         val incoming = (0 until a.length()).mapNotNull { i -> fromJson(a.optJSONObject(i)) }
@@ -109,15 +105,15 @@ object TradeLedger {
         return merged.size - old.size
     }
 
-    fun delete(context: Context, id: String) {
+    fun delete(context: AppContext, id: String) {
         save(context, records(context).filterNot { it.id == id })
     }
 
-    fun position(context: Context, code: String, mode: String? = null): LedgerPosition? =
+    fun position(context: AppContext, code: String, mode: String? = null): LedgerPosition? =
         summary(context, mode).positions.firstOrNull { it.code == code }
 
     fun add(
-        context: Context,
+        context: AppContext,
         code: String,
         name: String,
         side: String,
@@ -154,7 +150,7 @@ object TradeLedger {
         return row
     }
 
-    fun summary(context: Context, mode: String? = null): LedgerSummary {
+    fun summary(context: AppContext, mode: String? = null): LedgerSummary {
         val rows = records(context).filter { mode == null || it.mode == mode }
         data class State(var name: String = "", var qty: Int = 0, var cost: Double = 0.0, var first: String? = null, var boughtBeforeToday: Int = 0, var soldQty: Int = 0)
         val states = linkedMapOf<String, State>()
@@ -216,7 +212,7 @@ object TradeLedger {
 
 @Composable
 fun TradeJournalScreen() {
-    val context = LocalContext.current
+    val context = LocalAppContext.current
     var version by remember { mutableIntStateOf(0) }
     var mode by remember { mutableStateOf("REAL") }
     var showAdd by remember { mutableStateOf(false) }
@@ -255,13 +251,11 @@ fun TradeJournalScreen() {
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(onClick = {
-                    val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    cm.setPrimaryClip(ClipData.newPlainText("A股交易日志备份", TradeLedger.exportJson(context)))
+                    copyBackup(context, TradeLedger.exportJson(context))
                     message = "已复制交易日志备份到剪贴板"
                 }, modifier = Modifier.weight(1f)) { Text("复制备份", fontSize = 9.sp) }
                 OutlinedButton(onClick = {
-                    val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    val text = cm.primaryClip?.getItemAt(0)?.coerceToText(context)?.toString().orEmpty()
+                    val text = readBackup(context)
                     val added = runCatching { TradeLedger.importMerge(context, text) }.getOrElse { -1 }
                     if (added >= 0) { version++; message = "备份导入完成，新增${added}笔" } else message = "剪贴板不是有效交易日志备份"
                 }, modifier = Modifier.weight(1f)) { Text("导入备份", fontSize = 9.sp) }
@@ -371,7 +365,7 @@ fun TradeRecordDialog(
     onDismiss: () -> Unit,
     onSaved: (TradeRecord) -> Unit,
 ) {
-    val context = LocalContext.current
+    val context = LocalAppContext.current
     var code by remember { mutableStateOf(initialCode) }
     var name by remember { mutableStateOf(initialName) }
     var price by remember { mutableStateOf(initialPrice?.let { String.format("%.3f", it) } ?: "") }
