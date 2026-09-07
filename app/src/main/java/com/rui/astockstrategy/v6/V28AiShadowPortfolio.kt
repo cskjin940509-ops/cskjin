@@ -58,6 +58,9 @@ private fun money28(v: Double?): String = v?.let {
         else -> String.format("¥%.2f", it)
     }
 } ?: "—"
+private fun exactMoney49(v: Double?): String = v?.takeIf { it.isFinite() }?.let { String.format("¥%,.2f", it) } ?: "—"
+private fun weight49(v: Double?): String = v?.let { String.format("%.2f%%", it) } ?: "—"
+
 private fun price28(v: Double?): String = v?.let { String.format("%.2f", it) } ?: "—"
 private fun pnlColor28(v: Double?): Color = if ((v ?: 0.0) >= 0) AiUp28 else AiDown28
 
@@ -95,7 +98,8 @@ private data class AiDecision28(
     val id: String, val time: String, val side: String, val code: String, val name: String, val qty: Int,
     val price: Double?, val weight: Double?, val realizedPnl: Double?, val realizedReturn: Double?, val reason: String,
     val requestedQty: Int?, val partialFill: Boolean, val participationPct: Double?, val slippageBps: Double?,
-    val intradayAmount: Double?, val adv20Amount: Double?, val executionModel: String
+    val intradayAmount: Double?, val adv20Amount: Double?, val executionModel: String,
+    val amount: Double?, val fee: Double?
 )
 
 private fun positions28(a: JSONArray?): List<AiPosition28> {
@@ -144,7 +148,9 @@ private fun decisions28(a: JSONArray?): List<AiDecision28> {
             slippageBps = n28(x, "slippageBps"),
             intradayAmount = n28(x, "intradayAmount"),
             adv20Amount = n28(x, "adv20Amount"),
-            executionModel = x.optString("executionModel")
+            executionModel = x.optString("executionModel"),
+            amount = n28(x, "amount") ?: n28(x, "price")?.let { it * x.optInt("qty") },
+            fee = n28(x, "fee")
         )
     }
 }
@@ -250,6 +256,7 @@ fun AiShadowPortfolioScreen28() {
                     }
                 }
             } else item { AiEmpty28("该股票已不在当前持仓中，可查看下方历史成交。") }
+            item { AiLedgerTotals49(allDecisions.filter { it.code == selectedCode }, ledger != null && ledgerError == null) }
             item { AiTitle28("个股成交记录") }
             val stockDecisions = allDecisions.filter { it.code == selectedCode }
             if (stockDecisions.isEmpty()) item { AiEmpty28(ledgerError ?: "暂无成交记录") }
@@ -348,6 +355,12 @@ fun AiShadowPortfolioScreen28() {
                             AiMetric28("今日收益", pct28(n28(summary, "todayReturnPct")), pnlColor28(n28(summary, "todayReturnPct")), Modifier.weight(1f))
                             AiMetric28("持仓收益率", pct28(n28(summary, "holdingReturnPct")), pnlColor28(n28(summary,"holdingReturnPct")), Modifier.weight(1f))
                         }
+                        Row {
+                            val cost = if(d != null && pos.all { it.avgCost != null }) pos.sumOf { it.avgCost!! * it.qty } else null
+                            AiMetric28("持仓总成本（含买费）", money28(cost), AiBlue28, Modifier.weight(1f))
+                            AiMetric28("持仓市值", money28(n28(summary,"marketValue")), AiBlue28, Modifier.weight(1f))
+                            AiMetric28("已实现盈亏", money28(n28(summary,"realizedPnl")), pnlColor28(n28(summary,"realizedPnl")), Modifier.weight(1f))
+                        }
                         Text("仓位 ${pct28(n28(summary,"positionPct"))} · 可用 ${money28(n28(summary, "cash"))} · ${pos.size}只 · 模拟组合", fontSize = 10.sp, color = AiMuted28)
                         Text("快照 ${d?.optString("updatedAt")?.replace("T", " ")?.take(19) ?: "待同步"}", fontSize = 9.sp, color = AiMuted28)
                         Text(if(allLive) "${if(LiveHoldings.trading(clock)) "直连行情" else "休市行情"} ${marked.oldest?.atZone(ZoneId.of("Asia/Shanghai"))?.toLocalTime()}" else "有效报价 ${marked.covered}/${marked.total} · 汇总使用快照",fontSize=9.sp,color=if(allLive) AiBlue28 else AiAmber28)
@@ -360,7 +373,7 @@ fun AiShadowPortfolioScreen28() {
             }
             item {
                 Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp)) {
-                    listOf("名称 / 股数", "现价 / 今日涨幅", "盈亏 / 持仓收益", "成本 / 仓位").forEach { label ->
+                    listOf("名称 / 股数", "现价 / 今日涨幅", "盈亏 / 持仓收益", "每股成本 / 仓位").forEach { label ->
                         Text(label, Modifier.weight(1f), fontSize = 10.sp, color = AiMuted28, textAlign = if (label.startsWith("名称")) TextAlign.Start else TextAlign.End)
                     }
                 }
@@ -372,6 +385,7 @@ fun AiShadowPortfolioScreen28() {
         }
 
         if (page == "成交") {
+            item { AiLedgerTotals49(allDecisions, ledger != null && ledgerError == null) }
             item { AiTitle28("今日影子模拟动作（${today.size}笔）") }
             if (today.isEmpty()) item {
                 AiEmpty28(automation?.optString("statusZh")?.takeIf { it.isNotBlank() }
@@ -609,10 +623,14 @@ private fun AiPositionCard28(p: AiPosition28) {
                 }
             }
             Row {
-                AiMetric28("买入价", price28(p.entryPrice ?: p.avgCost), AiMuted28, Modifier.weight(1f))
+                AiMetric28("每股成本（含买费）", p.avgCost?.let { String.format("%.4f", it) } ?: "—", AiMuted28, Modifier.weight(1f))
                 AiMetric28("现价", price28(p.currentPrice), pnlColor28(p.floatingReturnPct), Modifier.weight(1f))
                 AiMetric28("当前仓位", pct28(p.currentWeightPct), AiBlue28, Modifier.weight(1f))
             }
+            Text("持仓成本 ${exactMoney49(p.avgCost?.let { it * p.qty })}", fontSize=14.sp, fontWeight=FontWeight.Bold)
+            Text("当前市值 ${exactMoney49(p.currentPrice?.let { it * p.qty })}", fontSize=14.sp)
+            Text("首次成交价 ${price28(p.entryPrice)} · 当前持有 ${p.qty}股", fontSize=12.sp)
+            Text("成本按剩余股数×含买入费用的平均成本计算；已卖出盈亏单独统计，不冲减此成本。",fontSize=10.sp,color=AiMuted28)
             Text("今日涨幅 ${pct28(p.marketChangePct)} · 持仓收益 ${pct28(p.floatingReturnPct)}",fontSize=12.sp)
             Text(p.displayQuoteAt?.let { "报价 $it" } ?: "价格来自组合快照",fontSize=10.sp,color=AiMuted28)
             Text("买入时点 ${p.entryTimestamp.replace("T", " ").take(16)}", color = AiMuted28, fontSize = 9.sp)
@@ -637,6 +655,10 @@ private fun AiDecisionCard28(x: AiDecision28) {
                 Text(x.time.replace("T", " ").take(16), color = AiMuted28, fontSize = 8.sp)
             }
             Text("${x.qty}股 · 成交模拟价 ${price28(x.price)}${x.weight?.let { " · 目标仓位 ${pct28(it)}" } ?: ""}", fontSize = 9.sp)
+            Text("成交金额 ${exactMoney49(x.amount)} · 费用 ${exactMoney49(x.fee)}",fontSize=12.sp)
+            val cashMovement = x.amount?.let { amount -> x.fee?.let { fee -> if(buy) amount + fee else amount - fee } }
+            Text("${if(buy) "实际支出" else "实际到账"} ${exactMoney49(cashMovement)}",fontSize=13.sp,fontWeight=FontWeight.Bold)
+            if(x.fee == null) Text("该笔费用未记录，实际收支暂不可核算",fontSize=10.sp,color=AiAmber28)
             if (x.executionModel == "v3-liquidity-capacity-point-in-time") {
                 val requestText = x.requestedQty?.let { "目标${it}股 · " } ?: ""
                 Text(
@@ -809,6 +831,7 @@ private fun AiCompactPosition28(p: AiPosition28, onClick: () -> Unit) {
         Column(Modifier.weight(1f)) {
             Text(p.name, fontSize = 12.sp, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text("${p.code} · ${p.qty}股", fontSize = 9.sp, color = AiMuted28, maxLines = 1)
+            Text("市值 ${money28(p.currentPrice?.let { it * p.qty })}",fontSize=9.sp,color=AiMuted28,maxLines=1)
         }
         Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
             Text("${price28(p.currentPrice)}${if(p.displayQuoteAt==null) "旧" else ""}", fontSize = 12.sp)
@@ -820,7 +843,31 @@ private fun AiCompactPosition28(p: AiPosition28, onClick: () -> Unit) {
         }
         Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
             Text(price28(p.avgCost), fontSize = 12.sp, maxLines = 1)
-            Text("${pct28(p.currentWeightPct)} ›", fontSize = 10.sp, color = AiMuted28)
+            Text("${weight49(p.currentWeightPct)} ›", fontSize = 10.sp, color = AiMuted28)
+            Text("投入 ${money28(p.avgCost?.let { it * p.qty })}",fontSize=9.sp,color=AiMuted28,maxLines=1)
+        }
+    }
+}
+
+@Composable
+private fun AiLedgerTotals49(rows: List<AiDecision28>, loaded: Boolean) {
+    fun total(values: List<Double?>): Double? = if(loaded && values.all { it != null && it.isFinite() }) values.sumOf { it!! } else null
+    val buys=rows.filter { it.side == "买入" || it.side == "加仓" }
+    val sells=rows.filter { it.side == "卖出" || it.side == "减仓" || it.side == "清仓" }
+    val buyAmount=total(buys.map { it.amount })
+    val sellAmount=total(sells.map { it.amount })
+    val buyFees=total(buys.map { it.fee })
+    val sellFees=total(sells.map { it.fee })
+    Card(colors=CardDefaults.cardColors(containerColor=Color.White)) {
+        Column(Modifier.fillMaxWidth().padding(12.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
+            Text("历史成交资金汇总",fontWeight=FontWeight.Bold)
+            Text("累计买入 ${exactMoney49(buyAmount)} · ${buys.size}笔",fontSize=12.sp)
+            Text("累计卖出 ${exactMoney49(sellAmount)} · ${sells.size}笔",fontSize=12.sp)
+            Text("累计费用 ${exactMoney49(total(rows.map { it.fee }))}",fontSize=12.sp)
+            Text("买入总支出 ${exactMoney49(buyAmount?.let { a -> buyFees?.let { a + it } })}",fontSize=12.sp)
+            Text("卖出总到账 ${exactMoney49(sellAmount?.let { a -> sellFees?.let { a - it } })}",fontSize=12.sp)
+            Text("卖出已实现盈亏 ${exactMoney49(total(sells.map { it.realizedPnl }))}",fontSize=12.sp)
+            Text("含原100万阶段及增资后全部成交；累计买入包含重复买入，与当前持仓成本不同。费用缺失显示—。",fontSize=10.sp,color=AiMuted28)
         }
     }
 }

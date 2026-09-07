@@ -24,6 +24,7 @@ print(adb('shell','am','start','-W','-n','com.rui.astockstrategy.selection/com.r
 time.sleep(12)
 screenshot('android-startup')
 tap_text('组合'); time.sleep(8); screenshot('android-holdings')
+tap_text('成交'); screenshot('android-transactions')
 tap_text('报表'); time.sleep(5); screenshot('android-daily-returns')
 tap_text('累计收益率'); screenshot('android-cumulative-returns')
 Path('dist/android-ui-smoke.txt').write_text('PASS: APK installed and portfolio/daily/cumulative screens navigated; screenshots saved.\n')
