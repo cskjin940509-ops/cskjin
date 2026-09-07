@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-07T18:47:01.329456+08:00",
+  "stageStartedAt": "2026-09-03T23:23:35+08:00",
+  "capital": 20000000,
+  "status": "RECONSTRUCTED_ACCOUNTING",
+  "rows": [
+    {
+      "date": "2026-09-03",
+      "closeAssets": 20035902.89,
+      "previousCloseAssets": null,
+      "netContribution": 19000000.0,
+      "dailyPnl": null,
+      "dailyReturnPct": null,
+      "cumulativeReturnPct": 0.0,
+      "status": "STAGE_BASELINE",
+      "missingCodes": [],
+      "holdingCount": 10
+    },
+    {
+      "date": "2026-09-04",
+      "closeAssets": 19817229.29,
+      "previousCloseAssets": 20035902.89,
+      "netContribution": 0,
+      "dailyPnl": -218673.6,
+      "dailyReturnPct": -1.091408763560842,
+      "cumulativeReturnPct": -1.0914087635608416,
+      "status": "RECONSTRUCTED_CLOSE",
+      "missingCodes": [],
+      "holdingCount": 13
+    },
+    {
+      "date": "2026-09-07",
+      "closeAssets": 20196621.29,
+      "previousCloseAssets": 19817229.29,
+      "netContribution": 0,
+      "dailyPnl": 379392.0,
+      "dailyReturnPct": 1.9144553178856618,
+      "cumulativeReturnPct": 0.8021520212109445,
+      "status": "RECONSTRUCTED_CLOSE",
+      "missingCodes": [],
+      "holdingCount": 13
+    }
+  ],
+  "formulaZh": "本日收益＝本日收盘总资产－前一日收盘总资产－本日净入金；日收益率＝本日收益÷前一日收盘总资产。",
+  "baselineNoteZh": "增资发生在9月3日收盘后：当日期初基准含1900万入金，作为2000万阶段起点，不计作投资盈利。",
+  "sourceZh": "原始模拟成交账本＋腾讯不复权日K收盘价；事后补算，不冒充当时冻结的收盘证据。",
+  "ledgerDecisionCount": 41,
+  "ledgerReconciled": true
+}
