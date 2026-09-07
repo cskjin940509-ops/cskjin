@@ -4,7 +4,7 @@
   "mode": "a股筛选池 · 主线持仓＋底仓T研究",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-07T10:47:18+08:00",
+  "updatedAt": "2026-09-07T10:47:21+08:00",
   "radarCapturedAt": "2026-09-07T10:42:24+08:00",
   "radarStatus": "RadarLive",
   "summary": {
@@ -9613,5 +9613,35 @@
     "radarFresh": true,
     "radarAgeSeconds": 283.6,
     "maxAllowedAgeSeconds": 900
+  },
+  "benchmarkComparison": {
+    "startedAt": "2026-09-03T23:23:37+08:00",
+    "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
+    "portfolioMetric": "UNIT_NAV_RETURN",
+    "portfolioReturnPct": 0.186,
+    "indexes": [
+      {
+        "name": "沪深300",
+        "returnPct": 0.138,
+        "alphaPct": 0.048
+      },
+      {
+        "name": "中证A500",
+        "returnPct": 0.058,
+        "alphaPct": 0.128
+      },
+      {
+        "name": "创业板指",
+        "returnPct": 1.675,
+        "alphaPct": -1.489
+      }
+    ],
+    "candidatePool": {
+      "name": "原始候选池固定等权",
+      "memberCount": 30,
+      "returnPct": -0.802,
+      "alphaPct": 0.988,
+      "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
+    }
   }
 }
