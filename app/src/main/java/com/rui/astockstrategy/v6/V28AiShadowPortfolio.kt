@@ -218,7 +218,7 @@ fun AiShadowPortfolioScreen28() {
 
     LazyColumn(
         modifier = Modifier.fillMaxSize().background(AiBg28),
-        contentPadding = PaddingValues(14.dp),
+        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
         verticalArrangement = Arrangement.spacedBy(if (page == "持仓") 1.dp else 10.dp)
     ) {
         if (page != "持仓") item {
@@ -296,21 +296,18 @@ fun AiShadowPortfolioScreen28() {
         if (page == "持仓") {
             item {
                 Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(12.dp)) {
-                    Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Column(Modifier.fillMaxWidth().padding(10.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Column(Modifier.weight(1f)) {
-                                Text("总资产 · 模拟组合", fontSize = 11.sp, color = AiMuted28)
-                                Text(money28(n28(summary, "totalAssets")), fontSize = 23.sp, fontWeight = FontWeight.Bold)
-                            }
-                            TextButton(onClick = { refreshGeneration++ }, enabled = !refreshing) { Text(if (refreshing) "刷新中" else "刷新") }
+                            Text("总资产 ${money28(n28(summary, "totalAssets"))}", Modifier.weight(1f), fontSize = 19.sp, fontWeight = FontWeight.Bold)
+                            Text(if (refreshing) "刷新中" else "刷新", Modifier.clickable(enabled = !refreshing) { refreshGeneration++ }.padding(10.dp), color = AiBlue28, fontSize = 12.sp)
                         }
                         Row {
                             AiMetric28("持仓盈亏", money28(n28(summary, "floatingPnl")), pnlColor28(n28(summary, "floatingPnl")), Modifier.weight(1f))
                             AiMetric28("今日收益", pct28(n28(summary, "todayReturnPct")), pnlColor28(n28(summary, "todayReturnPct")), Modifier.weight(1f))
                             AiMetric28("总仓位", pct28(n28(summary, "positionPct")), AiBlue28, Modifier.weight(1f))
                         }
-                        Text("可用 ${money28(n28(summary, "cash"))}  ·  ${pos.size}只持仓  ·  今日${today.size}笔", fontSize = 11.sp, color = AiMuted28)
-                        Text("组合快照 ${d?.optString("updatedAt")?.replace("T", " ")?.take(19) ?: "待同步"}", fontSize = 10.sp, color = AiMuted28)
+                        Text("可用 ${money28(n28(summary, "cash"))} · ${pos.size}只 · 今日${today.size}笔 · 模拟组合", fontSize = 10.sp, color = AiMuted28)
+                        Text("快照 ${d?.optString("updatedAt")?.replace("T", " ")?.take(19) ?: "待同步"}", fontSize = 9.sp, color = AiMuted28)
                     }
                 }
             }

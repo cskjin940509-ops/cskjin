@@ -26,6 +26,7 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -332,7 +333,11 @@ fun PortfolioHub44() {
     val modes = listOf("自动组合", "手工账本")
     var mode by remember { mutableStateOf(modes.first()) }
     Column(Modifier.fillMaxSize().background(DashBg44)) {
-        HubHeader44("组合中心", "云端影子组合与本机手工记录严格分账", modes, mode) { mode = it }
+        Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            modes.forEach { value ->
+                TextButton(onClick = { mode = value }) { Text(value, fontWeight = if (mode == value) FontWeight.Bold else FontWeight.Normal) }
+            }
+        }
         Box(Modifier.fillMaxWidth().weight(1f)) {
             if (mode == "自动组合") AiShadowPortfolioScreen28() else TradeJournalScreen()
         }
