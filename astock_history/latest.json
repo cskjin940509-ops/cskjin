@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-09-08T15:24:33+08:00",
+  "updatedAt": "2026-09-08T15:33:31+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
     "sampleCount": 138,
@@ -34,25 +34,25 @@
         "p90": 0.0252706
       },
       "3D": {
-        "members": 119,
+        "members": 120,
         "mature": true,
-        "meanReturn": -0.04189598,
-        "medianReturn": -0.04897959,
-        "hitRate": 0.21848739,
-        "meanAlpha": -0.03121141,
-        "medianAlpha": -0.0377521,
-        "p10": -0.1084172,
-        "p25": -0.07915072,
-        "p75": -0.01330008,
-        "p90": 0.02924457
+        "meanReturn": -0.04198716,
+        "medianReturn": -0.04928736,
+        "hitRate": 0.21666667,
+        "meanAlpha": -0.03136143,
+        "medianAlpha": -0.0379283,
+        "p10": -0.10826265,
+        "p25": -0.07826364,
+        "p75": -0.01360052,
+        "p90": 0.02904851
       },
       "5D": {
         "members": 95,
         "mature": true,
         "meanReturn": -0.02432916,
-        "medianReturn": -0.02519832,
+        "medianReturn": -0.025198,
         "hitRate": 0.4,
-        "meanAlpha": -0.01324936,
+        "meanAlpha": -0.01324937,
         "medianAlpha": -0.011911,
         "p10": -0.11375174,
         "p25": -0.081829,
@@ -93,9 +93,9 @@
         "mature": false
       }
     },
-    "medianMFE": 0.031299,
+    "medianMFE": 0.0317205,
     "medianMAE": -0.0666265,
-    "medianMaxDrawdown": -0.07287449
+    "medianMaxDrawdown": -0.07249774
   },
   "horizonGroups": {
     "shortTerm": [
@@ -134,7 +134,7 @@
       "requestedSamples": 138,
       "actualSamples": 138,
       "fiveDayMedianAlpha": -0.011911,
-      "fiveDayMedianReturn": -0.02519832,
+      "fiveDayMedianReturn": -0.025198,
       "fiveDayHitRate": 0.4,
       "fiveDayMembers": 95
     },
@@ -159,21 +159,21 @@
         "sampleCount": 138,
         "fiveDayMembers": 95,
         "fiveDayMedianAlpha": -0.011911,
-        "fiveDayMedianReturn": -0.02519832,
+        "fiveDayMedianReturn": -0.025198,
         "fiveDayHitRate": 0.4
       },
       "recentOneYear": {
         "sampleCount": 138,
         "fiveDayMembers": 95,
         "fiveDayMedianAlpha": -0.011911,
-        "fiveDayMedianReturn": -0.02519832,
+        "fiveDayMedianReturn": -0.025198,
         "fiveDayHitRate": 0.4
       },
       "recentThreeMonths": {
         "sampleCount": 138,
         "fiveDayMembers": 95,
         "fiveDayMedianAlpha": -0.011911,
-        "fiveDayMedianReturn": -0.02519832,
+        "fiveDayMedianReturn": -0.025198,
         "fiveDayHitRate": 0.4
       }
     },
@@ -787,16 +787,16 @@
     },
     {
       "day": 3,
-      "meanReturn": -0.04189598,
-      "medianReturn": -0.04897959,
-      "meanAlpha": -0.03121141,
-      "members": 119
+      "meanReturn": -0.04198716,
+      "medianReturn": -0.04928736,
+      "meanAlpha": -0.03136143,
+      "members": 120
     },
     {
       "day": 5,
       "meanReturn": -0.02432916,
-      "medianReturn": -0.02519832,
-      "meanAlpha": -0.01324936,
+      "medianReturn": -0.025198,
+      "meanAlpha": -0.01324937,
       "members": 95
     },
     {
@@ -861,52 +861,52 @@
     },
     "3D": {
       "horizon": "3D",
-      "members": 119,
+      "members": 120,
       "bins": [
         {
           "label": "<-5%",
-          "count": 58,
-          "share": 0.48739496
+          "count": 59,
+          "share": 0.49166667
         },
         {
           "label": "-5~-3%",
           "count": 16,
-          "share": 0.13445378
+          "share": 0.13333333
         },
         {
           "label": "-3~-1%",
           "count": 17,
-          "share": 0.14285714
+          "share": 0.14166667
         },
         {
           "label": "-1~0%",
           "count": 2,
-          "share": 0.01680672
+          "share": 0.01666667
         },
         {
           "label": "0~1%",
           "count": 5,
-          "share": 0.04201681
+          "share": 0.04166667
         },
         {
           "label": "1~3%",
           "count": 9,
-          "share": 0.07563025
+          "share": 0.075
         },
         {
           "label": "3~5%",
           "count": 7,
-          "share": 0.05882353
+          "share": 0.05833333
         },
         {
           "label": "5~10%",
           "count": 3,
-          "share": 0.02521008
+          "share": 0.025
         },
         {
           "label": ">10%",
           "count": 2,
-          "share": 0.01680672
+          "share": 0.01666667
         }
       ]
     },
@@ -1461,7 +1461,7 @@
       "code": "302132",
       "name": "中航成飞",
       "mfe": 0.017195,
-      "mae": -0.021612,
+      "mae": -0.037703,
       "fiveDayReturn": null
     },
     {
@@ -1469,8 +1469,8 @@
       "date": "2026-09-02",
       "code": "301357",
       "name": "北方长龙",
-      "mfe": 0.010184,
-      "mae": -0.05257,
+      "mfe": 0.037827,
+      "mae": -0.057226,
       "fiveDayReturn": null
     },
     {
@@ -1722,17 +1722,17 @@
       "code": "301262",
       "name": "海看股份",
       "mfe": 0.045264,
-      "mae": -0.035931,
-      "fiveDayReturn": -0.02519832
+      "mae": -0.05693,
+      "fiveDayReturn": -0.025198
     },
     {
       "id": "2026-08-31-301171",
       "date": "2026-08-31",
       "code": "301171",
       "name": "易点天下",
-      "mfe": 0.038667,
+      "mfe": 0.1024,
       "mae": -0.088533,
-      "fiveDayReturn": 0.07466667
+      "fiveDayReturn": 0.074667
     },
     {
       "id": "2026-08-31-300911",
@@ -2456,7 +2456,7 @@
       "highChaseRatio": null,
       "stageDistribution": {},
       "chaseDistribution": {},
-      "medianMFE": 0.081591,
+      "medianMFE": 0.093385,
       "medianMAE": -0.062687
     },
     "failure": {
@@ -2610,8 +2610,8 @@
         "name": "B0/B1/B4",
         "sampleCount": 6,
         "confidenceZh": "低",
-        "fiveDayMedianReturn": 0.07466667,
-        "fiveDayMedianAlpha": 0.08413031,
+        "fiveDayMedianReturn": 0.074667,
+        "fiveDayMedianAlpha": 0.08413,
         "fiveDayHitRate": 0.66666667,
         "fiveDayMembers": 3
       },
