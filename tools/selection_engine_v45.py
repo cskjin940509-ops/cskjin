@@ -10,6 +10,8 @@ import run_ai_dynamic_portfolio_v2 as execution
 import selection_rules_v45 as rules
 import selection_data_v45 as feeds
 import selection_research_v46 as study
+import selection_rotation_v49 as rotation
+import sys
 
 CONTEXT = {}
 LAST_ACTIONS = []
@@ -366,6 +368,7 @@ def t_report(state, prices):
 
 def build_latest(state, ledger, prices, radar):
     obj = metadata(state)
+    rotation.expire_snapshot(obj, base.now_cn())
     if radar.get('date') != base.now_cn().date().isoformat() or not CONTEXT.get('quotes'):
         obj['portfolioRisk'] = dict(obj.get('portfolioRisk') or {}, allowNew=False,
                                     currentEvidenceReady=False)
@@ -418,6 +421,8 @@ def build_latest(state, ledger, prices, radar):
     out['selection45']['nextReview'] = {'observedTradingDays': elapsed, 'reviewEveryTradingDays': 20,
                                        'reviewDue': elapsed >= 20,
                                        'statusZh': '已到滚动复核窗口，须样本外检查' if elapsed >= 20 else '正在积累前向影子盘样本；尚不能判断优于旧策略'}
+    out['selection45']['opportunityRotation'] = deepcopy(obj.get('rotation49') or {})
+    out['selection45']['rotationParameters'] = rotation.PARAMETERS
     out['tTrading'] = t_report(state, prices)
     out['strategyResearch'] = study.report(state, now, comparison, simple_comparison)
     out['targetPortfolio'] = [{k: t[k] for k in ('code', 'name', 'sector', 'score', 'targetWeightPct', 'referencePrice', 'priceSource', 'reasonZh')}
@@ -574,7 +579,11 @@ def build_candidate(state, stock, radar, quotes):
     if CONTROL_MODE != 'FIXED_HOLD' and setup.get('ready') and setup.get('potentialRewardPct', 0) < cost_pct + .3: rejects.append('近期阻力位空间不足覆盖双边成本及余量')
     target = .025 if stage == 'EMERGING' else .04
     pos = (state.get('positions') or {}).get(code)
-    if pos:
+    rotating = rotation.active(state.get('selection45', {}))
+    is_rotation_remainder = rotating and rotating['buyCode'] == code
+    if is_rotation_remainder:
+        target = rotating['targetWeight']
+    if pos and not is_rotation_remainder:
         pending = (state.get('selection45', {}).get('pendingBuys') or {}).get(code)
         if pending:
             target = pending['targetWeight']
@@ -622,6 +631,8 @@ def evaluate_entries(state, ledger, radar, prices):
         if c.get('count', 0) < 3 or not rules.normal_window(now) or code in obj['pendingExits']:
             t['executionStatus'] = 'WAIT_CONFIRMATION' if c.get('count', 0) < 3 else 'WAIT_WINDOW_OR_EXIT'
             continue
+        if rotation.active(obj):
+            t['executionStatus'] = 'WAIT_ROTATION_PLAN'; continue
         pos = state.get('positions', {}).get(code)
         nav, mv = base.portfolio_nav(state, prices)
         cw, sw, _ = base.current_weights(state, prices)
@@ -656,7 +667,9 @@ def evaluate_entries(state, ledger, radar, prices):
             if state['positions'][code]['qty'] * price >= weight * nav - price * 100 * 1.01:
                 pending_core.pop(code, None); c.clear()
             actions.append(row)
-    actions.extend(evaluate_t(state, ledger, prices, radar))
+    actions.extend(rotation.run(sys.modules[__name__], state, ledger, targets, enriched_radar, prices))
+    if not rotation.active(obj):
+        actions.extend(evaluate_t(state, ledger, prices, radar))
     LAST_ACTIONS += actions
     return actions
 
