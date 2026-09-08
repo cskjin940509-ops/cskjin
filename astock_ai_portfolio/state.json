@@ -2824,6 +2824,21 @@
       "cumulativeReturnPct": 5.993,
       "radarCapturedAt": "2026-09-08T14:57:35+08:00",
       "isVerifiedClose": true
+    },
+    {
+      "timestamp": "2026-09-08T15:09:15+08:00",
+      "date": "2026-09-08",
+      "time": "15:09:15",
+      "nav": 20500621.29,
+      "cash": 10.29,
+      "marketValue": 20500611.0,
+      "positionCount": 13,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.05992991,
+      "cumulativeNav": 1.05992991,
+      "cumulativeReturnPct": 5.993,
+      "radarCapturedAt": "2026-09-08T14:57:35+08:00",
+      "isVerifiedClose": true
     }
   ],
   "dailyControl": {
@@ -2850,11 +2865,11 @@
     "2026-09-08": {
       "newBuys": 0,
       "sells": 0,
-      "lastDecisionAt": "2026-09-08T15:08:21+08:00"
+      "lastDecisionAt": "2026-09-08T15:09:15+08:00"
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-09-08T15:08:25+08:00",
+  "updatedAt": "2026-09-08T15:09:15+08:00",
   "capitalEvents": [
     {
       "eventId": "capital-20260903-232335",
@@ -13649,11 +13664,18 @@
     "tCycles": [],
     "audit": [],
     "market": {
-      "state": "UNKNOWN",
-      "cap": 0.0,
-      "allowNew": false,
-      "reasonZh": "大盘快照过期/时间在未来",
-      "missingEvidence": []
+      "state": "NEUTRAL",
+      "cap": 0.3,
+      "allowNew": true,
+      "breadthPct": 63.66,
+      "missingEvidence": [
+        "margin",
+        "broadEtf",
+        "usRisk",
+        "us30y",
+        "cn10y"
+      ],
+      "reasonZh": "市场广度63.7%；宏观证据缺失时上限收紧至30%"
     },
     "portfolioRisk": {
       "cap": 0.3,
@@ -257298,11 +257320,7 @@
       "土地流转": "BK0632"
     },
     "sectorRanks": {
-      "阿兹海默": {
-        "complete": false,
-        "error": "HTTPError"
-      },
-      "炭黑": {
+      "低碳冶金": {
         "complete": false,
         "error": "HTTPError"
       },
@@ -257310,11 +257328,15 @@
         "complete": false,
         "error": "HTTPError"
       },
-      "低碳冶金": {
+      "钢铁管材": {
         "complete": false,
         "error": "HTTPError"
       },
-      "钢铁管材": {
+      "炭黑": {
+        "complete": false,
+        "error": "HTTPError"
+      },
+      "阿兹海默": {
         "complete": false,
         "error": "HTTPError"
       },
@@ -257322,19 +257344,19 @@
         "complete": false,
         "error": "HTTPError"
       },
-      "铜": {
-        "complete": false,
-        "error": "HTTPError"
-      },
       "磷化工": {
         "complete": false,
         "error": "HTTPError"
       },
-      "环氧丙烷": {
+      "铜": {
         "complete": false,
         "error": "HTTPError"
       },
       "炼油化工": {
+        "complete": false,
+        "error": "HTTPError"
+      },
+      "环氧丙烷": {
         "complete": false,
         "error": "HTTPError"
       }
@@ -258761,7 +258783,7 @@
         "volumeRatio5to20": 0.38980103746901335
       }
     },
-    "collectedAt": "2026-09-08T15:07:48.266086+08:00",
+    "collectedAt": "2026-09-08T15:08:41.513623+08:00",
     "secondaryQuoteRefresh": {
       "status": "PARTIAL",
       "requested": 73,
