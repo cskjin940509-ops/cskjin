@@ -3,6 +3,7 @@ from __future__ import annotations
 from copy import deepcopy
 from datetime import time
 import math
+import os
 
 import run_ai_shadow_portfolio as base
 import run_ai_dynamic_portfolio_v2 as execution
@@ -39,6 +40,7 @@ def prepare_quotes(codes):
             before = rules.stamp((quotes.get(code) or {}).get('quoteTimestamp'))
             if at and (not before or at > before): quotes[code] = quote
         now = base.now_cn()
+    data["secondaryQuoteRefresh"] = feeds.refresh_secondary(radar, codes, base.now_cn()) if os.getenv("ASTOCK_DISABLE_QUOTE_FETCH") != "1" else {}
     CONTEXT.clear()
     CONTEXT.update(radar=radar, quotes=quotes, data=data,
                    market=rules.market_regime(market, now, radar.get('macroEvidence')))
@@ -247,7 +249,7 @@ def evaluate_t(state, ledger, prices, radar):
         room = min(room, max(0, .35 * nav - group_value))
         qty = min(remaining, int(room / (price * 1.01) / 100) * 100)
         if qty < 100:
-            t['executionStatus'] = 'INSUFFICIENT_CASH_OR_RISK_ROOM'; continue
+            cycle['executionStatus'] = 'INSUFFICIENT_CASH_OR_RISK_ROOM'; continue
         buy_plan = base.fund.plan_execution(state, side='BUY', code=code, name=pos['name'], requested_qty=qty,
                                            reference_price=price, market=base.EXECUTION_MARKET.get(code) or {}, day=today)
         if not buy_plan.get('allowed'): continue
