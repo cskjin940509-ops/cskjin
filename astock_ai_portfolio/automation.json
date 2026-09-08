@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34192463290-1",
-  "lastRunAt": "2026-09-08T13:55:21+08:00",
-  "lastSuccessAt": "2026-09-08T13:55:21+08:00",
+  "cycleId": "34192473150-1",
+  "lastRunAt": "2026-09-08T13:57:56+08:00",
+  "lastSuccessAt": "2026-09-08T13:57:56+08:00",
   "lastTradeAt": "2026-09-04T10:41:13+08:00",
   "status": "NO_ACTION",
   "statusZh": "本轮无退出成交；候选买入条件未通过",
-  "runSource": "dedicated-auto-scheduler",
+  "runSource": "integrated-radar-cycle",
   "sessionOpen": true,
-  "radarCapturedAt": "2026-09-08T13:45:48+08:00",
+  "radarCapturedAt": "2026-09-08T13:55:47+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 573.6,
+  "radarAgeSeconds": 129.8,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -42,25 +42,7 @@
     "rejectedCandidateCount": 60,
     "candidateReasons": [
       {
-        "code": "002493",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000301",
-        "reasons": [
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "301035",
+        "code": "601899",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
@@ -69,7 +51,23 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "600458",
+        "code": "603993",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "601600",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600219",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
@@ -78,17 +76,7 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "603970",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "601857",
+        "code": "000758",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
@@ -97,9 +85,8 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "002215",
+        "code": "000630",
         "reasons": [
-          "ADV20不足20个完整交易日",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
           "盘中样本间隔不足或断档，等待连续确认"
@@ -107,9 +94,8 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "600028",
+        "code": "000807",
         "reasons": [
-          "ADV20不足20个完整交易日",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
           "盘中样本间隔不足或断档，等待连续确认"
@@ -117,8 +103,124 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "603086",
+        "code": "600497",
         "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600361",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "300697",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "涨跌幅超出保守买入区间",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600789",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "601020",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "002532",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600711",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "601388",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "601618",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未确认回撤企稳/突破回踩，继续等待",
+          "未验证板块完整样本前20%"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "603980",
+        "reasons": [
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "603979",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "601212",
+        "reasons": [
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "002171",
+        "reasons": [
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "002824",
+        "reasons": [
+          "当日走势明显走弱",
           "未验证板块完整样本前20%",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认"
@@ -126,82 +228,177 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "301665",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "300575",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600770",
+        "code": "002988",
         "reasons": [
           "5日相对板块扩张超过5个百分点",
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
           "未验证板块完整样本前20%",
           "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "追高风险高"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000703",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认"
         ],
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "000523",
+        "code": "002203",
         "reasons": [
-          "5日相对板块扩张超过5个百分点",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "000766",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "000060",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "000737",
+        "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64",
           "追高风险高"
         ],
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "000833",
+        "code": "000933",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "603132",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "000756",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600595",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600362",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日涨幅已超过提前介入上限",
+          "涨跌幅超出保守买入区间",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600227",
+        "reasons": [
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64",
+          "追高风险高"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "000878",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
           "未验证板块完整样本前20%",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
-          "追高风险高"
+          "综合分不足64"
         ],
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "603599",
+        "code": "002379",
         "reasons": [
-          "5日相对板块扩张超过5个百分点",
-          "当日涨幅已超过提前介入上限",
+          "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "300149",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认"
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "002020",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600961",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
         ],
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
@@ -214,106 +411,15 @@
           "未确认回撤企稳/突破回踩，继续等待",
           "未验证板块完整样本前20%",
           "涨跌幅超出保守买入区间",
+          "综合分不足64",
           "追高风险高"
         ],
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "601618",
-        "reasons": [
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未确认回撤企稳/突破回踩，继续等待",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600881",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "追高风险高"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600688",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "920866",
-        "reasons": [
-          "5日相对板块扩张超过5个百分点",
-          "双源价格偏差超过0.3%或缺数",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "第二行情缺失/过期"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "002051",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未确认回撤企稳/突破回踩，继续等待",
-          "未验证板块完整样本前20%"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600506",
-        "reasons": [
-          "5日相对板块扩张超过5个百分点",
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "当日走势明显走弱",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600346",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000753",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600596",
+        "code": "002295",
         "reasons": [
           "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "综合分不足64",
@@ -322,7 +428,7 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "000009",
+        "code": "601677",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
@@ -332,66 +438,13 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "002316",
+        "code": "688105",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600486",
-        "reasons": [
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "002258",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "002250",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "003042",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "002734",
-        "reasons": [
+          "双源价格偏差0.68%",
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "综合分不足64"
@@ -399,87 +452,7 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "000065",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未确认回撤企稳/突破回踩，继续等待",
-          "未验证板块完整样本前20%",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000959",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "002004",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000709",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未确认回撤企稳/突破回踩，继续等待",
-          "未验证板块完整样本前20%",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000553",
-        "reasons": [
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600141",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "603077",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64",
-          "追高风险高"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600682",
+        "code": "000612",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
@@ -499,75 +472,30 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "600970",
+        "code": "000709",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
+          "未确认回撤企稳/突破回踩，继续等待",
           "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
           "综合分不足64"
         ],
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "002942",
+        "code": "002068",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差0.83%",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "605033",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "002575",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "002749",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000525",
-        "reasons": [
-          "ADV20不足20个完整交易日",
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
+          "综合分不足64",
+          "追高风险高"
         ],
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "002496",
+        "code": "600531",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
@@ -577,9 +505,124 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "000059",
+        "code": "600490",
         "reasons": [
-          "ADV20不足20个完整交易日",
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "300244",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "601609",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "000751",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "涨跌幅超出保守买入区间",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "002051",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未确认回撤企稳/突破回踩，继续等待",
+          "未验证板块完整样本前20%",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "000065",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未确认回撤企稳/突破回踩，继续等待",
+          "未验证板块完整样本前20%",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "300328",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "当日走势明显走弱",
+          "未验证板块完整样本前20%",
+          "涨跌幅超出保守买入区间",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "002107",
+        "reasons": [
+          "当日涨幅已超过提前介入上限",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600888",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "600338",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "002038",
+        "reasons": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "601168",
+        "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
           "未验证板块完整样本前20%",
@@ -591,21 +634,7 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "300261",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差0.92%",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "002391",
+        "code": "603876",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
@@ -615,92 +644,13 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "002758",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000025",
+        "code": "600196",
         "reasons": [
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600307",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600731",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600673",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "000713",
-        "reasons": [
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "603360",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
-        "code": "600389",
-        "reasons": [
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64",
-          "追高风险高"
         ],
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       }
