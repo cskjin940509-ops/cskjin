@@ -2389,6 +2389,20 @@
       "cumulativeNav": 1.06684433,
       "cumulativeReturnPct": 6.6844,
       "radarCapturedAt": "2026-09-08T11:24:50+08:00"
+    },
+    {
+      "timestamp": "2026-09-08T11:36:24+08:00",
+      "date": "2026-09-08",
+      "time": "11:36:24",
+      "nav": 20634356.29,
+      "cash": 10.29,
+      "marketValue": 20634346.0,
+      "positionCount": 13,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.06684433,
+      "cumulativeNav": 1.06684433,
+      "cumulativeReturnPct": 6.6844,
+      "radarCapturedAt": "2026-09-08T11:24:50+08:00"
     }
   ],
   "dailyControl": {
@@ -2415,11 +2429,11 @@
     "2026-09-08": {
       "newBuys": 0,
       "sells": 0,
-      "lastDecisionAt": "2026-09-08T11:35:16+08:00"
+      "lastDecisionAt": "2026-09-08T11:36:24+08:00"
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-09-08T11:35:22+08:00",
+  "updatedAt": "2026-09-08T11:36:24+08:00",
   "capitalEvents": [
     {
       "eventId": "capital-20260903-232335",
@@ -12899,7 +12913,7 @@
       "state": "UNKNOWN",
       "cap": 0.0,
       "allowNew": false,
-      "reasonZh": "大盘快照过期/时间在未来",
+      "reasonZh": "全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
       "missingEvidence": []
     },
     "portfolioRisk": {
@@ -219176,7 +219190,19 @@
       "农业种植": "BK0888"
     },
     "sectorRanks": {
+      "通信线缆及配套": {
+        "complete": false,
+        "error": "HTTPError"
+      },
+      "钢铁管材": {
+        "complete": false,
+        "error": "HTTPError"
+      },
       "综合Ⅲ": {
+        "complete": false,
+        "error": "HTTPError"
+      },
+      "农化制品": {
         "complete": false,
         "error": "HTTPError"
       },
@@ -219188,15 +219214,7 @@
         "complete": false,
         "error": "HTTPError"
       },
-      "通信线缆及配套": {
-        "complete": false,
-        "error": "HTTPError"
-      },
-      "钢铁管材": {
-        "complete": false,
-        "error": "HTTPError"
-      },
-      "农化制品": {
+      "低碳冶金": {
         "complete": false,
         "error": "HTTPError"
       },
@@ -219204,21 +219222,16 @@
         "complete": false,
         "error": "HTTPError"
       },
-      "工业金属": {
+      "农业种植": {
         "complete": false,
         "error": "HTTPError"
       },
-      "农业种植": {
-        "complete": false,
-        "error": "URLError"
-      },
-      "低碳冶金": {
+      "工业金属": {
         "complete": false,
         "error": "URLError"
       }
     },
     "marketSessions": [
-      "2026-06-08",
       "2026-06-09",
       "2026-06-10",
       "2026-06-11",
@@ -220598,6 +220611,6 @@
         "sampleDays": 0
       }
     },
-    "collectedAt": "2026-09-08T11:34:55.100303+08:00"
+    "collectedAt": "2026-09-08T11:36:15.742587+08:00"
   }
 }
