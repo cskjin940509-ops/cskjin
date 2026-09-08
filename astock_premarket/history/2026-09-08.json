@@ -3,7 +3,7 @@
   "version": "v1.0-premarket-prediction-point-in-time",
   "state": "ready",
   "targetDate": "2026-09-08",
-  "generatedAt": "2026-09-08T09:23:33+08:00",
+  "generatedAt": "2026-09-08T09:50:57+08:00",
   "sourceOfficialDate": "2026-09-07",
   "factorDataDate": "2026-09-07",
   "slowMoneyFresh": true,
@@ -86,8 +86,8 @@
   "summary": {
     "candidateCount": 13,
     "tierCounts": {
-      "一级优先": 1,
-      "二级观察": 0,
+      "一级优先": 0,
+      "二级观察": 1,
       "等竞价确认": 12
     },
     "noteZh": "一级优先仍需竞价/开盘确认；若B1/B2尚未更新则不会给出一级优先。"
@@ -121,8 +121,8 @@
       "code": "688205",
       "name": "德科立",
       "sector": "通信网络设备及器件",
-      "priorityScore": 74.03,
-      "tierZh": "一级优先",
+      "priorityScore": 69.03,
+      "tierZh": "二级观察",
       "memberships": [
         "B0",
         "B1",
@@ -135,10 +135,10 @@
       "marginScore": 82.5,
       "etfScore": 10.95,
       "mainFlowPct": 11.01,
-      "mainlineStage": "CONFIRMING",
+      "mainlineStage": null,
       "chaseRisk": "MEDIUM",
       "previousChangePct": 10.32,
-      "reasonZh": "B13 双因子确认；基础/综合强度 60.0；主线确认中；两融评分 82；ETF评分 11",
+      "reasonZh": "B13 双因子确认；基础/综合强度 60.0；两融评分 82；ETF评分 11",
       "riskZh": "追高风险中；上一交易日已上涨10.32%",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
@@ -146,7 +146,7 @@
       "code": "603083",
       "name": "剑桥科技",
       "sector": "CPO概念",
-      "priorityScore": 73.9,
+      "priorityScore": 68.9,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -160,10 +160,10 @@
       "marginScore": 73.75,
       "etfScore": 10.95,
       "mainFlowPct": 31.49,
-      "mainlineStage": "CONFIRMING",
+      "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 10.0,
-      "reasonZh": "B13 双因子确认；基础/综合强度 64.9；主线确认中；两融评分 74；ETF评分 11",
+      "reasonZh": "B13 双因子确认；基础/综合强度 64.9；两融评分 74；ETF评分 11",
       "riskZh": "追高风险高；上一交易日已上涨10.00%",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
@@ -189,30 +189,6 @@
       "previousChangePct": 10.02,
       "reasonZh": "B13 双因子确认；基础/综合强度 64.6；两融评分 68；ETF评分 11",
       "riskZh": "追高风险高；上一交易日已上涨10.02%",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "002281",
-      "name": "光迅科技",
-      "sector": "通信网络设备及器件",
-      "priorityScore": 63.29,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B1",
-        "B3",
-        "B4",
-        "B13"
-      ],
-      "baseScore": 64.24,
-      "slowCompositeScore": 56.29,
-      "marginScore": 60.0,
-      "etfScore": 10.95,
-      "mainFlowPct": 22.2,
-      "mainlineStage": "CONFIRMING",
-      "chaseRisk": "HIGH",
-      "previousChangePct": 10.0,
-      "reasonZh": "B13 双因子确认；基础/综合强度 56.3；主线确认中；两融评分 60；ETF评分 11",
-      "riskZh": "追高风险高；上一交易日已上涨10.00%",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
@@ -285,48 +261,27 @@
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
-      "code": "300570",
-      "name": "太辰光",
+      "code": "002281",
+      "name": "光迅科技",
       "sector": "通信网络设备及器件",
-      "priorityScore": 56.28,
+      "priorityScore": 58.29,
       "tierZh": "等竞价确认",
       "memberships": [
-        "B0",
+        "B1",
         "B3",
-        "B4"
+        "B4",
+        "B13"
       ],
-      "baseScore": 77.21,
-      "slowCompositeScore": 56.28,
-      "marginScore": 63.75,
+      "baseScore": 64.24,
+      "slowCompositeScore": 56.29,
+      "marginScore": 60.0,
       "etfScore": 10.95,
-      "mainFlowPct": 10.81,
-      "mainlineStage": "CONFIRMING",
+      "mainFlowPct": 22.2,
+      "mainlineStage": null,
       "chaseRisk": "HIGH",
-      "previousChangePct": 14.5,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 56.3；主线确认中；两融评分 64；ETF评分 11",
-      "riskZh": "追高风险高；上一交易日已上涨14.50%；暂无双因子交叉确认",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "300394",
-      "name": "天孚通信",
-      "sector": "通信网络设备及器件",
-      "priorityScore": 56.1,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0",
-        "B3"
-      ],
-      "baseScore": 70.44,
-      "slowCompositeScore": 53.1,
-      "marginScore": 33.75,
-      "etfScore": 10.95,
-      "mainFlowPct": 17.22,
-      "mainlineStage": "CONFIRMING",
-      "chaseRisk": "MEDIUM",
-      "previousChangePct": 7.36,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 53.1；主线确认中；两融评分 34；ETF评分 11",
-      "riskZh": "追高风险中；上一交易日已上涨7.36%；暂无双因子交叉确认",
+      "previousChangePct": 10.0,
+      "reasonZh": "B13 双因子确认；基础/综合强度 56.3；两融评分 60；ETF评分 11",
+      "riskZh": "追高风险高；上一交易日已上涨10.00%",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
@@ -353,10 +308,55 @@
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
+      "code": "300570",
+      "name": "太辰光",
+      "sector": "通信网络设备及器件",
+      "priorityScore": 51.28,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "baseScore": 77.21,
+      "slowCompositeScore": 56.28,
+      "marginScore": 63.75,
+      "etfScore": 10.95,
+      "mainFlowPct": 10.81,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 14.5,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 56.3；两融评分 64；ETF评分 11",
+      "riskZh": "追高风险高；上一交易日已上涨14.50%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "300394",
+      "name": "天孚通信",
+      "sector": "通信网络设备及器件",
+      "priorityScore": 51.1,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3"
+      ],
+      "baseScore": 70.44,
+      "slowCompositeScore": 53.1,
+      "marginScore": 33.75,
+      "etfScore": 10.95,
+      "mainFlowPct": 17.22,
+      "mainlineStage": null,
+      "chaseRisk": "MEDIUM",
+      "previousChangePct": 7.36,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 53.1；两融评分 34；ETF评分 11",
+      "riskZh": "追高风险中；上一交易日已上涨7.36%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
       "code": "688143",
       "name": "长盈通",
       "sector": "通信线缆及配套",
-      "priorityScore": 44.89,
+      "priorityScore": 39.89,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0"
@@ -366,10 +366,10 @@
       "marginScore": 23.75,
       "etfScore": 10.95,
       "mainFlowPct": 7.95,
-      "mainlineStage": "CONFIRMING",
+      "mainlineStage": null,
       "chaseRisk": "MEDIUM",
       "previousChangePct": 11.17,
-      "reasonZh": "基础/综合强度 45.9；主线确认中；两融评分 24；ETF评分 11",
+      "reasonZh": "基础/综合强度 45.9；两融评分 24；ETF评分 11",
       "riskZh": "追高风险中；上一交易日已上涨11.17%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
