@@ -85,6 +85,7 @@ jobs:
       - name: a股筛选池证据驱动持仓与底仓T模拟
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         env:
+          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
           ASTOCK_RUN_SOURCE: integrated-radar-cycle
         run: python tools/run_ai_dynamic_portfolio_v2_2.py
 

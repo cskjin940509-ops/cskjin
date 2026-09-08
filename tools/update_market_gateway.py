@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json, re, statistics, sys, time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
@@ -120,7 +121,37 @@ def boards(kind):
 
 def all_a_breadth():
     fs = "m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23"
-    rows = eastmoney_clist(fs, "f3,f6,f12,f14", 6000, "f6")
+    # Providers cap pz silently. Use actual page length and verify all unique codes.
+    def collect(host):
+        def page(n):
+            q = dict(pn=n, pz=100, po=1, np=1, fltt=2, invt=2, fid='f12', fs=fs,
+                     fields='f3,f6,f12,f13,f14', ut='bd1d9ddb04089700cf9c27f6f7426281')
+            data = get_json(f'https://{host}/api/qt/clist/get?' + urlencode(q)).get('data') or {}
+            part = data.get('diff') or []
+            if isinstance(part, dict): part = list(part.values())
+            return int(data.get('total') or 0), part
+        total, first = page(1)
+        if total < 2000 or not first: raise RuntimeError('Incomplete full-market universe')
+        size = len(first)
+        if (total + size - 1) // size > 100: raise RuntimeError('Unexpected market page size')
+        rows = list(first)
+        with ThreadPoolExecutor(max_workers=6) as pool:
+            for count, part in pool.map(page, range(2, (total + size - 1) // size + 1)):
+                if count != total: raise RuntimeError('Market universe changed during pagination')
+                rows.extend(part)
+        unique = {(x.get('f13'), x.get('f12')): x for x in rows if x.get('f12')}
+        if len(unique) != total: raise RuntimeError('Missing or duplicated market pages')
+        return list(unique.values())
+    failures = []
+    for host in ('push2.eastmoney.com', 'push2delay.eastmoney.com'):
+        try:
+            rows = collect(host)
+            break
+        except Exception as exc:
+            failures.append(type(exc).__name__)
+    else:
+        raise RuntimeError('Full-market pagination failed: ' + ','.join(failures))
+
     changes, amounts = [], []
     up = down = flat = 0
     for x in rows:

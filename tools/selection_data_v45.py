@@ -4,7 +4,8 @@ import json
 import os
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-from selection_rules_v45 import finite, indicators
+from selection_rules_v45 import finite, indicators, fresh
+from datetime import datetime
 
 
 def get_json(url):
@@ -33,8 +34,23 @@ def daily_bars(code, exchange=None):
     sym = ('sh' if sh else 'sz') + code
     obj = get_json('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?' + urlencode({'param': f'{sym},day,,,65,qfq'}))
     data = (obj.get('data') or {}).get(sym) or {}
-    return [{'date': a[0], 'open': finite(a[1]), 'close': finite(a[2]), 'high': finite(a[3]),
+    rows = [{'date': a[0], 'open': finite(a[1]), 'close': finite(a[2]), 'high': finite(a[3]),
              'low': finite(a[4]), 'amount': None} for a in (data.get('qfqday') or data.get('day') or []) if len(a) >= 5]
+    # Only provider-reported traded amounts; never estimate amount from close*volume.
+    if os.getenv('YUNAI_TOKEN') and not code.startswith('BK') and exchange is None:
+        try:
+            from yunai_tail_overlay import fetch_daily_kline
+            amounts = {x['date']: x for x in fetch_daily_kline(code, 65)}
+            for row in rows:
+                other = amounts.get(row['date']) or {}
+                if (finite(other.get('amount'), 0) > 0 and finite(other.get('close'), 0) > 0
+                        and row['close'] and abs(other['close'] / row['close'] - 1) <= .003):
+                    row['amount'] = other['amount']
+                    row['amountSource'] = 'Yunai bars-range; matching date and close'
+        except Exception:
+            pass
+    return rows
+
 
 
 def sector_members(board):
@@ -72,17 +88,18 @@ def enrich(state, radar, quotes, now):
         control = ((state.get('research46') or {}).get('noTControl') or {}).get('state') or {}
         simple = ((state.get('research46') or {}).get('timingControl') or {}).get('state') or {}
         codes = set(state.get('positions') or {}) | set(radar.get('stocks') or {}) | set(control.get('positions') or {}) | set(simple.get('positions') or {})
-        needed = [c for c in codes if (histories.get(c) or {}).get('collectedDate') != today]
+        needed = [c for c in codes if history_due(histories.get(c), now)]
         with ThreadPoolExecutor(max_workers=6) as pool:
             futures = {pool.submit(daily_bars, c): c for c in needed}
             for f in as_completed(futures):
                 c = futures[f]
                 try:
                     rows = f.result()
-                    histories[c] = {'collectedDate': today, 'availableAt': now.isoformat(),
+                    if not rows: raise ValueError("Empty history response")
+                    histories[c] = {'collectedDate': today, 'lastAttemptAt': now.isoformat(), 'availableAt': now.isoformat(),
                                     'bars': [x for x in rows if x.get('date', '') < today]}
                 except Exception as exc:
-                    histories[c] = {'collectedDate': today, 'bars': [], 'error': type(exc).__name__}
+                    histories.setdefault(c, {}).update(lastAttemptAt=now.isoformat(), error=type(exc).__name__)
         # Full sector universe, not the top-15 radar list. Same-day, one cycle only.
         sectors = {x['name']: x for x in radar.get('mainlines') or [] if x.get('boardCode') and x.get('name')}
         board_cache = data.setdefault('sectorBoards', {})
@@ -108,7 +125,8 @@ def enrich(state, radar, quotes, now):
             data.setdefault('marketSessions', [])
         sector_history = data.setdefault('sectorHistory', {})
         needed_boards = {name: x['boardCode'] for name, x in sectors.items()
-                         if (sector_history.get(name) or {}).get('collectedDate') != today}
+                         if (sector_history.get(name) or {}).get('collectedDate') != today
+                         or (sector_history.get(name) or {}).get('return5Pct') is None}
         with ThreadPoolExecutor(max_workers=6) as pool:
             futures = {pool.submit(daily_bars, board): name for name, board in needed_boards.items()}
             for f in as_completed(futures):
@@ -137,3 +155,41 @@ def enrich(state, radar, quotes, now):
     data['technical'] = technical
     data['collectedAt'] = now.isoformat()
     return data
+
+
+def history_due(record, now):
+    record = record or {}
+    if fresh(record.get('lastAttemptAt'), now, 240): return False
+    if record.get('collectedDate') != now.date().isoformat(): return True
+    days = {x['date']: x for x in record.get('bars', []) if x.get('date', '') < now.date().isoformat()}
+    rows = [days[d] for d in sorted(days)]
+    return len(rows) < 21 or any(finite(x.get('amount'), 0) <= 0 for x in rows[-20:])
+
+
+def refresh_secondary(radar, codes, now):
+    # Refresh price-only batches at decision time, including held names off radar.
+    if not os.getenv('YUNAI_TOKEN'):
+        return {'status': 'MISSING_CREDENTIAL', 'requested': len(codes), 'fresh': 0}
+    import yunai_tail_overlay as yo
+    codes = sorted(c for c in set(codes) if not c.startswith(('8', '9')))
+    out = {c: {'quoteOk': False} for c in codes}
+    def fetch(batch):
+        status, _, payload = yo.post(yo.PREFIX + '/real-time-quotes', {'symbols': batch})
+        return batch, status, payload
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        for batch, status, payload in pool.map(fetch, [codes[i:i+10] for i in range(0,len(codes),10)]):
+            if 200 <= status < 300: yo.apply_quote(out, batch, payload)
+    now = datetime.now(now.tzinfo)
+    count = 0
+    for code, value in out.items():
+        quote = value.get('quote') or {}
+        at = quote.get('timestamp') or quote.get('latestTime')
+        row = radar.setdefault('stocks', {}).setdefault(code, {'code': code})
+        y = row.setdefault('yunai', {})
+        ok = value.get('quoteOk') and finite(quote.get('price'), 0) > 0 and fresh(at, now)
+        if ok:
+            y.update(quoteOk=True, price=quote['price'], quoteTime=at)
+            count += 1
+        else:
+            y['quoteOk'] = False
+    return {'status': 'OK' if count == len(codes) else 'PARTIAL', 'requested': len(codes), 'fresh': count}
