@@ -2092,7 +2092,7 @@
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-09-07T18:46:58+08:00",
+  "updatedAt": "2026-09-08T09:38:56+08:00",
   "capitalEvents": [
     {
       "eventId": "capital-20260903-232335",
@@ -7867,10 +7867,9 @@
     "audit": [],
     "market": {
       "state": "UNKNOWN",
-      "cap": 0.0,
+      "cap": 0,
       "allowNew": false,
-      "reasonZh": "大盘快照过期/时间在未来",
-      "missingEvidence": []
+      "reasonZh": "无当日大盘证据"
     },
     "portfolioRisk": {
       "cap": 0.9999994898829333,
@@ -7881,7 +7880,8 @@
       "confirmedCloseDrawdownPct": null,
       "dailyRiskDataReady": false,
       "paused": false,
-      "forceReduction": false
+      "forceReduction": false,
+      "currentEvidenceReady": false
     },
     "riskGuard": {},
     "capConfirmation": {
