@@ -9,9 +9,21 @@ from datetime import datetime
 
 
 def get_json(url):
-    request = Request(url, headers={'User-Agent': 'Mozilla/5.0 AStockSelection/4.5', 'Referer': 'https://quote.eastmoney.com/'})
-    with urlopen(request, timeout=6) as response:
-        return json.loads(response.read(12 * 1024 * 1024))
+    # Same-provider alternate network route, already used by the market gateway.
+    routes = [url]
+    if '://push2.eastmoney.com/' in url:
+        routes.append(url.replace('://push2.eastmoney.com/', '://push2delay.eastmoney.com/'))
+    else:
+        routes.append(url)
+    last = None
+    for route in routes:
+        request = Request(route, headers={'User-Agent': 'Mozilla/5.0 AStockSelection/4.5', 'Referer': 'https://quote.eastmoney.com/'})
+        try:
+            with urlopen(request, timeout=6) as response:
+                return json.loads(response.read(12 * 1024 * 1024))
+        except Exception as exc:
+            last = exc
+    raise last
 
 
 def daily_bars(code, exchange=None):
@@ -20,6 +32,7 @@ def daily_bars(code, exchange=None):
               'fqt': 1, 'lmt': 65, 'end': '20500101', 'iscca': 1,
               'ut': 'fa5fd1943c7b386f172d6893dbfba10b',
               'fields1': 'f1,f2,f3,f4,f5,f6', 'fields2': 'f51,f52,f53,f54,f55,f56,f57'}
+    primary_error = None
     try:
         raw = (get_json('https://push2his.eastmoney.com/api/qt/stock/kline/get?' + urlencode(params)).get('data') or {}).get('klines') or []
         rows = []
@@ -29,9 +42,10 @@ def daily_bars(code, exchange=None):
                 rows.append(dict(date=a[0], **{k: finite(a[i]) for k, i in [('open', 1), ('close', 2), ('high', 3), ('low', 4), ('amount', 6)]}))
         if len(rows) >= 21:
             return rows
-    except Exception:
-        pass
+    except Exception as exc:
+        primary_error = exc
     if code.startswith('BK'):
+        if primary_error: raise primary_error
         raise RuntimeError('Board history unavailable; retain missing evidence for retry')
     # Tencent fallback has no verified traded amount: ATR works, buy gates remain closed.
     sym = ('sh' if sh else 'sz') + code
@@ -61,7 +75,7 @@ def sector_members(board):
     total = None
     for page in range(1, 16):
         q = {'pn': page, 'pz': 100, 'po': 1, 'np': 1, 'fltt': 2, 'invt': 2, 'fid': 'f12',
-             'fs': 'b:' + board, 'fields': 'f2,f3,f6,f12,f14,f62,f184'}
+             'fs': 'b:' + board, 'ut': 'bd1d9ddb04089700cf9c27f6f7426281', 'fields': 'f2,f3,f6,f12,f14,f62,f184'}
         payload = get_json('https://push2.eastmoney.com/api/qt/clist/get?' + urlencode(q)).get('data') or {}
         total = int(payload.get('total') or 0)
         part = payload.get('diff') or []
@@ -118,7 +132,7 @@ def enrich(state, radar, quotes, now):
                 try:
                     ranks[futures[f]] = dict(f.result(), availableAt=now.isoformat())
                 except Exception as exc:
-                    ranks[futures[f]] = {'complete': False, 'error': type(exc).__name__}
+                    ranks[futures[f]] = {'complete': False, 'error': type(exc).__name__, 'httpStatus': getattr(exc, 'code', None)}
             data['sectorRanks'] = ranks
         # Index trading dates prevent weekends, holidays or missed jobs becoming confirmations.
         try:
@@ -137,8 +151,9 @@ def enrich(state, radar, quotes, now):
                     rows = sorted((x for x in f.result() if x['date'] < today), key=lambda x: x['date'])
                     r5 = (rows[-1]['close'] / rows[-6]['close'] - 1) * 100 if len(rows) >= 6 else None
                     sector_history[futures[f]] = {'collectedDate': today, 'return5Pct': r5}
-                except Exception:
-                    sector_history[futures[f]] = {'collectedDate': today, 'return5Pct': None}
+                except Exception as exc:
+                    sector_history[futures[f]] = {'collectedDate': today, 'return5Pct': None,
+                                                  'error': type(exc).__name__, 'httpStatus': getattr(exc, 'code', None)}
         for name, sector in sectors.items():
             sector['return5Pct'] = (sector_history.get(name) or {}).get('return5Pct')
             if sector['stage'] == 'HOLDING_TRACK_ONLY':
