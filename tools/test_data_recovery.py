@@ -15,6 +15,14 @@ class RecoveryTests(unittest.TestCase):
         picked=confirmation_samples(rows)
         self.assertEqual([x['at'] for x in picked], [rows[2]['at'],rows[4]['at'],rows[-1]['at']])
         self.assertEqual(len(rows),9)
+    def test_sector_route_falls_back_on_http_failure(self):
+        import io
+        from urllib.error import HTTPError
+        response=io.BytesIO(b'{"data":{"total":1}}')
+        with patch.object(feeds,'urlopen',side_effect=[HTTPError('https://push2.eastmoney.com/',502,'bad gateway',{},None),response]) as fetch:
+            result=feeds.get_json('https://push2.eastmoney.com/api/qt/clist/get?pn=1')
+        self.assertEqual(result['data']['total'],1)
+        self.assertIn('push2delay.eastmoney.com',fetch.call_args.args[0].full_url)
     def test_board_uses_board_market_id(self):
         rows=['2026-09-07,10,10,11,9,100,1000']*21
         with patch.object(feeds,'get_json',return_value={'data':{'klines':rows}}) as fetch:
