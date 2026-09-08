@@ -16,7 +16,7 @@ def get_json(url):
 
 def daily_bars(code, exchange=None):
     sh = exchange == 'sh' or code.startswith(('6', 'BK'))
-    params = {'secid': ('1.' if sh else '0.') + code, 'klt': 101,
+    params = {'secid': ('90.' if code.startswith('BK') else '1.' if sh else '0.') + code, 'klt': 101,
               'fqt': 1, 'lmt': 65, 'end': '20500101',
               'fields1': 'f1,f2,f3,f4,f5,f6', 'fields2': 'f51,f52,f53,f54,f55,f56,f57'}
     try:
@@ -30,6 +30,8 @@ def daily_bars(code, exchange=None):
             return rows
     except Exception:
         pass
+    if code.startswith('BK'):
+        raise RuntimeError('Board history unavailable; retain missing evidence for retry')
     # Tencent fallback has no verified traded amount: ATR works, buy gates remain closed.
     sym = ('sh' if sh else 'sz') + code
     obj = get_json('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?' + urlencode({'param': f'{sym},day,,,65,qfq'}))

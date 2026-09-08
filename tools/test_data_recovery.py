@@ -9,6 +9,11 @@ import selection_data_v45 as feeds
 from selection_rules_v45 import CN
 
 class RecoveryTests(unittest.TestCase):
+    def test_board_uses_board_market_id(self):
+        rows=['2026-09-07,10,10,11,9,100,1000']*21
+        with patch.object(feeds,'get_json',return_value={'data':{'klines':rows}}) as fetch:
+            feeds.daily_bars('BK0478')
+        self.assertEqual(parse_qs(urlparse(fetch.call_args.args[0]).query)['secid'],['90.BK0478'])
     def test_capped_pages_collected_completely(self):
         def response(url):
             page=int(parse_qs(urlparse(url).query)['pn'][0]); start=(page-1)*100
