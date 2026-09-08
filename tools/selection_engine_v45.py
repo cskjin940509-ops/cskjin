@@ -90,7 +90,7 @@ def sample(state, code, quotes):
         vwap = amount / volume if amount and volume else None
         samples.append({'at': stamp, 'price': q['price'], 'vwap': vwap})
         samples[:] = samples[-80:]
-    return samples
+    return rules.confirmation_samples(samples)
 
 
 def own_quote_ok(code):

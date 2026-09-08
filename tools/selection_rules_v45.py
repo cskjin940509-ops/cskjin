@@ -206,3 +206,27 @@ def t_signal(price, tech, samples, net_cost_pct):
         return result
     return {'eligible': True, 'reasonZh': '震荡区冲高后转弱，净价差通过成本门槛',
             'targetBuyPrice': vwap, 'expectedNetEdgePct': round(net_edge, 3)}
+
+
+def confirmation_samples(samples):
+    """Keep every raw observation; select time-spaced evidence ending at latest tick.
+
+    Extra arrival-driven runs must not replace valid 3–10 minute evidence with
+    three sub-minute ticks. No interpolation or bridging a missing collection window.
+    """
+    if len(samples) < 3: return samples
+    c = samples[-1]
+    for j in range(len(samples)-2, 0, -1):
+        b = samples[j]
+        gap = (stamp(c['at']) - stamp(b['at'])).total_seconds()
+        if gap > 600: break
+        if gap < 180: continue
+        for i in range(j-1, -1, -1):
+            a = samples[i]
+            gap = (stamp(b['at']) - stamp(a['at'])).total_seconds()
+            if gap > 600: break
+            if gap >= 180:
+                # Price setup still checks the actual sampled prices; do not
+                # synthesize missing bars or bridge long collection outages.
+                return [a, b, c]
+    return samples[-3:]
