@@ -17,7 +17,8 @@ def get_json(url):
 def daily_bars(code, exchange=None):
     sh = exchange == 'sh' or code.startswith(('6', 'BK'))
     params = {'secid': ('90.' if code.startswith('BK') else '1.' if sh else '0.') + code, 'klt': 101,
-              'fqt': 1, 'lmt': 65, 'end': '20500101',
+              'fqt': 1, 'lmt': 65, 'end': '20500101', 'iscca': 1,
+              'ut': 'fa5fd1943c7b386f172d6893dbfba10b',
               'fields1': 'f1,f2,f3,f4,f5,f6', 'fields2': 'f51,f52,f53,f54,f55,f56,f57'}
     try:
         raw = (get_json('https://push2his.eastmoney.com/api/qt/stock/kline/get?' + urlencode(params)).get('data') or {}).get('klines') or []
