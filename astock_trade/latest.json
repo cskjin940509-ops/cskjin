@@ -1,10 +1,61 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-07",
-  "generatedAt": "2026-09-07T17:43:42+08:00",
-  "phase": "LIVE",
+  "date": "2026-09-08",
+  "generatedAt": "2026-09-08T09:08:43+08:00",
+  "phase": "CLOSED_OR_STALE",
   "officialDate": "2026-09-07",
   "officialPlans": [
+    {
+      "code": "300903",
+      "name": "科翔股份",
+      "sector": "印制电路板",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B1"
+      ],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 83.2,
+        "historical": {
+          "samples": 2,
+          "win5D": 0.0,
+          "avg5D": -0.0764,
+          "avgMFE5D": 0.0035,
+          "avgMAE5D": -0.1639
+        }
+      },
+      "quote": {
+        "price": 89.16,
+        "changePct": 3.67,
+        "open": 87.6,
+        "high": 90.88,
+        "low": 86.1,
+        "dayLowToHighPct": 5.55,
+        "quoteTime": "20260907161436"
+      },
+      "entryZone": [
+        86.992,
+        88.75
+      ],
+      "triggerPrice": 87.871,
+      "stopLoss": 82.599,
+      "takeProfit1": 95.779,
+      "takeProfit2": 101.052,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 82.599",
+      "reasons": [
+        "趋势回踩",
+        "形态分 83",
+        "距MA20 +0.84 ATR",
+        "主力资金占比 +0.77%"
+      ]
+    },
     {
       "code": "002436",
       "name": "兴森科技",
@@ -16,7 +67,7 @@
         "B3",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -33,7 +84,7 @@
         "quoteTime": "20260907161421"
       },
       "entryZone": null,
-      "triggerPrice": 34.446,
+      "triggerPrice": 34.797,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -45,7 +96,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 51",
-        "距MA20 +0.83 ATR",
+        "距MA20 +0.75 ATR",
         "主力资金占比 +31.84%",
         "接近涨停，按追高风险处理"
       ]
@@ -59,7 +110,7 @@
       "poolTags": [
         "B3"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -76,7 +127,7 @@
         "quoteTime": "20260907161457"
       },
       "entryZone": null,
-      "triggerPrice": 14.077,
+      "triggerPrice": 14.241,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -88,7 +139,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 51",
-        "距MA20 +1.07 ATR",
+        "距MA20 +0.98 ATR",
         "主力资金占比 +38.53%",
         "接近涨停，按追高风险处理"
       ]
@@ -106,7 +157,7 @@
         "B4",
         "B13"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -123,7 +174,7 @@
         "quoteTime": "20260907161415"
       },
       "entryZone": null,
-      "triggerPrice": 14.245,
+      "triggerPrice": 14.51,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -135,55 +186,8 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 51",
-        "距MA20 +2.79 ATR",
+        "距MA20 +2.57 ATR",
         "主力资金占比 +24.94%",
-        "接近涨停，按追高风险处理"
-      ]
-    },
-    {
-      "code": "603083",
-      "name": "剑桥科技",
-      "sector": "CPO概念",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B1",
-        "B3",
-        "B4",
-        "B13"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 51.0,
-        "historical": {}
-      },
-      "quote": {
-        "price": 207.21,
-        "changePct": 10.0,
-        "open": 206.0,
-        "high": 207.21,
-        "low": 202.34,
-        "dayLowToHighPct": 2.41,
-        "quoteTime": "20260907161449"
-      },
-      "entryZone": null,
-      "triggerPrice": 185.666,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 51",
-        "距MA20 +2.16 ATR",
-        "主力资金占比 +31.49%",
         "接近涨停，按追高风险处理"
       ]
     },
@@ -197,7 +201,7 @@
         "B3",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -214,7 +218,7 @@
         "quoteTime": "20260907161500"
       },
       "entryZone": null,
-      "triggerPrice": 27.363,
+      "triggerPrice": 27.645,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -226,8 +230,55 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 51",
-        "距MA20 +1.09 ATR",
+        "距MA20 +0.96 ATR",
         "主力资金占比 +32.98%",
+        "接近涨停，按追高风险处理"
+      ]
+    },
+    {
+      "code": "603083",
+      "name": "剑桥科技",
+      "sector": "CPO概念",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B1",
+        "B3",
+        "B4",
+        "B13"
+      ],
+      "action": "盘前观察",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 51.0,
+        "historical": {}
+      },
+      "quote": {
+        "price": 207.21,
+        "changePct": 10.0,
+        "open": 206.0,
+        "high": 207.21,
+        "low": 202.34,
+        "dayLowToHighPct": 2.41,
+        "quoteTime": "20260907161449"
+      },
+      "entryZone": null,
+      "triggerPrice": 188.798,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 51",
+        "距MA20 +1.87 ATR",
+        "主力资金占比 +31.49%",
         "接近涨停，按追高风险处理"
       ]
     },
@@ -241,7 +292,7 @@
         "B3",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -258,7 +309,7 @@
         "quoteTime": "20260907161427"
       },
       "entryZone": null,
-      "triggerPrice": 172.682,
+      "triggerPrice": 174.49,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -270,7 +321,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +0.52 ATR",
+        "距MA20 +0.47 ATR",
         "主力资金占比 +22.20%",
         "接近涨停，按追高风险处理"
       ]
@@ -286,7 +337,7 @@
         "B3",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -303,7 +354,7 @@
         "quoteTime": "20260907161452"
       },
       "entryZone": null,
-      "triggerPrice": 176.668,
+      "triggerPrice": 178.749,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -315,7 +366,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +0.92 ATR",
+        "距MA20 +0.83 ATR",
         "主力资金占比 +21.44%",
         "接近涨停，按追高风险处理"
       ]
@@ -331,7 +382,7 @@
         "B3",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -348,7 +399,7 @@
         "quoteTime": "20260907161451"
       },
       "entryZone": null,
-      "triggerPrice": 255.32,
+      "triggerPrice": 257.07,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -360,50 +411,8 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 49",
-        "距MA20 +0.47 ATR",
+        "距MA20 +0.34 ATR",
         "主力资金占比 +17.22%"
-      ]
-    },
-    {
-      "code": "300903",
-      "name": "科翔股份",
-      "sector": "印制电路板",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B1"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 49.2,
-        "historical": {}
-      },
-      "quote": {
-        "price": 89.16,
-        "changePct": 3.67,
-        "open": 87.6,
-        "high": 90.88,
-        "low": 86.1,
-        "dayLowToHighPct": 5.55,
-        "quoteTime": "20260907161436"
-      },
-      "entryZone": null,
-      "triggerPrice": 86.735,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 49",
-        "距MA20 +0.99 ATR",
-        "主力资金占比 +0.77%"
       ]
     },
     {
@@ -415,7 +424,7 @@
       "poolTags": [
         "B1"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -432,7 +441,7 @@
         "quoteTime": "20260907161442"
       },
       "entryZone": null,
-      "triggerPrice": 155.157,
+      "triggerPrice": 156.985,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -444,53 +453,9 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 48",
-        "距MA20 +0.96 ATR",
+        "距MA20 +0.91 ATR",
         "主力资金占比 +12.29%",
         "接近涨停，按追高风险处理"
-      ]
-    },
-    {
-      "code": "688183",
-      "name": "生益电子",
-      "sector": "印制电路板",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B1",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 48.2,
-        "historical": {}
-      },
-      "quote": {
-        "price": 132.93,
-        "changePct": 12.24,
-        "open": 122.0,
-        "high": 132.93,
-        "low": 120.79,
-        "dayLowToHighPct": 10.05,
-        "quoteTime": "20260907161454"
-      },
-      "entryZone": null,
-      "triggerPrice": 118.295,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 48",
-        "距MA20 +2.00 ATR",
-        "主力资金占比 +11.15%"
       ]
     },
     {
@@ -503,7 +468,7 @@
         "B0",
         "B3"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -520,7 +485,7 @@
         "quoteTime": "20260907161409"
       },
       "entryZone": null,
-      "triggerPrice": 196.753,
+      "triggerPrice": 197.073,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -532,8 +497,52 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 48",
-        "距MA20 +1.38 ATR",
+        "距MA20 +1.08 ATR",
         "主力资金占比 +10.81%"
+      ]
+    },
+    {
+      "code": "688183",
+      "name": "生益电子",
+      "sector": "印制电路板",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B1",
+        "B4"
+      ],
+      "action": "盘前观察",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 48.2,
+        "historical": {}
+      },
+      "quote": {
+        "price": 132.93,
+        "changePct": 12.24,
+        "open": 122.0,
+        "high": 132.93,
+        "low": 120.79,
+        "dayLowToHighPct": 10.05,
+        "quoteTime": "20260907161454"
+      },
+      "entryZone": null,
+      "triggerPrice": 121.358,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 48",
+        "距MA20 +1.79 ATR",
+        "主力资金占比 +11.15%"
       ]
     },
     {
@@ -549,7 +558,7 @@
         "B4",
         "B13"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -566,7 +575,7 @@
         "quoteTime": "20260907161446"
       },
       "entryZone": null,
-      "triggerPrice": 170.655,
+      "triggerPrice": 176.458,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -578,7 +587,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 48",
-        "距MA20 +3.19 ATR",
+        "距MA20 +2.91 ATR",
         "主力资金占比 +11.01%"
       ]
     },
@@ -592,7 +601,7 @@
         "B0",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -609,7 +618,7 @@
         "quoteTime": "20260907161433"
       },
       "entryZone": null,
-      "triggerPrice": 166.652,
+      "triggerPrice": 169.75,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -621,7 +630,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 48",
-        "距MA20 +1.73 ATR",
+        "距MA20 +1.46 ATR",
         "主力资金占比 +7.95%"
       ]
     },
@@ -634,7 +643,7 @@
       "poolTags": [
         "B0"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -651,7 +660,7 @@
         "quoteTime": "20260907161415"
       },
       "entryZone": null,
-      "triggerPrice": 89.594,
+      "triggerPrice": 91.61,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -663,7 +672,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 47",
-        "距MA20 +2.93 ATR",
+        "距MA20 +2.57 ATR",
         "主力资金占比 +4.54%"
       ]
     },
@@ -676,7 +685,7 @@
       "poolTags": [
         "B1"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -693,7 +702,7 @@
         "quoteTime": "20260907161409"
       },
       "entryZone": null,
-      "triggerPrice": 252.715,
+      "triggerPrice": 256.038,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -705,7 +714,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 46",
-        "距MA20 +1.37 ATR",
+        "距MA20 +1.24 ATR",
         "主力资金占比 -0.54%"
       ]
     },
@@ -718,7 +727,7 @@
       "poolTags": [
         "B1"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "BROKEN",
         "label": "跌破趋势支撑",
@@ -735,7 +744,7 @@
         "quoteTime": "20260907161457"
       },
       "entryZone": null,
-      "triggerPrice": 61.291,
+      "triggerPrice": 61.082,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -747,7 +756,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 41",
-        "距MA20 -1.12 ATR",
+        "距MA20 -1.06 ATR",
         "主力资金占比 +9.75%"
       ]
     }
@@ -757,9 +766,7 @@
     "official": 17,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0,
-    "marketPrefilterCount": 220,
-    "marketScannedCount": 220
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -772,20 +779,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "ready",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5556,
-    "uniqueRows": 5456,
-    "pagesRequested": 56,
-    "coveragePct": 98.2,
-    "prefiltered": 220,
-    "historyLoaded": 220,
-    "setupMatches": 12,
-    "historicalEdgeMatches": 0,
-    "selected": 0,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
