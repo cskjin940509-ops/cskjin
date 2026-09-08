@@ -16,6 +16,12 @@ def explain(latest):
     elif reasons: code='BLOCKED_EVIDENCE_OR_RISK'; text='本轮未成交；'+'；'.join(reasons)
     elif candidates and len(rejected)==len(candidates): code='ENTRY_CONDITIONS_NOT_MET'; text='本轮无退出成交；候选买入条件未通过'
     else: code='NO_FILL_AFTER_EVALUATION'; text='本轮已评估但未成交；需结合个股确认次数、交易窗口、仓位和执行限制查看'
-    return {'reasonCode':code,'reasonZh':text,'entryBlocks':reasons,'pendingExits':pending_reasons,
+    rotation = s.get('opportunityRotation') or {}
+    plan = rotation.get('active') or {}
+    if plan.get('status') and plan['status'] not in ('DONE','CANCELLED','EXPIRED'):
+        code='OPPORTUNITY_ROTATION_PENDING'; text='择优换仓：'+rotation.get('statusZh',plan['status'])
+    elif rotation and not pending and not reasons and code=='NO_FILL_AFTER_EVALUATION':
+        text += '；择优换仓：'+rotation.get('statusZh','等待评估')
+    return {'opportunityRotation': rotation, 'reasonCode':code,'reasonZh':text,'entryBlocks':reasons,'pendingExits':pending_reasons,
             'candidateCount':len(candidates),'rejectedCandidateCount':len(rejected),
             'candidateReasons':[{'code':x.get('code'),'reasons':x.get('rejections',[]), 'executionStatus':x.get('executionStatus')} for x in candidates]}
