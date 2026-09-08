@@ -156,10 +156,18 @@ def risk_control(state, prices):
     return result
 
 
+def cancel_t_buybacks(obj, stock_code, reason):
+    for cycle in obj.get('tCycles', []):
+        if cycle['code'] == stock_code and cycle['status'] == 'OPEN':
+            cycle.update(status='RISK_CANCELLED', reasonZh=reason, cancelledAt=base.iso())
+
+
 def queue_exit(state, pos, qty, code, reason, signal=None):
     if CONTROL_MODE == 'FIXED_HOLD' and code not in ('HARD_STOP', 'PORTFOLIO_RISK', 'CONFIRMED_EXPOSURE_REDUCTION', 'FIXED_HOLD_EXIT'):
         return
+    if qty <= 0: return
     obj = metadata(state); pending = obj.setdefault('pendingExits', {})
+    cancel_t_buybacks(obj, pos['code'], '策略减仓/退出优先，终止做T回补：' + reason)
     old = pending.get(pos['code'])
     # A stronger full exit supersedes a partial order; never repeatedly halve each cycle.
     if old and old['remainingQty'] >= qty:
@@ -615,8 +623,6 @@ def evaluate_entries(state, ledger, radar, prices):
             t['executionStatus'] = 'WAIT_CONFIRMATION' if c.get('count', 0) < 3 else 'WAIT_WINDOW_OR_EXIT'
             continue
         pos = state.get('positions', {}).get(code)
-        if any(x['code'] == code and x.get('remainingQty', 0) > 0 and x['status'] == 'OPEN' for x in obj['tCycles']):
-            continue
         nav, mv = base.portfolio_nav(state, prices)
         cw, sw, _ = base.current_weights(state, prices)
         delta = weight - cw.get(code, 0)
@@ -638,6 +644,7 @@ def evaluate_entries(state, ledger, radar, prices):
         row = execution.add_or_buy(state, ledger, t, qty, prices, reason)
         t['executionStatus'] = 'FILLED' if row else 'WAIT_CAPACITY_OR_LIMIT'
         if row:
+            cancel_t_buybacks(obj, code, '已按主策略买入，取消旧做T回补，避免重复加仓')
             annotate(state, row, 'SIMPLE_ENTRY' if CONTROL_MODE == 'FIXED_HOLD' else 'CONFIRMED_ENTRY', t)
             new_pos = state['positions'][code]
             if not order.get('counted'):

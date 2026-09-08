@@ -173,6 +173,41 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(self.ledger, [])
         self.assertEqual(self.state['selection45']['confirmations']['000001']['count'], 1)
 
+    def test_confirmed_core_buy_supersedes_open_t_buyback(self):
+        pos=self.state['positions']['000001'];pos.update(qty=2000,costAmount=20000,invalidationZh='test',expectedHorizonZh='test')
+        self.state['cash']=self.state['initialCapital']-20000
+        cycle={'id':'t-test','code':'000001','date':'2026-09-04','status':'OPEN','remainingQty':1000}
+        self.state['selection45']['tCycles']=[cycle]
+        self.state['selection45']['confirmations']={'000001':{'weight':.08,'count':3,'at':'2026-09-04T10:15:00+08:00'}}
+        candidate={'code':'000001','name':'测试','sector':'银行','score':80,'referencePrice':10.,'rejections':[],
+                   'targetWeight':.08,'targetWeightPct':8.,'priceSource':'test','reasonZh':'test'}
+        with patch.object(engine,'build_candidate',return_value=candidate):
+            rows=engine.evaluate_entries(self.state,self.ledger,engine.CONTEXT['radar'],self.prices)
+        self.assertTrue(any(x['reasonCode']=='CONFIRMED_ENTRY' for x in rows))
+        self.assertFalse(any(x['reasonCode']=='T_BUYBACK' for x in rows))
+        self.assertEqual(cycle['status'],'RISK_CANCELLED')
+
+    def test_strategy_trim_cancels_t_even_after_order_fully_filled(self):
+        obj=self.state['selection45']
+        cycle={'id':'t-test','code':'000001','date':'2026-09-04','status':'OPEN','remainingQty':1000}
+        obj['tCycles']=[cycle]
+        engine.queue_exit(self.state,self.state['positions']['000001'],1000,'OVERHEAT_TRIM','策略止盈')
+        self.assertEqual(cycle['status'],'RISK_CANCELLED')
+        fills=engine.execute_pending(self.state,self.ledger,self.prices)
+        self.assertEqual(len(fills),1)
+        self.assertNotIn('000001',obj['pendingExits'])
+        self.assertEqual(engine.evaluate_t(self.state,self.ledger,self.prices,engine.CONTEXT['radar']),[])
+        self.assertEqual(self.state['positions']['000001']['qty'],9000)
+
+    def test_t_does_not_hold_up_pending_stop_during_t1(self):
+        cycle={'id':'t-test','code':'000001','date':'2026-09-04','status':'OPEN','remainingQty':1000}
+        self.state['selection45']['tCycles']=[cycle]
+        self.state['positions']['000001']['dailyBuyQty']={'2026-09-04':10000}
+        engine.queue_exit(self.state,self.state['positions']['000001'],10000,'HARD_STOP','止损')
+        engine.execute_pending(self.state,self.ledger,self.prices)
+        self.assertEqual(cycle['status'],'RISK_CANCELLED')
+        self.assertEqual(self.state['selection45']['pendingExits']['000001']['state'],'WAIT_T_PLUS_ONE')
+
     def test_actual_t_pair_cost_and_daily_limit(self):
         pos = self.state['positions']['000001']; pos['completeObservedDays'] = 4
         pos['invalidationZh'] = 'test'; pos['expectedHorizonZh'] = 'test'
