@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-09T14:50:14+08:00",
+  "checkedAt": "2026-09-09T14:55:48+08:00",
   "provider": "Yunai Quant API",
   "connected": true,
   "marketStatus": {
@@ -24,7 +24,7 @@
     "600362"
   ],
   "quoteAvailable": 0,
-  "capitalResponseAvailable": 0,
+  "capitalResponseAvailable": 1,
   "stocks": {
     "000737": {
       "quoteOk": false,
@@ -68,7 +68,26 @@
     },
     "002312": {
       "quoteOk": false,
-      "capitalOk": false
+      "capitalOk": true,
+      "capital": {
+        "largeNetInflow": 5364.440000000002,
+        "totalNetInflow": 9968.400000000009,
+        "capitalIn": null,
+        "capitalOut": null,
+        "timestamp": 1788936873000,
+        "retrievedAt": "1788936877457",
+        "brokerSource": "L",
+        "keys": [
+          "timestamp",
+          "retrievedAt",
+          "capitalIn",
+          "capitalOut",
+          "largeNetInflow",
+          "totalNetInflow",
+          "netInflow",
+          "brokerSource"
+        ]
+      }
     },
     "002999": {
       "quoteOk": false,
@@ -97,15 +116,11 @@
       }
     },
     "000737": {
-      "httpStatus": 599,
+      "httpStatus": 200,
       "shape": {
         "type": "dict",
-        "keys": [
-          "error"
-        ],
-        "valueTypes": {
-          "error": "str"
-        }
+        "keys": [],
+        "valueTypes": {}
       }
     },
     "600596": {
