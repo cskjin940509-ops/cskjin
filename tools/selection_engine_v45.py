@@ -111,7 +111,7 @@ def annotate(state, row, reason_code, signal=None, sleeve='CORE'):
 def turnover_room(state, ledger, nav):
     today = base.now_cn().date().isoformat()
     used = sum(float(x.get('amount') or 0) for x in ledger if str(x.get('date') or x.get('timestamp', '')[:10]) == today
-               and x.get('reasonCode') not in ('HARD_STOP', 'TRAIL_STOP', 'PORTFOLIO_RISK', 'EMERGENCY_EXIT'))
+               and x.get('reasonCode') not in ('HARD_STOP', 'TRAIL_STOP', 'PORTFOLIO_RISK', 'EMERGENCY_EXIT', 'PROFIT_TAKE'))
     return max(0., nav * .20 - used)
 
 
@@ -186,7 +186,7 @@ def execute_pending(state, ledger, prices):
         pos = state.get('positions', {}).get(code)
         if not pos:
             pending.pop(code, None); continue
-        emergency = order['reasonCode'] in ('HARD_STOP', 'TRAIL_STOP', 'PORTFOLIO_RISK', 'EMERGENCY_EXIT')
+        emergency = order['reasonCode'] in ('HARD_STOP', 'TRAIL_STOP', 'PORTFOLIO_RISK', 'EMERGENCY_EXIT', 'PROFIT_TAKE')
         if not emergency and not rules.normal_window(now):
             order['state'] = 'WAIT_WINDOW'; continue
         if not own_quote_ok(code):
@@ -286,6 +286,7 @@ def evaluate_t(state, ledger, prices, radar):
     if not risk['allowNew'] or not (time(10, 15) <= now.time() <= time(14, 15)):
         return actions
     for code, pos in list(state.get('positions', {}).items()):
+        if pos.get('profitPlan50', {}).get('lastQueuedDay') == today: continue
         if code in obj['pendingExits'] or any(x['code'] == code and x['date'] == today for x in cycles): continue
         if int(pos.get('completeObservedDays', 0)) < 2 or not own_quote_ok(code): continue
         if not technical(state, code).get('adv20'): continue
@@ -440,7 +441,7 @@ def build_latest(state, ledger, prices, radar):
         row['decisionPlan'] = study.holding_plan(pos, obj['pendingExits'].get(row.get('code')), own_quote_ok(row.get('code')))
         row['currentActionZh'] = row['decisionPlan']['actionZh']
         row.update({k: pos.get(k) for k in ('holdingState', 'hardStopPrice', 'trailingStopPrice',
-                                           'atrFallback', 'completeObservedDays', 'invalidDayStreak')})
+                                           'atrFallback', 'completeObservedDays', 'invalidDayStreak', 'profitPlan50')})
     return out
 
 
@@ -533,6 +534,16 @@ def evaluate_exits(state, ledger, radar_stocks, quotes, prices):
             if fraction > 0:
                 queue_exit(state, pos, int(qty * fraction / 100) * 100, 'CONFIRMED_EXPOSURE_REDUCTION',
                            '大盘/集中度上限连续3轮确认，固定窗口分批降仓', risk)
+    if CONTROL_MODE != 'FIXED_HOLD':
+        for code, pos in state.get('positions', {}).items():
+            if code in obj['pendingExits'] or not own_quote_ok(code): continue
+            proposal = rules.profit_signal(pos, prices.get(code, pos.get('lastPrice', 0)),
+                                          technical(state, code), sample(state, code, quotes), now)
+            if proposal:
+                queue_exit(state, pos, proposal['qty'], 'PROFIT_TAKE', proposal['reasonZh'], proposal)
+                plan = pos['profitPlan50']
+                plan['queuedStages'].append(proposal['stage'])
+                plan['lastQueuedDay'] = today
     if CONTROL_MODE == 'FIXED_HOLD':
         for pos in state.get('positions', {}).values():
             if pos.get('completeObservedDays', 0) >= 10:
@@ -544,6 +555,9 @@ def evaluate_exits(state, ledger, radar_stocks, quotes, prices):
 def build_candidate(state, stock, radar, quotes):
     code = stock['code']; now = base.now_cn(); today = now.date().isoformat()
     q = quotes.get(code) or {}; rejects = []; reasons = []
+    held = state.get('positions', {}).get(code, {})
+    if held.get('profitPlan50', {}).get('lastQueuedDay') == now.date().isoformat():
+        rejects.append('主动止盈当日不回补，次日重新验证买入条件')
     sec = next((x for x in radar.get('mainlines') or [] if x.get('name') == stock.get('sector')), {})
     stage = sec.get('stage')
     evidence = rules.sector_evidence(stock, sec, today, now)
