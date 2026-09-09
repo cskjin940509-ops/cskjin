@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34321269566-1",
-  "lastRunAt": "2026-09-09T14:55:19+08:00",
-  "lastSuccessAt": "2026-09-09T14:55:19+08:00",
+  "cycleId": "34321325535-1",
+  "lastRunAt": "2026-09-09T14:56:00+08:00",
+  "lastSuccessAt": "2026-09-09T14:56:00+08:00",
   "lastTradeAt": "2026-09-09T13:31:36+08:00",
   "status": "NO_ACTION",
-  "statusZh": "本轮未成交；全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
+  "statusZh": "本轮未成交；大盘或组合风险条件不允许新增买入",
   "runSource": "dedicated-auto-scheduler",
   "sessionOpen": true,
   "radarCapturedAt": "2026-09-09T14:53:31+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 109.0,
+  "radarAgeSeconds": 149.6,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -40,9 +40,9 @@
       "statusZh": "先处理退出和组合风控，不用换仓绕过风险限制"
     },
     "reasonCode": "BLOCKED_EVIDENCE_OR_RISK",
-    "reasonZh": "本轮未成交；全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
+    "reasonZh": "本轮未成交；大盘或组合风险条件不允许新增买入",
     "entryBlocks": [
-      "全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场"
+      "大盘或组合风险条件不允许新增买入"
     ],
     "pendingExits": [],
     "candidateCount": 60,
@@ -64,6 +64,7 @@
           "双源价格偏差超过0.3%或缺数",
           "未验证板块完整样本前20%",
           "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
