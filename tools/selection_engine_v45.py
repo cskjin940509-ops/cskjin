@@ -11,6 +11,7 @@ import selection_rules_v45 as rules
 import selection_data_v45 as feeds
 import selection_research_v46 as study
 import selection_rotation_v49 as rotation
+import original_framework
 import sys
 
 CONTEXT = {}
@@ -449,6 +450,7 @@ def build_latest(state, ledger, prices, radar):
                                        'statusZh': '已到滚动复核窗口，须样本外检查' if elapsed >= 20 else '正在积累前向影子盘样本；尚不能判断优于旧策略'}
     out['selection45']['opportunityRotation'] = deepcopy(obj.get('rotation49') or {})
     out['selection45']['rotationParameters'] = rotation.PARAMETERS
+    out['originalFramework'] = original_framework.alignment_report()
     out['tTrading'] = t_report(state, prices)
     out['strategyResearch'] = study.report(state, now, comparison, simple_comparison)
     out['targetPortfolio'] = [{k: t[k] for k in ('code', 'name', 'sector', 'score', 'targetWeightPct', 'referencePrice', 'priceSource', 'reasonZh')}
