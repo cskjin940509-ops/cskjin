@@ -21,6 +21,8 @@ on:
       - 'tools/selection_rotation_v49.py'
       - 'tools/test_rotation_v49.py'
       - 'tools/test_profit_v50.py'
+      - 'tools/collect_selection_evidence_v51.py'
+      - 'tools/test_risk_v51.py'
       - 'tools/test_selection_v45.py'
       - 'tools/selection_research_v46.py'
       - 'tools/test_selection_research_v46.py'
@@ -39,7 +41,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: astock-radar-ai-shadow-production
+  group: astock-radar-evidence-producer
   cancel-in-progress: false
 
 jobs:
@@ -75,6 +77,11 @@ jobs:
           echo "$OUT"
           STATE=$(printf '%s\n' "$OUT" | tail -n 1 | python -c 'import json,sys; print(json.load(sys.stdin).get("state", "unknown"))')
           echo "state=$STATE" >> "$GITHUB_OUTPUT"
+      - name: 雷达数据到达立即通知独立交易任务
+        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python tools/publish_data_on_arrival.py radar-evidence
       - name: 云AI独立行情与资金确认
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen'
         env:
@@ -84,33 +91,12 @@ jobs:
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_slow_money_factors.py
       - name: 验证新持仓和底仓T规则
-        run: python -m unittest tools/test_profit_v50.py tools/test_rotation_v49.py tools/test_selection_v45.py tools/test_selection_research_v46.py
-      - name: a股筛选池证据驱动持仓与底仓T模拟
-        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        run: python -m unittest tools/test_risk_v51.py tools/test_profit_v50.py tools/test_rotation_v49.py tools/test_selection_v45.py tools/test_selection_research_v46.py
+      - name: 采集独立策略证据（不写账本）
         env:
           YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-          ASTOCK_RUN_SOURCE: integrated-radar-cycle
-        run: python tools/run_ai_dynamic_portfolio_v2_2.py
-
-      - name: 校验自动影子账户数据契约
-        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: python tools/validate_ai_shadow_contract.py
-      - name: 校验后立即发布雷达与影子账本
-        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
+        run: python tools/collect_selection_evidence_v51.py
+      - name: 证据到达立即通知独立交易任务
         env:
-          GH_TOKEN: ${{ github.token }}
-        run: python tools/publish_data_on_arrival.py radar
-
-      - name: 更新大盘与原始候选池同期基准
-        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: python tools/enrich_ai_shadow_benchmarks.py
-      - name: 校验补充基准后的账户数据
-        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        run: python tools/validate_ai_shadow_contract.py
-      - name: 补充发布同期基准
-        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python tools/publish_data_on_arrival.py portfolio
-
-# recovery-trigger: 2026-09-03T10:27+08:00
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python tools/publish_data_on_arrival.py radar-evidence

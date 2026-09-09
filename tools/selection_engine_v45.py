@@ -33,19 +33,29 @@ def prepare_quotes(codes):
     now = base.now_cn()
     gateway = base.read_json(base.ROOT / 'astock_gateway/latest.json', {})
     market = gateway.get('marketSnapshot') or radar.get('marketSnapshot') or {}
-    data = feeds.enrich(state, radar, quotes, now) if radar.get('date') == now.date().isoformat() else {}
-    # Slow evidence collection must not leave the execution price at its earlier timestamp.
-    if (base.now_cn() - now).total_seconds() > 10:
-        refreshed = ORIGINAL_QUOTES(codes)
-        for code, quote in refreshed.items():
-            at = rules.stamp(quote.get('quoteTimestamp') or quote.get('quoteTime'))
-            before = rules.stamp((quotes.get(code) or {}).get('quoteTimestamp'))
-            if at and (not before or at > before): quotes[code] = quote
-        now = base.now_cn()
-    data["secondaryQuoteRefresh"] = feeds.refresh_secondary(radar, codes, base.now_cn()) if os.getenv("ASTOCK_DISABLE_QUOTE_FETCH") != "1" else {}
+    # Execution never performs slow history, constituent or secondary collection.
+    cache = base.read_json(base.ROOT / 'astock_selection_evidence/latest.json', {})
+    cached = cache.get('data') or {}
+    data = deepcopy(cached if rules.fresh(cache.get('updatedAt'), now, 86400)
+                    else state.get('selectionData45') or {})
+    if cache.get('radar', {}).get('capturedAt') and cache['radar']['capturedAt'] == radar.get('capturedAt'):
+        radar = cache['radar']
+    for code, quote in quotes.items():
+        bars = (data.get('histories', {}).get(code) or {}).get('bars')
+        if bars:
+            data.setdefault('technical', {})[code] = rules.indicators(bars, now, quote.get('prevClose'))
+    previous = max((d for d in data.get('marketSessions', []) if d < now.date().isoformat()), default=None)
+    for tech in data.get('technical', {}).values():
+        if previous and tech.get('dataDate', '') < previous:
+            tech['ready'] = False
+    for rank in data.get('sectorRanks', {}).values():
+        if not rules.fresh(rank.get('availableAt'), now, 900): rank['complete'] = False
+    market = max([gateway.get('marketSnapshot') or {}, radar.get('marketSnapshot') or {}],
+                 key=lambda x: str(x.get('availableAt') or ''))
     CONTEXT.clear()
     CONTEXT.update(radar=radar, quotes=quotes, data=data,
-                   market=rules.market_regime(market, now, radar.get('macroEvidence')))
+                   market=rules.market_regime(market, now, radar.get('macroEvidence')),
+                   marketAt=market.get('availableAt'))
     return quotes
 
 
@@ -130,6 +140,19 @@ def risk_control(state, prices):
     close_values = [closes[d]['unitNav'] for d in sorted(closes)]
     drawdown = close_values[-1] / max(close_values) - 1 if close_values else None
     market = obj['market']; cap = market['cap']
+    defense = obj.setdefault('defensiveConfirmation51', {})
+    at = rules.stamp(CONTEXT.get('marketAt'))
+    before = rules.stamp(defense.get('at'))
+    if market['state'] != 'DEFENSIVE':
+        defense.clear()
+    elif at and rules.fresh(at.isoformat(), now, 900):
+        if defense.get('cap') != cap or (before and (at-before).total_seconds() > 900):
+            defense.clear(); before = None
+        if not before or (at-before).total_seconds() >= 60:
+            defense.update(at=at.isoformat(), cap=cap, count=defense.get('count', 0)+1)
+    defensive = (market['state'] == 'DEFENSIVE' and defense.get('count', 0) >= 2
+                 and at is not None and rules.fresh(at.isoformat(), now, 900))
+
     # Missing breadth blocks buys but is not evidence to liquidate an existing book.
     if market['state'] == 'UNKNOWN':
         cap = max(cap, mv / nav if nav else 0)
@@ -151,9 +174,11 @@ def risk_control(state, prices):
               'dailyUnitReturnPct': daily * 100 if daily is not None else None,
               'confirmedCloseDrawdownPct': drawdown * 100 if drawdown is not None else None,
               'dailyRiskDataReady': latest is not None, 'paused': paused,
-              'forceReduction': market['state'] == 'RISK' or (daily is not None and daily <= -.025) or (drawdown is not None and drawdown <= -.05)}
+              'defensiveConfirmed': defensive, 'defensiveConfirmations': defense.get('count', 0),
+              'forceReduction': defensive or market['state'] == 'RISK' or (daily is not None and daily <= -.025) or (drawdown is not None and drawdown <= -.05)}
     # Without a reliable daily base, opening new risk is blocked instead of assuming 0% loss.
-    result['allowNew'] = result['allowNew'] and latest is not None
+    result['allowNew'] = result['allowNew'] and latest is not None and (nav > 0 and mv <= nav * cap)
+    result['executionPolicyZh'] = '风险独立检查；防守大盘2个至少间隔60秒的新快照确认后立即分批降至上限，不等普通窗口和换手额度'
     obj['portfolioRisk'] = result
     return result
 
@@ -446,6 +471,7 @@ def build_latest(state, ledger, prices, radar):
 
 
 def main():
+    base.INDEPENDENT_RISK = True
     base.STRATEGY_VERSION = rules.VERSION
     base.MAX_SINGLE_WEIGHT = .08
     base.MAX_SECTOR_WEIGHT = .25
@@ -462,6 +488,7 @@ def evaluate_exits(state, ledger, radar_stocks, quotes, prices):
         start_no_t_control(state, ledger, prices)
     obj = metadata(state); now = base.now_cn(); today = now.date().isoformat()
     radar = CONTEXT.get('radar') or {'stocks': radar_stocks}
+    radar_current = base.radar_freshness(radar, now)[0]
     sectors = {x.get('name'): x for x in radar.get('mainlines') or []}
     risk = risk_control(state, prices)
     nav, mv = base.portfolio_nav(state, prices)
@@ -516,10 +543,10 @@ def evaluate_exits(state, ledger, radar_stocks, quotes, prices):
         sec = sectors.get(pos.get('sector')) or {}
         flow = rules.finite(stock.get('mainFlowPct'))
         relative = rules.finite(stock.get('changePct'), 0) - rules.finite(sec.get('changePct'), 0)
-        if flow is not None and flow <= -8 and relative <= -2 and completed >= 2 and tracked.get('fastTrimDay') != today:
+        if radar_current and flow is not None and flow <= -8 and relative <= -2 and completed >= 2 and tracked.get('fastTrimDay') != today:
             queue_exit(state, pos, qty // 200 * 100, 'FAST_FLOW_FAILURE', '资金快速转负且明显弱于板块，减半')
             tracked['fastTrimDay'] = today
-        if sec.get('stage') == 'OVERHEATED' and flow is not None and flow <= 0 and completed >= 2 and not tracked.get('overheatTrimmed'):
+        if radar_current and sec.get('stage') == 'OVERHEATED' and flow is not None and flow <= 0 and completed >= 2 and not tracked.get('overheatTrimmed'):
             queue_exit(state, pos, qty // 300 * 100, 'OVERHEAT_TRIM', '板块过热且个股资金未跟随，减仓三分之一')
             tracked['overheatTrimmed'] = True
         if risk['forceReduction'] and mv > nav * risk['cap'] and mv > 0:
@@ -618,6 +645,8 @@ def evaluate_entries(state, ledger, radar, prices):
     global LAST_TARGETS, LAST_ACTIONS
     obj = metadata(state); now = base.now_cn(); quotes = CONTEXT.get('quotes') or {}
     risk = risk_control(state, prices); actions = []
+    if not base.radar_freshness(radar, now)[0]:
+        return []
     enriched_radar = CONTEXT.get('radar') or radar
     targets = [build_candidate(state, signal_stock(state, code, enriched_radar), enriched_radar, quotes) for code in radar.get('stocks') or {}]
     targets.sort(key=lambda x: x['score'], reverse=True)
@@ -729,7 +758,7 @@ def update_no_t_control(state, ledger, prices, radar, primary_close_ok, control_
             (enriched.get('stocks') or {}).get(code) or {}, quotes.get(code) or {},
             (book['positions'][code]).get('lastPrice'))
     captured = enriched.get('capturedAt')
-    ready = base.trading_session(now) and base.radar_freshness(enriched, now)[0]
+    ready = base.trading_session(now)
     saved = (LAST_ACTIONS, LAST_TARGETS, NO_T_CONTROL, CONTROL_MODE)
     try:
         NO_T_CONTROL = True
@@ -737,7 +766,8 @@ def update_no_t_control(state, ledger, prices, radar, primary_close_ok, control_
         if ready and control.get('lastCycleAt') != base.iso(now):
             base.fund.update_liquidity_profiles(book, enriched, quotes, now.date().isoformat())
             evaluate_exits(book, book_ledger, enriched.get('stocks') or {}, quotes, mark_prices)
-            evaluate_entries(book, book_ledger, enriched, mark_prices)
+            if base.radar_freshness(enriched, now)[0]:
+                evaluate_entries(book, book_ledger, enriched, mark_prices)
             control['lastCycleAt'] = base.iso(now)
         freeze_daily_signals(book, enriched, mark_prices)
     finally:

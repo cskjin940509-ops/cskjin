@@ -925,12 +925,24 @@ def build_latest(state: dict, ledger: list, prices: dict[str, float], radar: dic
     }
 
 
+def execute_cycle(state, ledger, radar, quotes, prices, dt, independent_risk=False):
+    actions = []
+    if not trading_session(dt): return actions
+    fresh_radar = radar_freshness(radar, dt)[0]
+    if fresh_radar or independent_risk:
+        actions += evaluate_exits(state, ledger, radar.get('stocks') or {}, quotes, prices)
+    if fresh_radar:
+        actions += evaluate_entries(state, ledger, radar, prices)
+    return actions
+
+
 def _main_impl() -> int:
     global EXECUTION_MARKET, VALUATION_OVERRIDE
     VALUATION_OVERRIDE = None
     OUT.mkdir(parents=True, exist_ok=True)
     dt = now_cn()
-    if not RADAR.exists():
+    independent_risk = globals().get("INDEPENDENT_RISK", False)
+    if not RADAR.exists() and not independent_risk:
         record_automation_cycle("BLOCKED_NO_RADAR", "后台已运行，但没有可用雷达数据，拒绝交易", dt)
         print(json.dumps({"state": "no-radar", "time": iso(dt)}, ensure_ascii=False))
         return 0
@@ -942,7 +954,7 @@ def _main_impl() -> int:
         ledger = []
     capital_event = migrate_capital_capacity(state, dt)
     radar_date = str(radar.get("date") or "")
-    if radar_date != dt.date().isoformat():
+    if radar_date != dt.date().isoformat() and not independent_risk:
         # A stale signal must never trade, but accounting, heartbeat and the
         # investor-style report still need to be persisted independently.
         previous_latest = read_json(LATEST_PATH, {})
@@ -1010,10 +1022,7 @@ def _main_impl() -> int:
     radar_fresh, radar_age = radar_freshness(radar, dt)
     # Buy/sell decisions are only allowed during actual exchange trading hours.
     # Post-close jobs may update NAV but must never invent a fill after the market closes.
-    if trading_session(dt) and radar_fresh:
-        # Exits are evaluated before entries, so freed cash can be reused only after an auditable sell.
-        actions += evaluate_exits(state, ledger, radar.get("stocks") or {}, quotes, prices)
-        actions += evaluate_entries(state, ledger, radar, prices)
+    actions = execute_cycle(state, ledger, radar, quotes, prices, dt, independent_risk)
 
     nav, mv = portfolio_nav(state, prices)
     accounting = fund.ensure_fund_accounting(state, nav)
@@ -1046,9 +1055,12 @@ def _main_impl() -> int:
     state["strategyVersion"] = STRATEGY_VERSION
     latest = build_latest(state, ledger, prices, radar)
 
-    if trading_session(dt) and not radar_fresh:
+    if actions:
+        cycle_status = "TRADED"
+        cycle_reason = f"后台自动模拟成交{len(actions)}笔；持仓保护独立执行"
+    elif trading_session(dt) and not radar_fresh:
         cycle_status = "BLOCKED_STALE_RADAR"
-        cycle_reason = f"后台已运行，但雷达超过{RADAR_MAX_AGE_SECONDS // 60}分钟，拒绝使用旧信号交易"
+        cycle_reason = f"后台已运行，但雷达超过{RADAR_MAX_AGE_SECONDS // 60}分钟，禁止旧信号开仓；持仓保护已使用新行情独立检查"
     elif not trading_session(dt):
         cycle_status = "OUTSIDE_SESSION"
         cycle_reason = "后台已运行；当前不在A股交易时段，仅更新净值与健康状态"
