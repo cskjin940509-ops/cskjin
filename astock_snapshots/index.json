@@ -4097,7 +4097,7 @@
       }
     },
     "sectorPerformance": {},
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
@@ -4113,24 +4113,24 @@
         "missing-original-strategy-version",
         "missing-original-stock-metadata:17",
         "same-day-frozen-market-snapshot-missing",
-        "raw-price-cross-source-incomplete:1/17",
+        "raw-price-cross-source-incomplete:0/17",
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-09T15:42:20+08:00",
+      "auditedAt": "2026-09-09T16:17:42+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 17,
-          "verified": 1,
-          "coveragePct": 5.88,
+          "verified": 0,
+          "coveragePct": 0.0,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 0,
+          "available": 8,
           "total": 17,
-          "coveragePct": 0.0,
+          "coveragePct": 47.06,
           "cutoff": "2026-08-17",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -10468,16 +10468,16 @@
       "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
-        "raw-price-cross-source-incomplete:0/14",
+        "raw-price-cross-source-incomplete:1/14",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-09T15:42:20+08:00",
+      "auditedAt": "2026-09-09T16:17:42+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 14,
-          "verified": 0,
-          "coveragePct": 0.0,
+          "verified": 1,
+          "coveragePct": 7.14,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
@@ -10534,7 +10534,7 @@
         }
       }
     },
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
@@ -16579,7 +16579,7 @@
       "state": "可更新后续收益",
       "note": "信号日当天涨跌属于当日行情表现，不计作策略可交易收益。"
     },
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
@@ -24693,7 +24693,7 @@
         "raw-price-cross-source-incomplete:0/18",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-09T15:42:20+08:00",
+      "auditedAt": "2026-09-09T16:17:42+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -24704,9 +24704,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 0,
+          "available": 2,
           "total": 18,
-          "coveragePct": 0.0,
+          "coveragePct": 11.11,
           "cutoff": "2026-08-20",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -24856,7 +24856,7 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
@@ -31463,7 +31463,7 @@
         "raw-price-cross-source-incomplete:0/18",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-09T15:42:20+08:00",
+      "auditedAt": "2026-09-09T16:17:42+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -31626,7 +31626,7 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
@@ -37950,7 +37950,7 @@
         "raw-price-cross-source-incomplete:0/17",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-09T15:42:20+08:00",
+      "auditedAt": "2026-09-09T16:17:42+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -38113,7 +38113,7 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
@@ -44213,7 +44213,7 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
@@ -49075,7 +49075,7 @@
         "raw-price-cross-source-incomplete:0/16",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-09T15:42:20+08:00",
+      "auditedAt": "2026-09-09T16:17:42+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -49238,7 +49238,7 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
@@ -54745,7 +54745,7 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-09T15:48:31+08:00",
+    "trackingUpdatedAt": "2026-09-09T16:23:54+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
