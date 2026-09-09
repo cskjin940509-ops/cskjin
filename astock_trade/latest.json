@@ -766,61 +766,12 @@
       ]
     }
   ],
-  "setupCandidates": [
-    {
-      "code": "601899",
-      "name": "紫金矿业",
-      "sector": "铜",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "买入候选",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 82.3,
-        "historical": {
-          "samples": 6,
-          "win5D": 0.6667,
-          "avg5D": 0.0086,
-          "avgMFE5D": 0.056,
-          "avgMAE5D": -0.0317
-        }
-      },
-      "quote": {
-        "price": 33.87,
-        "changePct": 0.03,
-        "open": 33.87,
-        "high": 33.87,
-        "low": 33.87,
-        "dayLowToHighPct": 0.0,
-        "quoteTime": "20260909092638"
-      },
-      "entryZone": [
-        33.485,
-        34.08
-      ],
-      "triggerPrice": 33.743,
-      "stopLoss": 32.462,
-      "takeProfit1": 35.764,
-      "takeProfit2": 37.084,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 32.462",
-      "reasons": [
-        "趋势回踩",
-        "形态分 82",
-        "距MA20 +0.30 ATR"
-      ]
-    }
-  ],
+  "setupCandidates": [],
   "summary": {
     "official": 17,
     "officialBuy": 2,
     "officialWatch": 1,
-    "expandedSetupCandidates": 1
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -833,5 +784,9 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "skipped",
+    "reason": "official-has-live-buy"
+  }
 }
