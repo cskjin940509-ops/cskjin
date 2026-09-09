@@ -7,9 +7,9 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34321771612-1",
-  "lastRunAt": "2026-09-09T15:01:32+08:00",
-  "lastSuccessAt": "2026-09-09T15:01:32+08:00",
+  "cycleId": "34322051599-1",
+  "lastRunAt": "2026-09-09T15:04:55+08:00",
+  "lastSuccessAt": "2026-09-09T15:04:55+08:00",
   "lastTradeAt": "2026-09-09T13:31:36+08:00",
   "status": "OUTSIDE_SESSION",
   "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
@@ -17,7 +17,7 @@
   "sessionOpen": false,
   "radarCapturedAt": "2026-09-09T14:56:50+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 282.5,
+  "radarAgeSeconds": 485.3,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -40,9 +40,9 @@
       "statusZh": "先处理退出和组合风控，不用换仓绕过风险限制"
     },
     "reasonCode": "BLOCKED_EVIDENCE_OR_RISK",
-    "reasonZh": "本轮未成交；全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
+    "reasonZh": "本轮未成交；大盘或组合风险条件不允许新增买入",
     "entryBlocks": [
-      "全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场"
+      "大盘或组合风险条件不允许新增买入"
     ],
     "pendingExits": [],
     "candidateCount": 60,
