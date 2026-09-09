@@ -1,28 +1,28 @@
 {
   "schemaVersion": 3,
-  "strategyVersion": "v5.0-layered-profit",
+  "strategyVersion": "v5.1-independent-risk",
   "mode": "a股筛选池 · 主线持仓＋底仓T研究",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-09T14:53:13+08:00",
+  "updatedAt": "2026-09-09T14:53:38+08:00",
   "radarCapturedAt": "2026-09-09T14:41:14+08:00",
   "radarStatus": "RadarLive",
   "summary": {
     "initialCapital": 20000000.0,
     "capitalCapacity": 20000000.0,
     "inceptionCapital": 1000000.0,
-    "totalAssets": 20090306.68,
+    "totalAssets": 20075414.68,
     "fundUnits": 19341487.5886677,
-    "unitNav": 1.038716,
-    "cumulativeNav": 1.038716,
+    "unitNav": 1.037946,
+    "cumulativeNav": 1.037946,
     "cash": 2819426.68,
-    "marketValue": 17270880.0,
-    "positionPct": 85.97,
-    "cashPct": 14.03,
-    "todayReturnPct": -2.0014738521719644,
-    "cumulativeReturnPct": 3.872,
+    "marketValue": 17255988.0,
+    "positionPct": 85.96,
+    "cashPct": 14.04,
+    "todayReturnPct": -2.074115447878988,
+    "cumulativeReturnPct": 3.795,
     "realizedPnl": -159432.26,
-    "floatingPnl": 249727.97,
+    "floatingPnl": 234835.97,
     "maxDrawdownPct": 0.0,
     "maxDrawdownFrequency": "DAILY_CLOSE_UNIT_NAV",
     "intradayObservedMaxDrawdownPct": -2.9443,
@@ -52,7 +52,7 @@
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.15,
       "lastPrice": 219.0,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 26,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -86,10 +86,10 @@
       "marketValue": 3460200.0,
       "floatingPnl": 469132.02,
       "floatingReturnPct": 15.68,
-      "currentWeightPct": 17.22,
+      "currentWeightPct": 17.24,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145254",
+      "valuationQuoteAt": "20260909145336",
       "marketChangePct": -1.4844804318488558,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
@@ -113,8 +113,8 @@
       "entryTimestamp": "2026-09-04T10:13:42+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.15,
-      "lastPrice": 12.54,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPrice": 12.53,
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 2,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -133,7 +133,7 @@
       "trailingStopPrice": 0.0,
       "atrFallback": false,
       "atr14": 0.4371428571428572,
-      "stopDistancePct": 5.2289815447710195,
+      "stopDistancePct": 5.233154714399727,
       "holdingState": "HOLD",
       "completeObservedDays": 2,
       "invalidDayStreak": 0,
@@ -144,15 +144,15 @@
         "target2": 15.0113,
         "queuedStages": []
       },
-      "currentPrice": 12.54,
-      "marketValue": 2904264.0,
-      "floatingPnl": -118880.28,
-      "floatingReturnPct": -3.93,
+      "currentPrice": 12.53,
+      "marketValue": 2901948.0,
+      "floatingPnl": -121196.28,
+      "floatingReturnPct": -4.01,
       "currentWeightPct": 14.46,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145253",
-      "marketChangePct": -1.7241379310344862,
+      "valuationQuoteAt": "20260909145335",
+      "marketChangePct": -1.8025078369905967,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -175,8 +175,8 @@
       "entryTimestamp": "2026-09-04T10:27:06+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.08635,
-      "lastPrice": 1.71,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPrice": 1.7,
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 4,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -195,7 +195,7 @@
       "trailingStopPrice": 1.6284,
       "atrFallback": false,
       "atr14": 0.08571428571428573,
-      "stopDistancePct": 7.518796992481204,
+      "stopDistancePct": 7.563025210084034,
       "holdingState": "HOLD",
       "completeObservedDays": 2,
       "invalidDayStreak": 0,
@@ -206,15 +206,15 @@
         "target2": 1.9005,
         "queuedStages": []
       },
-      "currentPrice": 1.71,
-      "marketValue": 1834488.0,
-      "floatingPnl": 96122.88,
-      "floatingReturnPct": 5.53,
-      "currentWeightPct": 9.13,
+      "currentPrice": 1.7,
+      "marketValue": 1823760.0,
+      "floatingPnl": 85394.88,
+      "floatingReturnPct": 4.91,
+      "currentWeightPct": 9.08,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145254",
-      "marketChangePct": -1.1560693641618491,
+      "valuationQuoteAt": "20260909145336",
+      "marketChangePct": -1.7341040462427793,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -237,8 +237,8 @@
       "entryTimestamp": "2026-09-04T10:27:06+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.088272,
-      "lastPrice": 17.11,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPrice": 17.12,
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 2,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -257,7 +257,7 @@
       "trailingStopPrice": 0.0,
       "atrFallback": false,
       "atr14": 0.5535714285714286,
-      "stopDistancePct": 4.85305168239125,
+      "stopDistancePct": 4.850216955941255,
       "holdingState": "HOLD",
       "completeObservedDays": 2,
       "invalidDayStreak": 0,
@@ -268,15 +268,15 @@
         "target2": 20.2222,
         "queuedStages": []
       },
-      "currentPrice": 17.11,
-      "marketValue": 1728110.0,
-      "floatingPnl": -47924.5,
-      "floatingReturnPct": -2.7,
-      "currentWeightPct": 8.6,
+      "currentPrice": 17.12,
+      "marketValue": 1729120.0,
+      "floatingPnl": -46914.5,
+      "floatingReturnPct": -2.64,
+      "currentWeightPct": 8.61,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145251",
-      "marketChangePct": -3.4968979131415723,
+      "valuationQuoteAt": "20260909145333",
+      "marketChangePct": -3.440496333897347,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -299,8 +299,8 @@
       "entryTimestamp": "2026-09-04T10:27:06+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.076495,
-      "lastPrice": 4.89,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPrice": 4.88,
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 0,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -330,15 +330,15 @@
         "target2": 5.6595,
         "queuedStages": []
       },
-      "currentPrice": 4.89,
-      "marketValue": 1530081.0,
-      "floatingPnl": -9793.77,
-      "floatingReturnPct": -0.64,
-      "currentWeightPct": 7.62,
+      "currentPrice": 4.88,
+      "marketValue": 1526952.0,
+      "floatingPnl": -12922.77,
+      "floatingReturnPct": -0.84,
+      "currentWeightPct": 7.61,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145254",
-      "marketChangePct": -0.8113590263691739,
+      "valuationQuoteAt": "20260909145333",
+      "marketChangePct": -1.0141987829614618,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -362,7 +362,7 @@
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.077336,
       "lastPrice": 26.09,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 2,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -396,10 +396,10 @@
       "marketValue": 1476694.0,
       "floatingPnl": -79636.2,
       "floatingReturnPct": -5.12,
-      "currentWeightPct": 7.35,
+      "currentWeightPct": 7.36,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145251",
+      "valuationQuoteAt": "20260909145333",
       "marketChangePct": -4.781021897810211,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
@@ -424,7 +424,7 @@
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.1,
       "lastPrice": 6.82,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 11,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -461,7 +461,7 @@
       "currentWeightPct": 7.16,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145254",
+      "valuationQuoteAt": "20260909145336",
       "marketChangePct": -1.8705035971222972,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
@@ -485,8 +485,8 @@
       "entryTimestamp": "2026-09-04T09:42:17+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.1,
-      "lastPrice": 61.2,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPrice": 61.22,
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 26,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -505,7 +505,7 @@
       "trailingStopPrice": 0.0,
       "atrFallback": false,
       "atr14": 2.8407142857142853,
-      "stopDistancePct": 6.962535014005601,
+      "stopDistancePct": 6.9602604190974,
       "holdingState": "HOLD",
       "completeObservedDays": 2,
       "invalidDayStreak": 0,
@@ -516,15 +516,15 @@
         "target2": 73.1126,
         "queuedStages": []
       },
-      "currentPrice": 61.2,
-      "marketValue": 1425960.0,
-      "floatingPnl": -55365.46,
-      "floatingReturnPct": -3.74,
-      "currentWeightPct": 7.1,
+      "currentPrice": 61.22,
+      "marketValue": 1426426.0,
+      "floatingPnl": -54899.46,
+      "floatingReturnPct": -3.71,
+      "currentWeightPct": 7.11,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145255",
-      "marketChangePct": -1.449275362318836,
+      "valuationQuoteAt": "20260909145334",
+      "marketChangePct": -1.4170692431561993,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -548,7 +548,7 @@
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.15,
       "lastPrice": 9.15,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 11,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -585,7 +585,7 @@
       "currentWeightPct": 3.94,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145254",
+      "valuationQuoteAt": "20260909145336",
       "marketChangePct": -3.5827186512118026,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
@@ -609,8 +609,8 @@
       "entryTimestamp": "2026-09-04T09:42:17+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.15,
-      "lastPrice": 29.18,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPrice": 29.17,
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 11,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -629,7 +629,7 @@
       "trailingStopPrice": 0.0,
       "atrFallback": false,
       "atr14": 0.8742857142857147,
-      "stopDistancePct": 4.494272006266526,
+      "stopDistancePct": 4.495812723443853,
       "holdingState": "HOLD",
       "completeObservedDays": 2,
       "invalidDayStreak": 0,
@@ -640,15 +640,15 @@
         "target2": 35.574,
         "queuedStages": []
       },
-      "currentPrice": 29.18,
-      "marketValue": 569010.0,
-      "floatingPnl": -12823.2,
-      "floatingReturnPct": -2.2,
+      "currentPrice": 29.17,
+      "marketValue": 568815.0,
+      "floatingPnl": -13018.2,
+      "floatingReturnPct": -2.24,
       "currentWeightPct": 2.83,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145252",
-      "marketChangePct": -2.0476670023497845,
+      "valuationQuoteAt": "20260909145334",
+      "marketChangePct": -2.081235313863705,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -672,7 +672,7 @@
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.062133,
       "lastPrice": 37.42,
-      "lastPriceAt": "2026-09-09T14:53:09+08:00",
+      "lastPriceAt": "2026-09-09T14:53:38+08:00",
       "missingRadarCount": 4,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -709,7 +709,7 @@
       "currentWeightPct": 0.56,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260909145251",
+      "valuationQuoteAt": "20260909145333",
       "marketChangePct": 5.289814293753525,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
@@ -7254,19 +7254,33 @@
       "cumulativeNav": 1.03871569,
       "cumulativeReturnPct": 3.8716,
       "radarCapturedAt": "2026-09-09T14:41:14+08:00"
+    },
+    {
+      "timestamp": "2026-09-09T14:53:38+08:00",
+      "date": "2026-09-09",
+      "time": "14:53:38",
+      "nav": 20075414.68,
+      "cash": 2819426.68,
+      "marketValue": 17255988.0,
+      "positionCount": 11,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.03794574,
+      "cumulativeNav": 1.03794574,
+      "cumulativeReturnPct": 3.7946,
+      "radarCapturedAt": "2026-09-09T14:41:14+08:00"
     }
   ],
   "performanceReport": {
     "valuation": {
       "method": "UNIT_NAV_SUBSCRIPTION_REDEMPTION",
-      "unitNav": 1.038716,
-      "cumulativeNav": 1.038716,
+      "unitNav": 1.037946,
+      "cumulativeNav": 1.037946,
       "fundUnits": 19341487.5886677,
       "netSubscriptions": 19000000.0,
       "noteZh": "增资按增资前单位净值申购新增份额，单位净值和历史收益不重置。"
     },
     "returns": {
-      "cumulativeReturnPct": 3.8716,
+      "cumulativeReturnPct": 3.7946,
       "daily": [
         {
           "date": "2026-09-07",
@@ -7323,23 +7337,23 @@
       "closeVerificationNoteZh": "仅使用确认的日终估值；旧版盘中替代收盘统计另列保留"
     },
     "exposure": {
-      "grossExposurePct": 85.97,
-      "netExposurePct": 85.97,
-      "cashPct": 14.03,
-      "top1ConcentrationPct": 17.22,
-      "top5ConcentrationPct": 57.03,
+      "grossExposurePct": 85.96,
+      "netExposurePct": 85.96,
+      "cashPct": 14.04,
+      "top1ConcentrationPct": 17.24,
+      "top5ConcentrationPct": 57.0,
       "sectorExposure": [
         {
           "sector": "通信终端及配件",
-          "weightPct": 24.32
+          "weightPct": 24.35
         },
         {
           "sector": "跨境电商",
-          "weightPct": 24.15
+          "weightPct": 24.1
         },
         {
           "sector": "传媒",
-          "weightPct": 23.57
+          "weightPct": 23.58
         },
         {
           "sector": "租售同权",
@@ -7368,7 +7382,7 @@
       "partialFillCount": 9,
       "averageSlippageBps": 6.758,
       "grossTradedAmount": 25678753.0,
-      "turnoverPctOfCurrentAssets": 127.817,
+      "turnoverPctOfCurrentAssets": 127.911,
       "recentRejections": [
         {
           "timestamp": "2026-09-04T14:34:41+08:00",
@@ -7616,11 +7630,13 @@
     "rebalance": "10:00–10:30、14:30–14:50普通成交；目标连续3个不同快照确认；调仓差额不足3个百分点不交易（首次小仓和已确认未成交余量除外）；普通双边换手≤20%。",
     "stop": "1.5×ATR14/价格，距离限制4%–8%；ATR缺失保守4%并标注降级。盈利8%启动2×ATR移动保护；峰值盈利15%/25%后回撤距离上限收紧至5%/3%，风险线只收紧不放宽。",
     "profit": "主动止盈：首次获得完整日线时冻结目标一=max(20日高点,风险基准×1.08)，目标二=max(目标一×1.05,风险基准×1.15)。进入目标99%区间并经3个间隔3–10分钟快照确认滞涨回落≥0.2%，且当前盈利≥5%/10%，分别减1/3及剩余1/2；每档一次、每天一档。保护性卖出不等普通窗口/换手额度，保留T+1及成交限制。止盈当日禁止回补，已有T回补取消；参数待前向验证。",
+    "execution": "持仓保护与慢证据采集独立运行；证据发布后触发交易检查，单一账本写入。缺少新鲜个股行情不假设成交；慢证据不足只阻止新增风险。",
+    "defensive": "防守大盘仓位上限经2个间隔至少60秒的新鲜大盘快照确认后，立即分批降至上限，不受个股观察期、普通窗口及20%普通换手额度限制；指数急跌等紧急风险维持直接降仓。重复快照不累加；T+1/跌停/容量受限保留未成交数量。",
     "risk": "当日单位净值-1.5%停买，-2.5%总仓位目标降低25%；已确认日终净值回撤-5%仓位上限减半，-8%暂停新仓至少5个真实交易日并等待复核。",
     "t": "主策略买卖优先；做T仅优化持仓期间成本，不延长持有。策略减仓/退出立即终止旧T回补，主策略确认买入不等待T配对。仅模拟先卖后买；每股每日最多1组，≤昨日底仓20%且≤净值1%。仅震荡且冲高转弱时卖，回落企稳才买回。强趋势、退出风险、缺行情、价差不足覆盖双边成本时不做T。未买回/部分买回也计入机会损益。",
     "lowPoint": "判断相对买入区间，不宣称预测最低点：价格回撤接近20日均线/突破位，同时连续快照不再创新低并回升，且板块与资金未失效。"
   },
-  "legacyReportedMaxDrawdownPct": -2.0015,
+  "legacyReportedMaxDrawdownPct": -2.0741,
   "legacyDailyPerformance": [
     {
       "date": "2026-08-20",
@@ -7679,14 +7695,14 @@
     },
     {
       "date": "2026-09-09",
-      "closeUnitNav": 1.038716,
-      "closeCumulativeNav": 1.038716,
-      "cumulativeReturnPct": 3.8716,
-      "dailyReturnPct": -2.0015,
-      "periodReturnPct": -2.0015,
+      "closeUnitNav": 1.037946,
+      "closeCumulativeNav": 1.037946,
+      "cumulativeReturnPct": 3.7946,
+      "dailyReturnPct": -2.0741,
+      "periodReturnPct": -2.0741,
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
-      "pointCount": 31
+      "pointCount": 32
     }
   ],
   "selection45": {
@@ -7710,12 +7726,15 @@
       "cap": 0.25,
       "allowNew": false,
       "date": "2026-09-09",
-      "asOf": "2026-09-09T14:53:09+08:00",
-      "dailyUnitReturnPct": -2.0014738521719644,
+      "asOf": "2026-09-09T14:53:38+08:00",
+      "dailyUnitReturnPct": -2.074115447878988,
       "confirmedCloseDrawdownPct": 0.0,
       "dailyRiskDataReady": true,
       "paused": false,
-      "forceReduction": false
+      "defensiveConfirmed": false,
+      "defensiveConfirmations": 1,
+      "forceReduction": false,
+      "executionPolicyZh": "风险独立检查；防守大盘2个至少间隔60秒的新快照确认后立即分批降至上限，不等普通窗口和换手额度"
     },
     "parameters": {
       "singleLimit": 0.08,
@@ -7749,7 +7768,7 @@
         "name": "德龙激光",
         "sector": "激光设备",
         "score": 85.36,
-        "referencePrice": 66.79,
+        "referencePrice": 66.82,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分67；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -7779,14 +7798,14 @@
           "volumeRatio5to20": 1.8622086945410972
         },
         "rejections": [
-          "5日相对板块扩张超过5个百分点",
           "双源价格偏差超过0.3%或缺数",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.18181818181818182,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -7795,8 +7814,8 @@
           "resistanceReference": 66.94,
           "thesisZh": "提前分67；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
-            "5日相对板块扩张超过5个百分点",
             "双源价格偏差超过0.3%或缺数",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -7810,7 +7829,7 @@
         "name": "招商南油",
         "sector": "航运",
         "score": 84.13,
-        "referencePrice": 4.8,
+        "referencePrice": 4.82,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分63；主线确认中+5；形成分强+4；资金正向+3；资金评分高+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -7840,15 +7859,15 @@
           "volumeRatio5to20": 1.2897064968585004
         },
         "rejections": [
-          "5日相对板块扩张超过5个百分点",
           "双源价格偏差超过0.3%或缺数",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.3,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -7857,9 +7876,9 @@
           "resistanceReference": 4.7,
           "thesisZh": "提前分63；主线确认中+5；形成分强+4；资金正向+3；资金评分高+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
-            "5日相对板块扩张超过5个百分点",
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -7873,7 +7892,7 @@
         "name": "海峡股份",
         "sector": "航运",
         "score": 78.2,
-        "referencePrice": 7.46,
+        "referencePrice": 7.44,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分60；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -7906,12 +7925,13 @@
         "rejections": [
           "双源价格偏差超过0.3%或缺数",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.25,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -7922,6 +7942,7 @@
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -7935,9 +7956,9 @@
         "name": "锦江航运",
         "sector": "航运",
         "score": 77.18,
-        "referencePrice": 13.09,
+        "referencePrice": 13.11,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分59；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分59；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -7948,7 +7969,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -7969,26 +7990,28 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
-          "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照"
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "第二行情缺失/过期"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.35,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 13.48,
-          "thesisZh": "提前分59；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分59；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
-            "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照"
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "第二行情缺失/过期"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
@@ -8030,15 +8053,15 @@
           "volumeRatio5to20": 1.4711948532983359
         },
         "rejections": [
-          "5日相对板块扩张超过5个百分点",
           "双源价格偏差超过0.3%或缺数",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.5,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8047,9 +8070,9 @@
           "resistanceReference": 10.49,
           "thesisZh": "提前分62；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
-            "5日相对板块扩张超过5个百分点",
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8096,12 +8119,13 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.5454545454545454,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8113,6 +8137,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8126,7 +8151,7 @@
         "name": "杰普特",
         "sector": "激光设备",
         "score": 76.27,
-        "referencePrice": 396.25,
+        "referencePrice": 396.31,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分61；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -8159,12 +8184,13 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.6363636363636364,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8176,6 +8202,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8189,7 +8216,7 @@
         "name": "凤凰航运",
         "sector": "航运",
         "score": 74.76,
-        "referencePrice": 4.52,
+        "referencePrice": 4.51,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分57；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -8221,12 +8248,13 @@
         "rejections": [
           "双源价格偏差超过0.3%或缺数",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.4,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8237,6 +8265,7 @@
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8250,9 +8279,9 @@
         "name": "兴通股份",
         "sector": "航运",
         "score": 74.61,
-        "referencePrice": 15.02,
+        "referencePrice": 15.01,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分57；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分57；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -8263,7 +8292,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -8283,25 +8312,27 @@
           "ADV20不足20个完整交易日",
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
-          "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照"
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "第二行情缺失/过期"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.2,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 14.76,
-          "thesisZh": "提前分57；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分57；主线确认中+5；形成分强+4；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
-            "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照"
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "第二行情缺失/过期"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
@@ -8347,12 +8378,13 @@
           "ADV20不足20个完整交易日",
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.18181818181818182,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8364,6 +8396,7 @@
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8410,12 +8443,13 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.36363636363636365,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8427,6 +8461,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8475,12 +8510,13 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 4,
         "sectorRank": 0.25,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8493,6 +8529,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8539,12 +8576,13 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.45454545454545453,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8556,6 +8594,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8569,7 +8608,7 @@
         "name": "锐科激光",
         "sector": "激光设备",
         "score": 69.38,
-        "referencePrice": 41.54,
+        "referencePrice": 41.52,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分57；主线确认中+5；形成分强+4；价格开始扩张+1；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -8601,13 +8640,14 @@
         "rejections": [
           "双源价格偏差超过0.3%或缺数",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.45454545454545453,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8618,6 +8658,7 @@
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
@@ -8632,7 +8673,7 @@
         "name": "黔源电力",
         "sector": "水力发电",
         "score": 68.82,
-        "referencePrice": 19.44,
+        "referencePrice": 19.42,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分55；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
@@ -8665,12 +8706,13 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.2727272727272727,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8682,6 +8724,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8695,7 +8738,7 @@
         "name": "博瑞传播",
         "sector": "教育运营及其他",
         "score": 67.46,
-        "referencePrice": 4.67,
+        "referencePrice": 4.68,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分53；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
@@ -8727,12 +8770,13 @@
         "rejections": [
           "双源价格偏差超过0.3%或缺数",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": null,
         "sectorRank": null,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8743,6 +8787,7 @@
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -8756,9 +8801,9 @@
         "name": "中国银行",
         "sector": "国有大型银行Ⅲ",
         "score": 66.65,
-        "referencePrice": 6.44,
+        "referencePrice": 6.43,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分53；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分53；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
         "targetWeightPct": 2.5,
         "stage": "EMERGING",
@@ -8769,7 +8814,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -8789,25 +8834,27 @@
           "ADV20不足20个完整交易日",
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
-          "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照"
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "第二行情缺失/过期"
         ],
         "rankSampleCount": 6,
         "sectorRank": 0.16666666666666666,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 6.73,
-          "thesisZh": "提前分53；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分53；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
-            "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照"
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "第二行情缺失/过期"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
@@ -8819,7 +8866,7 @@
         "name": "英诺激光",
         "sector": "激光设备",
         "score": 65.97,
-        "referencePrice": 77.82,
+        "referencePrice": 77.86,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分55；主线确认中+5；形成分强+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -8853,13 +8900,14 @@
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.2727272727272727,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -8872,6 +8920,7 @@
             "完整5/20日成交额量比未通过1.2–2.5",
             "当日涨幅已超过提前介入上限",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
@@ -8888,7 +8937,7 @@
         "score": 65.45,
         "referencePrice": 4.64,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -8899,7 +8948,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -8920,26 +8969,28 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
-          "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照"
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "第二行情缺失/过期"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.55,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 4.77,
-          "thesisZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分50；主线确认中+5；形成分强+4；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
-            "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照"
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "第二行情缺失/过期"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
@@ -8953,7 +9004,7 @@
         "score": 63.85,
         "referencePrice": 79.51,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分55；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分55；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -8964,7 +9015,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -8981,33 +9032,33 @@
           "volumeRatio5to20": null
         },
         "rejections": [
-          "5日相对板块扩张超过5个百分点",
           "ADV20不足20个完整交易日",
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.7272727272727273,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 79.65,
-          "thesisZh": "提前分55；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分55；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
-            "5日相对板块扩张超过5个百分点",
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -9020,7 +9071,7 @@
         "name": "华工科技",
         "sector": "激光设备",
         "score": 63.34,
-        "referencePrice": 108.79,
+        "referencePrice": 108.81,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分46；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -9054,6 +9105,7 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
@@ -9062,7 +9114,7 @@
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.09090909090909091,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -9074,6 +9126,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -9123,13 +9176,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.6,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -9141,6 +9195,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -9155,9 +9210,9 @@
         "name": "宁波远洋",
         "sector": "航运",
         "score": 62.57,
-        "referencePrice": 8.76,
+        "referencePrice": 8.75,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分51；主线确认中+5；形成分强+4；价格开始扩张+1；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分51；主线确认中+5；形成分强+4；价格开始扩张+1；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -9168,7 +9223,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -9189,29 +9244,31 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.45,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 8.5,
-          "thesisZh": "提前分51；主线确认中+5；形成分强+4；价格开始扩张+1；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分51；主线确认中+5；形成分强+4；价格开始扩张+1；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -9224,7 +9281,7 @@
         "name": "华能水电",
         "sector": "水力发电",
         "score": 62.45,
-        "referencePrice": 9.75,
+        "referencePrice": 9.74,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分51；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
@@ -9257,13 +9314,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.5454545454545454,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -9275,6 +9333,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -9289,7 +9348,7 @@
         "name": "海信家电",
         "sector": "空调",
         "score": 61.4,
-        "referencePrice": 27.96,
+        "referencePrice": 27.97,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分47；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
@@ -9323,13 +9382,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 4,
         "sectorRank": 0.5,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -9342,6 +9402,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -9356,9 +9417,9 @@
         "name": "农业银行",
         "sector": "国有大型银行Ⅲ",
         "score": 60.31,
-        "referencePrice": 6.83,
+        "referencePrice": 6.82,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
         "targetWeightPct": 2.5,
         "stage": "EMERGING",
@@ -9369,7 +9430,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -9390,27 +9451,29 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 6,
         "sectorRank": 0.3333333333333333,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 7.1,
-          "thesisZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -9423,7 +9486,7 @@
         "name": "大族激光",
         "sector": "激光设备",
         "score": 59.82,
-        "referencePrice": 94.86,
+        "referencePrice": 94.78,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分55；主线确认中+5；形成分强+4；资金转负-6；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -9457,13 +9520,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.8181818181818182,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -9475,6 +9539,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -9489,9 +9554,9 @@
         "name": "工商银行",
         "sector": "国有大型银行Ⅲ",
         "score": 59.54,
-        "referencePrice": 8.01,
+        "referencePrice": 8.02,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
         "targetWeightPct": 2.5,
         "stage": "EMERGING",
@@ -9502,7 +9567,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -9523,27 +9588,29 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 6,
         "sectorRank": 0.6666666666666666,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 8.29,
-          "thesisZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -9558,7 +9625,7 @@
         "score": 59.48,
         "referencePrice": 10.84,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分48；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分48；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
         "targetWeightPct": 2.5,
         "stage": "EMERGING",
@@ -9569,7 +9636,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -9589,26 +9656,28 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 6,
         "sectorRank": 0.5,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 11.23,
-          "thesisZh": "提前分48；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分48；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -9651,9 +9720,9 @@
           "volumeRatio5to20": 1.8553532504537125
         },
         "rejections": [
-          "5日相对板块扩张超过5个百分点",
           "双源价格偏差超过0.3%或缺数",
           "当日涨幅已超过提前介入上限",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
@@ -9662,7 +9731,7 @@
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.05,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -9671,9 +9740,9 @@
           "resistanceReference": 15.47,
           "thesisZh": "提前分41；主线确认中+5；形成分强+4；资金强度高+5；资金评分高+3；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
-            "5日相对板块扩张超过5个百分点",
             "双源价格偏差超过0.3%或缺数",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -9723,6 +9792,7 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
@@ -9731,7 +9801,7 @@
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.1,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -9743,6 +9813,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -9759,9 +9830,9 @@
         "name": "交通银行",
         "sector": "国有大型银行Ⅲ",
         "score": 56.9,
-        "referencePrice": 7.31,
+        "referencePrice": 7.3,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分46；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分46；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
         "targetWeightPct": 2.5,
         "stage": "EMERGING",
@@ -9772,7 +9843,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -9792,26 +9863,28 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 6,
         "sectorRank": 0.8333333333333334,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 7.51,
-          "thesisZh": "提前分46；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分46；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -9826,7 +9899,7 @@
         "score": 56.81,
         "referencePrice": 20.78,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分48；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分48；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -9837,7 +9910,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -9857,26 +9930,28 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.9090909090909091,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 21.99,
-          "thesisZh": "提前分48；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分48；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -9889,7 +9964,7 @@
         "name": "美的集团",
         "sector": "空调",
         "score": 56.28,
-        "referencePrice": 85.93,
+        "referencePrice": 85.95,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分45；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
@@ -9923,13 +9998,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 4,
         "sectorRank": 0.75,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -9941,6 +10017,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -9957,7 +10034,7 @@
         "score": 56.02,
         "referencePrice": 3.19,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -9968,7 +10045,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -9989,27 +10066,29 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.7,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 3.28,
-          "thesisZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分47；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -10055,13 +10134,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.85,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10073,6 +10153,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -10089,7 +10170,7 @@
         "score": 54.73,
         "referencePrice": 5.41,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分44；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分44；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
         "targetWeightPct": 2.5,
         "stage": "EMERGING",
@@ -10100,7 +10181,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -10119,25 +10200,27 @@
         "rejections": [
           "双源价格偏差超过0.3%或缺数",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 6,
         "sectorRank": 1.0,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 5.61,
-          "thesisZh": "提前分44；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分44；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -10150,7 +10233,7 @@
         "name": "湖南发展",
         "sector": "水力发电",
         "score": 53.27,
-        "referencePrice": 13.39,
+        "referencePrice": 13.38,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分42；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
@@ -10184,13 +10267,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.8181818181818182,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10202,6 +10286,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -10249,13 +10334,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.7272727272727273,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10267,6 +10353,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -10281,9 +10368,9 @@
         "name": "中远海发",
         "sector": "航运",
         "score": 52.02,
-        "referencePrice": 2.53,
+        "referencePrice": 2.52,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分43；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分43；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -10294,7 +10381,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -10314,26 +10401,28 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.75,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 2.49,
-          "thesisZh": "提前分43；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分43；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -10379,13 +10468,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.6363636363636364,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10397,6 +10487,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -10413,7 +10504,7 @@
         "score": 50.58,
         "referencePrice": 3.59,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分42；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分42；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -10424,7 +10515,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -10444,26 +10535,28 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 20,
         "sectorRank": 1.0,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 3.54,
-          "thesisZh": "提前分42；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分42；主线确认中+5；形成分强+4；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -10476,7 +10569,7 @@
         "name": "中远海能",
         "sector": "航运",
         "score": 48.24,
-        "referencePrice": 21.44,
+        "referencePrice": 21.45,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分36；主线确认中+5；形成分强+4；资金正向+3；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -10508,6 +10601,7 @@
         "rejections": [
           "双源价格偏差超过0.3%或缺数",
           "当日涨幅已超过提前介入上限",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
@@ -10516,7 +10610,7 @@
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.15,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10527,6 +10621,7 @@
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -10576,6 +10671,7 @@
         "rejections": [
           "双源价格偏差超过0.3%或缺数",
           "当日涨幅已超过提前介入上限",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
@@ -10584,7 +10680,7 @@
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.09090909090909091,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10595,6 +10691,7 @@
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -10611,7 +10708,7 @@
         "name": "梅雁吉祥",
         "sector": "水力发电",
         "score": 43.49,
-        "referencePrice": 2.89,
+        "referencePrice": 2.9,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分38；主线潜在形成+3；形成分改善+2；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
@@ -10644,13 +10741,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.9090909090909091,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10662,6 +10760,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -10676,7 +10775,7 @@
         "name": "电投水电",
         "sector": "水力发电",
         "score": 41.47,
-        "referencePrice": 12.0,
+        "referencePrice": 11.99,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分36；主线潜在形成+3；形成分改善+2；资金转负-6；价格尚未充分扩张+4；追高风险低+2；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.025,
@@ -10709,13 +10808,14 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
         ],
         "rankSampleCount": 11,
         "sectorRank": 1.0,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10727,6 +10827,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -10741,7 +10842,7 @@
         "name": "中远海特",
         "sector": "航运",
         "score": 34.23,
-        "referencePrice": 11.78,
+        "referencePrice": 11.75,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分35；主线确认中+5；形成分强+4；资金转负-6；价格开始扩张+1；追高风险中-5；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -10774,6 +10875,7 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
@@ -10781,7 +10883,7 @@
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.9,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10793,6 +10895,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -10808,9 +10911,9 @@
         "name": "盛航股份",
         "sector": "航运",
         "score": 32.92,
-        "referencePrice": 15.26,
+        "referencePrice": 15.27,
         "priceSource": "当时双源确认行情",
-        "reasonZh": "提前分34；主线确认中+5；形成分强+4；资金转负-6；价格开始扩张+1；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+        "reasonZh": "提前分34；主线确认中+5；形成分强+4；资金转负-6；价格开始扩张+1；追高风险中-5；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
         "targetWeightPct": 4.0,
         "stage": "CONFIRMING",
@@ -10821,7 +10924,7 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -10841,28 +10944,30 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
+          "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
         "rankSampleCount": 20,
         "sectorRank": 0.8,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
           "buyZoneHigh": null,
           "initialProtectionPrice": null,
           "resistanceReference": 15.13,
-          "thesisZh": "提前分34；主线确认中+5；形成分强+4；资金转负-6；价格开始扩张+1；追高风险中-5；等待完整日线与至少3个有效盘中快照",
+          "thesisZh": "提前分34；主线确认中+5；形成分强+4；资金转负-6；价格开始扩张+1；追高风险中-5；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
@@ -10875,7 +10980,7 @@
         "name": "海目星",
         "sector": "激光设备",
         "score": 28.86,
-        "referencePrice": 58.87,
+        "referencePrice": 58.91,
         "priceSource": "当时双源确认行情",
         "reasonZh": "提前分26；主线确认中+5；形成分强+4；资金转负-6；盘中样本间隔不足或断档，等待连续确认",
         "targetWeight": 0.04,
@@ -10909,6 +11014,7 @@
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
@@ -10917,7 +11023,7 @@
         ],
         "rankSampleCount": 11,
         "sectorRank": 0.36363636363636365,
-        "dataAt": "2026-09-09T14:53:09+08:00",
+        "dataAt": "2026-09-09T14:53:38+08:00",
         "decisionPlan": {
           "actionZh": "等待条件",
           "buyZoneLow": null,
@@ -10930,6 +11036,7 @@
             "完整5/20日成交额量比未通过1.2–2.5",
             "当日涨幅已超过提前介入上限",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -11233,7 +11340,7 @@
   "strategyResearch": {
     "schemaVersion": 1,
     "version": "v4.6-forward-evidence",
-    "updatedAt": "2026-09-09T14:53:09.121930+08:00",
+    "updatedAt": "2026-09-09T14:53:38.884269+08:00",
     "activatedAt": "2026-09-06T02:38:25.980418+08:00",
     "objectiveZh": "提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。",
     "productionStatusZh": "策略参数或代码已变化：暂停新增冻结，需建立新版本研究",
@@ -11322,7 +11429,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-09T14:53:09.121930+08:00",
+        "checkedAt": "2026-09-09T14:53:38.884269+08:00",
         "reasonZh": "仅统计本次启用后的完整成员样本；不等于2017年至今历史覆盖审计。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -11332,7 +11439,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-09T14:53:09.121930+08:00",
+        "checkedAt": "2026-09-09T14:53:38.884269+08:00",
         "reasonZh": "使用首次观察时保存的成员；后续不以今天成员替换。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -11342,7 +11449,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-09T14:53:09.121930+08:00",
+        "checkedAt": "2026-09-09T14:53:38.884269+08:00",
         "reasonZh": "两融/ETF必须具备真实availableAt且不晚于决策；仅写T+1不能通过。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -11352,7 +11459,7 @@
         "status": "PENDING_REVIEW",
         "completed": 0,
         "total": 60,
-        "checkedAt": "2026-09-09T14:53:09.121930+08:00",
+        "checkedAt": "2026-09-09T14:53:38.884269+08:00",
         "reasonZh": "按信号日汇总，重叠窗口仍相关；需补除权、可成交成本、全市场基准与独立样本外验证。",
         "evidencePath": "astock_ai_portfolio/state.json#research46"
       },
@@ -11362,7 +11469,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-09T14:53:09.121930+08:00",
+        "checkedAt": "2026-09-09T14:53:38.884269+08:00",
         "reasonZh": "校验首次冻结内容哈希；仅证明未改写，不等于策略有效。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       }
@@ -11402,9 +11509,9 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "34320882320-1",
-    "lastRunAt": "2026-09-09T14:53:09+08:00",
-    "lastSuccessAt": "2026-09-09T14:53:09+08:00",
+    "cycleId": "34321126952-1",
+    "lastRunAt": "2026-09-09T14:53:38+08:00",
+    "lastSuccessAt": "2026-09-09T14:53:38+08:00",
     "lastTradeAt": "2026-09-09T13:31:36+08:00",
     "status": "NO_ACTION",
     "statusZh": "本轮未成交；大盘或组合风险条件不允许新增买入",
@@ -11412,7 +11519,7 @@
     "sessionOpen": true,
     "radarCapturedAt": "2026-09-09T14:41:14+08:00",
     "radarFresh": true,
-    "radarAgeSeconds": 715.1,
+    "radarAgeSeconds": 744.9,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -11446,8 +11553,8 @@
         {
           "code": "688170",
           "reasons": [
-            "5日相对板块扩张超过5个百分点",
             "双源价格偏差超过0.3%或缺数",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11456,9 +11563,9 @@
         {
           "code": "601975",
           "reasons": [
-            "5日相对板块扩张超过5个百分点",
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11469,6 +11576,7 @@
           "reasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11481,17 +11589,18 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
-            "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照"
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "第二行情缺失/过期"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
         },
         {
           "code": "920571",
           "reasons": [
-            "5日相对板块扩张超过5个百分点",
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11503,6 +11612,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11514,6 +11624,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11524,6 +11635,7 @@
           "reasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11535,8 +11647,9 @@
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
-            "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照"
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "第二行情缺失/过期"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
         },
@@ -11546,6 +11659,7 @@
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11557,6 +11671,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11569,6 +11684,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11580,6 +11696,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11590,6 +11707,7 @@
           "reasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
@@ -11602,6 +11720,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11612,6 +11731,7 @@
           "reasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
           ],
@@ -11623,8 +11743,9 @@
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
-            "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照"
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "第二行情缺失/过期"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
         },
@@ -11635,6 +11756,7 @@
             "完整5/20日成交额量比未通过1.2–2.5",
             "当日涨幅已超过提前介入上限",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期"
@@ -11648,21 +11770,22 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
-            "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照"
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "第二行情缺失/过期"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
         },
         {
           "code": "688646",
           "reasons": [
-            "5日相对板块扩张超过5个百分点",
             "ADV20不足20个完整交易日",
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11673,6 +11796,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -11687,6 +11811,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11700,9 +11825,10 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11713,6 +11839,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11726,6 +11853,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11739,8 +11867,9 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11751,6 +11880,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11764,8 +11894,9 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11776,8 +11907,9 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11785,9 +11917,9 @@
         {
           "code": "603162",
           "reasons": [
-            "5日相对板块扩张超过5个百分点",
             "双源价格偏差超过0.3%或缺数",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -11802,6 +11934,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -11816,8 +11949,9 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11828,8 +11962,9 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11840,6 +11975,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11853,8 +11989,9 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11865,6 +12002,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11876,8 +12014,9 @@
           "reasons": [
             "双源价格偏差超过0.3%或缺数",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11888,6 +12027,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11900,6 +12040,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11912,8 +12053,9 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11924,6 +12066,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11936,8 +12079,9 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -11947,6 +12091,7 @@
           "reasons": [
             "双源价格偏差超过0.3%或缺数",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -11960,6 +12105,7 @@
           "reasons": [
             "双源价格偏差超过0.3%或缺数",
             "当日涨幅已超过提前介入上限",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -11974,6 +12120,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11986,6 +12133,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
             "综合分不足64"
@@ -11998,6 +12146,7 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -12011,9 +12160,10 @@
             "双源价格偏差超过0.3%或缺数",
             "完整5/20日成交额量比未通过1.2–2.5",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
+            "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
-            "等待完整日线与至少3个有效盘中快照",
             "综合分不足64"
           ],
           "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
@@ -12025,6 +12175,7 @@
             "完整5/20日成交额量比未通过1.2–2.5",
             "当日涨幅已超过提前介入上限",
             "未验证板块完整样本前20%",
+            "板块5日收益缺失，无法检查相对涨幅",
             "涨跌幅超出保守买入区间",
             "盘中样本间隔不足或断档，等待连续确认",
             "第二行情缺失/过期",
@@ -12039,37 +12190,7 @@
   "capitalMigrationThisCycle": null,
   "dataFreshness": {
     "radarFresh": true,
-    "radarAgeSeconds": 715.1,
+    "radarAgeSeconds": 744.9,
     "maxAllowedAgeSeconds": 900
-  },
-  "benchmarkComparison": {
-    "startedAt": "2026-09-03T23:23:37+08:00",
-    "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
-    "portfolioMetric": "UNIT_NAV_RETURN",
-    "portfolioReturnPct": 0.272,
-    "indexes": [
-      {
-        "name": "沪深300",
-        "returnPct": 0.461,
-        "alphaPct": -0.189
-      },
-      {
-        "name": "中证A500",
-        "returnPct": 0.398,
-        "alphaPct": -0.126
-      },
-      {
-        "name": "创业板指",
-        "returnPct": 1.282,
-        "alphaPct": -1.01
-      }
-    ],
-    "candidatePool": {
-      "name": "原始候选池固定等权",
-      "memberCount": 30,
-      "returnPct": -1.625,
-      "alphaPct": 1.897,
-      "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
-    }
   }
 }
