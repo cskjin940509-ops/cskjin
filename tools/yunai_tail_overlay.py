@@ -113,17 +113,21 @@ def fetch_stock_overlay(codes):
             out[c]['unsupportedMarket']='BSE'
         else:
             supported.append(c)
-    for i in range(0,len(supported),10):
-        batch=supported[i:i+10]
-        st,_,p=post(PREFIX+'/real-time-quotes',{'symbols':batch})
-        if 200<=st<300: apply_quote(out,batch,p)
-        for c in batch:
-            if not out[c]['quoteOk']:
-                s,_,one=post(PREFIX+'/real-time-quotes',{'symbols':[c]})
-                if 200<=s<300: apply_quote(out,[c],one)
-        st,_,p=post(PREFIX+'/capital-distribution',{'symbols':batch})
-        if 200<=st<300: apply_capital(out,batch,p)
-        # Empty capital response is valid coverage state; do not fan out retries.
+    # Independent batches avoid serial 40-symbol timeout cascades.
+    from concurrent.futures import ThreadPoolExecutor
+    batches = [supported[i:i+10] for i in range(0, len(supported), 10)]
+    def request(task):
+        kind, batch = task
+        status, _, payload = post(PREFIX + '/' + kind, {'symbols': batch})
+        return kind, batch, status, payload
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        tasks = [(kind, batch) for batch in batches for kind in ('real-time-quotes', 'capital-distribution')]
+        for kind, batch, status, payload in pool.map(request, tasks):
+            if 200 <= status < 300:
+                (apply_quote if kind == 'real-time-quotes' else apply_capital)(out, batch, payload)
+        missing = [('real-time-quotes', [c]) for c in supported if not out[c]['quoteOk']]
+        for _, batch, status, payload in pool.map(request, missing):
+            if 200 <= status < 300: apply_quote(out, batch, payload)
     return out
 
 def fetch_daily_kline(code,lmt=80):

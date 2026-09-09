@@ -22,6 +22,7 @@ CHANNELS = {
     "gateway": ("astock_gateway", "astock_snapshots/index.json"),
     "factors": ("astock_factors", "astock_premarket"),
     "radar": ("astock_radar", "astock_ai_portfolio", "astock_factors"),
+    "radar-evidence": ("astock_radar", "astock_selection_evidence"),
     "portfolio": ("astock_ai_portfolio",),
     "trade-plan": ("astock_trade",),
     "execution": ("astock_execution",),
@@ -36,6 +37,7 @@ CHANNELS = {
 # Directed acyclic graph: no consumer dispatches back to its producer.
 # Core radar -> portfolio calculation already runs in the same process chain.
 DEPENDENTS = {
+    "radar-evidence": ("run-ai-shadow-auto.yml",),
     "gateway": ("run-ai-shadow-auto.yml", "run-trade-plan.yml",
                 "run-execution-assistant.yml", "run-tail-decision.yml", "run-daily-strategy.yml"),
     "factors": ("run-intraday-radar.yml",),

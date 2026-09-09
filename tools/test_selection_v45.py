@@ -35,7 +35,7 @@ class SelectionTests(unittest.TestCase):
     def refresh(self, price=None):
         price = price or self.prices['000001']
         engine.CONTEXT.update(market={'state': 'NEUTRAL', 'cap': .6, 'allowNew': True},
-            radar={'date': self.now.date().isoformat(), 'mainlines': [{'name': '银行', 'stage': 'CONFIRMING', 'changePct': .2, 'breadthPct': 70}],
+            radar={'date': self.now.date().isoformat(), 'capturedAt': self.now.isoformat(), 'mainlines': [{'name': '银行', 'stage': 'CONFIRMING', 'changePct': .2, 'breadthPct': 70}],
                    'stocks': {'000001': {'code': '000001', 'name': '测试', 'sector': '银行', 'price': price,
                      'mainFlowPct': 2, 'yunai': {'quoteOk': True, 'price': price, 'quoteTime': self.now.isoformat()}}}},
             quotes={'000001': {'price': price, 'prevClose': 10., 'quoteTime': self.now.strftime('%Y%m%d%H%M%S'),
