@@ -6,7 +6,7 @@ from statistics import mean
 from zoneinfo import ZoneInfo
 from shadow_fund_v3 import finite
 
-VERSION = 'v4.9-opportunity-rotation'
+VERSION = 'v5.0-layered-profit'
 CN = ZoneInfo('Asia/Shanghai')
 PARAMETERS = {
     'singleLimit': .08, 'leaderLimit': .10, 'sectorLimit': .25,
@@ -14,6 +14,8 @@ PARAMETERS = {
     'minCompleteHoldingDays': 2, 'targetConfirmations': 3,
     'atrStopMultiple': 1.5, 'trailingAtrMultiple': 2.,
     'stopMin': .04, 'stopMax': .08, 'trailingActivation': .08,
+    'profitTargetMin': .08, 'profitSecondMin': .15, 'profitZoneFraction': .99,
+    'profitStallDrop': .002, 'profitMinReturn': .05,
     'tBaseFraction': .20, 'tNavLimit': .01, 'tMaxPairsPerDay': 1,
     'tMinNetEdge': .003, 'tMaxQuoteGapSeconds': 600,
     'parameterStatus': 'INITIAL_RESEARCH_NOT_OUT_OF_SAMPLE_VALIDATED',
@@ -24,7 +26,8 @@ RULES_ZH = {
     'rotation': '现金不足时择优换仓：新票通过原买入条件及3轮确认；新旧证据完整，新旧优势再经3次间隔至少3分钟确认；评分优势≥10、近20日高点空间增益覆盖实际费用+0.86%滑点+1%余量，新票空间/风险≥1.5且较旧票高0.5。每天最多1项，单项≤净值5%、旧仓50%；先卖后买，15分钟内重新核验，失效保留现金；不绕过风控、T+1与容量。参数待样本外验证，价格空间不是预测收益。',
     'rebalance': '10:00–10:30、14:30–14:50普通成交；目标连续3个不同快照确认；调仓差额不足3个百分点不交易（首次小仓和已确认未成交余量除外）；普通双边换手≤20%。',
     'exit': '掉出候选只停加仓。至少2个完整交易日观察；1日失效观察，2日减半，3日退出；板块2日确认衰退退出。硬止损及组合风险优先，待退出数量不因T+1/跌停/部分成交丢失。',
-    'stop': '1.5×ATR14/价格，距离限制4%–8%；ATR缺失保守4%并标注降级。盈利8%启动2×ATR移动保护，风险线只收紧不放宽。',
+    'stop': '1.5×ATR14/价格，距离限制4%–8%；ATR缺失保守4%并标注降级。盈利8%启动2×ATR移动保护；峰值盈利15%/25%后回撤距离上限收紧至5%/3%，风险线只收紧不放宽。',
+    'profit': '主动止盈：首次获得完整日线时冻结目标一=max(20日高点,风险基准×1.08)，目标二=max(目标一×1.05,风险基准×1.15)。进入目标99%区间并经3个间隔3–10分钟快照确认滞涨回落≥0.2%，且当前盈利≥5%/10%，分别减1/3及剩余1/2；每档一次、每天一档。保护性卖出不等普通窗口/换手额度，保留T+1及成交限制。止盈当日禁止回补，已有T回补取消；参数待前向验证。',
     'risk': '当日单位净值-1.5%停买，-2.5%总仓位目标降低25%；已确认日终净值回撤-5%仓位上限减半，-8%暂停新仓至少5个真实交易日并等待复核。',
     't': '主策略买卖优先；做T仅优化持仓期间成本，不延长持有。策略减仓/退出立即终止旧T回补，主策略确认买入不等待T配对。仅模拟先卖后买；每股每日最多1组，≤昨日底仓20%且≤净值1%。仅震荡且冲高转弱时卖，回落企稳才买回。强趋势、退出风险、缺行情、价差不足覆盖双边成本时不做T。未买回/部分买回也计入机会损益。',
     'lowPoint': '判断相对买入区间，不宣称预测最低点：价格回撤接近20日均线/突破位，同时连续快照不再创新低并回升，且板块与资金未失效。',
@@ -181,6 +184,9 @@ def stop_lines(pos, price, technical):
     trailing = finite(pos.get('trailingStopPrice'), 0)
     if peak >= basis * 1.08:
         trail_distance = min(.08, max(.04, 2 * atr / price)) if atr else .04
+        peak_gain = peak / basis - 1
+        if peak_gain >= .25: trail_distance = min(trail_distance, .03)
+        elif peak_gain >= .15: trail_distance = min(trail_distance, .05)
         trailing = max(trailing, peak * (1 - trail_distance))
     return {'riskBasis': basis, 'hardStopPrice': round(hard, 4), 'peakPrice': peak,
             'trailingStopPrice': round(trailing, 4), 'atrFallback': atr is None,
@@ -231,3 +237,33 @@ def confirmation_samples(samples):
                 # synthesize missing bars or bridge long collection outages.
                 return [a, b, c]
     return samples[-3:]
+
+
+def profit_signal(pos, price, technical, samples, now):
+    """Freeze forward targets; emit at most one proposal per stage, never invent fills."""
+    basis = finite(pos.get('riskBasis'), finite(pos.get('avgCost'), 0))
+    if basis <= 0 or not technical.get('ready') or not finite(technical.get('high20'), 0):
+        return None
+    plan = pos.setdefault('profitPlan50', {})
+    if not plan:
+        first = max(technical['high20'], basis * 1.08)
+        plan.update(activatedAt=now.isoformat(), target1=round(first, 4),
+                    target2=round(max(first * 1.05, basis * 1.15), 4), queuedStages=[])
+    stage = 1 if 1 not in plan['queuedStages'] else 2
+    if stage in plan['queuedStages'] or plan.get('lastQueuedDay') == now.date().isoformat():
+        return None
+    if price < plan['target' + str(stage)] * .99 or price / basis - 1 < (.05 if stage == 1 else .10):
+        return None
+    recent = samples[-3:]
+    if len(recent) != 3: return None
+    times = [stamp(x.get('at')) for x in recent]
+    if any(t is None or t < stamp(plan['activatedAt']) for t in times): return None
+    if not all(180 <= (b-a).total_seconds() <= 600 for a,b in zip(times,times[1:])): return None
+    if not fresh(recent[-1]['at'], now): return None
+    values = [finite(x.get('price'), 0) for x in recent]
+    if min(values) <= 0 or price != values[-1]: return None
+    if values[-1] > values[0] or values[-1] > max(values) * .998: return None
+    qty = int(pos['qty']) // (300 if stage == 1 else 200) * 100
+    if qty <= 0: return None
+    return {'stage': stage, 'qty': qty, 'targetPrice': plan['target' + str(stage)],
+            'samples': recent, 'reasonZh': '目标区间滞涨转弱，主动止盈第%d档' % stage}

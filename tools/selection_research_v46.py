@@ -190,9 +190,11 @@ def holding_plan(pos, pending, quote_ok):
         action, reason = '观察转弱信号', f"连续失效{pos['invalidDayStreak']}日，按既定退出条件处理"
     else:
         action, reason = '继续持有并跟踪', '当前未触发退出；掉出候选名单只停止加仓'
+    plan = pos.get('profitPlan50') or {}
+    profit_text = ('主动止盈目标一 %.4f、目标二 %.4f；进入区间并确认滞涨转弱后分两档兑现；已提交档位 %s。' % (plan['target1'], plan['target2'], plan.get('queuedStages', []))) if plan else '完整日线到达后冻结主动止盈目标。'
     return {'actionZh': action, 'reasonZh': reason,
         'hardStopPrice': pos.get('hardStopPrice'), 'trailingStopPrice': pos.get('trailingStopPrice'),
-        'takeProfitZh': '趋势延续保留底仓；板块过热且资金不跟随分批兑现；移动保护或逻辑失效退出。',
+        'takeProfitZh': profit_text + '趋势延续保留剩余仓位；峰值盈利15%/25%后移动保护距离上限收紧至5%/3%。',
         'tPolicyZh': '震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。'}
 
 
