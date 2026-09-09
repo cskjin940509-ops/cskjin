@@ -60968,7 +60968,8 @@
       "medianChangePct": 0.58,
       "sampleCount": 5209,
       "coreIndexCoverage": "6/6",
-      "coreIndexSource": "腾讯当日收盘快照"
+      "coreIndexSource": "腾讯当日收盘快照",
+      "marketStatusProvider": "Yunai Quant API"
     },
     "boardHeatmap": {
       "industry": [
@@ -63699,16 +63700,16 @@
       "marketStatus": {
         "connected": true,
         "provider": "Yunai Quant API",
-        "checkedAt": "2026-09-08T17:39:38+08:00",
+        "checkedAt": "2026-09-09T09:09:08+08:00",
         "httpStatus": 200,
         "contentType": "application/json",
         "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
-        "responseDigest": "67c4b5f8c662f29e",
+        "responseDigest": "e8ff569f1e6fcfc5",
         "data": [
           {
             "market": "CN",
-            "status": "CLOSING",
-            "marketStatus": "Closed"
+            "status": "NOT_YET_OPEN",
+            "marketStatus": "Not Yet Opened"
           }
         ]
       },
