@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-09-09",
-  "generatedAt": "2026-09-09T17:40:06+08:00",
+  "generatedAt": "2026-09-09T17:40:38+08:00",
   "phase": "LIVE",
   "officialDate": "2026-09-08",
   "officialPlans": [
@@ -78,8 +78,8 @@
           "samples": 4,
           "win5D": 0.5,
           "avg5D": 0.0219,
-          "avgMFE5D": 0.0746,
-          "avgMAE5D": -0.0339
+          "avgMFE5D": 0.0747,
+          "avgMAE5D": -0.034
         }
       },
       "quote": {
@@ -92,22 +92,22 @@
         "quoteTime": "20260909161459"
       },
       "entryZone": [
-        18.694,
-        19.058
+        18.69,
+        19.053
       ],
-      "triggerPrice": 18.869,
-      "stopLoss": 18.124,
-      "takeProfit1": 20.004,
-      "takeProfit2": 20.756,
+      "triggerPrice": 18.864,
+      "stopLoss": 18.119,
+      "takeProfit1": 19.999,
+      "takeProfit2": 20.751,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 18.124",
+      "invalidation": "收盘/有效价格跌破 18.119",
       "reasons": [
         "趋势回踩",
         "形态分 86",
-        "距MA20 +0.55 ATR",
+        "距MA20 +0.56 ATR",
         "主力资金占比 +14.81%"
       ]
     },
@@ -911,55 +911,6 @@
       ]
     },
     {
-      "code": "688621",
-      "name": "阳光诺和",
-      "sector": "医疗研发外包",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "买入候选",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 83.6,
-        "historical": {
-          "samples": 8,
-          "win5D": 0.875,
-          "avg5D": 0.0587,
-          "avgMFE5D": 0.0917,
-          "avgMAE5D": -0.0431
-        }
-      },
-      "quote": {
-        "price": 69.0,
-        "changePct": -1.75,
-        "open": 70.2,
-        "high": 70.2,
-        "low": 68.01,
-        "dayLowToHighPct": 3.22,
-        "quoteTime": "20260909161440"
-      },
-      "entryZone": [
-        67.71,
-        69.078
-      ],
-      "triggerPrice": 68.394,
-      "stopLoss": 64.482,
-      "takeProfit1": 74.262,
-      "takeProfit2": 78.174,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 64.482",
-      "reasons": [
-        "趋势回踩",
-        "形态分 84",
-        "距MA20 +0.44 ATR",
-        "主力资金占比 -1.80%"
-      ]
-    },
-    {
       "code": "000525",
       "name": "红太阳",
       "sector": "农化制品",
@@ -1006,6 +957,55 @@
         "形态分 84",
         "距MA20 +1.80 ATR",
         "主力资金占比 -2.14%"
+      ]
+    },
+    {
+      "code": "688621",
+      "name": "阳光诺和",
+      "sector": "医疗研发外包",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 83.6,
+        "historical": {
+          "samples": 8,
+          "win5D": 0.875,
+          "avg5D": 0.0587,
+          "avgMFE5D": 0.0917,
+          "avgMAE5D": -0.0431
+        }
+      },
+      "quote": {
+        "price": 69.0,
+        "changePct": -1.75,
+        "open": 70.2,
+        "high": 70.2,
+        "low": 68.01,
+        "dayLowToHighPct": 3.22,
+        "quoteTime": "20260909161440"
+      },
+      "entryZone": [
+        67.71,
+        69.078
+      ],
+      "triggerPrice": 68.394,
+      "stopLoss": 64.482,
+      "takeProfit1": 74.262,
+      "takeProfit2": 78.174,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 64.482",
+      "reasons": [
+        "趋势回踩",
+        "形态分 84",
+        "距MA20 +0.44 ATR",
+        "主力资金占比 -1.80%"
       ]
     },
     {
