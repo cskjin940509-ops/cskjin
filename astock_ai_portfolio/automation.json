@@ -7,22 +7,22 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34314417486-1",
-  "lastRunAt": "2026-09-09T13:30:39+08:00",
-  "lastSuccessAt": "2026-09-09T13:30:39+08:00",
-  "lastTradeAt": "2026-09-09T13:30:39+08:00",
+  "cycleId": "34314977493-1",
+  "lastRunAt": "2026-09-09T13:31:36+08:00",
+  "lastSuccessAt": "2026-09-09T13:31:36+08:00",
+  "lastTradeAt": "2026-09-09T13:31:36+08:00",
   "status": "TRADED",
   "statusZh": "后台自动模拟成交1笔",
-  "runSource": "integrated-radar-cycle",
+  "runSource": "dedicated-auto-scheduler",
   "sessionOpen": true,
   "radarCapturedAt": "2026-09-09T13:19:41+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 658.5,
+  "radarAgeSeconds": 715.3,
   "actionsThisCycle": 1,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 1,
-  "ledgerDecisionCount": 43,
-  "positionCount": 12,
+  "ledgerDecisionCount": 44,
+  "positionCount": 11,
   "capitalCapacity": 20000000.0,
   "error": null,
   "knownIncident": {
@@ -39,14 +39,12 @@
       "plans": [],
       "statusZh": "先处理退出和组合风控，不用换仓绕过风险限制"
     },
-    "reasonCode": "PENDING_EXECUTION",
-    "reasonZh": "已有退出信号；300166：部分成交后等待余量执行",
+    "reasonCode": "BLOCKED_EVIDENCE_OR_RISK",
+    "reasonZh": "本轮未成交；大盘快照过期/时间在未来",
     "entryBlocks": [
       "大盘快照过期/时间在未来"
     ],
-    "pendingExits": [
-      "300166：部分成交后等待余量执行"
-    ],
+    "pendingExits": [],
     "candidateCount": 60,
     "rejectedCandidateCount": 60,
     "candidateReasons": [
@@ -142,7 +140,6 @@
           "ADV20不足20个完整交易日",
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期"
         ],
@@ -249,6 +246,15 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
+        "code": "002886",
+        "reasons": [
+          "双源价格偏差超过0.3%或缺数",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "第二行情缺失/过期"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
         "code": "600522",
         "reasons": [
           "双源价格偏差超过0.3%或缺数",
@@ -285,21 +291,11 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "002886",
-        "reasons": [
-          "双源价格偏差超过0.3%或缺数",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "第二行情缺失/过期",
-          "综合分不足64"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
         "code": "000539",
         "reasons": [
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
+          "未验证板块完整样本前20%",
           "盘中样本间隔不足或断档，等待连续确认",
           "第二行情缺失/过期",
           "综合分不足64"
@@ -410,7 +406,6 @@
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
-          "未验证板块完整样本前20%",
           "涨跌幅超出保守买入区间",
           "第二行情缺失/过期",
           "等待完整日线与至少3个有效盘中快照",
