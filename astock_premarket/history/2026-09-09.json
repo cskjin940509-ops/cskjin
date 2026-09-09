@@ -3,7 +3,7 @@
   "version": "v1.0-premarket-prediction-point-in-time",
   "state": "ready",
   "targetDate": "2026-09-09",
-  "generatedAt": "2026-09-09T09:34:18+08:00",
+  "generatedAt": "2026-09-09T09:50:40+08:00",
   "sourceOfficialDate": "2026-09-08",
   "factorDataDate": "2026-09-08",
   "slowMoneyFresh": true,
@@ -32,19 +32,11 @@
       "002470"
     ],
     "B1": [
-      "600470",
       "000713",
       "301230",
-      "603077",
-      "600362",
       "000893"
     ],
-    "B2": [
-      "000737",
-      "300697",
-      "600362",
-      "603993"
-    ],
+    "B2": [],
     "B3": [
       "000737",
       "603077",
@@ -59,28 +51,21 @@
     ],
     "B4": [
       "603077",
-      "000737",
       "600227",
-      "600470",
-      "002312",
-      "600596",
-      "301230",
-      "300697",
-      "600362",
-      "600691"
-    ],
-    "B12": [
-      "600362"
-    ],
-    "B13": [
-      "301230",
-      "600470",
-      "603077"
-    ],
-    "B23": [
       "000737",
-      "603993"
-    ]
+      "600596",
+      "002312",
+      "600691",
+      "600470",
+      "603993",
+      "301230",
+      "002470"
+    ],
+    "B12": [],
+    "B13": [
+      "301230"
+    ],
+    "B23": []
   },
   "historyContext": {
     "updatedAt": "2026-09-08T17:45:08+08:00",
@@ -94,117 +79,18 @@
   "summary": {
     "candidateCount": 15,
     "tierCounts": {
-      "一级优先": 1,
+      "一级优先": 0,
       "二级观察": 2,
-      "等竞价确认": 12
+      "等竞价确认": 13
     },
     "noteZh": "一级优先仍需竞价/开盘确认；若B1/B2尚未更新则不会给出一级优先。"
   },
   "candidates": [
     {
-      "code": "000737",
-      "name": "北方铜业",
-      "sector": "铜",
-      "priorityScore": 74.92,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0",
-        "B2",
-        "B3",
-        "B4",
-        "B23"
-      ],
-      "baseScore": 73.97,
-      "slowCompositeScore": 66.92,
-      "marginScore": 34.62,
-      "etfScore": 59.05,
-      "mainFlowPct": 23.1,
-      "mainlineStage": "EMERGING",
-      "chaseRisk": "HIGH",
-      "previousChangePct": 9.63,
-      "reasonZh": "B23 双因子确认；基础/综合强度 66.9；主线潜在形成；两融评分 35；ETF评分 59",
-      "riskZh": "追高风险高；上一交易日已上涨9.63%",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "603993",
-      "name": "洛阳钼业",
-      "sector": "铜",
-      "priorityScore": 74.73,
-      "tierZh": "一级优先",
-      "memberships": [
-        "B0",
-        "B2",
-        "B3",
-        "B23"
-      ],
-      "baseScore": 62.35,
-      "slowCompositeScore": 53.73,
-      "marginScore": 24.62,
-      "etfScore": 59.05,
-      "mainFlowPct": 14.81,
-      "mainlineStage": "EMERGING",
-      "chaseRisk": "LOW",
-      "previousChangePct": 3.1,
-      "reasonZh": "B23 双因子确认；基础/综合强度 53.7；主线潜在形成；两融评分 25；ETF评分 59",
-      "riskZh": "仍需集合竞价与开盘后价格行为确认",
-      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
-    },
-    {
-      "code": "603077",
-      "name": "和邦生物",
-      "sector": "农化制品",
-      "priorityScore": 73.46,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0",
-        "B1",
-        "B3",
-        "B4",
-        "B13"
-      ],
-      "baseScore": 67.61,
-      "slowCompositeScore": 69.46,
-      "marginScore": 66.15,
-      "etfScore": null,
-      "mainFlowPct": 29.22,
-      "mainlineStage": null,
-      "chaseRisk": "HIGH",
-      "previousChangePct": 10.0,
-      "reasonZh": "B13 双因子确认；基础/综合强度 69.5；两融评分 66",
-      "riskZh": "追高风险高；上一交易日已上涨10.00%",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "600362",
-      "name": "江西铜业",
-      "sector": "铜",
-      "priorityScore": 72.01,
-      "tierZh": "二级观察",
-      "memberships": [
-        "B0",
-        "B1",
-        "B2",
-        "B4",
-        "B12"
-      ],
-      "baseScore": 62.69,
-      "slowCompositeScore": 54.01,
-      "marginScore": 64.62,
-      "etfScore": 59.05,
-      "mainFlowPct": 8.34,
-      "mainlineStage": "EMERGING",
-      "chaseRisk": "MEDIUM",
-      "previousChangePct": 5.45,
-      "reasonZh": "B12 双因子确认；基础/综合强度 54.0；主线潜在形成；两融评分 65；ETF评分 59",
-      "riskZh": "追高风险中；上一交易日已上涨5.45%",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
       "code": "301230",
       "name": "泓博医药",
       "sector": "医疗研发外包",
-      "priorityScore": 71.02,
+      "priorityScore": 70.84,
       "tierZh": "二级观察",
       "memberships": [
         "B1",
@@ -213,46 +99,68 @@
         "B13"
       ],
       "baseScore": 54.62,
-      "slowCompositeScore": 56.02,
-      "marginScore": 76.92,
+      "slowCompositeScore": 55.84,
+      "marginScore": 75.71,
       "etfScore": 40.0,
       "mainFlowPct": 16.6,
       "mainlineStage": null,
       "chaseRisk": "LOW",
       "previousChangePct": 4.92,
-      "reasonZh": "B13 双因子确认；基础/综合强度 56.0；两融评分 77；ETF评分 40",
+      "reasonZh": "B13 双因子确认；基础/综合强度 55.8；两融评分 76；ETF评分 40",
       "riskZh": "上一交易日已上涨4.92%",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
-      "code": "600470",
-      "name": "六国化工",
+      "code": "603993",
+      "name": "洛阳钼业",
+      "sector": "铜",
+      "priorityScore": 66.17,
+      "tierZh": "二级观察",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "baseScore": 62.35,
+      "slowCompositeScore": 56.17,
+      "marginScore": null,
+      "etfScore": 50.0,
+      "mainFlowPct": 14.81,
+      "mainlineStage": null,
+      "chaseRisk": "LOW",
+      "previousChangePct": 3.1,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 56.2；ETF评分 50",
+      "riskZh": "暂无双因子交叉确认",
+      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
+    },
+    {
+      "code": "603077",
+      "name": "和邦生物",
       "sector": "农化制品",
-      "priorityScore": 66.45,
+      "priorityScore": 62.04,
       "tierZh": "等竞价确认",
       "memberships": [
-        "B1",
+        "B0",
         "B3",
-        "B4",
-        "B13"
+        "B4"
       ],
-      "baseScore": 61.51,
-      "slowCompositeScore": 64.45,
-      "marginScore": 92.31,
+      "baseScore": 67.61,
+      "slowCompositeScore": 67.04,
+      "marginScore": null,
       "etfScore": null,
-      "mainFlowPct": 18.5,
+      "mainFlowPct": 29.22,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
-      "previousChangePct": 8.48,
-      "reasonZh": "B13 双因子确认；基础/综合强度 64.5；两融评分 92",
-      "riskZh": "追高风险高；上一交易日已上涨8.48%",
+      "previousChangePct": 10.0,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 67.0",
+      "riskZh": "追高风险高；上一交易日已上涨10.00%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
       "code": "600227",
       "name": "赤天化",
       "sector": "农化制品",
-      "priorityScore": 65.04,
+      "priorityScore": 61.04,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -264,41 +172,41 @@
       "marginScore": null,
       "etfScore": null,
       "mainFlowPct": 26.33,
-      "mainlineStage": "EMERGING",
+      "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 9.98,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 66.0；主线潜在形成",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 66.0",
       "riskZh": "追高风险高；上一交易日已上涨9.98%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
-      "code": "300697",
-      "name": "电工合金",
+      "code": "000737",
+      "name": "北方铜业",
       "sector": "铜",
-      "priorityScore": 59.57,
+      "priorityScore": 59.01,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
-        "B2",
+        "B3",
         "B4"
       ],
-      "baseScore": 63.49,
-      "slowCompositeScore": 54.57,
-      "marginScore": null,
-      "etfScore": 59.05,
-      "mainFlowPct": 12.05,
-      "mainlineStage": "EMERGING",
-      "chaseRisk": "MEDIUM",
-      "previousChangePct": 9.32,
-      "reasonZh": "B2 单源/多源确认；基础/综合强度 54.6；主线潜在形成；ETF评分 59",
-      "riskZh": "追高风险中；上一交易日已上涨9.32%；暂无双因子交叉确认",
+      "baseScore": 73.97,
+      "slowCompositeScore": 64.01,
+      "marginScore": 24.29,
+      "etfScore": 50.0,
+      "mainFlowPct": 23.1,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 9.63,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 64.0；两融评分 24；ETF评分 50",
+      "riskZh": "追高风险高；上一交易日已上涨9.63%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
       "code": "600596",
       "name": "新安股份",
       "sector": "农化制品",
-      "priorityScore": 54.92,
+      "priorityScore": 58.96,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -306,44 +214,22 @@
         "B4"
       ],
       "baseScore": 68.5,
-      "slowCompositeScore": 59.92,
-      "marginScore": 23.08,
+      "slowCompositeScore": 63.96,
+      "marginScore": null,
       "etfScore": null,
       "mainFlowPct": 21.23,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 10.02,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 59.9；两融评分 23",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 64.0",
       "riskZh": "追高风险高；上一交易日已上涨10.02%；暂无双因子交叉确认",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "002312",
-      "name": "川发龙蟒",
-      "sector": "农化制品",
-      "priorityScore": 53.95,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B3",
-        "B4"
-      ],
-      "baseScore": 59.07,
-      "slowCompositeScore": 60.95,
-      "marginScore": 30.0,
-      "etfScore": null,
-      "mainFlowPct": 43.18,
-      "mainlineStage": null,
-      "chaseRisk": "HIGH",
-      "previousChangePct": 10.01,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 61.0；两融评分 30",
-      "riskZh": "追高风险高；上一交易日已上涨10.01%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
       "code": "600691",
       "name": "潞化科技",
       "sector": "农化制品",
-      "priorityScore": 48.76,
+      "priorityScore": 54.52,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -351,35 +237,121 @@
         "B4"
       ],
       "baseScore": 61.99,
-      "slowCompositeScore": 53.76,
-      "marginScore": 11.54,
+      "slowCompositeScore": 59.52,
+      "marginScore": null,
       "etfScore": null,
       "mainFlowPct": 20.1,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 10.16,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 53.8；两融评分 12",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 59.5",
       "riskZh": "追高风险高；上一交易日已上涨10.16%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "002312",
+      "name": "川发龙蟒",
+      "sector": "农化制品",
+      "priorityScore": 53.3,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B3",
+        "B4"
+      ],
+      "baseScore": 59.07,
+      "slowCompositeScore": 60.3,
+      "marginScore": 25.71,
+      "etfScore": null,
+      "mainFlowPct": 43.18,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 10.01,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 60.3；两融评分 26",
+      "riskZh": "追高风险高；上一交易日已上涨10.01%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "600470",
+      "name": "六国化工",
+      "sector": "农化制品",
+      "priorityScore": 51.11,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B3",
+        "B4"
+      ],
+      "baseScore": 61.51,
+      "slowCompositeScore": 58.11,
+      "marginScore": null,
+      "etfScore": null,
+      "mainFlowPct": 18.5,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 8.48,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 58.1",
+      "riskZh": "追高风险高；上一交易日已上涨8.48%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "600362",
+      "name": "江西铜业",
+      "sector": "铜",
+      "priorityScore": 47.46,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0"
+      ],
+      "baseScore": 62.69,
+      "slowCompositeScore": 50.46,
+      "marginScore": null,
+      "etfScore": 50.0,
+      "mainFlowPct": 8.34,
+      "mainlineStage": null,
+      "chaseRisk": "MEDIUM",
+      "previousChangePct": 5.45,
+      "reasonZh": "基础/综合强度 50.5；ETF评分 50",
+      "riskZh": "追高风险中；上一交易日已上涨5.45%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "300697",
+      "name": "电工合金",
+      "sector": "铜",
+      "priorityScore": 47.22,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0"
+      ],
+      "baseScore": 63.49,
+      "slowCompositeScore": 53.22,
+      "marginScore": null,
+      "etfScore": 50.0,
+      "mainFlowPct": 12.05,
+      "mainlineStage": null,
+      "chaseRisk": "MEDIUM",
+      "previousChangePct": 9.32,
+      "reasonZh": "基础/综合强度 53.2；ETF评分 50",
+      "riskZh": "追高风险中；上一交易日已上涨9.32%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
       "code": "300505",
       "name": "川金诺",
       "sector": "农化制品",
-      "priorityScore": 46.79,
+      "priorityScore": 46.43,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0"
       ],
       "baseScore": 63.84,
-      "slowCompositeScore": 52.79,
-      "marginScore": 53.85,
+      "slowCompositeScore": 52.43,
+      "marginScore": 51.43,
       "etfScore": null,
       "mainFlowPct": 11.56,
       "mainlineStage": null,
       "chaseRisk": "MEDIUM",
       "previousChangePct": 11.69,
-      "reasonZh": "基础/综合强度 52.8；两融评分 54",
+      "reasonZh": "基础/综合强度 52.4；两融评分 51",
       "riskZh": "追高风险中；上一交易日已上涨11.69%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
@@ -387,22 +359,44 @@
       "code": "000893",
       "name": "亚钾国际",
       "sector": "农化制品",
-      "priorityScore": 44.84,
+      "priorityScore": 45.32,
       "tierZh": "等竞价确认",
       "memberships": [
         "B1"
       ],
       "baseScore": 38.19,
-      "slowCompositeScore": 37.84,
-      "marginScore": 55.38,
+      "slowCompositeScore": 38.32,
+      "marginScore": 58.57,
       "etfScore": null,
       "mainFlowPct": 3.28,
       "mainlineStage": null,
       "chaseRisk": "LOW",
       "previousChangePct": 0.92,
-      "reasonZh": "B1 单源/多源确认；基础/综合强度 37.8；两融评分 55",
+      "reasonZh": "B1 单源/多源确认；基础/综合强度 38.3；两融评分 59",
       "riskZh": "暂无双因子交叉确认",
       "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
+    },
+    {
+      "code": "002470",
+      "name": "金正大",
+      "sector": "农化制品",
+      "priorityScore": 44.4,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B4"
+      ],
+      "baseScore": 61.51,
+      "slowCompositeScore": 53.4,
+      "marginScore": null,
+      "etfScore": null,
+      "mainFlowPct": 13.36,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 10.0,
+      "reasonZh": "基础/综合强度 53.4",
+      "riskZh": "追高风险高；上一交易日已上涨10.00%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
       "code": "002999",
@@ -422,27 +416,6 @@
       "chaseRisk": "HIGH",
       "previousChangePct": 10.0,
       "reasonZh": "B3 单源/多源确认；基础/综合强度 52.6",
-      "riskZh": "追高风险高；上一交易日已上涨10.00%；暂无双因子交叉确认",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "002470",
-      "name": "金正大",
-      "sector": "农化制品",
-      "priorityScore": 42.4,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0"
-      ],
-      "baseScore": 61.51,
-      "slowCompositeScore": 53.4,
-      "marginScore": null,
-      "etfScore": null,
-      "mainFlowPct": 13.36,
-      "mainlineStage": null,
-      "chaseRisk": "HIGH",
-      "previousChangePct": 10.0,
-      "reasonZh": "基础/综合强度 53.4",
       "riskZh": "追高风险高；上一交易日已上涨10.00%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     }
