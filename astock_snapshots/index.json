@@ -72978,7 +72978,8 @@
       "medianChangePct": -1.41,
       "sampleCount": 5208,
       "coreIndexCoverage": "6/6",
-      "coreIndexSource": "腾讯当日收盘快照"
+      "coreIndexSource": "腾讯当日收盘快照",
+      "marketStatusProvider": "Yunai Quant API"
     },
     "boardHeatmap": {
       "industry": [
@@ -75703,6 +75704,32 @@
       "entryRule": "信号日后一交易日开盘",
       "state": "等待下一交易日可成交开盘",
       "note": "信号日当天涨跌属于当日行情表现，不计作策略可交易收益。"
+    },
+    "yunai": {
+      "configured": true,
+      "connected": true,
+      "marketStatus": {
+        "connected": true,
+        "provider": "Yunai Quant API",
+        "checkedAt": "2026-09-10T15:15:24+08:00",
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
+        "responseDigest": "67c4b5f8c662f29e",
+        "data": [
+          {
+            "market": "CN",
+            "status": "CLOSING",
+            "marketStatus": "Closed"
+          }
+        ]
+      },
+      "openapiState": "ready",
+      "endpointCount": 38,
+      "categories": [
+        "K线",
+        "行情"
+      ]
     }
   }
 ]
