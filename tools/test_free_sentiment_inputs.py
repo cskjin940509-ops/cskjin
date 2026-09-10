@@ -14,6 +14,18 @@ class Frame:
     def to_dict(self, *_): return self.rows
 
 
+class ColumnFrame:
+    def __init__(self, values):
+        self.empty = not values
+        self.columns = ["证券代码", "新增字段", "融资余额"]
+        self._values = values
+    def __getitem__(self, key):
+        class Series:
+            def __init__(self, values): self.values = values
+            def tolist(self): return self.values
+        return Series(self._values)
+
+
 class FreeSentimentInputTests(unittest.TestCase):
     def test_full_exchange_summary_is_separate_and_not_score_ready(self):
         with patch.object(collector.ak, "stock_margin_sse", return_value=Frame([{"融资余额": 10_000_000_000}])), \
@@ -42,6 +54,10 @@ class FreeSentimentInputTests(unittest.TestCase):
         self.assertTrue(result["complete"])
         self.assertEqual(result["exchangeBalances"]["SZSE"], 50.0)
         self.assertIn("回退", result["sources"]["SZSE"])
+
+    def test_szse_raw_frame_tolerates_added_exchange_columns(self):
+        self.assertEqual(collector._sum_financing_balance_frame(
+            ColumnFrame(["1,000", 2000, None])), 3000.0)
 
 
 if __name__ == "__main__": unittest.main()

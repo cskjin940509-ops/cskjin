@@ -8,8 +8,11 @@ ETF collection remains exchange-share based.
 from __future__ import annotations
 
 import time
+from io import BytesIO
+
 import akshare as ak
 import collect_slow_money_factors as base
+import requests
 
 _original_fetch_margin_day = base.fetch_margin_day
 _original_collect_margin = base.collect_margin
@@ -71,6 +74,36 @@ def _first_finite(records, names):
     return None
 
 
+def _sum_financing_balance_frame(df):
+    """Sum an official detail table without assuming a fixed column count."""
+    if df is None or df.empty:
+        return None
+    column = next((c for c in df.columns if str(c).strip() in ("融资余额", "融资余额(元)")), None)
+    if column is None:
+        return None
+    values = [base.finite(v.replace(",", "") if isinstance(v, str) else v)
+              for v in df[column].tolist()]
+    values = [v for v in values if v is not None]
+    return sum(values) if values else None
+
+
+def _fetch_szse_detail_total_raw(stamp):
+    """Read SZSE's official xlsx while preserving its published headers.
+
+    AKShare currently replaces the complete column list with eight fixed names;
+    an added exchange column therefore raises ValueError before data is returned.
+    """
+    response = requests.get(
+        "https://www.szse.cn/api/report/ShowReport",
+        params={"SHOWTYPE": "xlsx", "CATALOGID": "1837_xxpl",
+                "txtDate": f"{stamp[:4]}-{stamp[4:6]}-{stamp[6:]}",
+                "tab2PAGENO": "1", "TABKEY": "tab2"},
+        headers={"Referer": "https://www.szse.cn/disclosure/margin/margin/index.html",
+                 "User-Agent": "Mozilla/5.0"}, timeout=30)
+    response.raise_for_status()
+    return _sum_financing_balance_frame(base.pd.read_excel(BytesIO(response.content), engine="openpyxl"))
+
+
 def fetch_market_margin_summary(d):
     """Fetch exchange totals without pretending a partial sum is complete.
 
@@ -112,7 +145,16 @@ def fetch_market_margin_summary(d):
             balances["SZSE"] = sum(values)
             sources["SZSE"] = "深交所融资融券明细当日汇总（汇总接口异常时回退）"
         except Exception as detail_error:
-            errors["SZSE"] = f"summary:{summary_error.__class__.__name__};detail:{detail_error.__class__.__name__}"
+            try:
+                value = _fetch_szse_detail_total_raw(stamp)
+                if value is None:
+                    raise ValueError("missing financing balance")
+                balances["SZSE"] = value
+                sources["SZSE"] = "深交所官方明细xlsx当日汇总（绕过固定列数封装）"
+            except Exception as raw_error:
+                errors["SZSE"] = (f"summary:{summary_error.__class__.__name__};"
+                                  f"detail:{detail_error.__class__.__name__};"
+                                  f"raw:{raw_error.__class__.__name__}")
     try:
         df = ak.stock_margin_detail_bse(date=stamp)
         rows = base.df_records(df)
