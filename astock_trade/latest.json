@@ -952,436 +952,263 @@
   ],
   "setupCandidates": [
     {
-      "code": "603268",
-      "name": "松发股份",
-      "sector": "航海装备Ⅲ",
+      "code": "603002",
+      "name": "宏昌电子",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "买入候选",
-      "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 86.1,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 199.17,
-        "changePct": 0.74,
-        "open": 196.0,
-        "high": 202.0,
-        "low": 196.0,
-        "dayLowToHighPct": 3.06,
-        "quoteTime": "20260910145011"
-      },
-      "entryZone": [
-        198.832,
-        201.823
-      ],
-      "triggerPrice": 199.43,
-      "stopLoss": 192.932,
-      "takeProfit1": 211.421,
-      "takeProfit2": 218.817,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 192.932",
-      "reasons": [
-        "突破回踩",
-        "形态分 86",
-        "距MA20 +1.61 ATR",
-        "主力资金占比 +10.51%"
-      ]
-    },
-    {
-      "code": "600179",
-      "name": "安通控股",
-      "sector": "航运",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
+      "action": "盘前观察",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 79.9,
+        "score": 85.8,
+        "historical": {
+          "samples": 4,
+          "win5D": 0.75,
+          "avg5D": 0.1465,
+          "avgMFE5D": 0.2141,
+          "avgMAE5D": -0.0566
+        }
+      },
+      "quote": {
+        "price": 16.77,
+        "changePct": 2.19,
+        "open": null,
+        "high": 17.23,
+        "low": 16.0,
+        "dayLowToHighPct": 7.69,
+        "quoteTime": null
+      },
+      "entryZone": [
+        16.398,
+        16.72
+      ],
+      "triggerPrice": 16.554,
+      "stopLoss": 15.565,
+      "takeProfit1": 18.049,
+      "takeProfit2": 19.042,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 15.565",
+      "reasons": [
+        "趋势回踩",
+        "形态分 86",
+        "距MA20 +0.34 ATR",
+        "主力资金占比 +8.81%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "603619",
+      "name": "中曼石油",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 84.9,
         "historical": {
           "samples": 8,
-          "win5D": 0.5,
-          "avg5D": 0.0054,
-          "avgMFE5D": 0.0658,
-          "avgMAE5D": -0.0359
-        }
-      },
-      "quote": {
-        "price": 4.63,
-        "changePct": -0.22,
-        "open": 4.66,
-        "high": 4.68,
-        "low": 4.58,
-        "dayLowToHighPct": 2.18,
-        "quoteTime": "20260910145010"
-      },
-      "entryZone": [
-        4.564,
-        4.656
-      ],
-      "triggerPrice": 4.61,
-      "stopLoss": 4.465,
-      "takeProfit1": 4.827,
-      "takeProfit2": 4.972,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 4.465",
-      "reasons": [
-        "趋势回踩",
-        "形态分 80",
-        "距MA20 +1.08 ATR",
-        "主力资金占比 +4.53%"
-      ]
-    },
-    {
-      "code": "300903",
-      "name": "科翔股份",
-      "sector": "印制电路板",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 79.6,
-        "historical": {
-          "samples": 2,
-          "win5D": 0.0,
-          "avg5D": -0.0764,
-          "avgMFE5D": 0.0035,
-          "avgMAE5D": -0.1639
-        }
-      },
-      "quote": {
-        "price": 88.17,
-        "changePct": 1.78,
-        "open": 86.0,
-        "high": 92.66,
-        "low": 84.0,
-        "dayLowToHighPct": 10.31,
-        "quoteTime": "20260910145006"
-      },
-      "entryZone": [
-        88.593,
-        90.383
-      ],
-      "triggerPrice": 89.488,
-      "stopLoss": 84.119,
-      "takeProfit1": 97.542,
-      "takeProfit2": 102.911,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 84.119",
-      "reasons": [
-        "趋势回踩",
-        "形态分 80",
-        "距MA20 +0.63 ATR",
-        "主力资金占比 +2.88%"
-      ]
-    },
-    {
-      "code": "688143",
-      "name": "长盈通",
-      "sector": "通信线缆及配套",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 79.0,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 169.31,
-        "changePct": -2.81,
-        "open": 166.7,
-        "high": 174.0,
-        "low": 163.21,
-        "dayLowToHighPct": 6.61,
-        "quoteTime": "20260910145011"
-      },
-      "entryZone": [
-        168.339,
-        171.739
-      ],
-      "triggerPrice": 170.039,
-      "stopLoss": 159.837,
-      "takeProfit1": 185.343,
-      "takeProfit2": 195.545,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 159.837",
-      "reasons": [
-        "趋势回踩",
-        "形态分 79",
-        "距MA20 +0.54 ATR",
-        "主力资金占比 -0.09%"
-      ]
-    },
-    {
-      "code": "688183",
-      "name": "生益电子",
-      "sector": "印制电路板",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.3,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 125.87,
-        "changePct": -2.07,
-        "open": 126.08,
-        "high": 130.6,
-        "low": 125.58,
-        "dayLowToHighPct": 4.0,
-        "quoteTime": "20260910145011"
-      },
-      "entryZone": [
-        124.662,
-        127.18
-      ],
-      "triggerPrice": 125.921,
-      "stopLoss": 118.366,
-      "takeProfit1": 137.254,
-      "takeProfit2": 144.809,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 118.366",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.92 ATR",
-        "主力资金占比 -3.70%"
-      ]
-    },
-    {
-      "code": "600183",
-      "name": "生益科技",
-      "sector": "印制电路板",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 77.9,
-        "historical": {
-          "samples": 1,
           "win5D": 1.0,
-          "avg5D": 0.2413,
-          "avgMFE5D": 0.2413,
-          "avgMAE5D": 0.0209
+          "avg5D": 0.0341,
+          "avgMFE5D": 0.0742,
+          "avgMAE5D": -0.0261
         }
       },
       "quote": {
-        "price": 146.89,
-        "changePct": -0.86,
-        "open": 145.02,
-        "high": 151.3,
-        "low": 145.0,
-        "dayLowToHighPct": 4.34,
-        "quoteTime": "20260910145009"
+        "price": 24.1,
+        "changePct": -2.63,
+        "open": null,
+        "high": 25.71,
+        "low": 24.02,
+        "dayLowToHighPct": 7.04,
+        "quoteTime": null
       },
       "entryZone": [
-        143.817,
-        146.723
+        23.475,
+        23.949
       ],
-      "triggerPrice": 145.27,
-      "stopLoss": 136.554,
-      "takeProfit1": 158.344,
-      "takeProfit2": 167.061,
+      "triggerPrice": 23.712,
+      "stopLoss": 22.49,
+      "takeProfit1": 25.545,
+      "takeProfit2": 26.768,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 136.554",
+      "invalidation": "收盘/有效价格跌破 22.490",
       "reasons": [
         "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.69 ATR",
-        "主力资金占比 -5.68%"
-      ]
-    },
-    {
-      "code": "000070",
-      "name": "特发信息",
-      "sector": "通信线缆及配套",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 77.3,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 16.19,
-        "changePct": -3.0,
-        "open": 16.41,
-        "high": 16.6,
-        "low": 16.12,
-        "dayLowToHighPct": 2.98,
-        "quoteTime": "20260910145012"
-      },
-      "entryZone": [
-        15.88,
-        16.2
-      ],
-      "triggerPrice": 16.04,
-      "stopLoss": 15.201,
-      "takeProfit1": 17.299,
-      "takeProfit2": 18.138,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 15.201",
-      "reasons": [
-        "趋势回踩",
-        "形态分 77",
+        "形态分 85",
         "距MA20 +0.71 ATR",
-        "主力资金占比 -8.35%"
-      ]
+        "主力资金占比 +4.30%"
+      ],
+      "source": "沪深市场历史形态精筛"
     },
     {
-      "code": "603386",
-      "name": "骏亚科技",
-      "sector": "印制电路板",
+      "code": "002591",
+      "name": "恒大高新",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "等待触发",
+      "action": "盘前观察",
       "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 73.6,
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 85.8,
         "historical": {
-          "samples": 1,
+          "samples": 3,
           "win5D": 1.0,
-          "avg5D": 0.0433,
-          "avgMFE5D": 0.076,
-          "avgMAE5D": -0.0409
+          "avg5D": 0.0339,
+          "avgMFE5D": 0.0542,
+          "avgMAE5D": -0.0094
         }
       },
       "quote": {
-        "price": 14.93,
-        "changePct": 0.81,
-        "open": 14.63,
-        "high": 15.3,
-        "low": 14.53,
-        "dayLowToHighPct": 5.3,
-        "quoteTime": "20260910145010"
+        "price": 6.55,
+        "changePct": 0.31,
+        "open": null,
+        "high": 6.89,
+        "low": 6.39,
+        "dayLowToHighPct": 7.82,
+        "quoteTime": null
       },
       "entryZone": [
-        14.969,
-        15.165
+        6.476,
+        6.606
       ],
-      "triggerPrice": 15.09,
-      "stopLoss": 14.652,
-      "takeProfit1": 15.691,
-      "takeProfit2": 16.106,
+      "triggerPrice": 6.541,
+      "stopLoss": 6.32,
+      "takeProfit1": 6.873,
+      "takeProfit2": 7.095,
       "riskReward1": 1.5,
-      "preferredWindow": "触发价出现后再评估",
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 14.652",
+      "invalidation": "收盘/有效价格跌破 6.320",
       "reasons": [
-        "临界突破",
-        "形态分 74",
-        "距MA20 +1.68 ATR",
-        "主力资金占比 +8.23%"
-      ]
+        "趋势回踩",
+        "形态分 86",
+        "距MA20 +0.57 ATR",
+        "主力资金占比 +9.22%"
+      ],
+      "source": "沪深市场历史形态精筛"
     },
     {
-      "code": "605258",
-      "name": "协和电子",
-      "sector": "印制电路板",
+      "code": "600938",
+      "name": "中国海油",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "等待触发",
+      "action": "盘前观察",
       "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 73.3,
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 86.7,
         "historical": {
-          "samples": 1,
-          "win5D": 0.0,
-          "avg5D": -0.0644,
-          "avgMFE5D": 0.0263,
-          "avgMAE5D": -0.0754
+          "samples": 5,
+          "win5D": 0.8,
+          "avg5D": 0.0204,
+          "avgMFE5D": 0.0589,
+          "avgMAE5D": -0.013
         }
       },
       "quote": {
-        "price": 31.63,
-        "changePct": 0.19,
-        "open": 31.55,
-        "high": 32.41,
-        "low": 30.81,
-        "dayLowToHighPct": 5.19,
-        "quoteTime": "20260910145010"
+        "price": 34.45,
+        "changePct": 0.79,
+        "open": null,
+        "high": 35.1,
+        "low": 34.27,
+        "dayLowToHighPct": 2.42,
+        "quoteTime": null
       },
       "entryZone": [
-        31.942,
-        32.361
+        33.618,
+        34.293
       ],
-      "triggerPrice": 32.2,
-      "stopLoss": 31.047,
-      "takeProfit1": 33.809,
-      "takeProfit2": 34.914,
+      "triggerPrice": 33.953,
+      "stopLoss": 32.881,
+      "takeProfit1": 35.568,
+      "takeProfit2": 36.642,
       "riskReward1": 1.5,
-      "preferredWindow": "触发价出现后再评估",
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 31.047",
+      "invalidation": "收盘/有效价格跌破 32.881",
       "reasons": [
-        "临界突破",
-        "形态分 73",
-        "距MA20 +1.76 ATR",
-        "主力资金占比 +6.33%"
-      ]
+        "趋势回踩",
+        "形态分 87",
+        "距MA20 +0.90 ATR",
+        "主力资金占比 +13.58%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "600844",
+      "name": "金煤科技",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 86.8,
+        "historical": {
+          "samples": 4,
+          "win5D": 0.75,
+          "avg5D": 0.0198,
+          "avgMFE5D": 0.0512,
+          "avgMAE5D": -0.0328
+        }
+      },
+      "quote": {
+        "price": 3.79,
+        "changePct": -1.56,
+        "open": null,
+        "high": 4.24,
+        "low": 3.77,
+        "dayLowToHighPct": 12.47,
+        "quoteTime": null
+      },
+      "entryZone": [
+        3.758,
+        3.834
+      ],
+      "triggerPrice": 3.796,
+      "stopLoss": 3.568,
+      "takeProfit1": 4.138,
+      "takeProfit2": 4.365,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 3.568",
+      "reasons": [
+        "趋势回踩",
+        "形态分 87",
+        "距MA20 +0.45 ATR",
+        "主力资金占比 +13.95%"
+      ],
+      "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
     "official": 22,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 9
+    "expandedSetupCandidates": 5,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -1394,5 +1221,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "ready",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5558,
+    "uniqueRows": 5536,
+    "pagesRequested": 56,
+    "coveragePct": 99.6,
+    "prefiltered": 220,
+    "historyLoaded": 220,
+    "setupMatches": 29,
+    "historicalEdgeMatches": 5,
+    "selected": 5,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
