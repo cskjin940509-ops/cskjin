@@ -1,0 +1,45 @@
+name: Publish four original sentiment daily
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/publish_four_sentiment_daily.py'
+      - 'tools/test_publish_four_sentiment_daily.py'
+      - '.github/workflows/publish-four-sentiment-daily.yml'
+  schedule:
+    - cron: '50 0 * * 1-5'
+  workflow_run:
+    workflows: ['Update AStock B1 Margin / B2 ETF / 开盘前预测池']
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-four-original-sentiment
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate daily publisher
+        run: python -m unittest tools/test_publish_four_sentiment_daily.py
+      - name: Publish four-row daily evidence
+        run: python tools/publish_four_sentiment_daily.py
+      - name: Commit exact-once daily output
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add astock_sentiment/latest.json astock_sentiment/history/
+          git diff --cached --quiet || git commit -m "Publish four sentiment daily evidence"
+          git push
