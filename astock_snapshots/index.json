@@ -4437,14 +4437,14 @@
       }
     },
     "sectorPerformance": {},
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "audit": {
       "status": "PartiallyVerified",
@@ -7733,10 +7733,10 @@
           "asOf": "2026-09-01"
         },
         "current": {
-          "return": 0.048746,
+          "return": 0.044328,
           "median": 0.048608,
-          "alpha": 0.068438,
-          "hitRate": 0.8,
+          "alpha": 0.064242,
+          "hitRate": 0.7,
           "members": 10,
           "asOf": "2026-09-10"
         },
@@ -7885,10 +7885,10 @@
           "asOf": "2026-09-01"
         },
         "current": {
-          "return": 0.077244,
+          "return": 0.0662,
           "median": 0.068387,
-          "alpha": 0.100652,
-          "hitRate": 1.0,
+          "alpha": 0.090163,
+          "hitRate": 0.75,
           "members": 4,
           "asOf": "2026-09-10"
         },
@@ -8013,187 +8013,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-08-19",
-            "close": 6.77,
-            "dailyReturn": -0.0216763,
-            "cumulativeReturn": -0.0216763,
-            "benchmarkDailyReturn": -0.01531311,
-            "benchmarkCumulativeReturn": -0.01531311,
-            "cumulativeAlpha": -0.00636319,
-            "drawdown": -0.0216763
-          },
-          {
-            "date": "2026-08-20",
-            "close": 6.86,
-            "dailyReturn": 0.01329394,
-            "cumulativeReturn": -0.00867052,
-            "benchmarkDailyReturn": 0.0008826,
-            "benchmarkCumulativeReturn": -0.01444402,
-            "cumulativeAlpha": 0.0057735,
-            "drawdown": -0.00867052
-          },
-          {
-            "date": "2026-08-21",
-            "close": 6.36,
-            "dailyReturn": -0.0728863,
-            "cumulativeReturn": -0.08092486,
-            "benchmarkDailyReturn": 0.00569376,
-            "benchmarkCumulativeReturn": -0.0088325,
-            "cumulativeAlpha": -0.07209235,
-            "drawdown": -0.08092486
-          },
-          {
-            "date": "2026-08-24",
-            "close": 6.42,
-            "dailyReturn": 0.00943396,
-            "cumulativeReturn": -0.07225434,
-            "benchmarkDailyReturn": -0.0120743,
-            "benchmarkCumulativeReturn": -0.02080016,
-            "cumulativeAlpha": -0.05145417,
-            "drawdown": -0.07225434
-          },
-          {
-            "date": "2026-08-25",
-            "close": 6.65,
-            "dailyReturn": 0.03582555,
-            "cumulativeReturn": -0.03901734,
-            "benchmarkDailyReturn": -0.00243254,
-            "benchmarkCumulativeReturn": -0.0231821,
-            "cumulativeAlpha": -0.01583524,
-            "drawdown": -0.03901734
-          },
-          {
-            "date": "2026-08-26",
-            "close": 6.85,
-            "dailyReturn": 0.03007519,
-            "cumulativeReturn": -0.01011561,
-            "benchmarkDailyReturn": 0.00851488,
-            "benchmarkCumulativeReturn": -0.01486462,
-            "cumulativeAlpha": 0.00474901,
-            "drawdown": -0.01011561
-          },
-          {
-            "date": "2026-08-27",
-            "close": 7.17,
-            "dailyReturn": 0.04671533,
-            "cumulativeReturn": 0.03612717,
-            "benchmarkDailyReturn": 0.00860201,
-            "benchmarkCumulativeReturn": -0.00639048,
-            "cumulativeAlpha": 0.04251764,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-28",
-            "close": 7.32,
-            "dailyReturn": 0.0209205,
-            "cumulativeReturn": 0.05780347,
-            "benchmarkDailyReturn": -0.00455696,
-            "benchmarkCumulativeReturn": -0.01091831,
-            "cumulativeAlpha": 0.06872178,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-31",
-            "close": 7.2,
-            "dailyReturn": -0.01639344,
-            "cumulativeReturn": 0.04046243,
-            "benchmarkDailyReturn": 0.00345181,
-            "benchmarkCumulativeReturn": -0.0075042,
-            "cumulativeAlpha": 0.04796662,
-            "drawdown": -0.01639344
-          },
-          {
-            "date": "2026-09-01",
-            "close": 7.92,
-            "dailyReturn": 0.1,
-            "cumulativeReturn": 0.14450867,
-            "benchmarkDailyReturn": -0.00295129,
-            "benchmarkCumulativeReturn": -0.01043334,
-            "cumulativeAlpha": 0.15494201,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-02",
-            "close": 7.18,
-            "dailyReturn": -0.09343434,
-            "cumulativeReturn": 0.03757225,
-            "benchmarkDailyReturn": -0.01376577,
-            "benchmarkCumulativeReturn": -0.02405548,
-            "cumulativeAlpha": 0.06162774,
-            "drawdown": -0.09343434
-          },
-          {
-            "date": "2026-09-03",
-            "close": 6.99,
-            "dailyReturn": -0.0264624,
-            "cumulativeReturn": 0.01011561,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.02306408,
-            "cumulativeAlpha": 0.03317969,
-            "drawdown": -0.11742424
-          },
-          {
-            "date": "2026-09-04",
-            "close": 7.13,
-            "dailyReturn": 0.02002861,
-            "cumulativeReturn": 0.03034682,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.02403617,
-            "cumulativeAlpha": 0.05438299,
-            "drawdown": -0.09974747
-          },
-          {
-            "date": "2026-09-07",
-            "close": 7.38,
-            "dailyReturn": 0.03506311,
-            "cumulativeReturn": 0.06647399,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.01824869,
-            "cumulativeAlpha": 0.08472268,
-            "drawdown": -0.06818182
-          },
-          {
-            "date": "2026-09-08",
-            "close": 7.69,
-            "dailyReturn": 0.04200542,
-            "cumulativeReturn": 0.11127168,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.02174221,
-            "cumulativeAlpha": 0.13301389,
-            "drawdown": -0.0290404
-          },
-          {
-            "date": "2026-09-09",
-            "close": 8.46,
-            "dailyReturn": 0.10013004,
-            "cumulativeReturn": 0.22254335,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.018768,
-            "cumulativeAlpha": 0.24131135,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 7.68,
-            "dailyReturn": -0.09219858,
-            "cumulativeReturn": 0.10982659,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.02396321,
-            "cumulativeAlpha": 0.1337898,
-            "drawdown": -0.09219858
-          }
-        ],
-        "dailyReturn": -0.09219858,
-        "cumulativeReturn": 0.10982659,
-        "cumulativeAlpha": 0.1337898,
-        "maxDrawdown": -0.11742424,
-        "dailyPathMFE": 0.22254335,
-        "dailyPathMAE": -0.08815029,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000716": {
         "entryRule": "次一交易日开盘等权",
@@ -8247,187 +8067,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-08-19",
-            "close": 5.23,
-            "dailyReturn": -0.05595668,
-            "cumulativeReturn": -0.05595668,
-            "benchmarkDailyReturn": -0.01531311,
-            "benchmarkCumulativeReturn": -0.01531311,
-            "cumulativeAlpha": -0.04064357,
-            "drawdown": -0.05595668
-          },
-          {
-            "date": "2026-08-20",
-            "close": 5.02,
-            "dailyReturn": -0.04015296,
-            "cumulativeReturn": -0.09386282,
-            "benchmarkDailyReturn": 0.0008826,
-            "benchmarkCumulativeReturn": -0.01444402,
-            "cumulativeAlpha": -0.0794188,
-            "drawdown": -0.09386282
-          },
-          {
-            "date": "2026-08-21",
-            "close": 4.8,
-            "dailyReturn": -0.0438247,
-            "cumulativeReturn": -0.13357401,
-            "benchmarkDailyReturn": 0.00569376,
-            "benchmarkCumulativeReturn": -0.0088325,
-            "cumulativeAlpha": -0.1247415,
-            "drawdown": -0.13357401
-          },
-          {
-            "date": "2026-08-24",
-            "close": 4.72,
-            "dailyReturn": -0.01666667,
-            "cumulativeReturn": -0.14801444,
-            "benchmarkDailyReturn": -0.0120743,
-            "benchmarkCumulativeReturn": -0.02080016,
-            "cumulativeAlpha": -0.12721428,
-            "drawdown": -0.14801444
-          },
-          {
-            "date": "2026-08-25",
-            "close": 5.02,
-            "dailyReturn": 0.06355932,
-            "cumulativeReturn": -0.09386282,
-            "benchmarkDailyReturn": -0.00243254,
-            "benchmarkCumulativeReturn": -0.0231821,
-            "cumulativeAlpha": -0.07068071,
-            "drawdown": -0.09386282
-          },
-          {
-            "date": "2026-08-26",
-            "close": 5.0,
-            "dailyReturn": -0.00398406,
-            "cumulativeReturn": -0.09747292,
-            "benchmarkDailyReturn": 0.00851488,
-            "benchmarkCumulativeReturn": -0.01486462,
-            "cumulativeAlpha": -0.08260831,
-            "drawdown": -0.09747292
-          },
-          {
-            "date": "2026-08-27",
-            "close": 5.15,
-            "dailyReturn": 0.03,
-            "cumulativeReturn": -0.07039711,
-            "benchmarkDailyReturn": 0.00860201,
-            "benchmarkCumulativeReturn": -0.00639048,
-            "cumulativeAlpha": -0.06400664,
-            "drawdown": -0.07039711
-          },
-          {
-            "date": "2026-08-28",
-            "close": 5.67,
-            "dailyReturn": 0.10097087,
-            "cumulativeReturn": 0.0234657,
-            "benchmarkDailyReturn": -0.00455696,
-            "benchmarkCumulativeReturn": -0.01091831,
-            "cumulativeAlpha": 0.03438402,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-31",
-            "close": 5.87,
-            "dailyReturn": 0.03527337,
-            "cumulativeReturn": 0.05956679,
-            "benchmarkDailyReturn": 0.00345181,
-            "benchmarkCumulativeReturn": -0.0075042,
-            "cumulativeAlpha": 0.06707098,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-01",
-            "close": 5.91,
-            "dailyReturn": 0.00681431,
-            "cumulativeReturn": 0.066787,
-            "benchmarkDailyReturn": -0.00295129,
-            "benchmarkCumulativeReturn": -0.01043334,
-            "cumulativeAlpha": 0.07722035,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-02",
-            "close": 5.4,
-            "dailyReturn": -0.08629442,
-            "cumulativeReturn": -0.02527076,
-            "benchmarkDailyReturn": -0.01376577,
-            "benchmarkCumulativeReturn": -0.02405548,
-            "cumulativeAlpha": -0.00121527,
-            "drawdown": -0.08629442
-          },
-          {
-            "date": "2026-09-03",
-            "close": 5.31,
-            "dailyReturn": -0.01666667,
-            "cumulativeReturn": -0.04151625,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.02306408,
-            "cumulativeAlpha": -0.01845216,
-            "drawdown": -0.10152284
-          },
-          {
-            "date": "2026-09-04",
-            "close": 5.46,
-            "dailyReturn": 0.02824859,
-            "cumulativeReturn": -0.01444043,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.02403617,
-            "cumulativeAlpha": 0.00959574,
-            "drawdown": -0.07614213
-          },
-          {
-            "date": "2026-09-07",
-            "close": 5.72,
-            "dailyReturn": 0.04761905,
-            "cumulativeReturn": 0.03249097,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.01824869,
-            "cumulativeAlpha": 0.05073967,
-            "drawdown": -0.0321489
-          },
-          {
-            "date": "2026-09-08",
-            "close": 5.84,
-            "dailyReturn": 0.02097902,
-            "cumulativeReturn": 0.05415162,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.02174221,
-            "cumulativeAlpha": 0.07589383,
-            "drawdown": -0.01184433
-          },
-          {
-            "date": "2026-09-09",
-            "close": 5.73,
-            "dailyReturn": -0.01883562,
-            "cumulativeReturn": 0.03429603,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.018768,
-            "cumulativeAlpha": 0.05306403,
-            "drawdown": -0.03045685
-          },
-          {
-            "date": "2026-09-10",
-            "close": 5.55,
-            "dailyReturn": -0.03141361,
-            "cumulativeReturn": 0.00180505,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.02396321,
-            "cumulativeAlpha": 0.02576826,
-            "drawdown": -0.06091371
-          }
-        ],
-        "dailyReturn": -0.03141361,
-        "cumulativeReturn": 0.00180505,
-        "cumulativeAlpha": 0.02576826,
-        "maxDrawdown": -0.14801444,
-        "dailyPathMFE": 0.13176895,
-        "dailyPathMAE": -0.16064982,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000998": {
         "entryRule": "次一交易日开盘等权",
@@ -8715,194 +8355,14 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-08-19",
-            "close": 9.9,
-            "dailyReturn": 0.00101112,
-            "cumulativeReturn": 0.00101112,
-            "benchmarkDailyReturn": -0.01531311,
-            "benchmarkCumulativeReturn": -0.01531311,
-            "cumulativeAlpha": 0.01632423,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-20",
-            "close": 10.18,
-            "dailyReturn": 0.02828283,
-            "cumulativeReturn": 0.02932255,
-            "benchmarkDailyReturn": 0.0008826,
-            "benchmarkCumulativeReturn": -0.01444402,
-            "cumulativeAlpha": 0.04376657,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-21",
-            "close": 9.26,
-            "dailyReturn": -0.09037328,
-            "cumulativeReturn": -0.06370071,
-            "benchmarkDailyReturn": 0.00569376,
-            "benchmarkCumulativeReturn": -0.0088325,
-            "cumulativeAlpha": -0.0548682,
-            "drawdown": -0.09037328
-          },
-          {
-            "date": "2026-08-24",
-            "close": 10.19,
-            "dailyReturn": 0.10043197,
-            "cumulativeReturn": 0.03033367,
-            "benchmarkDailyReturn": -0.0120743,
-            "benchmarkCumulativeReturn": -0.02080016,
-            "cumulativeAlpha": 0.05113383,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-25",
-            "close": 11.21,
-            "dailyReturn": 0.10009814,
-            "cumulativeReturn": 0.13346815,
-            "benchmarkDailyReturn": -0.00243254,
-            "benchmarkCumulativeReturn": -0.0231821,
-            "cumulativeAlpha": 0.15665025,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-26",
-            "close": 10.78,
-            "dailyReturn": -0.03835861,
-            "cumulativeReturn": 0.08998989,
-            "benchmarkDailyReturn": 0.00851488,
-            "benchmarkCumulativeReturn": -0.01486462,
-            "cumulativeAlpha": 0.1048545,
-            "drawdown": -0.03835861
-          },
-          {
-            "date": "2026-08-27",
-            "close": 11.23,
-            "dailyReturn": 0.04174397,
-            "cumulativeReturn": 0.13549039,
-            "benchmarkDailyReturn": 0.00860201,
-            "benchmarkCumulativeReturn": -0.00639048,
-            "cumulativeAlpha": 0.14188087,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-28",
-            "close": 11.2,
-            "dailyReturn": -0.00267142,
-            "cumulativeReturn": 0.13245703,
-            "benchmarkDailyReturn": -0.00455696,
-            "benchmarkCumulativeReturn": -0.01091831,
-            "cumulativeAlpha": 0.14337534,
-            "drawdown": -0.00267142
-          },
-          {
-            "date": "2026-08-31",
-            "close": 10.8,
-            "dailyReturn": -0.03571429,
-            "cumulativeReturn": 0.09201213,
-            "benchmarkDailyReturn": 0.00345181,
-            "benchmarkCumulativeReturn": -0.0075042,
-            "cumulativeAlpha": 0.09951633,
-            "drawdown": -0.03829029
-          },
-          {
-            "date": "2026-09-01",
-            "close": 11.88,
-            "dailyReturn": 0.1,
-            "cumulativeReturn": 0.20121335,
-            "benchmarkDailyReturn": -0.00295129,
-            "benchmarkCumulativeReturn": -0.01043334,
-            "cumulativeAlpha": 0.21164669,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-02",
-            "close": 10.87,
-            "dailyReturn": -0.08501684,
-            "cumulativeReturn": 0.09908999,
-            "benchmarkDailyReturn": -0.01376577,
-            "benchmarkCumulativeReturn": -0.02405548,
-            "cumulativeAlpha": 0.12314547,
-            "drawdown": -0.08501684
-          },
-          {
-            "date": "2026-09-03",
-            "close": 10.43,
-            "dailyReturn": -0.04047838,
-            "cumulativeReturn": 0.05460061,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.02306408,
-            "cumulativeAlpha": 0.07766469,
-            "drawdown": -0.12205387
-          },
-          {
-            "date": "2026-09-04",
-            "close": 10.98,
-            "dailyReturn": 0.0527325,
-            "cumulativeReturn": 0.11021234,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.02403617,
-            "cumulativeAlpha": 0.13424851,
-            "drawdown": -0.07575758
-          },
-          {
-            "date": "2026-09-07",
-            "close": 11.58,
-            "dailyReturn": 0.05464481,
-            "cumulativeReturn": 0.17087968,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.01824869,
-            "cumulativeAlpha": 0.18912837,
-            "drawdown": -0.02525253
-          },
-          {
-            "date": "2026-09-08",
-            "close": 12.02,
-            "dailyReturn": 0.03799655,
-            "cumulativeReturn": 0.21536906,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.02174221,
-            "cumulativeAlpha": 0.23711127,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 11.66,
-            "dailyReturn": -0.02995008,
-            "cumulativeReturn": 0.17896866,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.018768,
-            "cumulativeAlpha": 0.19773665,
-            "drawdown": -0.02995008
-          },
-          {
-            "date": "2026-09-10",
-            "close": 11.14,
-            "dailyReturn": -0.04459691,
-            "cumulativeReturn": 0.12639029,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.02396321,
-            "cumulativeAlpha": 0.1503535,
-            "drawdown": -0.07321131
-          }
-        ],
-        "dailyReturn": -0.04459691,
-        "cumulativeReturn": 0.12639029,
-        "cumulativeAlpha": 0.1503535,
-        "maxDrawdown": -0.12205387,
-        "dailyPathMFE": 0.26491405,
-        "dailyPathMAE": -0.07280081,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002124": {
         "entryRule": "次一交易日开盘等权",
         "entryDate": "2026-08-19",
         "entryPrice": 2.49,
-        "asOf": "2026-09-08",
-        "tradingDays": 15,
+        "asOf": "2026-09-10",
+        "tradingDays": 17,
         "source": "腾讯+东方财富未复权入场价；收益使用前复权日线",
         "1D": {
           "return": -0.064257,
@@ -8926,18 +8386,18 @@
           "mature": true
         },
         "current": {
-          "return": 0.012048,
-          "benchmark": -0.021742,
-          "alpha": 0.03379,
-          "asOf": "2026-09-08"
+          "return": -0.032129,
+          "benchmark": -0.023963,
+          "alpha": -0.008165,
+          "asOf": "2026-09-10"
         },
         "MFE": {
           "return": 0.068273,
-          "asOf": "2026-09-08"
+          "asOf": "2026-09-10"
         },
         "MAE": {
           "return": -0.124498,
-          "asOf": "2026-09-08"
+          "asOf": "2026-09-10"
         },
         "returnEntryPriceAdjusted": 2.49,
         "priceValidation": {
@@ -8949,187 +8409,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-08-19",
-            "close": 2.33,
-            "dailyReturn": -0.06425703,
-            "cumulativeReturn": -0.06425703,
-            "benchmarkDailyReturn": -0.01531311,
-            "benchmarkCumulativeReturn": -0.01531311,
-            "cumulativeAlpha": -0.04894392,
-            "drawdown": -0.06425703
-          },
-          {
-            "date": "2026-08-20",
-            "close": 2.34,
-            "dailyReturn": 0.00429185,
-            "cumulativeReturn": -0.06024096,
-            "benchmarkDailyReturn": 0.0008826,
-            "benchmarkCumulativeReturn": -0.01444402,
-            "cumulativeAlpha": -0.04579694,
-            "drawdown": -0.06024096
-          },
-          {
-            "date": "2026-08-21",
-            "close": 2.27,
-            "dailyReturn": -0.02991453,
-            "cumulativeReturn": -0.08835341,
-            "benchmarkDailyReturn": 0.00569376,
-            "benchmarkCumulativeReturn": -0.0088325,
-            "cumulativeAlpha": -0.07952091,
-            "drawdown": -0.08835341
-          },
-          {
-            "date": "2026-08-24",
-            "close": 2.24,
-            "dailyReturn": -0.01321586,
-            "cumulativeReturn": -0.10040161,
-            "benchmarkDailyReturn": -0.0120743,
-            "benchmarkCumulativeReturn": -0.02080016,
-            "cumulativeAlpha": -0.07960145,
-            "drawdown": -0.10040161
-          },
-          {
-            "date": "2026-08-25",
-            "close": 2.28,
-            "dailyReturn": 0.01785714,
-            "cumulativeReturn": -0.08433735,
-            "benchmarkDailyReturn": -0.00243254,
-            "benchmarkCumulativeReturn": -0.0231821,
-            "cumulativeAlpha": -0.06115524,
-            "drawdown": -0.08433735
-          },
-          {
-            "date": "2026-08-26",
-            "close": 2.26,
-            "dailyReturn": -0.00877193,
-            "cumulativeReturn": -0.09236948,
-            "benchmarkDailyReturn": 0.00851488,
-            "benchmarkCumulativeReturn": -0.01486462,
-            "cumulativeAlpha": -0.07750486,
-            "drawdown": -0.09236948
-          },
-          {
-            "date": "2026-08-27",
-            "close": 2.31,
-            "dailyReturn": 0.02212389,
-            "cumulativeReturn": -0.07228916,
-            "benchmarkDailyReturn": 0.00860201,
-            "benchmarkCumulativeReturn": -0.00639048,
-            "cumulativeAlpha": -0.06589868,
-            "drawdown": -0.07228916
-          },
-          {
-            "date": "2026-08-28",
-            "close": 2.35,
-            "dailyReturn": 0.01731602,
-            "cumulativeReturn": -0.0562249,
-            "benchmarkDailyReturn": -0.00455696,
-            "benchmarkCumulativeReturn": -0.01091831,
-            "cumulativeAlpha": -0.04530659,
-            "drawdown": -0.0562249
-          },
-          {
-            "date": "2026-08-31",
-            "close": 2.32,
-            "dailyReturn": -0.01276596,
-            "cumulativeReturn": -0.06827309,
-            "benchmarkDailyReturn": 0.00345181,
-            "benchmarkCumulativeReturn": -0.0075042,
-            "cumulativeAlpha": -0.0607689,
-            "drawdown": -0.06827309
-          },
-          {
-            "date": "2026-09-01",
-            "close": 2.35,
-            "dailyReturn": 0.01293103,
-            "cumulativeReturn": -0.0562249,
-            "benchmarkDailyReturn": -0.00295129,
-            "benchmarkCumulativeReturn": -0.01043334,
-            "cumulativeAlpha": -0.04579156,
-            "drawdown": -0.0562249
-          },
-          {
-            "date": "2026-09-02",
-            "close": 2.27,
-            "dailyReturn": -0.03404255,
-            "cumulativeReturn": -0.08835341,
-            "benchmarkDailyReturn": -0.01376577,
-            "benchmarkCumulativeReturn": -0.02405548,
-            "cumulativeAlpha": -0.06429793,
-            "drawdown": -0.08835341
-          },
-          {
-            "date": "2026-09-03",
-            "close": 2.2,
-            "dailyReturn": -0.030837,
-            "cumulativeReturn": -0.11646586,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.02306408,
-            "cumulativeAlpha": -0.09340178,
-            "drawdown": -0.11646586
-          },
-          {
-            "date": "2026-09-04",
-            "close": 2.42,
-            "dailyReturn": 0.1,
-            "cumulativeReturn": -0.02811245,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.02403617,
-            "cumulativeAlpha": -0.00407628,
-            "drawdown": -0.02811245
-          },
-          {
-            "date": "2026-09-07",
-            "close": 2.54,
-            "dailyReturn": 0.04958678,
-            "cumulativeReturn": 0.02008032,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.01824869,
-            "cumulativeAlpha": 0.03832901,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-08",
-            "close": 2.52,
-            "dailyReturn": -0.00787402,
-            "cumulativeReturn": 0.01204819,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.02174221,
-            "cumulativeAlpha": 0.0337904,
-            "drawdown": -0.00787402
-          },
-          {
-            "date": "2026-09-09",
-            "close": 2.52,
-            "dailyReturn": 0.0,
-            "cumulativeReturn": 0.01204819,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.018768,
-            "cumulativeAlpha": 0.03081619,
-            "drawdown": -0.00787402
-          },
-          {
-            "date": "2026-09-10",
-            "close": 2.41,
-            "dailyReturn": -0.04365079,
-            "cumulativeReturn": -0.03212851,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.02396321,
-            "cumulativeAlpha": -0.0081653,
-            "drawdown": -0.0511811
-          }
-        ],
-        "dailyReturn": -0.04365079,
-        "cumulativeReturn": -0.03212851,
-        "cumulativeAlpha": -0.0081653,
-        "maxDrawdown": -0.11646586,
-        "dailyPathMFE": 0.06827309,
-        "dailyPathMAE": -0.12449799,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002385": {
         "entryRule": "次一交易日开盘等权",
@@ -10774,14 +10054,14 @@
         }
       }
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingDisplayStatus": "ReferenceOnly",
     "trackingDisplayNote": "价格路径通过入场价验证后可展示参考跟踪；该批次仍不进入胜率、Alpha或因子有效性统计。",
@@ -12097,177 +11377,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-08-20",
-            "close": 4.87,
-            "dailyReturn": -0.00612245,
-            "cumulativeReturn": -0.00612245,
-            "benchmarkDailyReturn": -0.00445451,
-            "benchmarkCumulativeReturn": -0.00445451,
-            "cumulativeAlpha": -0.00166794,
-            "drawdown": -0.00612245
-          },
-          {
-            "date": "2026-08-21",
-            "close": 4.71,
-            "dailyReturn": -0.03285421,
-            "cumulativeReturn": -0.03877551,
-            "benchmarkDailyReturn": 0.00569376,
-            "benchmarkCumulativeReturn": 0.00121388,
-            "cumulativeAlpha": -0.03998939,
-            "drawdown": -0.03877551
-          },
-          {
-            "date": "2026-08-24",
-            "close": 4.66,
-            "dailyReturn": -0.01061571,
-            "cumulativeReturn": -0.04897959,
-            "benchmarkDailyReturn": -0.0120743,
-            "benchmarkCumulativeReturn": -0.01087508,
-            "cumulativeAlpha": -0.03810451,
-            "drawdown": -0.04897959
-          },
-          {
-            "date": "2026-08-25",
-            "close": 4.76,
-            "dailyReturn": 0.02145923,
-            "cumulativeReturn": -0.02857143,
-            "benchmarkDailyReturn": -0.00243254,
-            "benchmarkCumulativeReturn": -0.01328117,
-            "cumulativeAlpha": -0.01529026,
-            "drawdown": -0.02857143
-          },
-          {
-            "date": "2026-08-26",
-            "close": 4.8,
-            "dailyReturn": 0.00840336,
-            "cumulativeReturn": -0.02040816,
-            "benchmarkDailyReturn": 0.00851488,
-            "benchmarkCumulativeReturn": -0.00487937,
-            "cumulativeAlpha": -0.01552879,
-            "drawdown": -0.02040816
-          },
-          {
-            "date": "2026-08-27",
-            "close": 5.06,
-            "dailyReturn": 0.05416667,
-            "cumulativeReturn": 0.03265306,
-            "benchmarkDailyReturn": 0.00860201,
-            "benchmarkCumulativeReturn": 0.00368066,
-            "cumulativeAlpha": 0.0289724,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-28",
-            "close": 5.57,
-            "dailyReturn": 0.10079051,
-            "cumulativeReturn": 0.13673469,
-            "benchmarkDailyReturn": -0.00455696,
-            "benchmarkCumulativeReturn": -0.00089307,
-            "cumulativeAlpha": 0.13762776,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-31",
-            "close": 5.78,
-            "dailyReturn": 0.03770197,
-            "cumulativeReturn": 0.17959184,
-            "benchmarkDailyReturn": 0.00345181,
-            "benchmarkCumulativeReturn": 0.00255565,
-            "cumulativeAlpha": 0.17703618,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-01",
-            "close": 6.01,
-            "dailyReturn": 0.03979239,
-            "cumulativeReturn": 0.22653061,
-            "benchmarkDailyReturn": -0.00295129,
-            "benchmarkCumulativeReturn": -0.00040318,
-            "cumulativeAlpha": 0.22693379,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-02",
-            "close": 5.88,
-            "dailyReturn": -0.02163062,
-            "cumulativeReturn": 0.2,
-            "benchmarkDailyReturn": -0.01376577,
-            "benchmarkCumulativeReturn": -0.0141634,
-            "cumulativeAlpha": 0.2141634,
-            "drawdown": -0.02163062
-          },
-          {
-            "date": "2026-09-03",
-            "close": 5.84,
-            "dailyReturn": -0.00680272,
-            "cumulativeReturn": 0.19183673,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.01316194,
-            "cumulativeAlpha": 0.20499868,
-            "drawdown": -0.02828619
-          },
-          {
-            "date": "2026-09-04",
-            "close": 5.75,
-            "dailyReturn": -0.01541096,
-            "cumulativeReturn": 0.17346939,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.01414389,
-            "cumulativeAlpha": 0.18761328,
-            "drawdown": -0.04326123
-          },
-          {
-            "date": "2026-09-07",
-            "close": 5.59,
-            "dailyReturn": -0.02782609,
-            "cumulativeReturn": 0.14081633,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00829775,
-            "cumulativeAlpha": 0.14911407,
-            "drawdown": -0.06988353
-          },
-          {
-            "date": "2026-09-08",
-            "close": 6.15,
-            "dailyReturn": 0.10017889,
-            "cumulativeReturn": 0.25510204,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.01182668,
-            "cumulativeAlpha": 0.26692872,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 5.96,
-            "dailyReturn": -0.03089431,
-            "cumulativeReturn": 0.21632653,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00882232,
-            "cumulativeAlpha": 0.22514885,
-            "drawdown": -0.03089431
-          },
-          {
-            "date": "2026-09-10",
-            "close": 5.79,
-            "dailyReturn": -0.02852349,
-            "cumulativeReturn": 0.18163265,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.01407019,
-            "cumulativeAlpha": 0.19570284,
-            "drawdown": -0.05853659
-          }
-        ],
-        "dailyReturn": -0.02852349,
-        "cumulativeReturn": 0.18163265,
-        "cumulativeAlpha": 0.19570284,
-        "maxDrawdown": -0.06988353,
-        "dailyPathMFE": 0.2755102,
-        "dailyPathMAE": -0.06530612,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "600740": {
         "entryRule": "次一交易日开盘等权",
@@ -12545,177 +11655,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-08-20",
-            "close": 20.1,
-            "dailyReturn": 0.04037267,
-            "cumulativeReturn": 0.04037267,
-            "benchmarkDailyReturn": -0.00445451,
-            "benchmarkCumulativeReturn": -0.00445451,
-            "cumulativeAlpha": 0.04482718,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-21",
-            "close": 20.8,
-            "dailyReturn": 0.03482587,
-            "cumulativeReturn": 0.07660455,
-            "benchmarkDailyReturn": 0.00569376,
-            "benchmarkCumulativeReturn": 0.00121388,
-            "cumulativeAlpha": 0.07539067,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-24",
-            "close": 19.02,
-            "dailyReturn": -0.08557692,
-            "cumulativeReturn": -0.01552795,
-            "benchmarkDailyReturn": -0.0120743,
-            "benchmarkCumulativeReturn": -0.01087508,
-            "cumulativeAlpha": -0.00465287,
-            "drawdown": -0.08557692
-          },
-          {
-            "date": "2026-08-25",
-            "close": 18.34,
-            "dailyReturn": -0.03575184,
-            "cumulativeReturn": -0.05072464,
-            "benchmarkDailyReturn": -0.00243254,
-            "benchmarkCumulativeReturn": -0.01328117,
-            "cumulativeAlpha": -0.03744347,
-            "drawdown": -0.11826923
-          },
-          {
-            "date": "2026-08-26",
-            "close": 18.2,
-            "dailyReturn": -0.00763359,
-            "cumulativeReturn": -0.05797101,
-            "benchmarkDailyReturn": 0.00851488,
-            "benchmarkCumulativeReturn": -0.00487937,
-            "cumulativeAlpha": -0.05309164,
-            "drawdown": -0.125
-          },
-          {
-            "date": "2026-08-27",
-            "close": 19.2,
-            "dailyReturn": 0.05494505,
-            "cumulativeReturn": -0.00621118,
-            "benchmarkDailyReturn": 0.00860201,
-            "benchmarkCumulativeReturn": 0.00368066,
-            "cumulativeAlpha": -0.00989184,
-            "drawdown": -0.07692308
-          },
-          {
-            "date": "2026-08-28",
-            "close": 19.49,
-            "dailyReturn": 0.01510417,
-            "cumulativeReturn": 0.00879917,
-            "benchmarkDailyReturn": -0.00455696,
-            "benchmarkCumulativeReturn": -0.00089307,
-            "cumulativeAlpha": 0.00969224,
-            "drawdown": -0.06298077
-          },
-          {
-            "date": "2026-08-31",
-            "close": 19.52,
-            "dailyReturn": 0.00153925,
-            "cumulativeReturn": 0.01035197,
-            "benchmarkDailyReturn": 0.00345181,
-            "benchmarkCumulativeReturn": 0.00255565,
-            "cumulativeAlpha": 0.00779631,
-            "drawdown": -0.06153846
-          },
-          {
-            "date": "2026-09-01",
-            "close": 18.98,
-            "dailyReturn": -0.02766393,
-            "cumulativeReturn": -0.01759834,
-            "benchmarkDailyReturn": -0.00295129,
-            "benchmarkCumulativeReturn": -0.00040318,
-            "cumulativeAlpha": -0.01719516,
-            "drawdown": -0.0875
-          },
-          {
-            "date": "2026-09-02",
-            "close": 18.52,
-            "dailyReturn": -0.02423604,
-            "cumulativeReturn": -0.04140787,
-            "benchmarkDailyReturn": -0.01376577,
-            "benchmarkCumulativeReturn": -0.0141634,
-            "cumulativeAlpha": -0.02724447,
-            "drawdown": -0.10961538
-          },
-          {
-            "date": "2026-09-03",
-            "close": 18.88,
-            "dailyReturn": 0.01943844,
-            "cumulativeReturn": -0.02277433,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.01316194,
-            "cumulativeAlpha": -0.00961238,
-            "drawdown": -0.09230769
-          },
-          {
-            "date": "2026-09-04",
-            "close": 17.93,
-            "dailyReturn": -0.0503178,
-            "cumulativeReturn": -0.07194617,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.01414389,
-            "cumulativeAlpha": -0.05780228,
-            "drawdown": -0.13798077
-          },
-          {
-            "date": "2026-09-07",
-            "close": 17.69,
-            "dailyReturn": -0.01338539,
-            "cumulativeReturn": -0.08436853,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00829775,
-            "cumulativeAlpha": -0.07607078,
-            "drawdown": -0.14951923
-          },
-          {
-            "date": "2026-09-08",
-            "close": 18.89,
-            "dailyReturn": 0.06783493,
-            "cumulativeReturn": -0.02225673,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.01182668,
-            "cumulativeAlpha": -0.01043005,
-            "drawdown": -0.09182692
-          },
-          {
-            "date": "2026-09-09",
-            "close": 18.65,
-            "dailyReturn": -0.01270513,
-            "cumulativeReturn": -0.03467909,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00882232,
-            "cumulativeAlpha": -0.02585677,
-            "drawdown": -0.10336538
-          },
-          {
-            "date": "2026-09-10",
-            "close": 18.0,
-            "dailyReturn": -0.03485255,
-            "cumulativeReturn": -0.06832298,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.01407019,
-            "cumulativeAlpha": -0.05425279,
-            "drawdown": -0.13461538
-          }
-        ],
-        "dailyReturn": -0.03485255,
-        "cumulativeReturn": -0.06832298,
-        "cumulativeAlpha": -0.05425279,
-        "maxDrawdown": -0.14951923,
-        "dailyPathMFE": 0.08436853,
-        "dailyPathMAE": -0.09057971,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000723": {
         "entryRule": "次一交易日开盘等权",
@@ -12769,177 +11709,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-08-20",
-            "close": 3.61,
-            "dailyReturn": -0.02695418,
-            "cumulativeReturn": -0.02695418,
-            "benchmarkDailyReturn": -0.00445451,
-            "benchmarkCumulativeReturn": -0.00445451,
-            "cumulativeAlpha": -0.02249967,
-            "drawdown": -0.02695418
-          },
-          {
-            "date": "2026-08-21",
-            "close": 3.54,
-            "dailyReturn": -0.01939058,
-            "cumulativeReturn": -0.0458221,
-            "benchmarkDailyReturn": 0.00569376,
-            "benchmarkCumulativeReturn": 0.00121388,
-            "cumulativeAlpha": -0.04703598,
-            "drawdown": -0.0458221
-          },
-          {
-            "date": "2026-08-24",
-            "close": 3.89,
-            "dailyReturn": 0.09887006,
-            "cumulativeReturn": 0.04851752,
-            "benchmarkDailyReturn": -0.0120743,
-            "benchmarkCumulativeReturn": -0.01087508,
-            "cumulativeAlpha": 0.0593926,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-25",
-            "close": 3.87,
-            "dailyReturn": -0.00514139,
-            "cumulativeReturn": 0.04312668,
-            "benchmarkDailyReturn": -0.00243254,
-            "benchmarkCumulativeReturn": -0.01328117,
-            "cumulativeAlpha": 0.05640785,
-            "drawdown": -0.00514139
-          },
-          {
-            "date": "2026-08-26",
-            "close": 3.88,
-            "dailyReturn": 0.00258398,
-            "cumulativeReturn": 0.0458221,
-            "benchmarkDailyReturn": 0.00851488,
-            "benchmarkCumulativeReturn": -0.00487937,
-            "cumulativeAlpha": 0.05070147,
-            "drawdown": -0.00257069
-          },
-          {
-            "date": "2026-08-27",
-            "close": 3.9,
-            "dailyReturn": 0.00515464,
-            "cumulativeReturn": 0.05121294,
-            "benchmarkDailyReturn": 0.00860201,
-            "benchmarkCumulativeReturn": 0.00368066,
-            "cumulativeAlpha": 0.04753228,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-28",
-            "close": 3.95,
-            "dailyReturn": 0.01282051,
-            "cumulativeReturn": 0.06469003,
-            "benchmarkDailyReturn": -0.00455696,
-            "benchmarkCumulativeReturn": -0.00089307,
-            "cumulativeAlpha": 0.0655831,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-08-31",
-            "close": 3.9,
-            "dailyReturn": -0.01265823,
-            "cumulativeReturn": 0.05121294,
-            "benchmarkDailyReturn": 0.00345181,
-            "benchmarkCumulativeReturn": 0.00255565,
-            "cumulativeAlpha": 0.04865728,
-            "drawdown": -0.01265823
-          },
-          {
-            "date": "2026-09-01",
-            "close": 3.99,
-            "dailyReturn": 0.02307692,
-            "cumulativeReturn": 0.0754717,
-            "benchmarkDailyReturn": -0.00295129,
-            "benchmarkCumulativeReturn": -0.00040318,
-            "cumulativeAlpha": 0.07587488,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-02",
-            "close": 3.84,
-            "dailyReturn": -0.03759398,
-            "cumulativeReturn": 0.03504043,
-            "benchmarkDailyReturn": -0.01376577,
-            "benchmarkCumulativeReturn": -0.0141634,
-            "cumulativeAlpha": 0.04920383,
-            "drawdown": -0.03759398
-          },
-          {
-            "date": "2026-09-03",
-            "close": 3.76,
-            "dailyReturn": -0.02083333,
-            "cumulativeReturn": 0.01347709,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.01316194,
-            "cumulativeAlpha": 0.02663903,
-            "drawdown": -0.05764411
-          },
-          {
-            "date": "2026-09-04",
-            "close": 3.78,
-            "dailyReturn": 0.00531915,
-            "cumulativeReturn": 0.01886792,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.01414389,
-            "cumulativeAlpha": 0.03301181,
-            "drawdown": -0.05263158
-          },
-          {
-            "date": "2026-09-07",
-            "close": 3.73,
-            "dailyReturn": -0.01322751,
-            "cumulativeReturn": 0.00539084,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00829775,
-            "cumulativeAlpha": 0.01368858,
-            "drawdown": -0.06516291
-          },
-          {
-            "date": "2026-09-08",
-            "close": 3.88,
-            "dailyReturn": 0.04021448,
-            "cumulativeReturn": 0.0458221,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.01182668,
-            "cumulativeAlpha": 0.05764878,
-            "drawdown": -0.02756892
-          },
-          {
-            "date": "2026-09-09",
-            "close": 3.89,
-            "dailyReturn": 0.00257732,
-            "cumulativeReturn": 0.04851752,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00882232,
-            "cumulativeAlpha": 0.05733984,
-            "drawdown": -0.02506266
-          },
-          {
-            "date": "2026-09-10",
-            "close": 3.91,
-            "dailyReturn": 0.00514139,
-            "cumulativeReturn": 0.05390836,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.01407019,
-            "cumulativeAlpha": 0.06797854,
-            "drawdown": -0.02005013
-          }
-        ],
-        "dailyReturn": 0.00514139,
-        "cumulativeReturn": 0.05390836,
-        "cumulativeAlpha": 0.06797854,
-        "maxDrawdown": -0.06516291,
-        "dailyPathMFE": 0.11320755,
-        "dailyPathMAE": -0.06738544,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "601288": {
         "entryRule": "次一交易日开盘等权",
@@ -16556,14 +15326,14 @@
       "state": "可更新后续收益",
       "note": "信号日当天涨跌属于当日行情表现，不计作策略可交易收益。"
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
@@ -25193,14 +23963,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
@@ -27050,97 +25820,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-01",
-            "close": 3.21,
-            "dailyReturn": 0.003125,
-            "cumulativeReturn": 0.003125,
-            "benchmarkDailyReturn": -0.00157836,
-            "benchmarkCumulativeReturn": -0.00157836,
-            "cumulativeAlpha": 0.00470336,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-02",
-            "close": 3.11,
-            "dailyReturn": -0.03115265,
-            "cumulativeReturn": -0.028125,
-            "benchmarkDailyReturn": -0.01376577,
-            "benchmarkCumulativeReturn": -0.01532239,
-            "cumulativeAlpha": -0.01280261,
-            "drawdown": -0.03115265
-          },
-          {
-            "date": "2026-09-03",
-            "close": 3.02,
-            "dailyReturn": -0.02893891,
-            "cumulativeReturn": -0.05625,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.01432212,
-            "cumulativeAlpha": -0.04192788,
-            "drawdown": -0.05919003
-          },
-          {
-            "date": "2026-09-04",
-            "close": 2.97,
-            "dailyReturn": -0.01655629,
-            "cumulativeReturn": -0.071875,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.01530291,
-            "cumulativeAlpha": -0.05657209,
-            "drawdown": -0.07476636
-          },
-          {
-            "date": "2026-09-07",
-            "close": 3.02,
-            "dailyReturn": 0.01683502,
-            "cumulativeReturn": -0.05625,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00946364,
-            "cumulativeAlpha": -0.04678636,
-            "drawdown": -0.05919003
-          },
-          {
-            "date": "2026-09-08",
-            "close": 3.32,
-            "dailyReturn": 0.09933775,
-            "cumulativeReturn": 0.0375,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.01298842,
-            "cumulativeAlpha": 0.05048842,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 3.24,
-            "dailyReturn": -0.02409639,
-            "cumulativeReturn": 0.0125,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00998759,
-            "cumulativeAlpha": 0.02248759,
-            "drawdown": -0.02409639
-          },
-          {
-            "date": "2026-09-10",
-            "close": 3.19,
-            "dailyReturn": -0.0154321,
-            "cumulativeReturn": -0.003125,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.01522929,
-            "cumulativeAlpha": 0.01210429,
-            "drawdown": -0.03915663
-          }
-        ],
-        "dailyReturn": -0.0154321,
-        "cumulativeReturn": -0.003125,
-        "cumulativeAlpha": 0.01210429,
-        "maxDrawdown": -0.07476636,
-        "dailyPathMFE": 0.0625,
-        "dailyPathMAE": -0.078125,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "001330": {
         "entryRule": "次一交易日开盘等权",
@@ -32240,14 +30920,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
@@ -33663,16 +32343,16 @@
           "asOf": "2026-09-08"
         },
         "current": {
-          "return": -0.037686,
+          "return": -0.039471,
           "median": -0.032706,
-          "alpha": -0.031478,
-          "hitRate": 0.25,
+          "alpha": -0.032982,
+          "hitRate": 0.125,
           "members": 8,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.044359,
-          "median": 0.041472,
+          "return": 0.051145,
+          "median": 0.058098,
           "alpha": null,
           "hitRate": 0.75,
           "members": 8,
@@ -33748,16 +32428,16 @@
           "asOf": "2026-09-08"
         },
         "current": {
-          "return": -0.021079,
+          "return": -0.022507,
           "median": -0.027336,
-          "alpha": -0.014802,
-          "hitRate": 0.3,
+          "alpha": -0.016004,
+          "hitRate": 0.2,
           "members": 10,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.050776,
-          "median": 0.049272,
+          "return": 0.056205,
+          "median": 0.058098,
           "alpha": null,
           "hitRate": 0.9,
           "members": 10,
@@ -33790,16 +32470,16 @@
           "asOf": "2026-09-08"
         },
         "current": {
-          "return": -0.036766,
+          "return": -0.038354,
           "median": -0.029412,
-          "alpha": -0.030446,
-          "hitRate": 0.222222,
+          "alpha": -0.031782,
+          "hitRate": 0.111111,
           "members": 9,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.04662,
-          "median": 0.051515,
+          "return": 0.052651,
+          "median": 0.064681,
           "alpha": null,
           "hitRate": 0.777778,
           "members": 9,
@@ -33878,16 +32558,16 @@
           "asOf": "2026-09-08"
         },
         "current": {
-          "return": -0.04157,
+          "return": -0.042999,
           "median": -0.038588,
-          "alpha": -0.03525,
-          "hitRate": 0.2,
+          "alpha": -0.036453,
+          "hitRate": 0.1,
           "members": 10,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.039254,
-          "median": 0.027686,
+          "return": 0.044683,
+          "median": 0.044313,
           "alpha": null,
           "hitRate": 0.7,
           "members": 10,
@@ -34033,87 +32713,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-02",
-            "close": 7.18,
-            "dailyReturn": -0.11138614,
-            "cumulativeReturn": -0.11138614,
-            "benchmarkDailyReturn": -0.00732291,
-            "benchmarkCumulativeReturn": -0.00732291,
-            "cumulativeAlpha": -0.10406323,
-            "drawdown": -0.11138614
-          },
-          {
-            "date": "2026-09-03",
-            "close": 6.99,
-            "dailyReturn": -0.0264624,
-            "cumulativeReturn": -0.13490099,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.00631451,
-            "cumulativeAlpha": -0.12858648,
-            "drawdown": -0.13490099
-          },
-          {
-            "date": "2026-09-04",
-            "close": 7.13,
-            "dailyReturn": 0.02002861,
-            "cumulativeReturn": -0.11757426,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.00730327,
-            "cumulativeAlpha": -0.11027099,
-            "drawdown": -0.11757426
-          },
-          {
-            "date": "2026-09-07",
-            "close": 7.38,
-            "dailyReturn": 0.03506311,
-            "cumulativeReturn": -0.08663366,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00141656,
-            "cumulativeAlpha": -0.0852171,
-            "drawdown": -0.08663366
-          },
-          {
-            "date": "2026-09-08",
-            "close": 7.69,
-            "dailyReturn": 0.04200542,
-            "cumulativeReturn": -0.04826733,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.00496998,
-            "cumulativeAlpha": -0.04329735,
-            "drawdown": -0.04826733
-          },
-          {
-            "date": "2026-09-09",
-            "close": 8.46,
-            "dailyReturn": 0.10013004,
-            "cumulativeReturn": 0.0470297,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00194477,
-            "cumulativeAlpha": 0.04897448,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 7.68,
-            "dailyReturn": -0.09219858,
-            "cumulativeReturn": -0.04950495,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00722906,
-            "cumulativeAlpha": -0.04227589,
-            "drawdown": -0.09219858
-          }
-        ],
-        "dailyReturn": -0.09219858,
-        "cumulativeReturn": -0.04950495,
-        "cumulativeAlpha": -0.04227589,
-        "maxDrawdown": -0.13490099,
-        "dailyPathMFE": 0.0470297,
-        "dailyPathMAE": -0.15841584,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000564": {
         "entryRule": "次一交易日开盘等权",
@@ -34160,94 +32760,14 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-02",
-            "close": 1.63,
-            "dailyReturn": -0.04117647,
-            "cumulativeReturn": -0.04117647,
-            "benchmarkDailyReturn": -0.00732291,
-            "benchmarkCumulativeReturn": -0.00732291,
-            "cumulativeAlpha": -0.03385356,
-            "drawdown": -0.04117647
-          },
-          {
-            "date": "2026-09-03",
-            "close": 1.6,
-            "dailyReturn": -0.01840491,
-            "cumulativeReturn": -0.05882353,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.00631451,
-            "cumulativeAlpha": -0.05250902,
-            "drawdown": -0.05882353
-          },
-          {
-            "date": "2026-09-04",
-            "close": 1.6,
-            "dailyReturn": 0.0,
-            "cumulativeReturn": -0.05882353,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.00730327,
-            "cumulativeAlpha": -0.05152026,
-            "drawdown": -0.05882353
-          },
-          {
-            "date": "2026-09-07",
-            "close": 1.65,
-            "dailyReturn": 0.03125,
-            "cumulativeReturn": -0.02941176,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00141656,
-            "cumulativeAlpha": -0.0279952,
-            "drawdown": -0.02941176
-          },
-          {
-            "date": "2026-09-08",
-            "close": 1.73,
-            "dailyReturn": 0.04848485,
-            "cumulativeReturn": 0.01764706,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.00496998,
-            "cumulativeAlpha": 0.02261704,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 1.71,
-            "dailyReturn": -0.01156069,
-            "cumulativeReturn": 0.00588235,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00194477,
-            "cumulativeAlpha": 0.00782713,
-            "drawdown": -0.01156069
-          },
-          {
-            "date": "2026-09-10",
-            "close": 1.65,
-            "dailyReturn": -0.03508772,
-            "cumulativeReturn": -0.02941176,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00722906,
-            "cumulativeAlpha": -0.02218271,
-            "drawdown": -0.04624277
-          }
-        ],
-        "dailyReturn": -0.03508772,
-        "cumulativeReturn": -0.02941176,
-        "cumulativeAlpha": -0.02218271,
-        "maxDrawdown": -0.05882353,
-        "dailyPathMFE": 0.06470588,
-        "dailyPathMAE": -0.08235294,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000713": {
         "entryRule": "次一交易日开盘等权",
         "entryDate": "2026-09-02",
         "entryPrice": 7.0,
-        "asOf": "2026-09-08",
-        "tradingDays": 5,
+        "asOf": "2026-09-10",
+        "tradingDays": 7,
         "source": "腾讯+东方财富未复权入场价；收益使用前复权日线",
         "1D": {
           "return": -0.081429,
@@ -34264,18 +32784,18 @@
           "mature": true
         },
         "current": {
-          "return": 0.008571,
-          "benchmark": -0.00497,
-          "alpha": 0.013541,
-          "asOf": "2026-09-08"
+          "return": -0.005714,
+          "benchmark": -0.007229,
+          "alpha": 0.001515,
+          "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.031429,
-          "asOf": "2026-09-08"
+          "return": 0.085714,
+          "asOf": "2026-09-10"
         },
         "MAE": {
           "return": -0.108571,
-          "asOf": "2026-09-08"
+          "asOf": "2026-09-10"
         },
         "returnEntryPriceAdjusted": 7.0,
         "priceValidation": {
@@ -34287,87 +32807,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-02",
-            "close": 6.43,
-            "dailyReturn": -0.08142857,
-            "cumulativeReturn": -0.08142857,
-            "benchmarkDailyReturn": -0.00732291,
-            "benchmarkCumulativeReturn": -0.00732291,
-            "cumulativeAlpha": -0.07410566,
-            "drawdown": -0.08142857
-          },
-          {
-            "date": "2026-09-03",
-            "close": 6.46,
-            "dailyReturn": 0.00466563,
-            "cumulativeReturn": -0.07714286,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.00631451,
-            "cumulativeAlpha": -0.07082835,
-            "drawdown": -0.07714286
-          },
-          {
-            "date": "2026-09-04",
-            "close": 6.55,
-            "dailyReturn": 0.01393189,
-            "cumulativeReturn": -0.06428571,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.00730327,
-            "cumulativeAlpha": -0.05698245,
-            "drawdown": -0.06428571
-          },
-          {
-            "date": "2026-09-07",
-            "close": 6.79,
-            "dailyReturn": 0.03664122,
-            "cumulativeReturn": -0.03,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00141656,
-            "cumulativeAlpha": -0.02858344,
-            "drawdown": -0.03
-          },
-          {
-            "date": "2026-09-08",
-            "close": 7.06,
-            "dailyReturn": 0.03976436,
-            "cumulativeReturn": 0.00857143,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.00496998,
-            "cumulativeAlpha": 0.01354141,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 7.23,
-            "dailyReturn": 0.02407932,
-            "cumulativeReturn": 0.03285714,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00194477,
-            "cumulativeAlpha": 0.03480192,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 6.96,
-            "dailyReturn": -0.0373444,
-            "cumulativeReturn": -0.00571429,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00722906,
-            "cumulativeAlpha": 0.00151477,
-            "drawdown": -0.0373444
-          }
-        ],
-        "dailyReturn": -0.0373444,
-        "cumulativeReturn": -0.00571429,
-        "cumulativeAlpha": 0.00151477,
-        "maxDrawdown": -0.08142857,
-        "dailyPathMFE": 0.08571429,
-        "dailyPathMAE": -0.10857143,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000716": {
         "entryRule": "次一交易日开盘等权",
@@ -34414,87 +32854,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-02",
-            "close": 5.4,
-            "dailyReturn": -0.07056799,
-            "cumulativeReturn": -0.07056799,
-            "benchmarkDailyReturn": -0.00732291,
-            "benchmarkCumulativeReturn": -0.00732291,
-            "cumulativeAlpha": -0.06324507,
-            "drawdown": -0.07056799
-          },
-          {
-            "date": "2026-09-03",
-            "close": 5.31,
-            "dailyReturn": -0.01666667,
-            "cumulativeReturn": -0.08605852,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.00631451,
-            "cumulativeAlpha": -0.07974401,
-            "drawdown": -0.08605852
-          },
-          {
-            "date": "2026-09-04",
-            "close": 5.46,
-            "dailyReturn": 0.02824859,
-            "cumulativeReturn": -0.06024096,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.00730327,
-            "cumulativeAlpha": -0.05293769,
-            "drawdown": -0.06024096
-          },
-          {
-            "date": "2026-09-07",
-            "close": 5.72,
-            "dailyReturn": 0.04761905,
-            "cumulativeReturn": -0.01549053,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00141656,
-            "cumulativeAlpha": -0.01407397,
-            "drawdown": -0.01549053
-          },
-          {
-            "date": "2026-09-08",
-            "close": 5.84,
-            "dailyReturn": 0.02097902,
-            "cumulativeReturn": 0.00516351,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.00496998,
-            "cumulativeAlpha": 0.01013349,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 5.73,
-            "dailyReturn": -0.01883562,
-            "cumulativeReturn": -0.01376936,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00194477,
-            "cumulativeAlpha": -0.01182459,
-            "drawdown": -0.01883562
-          },
-          {
-            "date": "2026-09-10",
-            "close": 5.55,
-            "dailyReturn": -0.03141361,
-            "cumulativeReturn": -0.04475043,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00722906,
-            "cumulativeAlpha": -0.03752137,
-            "drawdown": -0.04965753
-          }
-        ],
-        "dailyReturn": -0.03141361,
-        "cumulativeReturn": -0.04475043,
-        "cumulativeAlpha": -0.03752137,
-        "maxDrawdown": -0.08605852,
-        "dailyPathMFE": 0.02065404,
-        "dailyPathMAE": -0.09122203,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000998": {
         "entryRule": "次一交易日开盘等权",
@@ -34668,87 +33028,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-02",
-            "close": 10.87,
-            "dailyReturn": -0.07489362,
-            "cumulativeReturn": -0.07489362,
-            "benchmarkDailyReturn": -0.00732291,
-            "benchmarkCumulativeReturn": -0.00732291,
-            "cumulativeAlpha": -0.0675707,
-            "drawdown": -0.07489362
-          },
-          {
-            "date": "2026-09-03",
-            "close": 10.43,
-            "dailyReturn": -0.04047838,
-            "cumulativeReturn": -0.11234043,
-            "benchmarkDailyReturn": 0.00101584,
-            "benchmarkCumulativeReturn": -0.00631451,
-            "cumulativeAlpha": -0.10602591,
-            "drawdown": -0.11234043
-          },
-          {
-            "date": "2026-09-04",
-            "close": 10.98,
-            "dailyReturn": 0.0527325,
-            "cumulativeReturn": -0.06553191,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.00730327,
-            "cumulativeAlpha": -0.05822865,
-            "drawdown": -0.06553191
-          },
-          {
-            "date": "2026-09-07",
-            "close": 11.58,
-            "dailyReturn": 0.05464481,
-            "cumulativeReturn": -0.01446809,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -0.00141656,
-            "cumulativeAlpha": -0.01305152,
-            "drawdown": -0.01446809
-          },
-          {
-            "date": "2026-09-08",
-            "close": 12.02,
-            "dailyReturn": 0.03799655,
-            "cumulativeReturn": 0.02297872,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.00496998,
-            "cumulativeAlpha": 0.0279487,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 11.66,
-            "dailyReturn": -0.02995008,
-            "cumulativeReturn": -0.00765957,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00194477,
-            "cumulativeAlpha": -0.0057148,
-            "drawdown": -0.02995008
-          },
-          {
-            "date": "2026-09-10",
-            "close": 11.14,
-            "dailyReturn": -0.04459691,
-            "cumulativeReturn": -0.05191489,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00722906,
-            "cumulativeAlpha": -0.04468584,
-            "drawdown": -0.07321131
-          }
-        ],
-        "dailyReturn": -0.04459691,
-        "cumulativeReturn": -0.05191489,
-        "cumulativeAlpha": -0.04468584,
-        "maxDrawdown": -0.11234043,
-        "dailyPathMFE": 0.06468085,
-        "dailyPathMAE": -0.13276596,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002470": {
         "entryRule": "次一交易日开盘等权",
@@ -38921,14 +37201,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
@@ -40688,77 +38968,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-03",
-            "close": 15.3,
-            "dailyReturn": 0.00327869,
-            "cumulativeReturn": 0.00327869,
-            "benchmarkDailyReturn": -0.00401014,
-            "benchmarkCumulativeReturn": -0.00401014,
-            "cumulativeAlpha": 0.00728883,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-04",
-            "close": 15.8,
-            "dailyReturn": 0.03267974,
-            "cumulativeReturn": 0.03606557,
-            "benchmarkDailyReturn": -0.00099504,
-            "benchmarkCumulativeReturn": -0.00500119,
-            "cumulativeAlpha": 0.04106677,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-07",
-            "close": 15.69,
-            "dailyReturn": -0.00696203,
-            "cumulativeReturn": 0.02885246,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": 0.00089916,
-            "cumulativeAlpha": 0.02795329,
-            "drawdown": -0.00696203
-          },
-          {
-            "date": "2026-09-08",
-            "close": 16.06,
-            "dailyReturn": 0.0235819,
-            "cumulativeReturn": 0.05311475,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.00266249,
-            "cumulativeAlpha": 0.05577724,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 16.63,
-            "dailyReturn": 0.03549191,
-            "cumulativeReturn": 0.0904918,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": 0.00036973,
-            "cumulativeAlpha": 0.09012207,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 16.14,
-            "dailyReturn": -0.02946482,
-            "cumulativeReturn": 0.05836066,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00492681,
-            "cumulativeAlpha": 0.06328746,
-            "drawdown": -0.02946482
-          }
-        ],
-        "dailyReturn": -0.02946482,
-        "cumulativeReturn": 0.05836066,
-        "cumulativeAlpha": 0.06328746,
-        "maxDrawdown": -0.02946482,
-        "dailyPathMFE": 0.1147541,
-        "dailyPathMAE": -0.02622951,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002297": {
         "entryRule": "次一交易日开盘等权",
@@ -45395,14 +43605,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
@@ -46590,24 +44800,24 @@
           "asOf": "2026-09-04"
         },
         "5D": {
-          "return": 0.045455,
-          "median": 0.045455,
-          "alpha": 0.05134,
+          "return": 0.074503,
+          "median": 0.074503,
+          "alpha": 0.080389,
           "hitRate": 1.0,
-          "members": 1,
+          "members": 2,
           "asOf": "2026-09-10"
         },
         "current": {
-          "return": 0.071995,
-          "median": 0.080138,
-          "alpha": 0.076184,
+          "return": 0.095359,
+          "median": 0.109186,
+          "alpha": 0.100114,
           "hitRate": 1.0,
           "members": 4,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.105873,
-          "median": 0.113905,
+          "return": 0.13106,
+          "median": 0.138937,
           "alpha": null,
           "hitRate": 1.0,
           "members": 4,
@@ -46717,24 +44927,24 @@
           "asOf": "2026-09-04"
         },
         "5D": {
-          "return": 0.045455,
-          "median": 0.045455,
-          "alpha": 0.05134,
+          "return": 0.074503,
+          "median": 0.074503,
+          "alpha": 0.080389,
           "hitRate": 1.0,
-          "members": 1,
+          "members": 2,
           "asOf": "2026-09-10"
         },
         "current": {
-          "return": 0.071995,
-          "median": 0.080138,
-          "alpha": 0.076184,
+          "return": 0.095359,
+          "median": 0.109186,
+          "alpha": 0.100114,
           "hitRate": 1.0,
           "members": 4,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.105873,
-          "median": 0.113905,
+          "return": 0.13106,
+          "median": 0.138937,
           "alpha": null,
           "hitRate": 1.0,
           "members": 4,
@@ -46797,24 +45007,24 @@
           "asOf": "2026-09-04"
         },
         "5D": {
-          "return": 0.049834,
-          "median": 0.049834,
-          "alpha": 0.055719,
+          "return": 0.06774,
+          "median": 0.054213,
+          "alpha": 0.073625,
           "hitRate": 1.0,
-          "members": 2,
+          "members": 3,
           "asOf": "2026-09-10"
         },
         "current": {
-          "return": 0.041969,
-          "median": 0.045455,
-          "alpha": 0.046572,
+          "return": 0.05532,
+          "median": 0.054213,
+          "alpha": 0.060247,
           "hitRate": 0.857143,
           "members": 7,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.080076,
-          "median": 0.088068,
+          "return": 0.094468,
+          "median": 0.110385,
           "alpha": null,
           "hitRate": 1.0,
           "members": 7,
@@ -46960,67 +45170,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-04",
-            "close": 15.8,
-            "dailyReturn": 0.03200523,
-            "cumulativeReturn": 0.03200523,
-            "benchmarkDailyReturn": -0.00596024,
-            "benchmarkCumulativeReturn": -0.00596024,
-            "cumulativeAlpha": 0.03796546,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-07",
-            "close": 15.69,
-            "dailyReturn": -0.00696203,
-            "cumulativeReturn": 0.02482038,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -6.557e-05,
-            "cumulativeAlpha": 0.02488595,
-            "drawdown": -0.00696203
-          },
-          {
-            "date": "2026-09-08",
-            "close": 16.06,
-            "dailyReturn": 0.0235819,
-            "cumulativeReturn": 0.04898759,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.00362379,
-            "cumulativeAlpha": 0.05261138,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 16.63,
-            "dailyReturn": 0.03549191,
-            "cumulativeReturn": 0.08621816,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00059449,
-            "cumulativeAlpha": 0.08681265,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 16.14,
-            "dailyReturn": -0.02946482,
-            "cumulativeReturn": 0.05421293,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00588593,
-            "cumulativeAlpha": 0.06009886,
-            "drawdown": -0.02946482
-          }
-        ],
-        "dailyReturn": -0.02946482,
-        "cumulativeReturn": 0.05421293,
-        "cumulativeAlpha": 0.06009886,
-        "maxDrawdown": -0.02946482,
-        "dailyPathMFE": 0.11038537,
-        "dailyPathMAE": -0.00457218,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "600655": {
         "entryRule": "次一交易日开盘等权",
@@ -47373,8 +45523,8 @@
         "entryRule": "次一交易日开盘等权",
         "entryDate": "2026-09-04",
         "entryPrice": 53.5,
-        "asOf": "2026-09-08",
-        "tradingDays": 3,
+        "asOf": "2026-09-10",
+        "tradingDays": 5,
         "source": "腾讯+东方财富未复权入场价；收益使用前复权日线",
         "1D": {
           "return": -0.048037,
@@ -47383,19 +45533,26 @@
           "asOf": "2026-09-04",
           "mature": true
         },
+        "5D": {
+          "return": 0.103551,
+          "benchmark": -0.005886,
+          "alpha": 0.109437,
+          "asOf": "2026-09-10",
+          "mature": true
+        },
         "current": {
-          "return": 0.010093,
-          "benchmark": -0.003624,
-          "alpha": 0.013717,
-          "asOf": "2026-09-08"
+          "return": 0.103551,
+          "benchmark": -0.005886,
+          "alpha": 0.109437,
+          "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.037383,
-          "asOf": "2026-09-08"
+          "return": 0.138131,
+          "asOf": "2026-09-10"
         },
         "MAE": {
           "return": -0.061495,
-          "asOf": "2026-09-08"
+          "asOf": "2026-09-10"
         },
         "returnEntryPriceAdjusted": 53.5,
         "priceValidation": {
@@ -47407,67 +45564,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-04",
-            "close": 50.93,
-            "dailyReturn": -0.04803738,
-            "cumulativeReturn": -0.04803738,
-            "benchmarkDailyReturn": -0.00596024,
-            "benchmarkCumulativeReturn": -0.00596024,
-            "cumulativeAlpha": -0.04207714,
-            "drawdown": -0.04803738
-          },
-          {
-            "date": "2026-09-07",
-            "close": 51.61,
-            "dailyReturn": 0.01335166,
-            "cumulativeReturn": -0.0353271,
-            "benchmarkDailyReturn": 0.00593001,
-            "benchmarkCumulativeReturn": -6.557e-05,
-            "cumulativeAlpha": -0.03526153,
-            "drawdown": -0.0353271
-          },
-          {
-            "date": "2026-09-08",
-            "close": 54.04,
-            "dailyReturn": 0.0470839,
-            "cumulativeReturn": 0.01009346,
-            "benchmarkDailyReturn": -0.00355845,
-            "benchmarkCumulativeReturn": -0.00362379,
-            "cumulativeAlpha": 0.01371725,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 59.44,
-            "dailyReturn": 0.09992598,
-            "cumulativeReturn": 0.11102804,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00059449,
-            "cumulativeAlpha": 0.11162253,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 59.04,
-            "dailyReturn": -0.00672948,
-            "cumulativeReturn": 0.1035514,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00588593,
-            "cumulativeAlpha": 0.10943733,
-            "drawdown": -0.00672948
-          }
-        ],
-        "dailyReturn": -0.00672948,
-        "cumulativeReturn": 0.1035514,
-        "cumulativeAlpha": 0.10943733,
-        "maxDrawdown": -0.04803738,
-        "dailyPathMFE": 0.13813084,
-        "dailyPathMAE": -0.06149533,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002171": {
         "entryRule": "次一交易日开盘等权",
@@ -50724,14 +48821,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
@@ -52128,16 +50225,16 @@
           "asOf": "2026-09-08"
         },
         "current": {
-          "return": 0.001748,
-          "median": -0.003305,
-          "alpha": 0.006083,
+          "return": 0.005327,
+          "median": -0.002181,
+          "alpha": 0.009945,
           "hitRate": 0.5,
           "members": 8,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.033061,
-          "median": 0.026903,
+          "return": 0.037525,
+          "median": 0.030078,
           "alpha": null,
           "hitRate": 1.0,
           "members": 8,
@@ -52269,16 +50366,16 @@
           "asOf": "2026-09-08"
         },
         "current": {
-          "return": 0.008702,
-          "median": 0.009319,
-          "alpha": 0.012795,
+          "return": 0.012792,
+          "median": 0.009467,
+          "alpha": 0.017208,
           "hitRate": 0.714286,
           "members": 7,
           "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.036672,
-          "median": 0.027019,
+          "return": 0.041774,
+          "median": 0.036667,
           "alpha": null,
           "hitRate": 1.0,
           "members": 7,
@@ -52401,8 +50498,8 @@
         "entryRule": "次一交易日开盘等权",
         "entryDate": "2026-09-08",
         "entryPrice": 168.0,
-        "asOf": "2026-09-08",
-        "tradingDays": 1,
+        "asOf": "2026-09-10",
+        "tradingDays": 3,
         "source": "腾讯+东方财富未复权入场价；收益使用前复权日线",
         "1D": {
           "return": 0.007083,
@@ -52412,18 +50509,18 @@
           "mature": true
         },
         "current": {
-          "return": 0.007083,
-          "benchmark": -0.00377,
-          "alpha": 0.010853,
-          "asOf": "2026-09-08"
+          "return": 0.035714,
+          "benchmark": -0.006031,
+          "alpha": 0.041746,
+          "asOf": "2026-09-10"
         },
         "MFE": {
-          "return": 0.026786,
-          "asOf": "2026-09-08"
+          "return": 0.0625,
+          "asOf": "2026-09-10"
         },
         "MAE": {
           "return": -0.008214,
-          "asOf": "2026-09-08"
+          "asOf": "2026-09-10"
         },
         "returnEntryPriceAdjusted": 168.0,
         "priceValidation": {
@@ -52435,47 +50532,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-08",
-            "close": 169.19,
-            "dailyReturn": 0.00708333,
-            "cumulativeReturn": 0.00708333,
-            "benchmarkDailyReturn": -0.00376968,
-            "benchmarkCumulativeReturn": -0.00376968,
-            "cumulativeAlpha": 0.01085301,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-09",
-            "close": 173.92,
-            "dailyReturn": 0.02795674,
-            "cumulativeReturn": 0.0352381,
-            "benchmarkDailyReturn": 0.00304031,
-            "benchmarkCumulativeReturn": -0.00074082,
-            "cumulativeAlpha": 0.03597892,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 174.0,
-            "dailyReturn": 0.00045998,
-            "cumulativeReturn": 0.03571429,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00603148,
-            "cumulativeAlpha": 0.04174577,
-            "drawdown": 0.0
-          }
-        ],
-        "dailyReturn": 0.00045998,
-        "cumulativeReturn": 0.03571429,
-        "cumulativeAlpha": 0.04174577,
-        "maxDrawdown": 0.0,
-        "dailyPathMFE": 0.0625,
-        "dailyPathMAE": -0.00821429,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002156": {
         "entryRule": "次一交易日开盘等权",
@@ -56571,14 +54628,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
@@ -57804,9 +55861,9 @@
           "asOf": "2026-09-09"
         },
         "current": {
-          "return": -0.003289,
-          "median": -0.006482,
-          "alpha": 0.000646,
+          "return": -0.013071,
+          "median": -0.007377,
+          "alpha": -0.007815,
           "hitRate": 0.5,
           "members": 4,
           "asOf": "2026-09-10"
@@ -58047,12 +56104,12 @@
           "asOf": "2026-09-09"
         },
         "current": {
-          "return": 0.047826,
-          "median": 0.047826,
-          "alpha": 0.049117,
+          "return": 0.008696,
+          "median": 0.008696,
+          "alpha": 0.015274,
           "hitRate": 1.0,
           "members": 1,
-          "asOf": "2026-09-09"
+          "asOf": "2026-09-10"
         },
         "MFE": {
           "return": 0.101449,
@@ -58060,7 +56117,7 @@
           "alpha": null,
           "hitRate": 1.0,
           "members": 1,
-          "asOf": "2026-09-09"
+          "asOf": "2026-09-10"
         },
         "MAE": {
           "return": -0.010145,
@@ -58068,7 +56125,7 @@
           "alpha": null,
           "hitRate": 0.0,
           "members": 1,
-          "asOf": "2026-09-09"
+          "asOf": "2026-09-10"
         }
       }
     },
@@ -58217,8 +56274,8 @@
         "entryRule": "次一交易日开盘等权",
         "entryDate": "2026-09-09",
         "entryPrice": 6.9,
-        "asOf": "2026-09-09",
-        "tradingDays": 1,
+        "asOf": "2026-09-10",
+        "tradingDays": 2,
         "source": "腾讯+东方财富未复权入场价；收益使用前复权日线",
         "1D": {
           "return": 0.047826,
@@ -58228,18 +56285,18 @@
           "mature": true
         },
         "current": {
-          "return": 0.047826,
-          "benchmark": -0.001291,
-          "alpha": 0.049117,
-          "asOf": "2026-09-09"
+          "return": 0.008696,
+          "benchmark": -0.006579,
+          "alpha": 0.015274,
+          "asOf": "2026-09-10"
         },
         "MFE": {
           "return": 0.101449,
-          "asOf": "2026-09-09"
+          "asOf": "2026-09-10"
         },
         "MAE": {
           "return": -0.010145,
-          "asOf": "2026-09-09"
+          "asOf": "2026-09-10"
         },
         "returnEntryPriceAdjusted": 6.9,
         "priceValidation": {
@@ -58247,41 +56304,11 @@
           "basis": "raw-open",
           "providers": [
             "腾讯",
-            "Yunai"
+            "东方财富"
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-09",
-            "close": 7.23,
-            "dailyReturn": 0.04782609,
-            "cumulativeReturn": 0.04782609,
-            "benchmarkDailyReturn": -0.00129081,
-            "benchmarkCumulativeReturn": -0.00129081,
-            "cumulativeAlpha": 0.0491169,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 6.96,
-            "dailyReturn": -0.0373444,
-            "cumulativeReturn": 0.00869565,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00657856,
-            "cumulativeAlpha": 0.01527421,
-            "drawdown": -0.0373444
-          }
-        ],
-        "dailyReturn": -0.0373444,
-        "cumulativeReturn": 0.00869565,
-        "cumulativeAlpha": 0.01527421,
-        "maxDrawdown": -0.0373444,
-        "dailyPathMFE": 0.10144928,
-        "dailyPathMAE": -0.01014493,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000737": {
         "entryRule": "次一交易日开盘等权",
@@ -58321,37 +56348,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-09",
-            "close": 16.47,
-            "dailyReturn": 0.01603948,
-            "cumulativeReturn": 0.01603948,
-            "benchmarkDailyReturn": -0.00129081,
-            "benchmarkCumulativeReturn": -0.00129081,
-            "cumulativeAlpha": 0.01733029,
-            "drawdown": 0.0
-          },
-          {
-            "date": "2026-09-10",
-            "close": 16.38,
-            "dailyReturn": -0.00546448,
-            "cumulativeReturn": 0.01048735,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00657856,
-            "cumulativeAlpha": 0.01706591,
-            "drawdown": -0.00546448
-          }
-        ],
-        "dailyReturn": -0.00546448,
-        "cumulativeReturn": 0.01048735,
-        "cumulativeAlpha": 0.01706591,
-        "maxDrawdown": -0.00546448,
-        "dailyPathMFE": 0.06107341,
-        "dailyPathMAE": -0.01357187,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000893": {
         "entryRule": "次一交易日开盘等权",
@@ -58391,37 +56388,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-09",
-            "close": 43.23,
-            "dailyReturn": -0.04779736,
-            "cumulativeReturn": -0.04779736,
-            "benchmarkDailyReturn": -0.00129081,
-            "benchmarkCumulativeReturn": -0.00129081,
-            "cumulativeAlpha": -0.04650654,
-            "drawdown": -0.04779736
-          },
-          {
-            "date": "2026-09-10",
-            "close": 43.22,
-            "dailyReturn": -0.00023132,
-            "cumulativeReturn": -0.04801762,
-            "benchmarkDailyReturn": -0.00529458,
-            "benchmarkCumulativeReturn": -0.00657856,
-            "cumulativeAlpha": -0.04143906,
-            "drawdown": -0.04801762
-          }
-        ],
-        "dailyReturn": -0.00023132,
-        "cumulativeReturn": -0.04801762,
-        "cumulativeAlpha": -0.04143906,
-        "maxDrawdown": -0.04801762,
-        "dailyPathMFE": 0.01101322,
-        "dailyPathMAE": -0.06806167,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002312": {
         "entryRule": "次一交易日开盘等权",
@@ -62044,14 +60011,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
@@ -63907,31 +61874,11 @@
           "basis": "raw-open",
           "providers": [
             "腾讯",
-            "Yunai"
+            "东方财富"
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-10",
-            "close": 18.7,
-            "dailyReturn": 0.11309524,
-            "cumulativeReturn": 0.11309524,
-            "benchmarkDailyReturn": -0.00039559,
-            "benchmarkCumulativeReturn": -0.00039559,
-            "cumulativeAlpha": 0.11349083,
-            "drawdown": 0.0
-          }
-        ],
-        "dailyReturn": 0.11309524,
-        "cumulativeReturn": 0.11309524,
-        "cumulativeAlpha": 0.11349083,
-        "maxDrawdown": 0.0,
-        "dailyPathMFE": 0.11309524,
-        "dailyPathMAE": -0.0077381,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "000988": {
         "entryRule": "次一交易日开盘等权",
@@ -64027,31 +61974,11 @@
           "basis": "raw-open",
           "providers": [
             "腾讯",
-            "Yunai"
+            "东方财富"
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-10",
-            "close": 94.78,
-            "dailyReturn": -0.00263075,
-            "cumulativeReturn": -0.00263075,
-            "benchmarkDailyReturn": -0.00039559,
-            "benchmarkCumulativeReturn": -0.00039559,
-            "cumulativeAlpha": -0.00223516,
-            "drawdown": -0.00263075
-          }
-        ],
-        "dailyReturn": -0.00263075,
-        "cumulativeReturn": -0.00263075,
-        "cumulativeAlpha": -0.00223516,
-        "maxDrawdown": -0.00263075,
-        "dailyPathMFE": 0.01694202,
-        "dailyPathMAE": -0.01925708,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002320": {
         "entryRule": "次一交易日开盘等权",
@@ -64087,31 +62014,11 @@
           "basis": "raw-open",
           "providers": [
             "腾讯",
-            "Yunai"
+            "东方财富"
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-10",
-            "close": 7.83,
-            "dailyReturn": 0.04260985,
-            "cumulativeReturn": 0.04260985,
-            "benchmarkDailyReturn": -0.00039559,
-            "benchmarkCumulativeReturn": -0.00039559,
-            "cumulativeAlpha": 0.04300544,
-            "drawdown": 0.0
-          }
-        ],
-        "dailyReturn": 0.04260985,
-        "cumulativeReturn": 0.04260985,
-        "cumulativeAlpha": 0.04300544,
-        "maxDrawdown": 0.0,
-        "dailyPathMFE": 0.07723036,
-        "dailyPathMAE": -0.02663116,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002384": {
         "entryRule": "次一交易日开盘等权",
@@ -64211,27 +62118,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-10",
-            "close": 39.71,
-            "dailyReturn": 0.01612078,
-            "cumulativeReturn": 0.01612078,
-            "benchmarkDailyReturn": -0.00039559,
-            "benchmarkCumulativeReturn": -0.00039559,
-            "cumulativeAlpha": 0.01651637,
-            "drawdown": 0.0
-          }
-        ],
-        "dailyReturn": 0.01612078,
-        "cumulativeReturn": 0.01612078,
-        "cumulativeAlpha": 0.01651637,
-        "maxDrawdown": 0.0,
-        "dailyPathMFE": 0.02814739,
-        "dailyPathMAE": -0.01791198,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002579": {
         "entryRule": "次一交易日开盘等权",
@@ -64271,27 +62158,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-10",
-            "close": 16.73,
-            "dailyReturn": -0.01646091,
-            "cumulativeReturn": -0.01646091,
-            "benchmarkDailyReturn": -0.00039559,
-            "benchmarkCumulativeReturn": -0.00039559,
-            "cumulativeAlpha": -0.01606532,
-            "drawdown": -0.01646091
-          }
-        ],
-        "dailyReturn": -0.01646091,
-        "cumulativeReturn": -0.01646091,
-        "cumulativeAlpha": -0.01606532,
-        "maxDrawdown": -0.01646091,
-        "dailyPathMFE": 0.01410935,
-        "dailyPathMAE": -0.03174603,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002636": {
         "entryRule": "次一交易日开盘等权",
@@ -64331,27 +62198,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-10",
-            "close": 76.45,
-            "dailyReturn": 0.11622135,
-            "cumulativeReturn": 0.11622135,
-            "benchmarkDailyReturn": -0.00039559,
-            "benchmarkCumulativeReturn": -0.00039559,
-            "cumulativeAlpha": 0.11661693,
-            "drawdown": 0.0
-          }
-        ],
-        "dailyReturn": 0.11622135,
-        "cumulativeReturn": 0.11622135,
-        "cumulativeAlpha": 0.11661693,
-        "maxDrawdown": 0.0,
-        "dailyPathMFE": 0.11622135,
-        "dailyPathMAE": -0.00262812,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002815": {
         "entryRule": "次一交易日开盘等权",
@@ -64391,27 +62238,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-10",
-            "close": 18.25,
-            "dailyReturn": 0.01388889,
-            "cumulativeReturn": 0.01388889,
-            "benchmarkDailyReturn": -0.00039559,
-            "benchmarkCumulativeReturn": -0.00039559,
-            "cumulativeAlpha": 0.01428448,
-            "drawdown": 0.0
-          }
-        ],
-        "dailyReturn": 0.01388889,
-        "cumulativeReturn": 0.01388889,
-        "cumulativeAlpha": 0.01428448,
-        "maxDrawdown": 0.0,
-        "dailyPathMFE": 0.03444444,
-        "dailyPathMAE": -0.02833333,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002916": {
         "entryRule": "次一交易日开盘等权",
@@ -64451,27 +62278,7 @@
           ],
           "maxRelDiff": 0.0,
           "returnBasis": "qfq"
-        },
-        "dailySeries": [
-          {
-            "date": "2026-09-10",
-            "close": 392.31,
-            "dailyReturn": 0.03201452,
-            "cumulativeReturn": 0.03201452,
-            "benchmarkDailyReturn": -0.00039559,
-            "benchmarkCumulativeReturn": -0.00039559,
-            "cumulativeAlpha": 0.03241011,
-            "drawdown": 0.0
-          }
-        ],
-        "dailyReturn": 0.03201452,
-        "cumulativeReturn": 0.03201452,
-        "cumulativeAlpha": 0.03241011,
-        "maxDrawdown": 0.0,
-        "dailyPathMFE": 0.04664071,
-        "dailyPathMAE": -0.00826011,
-        "dailyPathAsOf": "2026-09-10",
-        "dailyPathVersion": "v2.6-daily-path-fixed-member-nav"
+        }
       },
       "002938": {
         "entryRule": "次一交易日开盘等权",
@@ -67899,14 +65706,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-09-10T16:24:31+08:00",
+    "trackingUpdatedAt": "2026-09-10T16:48:12+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.4.1-next-open-verified-reference"
+      "version": "v1.4-next-open-verified-3source-display"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-09-10T16:03:50+08:00",
