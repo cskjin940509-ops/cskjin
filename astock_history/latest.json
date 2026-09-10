@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-09-10T15:23:10+08:00",
+  "updatedAt": "2026-09-10T15:25:21+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
     "sampleCount": 178,
@@ -21,35 +21,35 @@
         "p90": 0.034961
       },
       "2D": {
-        "members": 155,
+        "members": 119,
         "mature": true,
-        "meanReturn": -0.03565928,
-        "medianReturn": -0.03461753,
-        "hitRate": 0.24516129,
-        "meanAlpha": -0.02675005,
-        "medianAlpha": -0.02803897,
-        "p10": -0.11208558,
-        "p25": -0.07263027,
+        "meanReturn": -0.03382618,
+        "medianReturn": -0.03275109,
+        "hitRate": 0.24369748,
+        "meanAlpha": -0.02464604,
+        "medianAlpha": -0.02367863,
+        "p10": -0.10580523,
+        "p25": -0.06689051,
         "p75": -0.00070989,
-        "p90": 0.02752168
+        "p90": 0.01898472
       },
       "3D": {
-        "members": 138,
+        "members": 105,
         "mature": true,
-        "meanReturn": -0.03585289,
-        "medianReturn": -0.04582122,
-        "hitRate": 0.24637681,
-        "meanAlpha": -0.02584386,
-        "medianAlpha": -0.03495315,
-        "p10": -0.1072688,
-        "p25": -0.07702182,
-        "p75": -0.00293981,
-        "p90": 0.03577348
+        "meanReturn": -0.03346753,
+        "medianReturn": -0.04166667,
+        "hitRate": 0.25714286,
+        "meanAlpha": -0.02320689,
+        "medianAlpha": -0.0333964,
+        "p10": -0.10903538,
+        "p25": -0.07692308,
+        "p75": 0.00184843,
+        "p90": 0.03583268
       },
       "5D": {
         "members": 121,
         "mature": true,
-        "meanReturn": -0.01050153,
+        "meanReturn": -0.01050152,
         "medianReturn": -0.008108,
         "hitRate": 0.46280992,
         "meanAlpha": -0.00146837,
@@ -93,9 +93,9 @@
         "mature": false
       }
     },
-    "medianMFE": 0.034266,
+    "medianMFE": 0.036711,
     "medianMAE": -0.049947,
-    "medianMaxDrawdown": -0.06386304
+    "medianMaxDrawdown": -0.0621765
   },
   "horizonGroups": {
     "shortTerm": [
@@ -853,8 +853,8 @@
       {
         "date": "2026-09-03",
         "windowSamples": 20,
-        "medianAlpha": 0.04469381,
-        "medianReturn": 0.04193572,
+        "medianAlpha": 0.04469358,
+        "medianReturn": 0.04193595,
         "hitRate": 0.75
       },
       {
@@ -881,15 +881,15 @@
       {
         "date": "2026-09-03",
         "windowSamples": 20,
-        "medianAlpha": 0.04741851,
-        "medianReturn": 0.04153258,
+        "medianAlpha": 0.04741827,
+        "medianReturn": 0.04153281,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-03",
         "windowSamples": 20,
-        "medianAlpha": 0.04741851,
-        "medianReturn": 0.04153258,
+        "medianAlpha": 0.04741827,
+        "medianReturn": 0.04153281,
         "hitRate": 0.7
       }
     ],
@@ -972,21 +972,21 @@
     },
     {
       "day": 2,
-      "meanReturn": -0.03565928,
-      "medianReturn": -0.03461753,
-      "meanAlpha": -0.02675005,
-      "members": 155
+      "meanReturn": -0.03382618,
+      "medianReturn": -0.03275109,
+      "meanAlpha": -0.02464604,
+      "members": 119
     },
     {
       "day": 3,
-      "meanReturn": -0.03585289,
-      "medianReturn": -0.04582122,
-      "meanAlpha": -0.02584386,
-      "members": 138
+      "meanReturn": -0.03346753,
+      "medianReturn": -0.04166667,
+      "meanAlpha": -0.02320689,
+      "members": 105
     },
     {
       "day": 5,
-      "meanReturn": -0.01050153,
+      "meanReturn": -0.01050152,
       "medianReturn": -0.008108,
       "meanAlpha": -0.00146837,
       "members": 121
@@ -1053,52 +1053,52 @@
     },
     "3D": {
       "horizon": "3D",
-      "members": 138,
+      "members": 105,
       "bins": [
         {
           "label": "<-5%",
-          "count": 64,
-          "share": 0.46376812
+          "count": 47,
+          "share": 0.44761905
         },
         {
           "label": "-5~-3%",
-          "count": 18,
-          "share": 0.13043478
+          "count": 13,
+          "share": 0.12380952
         },
         {
           "label": "-3~-1%",
-          "count": 20,
-          "share": 0.14492754
+          "count": 16,
+          "share": 0.15238095
         },
         {
           "label": "-1~0%",
           "count": 2,
-          "share": 0.01449275
+          "share": 0.01904762
         },
         {
           "label": "0~1%",
-          "count": 5,
-          "share": 0.03623188
+          "count": 4,
+          "share": 0.03809524
         },
         {
           "label": "1~3%",
-          "count": 11,
-          "share": 0.07971014
+          "count": 8,
+          "share": 0.07619048
         },
         {
           "label": "3~5%",
-          "count": 8,
-          "share": 0.05797101
+          "count": 6,
+          "share": 0.05714286
         },
         {
           "label": "5~10%",
-          "count": 6,
-          "share": 0.04347826
+          "count": 5,
+          "share": 0.04761905
         },
         {
           "label": ">10%",
           "count": 4,
-          "share": 0.02898551
+          "share": 0.03809524
         }
       ]
     },
@@ -1680,7 +1680,7 @@
       "code": "002312",
       "name": "川发龙蟒",
       "mfe": 0.028125,
-      "mae": -0.028125,
+      "mae": -0.034375,
       "fiveDayReturn": null
     },
     {
@@ -1805,8 +1805,8 @@
       "date": "2026-09-07",
       "code": "300394",
       "name": "天孚通信",
-      "mfe": 0.031045,
-      "mae": -0.031309,
+      "mfe": 0.044851,
+      "mae": -0.045379,
       "fiveDayReturn": null
     },
     {
@@ -1814,7 +1814,7 @@
       "date": "2026-09-07",
       "code": "002815",
       "name": "崇达技术",
-      "mfe": 0.029223,
+      "mfe": 0.088837,
       "mae": -0.009351,
       "fiveDayReturn": null
     },
@@ -1841,8 +1841,8 @@
       "date": "2026-09-07",
       "code": "002281",
       "name": "光迅科技",
-      "mfe": 0.006181,
-      "mae": -0.057108,
+      "mfe": 0.014264,
+      "mae": -0.059485,
       "fiveDayReturn": null
     },
     {
@@ -1851,7 +1851,7 @@
       "code": "002156",
       "name": "通富微电",
       "mfe": 0.015046,
-      "mae": -0.019949,
+      "mae": -0.027726,
       "fiveDayReturn": null
     },
     {
@@ -1913,9 +1913,9 @@
       "date": "2026-09-03",
       "code": "002171",
       "name": "楚江新材",
-      "mfe": 0.012311,
+      "mfe": 0.088068,
       "mae": -0.043561,
-      "fiveDayReturn": 0.04545455
+      "fiveDayReturn": 0.045455
     },
     {
       "id": "2026-09-03-002046",
@@ -1931,9 +1931,9 @@
       "date": "2026-09-03",
       "code": "000519",
       "name": "中兵红箭",
-      "mfe": 0.073808,
+      "mfe": 0.110385,
       "mae": -0.004572,
-      "fiveDayReturn": 0.05421293
+      "fiveDayReturn": 0.054213
     },
     {
       "id": "2026-09-02-688543",
@@ -2076,26 +2076,26 @@
       "code": "002519",
       "name": "银河电子",
       "mfe": 0.006885,
-      "mae": -0.034423,
-      "fiveDayReturn": -0.01032702
+      "mae": -0.037866,
+      "fiveDayReturn": -0.010327
     },
     {
       "id": "2026-09-02-002297",
       "date": "2026-09-02",
       "code": "002297",
       "name": "博云新材",
-      "mfe": 0.103865,
+      "mfe": 0.135266,
       "mae": -0.037681,
-      "fiveDayReturn": 0.08695652
+      "fiveDayReturn": 0.086957
     },
     {
       "id": "2026-09-02-000519",
       "date": "2026-09-02",
       "code": "000519",
       "name": "中兵红箭",
-      "mfe": 0.078033,
+      "mfe": 0.114754,
       "mae": -0.02623,
-      "fiveDayReturn": 0.0904918
+      "fiveDayReturn": 0.090492
     },
     {
       "id": "2026-09-01-603395",
@@ -2246,7 +2246,7 @@
       "date": "2026-09-01",
       "code": "000019",
       "name": "深粮控股",
-      "mfe": 0.007426,
+      "mfe": 0.04703,
       "mae": -0.158416,
       "fiveDayReturn": -0.048267
     },
@@ -2408,7 +2408,7 @@
       "date": "2026-08-31",
       "code": "000620",
       "name": "盈新发展",
-      "mfe": 0.0375,
+      "mfe": 0.0625,
       "mae": -0.078125,
       "fiveDayReturn": -0.05625
     },
@@ -2508,7 +2508,7 @@
       "code": "300357",
       "name": "我武生物",
       "mfe": 0.007843,
-      "mae": -0.13098,
+      "mae": -0.253333,
       "fiveDayReturn": -0.083922
     },
     {
@@ -2516,7 +2516,7 @@
       "date": "2026-08-20",
       "code": "300347",
       "name": "泰格医药",
-      "mfe": 0.023333,
+      "mfe": 0.035185,
       "mae": -0.101667,
       "fiveDayReturn": -0.05963
     },
@@ -2526,7 +2526,7 @@
       "code": "300149",
       "name": "睿智医药",
       "mfe": 0.013661,
-      "mae": -0.183971,
+      "mae": -0.195811,
       "fiveDayReturn": -0.095628
     },
     {
@@ -2562,7 +2562,7 @@
       "code": "300009",
       "name": "安科生物",
       "mfe": 0.005236,
-      "mae": -0.135079,
+      "mae": -0.147644,
       "fiveDayReturn": -0.078534
     },
     {
@@ -2759,7 +2759,7 @@
       "date": "2026-08-18",
       "code": "002385",
       "name": "大北农",
-      "mfe": 0.098802,
+      "mfe": 0.101796,
       "mae": -0.065868,
       "fiveDayReturn": -0.023952
     },
@@ -2804,7 +2804,7 @@
       "date": "2026-08-18",
       "code": "000019",
       "name": "深粮控股",
-      "mfe": 0.176301,
+      "mfe": 0.222543,
       "mae": -0.08815,
       "fiveDayReturn": -0.039017
     },
@@ -2913,7 +2913,7 @@
       "code": "300476",
       "name": "300476",
       "mfe": 0.013401,
-      "mae": -0.184152,
+      "mae": -0.208186,
       "fiveDayReturn": -0.107826
     },
     {
@@ -2964,37 +2964,37 @@
   ],
   "pathClusters": {
     "methodZh": "第一期使用透明规则分型；样本量充足后再升级为无监督路径聚类，并保留版本号避免事后改口径。",
-    "matureSamples": 121,
+    "matureSamples": 92,
     "clusters": [
       {
         "name": "失败下跌型",
-        "sampleCount": 46,
-        "share": 0.38016529,
-        "medianFiveDayReturn": -0.0834655
+        "sampleCount": 31,
+        "share": 0.33695652,
+        "medianFiveDayReturn": -0.083009
       },
       {
         "name": "其他演化型",
-        "sampleCount": 29,
-        "share": 0.23966942,
-        "medianFiveDayReturn": 0.02776463
+        "sampleCount": 22,
+        "share": 0.23913043,
+        "medianFiveDayReturn": 0.02754632
       },
       {
         "name": "横盘蓄势型",
-        "sampleCount": 23,
-        "share": 0.19008264,
+        "sampleCount": 19,
+        "share": 0.20652174,
         "medianFiveDayReturn": 0.00228949
       },
       {
         "name": "回踩再涨型",
-        "sampleCount": 17,
-        "share": 0.14049587,
-        "medianFiveDayReturn": 0.05151915
+        "sampleCount": 15,
+        "share": 0.16304348,
+        "medianFiveDayReturn": 0.05244253
       },
       {
         "name": "快速启动型",
-        "sampleCount": 6,
-        "share": 0.04958678,
-        "medianFiveDayReturn": 0.06510473
+        "sampleCount": 5,
+        "share": 0.05434783,
+        "medianFiveDayReturn": 0.07230769
       }
     ]
   },
@@ -3008,7 +3008,7 @@
       "highChaseRatio": null,
       "stageDistribution": {},
       "chaseDistribution": {},
-      "medianMFE": 0.0481795,
+      "medianMFE": 0.065635,
       "medianMAE": -0.040621
     },
     "failure": {
@@ -3018,8 +3018,8 @@
       "highChaseRatio": null,
       "stageDistribution": {},
       "chaseDistribution": {},
-      "medianMFE": 0.021991,
-      "medianMAE": -0.1446055
+      "medianMFE": 0.025999,
+      "medianMAE": -0.1477095
     },
     "topExamples": [
       {
@@ -3162,8 +3162,8 @@
         "name": "B0/B1/B4",
         "sampleCount": 6,
         "confidenceZh": "低",
-        "fiveDayMedianReturn": 0.04545455,
-        "fiveDayMedianAlpha": 0.05134047,
+        "fiveDayMedianReturn": 0.045455,
+        "fiveDayMedianAlpha": 0.05134,
         "fiveDayHitRate": 0.6,
         "fiveDayMembers": 5
       },
