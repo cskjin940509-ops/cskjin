@@ -8,7 +8,7 @@
   "scheduledSlot": "1020",
   "refreshIntervalMin": 5,
   "marketQuoteAgeSec": 2.7,
-  "dataSource": "腾讯指数行情 + 东方财富板块/个股 + 历史日线",
+  "dataSource": "腾讯指数行情 + 东方财富板块/个股 + 历史日线 + Yunai独立确认",
   "mainlines": [
     {
       "boardCode": "BK1361",
@@ -33,7 +33,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 39,
-      "reasonZh": "形成分68；吸筹79；上涨扩散100%；资金强度+7.5%；价格延伸扣分0"
+      "reasonZh": "形成分68；吸筹79；上涨扩散100%；资金强度+7.5%；价格延伸扣分0",
+      "return5Pct": 0.06370287435091271
     },
     {
       "boardCode": "BK1612",
@@ -58,7 +59,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 1,
-      "reasonZh": "形成分66；吸筹77；上涨扩散100%；资金强度+6.9%；价格延伸扣分0"
+      "reasonZh": "形成分66；吸筹77；上涨扩散100%；资金强度+6.9%；价格延伸扣分0",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1462",
@@ -83,7 +85,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 39,
-      "reasonZh": "形成分62；吸筹79；上涨扩散100%；资金强度+8.4%；价格延伸扣分10"
+      "reasonZh": "形成分62；吸筹79；上涨扩散100%；资金强度+8.4%；价格延伸扣分10",
+      "return5Pct": -1.0908619144821552
     },
     {
       "boardCode": "BK1381",
@@ -108,7 +111,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 39,
-      "reasonZh": "形成分61；吸筹66；上涨扩散55%；资金强度+8.9%；价格延伸扣分0"
+      "reasonZh": "形成分61；吸筹66；上涨扩散55%；资金强度+8.9%；价格延伸扣分0",
+      "return5Pct": 1.3212960948135066
     },
     {
       "boardCode": "BK0546",
@@ -133,7 +137,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 1,
-      "reasonZh": "形成分61；吸筹68；上涨扩散71%；资金强度+8.4%；价格延伸扣分4"
+      "reasonZh": "形成分61；吸筹68；上涨扩散71%；资金强度+8.4%；价格延伸扣分4",
+      "return5Pct": -0.189601070544565
     },
     {
       "boardCode": "BK1574",
@@ -158,7 +163,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 0,
-      "reasonZh": "形成分60；吸筹69；上涨扩散60%；资金强度+11.0%；价格延伸扣分0"
+      "reasonZh": "形成分60；吸筹69；上涨扩散60%；资金强度+11.0%；价格延伸扣分0",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1506",
@@ -183,7 +189,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 1,
-      "reasonZh": "形成分60；吸筹71；上涨扩散67%；资金强度+12.2%；价格延伸扣分4"
+      "reasonZh": "形成分60；吸筹71；上涨扩散67%；资金强度+12.2%；价格延伸扣分4",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1609",
@@ -208,7 +215,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 1,
-      "reasonZh": "形成分60；吸筹71；上涨扩散94%；资金强度+5.2%；价格延伸扣分4"
+      "reasonZh": "形成分60；吸筹71；上涨扩散94%；资金强度+5.2%；价格延伸扣分4",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1375",
@@ -233,7 +241,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": null,
-      "reasonZh": "形成分56；吸筹62；上涨扩散54%；资金强度+7.6%；价格延伸扣分0"
+      "reasonZh": "形成分56；吸筹62；上涨扩散54%；资金强度+7.6%；价格延伸扣分0",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1368",
@@ -258,7 +267,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": null,
-      "reasonZh": "形成分55；吸筹64；上涨扩散67%；资金强度+6.3%；价格延伸扣分0"
+      "reasonZh": "形成分55；吸筹64；上涨扩散67%；资金强度+6.3%；价格延伸扣分0",
+      "return5Pct": null
     }
   ],
   "stocks": {
@@ -281,7 +291,23 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": 18.11,
       "MTA": "日周月共振",
-      "reasonZh": "提前分45；主线形成61；资金84；追高风险高"
+      "reasonZh": "提前分45；主线形成61；资金84；追高风险高",
+      "yunai": {
+        "quoteOk": false,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 11.42,
+        "changePct": 0.0623255814,
+        "quoteTime": "1789006989000",
+        "priceVsPrimaryPct": -0.349,
+        "largeNetInflow": -1055.539999999999,
+        "totalNetInflow": -1244.8499999999985,
+        "capitalTimestamp": "1789006736753",
+        "confirmation": "NEGATIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 54.18,
+      "slowFactorDataDate": "2026-09-09"
     },
     "605006": {
       "code": "605006",
@@ -302,7 +328,23 @@
       "actionZh": "提前观察",
       "RS20": 20.64,
       "MTA": "日周月共振",
-      "reasonZh": "提前分56；主线形成62；资金64；追高风险中"
+      "reasonZh": "提前分56；主线形成62；资金64；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 17.18,
+        "changePct": 0.0514075887,
+        "quoteTime": 1789006996000,
+        "priceVsPrimaryPct": -0.2323,
+        "largeNetInflow": -3190.7700000000004,
+        "totalNetInflow": -218.20000000000437,
+        "capitalTimestamp": "1789006871613",
+        "confirmation": "NEGATIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 55.92,
+      "slowFactorDataDate": "2026-09-09"
     },
     "603093": {
       "code": "603093",
@@ -323,7 +365,23 @@
       "actionZh": "潜在主线，提前介入候选",
       "RS20": 13.37,
       "MTA": "日周月共振",
-      "reasonZh": "提前分73；主线形成68；资金71；追高风险低"
+      "reasonZh": "提前分73；主线形成68；资金71；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 13.53,
+        "changePct": 0.0157539385,
+        "quoteTime": 1789006993000,
+        "priceVsPrimaryPct": -0.0738,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 65.69,
+      "slowFactorDataDate": "2026-09-09"
     },
     "002201": {
       "code": "002201",
@@ -344,7 +402,34 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分40；主线形成62；资金82；追高风险高"
+      "reasonZh": "提前分40；主线形成62；资金82；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 10.08,
+        "changePct": 0.1004366812,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 83.82,
+      "marginFactorScore": 83.82,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 207614104.0,
+        "buyAmount": 27096526.0,
+        "balanceChange1d": 2928524.0,
+        "balanceChangePct1d": 0.014307427030277365,
+        "balanceChangePct5d": 0.03550794331513831,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 56.59,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600903": {
       "code": "600903",
@@ -365,7 +450,34 @@
       "actionZh": "提前观察",
       "RS20": 21.12,
       "MTA": "日周月共振",
-      "reasonZh": "提前分58；主线形成61；资金52；追高风险低"
+      "reasonZh": "提前分58；主线形成61；资金52；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 7.65,
+        "changePct": 0.0255033557,
+        "quoteTime": 1789006993000,
+        "priceVsPrimaryPct": -0.1307,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 94.71,
+      "marginFactorScore": 94.71,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 223713077.0,
+        "buyAmount": 75840132.0,
+        "balanceChange1d": 4404990.0,
+        "balanceChangePct1d": 0.020085853012798385,
+        "balanceChangePct5d": 0.09268223418758995,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 60.96,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600908": {
       "code": "600908",
@@ -386,7 +498,34 @@
       "actionZh": "潜在主线，提前介入候选",
       "RS20": 13.6,
       "MTA": "日周月共振",
-      "reasonZh": "提前分71；主线形成66；资金74；追高风险低"
+      "reasonZh": "提前分71；主线形成66；资金74；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 6.02,
+        "changePct": 0.0169204738,
+        "quoteTime": 1789006992000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 70.0,
+      "marginFactorScore": 70.0,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 705673393.0,
+        "buyAmount": 25333853.0,
+        "balanceChange1d": 7603551.0,
+        "balanceChangePct1d": 0.010892249661173588,
+        "balanceChangePct5d": 0.035017194187583645,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 68.13,
+      "slowFactorDataDate": "2026-09-09"
     },
     "601128": {
       "code": "601128",
@@ -407,7 +546,34 @@
       "actionZh": "潜在主线，提前介入候选",
       "RS20": 8.5,
       "MTA": "日周月共振",
-      "reasonZh": "提前分71；主线形成66；资金75；追高风险低"
+      "reasonZh": "提前分71；主线形成66；资金75；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 6.51,
+        "changePct": 0.0171606864,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": 0.1536,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 25.88,
+      "marginFactorScore": 25.88,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 453287957.0,
+        "buyAmount": 15265953.0,
+        "balanceChange1d": -3320949.0,
+        "balanceChangePct1d": -0.007273071016271417,
+        "balanceChangePct5d": -0.07145075363749372,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 61.77,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600876": {
       "code": "600876",
@@ -428,7 +594,34 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": 16.28,
       "MTA": "日周月共振",
-      "reasonZh": "提前分38；主线形成61；资金79；追高风险高"
+      "reasonZh": "提前分38；主线形成61；资金79；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 7.91,
+        "changePct": 0.1001390821,
+        "quoteTime": 1789006966000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 21.47,
+      "marginFactorScore": 21.47,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 54951176.0,
+        "buyAmount": 969235.0,
+        "balanceChange1d": -492887.0,
+        "balanceChangePct1d": -0.00888980665071389,
+        "balanceChangePct5d": -0.04467745393683647,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 45.67,
+      "slowFactorDataDate": "2026-09-09"
     },
     "603318": {
       "code": "603318",
@@ -449,7 +642,34 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分37；主线形成61；资金78；追高风险高"
+      "reasonZh": "提前分37；主线形成61；资金78；追高风险高",
+      "yunai": {
+        "quoteOk": false,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 10.1,
+        "changePct": 0.0733262487,
+        "quoteTime": "1789006993964",
+        "priceVsPrimaryPct": 0.0991,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 84.41,
+      "marginFactorScore": 84.41,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 166001805.0,
+        "buyAmount": 29305292.0,
+        "balanceChange1d": 1210592.0,
+        "balanceChangePct1d": 0.0073462169369431125,
+        "balanceChangePct5d": 0.08561278202286636,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 54.4,
+      "slowFactorDataDate": "2026-09-09"
     },
     "603323": {
       "code": "603323",
@@ -470,7 +690,34 @@
       "actionZh": "潜在主线，提前介入候选",
       "RS20": 13.87,
       "MTA": "日周月共振",
-      "reasonZh": "提前分63；主线形成66；资金57；追高风险低"
+      "reasonZh": "提前分63；主线形成66；资金57；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 4.63,
+        "changePct": 0.0131291028,
+        "quoteTime": 1789006985000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 62.35,
+      "marginFactorScore": 62.35,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 842144593.0,
+        "buyAmount": 25193408.0,
+        "balanceChange1d": 7523917.0,
+        "balanceChangePct1d": 0.009014774275733375,
+        "balanceChangePct5d": 0.02306160267322714,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 59.77,
+      "slowFactorDataDate": "2026-09-09"
     },
     "002807": {
       "code": "002807",
@@ -491,7 +738,34 @@
       "actionZh": "潜在主线，提前介入候选",
       "RS20": 10.66,
       "MTA": "日周月共振",
-      "reasonZh": "提前分67；主线形成66；资金70；追高风险低"
+      "reasonZh": "提前分67；主线形成66；资金70；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 4.28,
+        "changePct": 0.011820331,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": -0.2331,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 44.71,
+      "marginFactorScore": 44.71,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 329958736.0,
+        "buyAmount": 18033873.0,
+        "balanceChange1d": -39398.0,
+        "balanceChangePct1d": -0.00011938855387588343,
+        "balanceChangePct5d": -0.050257827664449035,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 61.39,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600917": {
       "code": "600917",
@@ -512,7 +786,34 @@
       "actionZh": "提前观察",
       "RS20": 10.17,
       "MTA": "日周月共振",
-      "reasonZh": "提前分57；主线形成61；资金63；追高风险低"
+      "reasonZh": "提前分57；主线形成61；资金63；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 5.21,
+        "changePct": 0.0296442688,
+        "quoteTime": 1789006992000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 53.82,
+      "marginFactorScore": 53.82,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 118877601.0,
+        "buyAmount": 3970057.0,
+        "balanceChange1d": 795606.0,
+        "balanceChangePct1d": 0.006737741854717139,
+        "balanceChangePct5d": -0.013756671339027885,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 56.89,
+      "slowFactorDataDate": "2026-09-09"
     },
     "603393": {
       "code": "603393",
@@ -533,7 +834,34 @@
       "actionZh": "提前观察",
       "RS20": 13.53,
       "MTA": "日周月共振",
-      "reasonZh": "提前分61；主线形成61；资金60；追高风险低"
+      "reasonZh": "提前分61；主线形成61；资金60；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 27.13,
+        "changePct": 0.0007377352,
+        "quoteTime": 1789006994000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 11.47,
+      "marginFactorScore": 11.47,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 343106325.0,
+        "buyAmount": 14336469.0,
+        "balanceChange1d": -15106295.0,
+        "balanceChangePct1d": -0.04217130876070196,
+        "balanceChangePct5d": -0.060973128477518665,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 51.84,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600938": {
       "code": "600938",
@@ -554,7 +882,34 @@
       "actionZh": "潜在主线，提前介入候选",
       "RS20": 7.94,
       "MTA": "日周月共振",
-      "reasonZh": "提前分64；主线形成60；资金71；追高风险低"
+      "reasonZh": "提前分64；主线形成60；资金71；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 34.47,
+        "changePct": 0.0084844939,
+        "quoteTime": 1789006994000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 44.71,
+      "marginFactorScore": 44.71,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 2295888294.0,
+        "buyAmount": 117493505.0,
+        "balanceChange1d": -21518096.0,
+        "balanceChangePct1d": -0.009285421880622329,
+        "balanceChangePct5d": 0.02924811284665884,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 60.5,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600176": {
       "code": "600176",
@@ -575,7 +930,34 @@
       "actionZh": "提前观察",
       "RS20": 5.81,
       "MTA": "双周期共振",
-      "reasonZh": "提前分59；主线形成62；资金56；追高风险低"
+      "reasonZh": "提前分59；主线形成62；资金56；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 43.4,
+        "changePct": 0.0171080384,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": 0.1384,
+        "largeNetInflow": 20334.39,
+        "totalNetInflow": 35988.59999999998,
+        "capitalTimestamp": "1789006784115",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 32.94,
+      "marginFactorScore": 32.94,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 5129532287.0,
+        "buyAmount": 721787522.0,
+        "balanceChange1d": -96684830.0,
+        "balanceChangePct1d": -0.018499964283056784,
+        "balanceChangePct5d": -0.033346210417495366,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 53.22,
+      "slowFactorDataDate": "2026-09-09"
     },
     "002961": {
       "code": "002961",
@@ -596,7 +978,23 @@
       "actionZh": "提前观察",
       "RS20": 8.16,
       "MTA": "日周月共振",
-      "reasonZh": "提前分60；主线形成68；资金53；追高风险低"
+      "reasonZh": "提前分60；主线形成68；资金53；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 20.44,
+        "changePct": 0.0128904313,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 55.43,
+      "slowFactorDataDate": "2026-09-09"
     },
     "000968": {
       "code": "000968",
@@ -617,7 +1015,34 @@
       "actionZh": "提前观察",
       "RS20": 12.83,
       "MTA": "日周月共振",
-      "reasonZh": "提前分61；主线形成60；资金64；追高风险低"
+      "reasonZh": "提前分61；主线形成60；资金64；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 7.57,
+        "changePct": -0.0039473684,
+        "quoteTime": 1789006992000,
+        "priceVsPrimaryPct": 0.1323,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 93.82,
+      "marginFactorScore": 93.82,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 294704498.0,
+        "buyAmount": 43563621.0,
+        "balanceChange1d": 21257391.0,
+        "balanceChangePct1d": 0.07773858437639276,
+        "balanceChangePct5d": 0.05663608840050459,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 64.75,
+      "slowFactorDataDate": "2026-09-09"
     },
     "920010": {
       "code": "920010",
@@ -638,7 +1063,34 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "数据不足",
-      "reasonZh": "提前分61；主线形成61；资金63；追高风险低"
+      "reasonZh": "提前分61；主线形成61；资金63；追高风险低",
+      "yunai": {
+        "quoteOk": false,
+        "capitalOk": false,
+        "unsupportedMarket": "BSE",
+        "price": null,
+        "changePct": null,
+        "quoteTime": null,
+        "priceVsPrimaryPct": null,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 47.65,
+      "marginFactorScore": 47.65,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 27300029.0,
+        "buyAmount": 2405000.0,
+        "balanceChange1d": -622811.0,
+        "balanceChangePct1d": -0.02230471542292976,
+        "balanceChangePct5d": 0.26297848964865317,
+        "source": "北交所融资融券明细"
+      },
+      "slowCompositeScore": 57.69,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600333": {
       "code": "600333",
@@ -659,7 +1111,34 @@
       "actionZh": "提前观察",
       "RS20": 17.44,
       "MTA": "日周月共振",
-      "reasonZh": "提前分56；主线形成61；资金51；追高风险低"
+      "reasonZh": "提前分56；主线形成61；资金51；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 7.15,
+        "changePct": -0.0027894003,
+        "quoteTime": 1789006994000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 81.76,
+      "marginFactorScore": 81.76,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 71501500.0,
+        "buyAmount": 7464397.0,
+        "balanceChange1d": 984360.0,
+        "balanceChangePct1d": 0.013959159432727986,
+        "balanceChangePct5d": 0.04624407135919676,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 58.15,
+      "slowFactorDataDate": "2026-09-09"
     },
     "301526": {
       "code": "301526",
@@ -680,7 +1159,34 @@
       "actionZh": "提前观察",
       "RS20": -17.32,
       "MTA": "趋势偏弱",
-      "reasonZh": "提前分55；主线形成62；资金63；追高风险低"
+      "reasonZh": "提前分55；主线形成62；资金63；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 29.34,
+        "changePct": 0.0635208711,
+        "quoteTime": 1789006992000,
+        "priceVsPrimaryPct": 0.2738,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 42.35,
+      "marginFactorScore": 42.35,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 1845209674.0,
+        "buyAmount": 219457884.0,
+        "balanceChange1d": -16097083.0,
+        "balanceChangePct1d": -0.008648269791887937,
+        "balanceChangePct5d": -0.027098140558240558,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 54.0,
+      "slowFactorDataDate": "2026-09-09"
     },
     "601969": {
       "code": "601969",
@@ -701,7 +1207,34 @@
       "actionZh": "提前观察",
       "RS20": 12.95,
       "MTA": "日周月共振",
-      "reasonZh": "提前分49；主线形成60；资金47；追高风险低"
+      "reasonZh": "提前分49；主线形成60；资金47；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 10.08,
+        "changePct": 0.020242915,
+        "quoteTime": 1789006989000,
+        "priceVsPrimaryPct": -0.0991,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 33.24,
+      "marginFactorScore": 33.24,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 328096332.0,
+        "buyAmount": 10877276.0,
+        "balanceChange1d": -2318716.0,
+        "balanceChangePct1d": -0.007017585954499263,
+        "balanceChangePct5d": -0.03856334474828198,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 46.58,
+      "slowFactorDataDate": "2026-09-09"
     },
     "601077": {
       "code": "601077",
@@ -722,7 +1255,34 @@
       "actionZh": "提前观察",
       "RS20": 6.75,
       "MTA": "双周期共振",
-      "reasonZh": "提前分60；主线形成66；资金60；追高风险低"
+      "reasonZh": "提前分60；主线形成66；资金60；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 6.83,
+        "changePct": 0.005899705,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": -0.1464,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 37.94,
+      "marginFactorScore": 37.94,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 314008289.0,
+        "buyAmount": 22864077.0,
+        "balanceChange1d": -7949310.0,
+        "balanceChangePct1d": -0.024690549391256953,
+        "balanceChangePct5d": 0.03873842937546981,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 54.98,
+      "slowFactorDataDate": "2026-09-09"
     },
     "002613": {
       "code": "002613",
@@ -743,7 +1303,23 @@
       "actionZh": "提前观察",
       "RS20": 5.24,
       "MTA": "日周月共振",
-      "reasonZh": "提前分60；主线形成61；资金66；追高风险低"
+      "reasonZh": "提前分60；主线形成61；资金66；追高风险低",
+      "yunai": {
+        "quoteOk": false,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 3.51,
+        "changePct": 0.0144508671,
+        "quoteTime": "1789006989000",
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 1484.23,
+        "totalNetInflow": 1524.4899999999998,
+        "capitalTimestamp": "1789006975974",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 58.05,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600293": {
       "code": "600293",
@@ -764,7 +1340,34 @@
       "actionZh": "提前观察",
       "RS20": 12.34,
       "MTA": "日周月共振",
-      "reasonZh": "提前分47；主线形成61；资金42；追高风险低"
+      "reasonZh": "提前分47；主线形成61；资金42；追高风险低",
+      "yunai": {
+        "quoteOk": false,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 3.08,
+        "changePct": 0.0198675497,
+        "quoteTime": "1789006990000",
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 2004.25,
+        "totalNetInflow": 3460.7200000000003,
+        "capitalTimestamp": "1789006987956",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 30.88,
+      "marginFactorScore": 30.88,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 151142219.0,
+        "buyAmount": 4005543.0,
+        "balanceChange1d": -2351065.0,
+        "balanceChangePct1d": -0.01531705452337576,
+        "balanceChangePct5d": 0.006402380385682701,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 44.2,
+      "slowFactorDataDate": "2026-09-09"
     },
     "300332": {
       "code": "300332",
@@ -785,7 +1388,34 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分55；主线形成61；资金52；追高风险低"
+      "reasonZh": "提前分55；主线形成61；资金52；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 5.23,
+        "changePct": 0.0175097276,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": 0.1916,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 31.18,
+      "marginFactorScore": 31.18,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 200828474.0,
+        "buyAmount": 10309770.0,
+        "balanceChange1d": -4495456.0,
+        "balanceChangePct1d": -0.0218944572120746,
+        "balanceChangePct5d": -0.008432916767815128,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 50.4,
+      "slowFactorDataDate": "2026-09-09"
     },
     "002839": {
       "code": "002839",
@@ -806,7 +1436,34 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分60；主线形成66；资金66；追高风险低"
+      "reasonZh": "提前分60；主线形成66；资金66；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 4.5,
+        "changePct": 0.0044642857,
+        "quoteTime": 1789006989000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 34.71,
+      "marginFactorScore": 34.71,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 465596302.0,
+        "buyAmount": 16301411.0,
+        "balanceChange1d": -6394205.0,
+        "balanceChangePct1d": -0.013547316959067569,
+        "balanceChangePct5d": -0.00584903628533362,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 56.21,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600617": {
       "code": "600617",
@@ -827,7 +1484,34 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分56；主线形成61；资金58；追高风险低"
+      "reasonZh": "提前分56；主线形成61；资金58；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 3.55,
+        "changePct": 0.0,
+        "quoteTime": 1789006989000,
+        "priceVsPrimaryPct": -0.2809,
+        "largeNetInflow": -947.29,
+        "totalNetInflow": -8.449999999998909,
+        "capitalTimestamp": "1789006847153",
+        "confirmation": "NEGATIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 62.06,
+      "marginFactorScore": 62.06,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 112600036.0,
+        "buyAmount": 13795612.0,
+        "balanceChange1d": -914487.0,
+        "balanceChangePct1d": -0.008056123356127744,
+        "balanceChangePct5d": 0.06973776945020864,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 56.67,
+      "slowFactorDataDate": "2026-09-09"
     },
     "300483": {
       "code": "300483",
@@ -848,7 +1532,23 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分52；主线形成61；资金43；追高风险低"
+      "reasonZh": "提前分52；主线形成61；资金43；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 25.73,
+        "changePct": 0.0178006329,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 49.35,
+      "slowFactorDataDate": "2026-09-09"
     },
     "300196": {
       "code": "300196",
@@ -869,7 +1569,23 @@
       "actionZh": "提前观察",
       "RS20": -0.39,
       "MTA": "双周期共振",
-      "reasonZh": "提前分52；主线形成62；资金45；追高风险低"
+      "reasonZh": "提前分52；主线形成62；资金45；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 17.35,
+        "changePct": 0.0260047281,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": 0.1153,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 49.84,
+      "slowFactorDataDate": "2026-09-09"
     },
     "001236": {
       "code": "001236",
@@ -890,7 +1606,23 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分54；主线形成68；资金48；追高风险低"
+      "reasonZh": "提前分54；主线形成68；资金48；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 8.26,
+        "changePct": 0.0085470085,
+        "quoteTime": 1789006986000,
+        "priceVsPrimaryPct": 0.1212,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 51.73,
+      "slowFactorDataDate": "2026-09-09"
     },
     "603256": {
       "code": "603256",
@@ -911,7 +1643,23 @@
       "actionZh": "提前观察",
       "RS20": -11.67,
       "MTA": "趋势偏弱",
-      "reasonZh": "提前分52；主线形成62；资金51；追高风险低"
+      "reasonZh": "提前分52；主线形成62；资金51；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 130.45,
+        "changePct": 0.0173099415,
+        "quoteTime": 1789006996000,
+        "priceVsPrimaryPct": 0.2459,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 51.05,
+      "slowFactorDataDate": "2026-09-09"
     },
     "002958": {
       "code": "002958",
@@ -932,7 +1680,34 @@
       "actionZh": "提前观察",
       "RS20": 5.35,
       "MTA": "日周月共振",
-      "reasonZh": "提前分48；主线形成66；资金34；追高风险低"
+      "reasonZh": "提前分48；主线形成66；资金34；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 3.05,
+        "changePct": 0.00330033,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 47.94,
+      "marginFactorScore": 47.94,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 793129962.0,
+        "buyAmount": 22518321.0,
+        "balanceChange1d": 3526764.0,
+        "balanceChangePct1d": 0.004466501666828356,
+        "balanceChangePct5d": -0.022894589953739816,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 45.28,
+      "slowFactorDataDate": "2026-09-09"
     },
     "000407": {
       "code": "000407",
@@ -953,7 +1728,23 @@
       "actionZh": "提前观察",
       "RS20": 9.9,
       "MTA": "日周月共振",
-      "reasonZh": "提前分47；主线形成61；资金37；追高风险低"
+      "reasonZh": "提前分47；主线形成61；资金37；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 4.38,
+        "changePct": 0.0,
+        "quoteTime": 1789006995000,
+        "priceVsPrimaryPct": -0.2278,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 45.93,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600803": {
       "code": "600803",
@@ -974,7 +1765,34 @@
       "actionZh": "提前观察",
       "RS20": 11.42,
       "MTA": "日周月共振",
-      "reasonZh": "提前分45；主线形成61；资金30；追高风险低"
+      "reasonZh": "提前分45；主线形成61；资金30；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 18.92,
+        "changePct": -0.0042105263,
+        "quoteTime": 1789006993000,
+        "priceVsPrimaryPct": -0.1583,
+        "largeNetInflow": 694.1500000000001,
+        "totalNetInflow": 302.58999999999924,
+        "capitalTimestamp": "1789006913852",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 36.47,
+      "marginFactorScore": 36.47,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 91634780.0,
+        "buyAmount": 3470567.0,
+        "balanceChange1d": -1486834.0,
+        "balanceChangePct1d": -0.015966583225243497,
+        "balanceChangePct5d": 0.025721889262134076,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 41.34,
+      "slowFactorDataDate": "2026-09-09"
     },
     "601860": {
       "code": "601860",
@@ -995,7 +1813,34 @@
       "actionZh": "提前观察",
       "RS20": 7.42,
       "MTA": "日周月共振",
-      "reasonZh": "提前分44；主线形成66；资金27；追高风险低"
+      "reasonZh": "提前分44；主线形成66；资金27；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 2.67,
+        "changePct": 0.0075471698,
+        "quoteTime": 1789006985000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 45.59,
+      "marginFactorScore": 45.59,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 433256470.0,
+        "buyAmount": 10597462.0,
+        "balanceChange1d": 890131.0,
+        "balanceChangePct1d": 0.002058742597906078,
+        "balanceChangePct5d": -0.017345534904863423,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 41.98,
+      "slowFactorDataDate": "2026-09-09"
     },
     "002080": {
       "code": "002080",
@@ -1016,7 +1861,34 @@
       "actionZh": "提前观察",
       "RS20": -6.18,
       "MTA": "趋势偏弱",
-      "reasonZh": "提前分45；主线形成62；资金37；追高风险低"
+      "reasonZh": "提前分45；主线形成62；资金37；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 51.03,
+        "changePct": 0.0100930141,
+        "quoteTime": 1789006998000,
+        "priceVsPrimaryPct": 0.1963,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 53.82,
+      "marginFactorScore": 53.82,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 1406164853.0,
+        "buyAmount": 147381762.0,
+        "balanceChange1d": 2864195.0,
+        "balanceChangePct1d": 0.0020410415855445286,
+        "balanceChangePct5d": -0.03976009772380805,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 45.64,
+      "slowFactorDataDate": "2026-09-09"
     },
     "601825": {
       "code": "601825",
@@ -1037,7 +1909,34 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分44；主线形成66；资金30；追高风险低"
+      "reasonZh": "提前分44；主线形成66；资金30；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 9.03,
+        "changePct": 0.0066964286,
+        "quoteTime": 1789006999000,
+        "priceVsPrimaryPct": -0.1107,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 35.0,
+      "marginFactorScore": 35.0,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 104904853.0,
+        "buyAmount": 4690315.0,
+        "balanceChange1d": -641495.0,
+        "balanceChangePct1d": -0.006077851220394665,
+        "balanceChangePct5d": -0.05434856310990231,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 40.79,
+      "slowFactorDataDate": "2026-09-09"
     },
     "605090": {
       "code": "605090",
@@ -1058,7 +1957,34 @@
       "actionZh": "提前观察",
       "RS20": 0.73,
       "MTA": "趋势偏弱",
-      "reasonZh": "提前分47；主线形成61；资金44；追高风险低"
+      "reasonZh": "提前分47；主线形成61；资金44；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 33.71,
+        "changePct": 0.0029735355,
+        "quoteTime": 1789006998000,
+        "priceVsPrimaryPct": 0.0297,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 38.24,
+      "marginFactorScore": 38.24,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 530836993.0,
+        "buyAmount": 24069418.0,
+        "balanceChange1d": -802802.0,
+        "balanceChangePct1d": -0.0015100487351591128,
+        "balanceChangePct5d": -0.06357415448050165,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 45.35,
+      "slowFactorDataDate": "2026-09-09"
     },
     "600681": {
       "code": "600681",
@@ -1079,7 +2005,25 @@
       "actionZh": "提前观察",
       "RS20": 7.83,
       "MTA": "日周月共振",
-      "reasonZh": "提前分42；主线形成61；资金28；追高风险低"
+      "reasonZh": "提前分42；主线形成61；资金28；追高风险低",
+      "marginScore": 77.94,
+      "marginFactorScore": 77.94,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 143548128.0,
+        "buyAmount": 11519116.0,
+        "balanceChange1d": 3757203.0,
+        "balanceChangePct1d": 0.026877302657522296,
+        "balanceChangePct5d": 0.006379731479242911,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 45.61,
+      "slowFactorDataDate": "2026-09-09",
+      "yunai": {
+        "quoteOk": true,
+        "price": 3.63,
+        "quoteTime": 1789007016000
+      }
     },
     "600635": {
       "code": "600635",
@@ -1100,7 +2044,25 @@
       "actionZh": "提前观察",
       "RS20": 3.58,
       "MTA": "日周月共振",
-      "reasonZh": "提前分41；主线形成61；资金30；追高风险低"
+      "reasonZh": "提前分41；主线形成61；资金30；追高风险低",
+      "marginScore": 44.71,
+      "marginFactorScore": 44.71,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 501783415.0,
+        "buyAmount": 9707177.0,
+        "balanceChange1d": 663931.0,
+        "balanceChangePct1d": 0.001324895601145694,
+        "balanceChangePct5d": -0.009023140554374056,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 40.9,
+      "slowFactorDataDate": "2026-09-09",
+      "yunai": {
+        "quoteOk": true,
+        "price": 4.76,
+        "quoteTime": 1789007018000
+      }
     },
     "601139": {
       "code": "601139",
@@ -1121,7 +2083,25 @@
       "actionZh": "提前观察",
       "RS20": 7.92,
       "MTA": "日周月共振",
-      "reasonZh": "提前分39；主线形成61；资金24；追高风险低"
+      "reasonZh": "提前分39；主线形成61；资金24；追高风险低",
+      "marginScore": 70.29,
+      "marginFactorScore": 70.29,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 164412570.0,
+        "buyAmount": 5700096.0,
+        "balanceChange1d": 1414382.0,
+        "balanceChangePct1d": 0.008677286645665043,
+        "balanceChangePct5d": 0.0550168607552491,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 42.25,
+      "slowFactorDataDate": "2026-09-09",
+      "yunai": {
+        "quoteOk": true,
+        "price": 6.58,
+        "quoteTime": 1789007026452
+      }
     },
     "600777": {
       "code": "600777",
@@ -1142,7 +2122,34 @@
       "actionZh": "提前观察",
       "RS20": 1.11,
       "MTA": "双周期共振",
-      "reasonZh": "提前分42；主线形成60；资金40；追高风险低"
+      "reasonZh": "提前分42；主线形成60；资金40；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 4.13,
+        "changePct": -0.0024154589,
+        "quoteTime": 1789007000000,
+        "priceVsPrimaryPct": 0.2427,
+        "largeNetInflow": -23.670000000000073,
+        "totalNetInflow": 172.1599999999994,
+        "capitalTimestamp": "1789006957909",
+        "confirmation": "NEGATIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "marginScore": 61.18,
+      "marginFactorScore": 61.18,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 121243383.0,
+        "buyAmount": 7475367.0,
+        "balanceChange1d": -716108.0,
+        "balanceChangePct1d": -0.005871687345759749,
+        "balanceChangePct5d": 0.05105298891312208,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 45.86,
+      "slowFactorDataDate": "2026-09-09"
     },
     "001331": {
       "code": "001331",
@@ -1163,7 +2170,23 @@
       "actionZh": "提前观察",
       "RS20": -20.22,
       "MTA": "趋势偏弱",
-      "reasonZh": "提前分42；主线形成61；资金42；追高风险低"
+      "reasonZh": "提前分42；主线形成61；资金42；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 42.72,
+        "changePct": -0.009274287,
+        "quoteTime": 1789006998000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      },
+      "slowCompositeScore": 44.52,
+      "slowFactorDataDate": "2026-09-09"
     },
     "000593": {
       "code": "000593",
@@ -1184,7 +2207,25 @@
       "actionZh": "提前观察",
       "RS20": -20.72,
       "MTA": "趋势偏弱",
-      "reasonZh": "提前分36；主线形成61；资金26；追高风险低"
+      "reasonZh": "提前分36；主线形成61；资金26；追高风险低",
+      "marginScore": 15.0,
+      "marginFactorScore": 15.0,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 580915368.0,
+        "buyAmount": 14728264.0,
+        "balanceChange1d": -9768047.0,
+        "balanceChangePct1d": -0.016536856718755173,
+        "balanceChangePct5d": -0.049356830568497885,
+        "source": "深交所融资融券明细"
+      },
+      "slowCompositeScore": 32.75,
+      "slowFactorDataDate": "2026-09-09",
+      "yunai": {
+        "quoteOk": true,
+        "price": 21.37,
+        "quoteTime": 1789007019000
+      }
     },
     "601636": {
       "code": "601636",
@@ -1205,7 +2246,89 @@
       "actionZh": "提前观察",
       "RS20": -2.19,
       "MTA": "趋势偏弱",
-      "reasonZh": "提前分28；主线形成61；资金14；追高风险低"
+      "reasonZh": "提前分28；主线形成61；资金14；追高风险低",
+      "marginScore": 47.94,
+      "marginFactorScore": 47.94,
+      "marginData": {
+        "dataDate": "2026-09-09",
+        "balance": 505973812.0,
+        "buyAmount": 23064145.0,
+        "balanceChange1d": -1446652.0,
+        "balanceChangePct1d": -0.0028509926237425065,
+        "balanceChangePct5d": -0.01695704172717899,
+        "source": "上交所融资融券明细"
+      },
+      "slowCompositeScore": 31.51,
+      "slowFactorDataDate": "2026-09-09",
+      "yunai": {
+        "quoteOk": true,
+        "price": 5.74,
+        "quoteTime": 1789007024000
+      }
+    },
+    "000011": {
+      "code": "000011",
+      "yunai": {
+        "quoteOk": true,
+        "price": 9.15,
+        "quoteTime": 1789007016000
+      }
+    },
+    "000564": {
+      "code": "000564",
+      "yunai": {
+        "quoteOk": true,
+        "price": 1.64,
+        "quoteTime": 1789007022000
+      }
+    },
+    "001979": {
+      "code": "001979",
+      "yunai": {
+        "quoteOk": true,
+        "price": 6.8,
+        "quoteTime": 1789007016000
+      }
+    },
+    "002027": {
+      "code": "002027",
+      "yunai": {
+        "quoteOk": true,
+        "price": 4.84,
+        "quoteTime": 1789007019000
+      }
+    },
+    "002517": {
+      "code": "002517",
+      "yunai": {
+        "quoteOk": true,
+        "price": 17.16,
+        "quoteTime": 1789007022000
+      }
+    },
+    "600895": {
+      "code": "600895",
+      "yunai": {
+        "quoteOk": true,
+        "price": 29.08,
+        "quoteTime": 1789007021000
+      }
+    },
+    "603083": {
+      "code": "603083",
+      "yunai": {
+        "quoteOk": true,
+        "price": 223.12,
+        "quoteTime": 1789007023000
+      }
+    },
+    "603236": {
+      "code": "603236",
+      "yunai": {
+        "quoteOk": true,
+        "price": 60.33,
+        "quoteTime": 1789007022000
+      }
     }
   },
   "pools": {
@@ -1240,6 +2363,30 @@
       "002201",
       "600876",
       "603318"
+    ],
+    "B1": [
+      "600903",
+      "000968",
+      "603318",
+      "002201",
+      "600333",
+      "600681",
+      "601139",
+      "600908",
+      "603323"
+    ],
+    "B2": [],
+    "B4": [
+      "600908",
+      "603093",
+      "000968",
+      "601128",
+      "002807",
+      "600903",
+      "600938",
+      "603323",
+      "600333",
+      "002613"
     ]
   },
   "marketSnapshot": {
@@ -1288,9 +2435,66 @@
     "价格/成交/板块广度": "可用",
     "东方财富主力资金": "可用时参与",
     "Yunai独立大单资金": "由后置独立确认层补充",
-    "两融B1": "未接入真实专用数据，不伪造",
-    "ETF一级申赎B2": "未接入真实专用数据，不伪造"
+    "B1": "可用：交易所两融T+1日频，数据日 2026-09-09，覆盖 4118 只股票",
+    "B2": "可用：交易所ETF份额T+1日频，数据日 2026-09-09，覆盖 1633 只ETF；净申赎金额为份额变化×价格的估算"
   },
   "scoreMeaningZh": "形成分是研究排序分，不代表上涨概率；当日涨幅只进入价格延伸惩罚，不作为形成分正向奖励。",
-  "note": "从开盘起每5分钟滚动识别潜在主线和提前介入候选；14:30以后进入尾盘执行/确认阶段，15:00形成当日最终雷达快照。"
+  "note": "从开盘起每5分钟滚动识别潜在主线和提前介入候选；14:30以后进入尾盘执行/确认阶段，15:00形成当日最终雷达快照。",
+  "yunaiConfirmation": {
+    "checkedAt": "2026-09-10T10:23:24+08:00",
+    "provider": "Yunai Quant API",
+    "checkedSymbols": [
+      "603093",
+      "601128",
+      "600908",
+      "002807",
+      "600938",
+      "603323",
+      "603393",
+      "920010",
+      "000968",
+      "002839",
+      "601077",
+      "002613",
+      "002961",
+      "600176",
+      "600903",
+      "600917",
+      "600333",
+      "600617",
+      "605006",
+      "300332",
+      "001299",
+      "002201",
+      "600876",
+      "603318",
+      "301526",
+      "001236",
+      "603256",
+      "300196",
+      "300483",
+      "601969",
+      "002958",
+      "600293",
+      "000407",
+      "605090",
+      "002080",
+      "600803",
+      "601860",
+      "601825",
+      "600777",
+      "001331"
+    ],
+    "quoteAvailable": 39,
+    "capitalResponseAvailable": 8,
+    "role": "独立确认层；不直接改写formationScore/earlyEntryScore"
+  },
+  "slowMoneyFactor": {
+    "state": "ready",
+    "dataDate": "2026-09-09",
+    "latency": "T+1日频",
+    "B1Members": 9,
+    "B2Members": 0,
+    "note": "两融与ETF份额是上一已发布交易日的慢资金结构因子，不冒充盘中实时；空池表示当前候选未达阈值。"
+  }
 }
