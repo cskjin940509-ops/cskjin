@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install 'PyYAML==6.0.3'
+      - run: python -m pip install 'PyYAML==6.0.3' 'akshare>=1.18.15,<2'
       - name: Verify publication, event routing and trading regressions offline
         run: |
           python -m unittest tools/test_free_sentiment_inputs.py tools/test_data_on_arrival.py tools/test_selection_research_v46.py tools/test_selection_v45.py tools/test_ai_shadow_portfolio.py
