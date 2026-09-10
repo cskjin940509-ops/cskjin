@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-09-10T16:25:35+08:00",
+  "updatedAt": "2026-09-10T16:51:16+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
     "sampleCount": 180,
@@ -21,30 +21,30 @@
         "p90": 0.034289
       },
       "2D": {
-        "members": 144,
+        "members": 124,
         "mature": true,
-        "meanReturn": -0.03678139,
-        "medianReturn": -0.03521563,
-        "hitRate": 0.23611111,
-        "meanAlpha": -0.0276419,
-        "medianAlpha": -0.02885348,
-        "p10": -0.11242468,
+        "meanReturn": -0.03781973,
+        "medianReturn": -0.03486085,
+        "hitRate": 0.21774194,
+        "meanAlpha": -0.0282274,
+        "medianAlpha": -0.02804089,
+        "p10": -0.11343054,
         "p25": -0.07405409,
-        "p75": -0.002957,
-        "p90": 0.0279719
+        "p75": -0.00716794,
+        "p90": 0.02005116
       },
       "3D": {
-        "members": 128,
+        "members": 111,
         "mature": true,
-        "meanReturn": -0.0359907,
-        "medianReturn": -0.04582122,
-        "hitRate": 0.2421875,
-        "meanAlpha": -0.0258399,
-        "medianAlpha": -0.03495315,
-        "p10": -0.10857174,
-        "p25": -0.07709252,
-        "p75": -0.00567477,
-        "p90": 0.03622761
+        "meanReturn": -0.03536223,
+        "medianReturn": -0.04166667,
+        "hitRate": 0.23423423,
+        "meanAlpha": -0.02483855,
+        "medianAlpha": -0.0333964,
+        "p10": -0.10810811,
+        "p25": -0.07713031,
+        "p75": -0.00855071,
+        "p90": 0.0359116
       },
       "5D": {
         "members": 123,
@@ -93,9 +93,9 @@
         "mature": false
       }
     },
-    "medianMFE": 0.0372595,
+    "medianMFE": 0.03871,
     "medianMAE": -0.0494,
-    "medianMaxDrawdown": -0.06903268
+    "medianMaxDrawdown": -0.07306963
   },
   "horizonGroups": {
     "shortTerm": [
@@ -986,17 +986,17 @@
     },
     {
       "day": 2,
-      "meanReturn": -0.03678139,
-      "medianReturn": -0.03521563,
-      "meanAlpha": -0.0276419,
-      "members": 144
+      "meanReturn": -0.03781973,
+      "medianReturn": -0.03486085,
+      "meanAlpha": -0.0282274,
+      "members": 124
     },
     {
       "day": 3,
-      "meanReturn": -0.0359907,
-      "medianReturn": -0.04582122,
-      "meanAlpha": -0.0258399,
-      "members": 128
+      "meanReturn": -0.03536223,
+      "medianReturn": -0.04166667,
+      "meanAlpha": -0.02483855,
+      "members": 111
     },
     {
       "day": 5,
@@ -1067,52 +1067,52 @@
     },
     "3D": {
       "horizon": "3D",
-      "members": 128,
+      "members": 111,
       "bins": [
         {
           "label": "<-5%",
-          "count": 59,
-          "share": 0.4609375
+          "count": 49,
+          "share": 0.44144144
         },
         {
           "label": "-5~-3%",
-          "count": 18,
-          "share": 0.140625
+          "count": 17,
+          "share": 0.15315315
         },
         {
           "label": "-3~-1%",
-          "count": 18,
-          "share": 0.140625
+          "count": 17,
+          "share": 0.15315315
         },
         {
           "label": "-1~0%",
           "count": 2,
-          "share": 0.015625
+          "share": 0.01801802
         },
         {
           "label": "0~1%",
           "count": 5,
-          "share": 0.0390625
+          "share": 0.04504505
         },
         {
           "label": "1~3%",
-          "count": 8,
-          "share": 0.0625
+          "count": 6,
+          "share": 0.05405405
         },
         {
           "label": "3~5%",
-          "count": 8,
-          "share": 0.0625
+          "count": 5,
+          "share": 0.04504505
         },
         {
           "label": "5~10%",
           "count": 6,
-          "share": 0.046875
+          "share": 0.05405405
         },
         {
           "label": ">10%",
           "count": 4,
-          "share": 0.03125
+          "share": 0.03603604
         }
       ]
     },
@@ -1873,7 +1873,7 @@
       "date": "2026-09-07",
       "code": "001389",
       "name": "广合科技",
-      "mfe": 0.026786,
+      "mfe": 0.0625,
       "mae": -0.008214,
       "fiveDayReturn": null
     },
@@ -1954,9 +1954,9 @@
       "date": "2026-09-03",
       "code": "002046",
       "name": "国机精工",
-      "mfe": 0.037383,
+      "mfe": 0.138131,
       "mae": -0.061495,
-      "fiveDayReturn": 0.1035514
+      "fiveDayReturn": 0.103551
     },
     {
       "id": "2026-09-03-000519",
@@ -2260,7 +2260,7 @@
       "date": "2026-09-01",
       "code": "000713",
       "name": "国投丰乐",
-      "mfe": 0.031429,
+      "mfe": 0.085714,
       "mae": -0.108571,
       "fiveDayReturn": 0.008571
     },
@@ -2996,37 +2996,37 @@
   ],
   "pathClusters": {
     "methodZh": "第一期使用透明规则分型；样本量充足后再升级为无监督路径聚类，并保留版本号避免事后改口径。",
-    "matureSamples": 111,
+    "matureSamples": 95,
     "clusters": [
       {
         "name": "失败下跌型",
-        "sampleCount": 44,
-        "share": 0.3963964,
-        "medianFiveDayReturn": -0.0841295
+        "sampleCount": 38,
+        "share": 0.4,
+        "medianFiveDayReturn": -0.09041829
       },
       {
         "name": "其他演化型",
-        "sampleCount": 24,
-        "share": 0.21621622,
+        "sampleCount": 20,
+        "share": 0.21052632,
         "medianFiveDayReturn": 0.03716191
       },
       {
         "name": "横盘蓄势型",
-        "sampleCount": 21,
-        "share": 0.18918919,
-        "medianFiveDayReturn": 0.0
+        "sampleCount": 18,
+        "share": 0.18947368,
+        "medianFiveDayReturn": -0.0010665
       },
       {
         "name": "回踩再涨型",
-        "sampleCount": 16,
-        "share": 0.14414414,
+        "sampleCount": 14,
+        "share": 0.14736842,
         "medianFiveDayReturn": 0.05198084
       },
       {
         "name": "快速启动型",
-        "sampleCount": 6,
-        "share": 0.05405405,
-        "medianFiveDayReturn": 0.06510473
+        "sampleCount": 5,
+        "share": 0.05263158,
+        "medianFiveDayReturn": 0.07230769
       }
     ]
   },
@@ -3040,7 +3040,7 @@
       "highChaseRatio": null,
       "stageDistribution": {},
       "chaseDistribution": {},
-      "medianMFE": 0.079848,
+      "medianMFE": 0.080766,
       "medianMAE": -0.040621
     },
     "failure": {
