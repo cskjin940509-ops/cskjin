@@ -33,5 +33,15 @@ class FreeSentimentInputTests(unittest.TestCase):
         self.assertIsNone(result["financingBalance"])
         self.assertEqual(result["scoreBlocker"], "交易所覆盖不完整")
 
+    def test_szse_summary_failure_falls_back_to_official_detail(self):
+        with patch.object(collector.ak, "stock_margin_sse", return_value=Frame([{"融资余额": 100.0}])), \
+             patch.object(collector.ak, "stock_margin_szse", side_effect=ValueError("shape changed")), \
+             patch.object(collector.ak, "stock_margin_detail_szse", return_value=Frame([{"融资余额": 20.0}, {"融资余额": 30.0}])), \
+             patch.object(collector.ak, "stock_margin_detail_bse", return_value=Frame([{"融资余额": 5.0}])):
+            result = collector.fetch_market_margin_summary(date(2026, 9, 9))
+        self.assertTrue(result["complete"])
+        self.assertEqual(result["exchangeBalances"]["SZSE"], 50.0)
+        self.assertIn("回退", result["sources"]["SZSE"])
+
 
 if __name__ == "__main__": unittest.main()

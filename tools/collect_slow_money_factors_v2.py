@@ -99,8 +99,20 @@ def fetch_market_margin_summary(d):
             value *= 1e8
         balances["SZSE"] = value
         sources["SZSE"] = "深交所融资融券汇总"
-    except Exception as e:
-        errors["SZSE"] = e.__class__.__name__
+    except Exception as summary_error:
+        # The SZSE summary endpoint occasionally changes its JSON shape. The
+        # official per-security table carries the same balance field, so use
+        # its exact daily sum instead of discarding the whole exchange.
+        try:
+            df = ak.stock_margin_detail_szse(date=stamp)
+            values = [base.finite(x.get("融资余额")) for x in base.df_records(df)]
+            values = [x for x in values if x is not None]
+            if not values:
+                raise ValueError("missing financing balance")
+            balances["SZSE"] = sum(values)
+            sources["SZSE"] = "深交所融资融券明细当日汇总（汇总接口异常时回退）"
+        except Exception as detail_error:
+            errors["SZSE"] = f"summary:{summary_error.__class__.__name__};detail:{detail_error.__class__.__name__}"
     try:
         df = ak.stock_margin_detail_bse(date=stamp)
         rows = base.df_records(df)
