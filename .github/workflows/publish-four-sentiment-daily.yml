@@ -42,4 +42,11 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add astock_sentiment/latest.json astock_sentiment/history/
           git diff --cached --quiet || git commit -m "Publish four sentiment daily evidence"
-          git push
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          exit 1
