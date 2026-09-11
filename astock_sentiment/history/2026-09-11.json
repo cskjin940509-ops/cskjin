@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reportDate": "2026-09-11",
-  "generatedAt": "2026-09-11T14:25:08.346503+08:00",
+  "generatedAt": "2026-09-11T15:21:44.645995+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -10,14 +10,14 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "logUpDownRatio": -1.5031833421793932,
-        "up": 932.0,
-        "down": 4192.0,
-        "flat": 84.0,
-        "sampleCount": 5208.0
+        "logUpDownRatio": -2.020666725259015,
+        "up": 605.0,
+        "down": 4567.0,
+        "flat": 38.0,
+        "sampleCount": 5210.0
       },
-      "dataDate": "2026-09-10",
-      "availableAt": "2026-09-10T17:42:38+08:00",
+      "dataDate": "2026-09-11",
+      "availableAt": "2026-09-11T15:18:45+08:00",
       "classification": "研究原始值",
       "status": "INSUFFICIENT_485_HISTORY",
       "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
@@ -28,21 +28,20 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "financingBalance": null,
-        "change1d": null,
+        "financingBalance": 2617177271180.0,
+        "change1d": -2213824034.0,
         "exchangeCoverage": [
           "BSE",
+          "SSE",
           "SZSE"
         ],
-        "errors": {
-          "SSE": "JSONDecodeError"
-        }
+        "errors": {}
       },
       "dataDate": "2026-09-10",
-      "availableAt": "2026-09-11T14:24:47+08:00",
+      "availableAt": "2026-09-11T15:21:22+08:00",
       "classification": "研究原始值",
-      "status": "MISSING_INPUT",
-      "blocker": "交易所覆盖不完整",
+      "status": "INSUFFICIENT_485_HISTORY",
+      "blocker": "需要485个连续、同口径、按可得时间保存的完整交易日汇总",
       "positionEligible": false
     },
     {
@@ -50,14 +49,14 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "etfCount": 731,
-        "validChangeCount": 730,
-        "netShareChange1d": 1298634624.0,
-        "netCreationAmountEstimate1d": 1982200799.5229998,
+        "etfCount": 1635,
+        "validChangeCount": 1633,
+        "netShareChange1d": 5802050624.0,
+        "netCreationAmountEstimate1d": 5741950200.0,
         "historyObservations": 21
       },
       "dataDate": "2026-09-10",
-      "availableAt": "2026-09-11T14:24:47+08:00",
+      "availableAt": "2026-09-11T15:21:22+08:00",
       "classification": "研究观察值",
       "status": "FORMULA_UNVERIFIED",
       "blocker": "原版ETF池、窗口、原始因子与标准化顺序未冻结；历史不足485日",
@@ -68,8 +67,8 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": null,
-      "dataDate": "2026-09-10",
-      "availableAt": "2026-09-11T14:25:08.346503+08:00",
+      "dataDate": "2026-09-11",
+      "availableAt": "2026-09-11T15:21:44.645995+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
