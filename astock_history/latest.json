@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-09-11T15:54:49+08:00",
+  "updatedAt": "2026-09-11T16:02:34+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
     "sampleCount": 193,
@@ -21,30 +21,30 @@
         "p90": 0.0376786
       },
       "2D": {
-        "members": 131,
+        "members": 174,
         "mature": true,
-        "meanReturn": -0.03288936,
-        "medianReturn": -0.03433885,
-        "hitRate": 0.25954198,
-        "meanAlpha": -0.02403452,
-        "medianAlpha": -0.02803897,
-        "p10": -0.11246078,
-        "p25": -0.07345815,
-        "p75": 0.00390555,
-        "p90": 0.02995169
+        "meanReturn": -0.02759895,
+        "medianReturn": -0.02799978,
+        "hitRate": 0.29310345,
+        "meanAlpha": -0.01877491,
+        "medianAlpha": -0.02002892,
+        "p10": -0.10962889,
+        "p25": -0.06401676,
+        "p75": 0.00693023,
+        "p90": 0.04127687
       },
       "3D": {
-        "members": 115,
+        "members": 154,
         "mature": true,
-        "meanReturn": -0.04131582,
-        "medianReturn": -0.05185681,
-        "hitRate": 0.22608696,
-        "meanAlpha": -0.03122045,
-        "medianAlpha": -0.04192788,
-        "p10": -0.11325516,
-        "p25": -0.08125878,
-        "p75": -0.01137918,
-        "p90": 0.03583268
+        "meanReturn": -0.0404322,
+        "medianReturn": -0.04928736,
+        "hitRate": 0.22077922,
+        "meanAlpha": -0.03007571,
+        "medianAlpha": -0.0379283,
+        "p10": -0.11289606,
+        "p25": -0.08051743,
+        "p75": -0.0129479,
+        "p90": 0.03468852
       },
       "5D": {
         "members": 125,
@@ -95,7 +95,7 @@
     },
     "medianMFE": 0.041152,
     "medianMAE": -0.059485,
-    "medianMaxDrawdown": -0.07326478
+    "medianMaxDrawdown": -0.07715241
   },
   "horizonGroups": {
     "shortTerm": [
@@ -1005,17 +1005,17 @@
     },
     {
       "day": 2,
-      "meanReturn": -0.03288936,
-      "medianReturn": -0.03433885,
-      "meanAlpha": -0.02403452,
-      "members": 131
+      "meanReturn": -0.02759895,
+      "medianReturn": -0.02799978,
+      "meanAlpha": -0.01877491,
+      "members": 174
     },
     {
       "day": 3,
-      "meanReturn": -0.04131582,
-      "medianReturn": -0.05185681,
-      "meanAlpha": -0.03122045,
-      "members": 115
+      "meanReturn": -0.0404322,
+      "medianReturn": -0.04928736,
+      "meanAlpha": -0.03007571,
+      "members": 154
     },
     {
       "day": 5,
@@ -1086,52 +1086,52 @@
     },
     "3D": {
       "horizon": "3D",
-      "members": 115,
+      "members": 154,
       "bins": [
         {
           "label": "<-5%",
-          "count": 59,
-          "share": 0.51304348
+          "count": 76,
+          "share": 0.49350649
         },
         {
           "label": "-5~-3%",
-          "count": 13,
-          "share": 0.11304348
+          "count": 20,
+          "share": 0.12987013
         },
         {
           "label": "-3~-1%",
-          "count": 15,
-          "share": 0.13043478
+          "count": 22,
+          "share": 0.14285714
         },
         {
           "label": "-1~0%",
           "count": 2,
-          "share": 0.0173913
+          "share": 0.01298701
         },
         {
           "label": "0~1%",
-          "count": 4,
-          "share": 0.03478261
+          "count": 5,
+          "share": 0.03246753
         },
         {
           "label": "1~3%",
-          "count": 7,
-          "share": 0.06086957
+          "count": 10,
+          "share": 0.06493506
         },
         {
           "label": "3~5%",
-          "count": 7,
-          "share": 0.06086957
+          "count": 9,
+          "share": 0.05844156
         },
         {
           "label": "5~10%",
-          "count": 5,
-          "share": 0.04347826
+          "count": 6,
+          "share": 0.03896104
         },
         {
           "label": ">10%",
-          "count": 3,
-          "share": 0.02608696
+          "count": 4,
+          "share": 0.02597403
         }
       ]
     },
@@ -3132,37 +3132,37 @@
   ],
   "pathClusters": {
     "methodZh": "第一期使用透明规则分型；样本量充足后再升级为无监督路径聚类，并保留版本号避免事后改口径。",
-    "matureSamples": 95,
+    "matureSamples": 121,
     "clusters": [
       {
         "name": "失败下跌型",
-        "sampleCount": 39,
-        "share": 0.41052632,
-        "medianFiveDayReturn": -0.084337
+        "sampleCount": 45,
+        "share": 0.37190083,
+        "medianFiveDayReturn": -0.083922
       },
       {
         "name": "其他演化型",
-        "sampleCount": 20,
-        "share": 0.21052632,
-        "medianFiveDayReturn": 0.0356605
+        "sampleCount": 31,
+        "share": 0.25619835,
+        "medianFiveDayReturn": 0.027328
       },
       {
         "name": "横盘蓄势型",
-        "sampleCount": 18,
-        "share": 0.18947368,
+        "sampleCount": 22,
+        "share": 0.18181818,
         "medianFiveDayReturn": 0.0
       },
       {
         "name": "回踩再涨型",
-        "sampleCount": 15,
-        "share": 0.15789474,
+        "sampleCount": 17,
+        "share": 0.14049587,
         "medianFiveDayReturn": 0.05151915
       },
       {
         "name": "快速启动型",
-        "sampleCount": 3,
-        "share": 0.03157895,
-        "medianFiveDayReturn": 0.07439813
+        "sampleCount": 6,
+        "share": 0.04958678,
+        "medianFiveDayReturn": 0.065105
       }
     ]
   },
