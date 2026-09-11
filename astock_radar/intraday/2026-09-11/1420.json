@@ -8,7 +8,7 @@
   "scheduledSlot": "1420",
   "refreshIntervalMin": 5,
   "marketQuoteAgeSec": 2.9,
-  "dataSource": "腾讯指数行情 + 东方财富板块/个股 + 历史日线",
+  "dataSource": "腾讯指数行情 + 东方财富板块/个股 + 历史日线 + Yunai独立确认",
   "mainlines": [
     {
       "boardCode": "BK1296",
@@ -281,7 +281,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分54；主线形成65；资金50；追高风险低"
+      "reasonZh": "提前分54；主线形成65；资金50；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": false,
+        "unsupportedMarket": null,
+        "price": 17.85,
+        "changePct": 0.0056338028,
+        "quoteTime": "1789107699000",
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": null,
+        "totalNetInflow": null,
+        "capitalTimestamp": null,
+        "confirmation": "NO_CAPITAL_DATA",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     }
   },
   "pools": {
@@ -341,5 +355,15 @@
     "ETF一级申赎B2": "未接入真实专用数据，不伪造"
   },
   "scoreMeaningZh": "形成分是研究排序分，不代表上涨概率；当日涨幅只进入价格延伸惩罚，不作为形成分正向奖励。",
-  "note": "从开盘起每5分钟滚动识别潜在主线和提前介入候选；14:30以后进入尾盘执行/确认阶段，15:00形成当日最终雷达快照。"
+  "note": "从开盘起每5分钟滚动识别潜在主线和提前介入候选；14:30以后进入尾盘执行/确认阶段，15:00形成当日最终雷达快照。",
+  "yunaiConfirmation": {
+    "checkedAt": "2026-09-11T14:21:48+08:00",
+    "provider": "Yunai Quant API",
+    "checkedSymbols": [
+      "300413"
+    ],
+    "quoteAvailable": 1,
+    "capitalResponseAvailable": 0,
+    "role": "独立确认层；不直接改写formationScore/earlyEntryScore"
+  }
 }
