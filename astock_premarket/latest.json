@@ -3,7 +3,7 @@
   "version": "v1.0-premarket-prediction-point-in-time",
   "state": "ready",
   "targetDate": "2026-09-11",
-  "generatedAt": "2026-09-11T09:50:07+08:00",
+  "generatedAt": "2026-09-11T10:20:21+08:00",
   "sourceOfficialDate": "2026-09-10",
   "factorDataDate": "2026-09-10",
   "slowMoneyFresh": true,
@@ -32,9 +32,7 @@
       "601229"
     ],
     "B1": [
-      "301526",
-      "600908",
-      "000001"
+      "301526"
     ],
     "B2": [],
     "B3": [
@@ -51,15 +49,15 @@
     ],
     "B4": [
       "301526",
-      "605006",
       "002201",
+      "605006",
       "600876",
       "002613",
+      "603256",
+      "300196",
       "601112",
       "601229",
-      "601128",
-      "603256",
-      "300196"
+      "002080"
     ],
     "B12": [],
     "B13": [
@@ -77,10 +75,10 @@
     "policyZh": "历史形态只作风险背景，不把历史重建收益直接写成买入概率或实盘权重。"
   },
   "summary": {
-    "candidateCount": 14,
+    "candidateCount": 13,
     "tierCounts": {
       "一级优先": 1,
-      "二级观察": 4,
+      "二级观察": 3,
       "等竞价确认": 9
     },
     "noteZh": "一级优先仍需竞价/开盘确认；若B1/B2尚未更新则不会给出一级优先。"
@@ -90,7 +88,7 @@
       "code": "301526",
       "name": "国际复材",
       "sector": "玻纤制造",
-      "priorityScore": 90.2,
+      "priorityScore": 89.66,
       "tierZh": "一级优先",
       "memberships": [
         "B0",
@@ -100,14 +98,14 @@
         "B13"
       ],
       "baseScore": 75.59,
-      "slowCompositeScore": 73.2,
-      "marginScore": 87.65,
+      "slowCompositeScore": 72.66,
+      "marginScore": 84.0,
       "etfScore": null,
       "mainFlowPct": 11.43,
       "mainlineStage": null,
       "chaseRisk": "LOW",
       "previousChangePct": 6.79,
-      "reasonZh": "B13 双因子确认；基础/综合强度 73.2；两融评分 88",
+      "reasonZh": "B13 双因子确认；基础/综合强度 72.7；两融评分 84",
       "riskZh": "上一交易日已上涨6.79%",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
@@ -131,29 +129,6 @@
       "chaseRisk": "LOW",
       "previousChangePct": 2.02,
       "reasonZh": "B3 单源/多源确认；基础/综合强度 62.2",
-      "riskZh": "暂无双因子交叉确认",
-      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
-    },
-    {
-      "code": "601229",
-      "name": "上海银行",
-      "sector": "银行",
-      "priorityScore": 67.13,
-      "tierZh": "二级观察",
-      "memberships": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "baseScore": 59.42,
-      "slowCompositeScore": 57.13,
-      "marginScore": 50.59,
-      "etfScore": 14.76,
-      "mainFlowPct": 14.79,
-      "mainlineStage": null,
-      "chaseRisk": "LOW",
-      "previousChangePct": 2.09,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 57.1；两融评分 51；ETF评分 15",
       "riskZh": "暂无双因子交叉确认",
       "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
@@ -204,28 +179,6 @@
       "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
     {
-      "code": "601128",
-      "name": "常熟银行",
-      "sector": "银行",
-      "priorityScore": 64.81,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B3",
-        "B4"
-      ],
-      "baseScore": 54.69,
-      "slowCompositeScore": 56.81,
-      "marginScore": 70.59,
-      "etfScore": 14.76,
-      "mainFlowPct": 13.34,
-      "mainlineStage": null,
-      "chaseRisk": "LOW",
-      "previousChangePct": 0.78,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 56.8；两融评分 71；ETF评分 15",
-      "riskZh": "暂无双因子交叉确认",
-      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
-    },
-    {
       "code": "605006",
       "name": "山东玻纤",
       "sector": "玻纤制造",
@@ -249,23 +202,25 @@
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
-      "code": "601112",
-      "name": "振石股份",
-      "sector": "玻纤制造",
-      "priorityScore": 62.19,
+      "code": "601229",
+      "name": "上海银行",
+      "sector": "银行",
+      "priorityScore": 63.9,
       "tierZh": "等竞价确认",
       "memberships": [
+        "B0",
+        "B3",
         "B4"
       ],
-      "baseScore": 58.33,
-      "slowCompositeScore": 58.19,
-      "marginScore": 64.12,
-      "etfScore": null,
-      "mainFlowPct": 9.94,
+      "baseScore": 59.42,
+      "slowCompositeScore": 53.9,
+      "marginScore": 38.78,
+      "etfScore": 5.0,
+      "mainFlowPct": 14.79,
       "mainlineStage": null,
       "chaseRisk": "LOW",
-      "previousChangePct": 1.7,
-      "reasonZh": "基础/综合强度 58.2；两融评分 64",
+      "previousChangePct": 2.09,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 53.9；两融评分 39；ETF评分 5",
       "riskZh": "暂无双因子交叉确认",
       "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
@@ -273,7 +228,7 @@
       "code": "002201",
       "name": "九鼎新材",
       "sector": "玻纤制造",
-      "priorityScore": 60.75,
+      "priorityScore": 61.05,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -281,22 +236,43 @@
         "B4"
       ],
       "baseScore": 73.35,
-      "slowCompositeScore": 65.75,
-      "marginScore": 20.0,
+      "slowCompositeScore": 66.05,
+      "marginScore": 22.0,
       "etfScore": null,
       "mainFlowPct": 34.08,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 10.04,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 65.8；两融评分 20",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 66.0；两融评分 22",
       "riskZh": "追高风险高；上一交易日已上涨10.04%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "601112",
+      "name": "振石股份",
+      "sector": "玻纤制造",
+      "priorityScore": 60.01,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B4"
+      ],
+      "baseScore": 58.33,
+      "slowCompositeScore": 56.01,
+      "marginScore": 49.59,
+      "etfScore": null,
+      "mainFlowPct": 9.94,
+      "mainlineStage": null,
+      "chaseRisk": "LOW",
+      "previousChangePct": 1.7,
+      "reasonZh": "基础/综合强度 56.0；两融评分 50",
+      "riskZh": "暂无双因子交叉确认",
+      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
     {
       "code": "600876",
       "name": "凯盛新能",
       "sector": "玻璃玻纤",
-      "priorityScore": 60.51,
+      "priorityScore": 57.55,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -304,56 +280,56 @@
         "B4"
       ],
       "baseScore": 64.45,
-      "slowCompositeScore": 65.51,
-      "marginScore": 41.76,
+      "slowCompositeScore": 62.55,
+      "marginScore": 22.04,
       "etfScore": null,
       "mainFlowPct": 36.46,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 10.01,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 65.5；两融评分 42",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 62.5；两融评分 22",
       "riskZh": "追高风险高；上一交易日已上涨10.01%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
-      "code": "000001",
-      "name": "平安银行",
-      "sector": "银行",
-      "priorityScore": 58.08,
+      "code": "002080",
+      "name": "中材科技",
+      "sector": "玻纤制造",
+      "priorityScore": 54.88,
       "tierZh": "等竞价确认",
       "memberships": [
-        "B1"
+        "B4"
       ],
-      "baseScore": 54.38,
-      "slowCompositeScore": 51.08,
-      "marginScore": 58.82,
-      "etfScore": 14.76,
-      "mainFlowPct": 10.29,
+      "baseScore": 58.17,
+      "slowCompositeScore": 50.88,
+      "marginScore": 54.0,
+      "etfScore": null,
+      "mainFlowPct": 3.87,
       "mainlineStage": null,
       "chaseRisk": "LOW",
-      "previousChangePct": 1.28,
-      "reasonZh": "B1 单源/多源确认；基础/综合强度 51.1；两融评分 59；ETF评分 15",
+      "previousChangePct": 0.63,
+      "reasonZh": "基础/综合强度 50.9；两融评分 54",
       "riskZh": "暂无双因子交叉确认",
       "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
     {
-      "code": "600908",
-      "name": "无锡银行",
+      "code": "601128",
+      "name": "常熟银行",
       "sector": "银行",
-      "priorityScore": 57.1,
+      "priorityScore": 54.86,
       "tierZh": "等竞价确认",
       "memberships": [
-        "B1"
+        "B3"
       ],
       "baseScore": 54.69,
-      "slowCompositeScore": 50.1,
-      "marginScore": 82.94,
-      "etfScore": 14.76,
-      "mainFlowPct": 5.68,
+      "slowCompositeScore": 48.86,
+      "marginScore": 27.35,
+      "etfScore": 5.0,
+      "mainFlowPct": 13.34,
       "mainlineStage": null,
       "chaseRisk": "LOW",
-      "previousChangePct": 2.54,
-      "reasonZh": "B1 单源/多源确认；基础/综合强度 50.1；两融评分 83；ETF评分 15",
+      "previousChangePct": 0.78,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 48.9；两融评分 27；ETF评分 5",
       "riskZh": "暂无双因子交叉确认",
       "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
@@ -361,21 +337,21 @@
       "code": "600919",
       "name": "江苏银行",
       "sector": "银行",
-      "priorityScore": 54.04,
+      "priorityScore": 53.65,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
         "B3"
       ],
       "baseScore": 60.11,
-      "slowCompositeScore": 46.04,
-      "marginScore": 18.82,
-      "etfScore": 14.76,
+      "slowCompositeScore": 45.65,
+      "marginScore": 25.92,
+      "etfScore": 5.0,
       "mainFlowPct": 9.49,
       "mainlineStage": null,
       "chaseRisk": "LOW",
       "previousChangePct": 2.35,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 46.0；两融评分 19；ETF评分 15",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 45.6；两融评分 26；ETF评分 5",
       "riskZh": "暂无双因子交叉确认",
       "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
@@ -383,20 +359,20 @@
       "code": "600176",
       "name": "中国巨石",
       "sector": "玻纤制造",
-      "priorityScore": 53.65,
+      "priorityScore": 52.4,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0"
       ],
       "baseScore": 63.56,
-      "slowCompositeScore": 49.65,
-      "marginScore": 40.59,
+      "slowCompositeScore": 48.4,
+      "marginScore": 32.24,
       "etfScore": null,
       "mainFlowPct": 2.99,
       "mainlineStage": null,
       "chaseRisk": "LOW",
       "previousChangePct": 1.85,
-      "reasonZh": "基础/综合强度 49.6；两融评分 41",
+      "reasonZh": "基础/综合强度 48.4；两融评分 32",
       "riskZh": "暂无双因子交叉确认",
       "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     }
