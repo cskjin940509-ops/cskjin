@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-11T16:14:45+08:00",
+  "generatedAt": "2026-09-11T17:38:23+08:00",
   "state": "可用",
   "verifiedToday": true,
   "providerDate": "20260911",
@@ -8,17 +8,17 @@
   "activePoolQuoteCount": 21,
   "marketSnapshot": {
     "sourceDate": "2026-09-11",
-    "availableAt": "2026-09-11T16:14:45+08:00",
+    "availableAt": "2026-09-11T17:38:23+08:00",
     "confidence": "高",
     "verifiedToday": true,
-    "dataSource": "Yunai Quant API（市场状态） + 腾讯行情 + 东方财富",
+    "dataSource": "腾讯行情 + 东方财富",
     "indices": {
       "sh000001": {
         "name": "上证指数",
         "close": 3888.11,
         "changePct": -1.18,
         "amount": 958186340000.0,
-        "quoteTime": "161433"
+        "quoteTime": "161403"
       },
       "sz399006": {
         "name": "创业板指",
@@ -32,21 +32,21 @@
         "close": 1553.39,
         "changePct": -1.01,
         "amount": 77879620000.0,
-        "quoteTime": "161445"
+        "quoteTime": "161415"
       },
       "sh000300": {
         "name": "沪深300",
         "close": 4510.16,
         "changePct": -0.84,
         "amount": 522206650000.0,
-        "quoteTime": "161445"
+        "quoteTime": "161415"
       },
       "sh000852": {
         "name": "中证1000",
         "close": 7427.24,
         "changePct": -2.12,
         "amount": 421033230000.0,
-        "quoteTime": "161433"
+        "quoteTime": "161403"
       },
       "sz399001": {
         "name": "深证成指",
@@ -56,16 +56,17 @@
         "quoteTime": "161454"
       }
     },
-    "totalAmount": 1971662906469.49,
-    "up": 605,
-    "down": 4567,
-    "flat": 38,
-    "medianChangePct": -2.18,
-    "sampleCount": 5210,
-    "breadthStatus": "全市场统计可用",
+    "totalAmount": null,
+    "up": null,
+    "down": null,
+    "flat": null,
+    "medianChangePct": null,
+    "sampleCount": null,
+    "breadthStatus": "全市场统计待同步",
+    "breadthSampleCount": 0,
+    "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
     "coreIndexCoverage": "6/6",
-    "coreIndexSource": "腾讯当日收盘快照",
-    "marketStatusProvider": "Yunai Quant API"
+    "coreIndexSource": "腾讯当日收盘快照"
   },
   "boardHeatmap": {
     "industry": [
@@ -2673,7 +2674,7 @@
       }
     ],
     "sourceDate": "2026-09-11",
-    "availableAt": "2026-09-11T16:14:45+08:00"
+    "availableAt": "2026-09-11T17:38:23+08:00"
   },
   "quotes": {
     "sh000001": {
@@ -2686,9 +2687,9 @@
       "high": 3912.32,
       "low": 3852.03,
       "amount": 958186340000.0,
-      "quoteTimeRaw": "20260911161403",
+      "quoteTimeRaw": "20260911161433",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:03",
+      "quoteTime": "16:14:33",
       "source": "腾讯行情"
     },
     "sz399006": {
@@ -2716,9 +2717,9 @@
       "high": 1556.68,
       "low": 1516.2,
       "amount": 77879620000.0,
-      "quoteTimeRaw": "20260911161415",
+      "quoteTimeRaw": "20260911161445",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:15",
+      "quoteTime": "16:14:45",
       "source": "腾讯行情"
     },
     "sh000300": {
@@ -2731,9 +2732,9 @@
       "high": 4520.17,
       "low": 4461.57,
       "amount": 522206650000.0,
-      "quoteTimeRaw": "20260911161415",
+      "quoteTimeRaw": "20260911161445",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:15",
+      "quoteTime": "16:14:45",
       "source": "腾讯行情"
     },
     "sh000852": {
@@ -2746,9 +2747,9 @@
       "high": 7506.24,
       "low": 7284.53,
       "amount": 421033230000.0,
-      "quoteTimeRaw": "20260911161403",
+      "quoteTimeRaw": "20260911161433",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:03",
+      "quoteTime": "16:14:33",
       "source": "腾讯行情"
     },
     "sz000070": {
@@ -2791,9 +2792,9 @@
       "high": 20.57,
       "low": 18.2,
       "amount": 3524510000.0,
-      "quoteTimeRaw": "20260911161400",
+      "quoteTimeRaw": "20260911161500",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:00",
+      "quoteTime": "16:15:00",
       "source": "腾讯行情"
     },
     "sz001232": {
@@ -2836,9 +2837,9 @@
       "high": 20.08,
       "low": 17.88,
       "amount": 2014180000.0,
-      "quoteTimeRaw": "20260911161354",
+      "quoteTimeRaw": "20260911161454",
       "quoteDate": "20260911",
-      "quoteTime": "16:13:54",
+      "quoteTime": "16:14:54",
       "source": "腾讯行情"
     },
     "sz002913": {
@@ -2851,9 +2852,9 @@
       "high": 74.44,
       "low": 69.24,
       "amount": 1079530000.0,
-      "quoteTimeRaw": "20260911161348",
+      "quoteTimeRaw": "20260911161448",
       "quoteDate": "20260911",
-      "quoteTime": "16:13:48",
+      "quoteTime": "16:14:48",
       "source": "腾讯行情"
     },
     "sz002916": {
@@ -2866,9 +2867,9 @@
       "high": 400.33,
       "low": 384.59,
       "amount": 3538070000.0,
-      "quoteTimeRaw": "20260911161351",
+      "quoteTimeRaw": "20260911161451",
       "quoteDate": "20260911",
-      "quoteTime": "16:13:51",
+      "quoteTime": "16:14:51",
       "source": "腾讯行情"
     },
     "sz002938": {
@@ -2941,9 +2942,9 @@
       "high": 31.25,
       "low": 27.3,
       "amount": 6716040000.0,
-      "quoteTimeRaw": "20260911161351",
+      "quoteTimeRaw": "20260911161451",
       "quoteDate": "20260911",
-      "quoteTime": "16:13:51",
+      "quoteTime": "16:14:51",
       "source": "腾讯行情"
     },
     "sh600105": {
@@ -2956,9 +2957,9 @@
       "high": 43.2,
       "low": 39.99,
       "amount": 8654130000.0,
-      "quoteTimeRaw": "20260911161420",
+      "quoteTimeRaw": "20260911161450",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:20",
+      "quoteTime": "16:14:50",
       "source": "腾讯行情"
     },
     "sh600184": {
@@ -2971,9 +2972,9 @@
       "high": 19.98,
       "low": 17.8,
       "amount": 920210000.0,
-      "quoteTimeRaw": "20260911161415",
+      "quoteTimeRaw": "20260911161445",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:15",
+      "quoteTime": "16:14:45",
       "source": "腾讯行情"
     },
     "sh600237": {
@@ -2986,9 +2987,9 @@
       "high": 9.22,
       "low": 8.21,
       "amount": 899420000.0,
-      "quoteTimeRaw": "20260911161427",
+      "quoteTimeRaw": "20260911161457",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:27",
+      "quoteTime": "16:14:57",
       "source": "腾讯行情"
     },
     "sh600522": {
@@ -3046,9 +3047,9 @@
       "high": 20.88,
       "low": 18.4,
       "amount": 2302990000.0,
-      "quoteTimeRaw": "20260911161422",
+      "quoteTimeRaw": "20260911161452",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:22",
+      "quoteTime": "16:14:52",
       "source": "腾讯行情"
     },
     "sh688143": {
@@ -3061,68 +3062,17 @@
       "high": 196.28,
       "low": 163.66,
       "amount": 3715320000.0,
-      "quoteTimeRaw": "20260911161426",
+      "quoteTimeRaw": "20260911161456",
       "quoteDate": "20260911",
-      "quoteTime": "16:14:26",
+      "quoteTime": "16:14:56",
       "source": "腾讯行情"
     }
   },
-  "errors": [],
+  "errors": [
+    "全A截面：Full-market pagination failed: HTTPError,URLError"
+  ],
   "dataSources": [
-    "Yunai Quant API",
     "腾讯行情",
     "东方财富实时/延迟板块"
-  ],
-  "yunai": {
-    "configured": true,
-    "connected": true,
-    "marketStatus": {
-      "connected": true,
-      "provider": "Yunai Quant API",
-      "checkedAt": "2026-09-11T16:15:10+08:00",
-      "httpStatus": 200,
-      "contentType": "application/json",
-      "endpoint": "/quant-market/api/v1/quantitative/quotes/market-status",
-      "responseDigest": "67c4b5f8c662f29e",
-      "data": [
-        {
-          "market": "CN",
-          "status": "CLOSING",
-          "marketStatus": "Closed"
-        }
-      ]
-    },
-    "openapiState": "ready",
-    "endpointCount": 38,
-    "categories": [
-      "K线",
-      "行情"
-    ]
-  },
-  "yunaiProduction": {
-    "checkedAt": "2026-09-11T16:15:14+08:00",
-    "provider": "Yunai Quant API",
-    "connected": true,
-    "marketStatus": {
-      "httpStatus": 200,
-      "type": "list",
-      "count": 1
-    },
-    "checkedSymbols": [
-      "601606",
-      "688543",
-      "301357",
-      "300922",
-      "600435",
-      "300875",
-      "000519"
-    ],
-    "quoteAvailable": 7,
-    "capitalResponseAvailable": 7,
-    "roles": {
-      "realTimeQuotes": "第二实时行情源",
-      "capitalDistribution": "独立大单资金分布，不等同东方财富主力净流入",
-      "barsRange": "已验证可用，按需用于历史K线/RS校验"
-    }
-  }
+  ]
 }
