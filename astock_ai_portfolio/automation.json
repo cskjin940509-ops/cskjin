@@ -7,9 +7,9 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34558124542-1",
-  "lastRunAt": "2026-09-11T11:22:13+08:00",
-  "lastSuccessAt": "2026-09-11T11:22:13+08:00",
+  "cycleId": "34558155638-1",
+  "lastRunAt": "2026-09-11T11:22:44+08:00",
+  "lastSuccessAt": "2026-09-11T11:22:44+08:00",
   "lastTradeAt": "2026-09-11T10:28:57+08:00",
   "status": "NO_ACTION",
   "statusZh": "本轮未成交；全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
@@ -17,7 +17,7 @@
   "sessionOpen": true,
   "radarCapturedAt": "2026-09-11T11:21:13+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 60.2,
+  "radarAgeSeconds": 91.8,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -112,6 +112,7 @@
       {
         "code": "600025",
         "reasons": [
+          "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未确认回撤企稳/突破回踩，继续等待",
           "未验证板块完整样本前20%",
@@ -183,6 +184,7 @@
         "code": "000722",
         "reasons": [
           "5日相对板块扩张超过5个百分点",
+          "双源价格偏差超过0.3%或缺数",
           "当日涨幅已超过提前介入上限",
           "未确认回撤企稳/突破回踩，继续等待",
           "未验证板块完整样本前20%",
@@ -246,6 +248,7 @@
       {
         "code": "002517",
         "reasons": [
+          "价格未改善，禁止下跌摊平",
           "加仓要求板块确认",
           "完整5/20日成交额量比未通过1.2–2.5",
           "成交额低于流动性门槛",
