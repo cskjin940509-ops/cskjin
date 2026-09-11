@@ -6,7 +6,7 @@
   "scheduledFor": "2026-09-11T15:00:00+08:00",
   "capturedAt": "2026-09-11T15:01:58+08:00",
   "marketQuoteAgeSec": 49.5,
-  "dataSource": "腾讯指数行情 + 东方财富延迟源（约15分钟）",
+  "dataSource": "腾讯指数行情 + 东方财富延迟源（约15分钟） + Yunai Quant API",
   "boardSource": "东方财富延迟源（约15分钟）",
   "factorCutoff": "2026-09-11T15:01:58+08:00",
   "confirmedMainlines": [
@@ -151,7 +151,13 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度58.1；历史趋势未同步"
+      "reason": "综合强度58.1；历史趋势未同步",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 36.12,
+        "changePct": 0.0472600754,
+        "amount": 2569561733.0
+      }
     },
     "688543": {
       "code": "688543",
@@ -176,7 +182,13 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度49.7；历史趋势未同步"
+      "reason": "综合强度49.7；历史趋势未同步",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 46.32,
+        "changePct": 0.0378669057,
+        "amount": 842861634.0
+      }
     },
     "301357": {
       "code": "301357",
@@ -201,7 +213,13 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度50.7；历史趋势未同步"
+      "reason": "综合强度50.7；历史趋势未同步",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 108.6,
+        "changePct": 0.0422264875,
+        "amount": 977457968.95
+      }
     },
     "300922": {
       "code": "300922",
@@ -226,7 +244,13 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度46.3；历史趋势未同步"
+      "reason": "综合强度46.3；历史趋势未同步",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 19.86,
+        "changePct": 0.0563829787,
+        "amount": 385198033.12
+      }
     },
     "600435": {
       "code": "600435",
@@ -251,7 +275,13 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度42.2；历史趋势未同步"
+      "reason": "综合强度42.2；历史趋势未同步",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 11.94,
+        "changePct": 0.0144435004,
+        "amount": 426114126.0
+      }
     },
     "300875": {
       "code": "300875",
@@ -276,7 +306,13 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度42.8；历史趋势未同步"
+      "reason": "综合强度42.8；历史趋势未同步",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 35.34,
+        "changePct": 0.0202078522,
+        "amount": 330721709.85
+      }
     },
     "000519": {
       "code": "000519",
@@ -301,7 +337,13 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度38.7；历史趋势未同步"
+      "reason": "综合强度38.7；历史趋势未同步",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 16.21,
+        "changePct": 0.0043370508,
+        "amount": 1690287524.19
+      }
     }
   },
   "noTrade": false,
@@ -312,5 +354,14 @@
   "scheduledSlot": "1500",
   "isFinal": true,
   "phase": "收盘锁定",
-  "snapshotPath": "astock_tail/history/2026-09-11.json"
+  "snapshotPath": "astock_tail/history/2026-09-11.json",
+  "yunaiIntegration": {
+    "state": "connected",
+    "gatewayCheckedAt": "2026-09-11T15:02:17+08:00",
+    "quoteChecked": 7,
+    "quoteVerifiedWithin1Pct": 7,
+    "capitalAvailable": 0,
+    "priceRole": "第二实时行情源交叉核对",
+    "capitalRole": "独立资金确认源；当前不改变TB3池排序"
+  }
 }
