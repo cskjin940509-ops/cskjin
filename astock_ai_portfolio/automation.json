@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34558054013-1",
-  "lastRunAt": "2026-09-11T11:20:40+08:00",
-  "lastSuccessAt": "2026-09-11T11:20:40+08:00",
+  "cycleId": "34558088978-1",
+  "lastRunAt": "2026-09-11T11:21:48+08:00",
+  "lastSuccessAt": "2026-09-11T11:21:48+08:00",
   "lastTradeAt": "2026-09-11T10:28:57+08:00",
   "status": "NO_ACTION",
   "statusZh": "本轮未成交；全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
   "runSource": "dedicated-auto-scheduler",
   "sessionOpen": true,
-  "radarCapturedAt": "2026-09-11T11:20:03+08:00",
+  "radarCapturedAt": "2026-09-11T11:21:13+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 37.6,
+  "radarAgeSeconds": 35.8,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -147,7 +147,7 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "000601",
+        "code": "002039",
         "reasons": [
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
@@ -160,7 +160,7 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "002039",
+        "code": "000601",
         "reasons": [
           "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
@@ -238,26 +238,25 @@
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
-        "code": "000993",
-        "reasons": [
-          "双源价格偏差超过0.3%或缺数",
-          "当日涨幅已超过提前介入上限",
-          "未确认回撤企稳/突破回踩，继续等待",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "涨跌幅超出保守买入区间",
-          "第二行情缺失/过期",
-          "综合分不足64",
-          "追高风险高"
-        ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
-      },
-      {
         "code": "000722",
         "reasons": [
           "双源价格偏差超过0.3%或缺数",
           "当日涨幅已超过提前介入上限",
           "未确认回撤企稳/突破回踩，继续等待",
           "未验证板块完整样本前20%",
+          "板块5日收益缺失，无法检查相对涨幅",
+          "涨跌幅超出保守买入区间",
+          "第二行情缺失/过期",
+          "综合分不足64"
+        ],
+        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+      },
+      {
+        "code": "000993",
+        "reasons": [
+          "双源价格偏差超过0.3%或缺数",
+          "当日涨幅已超过提前介入上限",
+          "未确认回撤企稳/突破回踩，继续等待",
           "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "第二行情缺失/过期",
