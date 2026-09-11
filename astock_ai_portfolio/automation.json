@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34571284619-1",
-  "lastRunAt": "2026-09-11T14:45:33+08:00",
-  "lastSuccessAt": "2026-09-11T14:45:33+08:00",
+  "cycleId": "34571427734-1",
+  "lastRunAt": "2026-09-11T14:47:33+08:00",
+  "lastSuccessAt": "2026-09-11T14:47:33+08:00",
   "lastTradeAt": "2026-09-11T10:28:57+08:00",
   "status": "NO_ACTION",
-  "statusZh": "本轮未成交；全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
+  "statusZh": "本轮未成交；大盘或组合风险条件不允许新增买入",
   "runSource": "dedicated-auto-scheduler",
   "sessionOpen": true,
   "radarCapturedAt": "2026-09-11T14:38:27+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 427.0,
+  "radarAgeSeconds": 546.8,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -40,9 +40,9 @@
       "statusZh": "先处理退出和组合风控，不用换仓绕过风险限制"
     },
     "reasonCode": "BLOCKED_EVIDENCE_OR_RISK",
-    "reasonZh": "本轮未成交；全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场",
+    "reasonZh": "本轮未成交；大盘或组合风险条件不允许新增买入",
     "entryBlocks": [
-      "全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场"
+      "大盘或组合风险条件不允许新增买入"
     ],
     "pendingExits": [],
     "candidateCount": 18,
@@ -52,6 +52,7 @@
         "code": "300319",
         "reasons": [
           "ADV20不足20个完整交易日",
+          "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
@@ -71,6 +72,7 @@
       {
         "code": "301566",
         "reasons": [
+          "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
           "未验证板块完整样本前20%",
@@ -85,7 +87,6 @@
         "code": "301458",
         "reasons": [
           "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
           "涨跌幅超出保守买入区间",
@@ -137,6 +138,7 @@
       {
         "code": "002484",
         "reasons": [
+          "双源价格偏差超过0.3%或缺数",
           "完整5/20日成交额量比未通过1.2–2.5",
           "未验证板块完整样本前20%",
           "盘中样本间隔不足或断档，等待连续确认",
