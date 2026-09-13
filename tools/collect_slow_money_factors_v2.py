@@ -27,7 +27,7 @@ PROXY_URL = os.getenv("STOCK_API_URL", "https://jiaoch.top/")
 
 def _proxy_rows(api_name, params, fields=""):
     raw_token = os.getenv("STOCK_API_TOKEN", "").strip()
-    match = re.search(r"[0-9a-fA-F]{40}", raw_token)
+    match = re.search(r"(?<![0-9a-fA-F])[0-9a-fA-F]{64}(?![0-9a-fA-F])", raw_token)
     token = match.group(0) if match else raw_token.strip("'\"")
     if not token:
         raise RuntimeError("STOCK_API_TOKEN is not configured")
