@@ -40,8 +40,16 @@ def request(api_name, params):
 
 
 def trading_dates():
-    payload = json.loads((BACKFILL / "margin.json").read_text(encoding="utf-8"))
-    data = payload.get("data") or {}; fields = data.get("fields") or []
+    try:
+        payload = json.loads((BACKFILL / "margin.json").read_text(encoding="utf-8"))
+        data = payload.get("data") or {}
+    except (OSError, ValueError):
+        # GitHub may check out large historical files as LFS pointers.  Resolve
+        # the calendar from the API itself instead of depending on that file.
+        data = request("margin", {"start_date": "20240901",
+                                  "end_date": datetime.now().strftime("%Y%m%d"),
+                                  "limit": 2000})
+    fields = data.get("fields") or []
     di, ei = fields.index("trade_date"), fields.index("exchange_id")
     coverage = {}
     for row in data.get("items") or []:

@@ -26,4 +26,17 @@ class ETFBackfillTests(unittest.TestCase):
                 self.assertEqual(len(b.trading_dates()),486)
             finally: b.BACKFILL=old
 
+    def test_lfs_pointer_falls_back_to_api_calendar(self):
+        rows=[]
+        for i in range(490):
+            day=f'{20240000+i:08d}'; rows += [[day,'SSE'],[day,'SZSE']]
+        with tempfile.TemporaryDirectory() as td:
+            old=b.BACKFILL; b.BACKFILL=Path(td)
+            try:
+                (Path(td)/'margin.json').write_text('version https://git-lfs.github.com/spec/v1')
+                with patch.object(b,'request',return_value={
+                    'fields':['trade_date','exchange_id'],'items':rows}):
+                    self.assertEqual(len(b.trading_dates()),486)
+            finally: b.BACKFILL=old
+
 if __name__=='__main__': unittest.main()
