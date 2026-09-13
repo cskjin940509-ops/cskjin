@@ -95,6 +95,10 @@ def sentiment_position_cap(score, previous_score, previous_cap=None):
     direction = 'RISING' if score > previous_score else 'FALLING' if score < previous_score else 'FLAT'
     if score < 20 or score >= 80:
         cap = 0.
+    elif (20 <= score < 50 and 20 <= previous_score < 50) or (50 <= score < 80 and 50 <= previous_score < 80):
+        cap = finite(previous_cap)
+        if cap is None:
+            return {'ready': False, 'cap': 0., 'direction': direction, 'reasonZh': '区间内缺少已确认状态，等待可审核跨档记录'}
     elif direction == 'RISING':
         cap = .5 if score < 50 else 1.
     elif direction == 'FALLING':
@@ -114,6 +118,14 @@ def market_regime(snapshot, now, macro=None, sentiment=None):
               'missingEvidence': [], 'sentiment': sentiment}
     if not sentiment.get('ready'):
         return result
+    # Before the opening bell the previous-session breadth fallback is the
+    # latest legally available market evidence. It establishes the opening
+    # risk budget; live breadth can tighten it after 09:30.
+    if sentiment.get('fallback') and now.time() < time(9, 30):
+        return {'state': 'PREMARKET', 'cap': base_cap, 'baseCap': base_cap,
+                'intradayCap': None, 'allowNew': base_cap > 0,
+                'breadthPct': None, 'missingEvidence': [],
+                'sentiment': sentiment, 'reasonZh': sentiment['reasonZh']}
     if not snapshot or snapshot.get('sourceDate') != now.date().isoformat() or not snapshot.get('verifiedToday'):
         result['reasonZh'] += '；缺少当日盘中大盘证据，暂停新增风险'
         return result

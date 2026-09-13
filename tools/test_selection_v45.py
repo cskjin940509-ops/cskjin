@@ -157,13 +157,27 @@ class SelectionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td); history = root / 'astock_sentiment' / 'history'; history.mkdir(parents=True)
             for day, score in [('2026-09-09', 45), ('2026-09-10', 60)]:
-                payload = {'reportDate': day, 'indices': [{'name': '综合市场资金情绪',
+                payload = {'reportDate': day, 'generatedAt': day + 'T18:00:00+08:00', 'indices': [{'name': '综合市场资金情绪',
                     'score': score, 'dataDate': day, 'classification': '掘金报告原值',
                     'positionEligible': True}]}
                 (history / f'{day}.json').write_text(json.dumps(payload), encoding='utf-8')
-            plan = engine.premarket_sentiment_plan(root, '2026-09-10')
+            plan = engine.premarket_sentiment_plan(root, '2026-09-10', now=datetime.fromisoformat('2026-09-11T09:20:00+08:00'))
             self.assertTrue(plan['ready']); self.assertEqual(plan['cap'], 1.)
             self.assertFalse(engine.premarket_sentiment_plan(root, '2026-09-11')['ready'])
+
+    def test_missing_composite_uses_previous_close_breadth_without_stopping_selector(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); history = root / 'astock_sentiment' / 'history'; history.mkdir(parents=True)
+            payload = {'reportDate': '2026-09-11', 'indices': [{
+                'name': '市场赚钱效应', 'dataDate': '2026-09-10',
+                'raw': {'up': 932, 'down': 4192}}]}
+            (history / '2026-09-10.json').write_text(json.dumps(payload), encoding='utf-8')
+            plan = engine.premarket_sentiment_plan(
+                root, '2026-09-10', now=datetime.fromisoformat('2026-09-11T09:20:00+08:00'))
+            self.assertTrue(plan['ready']); self.assertTrue(plan['fallback'])
+            self.assertEqual(plan['cap'], .10)
+            market = rules.market_regime({}, datetime.fromisoformat('2026-09-11T09:20:00+08:00'), {}, plan)
+            self.assertEqual(market['state'], 'PREMARKET'); self.assertTrue(market['allowNew'])
 
     def test_no_intraday_mark_as_formal_close(self):
         self.state['navHistory'][0].pop('isVerifiedClose')

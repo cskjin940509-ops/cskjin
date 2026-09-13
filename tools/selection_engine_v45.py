@@ -24,9 +24,11 @@ ORIGINAL_QUOTES = base.fetch_tencent_quotes
 ORIGINAL_BUILD = base.build_latest
 
 
-def premarket_sentiment_plan(root, required_date, stored=None):
+def premarket_sentiment_plan(root, required_date, stored=None, now=None):
     """Use only the required previous-session report and an earlier comparable score."""
     rows = []
+    now = now or base.now_cn()
+    cutoff = min(now, now.replace(hour=9, minute=30, second=0, microsecond=0))
     folder = root / 'astock_sentiment' / 'history'
     for path in sorted(folder.glob('*.json')) if folder.exists() else []:
         try:
@@ -36,6 +38,9 @@ def premarket_sentiment_plan(root, required_date, stored=None):
         item = next((x for x in report.get('indices', [])
                      if x.get('name') in ('综合市场资金情绪', '市场资金情绪指数')), None)
         if not item or rules.finite(item.get('score')) is None:
+            continue
+        available = rules.stamp(item.get('availableAt') or report.get('generatedAt'))
+        if available is None or available > cutoff:
             continue
         official = item.get('classification') == '掘金报告原值'
         if not (item.get('positionEligible') is True or official):
@@ -47,8 +52,30 @@ def premarket_sentiment_plan(root, required_date, stored=None):
     previous = max((x for x in rows if current and x['dataDate'] < current['dataDate']),
                    key=lambda x: x['dataDate'], default=None)
     if not current or not previous:
+        # A missing/unverified reverse-engineered composite must not stop the
+        # whole selector. Use the audited previous-session market breadth as a
+        # conservative operational cap while keeping it clearly separate from
+        # the Juejin index.
+        report_path = folder / f'{required_date}.json'
+        try:
+            report = json.loads(report_path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            report = {}
+        profit = next((x for x in report.get('indices', [])
+                       if x.get('name') in ('市场赚钱效应', '赚钱效应指数')), {})
+        raw = profit.get('raw') or {}
+        up, down = rules.finite(raw.get('up')), rules.finite(raw.get('down'))
+        if up is not None and down is not None and up + down >= 2000:
+            breadth = up / (up + down)
+            cap = .10 if breadth < .25 else .25 if breadth < .40 else .50
+            return {'ready': True, 'cap': cap, 'direction': 'FALLBACK',
+                    'score': None, 'previousScore': None, 'fallback': True,
+                    'requiredDataDate': required_date, 'dataDate': required_date,
+                    'classification': '前一交易日全市场宽度备用仓位',
+                    'source': '全市场涨跌家数（非掘金综合指数）',
+                    'reasonZh': f'前一交易日全市场上涨占比{breadth:.1%}，备用仓位上限{cap:.0%}'}
         return {'ready': False, 'cap': 0., 'requiredDataDate': required_date,
-                'reasonZh': f'缺少{required_date}或其前一日可用于仓位的综合情绪指数'}
+                'reasonZh': f'{required_date}盘前市场宽度数据尚未到达'}
     old = ((stored or {}).get('selection45') or {}).get('sentimentPositionControl') or {}
     plan = rules.sentiment_position_cap(current['score'], previous['score'], old.get('baseCap'))
     plan.update(requiredDataDate=required_date, dataDate=current['dataDate'],
@@ -87,7 +114,7 @@ def prepare_quotes(codes):
     market = max([gateway.get('marketSnapshot') or {}, radar.get('marketSnapshot') or {}],
                  key=lambda x: str(x.get('availableAt') or ''))
     CONTEXT.clear()
-    sentiment = premarket_sentiment_plan(base.ROOT, previous, state) if previous else {
+    sentiment = premarket_sentiment_plan(base.ROOT, previous, state, now) if previous else {
         'ready': False, 'cap': 0., 'reasonZh': '无法识别前一交易日'}
     CONTEXT.update(radar=radar, quotes=quotes, data=data,
                    market=rules.market_regime(market, now, radar.get('macroEvidence'), sentiment),
@@ -216,7 +243,7 @@ def risk_control(state, prices):
               'confirmedCloseDrawdownPct': drawdown * 100 if drawdown is not None else None,
               'dailyRiskDataReady': latest is not None, 'paused': paused,
               'defensiveConfirmed': defensive, 'defensiveConfirmations': defense.get('count', 0),
-              'forceReduction': defensive or market['state'] == 'RISK' or (daily is not None and daily <= -.025) or (drawdown is not None and drawdown <= -.05)}
+              'forceReduction': (bool((market.get('sentiment') or {}).get('ready')) and mv > nav * cap) or defensive or market['state'] == 'RISK' or (daily is not None and daily <= -.025) or (drawdown is not None and drawdown <= -.05)}
     # Without a reliable daily base, opening new risk is blocked instead of assuming 0% loss.
     result['allowNew'] = result['allowNew'] and latest is not None and (nav > 0 and mv <= nav * cap)
     result['executionPolicyZh'] = '风险独立检查；防守大盘2个至少间隔60秒的新快照确认后立即分批降至上限，不等普通窗口和换手额度'
