@@ -12,9 +12,10 @@ on:
       - 'tools/generate_premarket_prediction.py'
       - '.github/workflows/update-slow-money-factors.yml'
   schedule:
-    # 北京时间工作日 08:55 首次更新；09:05 / 09:15 重试，保证开盘前尽量拿到上一交易日B1/B2。
-    - cron: '55 0 * * 1-5'
-    - cron: '5,15,35 1 * * 1-5'
+    # 北京时间工作日08:20起预取；08:40/08:55/09:10/09:20重试。
+    # 每轮采集完成后立即重算四指数，最后一轮仍预留约10分钟给9:30开盘决策。
+    - cron: '20,40,55 0 * * 1-5'
+    - cron: '10,20,35 1 * * 1-5'
     # 独立补采延迟发布的日频数据，不占用实时雷达队列。
     - cron: '5 2,3,5,6,7 * * 1-5'
 
@@ -64,6 +65,8 @@ jobs:
           STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
           STOCK_API_URL: https://jiaoch.top/
         run: python tools/collect_slow_money_factors_v2.py
+      - name: 慢资金到达后立即重算四个盘前情绪指数
+        run: python tools/publish_four_sentiment_daily.py
       - name: 慢资金到达立即发布并通知雷达
         env:
           GH_TOKEN: ${{ github.token }}
