@@ -179,6 +179,18 @@ class SelectionTests(unittest.TestCase):
             market = rules.market_regime({}, datetime.fromisoformat('2026-09-11T09:20:00+08:00'), {}, plan)
             self.assertEqual(market['state'], 'PREMARKET'); self.assertTrue(market['allowNew'])
 
+    def test_build_latest_keeps_premarket_budget_without_same_day_radar(self):
+        self.now = datetime.fromisoformat('2026-09-04T09:20:00+08:00')
+        engine.CONTEXT['market'] = {
+            'state': 'PREMARKET', 'cap': .10, 'allowNew': True,
+            'sentiment': {'ready': True, 'fallback': True}}
+        stale_radar = dict(engine.CONTEXT['radar'], date='2026-09-03')
+        engine.build_latest(self.state, self.ledger, self.prices, stale_radar)
+        risk = self.state['selection45']['portfolioRisk']
+        self.assertEqual(risk['date'], '2026-09-04')
+        self.assertTrue(risk['currentEvidenceReady'])
+        self.assertTrue(risk['allowNew'])
+
     def test_no_intraday_mark_as_formal_close(self):
         self.state['navHistory'][0].pop('isVerifiedClose')
         self.assertFalse(engine.risk_control(self.state, self.prices)['allowNew'])

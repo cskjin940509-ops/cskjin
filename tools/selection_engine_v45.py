@@ -248,6 +248,7 @@ def risk_control(state, prices):
               'dailyUnitReturnPct': daily * 100 if daily is not None else None,
               'confirmedCloseDrawdownPct': drawdown * 100 if drawdown is not None else None,
               'dailyRiskDataReady': latest is not None, 'paused': paused,
+              'currentEvidenceReady': bool((market.get('sentiment') or {}).get('ready')),
               'defensiveConfirmed': defensive, 'defensiveConfirmations': defense.get('count', 0),
               'forceReduction': (bool((market.get('sentiment') or {}).get('ready')) and mv > nav * cap) or defensive or market['state'] == 'RISK' or (daily is not None and daily <= -.025) or (drawdown is not None and drawdown <= -.05)}
     # Without a reliable daily base, opening new risk is blocked instead of assuming 0% loss.
@@ -469,9 +470,11 @@ def t_report(state, prices):
 def build_latest(state, ledger, prices, radar):
     obj = metadata(state)
     rotation.expire_snapshot(obj, base.now_cn())
-    if radar.get('date') != base.now_cn().date().isoformat() or not CONTEXT.get('quotes'):
-        obj['portfolioRisk'] = dict(obj.get('portfolioRisk') or {}, allowNew=False,
-                                    currentEvidenceReady=False)
+    # Refresh the published risk budget on every cycle, including pre-market and
+    # closed-market heartbeat runs.  Trading-session checks still prevent fills;
+    # a missing same-day radar must not overwrite a valid previous-close opening
+    # budget with yesterday's stale "not ready" UI state.
+    risk_control(state, prices)
     for cycle in obj['tCycles']:
         if cycle['status'] == 'OPEN' and (cycle['date'] < base.now_cn().date().isoformat() or base.now_cn().time() > time(14, 50)):
             cycle.update(status='UNPAIRED', reasonZh='当日未完成买回，保留全部未配对机会损益')
