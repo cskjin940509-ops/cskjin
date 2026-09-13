@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "strategyVersion": "v5.1-independent-risk",
+  "strategyVersion": "v5.2-sentiment-position-state-machine",
   "mode": "AI影子实盘",
   "simulated": true,
   "initialCapital": 20000000.0,
@@ -6246,6 +6246,20 @@
       "cumulativeReturnPct": 3.0381,
       "radarCapturedAt": "2026-09-11T15:01:43+08:00",
       "isVerifiedClose": true
+    },
+    {
+      "timestamp": "2026-09-13T13:09:15+08:00",
+      "date": "2026-09-13",
+      "time": "13:09:15",
+      "nav": 19929098.79,
+      "cash": 19468071.79,
+      "marketValue": 461027.0,
+      "positionCount": 3,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.03038087,
+      "cumulativeNav": 1.03038087,
+      "cumulativeReturnPct": 3.0381,
+      "radarCapturedAt": "2026-09-11T15:01:43+08:00"
     }
   ],
   "dailyControl": {
@@ -6288,10 +6302,15 @@
       "newBuys": 0,
       "sells": 5,
       "lastDecisionAt": "2026-09-11T15:23:15+08:00"
+    },
+    "2026-09-13": {
+      "newBuys": 0,
+      "sells": 0,
+      "lastDecisionAt": "2026-09-13T13:09:15+08:00"
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-09-11T15:23:21+08:00",
+  "updatedAt": "2026-09-13T13:09:15+08:00",
   "capitalEvents": [
     {
       "eventId": "capital-20260903-232335",
@@ -7099,10 +7118,11 @@
         "2026-09-08": 510500000.0,
         "2026-09-09": 389470000.0,
         "2026-09-10": 397430000.0,
-        "2026-09-11": 446550000.0
+        "2026-09-11": 446550000.0,
+        "2026-09-13": 446550000.0
       },
-      "adv20Amount": 578138000.0,
-      "advSampleDays": 5
+      "adv20Amount": 556206666.67,
+      "advSampleDays": 6
     },
     "000011": {
       "dailyAmounts": {
@@ -7111,10 +7131,11 @@
         "2026-09-08": 322930000.0,
         "2026-09-09": 290750000.0,
         "2026-09-10": 161570000.0,
-        "2026-09-11": 131770000.0
+        "2026-09-11": 131770000.0,
+        "2026-09-13": 131770000.0
       },
-      "adv20Amount": 247612000.0,
-      "advSampleDays": 5
+      "adv20Amount": 228305000.0,
+      "advSampleDays": 6
     },
     "600895": {
       "dailyAmounts": {
@@ -7441,10 +7462,11 @@
       "dailyAmounts": {
         "2026-09-04": 1552610000.0,
         "2026-09-07": 2117350000.0,
-        "2026-09-11": 2082190000.0
+        "2026-09-11": 2082190000.0,
+        "2026-09-13": 2082190000.0
       },
-      "adv20Amount": 1834980000.0,
-      "advSampleDays": 2
+      "adv20Amount": 1917383333.33,
+      "advSampleDays": 3
     },
     "002212": {
       "dailyAmounts": {
@@ -7639,10 +7661,11 @@
     "300413": {
       "dailyAmounts": {
         "2026-09-04": 4844680000.0,
-        "2026-09-11": 2299390000.0
+        "2026-09-11": 2299390000.0,
+        "2026-09-13": 2299390000.0
       },
-      "adv20Amount": 4844680000.0,
-      "advSampleDays": 1
+      "adv20Amount": 3572035000.0,
+      "advSampleDays": 2
     },
     "600228": {
       "dailyAmounts": {
@@ -7672,10 +7695,11 @@
         "2026-09-08": 1069860000.0,
         "2026-09-09": 881290000.0,
         "2026-09-10": 1048880000.0,
-        "2026-09-11": 1234910000.0
+        "2026-09-11": 1234910000.0,
+        "2026-09-13": 1234910000.0
       },
-      "adv20Amount": 1213746000.0,
-      "advSampleDays": 5
+      "adv20Amount": 1217273333.33,
+      "advSampleDays": 6
     },
     "300182": {
       "dailyAmounts": {
@@ -7917,10 +7941,11 @@
     "300975": {
       "dailyAmounts": {
         "2026-09-04": 899550000.0,
-        "2026-09-11": 799230000.0
+        "2026-09-11": 799230000.0,
+        "2026-09-13": 799230000.0
       },
-      "adv20Amount": 899550000.0,
-      "advSampleDays": 1
+      "adv20Amount": 849390000.0,
+      "advSampleDays": 2
     },
     "300005": {
       "dailyAmounts": {
@@ -10004,10 +10029,11 @@
       "dailyAmounts": {
         "2026-09-07": 1088140000.0,
         "2026-09-09": 853900000.0,
-        "2026-09-11": 3573130000.0
+        "2026-09-11": 3573130000.0,
+        "2026-09-13": 3573130000.0
       },
-      "adv20Amount": 971020000.0,
-      "advSampleDays": 2
+      "adv20Amount": 1838390000.0,
+      "advSampleDays": 3
     },
     "300489": {
       "dailyAmounts": {
@@ -10028,10 +10054,11 @@
     "002138": {
       "dailyAmounts": {
         "2026-09-07": 1064080000.0,
-        "2026-09-11": 1436340000.0
+        "2026-09-11": 1436340000.0,
+        "2026-09-13": 1436340000.0
       },
-      "adv20Amount": 1064080000.0,
-      "advSampleDays": 1
+      "adv20Amount": 1250210000.0,
+      "advSampleDays": 2
     },
     "300903": {
       "dailyAmounts": {
@@ -10236,10 +10263,11 @@
       "dailyAmounts": {
         "2026-09-07": 2928450000.0,
         "2026-09-09": 4395080000.0,
-        "2026-09-11": 9300520000.0
+        "2026-09-11": 9300520000.0,
+        "2026-09-13": 9300520000.0
       },
-      "adv20Amount": 3661765000.0,
-      "advSampleDays": 2
+      "adv20Amount": 5541350000.0,
+      "advSampleDays": 3
     },
     "002837": {
       "dailyAmounts": {
@@ -10293,10 +10321,11 @@
     "000636": {
       "dailyAmounts": {
         "2026-09-07": 1985910000.0,
-        "2026-09-11": 9984860000.0
+        "2026-09-11": 9984860000.0,
+        "2026-09-13": 9984860000.0
       },
-      "adv20Amount": 1985910000.0,
-      "advSampleDays": 1
+      "adv20Amount": 5985385000.0,
+      "advSampleDays": 2
     },
     "600206": {
       "dailyAmounts": {
@@ -14682,73 +14711,83 @@
     },
     "603989": {
       "dailyAmounts": {
-        "2026-09-11": 1217140000.0
+        "2026-09-11": 1217140000.0,
+        "2026-09-13": 1217140000.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 1217140000.0,
+      "advSampleDays": 1
     },
     "600237": {
       "dailyAmounts": {
-        "2026-09-11": 899420000.0
+        "2026-09-11": 899420000.0,
+        "2026-09-13": 899420000.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 899420000.0,
+      "advSampleDays": 1
     },
     "301566": {
       "dailyAmounts": {
-        "2026-09-11": 882710000.0
+        "2026-09-11": 882710000.0,
+        "2026-09-13": 882710000.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 882710000.0,
+      "advSampleDays": 1
     },
     "603115": {
       "dailyAmounts": {
-        "2026-09-11": 1107040000.0
+        "2026-09-11": 1107040000.0,
+        "2026-09-13": 1107040000.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 1107040000.0,
+      "advSampleDays": 1
     },
     "301458": {
       "dailyAmounts": {
-        "2026-09-11": 319720000.0
+        "2026-09-11": 319720000.0,
+        "2026-09-13": 319720000.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 319720000.0,
+      "advSampleDays": 1
     },
     "603738": {
       "dailyAmounts": {
-        "2026-09-11": 919380000.0
+        "2026-09-11": 919380000.0,
+        "2026-09-13": 919380000.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 919380000.0,
+      "advSampleDays": 1
     },
     "600563": {
       "dailyAmounts": {
-        "2026-09-11": 411380000.0
+        "2026-09-11": 411380000.0,
+        "2026-09-13": 411380000.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 411380000.0,
+      "advSampleDays": 1
     },
     "920128": {
       "dailyAmounts": {
-        "2026-09-11": 125995100.0
+        "2026-09-11": 125995100.0,
+        "2026-09-13": 125995100.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 125995100.0,
+      "advSampleDays": 1
     },
     "920981": {
       "dailyAmounts": {
-        "2026-09-11": 51860900.0
+        "2026-09-11": 51860900.0,
+        "2026-09-13": 51860900.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 51860900.0,
+      "advSampleDays": 1
     },
     "688539": {
       "dailyAmounts": {
-        "2026-09-11": 50480000.0
+        "2026-09-11": 50480000.0,
+        "2026-09-13": 50480000.0
       },
-      "adv20Amount": null,
-      "advSampleDays": 0
+      "adv20Amount": 50480000.0,
+      "advSampleDays": 1
     }
   },
   "executionControl": {
@@ -17383,18 +17422,19 @@
     "tCycles": [],
     "audit": [],
     "market": {
-      "state": "RISK",
-      "cap": 0.1,
+      "state": "UNKNOWN",
+      "cap": 0.0,
+      "baseCap": 0.0,
+      "intradayCap": null,
       "allowNew": false,
-      "breadthPct": 11.7,
-      "missingEvidence": [
-        "margin",
-        "broadEtf",
-        "usRisk",
-        "us30y",
-        "cn10y"
-      ],
-      "reasonZh": "市场广度11.7%；宏观证据缺失时上限收紧至30%"
+      "reasonZh": "缺少2026-09-11或其前一日可用于仓位的综合情绪指数",
+      "missingEvidence": [],
+      "sentiment": {
+        "ready": false,
+        "cap": 0.0,
+        "requiredDataDate": "2026-09-11",
+        "reasonZh": "缺少2026-09-11或其前一日可用于仓位的综合情绪指数"
+      }
     },
     "portfolioRisk": {
       "cap": 0.023114781323341594,
@@ -17408,7 +17448,8 @@
       "defensiveConfirmed": false,
       "defensiveConfirmations": 0,
       "forceReduction": false,
-      "executionPolicyZh": "风险独立检查；防守大盘2个至少间隔60秒的新快照确认后立即分批降至上限，不等普通窗口和换手额度"
+      "executionPolicyZh": "风险独立检查；防守大盘2个至少间隔60秒的新快照确认后立即分批降至上限，不等普通窗口和换手额度",
+      "currentEvidenceReady": false
     },
     "riskGuard": {},
     "capConfirmation": {
@@ -504024,7 +504065,7 @@
     },
     "sectorRanks": {
       "电信运营商": {
-        "complete": true,
+        "complete": false,
         "total": 3,
         "observed": 3,
         "ranks": {
@@ -504055,7 +504096,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "集成电路制造": {
-        "complete": true,
+        "complete": false,
         "total": 9,
         "observed": 9,
         "ranks": {
@@ -504128,7 +504169,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "光伏发电": {
-        "complete": true,
+        "complete": false,
         "total": 13,
         "observed": 13,
         "ranks": {
@@ -504229,7 +504270,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "风电零部件": {
-        "complete": true,
+        "complete": false,
         "total": 26,
         "observed": 26,
         "ranks": {
@@ -504421,7 +504462,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "被动元件": {
-        "complete": true,
+        "complete": false,
         "total": 19,
         "observed": 19,
         "ranks": {
@@ -504564,7 +504605,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "视频媒体": {
-        "complete": true,
+        "complete": false,
         "total": 1,
         "observed": 1,
         "ranks": {
@@ -504581,7 +504622,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "风电设备": {
-        "complete": true,
+        "complete": false,
         "total": 31,
         "observed": 31,
         "ranks": {
@@ -504808,7 +504849,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "MLCC": {
-        "complete": true,
+        "complete": false,
         "total": 39,
         "observed": 39,
         "ranks": {
@@ -505091,7 +505132,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "其他通信设备": {
-        "complete": true,
+        "complete": false,
         "total": 14,
         "observed": 14,
         "ranks": {
@@ -505199,7 +505240,7 @@
         "availableAt": "2026-09-11T15:21:49.395124+08:00"
       },
       "空调": {
-        "complete": true,
+        "complete": false,
         "total": 4,
         "observed": 4,
         "ranks": {
@@ -505980,7 +506021,7 @@
     },
     "technical": {
       "000011": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 65,
         "atr14": 0.5385714285714285,
@@ -505994,7 +506035,7 @@
         "volumeRatio5to20": 1.5474935260044163
       },
       "000636": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 3.001428571428573,
@@ -506008,7 +506049,7 @@
         "volumeRatio5to20": 0.6469723237853895
       },
       "001979": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 65,
         "atr14": 0.2992857142857143,
@@ -506022,7 +506063,7 @@
         "volumeRatio5to20": 0.7651091121474045
       },
       "002138": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 2.552857142857143,
@@ -506036,7 +506077,7 @@
         "volumeRatio5to20": 0.8715246484186155
       },
       "002484": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 4.715714285714284,
@@ -506050,7 +506091,7 @@
         "volumeRatio5to20": 0.8809222681560399
       },
       "002517": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 65,
         "atr14": 0.597857142857143,
@@ -506064,7 +506105,7 @@
         "volumeRatio5to20": 1.1354273583900296
       },
       "300319": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 1.3350000000000002,
@@ -506078,7 +506119,7 @@
         "volumeRatio5to20": 0.8979025384526802
       },
       "300408": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 6.145000000000001,
@@ -506092,7 +506133,7 @@
         "volumeRatio5to20": 0.8851970427687804
       },
       "300413": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 1.6821428571428576,
@@ -506106,7 +506147,7 @@
         "volumeRatio5to20": 2.1624801713752824
       },
       "300975": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 1.3707142857142856,
@@ -506120,7 +506161,7 @@
         "volumeRatio5to20": 0.8117201940574263
       },
       "301458": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 1.9599999999999997,
@@ -506134,7 +506175,7 @@
         "volumeRatio5to20": 0.7289236392885934
       },
       "301566": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 1.284285714285715,
@@ -506148,7 +506189,7 @@
         "volumeRatio5to20": 0.709505709907226
       },
       "600237": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 0.30928571428571433,
@@ -506162,7 +506203,7 @@
         "volumeRatio5to20": 1.073423413896655
       },
       "600563": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 4.46357142857143,
@@ -506176,7 +506217,7 @@
         "volumeRatio5to20": 0.657842899915379
       },
       "603115": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 6.6621428571428565,
@@ -506190,7 +506231,7 @@
         "volumeRatio5to20": 1.2483366001409961
       },
       "603738": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 2.3049999999999993,
@@ -506204,7 +506245,7 @@
         "volumeRatio5to20": 0.6079810547728758
       },
       "603989": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 2.18,
@@ -506218,7 +506259,7 @@
         "volumeRatio5to20": 1.3547329330584967
       },
       "688539": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 65,
         "atr14": 0.920714285714286,
@@ -506232,7 +506273,7 @@
         "volumeRatio5to20": null
       },
       "920128": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 1.1464285714285716,
@@ -506246,7 +506287,7 @@
         "volumeRatio5to20": 2.509411494702038
       },
       "920981": {
-        "ready": true,
+        "ready": false,
         "dataDate": "2026-09-10",
         "sampleDays": 64,
         "atr14": 1.4714285714285715,
