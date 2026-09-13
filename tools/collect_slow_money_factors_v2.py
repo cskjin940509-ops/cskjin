@@ -31,18 +31,27 @@ def _proxy_rows(api_name, params, fields=""):
     token = max(candidates, key=len) if candidates else raw_token.strip("'\"")
     if not token:
         raise RuntimeError("STOCK_API_TOKEN is not configured")
-    response = requests.post(
-        PROXY_URL,
-        json={"api_name": api_name, "token": token, "params": params,
-              "fields": fields},
-        headers={"Accept-Encoding": "gzip"}, timeout=45)
-    response.raise_for_status()
-    payload = response.json()
-    if payload.get("code") != 0:
-        raise RuntimeError(f"proxy api error: {payload.get('code')}")
-    data = payload.get("data") or {}
-    names = data.get("fields") or []
-    return [dict(zip(names, values)) for values in (data.get("items") or [])]
+    requested = int(params.get("limit") or 2000)
+    page_size = min(requested, 2000)
+    rows = []
+    for offset in range(0, requested, page_size):
+        page_params = {**params, "limit": page_size, "offset": offset}
+        response = requests.post(
+            PROXY_URL,
+            json={"api_name": api_name, "token": token, "params": page_params,
+                  "fields": fields},
+            headers={"Accept-Encoding": "gzip"}, timeout=45)
+        response.raise_for_status()
+        payload = response.json()
+        if payload.get("code") != 0:
+            raise RuntimeError(f"proxy api error: {payload.get('code')}")
+        data = payload.get("data") or {}
+        names = data.get("fields") or []
+        page = [dict(zip(names, values)) for values in (data.get("items") or [])]
+        rows.extend(page)
+        if len(page) < page_size:
+            break
+    return rows
 
 
 def _merge_margin_df(merged, df, exchange, source):
@@ -279,8 +288,22 @@ def collect_margin_v2(cutoff):
         result["marketSummary"] = {"complete": False, "scoreEligible": False,
                                    "scoreBlocker": "没有可核验的两融交易日"}
         return result
-    result["marketSummary"] = fetch_market_margin_summary(
-        base.datetime.strptime(day, "%Y-%m-%d").date())
+    start = base.datetime.strptime(day, "%Y-%m-%d").date()
+    checks = []
+    for i in range(10):
+        candidate = start - base.timedelta(days=i)
+        if candidate.weekday() >= 5:
+            continue
+        summary = fetch_market_margin_summary(candidate)
+        checks.append({"dataDate": summary.get("dataDate"),
+                       "complete": summary.get("complete")})
+        if summary.get("complete"):
+            summary["latestDateChecks"] = checks
+            result["marketSummary"] = summary
+            break
+    else:
+        result["marketSummary"] = summary
+        result["marketSummary"]["latestDateChecks"] = checks
     return result
 
 
