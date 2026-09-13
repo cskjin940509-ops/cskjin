@@ -82,6 +82,9 @@ jobs:
             'MAE':'最大不利跌幅',
           }
           for a,b in repl.items(): s=s.replace(a,b)
+          # UI translations must not rename a Kotlin type used by other files.
+          s=s.replace('预览Sector', 'PreviewSector')
+          s=s.replace('private val CnZone =', 'internal val CnZone =')
           s=s.replace('item { Title("实时${type}热力图") }','item { Title(if (marketOpenNow()) "实时${type}热力图" else "收盘${type}热力图") }')
 
           # Do not expose raw provider timestamps. Validate yyyyMMddHHmmss and show HH:mm:ss.
