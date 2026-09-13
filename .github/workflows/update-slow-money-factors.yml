@@ -54,6 +54,11 @@ jobs:
         run: python -m pip install --quiet 'akshare>=1.18.15,<2'
       - name: 校验免费情绪数据输入
         run: python -m unittest tools/test_free_sentiment_inputs.py
+      - name: 校验指定数据中转接口
+        env:
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
+        run: python tools/check_stock_proxy.py
       - name: 拉取两融与ETF份额慢资金数据
         env:
           STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
