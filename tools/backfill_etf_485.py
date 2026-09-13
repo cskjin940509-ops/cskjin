@@ -40,6 +40,14 @@ def request(api_name, params):
 
 
 def trading_dates():
+    compact = BACKFILL / "trading_dates.json"
+    try:
+        dates = json.loads(compact.read_text(encoding="utf-8"))["tradeDates"]
+        dates = sorted({str(x) for x in dates})
+        if len(dates) >= WINDOW + 1:
+            return dates[-(WINDOW + 1):]
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
     try:
         payload = json.loads((BACKFILL / "margin.json").read_text(encoding="utf-8"))
         data = payload.get("data") or {}

@@ -5,6 +5,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import backfill_etf_485 as b
 
 class ETFBackfillTests(unittest.TestCase):
+    def test_compact_verified_calendar_is_preferred(self):
+        with tempfile.TemporaryDirectory() as td:
+            old=b.BACKFILL; b.BACKFILL=Path(td)
+            try:
+                dates=[f'{20240000+i:08d}' for i in range(490)]
+                (Path(td)/'trading_dates.json').write_text(json.dumps({'tradeDates':dates}))
+                self.assertEqual(b.trading_dates(), dates[-486:])
+            finally: b.BACKFILL=old
+
     def test_existing_snapshot_requires_date_and_fields(self):
         with tempfile.TemporaryDirectory() as td:
             p=Path(td)/'x.json'
