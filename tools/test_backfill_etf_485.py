@@ -35,7 +35,7 @@ class ETFBackfillTests(unittest.TestCase):
             try:
                 (Path(td)/'margin.json').write_text('version https://git-lfs.github.com/spec/v1')
                 with patch.object(b,'request',return_value={
-                    'fields':['trade_date','exchange_id'],'items':rows}):
+                    'fields':['cal_date'],'items':[[r[0]] for r in rows[::2]]}):
                     self.assertEqual(len(b.trading_dates()),486)
             finally: b.BACKFILL=old
 

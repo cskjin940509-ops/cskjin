@@ -46,9 +46,14 @@ def trading_dates():
     except (OSError, ValueError):
         # GitHub may check out large historical files as LFS pointers.  Resolve
         # the calendar from the API itself instead of depending on that file.
-        data = request("margin", {"start_date": "20240901",
-                                  "end_date": datetime.now().strftime("%Y%m%d"),
-                                  "limit": 2000})
+        calendar = request("trade_cal", {"exchange": "SSE",
+                                         "start_date": "20240901",
+                                         "end_date": datetime.now().strftime("%Y%m%d"),
+                                         "is_open": "1", "limit": 2000})
+        fields = calendar.get("fields") or []
+        di = fields.index("cal_date")
+        dates = sorted({str(row[di]) for row in calendar.get("items") or []})
+        return dates[-(WINDOW + 1):]
     fields = data.get("fields") or []
     di, ei = fields.index("trade_date"), fields.index("exchange_id")
     coverage = {}
