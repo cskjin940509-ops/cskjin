@@ -3,7 +3,7 @@
   "version": "v1.0-premarket-prediction-point-in-time",
   "state": "ready",
   "targetDate": "2026-09-14",
-  "generatedAt": "2026-09-14T00:24:51+08:00",
+  "generatedAt": "2026-09-14T00:28:47+08:00",
   "sourceOfficialDate": "2026-09-11",
   "factorDataDate": "2026-09-11",
   "slowMoneyFresh": true,
@@ -36,13 +36,7 @@
       "601869",
       "688143"
     ],
-    "B2": [
-      "000070",
-      "600105",
-      "600522",
-      "601869",
-      "688143"
-    ],
+    "B2": [],
     "B3": [
       "600967",
       "000636",
@@ -58,25 +52,20 @@
     "B4": [
       "600967",
       "000070",
-      "688143",
       "002815",
       "000636",
-      "601869",
-      "600522",
       "002519",
       "600184",
-      "600105"
+      "000823",
+      "688143",
+      "603936",
+      "601869"
     ],
-    "B12": [
-      "601869",
-      "688143"
-    ],
+    "B12": [],
     "B13": [
       "600967"
     ],
-    "B23": [
-      "000070"
-    ]
+    "B23": []
   },
   "historyContext": {
     "updatedAt": "2026-09-11T17:45:17+08:00",
@@ -91,37 +80,12 @@
     "candidateCount": 15,
     "tierCounts": {
       "一级优先": 0,
-      "二级观察": 1,
-      "等竞价确认": 14
+      "二级观察": 0,
+      "等竞价确认": 15
     },
     "noteZh": "一级优先仍需竞价/开盘确认；若B1/B2尚未更新则不会给出一级优先。"
   },
   "candidates": [
-    {
-      "code": "000070",
-      "name": "特发信息",
-      "sector": "通信线缆及配套",
-      "priorityScore": 78.98,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0",
-        "B2",
-        "B3",
-        "B4",
-        "B23"
-      ],
-      "baseScore": 66.27,
-      "slowCompositeScore": 71.98,
-      "marginScore": 81.33,
-      "etfScore": 91.9,
-      "mainFlowPct": 11.97,
-      "mainlineStage": null,
-      "chaseRisk": "HIGH",
-      "previousChangePct": 6.06,
-      "reasonZh": "B23 双因子确认；基础/综合强度 72.0；两融评分 81；ETF评分 92",
-      "riskZh": "追高风险高；上一交易日已上涨6.06%",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
     {
       "code": "600967",
       "name": "内蒙一机",
@@ -148,99 +112,26 @@
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
-      "code": "600522",
-      "name": "中天科技",
+      "code": "000070",
+      "name": "特发信息",
       "sector": "通信线缆及配套",
-      "priorityScore": 73.3,
-      "tierZh": "二级观察",
+      "priorityScore": 64.69,
+      "tierZh": "等竞价确认",
       "memberships": [
         "B0",
-        "B2",
+        "B3",
         "B4"
       ],
-      "baseScore": 64.27,
-      "slowCompositeScore": 62.3,
-      "marginScore": 42.5,
-      "etfScore": 91.9,
-      "mainFlowPct": 7.72,
-      "mainlineStage": null,
-      "chaseRisk": "LOW",
-      "previousChangePct": 3.57,
-      "reasonZh": "B2 单源/多源确认；基础/综合强度 62.3；两融评分 42；ETF评分 92",
-      "riskZh": "暂无双因子交叉确认",
-      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
-    },
-    {
-      "code": "688143",
-      "name": "长盈通",
-      "sector": "通信线缆及配套",
-      "priorityScore": 70.11,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0",
-        "B1",
-        "B2",
-        "B4",
-        "B12"
-      ],
-      "baseScore": 67.67,
-      "slowCompositeScore": 64.11,
-      "marginScore": 75.0,
-      "etfScore": 91.9,
-      "mainFlowPct": 4.95,
+      "baseScore": 66.27,
+      "slowCompositeScore": 66.69,
+      "marginScore": 81.33,
+      "etfScore": 56.67,
+      "mainFlowPct": 11.97,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
-      "previousChangePct": 15.49,
-      "reasonZh": "B12 双因子确认；基础/综合强度 64.1；两融评分 75；ETF评分 92",
-      "riskZh": "追高风险高；上一交易日已上涨15.49%",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "601869",
-      "name": "长飞光纤",
-      "sector": "通信线缆及配套",
-      "priorityScore": 69.15,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0",
-        "B1",
-        "B2",
-        "B4",
-        "B12"
-      ],
-      "baseScore": 63.84,
-      "slowCompositeScore": 63.15,
-      "marginScore": 75.0,
-      "etfScore": 91.9,
-      "mainFlowPct": 5.82,
-      "mainlineStage": null,
-      "chaseRisk": "HIGH",
-      "previousChangePct": 8.78,
-      "reasonZh": "B12 双因子确认；基础/综合强度 63.1；两融评分 75；ETF评分 92",
-      "riskZh": "追高风险高；上一交易日已上涨8.78%",
-      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "600105",
-      "name": "永鼎股份",
-      "sector": "通信线缆及配套",
-      "priorityScore": 63.86,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0",
-        "B2",
-        "B4"
-      ],
-      "baseScore": 64.73,
-      "slowCompositeScore": 59.86,
-      "marginScore": 43.75,
-      "etfScore": 91.9,
-      "mainFlowPct": 6.45,
-      "mainlineStage": null,
-      "chaseRisk": "MEDIUM",
-      "previousChangePct": 4.51,
-      "reasonZh": "B2 单源/多源确认；基础/综合强度 59.9；两融评分 44；ETF评分 92",
-      "riskZh": "追高风险中；上一交易日已上涨4.51%；暂无双因子交叉确认",
+      "previousChangePct": 6.06,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 66.7；两融评分 81；ETF评分 57",
+      "riskZh": "追高风险高；上一交易日已上涨6.06%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
@@ -265,6 +156,27 @@
       "reasonZh": "B3 单源/多源确认；基础/综合强度 63.4；主线潜在形成；两融评分 35",
       "riskZh": "追高风险高；上一交易日已上涨10.00%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "600522",
+      "name": "中天科技",
+      "sector": "通信线缆及配套",
+      "priorityScore": 61.01,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0"
+      ],
+      "baseScore": 64.27,
+      "slowCompositeScore": 57.01,
+      "marginScore": 42.5,
+      "etfScore": 56.67,
+      "mainFlowPct": 7.72,
+      "mainlineStage": null,
+      "chaseRisk": "LOW",
+      "previousChangePct": 3.57,
+      "reasonZh": "基础/综合强度 57.0；两融评分 42；ETF评分 57",
+      "riskZh": "暂无双因子交叉确认",
+      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
     {
       "code": "300319",
@@ -333,6 +245,29 @@
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
+      "code": "688143",
+      "name": "长盈通",
+      "sector": "通信线缆及配套",
+      "priorityScore": 54.82,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B1",
+        "B4"
+      ],
+      "baseScore": 67.67,
+      "slowCompositeScore": 58.82,
+      "marginScore": 75.0,
+      "etfScore": 56.67,
+      "mainFlowPct": 4.95,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 15.49,
+      "reasonZh": "B1 单源/多源确认；基础/综合强度 58.8；两融评分 75；ETF评分 57",
+      "riskZh": "追高风险高；上一交易日已上涨15.49%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
       "code": "002519",
       "name": "银河电子",
       "sector": "地面兵装Ⅲ",
@@ -355,14 +290,38 @@
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
-      "code": "603936",
-      "name": "博敏电子",
-      "sector": "元件",
-      "priorityScore": 51.37,
+      "code": "601869",
+      "name": "长飞光纤",
+      "sector": "通信线缆及配套",
+      "priorityScore": 53.86,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
-        "B3"
+        "B1",
+        "B4"
+      ],
+      "baseScore": 63.84,
+      "slowCompositeScore": 57.86,
+      "marginScore": 75.0,
+      "etfScore": 56.67,
+      "mainFlowPct": 5.82,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 8.78,
+      "reasonZh": "B1 单源/多源确认；基础/综合强度 57.9；两融评分 75；ETF评分 57",
+      "riskZh": "追高风险高；上一交易日已上涨8.78%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "603936",
+      "name": "博敏电子",
+      "sector": "元件",
+      "priorityScore": 53.37,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
       ],
       "baseScore": 63.24,
       "slowCompositeScore": 58.37,
@@ -377,13 +336,35 @@
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
-      "code": "000823",
-      "name": "超声电子",
-      "sector": "元件",
-      "priorityScore": 48.29,
+      "code": "600105",
+      "name": "永鼎股份",
+      "sector": "通信线缆及配套",
+      "priorityScore": 51.57,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0"
+      ],
+      "baseScore": 64.73,
+      "slowCompositeScore": 54.57,
+      "marginScore": 43.75,
+      "etfScore": 56.67,
+      "mainFlowPct": 6.45,
+      "mainlineStage": null,
+      "chaseRisk": "MEDIUM",
+      "previousChangePct": 4.51,
+      "reasonZh": "基础/综合强度 54.6；两融评分 44；ETF评分 57",
+      "riskZh": "追高风险中；上一交易日已上涨4.51%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "000823",
+      "name": "超声电子",
+      "sector": "元件",
+      "priorityScore": 50.29,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B4"
       ],
       "baseScore": 61.8,
       "slowCompositeScore": 59.29,
