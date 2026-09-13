@@ -56,13 +56,19 @@ def premarket_sentiment_plan(root, required_date, stored=None, now=None):
         # whole selector. Use the audited previous-session market breadth as a
         # conservative operational cap while keeping it clearly separate from
         # the Juejin index.
-        report_path = folder / f'{required_date}.json'
-        try:
-            report = json.loads(report_path.read_text(encoding='utf-8'))
-        except (OSError, ValueError):
-            report = {}
-        profit = next((x for x in report.get('indices', [])
-                       if x.get('name') in ('市场赚钱效应', '赚钱效应指数')), {})
+        profit = {}
+        for report_path in sorted(folder.glob('*.json'), reverse=True):
+            try:
+                report = json.loads(report_path.read_text(encoding='utf-8'))
+            except (OSError, ValueError):
+                continue
+            candidate = next((x for x in report.get('indices', [])
+                              if x.get('name') in ('市场赚钱效应', '赚钱效应指数')
+                              and (x.get('dataDate') or report.get('reportDate')) == required_date), None)
+            available = rules.stamp((candidate or {}).get('availableAt') or report.get('generatedAt'))
+            if candidate and (available is None or available <= cutoff):
+                profit = candidate
+                break
         raw = profit.get('raw') or {}
         up, down = rules.finite(raw.get('up')), rules.finite(raw.get('down'))
         if up is not None and down is not None and up + down >= 2000:

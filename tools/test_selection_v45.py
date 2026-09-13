@@ -171,7 +171,7 @@ class SelectionTests(unittest.TestCase):
             payload = {'reportDate': '2026-09-11', 'indices': [{
                 'name': '市场赚钱效应', 'dataDate': '2026-09-10',
                 'raw': {'up': 932, 'down': 4192}}]}
-            (history / '2026-09-10.json').write_text(json.dumps(payload), encoding='utf-8')
+            (history / '2026-09-11.json').write_text(json.dumps(payload), encoding='utf-8')
             plan = engine.premarket_sentiment_plan(
                 root, '2026-09-10', now=datetime.fromisoformat('2026-09-11T09:20:00+08:00'))
             self.assertTrue(plan['ready']); self.assertTrue(plan['fallback'])
