@@ -27,17 +27,16 @@ class ColumnFrame:
 
 
 class FreeSentimentInputTests(unittest.TestCase):
-    def test_proxy_rows_pages_past_service_cap(self):
-        first = {"code": 0, "data": {"fields": ["id"], "items": [[i] for i in range(2000)]}}
-        second = {"code": 0, "data": {"fields": ["id"], "items": [[2000], [2001]]}}
+    def test_proxy_rows_preserves_requested_limit(self):
+        first = {"code": 0, "data": {"fields": ["id"], "items": [[1], [2]]}}
         response = unittest.mock.Mock()
         response.raise_for_status.return_value = None
-        response.json.side_effect = [first, second]
+        response.json.return_value = first
         with patch.dict(collector.os.environ, {"STOCK_API_TOKEN": "a" * 56}), \
              patch.object(collector.requests, "post", return_value=response) as post:
             rows = collector._proxy_rows("margin_detail", {"trade_date": "20260910", "limit": 6000})
-        self.assertEqual(len(rows), 2002)
-        self.assertEqual(post.call_count, 2)
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(post.call_args.kwargs["json"]["params"]["limit"], 6000)
 
     def test_proxy_margin_uses_fixed_sse_szse_universe(self):
         rows = [{"exchange_id": "SSE", "rzye": 10_000_000_000},

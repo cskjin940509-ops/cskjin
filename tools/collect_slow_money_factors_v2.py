@@ -31,27 +31,18 @@ def _proxy_rows(api_name, params, fields=""):
     token = max(candidates, key=len) if candidates else raw_token.strip("'\"")
     if not token:
         raise RuntimeError("STOCK_API_TOKEN is not configured")
-    requested = int(params.get("limit") or 2000)
-    page_size = min(requested, 2000)
-    rows = []
-    for offset in range(0, requested, page_size):
-        page_params = {**params, "limit": page_size, "offset": offset}
-        response = requests.post(
-            PROXY_URL,
-            json={"api_name": api_name, "token": token, "params": page_params,
-                  "fields": fields},
-            headers={"Accept-Encoding": "gzip"}, timeout=45)
-        response.raise_for_status()
-        payload = response.json()
-        if payload.get("code") != 0:
-            raise RuntimeError(f"proxy api error: {payload.get('code')}")
-        data = payload.get("data") or {}
-        names = data.get("fields") or []
-        page = [dict(zip(names, values)) for values in (data.get("items") or [])]
-        rows.extend(page)
-        if len(page) < page_size:
-            break
-    return rows
+    response = requests.post(
+        PROXY_URL,
+        json={"api_name": api_name, "token": token, "params": params,
+              "fields": fields},
+        headers={"Accept-Encoding": "gzip"}, timeout=45)
+    response.raise_for_status()
+    payload = response.json()
+    if payload.get("code") != 0:
+        raise RuntimeError(f"proxy api error: {payload.get('code')}")
+    data = payload.get("data") or {}
+    names = data.get("fields") or []
+    return [dict(zip(names, values)) for values in (data.get("items") or [])]
 
 
 def _merge_margin_df(merged, df, exchange, source):
@@ -88,7 +79,8 @@ def fetch_margin_day_v2(d):
                 "buyAmount": buy, "repayAmount": repay,
                 "netBuyExact": (buy-repay) if buy is not None and repay is not None else None,
                 "source": "用户指定Tushare兼容接口融资融券明细", "exchange": "SSE" if suffix == "SH" else "SZSE"}
-        if merged:
+        coverage = {row["exchange"] for row in merged.values()}
+        if coverage == {"SSE", "SZSE"}:
             return base.iso(d), merged, {}
     except Exception:
         pass
