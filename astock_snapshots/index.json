@@ -5653,17 +5653,17 @@
         "missing-original-strategy-version",
         "missing-original-stock-metadata:17",
         "same-day-frozen-market-snapshot-missing",
-        "raw-price-cross-source-incomplete:1/17",
+        "raw-price-cross-source-incomplete:3/17",
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-10T16:18:37+08:00",
+      "auditedAt": "2026-09-13T10:31:49+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 17,
-          "verified": 1,
-          "coveragePct": 5.88,
+          "verified": 3,
+          "coveragePct": 17.65,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
@@ -13040,7 +13040,7 @@
         "raw-price-cross-source-incomplete:0/14",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-10T16:18:37+08:00",
+      "auditedAt": "2026-09-13T10:31:49+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -29353,7 +29353,7 @@
         "raw-price-cross-source-incomplete:0/18",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-10T16:18:37+08:00",
+      "auditedAt": "2026-09-13T10:31:49+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -37152,7 +37152,7 @@
         "raw-price-cross-source-incomplete:0/18",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-10T16:18:37+08:00",
+      "auditedAt": "2026-09-13T10:31:49+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -44768,7 +44768,7 @@
         "raw-price-cross-source-incomplete:0/17",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-10T16:18:37+08:00",
+      "auditedAt": "2026-09-13T10:31:49+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -58312,7 +58312,7 @@
         "raw-price-cross-source-incomplete:0/16",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-10T16:18:37+08:00",
+      "auditedAt": "2026-09-13T10:31:49+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -87002,13 +87002,74 @@
       "rule": "正式入池股票必须通过至少两个独立源未复权OHLC最大相对差<=0.1%；孤立失败股票剔除，不阻断其余已验证股票。"
     },
     "audit": {
-      "status": "VerifiedWithExclusions",
-      "eligibleForPerformanceComparison": true,
+      "status": "PartiallyVerified",
+      "eligibleForPerformanceComparison": false,
       "issues": [
-        "301176因双源收盘价校验失败已从当日正式池剔除"
+        "raw-price-cross-source-incomplete:0/21",
+        "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-11T15:04:14+08:00",
-      "note": "生产扫描通过目标日时点门禁；只有通过双源价格校验的股票进入Official。"
+      "auditedAt": "2026-09-13T10:31:49+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "reverification": {
+        "rawPrice": {
+          "total": 21,
+          "verified": 0,
+          "coveragePct": 0.0,
+          "bseSingleSource": 0,
+          "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
+        },
+        "factorRecompute": {
+          "available": 0,
+          "total": 21,
+          "coveragePct": 0.0,
+          "cutoff": "2026-09-11",
+          "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
+        },
+        "frozenMarket": {
+          "available": true,
+          "sourceDate": "2026-09-11",
+          "availableAt": "2026-09-11T17:38:23+08:00",
+          "boardCount": 200,
+          "sameDay": true
+        },
+        "factorProvenance": {
+          "complete": true,
+          "checks": {
+            "B0": {
+              "used": true,
+              "proven": true,
+              "evidence": "strategyVersion+stockMetadata"
+            },
+            "B1": {
+              "used": true,
+              "proven": true,
+              "evidence": "可用：交易所两融T+1日频，数据日 2026-09-10，覆盖 2445 只股票",
+              "requiredSource": "margin"
+            },
+            "B2": {
+              "used": false,
+              "proven": true,
+              "evidence": "可用：交易所ETF份额T+1日频，数据日 2026-09-10，覆盖 731 只ETF；净申赎金额为份额变化×价格的估算",
+              "requiredSource": "etf"
+            },
+            "B3": {
+              "used": true,
+              "proven": true,
+              "evidence": "frozen-stock-main-flow-fields"
+            }
+          }
+        },
+        "pointInTimeMembership": {
+          "available": false,
+          "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
+        },
+        "originalMetadata": {
+          "strategyVersion": "v1.9.0-verified-point-in-time-bse-slow-money",
+          "symbols": 21,
+          "stockMetadataPresent": 21,
+          "stockMetadataMissing": 0
+        }
+      }
     },
     "comboPools": {
       "B12": {
