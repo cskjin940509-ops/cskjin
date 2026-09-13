@@ -6,7 +6,7 @@ from statistics import mean
 from zoneinfo import ZoneInfo
 from shadow_fund_v3 import finite
 
-VERSION = 'v5.1-independent-risk'
+VERSION = 'v5.2-sentiment-position-state-machine'
 CN = ZoneInfo('Asia/Shanghai')
 PARAMETERS = {
     'singleLimit': .08, 'leaderLimit': .10, 'sectorLimit': .25,
@@ -22,7 +22,7 @@ PARAMETERS = {
 }
 RULES_ZH = {
     'newEntry': '大盘许可→潜在/确认板块至少两类独立证据（含资金）→板块完整样本前20%→回撤企稳/突破回踩；双源偏差≤0.3%，资金滞后时点、ADV20及成本检查通过才分批买入。',
-    'position': '潜在主线初始2.5%，确认主线4%；普通单股≤8%，两次确认龙头≤10%，板块≤25%，相关板块≤35%；最多加仓两次，不因单纯下跌补仓。',
+    'position': '前一交易日四项掘金指数的综合市场资金情绪按方向型状态机决定次日基础仓位：0–20为0%，上升至20–50为50%，上升至50–80为100%，80以上为0%，回落至50–80为30%，回落至20–50为0%；盘中风险只能下调该上限。潜在主线初始2.5%，确认主线4%；普通单股≤8%，两次确认龙头≤10%，板块≤25%，相关板块≤35%。',
     'rotation': '现金不足时择优换仓：新票通过原买入条件及3轮确认；新旧证据完整，新旧优势再经3次间隔至少3分钟确认；评分优势≥10、近20日高点空间增益覆盖实际费用+0.86%滑点+1%余量，新票空间/风险≥1.5且较旧票高0.5。每天最多1项，单项≤净值5%、旧仓50%；先卖后买，15分钟内重新核验，失效保留现金；不绕过风控、T+1与容量。参数待样本外验证，价格空间不是预测收益。',
     'rebalance': '10:00–10:30、14:30–14:50普通成交；目标连续3个不同快照确认；调仓差额不足3个百分点不交易（首次小仓和已确认未成交余量除外）；普通双边换手≤20%。',
     'exit': '掉出候选只停加仓。至少2个完整交易日观察；1日失效观察，2日减半，3日退出；板块2日确认衰退退出。硬止损及组合风险优先，待退出数量不因T+1/跌停/部分成交丢失。',
@@ -87,9 +87,35 @@ def indicators(bars, now, prev_close=None):
             'volumeRatio5to20': mean(amounts[-5:]) / mean(amounts) if valid_amount else None}
 
 
-def market_regime(snapshot, now, macro=None):
-    result = {'state': 'UNKNOWN', 'cap': 0., 'allowNew': False, 'reasonZh': '缺少当日大盘广度证据', 'missingEvidence': []}
+def sentiment_position_cap(score, previous_score, previous_cap=None):
+    """Direction-aware position table from 市场情绪指数交易策略笔记."""
+    score, previous_score = finite(score), finite(previous_score)
+    if score is None or not 0 <= score <= 100 or previous_score is None or not 0 <= previous_score <= 100:
+        return {'ready': False, 'cap': 0., 'direction': 'UNKNOWN', 'reasonZh': '缺少连续两个交易日可用于仓位的综合情绪指数'}
+    direction = 'RISING' if score > previous_score else 'FALLING' if score < previous_score else 'FLAT'
+    if score < 20 or score >= 80:
+        cap = 0.
+    elif direction == 'RISING':
+        cap = .5 if score < 50 else 1.
+    elif direction == 'FALLING':
+        cap = 0. if score < 50 else .3
+    else:
+        cap = finite(previous_cap, 0.)
+    return {'ready': True, 'cap': cap, 'direction': direction, 'score': score,
+            'previousScore': previous_score,
+            'reasonZh': f'综合情绪{score:.2f}，方向{direction}，文件规则基础仓位{cap:.0%}'}
+
+
+def market_regime(snapshot, now, macro=None, sentiment=None):
+    sentiment = sentiment or {}
+    base_cap = finite(sentiment.get('cap'), 0.) if sentiment.get('ready') else 0.
+    result = {'state': 'UNKNOWN', 'cap': base_cap, 'baseCap': base_cap, 'intradayCap': None,
+              'allowNew': False, 'reasonZh': sentiment.get('reasonZh') or '缺少前一交易日可用的综合情绪指数',
+              'missingEvidence': [], 'sentiment': sentiment}
+    if not sentiment.get('ready'):
+        return result
     if not snapshot or snapshot.get('sourceDate') != now.date().isoformat() or not snapshot.get('verifiedToday'):
+        result['reasonZh'] += '；缺少当日盘中大盘证据，暂停新增风险'
         return result
     if not fresh(snapshot.get('availableAt'), now, 900):
         result['reasonZh'] = '大盘快照过期/时间在未来'; return result
@@ -101,32 +127,31 @@ def market_regime(snapshot, now, macro=None):
     # Broad index crash still controls risk even if breadth is missing.
     avg = mean(values)
     if avg <= -2 or min(values) <= -3:
-        return dict(result, state='RISK', cap=.10, reasonZh='核心指数急跌，风险退出优先')
+        return dict(result, state='RISK', cap=min(base_cap, .10), intradayCap=.10,
+                    reasonZh='核心指数急跌，盘中风险上限下调至10%')
     if up is None or down is None or up + down < 2000:
         result['reasonZh'] = '全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场'; return result
     breadth = up / (up + down)
     if breadth < .25:
-        state, cap = 'RISK', .10
+        state, intraday_cap = 'RISK', .10
     elif breadth < .4 or avg < -.8:
-        state, cap = 'DEFENSIVE', .25
-    elif breadth >= .75 and avg >= 1.5:
-        state, cap = 'STRONG', 1.
-    elif breadth >= .6 and avg >= .5:
-        state, cap = 'POSITIVE', .8
+        state, intraday_cap = 'DEFENSIVE', .25
     else:
-        state, cap = 'NEUTRAL', .6
+        state, intraday_cap = 'NORMAL', 1.
     # Macro inputs are evidence flags supplied as-of, never invented numeric weights.
     macro = macro or {}
     missing = [k for k in ('margin', 'broadEtf', 'usRisk', 'us30y', 'cn10y')
                if not isinstance(macro.get(k), dict) or not macro[k].get('verified')
                or not fresh(macro[k].get('availableAt'), now, 4 * 86400)]
-    if missing:
-        cap = min(cap, .30)
     if any(x.get('riskOff') is True for k, x in macro.items() if isinstance(x, dict) and k not in missing):
-        cap = min(cap, .25)
-    return {'state': state, 'cap': cap, 'allowNew': state != 'RISK',
+        intraday_cap = min(intraday_cap, .25)
+        state = 'DEFENSIVE'
+    cap = min(base_cap, intraday_cap)
+    return {'state': state, 'cap': cap, 'baseCap': base_cap, 'intradayCap': intraday_cap,
+            'allowNew': state != 'RISK' and cap > 0,
             'breadthPct': round(breadth * 100, 2), 'missingEvidence': missing,
-            'reasonZh': f'市场广度{breadth:.1%}；宏观证据缺失时上限收紧至30%' if missing else '大盘量价广度与时点通过'}
+            'sentiment': sentiment,
+            'reasonZh': f'{sentiment["reasonZh"]}；盘中广度{breadth:.1%}，实际仓位上限{cap:.0%}'}
 
 
 def sector_evidence(stock, sector, today, now=None):

@@ -1,6 +1,8 @@
 import copy
 import sys
 import unittest
+import json
+import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
 from unittest.mock import patch
@@ -129,6 +131,39 @@ class SelectionTests(unittest.TestCase):
         engine.CONTEXT['market'] = market
         r = engine.risk_control(self.state, self.prices)
         self.assertFalse(r['allowNew']); self.assertFalse(r['forceReduction'])
+
+    def test_file_sentiment_position_table(self):
+        cases = [
+            (10, 15, 0.), (30, 15, .5), (60, 40, 1.), (85, 70, 0.),
+            (65, 85, .3), (35, 60, 0.), (15, 35, 0.)]
+        for score, previous, expected in cases:
+            with self.subTest(score=score, previous=previous):
+                self.assertEqual(rules.sentiment_position_cap(score, previous)['cap'], expected)
+
+    def test_intraday_risk_only_reduces_premarket_cap(self):
+        snapshot = {'sourceDate': '2026-09-04', 'verifiedToday': True,
+            'availableAt': self.now.isoformat(), 'up': 3500, 'down': 1500,
+            'indices': {k: {'changePct': .2} for k in ('sh000001', 'sh000300', 'sz399006')}}
+        sentiment = rules.sentiment_position_cap(60, 40)
+        normal = rules.market_regime(snapshot, self.now, {}, sentiment)
+        self.assertEqual(normal['baseCap'], 1.)
+        self.assertEqual(normal['cap'], 1.)
+        snapshot.update(up=800, down=4200)
+        risk = rules.market_regime(snapshot, self.now, {}, sentiment)
+        self.assertEqual(risk['cap'], .1)
+        self.assertEqual(risk['baseCap'], 1.)
+
+    def test_premarket_plan_requires_exact_previous_session_and_eligible_scores(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); history = root / 'astock_sentiment' / 'history'; history.mkdir(parents=True)
+            for day, score in [('2026-09-09', 45), ('2026-09-10', 60)]:
+                payload = {'reportDate': day, 'indices': [{'name': '综合市场资金情绪',
+                    'score': score, 'dataDate': day, 'classification': '掘金报告原值',
+                    'positionEligible': True}]}
+                (history / f'{day}.json').write_text(json.dumps(payload), encoding='utf-8')
+            plan = engine.premarket_sentiment_plan(root, '2026-09-10')
+            self.assertTrue(plan['ready']); self.assertEqual(plan['cap'], 1.)
+            self.assertFalse(engine.premarket_sentiment_plan(root, '2026-09-11')['ready'])
 
     def test_no_intraday_mark_as_formal_close(self):
         self.state['navHistory'][0].pop('isVerifiedClose')

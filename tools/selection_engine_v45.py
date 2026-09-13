@@ -4,6 +4,7 @@ from copy import deepcopy
 from datetime import time
 import math
 import os
+import json
 
 import run_ai_shadow_portfolio as base
 import run_ai_dynamic_portfolio_v2 as execution
@@ -21,6 +22,38 @@ NO_T_CONTROL = False
 CONTROL_MODE = None
 ORIGINAL_QUOTES = base.fetch_tencent_quotes
 ORIGINAL_BUILD = base.build_latest
+
+
+def premarket_sentiment_plan(root, required_date, stored=None):
+    """Use only the required previous-session report and an earlier comparable score."""
+    rows = []
+    folder = root / 'astock_sentiment' / 'history'
+    for path in sorted(folder.glob('*.json')) if folder.exists() else []:
+        try:
+            report = json.loads(path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            continue
+        item = next((x for x in report.get('indices', [])
+                     if x.get('name') in ('综合市场资金情绪', '市场资金情绪指数')), None)
+        if not item or rules.finite(item.get('score')) is None:
+            continue
+        official = item.get('classification') == '掘金报告原值'
+        if not (item.get('positionEligible') is True or official):
+            continue
+        rows.append({'dataDate': item.get('dataDate') or report.get('reportDate'),
+                     'score': item['score'], 'classification': item.get('classification'),
+                     'source': item.get('source') or report.get('source')})
+    current = next((x for x in reversed(rows) if x['dataDate'] == required_date), None)
+    previous = max((x for x in rows if current and x['dataDate'] < current['dataDate']),
+                   key=lambda x: x['dataDate'], default=None)
+    if not current or not previous:
+        return {'ready': False, 'cap': 0., 'requiredDataDate': required_date,
+                'reasonZh': f'缺少{required_date}或其前一日可用于仓位的综合情绪指数'}
+    old = ((stored or {}).get('selection45') or {}).get('sentimentPositionControl') or {}
+    plan = rules.sentiment_position_cap(current['score'], previous['score'], old.get('baseCap'))
+    plan.update(requiredDataDate=required_date, dataDate=current['dataDate'],
+                classification=current['classification'], source=current['source'])
+    return plan
 
 
 def prepare_quotes(codes):
@@ -54,8 +87,10 @@ def prepare_quotes(codes):
     market = max([gateway.get('marketSnapshot') or {}, radar.get('marketSnapshot') or {}],
                  key=lambda x: str(x.get('availableAt') or ''))
     CONTEXT.clear()
+    sentiment = premarket_sentiment_plan(base.ROOT, previous, state) if previous else {
+        'ready': False, 'cap': 0., 'reasonZh': '无法识别前一交易日'}
     CONTEXT.update(radar=radar, quotes=quotes, data=data,
-                   market=rules.market_regime(market, now, radar.get('macroEvidence')),
+                   market=rules.market_regime(market, now, radar.get('macroEvidence'), sentiment),
                    marketAt=market.get('availableAt'))
     return quotes
 
@@ -67,6 +102,11 @@ def metadata(state):
     if CONTEXT.get('data'):
         state['selectionData45'] = CONTEXT['data']
     obj['market'] = CONTEXT.get('market') or {'state': 'UNKNOWN', 'cap': 0, 'allowNew': False, 'reasonZh': '无当日大盘证据'}
+    if (obj['market'].get('sentiment') or {}).get('ready'):
+        s = obj['market']['sentiment']
+        obj['sentimentPositionControl'] = {'dataDate': s.get('dataDate'), 'score': s.get('score'),
+            'previousScore': s.get('previousScore'), 'direction': s.get('direction'),
+            'baseCap': s.get('cap'), 'classification': s.get('classification'), 'source': s.get('source')}
     return obj
 
 
