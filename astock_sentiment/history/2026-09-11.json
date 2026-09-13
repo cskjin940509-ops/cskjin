@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reportDate": "2026-09-11",
-  "generatedAt": "2026-09-11T15:21:44.645995+08:00",
+  "generatedAt": "2026-09-11T09:00:00+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -10,14 +10,14 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "logUpDownRatio": -2.020666725259015,
-        "up": 605.0,
-        "down": 4567.0,
-        "flat": 38.0,
-        "sampleCount": 5210.0
+        "logUpDownRatio": -1.5031833421793932,
+        "up": 932.0,
+        "down": 4192.0,
+        "flat": 84.0,
+        "sampleCount": 5208.0
       },
-      "dataDate": "2026-09-11",
-      "availableAt": "2026-09-11T15:18:45+08:00",
+      "dataDate": "2026-09-10",
+      "availableAt": "2026-09-10T17:42:38+08:00",
       "classification": "研究原始值",
       "status": "INSUFFICIENT_485_HISTORY",
       "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
@@ -25,24 +25,24 @@
     },
     {
       "name": "两融情绪",
-      "score": null,
+      "score": 29.958677685950413,
       "scoreScale": "0-100",
       "raw": {
-        "financingBalance": 2617177271180.0,
-        "change1d": -2213824034.0,
+        "financingBalance": 2608820537493.0,
+        "change1d": -2204530115.0,
         "exchangeCoverage": [
-          "BSE",
           "SSE",
           "SZSE"
         ],
-        "errors": {}
+        "errors": {},
+        "historyObservations": 485
       },
       "dataDate": "2026-09-10",
       "availableAt": "2026-09-11T15:21:22+08:00",
-      "classification": "研究原始值",
-      "status": "INSUFFICIENT_485_HISTORY",
-      "blocker": "需要485个连续、同口径、按可得时间保存的完整交易日汇总",
-      "positionEligible": false
+      "classification": "反向工程估算",
+      "status": "ESTIMATED",
+      "blocker": null,
+      "positionEligible": true
     },
     {
       "name": "ETF资金强弱",
@@ -67,8 +67,8 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": null,
-      "dataDate": "2026-09-11",
-      "availableAt": "2026-09-11T15:21:44.645995+08:00",
+      "dataDate": "2026-09-10",
+      "availableAt": "2026-09-11T09:00:00+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",

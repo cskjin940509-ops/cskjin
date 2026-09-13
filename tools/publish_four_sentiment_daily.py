@@ -20,10 +20,12 @@ def read_json(path, default=None):
         return default
 
 
-def latest_snapshot(payload):
+def latest_snapshot(payload, on_or_before=None):
     rows = payload if isinstance(payload, list) else (
         payload.get("snapshots") or payload.get("history") or payload.get("items") or [])
     rows = [x for x in rows if isinstance(x, dict) and x.get("date")]
+    if on_or_before:
+        rows = [x for x in rows if x.get("date") <= on_or_before]
     official = [x for x in rows if x.get("status") == "Official"]
     return max(official or rows, key=lambda x: x["date"], default=None)
 
@@ -48,11 +50,44 @@ def prior_item(name, before_date):
     return max(candidates, default=(None, None))[1]
 
 
-def publish(now=None):
+def proxy_margin_window(source_date):
+    payload = read_json(ROOT / "astock_factors" / "proxy_backfill" / "margin.json", {})
+    body = payload.get("data") or {}
+    fields, items = body.get("fields") or [], body.get("items") or []
+    required = ("trade_date", "exchange_id", "rzye")
+    if not all(x in fields for x in required):
+        return None
+    ix = {x: fields.index(x) for x in required}; by_day = {}
+    cutoff = source_date.replace("-", "")
+    for row in items:
+        day, exchange = str(row[ix["trade_date"]]), str(row[ix["exchange_id"]])
+        if day > cutoff or exchange not in ("SSE", "SZSE"):
+            continue
+        value = finite(row[ix["rzye"]])
+        if value is not None:
+            by_day.setdefault(day, {})[exchange] = value
+    balances = [(day, sum(parts.values())) for day, parts in sorted(by_day.items())
+                if set(parts) == {"SSE", "SZSE"}]
+    if len(balances) < 2 or balances[-1][0] != cutoff:
+        return None
+    deltas = [(balances[i][0], balances[i][1] - balances[i-1][1])
+              for i in range(1, len(balances))]
+    window = deltas[-485:]
+    change = deltas[-1][1]
+    score = (100 * sum(x[1] < change for x in window) / (len(window)-1)
+             if len(window) == 485 else None)
+    return {"balance": balances[-1][1], "change": change, "score": score,
+            "observations": len(window)}
+
+
+def publish(now=None, report_date=None, source_date=None, write_latest=True):
     now = now or datetime.now(CN)
+    report_date = report_date or now.date().isoformat()
     snapshots = read_json(ROOT / "astock_snapshots" / "index.json", {})
-    factors = read_json(ROOT / "astock_factors" / "latest.json", {})
-    snap = latest_snapshot(snapshots)
+    factor_path = ROOT / "astock_factors" / "history" / f"{source_date}.json" if source_date else None
+    factors = read_json(factor_path, None) if factor_path else None
+    factors = factors or read_json(ROOT / "astock_factors" / "latest.json", {})
+    snap = latest_snapshot(snapshots, source_date)
     market = (snap or {}).get("marketSnapshot") or {}
     source_date = market.get("sourceDate") or (snap or {}).get("date")
     up, down = finite(market.get("up")), finite(market.get("down"))
@@ -68,6 +103,12 @@ def publish(now=None):
     previous_balance = finite((previous_margin or {}).get("raw", {}).get("financingBalance"))
     margin_delta = (margin_balance - previous_balance
                     if margin_balance is not None and previous_balance is not None else None)
+    proxy_margin = proxy_margin_window(source_date or source_date)
+    margin_score = None
+    if proxy_margin:
+        margin_balance = proxy_margin["balance"]
+        margin_delta = proxy_margin["change"]
+        margin_score = proxy_margin["score"]
 
     etf = factors.get("etf") or {}
     etfs = list((etf.get("etfs") or {}).values())
@@ -91,15 +132,16 @@ def publish(now=None):
          "status": "INSUFFICIENT_485_HISTORY" if profit_raw is not None else "MISSING_INPUT",
          "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
          "positionEligible": False},
-        {"name": "两融情绪", "score": None, "scoreScale": "0-100",
+        {"name": "两融情绪", "score": margin_score, "scoreScale": "0-100",
          "raw": {"financingBalance": margin_balance, "change1d": margin_delta,
-                 "exchangeCoverage": summary.get("exchangeCoverage", []),
-                 "errors": summary.get("errors", {})},
-         "dataDate": summary.get("dataDate") or margin.get("dataDate"),
-         "availableAt": factors.get("collectedAt"), "classification": "研究原始值",
-         "status": "INSUFFICIENT_485_HISTORY" if margin_delta is not None else "MISSING_INPUT",
-         "blocker": summary.get("scoreBlocker") or "缺完整沪深北余额或相邻交易日基数",
-         "positionEligible": False},
+                 "exchangeCoverage": ["SSE", "SZSE"] if proxy_margin else summary.get("exchangeCoverage", []),
+                 "errors": summary.get("errors", {}),
+                 "historyObservations": (proxy_margin or {}).get("observations")},
+         "dataDate": source_date or summary.get("dataDate") or margin.get("dataDate"),
+         "availableAt": factors.get("collectedAt"), "classification": "反向工程估算",
+         "status": "ESTIMATED" if margin_score is not None else ("INSUFFICIENT_485_HISTORY" if margin_delta is not None else "MISSING_INPUT"),
+         "blocker": None if margin_score is not None else (summary.get("scoreBlocker") or "缺完整沪深余额或相邻交易日基数"),
+         "positionEligible": margin_score is not None},
         {"name": "ETF资金强弱", "score": None, "scoreScale": "0-100",
          "raw": etf_raw, "dataDate": etf.get("dataDate"),
          "availableAt": factors.get("collectedAt"), "classification": "研究观察值",
@@ -113,7 +155,7 @@ def publish(now=None):
          "positionEligible": False},
     ]
     result = {
-        "schemaVersion": 1, "reportDate": now.date().isoformat(),
+        "schemaVersion": 1, "reportDate": report_date,
         "generatedAt": now.isoformat(), "cutoffZh": "截至生成时实际可得数据",
         "referenceReplication": "NOT_VERIFIED", "indices": indices,
         "allFourScoresAvailable": all(x["score"] is not None for x in indices),
@@ -122,7 +164,8 @@ def publish(now=None):
     }
     OUT.mkdir(exist_ok=True); HISTORY.mkdir(exist_ok=True)
     text = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
-    (OUT / "latest.json").write_text(text, encoding="utf-8")
+    if write_latest:
+        (OUT / "latest.json").write_text(text, encoding="utf-8")
     (HISTORY / f"{result['reportDate']}.json").write_text(text, encoding="utf-8")
     return result
 
