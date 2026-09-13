@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reportDate": "2026-09-14",
-  "generatedAt": "2026-09-14T00:25:08.481376+08:00",
+  "generatedAt": "2026-09-14T00:29:04.004911+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -34,12 +34,11 @@
           "SSE"
         ],
         "errors": {
-          "SZSE": "summary:ValueError;detail:ValueError;raw:ValueError",
-          "primaryProxy": "RuntimeError"
+          "coverage": "missing SSE or SZSE"
         }
       },
       "dataDate": "2026-09-11",
-      "availableAt": "2026-09-14T00:24:47+08:00",
+      "availableAt": "2026-09-14T00:28:43+08:00",
       "classification": "研究原始值",
       "status": "MISSING_INPUT",
       "blocker": "沪深交易所覆盖不完整",
@@ -50,14 +49,14 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "etfCount": 1635,
-        "validChangeCount": 1635,
-        "netShareChange1d": 13206643687.0,
-        "netCreationAmountEstimate1d": 14090922179.632,
+        "etfCount": 1747,
+        "validChangeCount": 1746,
+        "netShareChange1d": 1349105.2612999997,
+        "netCreationAmountEstimate1d": 6387339.386923089,
         "historyObservations": 21
       },
       "dataDate": "2026-09-11",
-      "availableAt": "2026-09-14T00:24:47+08:00",
+      "availableAt": "2026-09-14T00:28:43+08:00",
       "classification": "研究观察值",
       "status": "FORMULA_UNVERIFIED",
       "blocker": "原版ETF池、窗口、原始因子与标准化顺序未冻结；历史不足485日",
@@ -69,7 +68,7 @@
       "scoreScale": "0-100",
       "raw": null,
       "dataDate": "2026-09-11",
-      "availableAt": "2026-09-14T00:25:08.481376+08:00",
+      "availableAt": "2026-09-14T00:29:04.004911+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
