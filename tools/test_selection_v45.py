@@ -125,6 +125,12 @@ class SelectionTests(unittest.TestCase):
         stock = {'marginData': {'dataDate': '2026-09-04', 'balanceChange1d': 1e8}}
         self.assertNotIn('B1', rules.sector_evidence(stock, {}, '2026-09-04'))
 
+    def test_missing_etf_does_not_block_breadth_and_mainflow_evidence(self):
+        stock = {'marginData': {}, 'etfData': {}}
+        sector = {'breadthPct': 70, 'changePct': .5, 'mainFlowPct': 2}
+        evidence = rules.sector_evidence(stock, sector, '2026-09-04', self.now)
+        self.assertEqual(evidence, ['B0', 'B3'])
+
     def test_missing_breadth_blocks_buy_without_forcing_liquidation(self):
         market = rules.market_regime({'sourceDate': '2026-09-04', 'verifiedToday': True,
             'availableAt': self.now.isoformat(), 'indices': {k: {'changePct': 0} for k in ('sh000001', 'sh000300', 'sz399006')}}, self.now)

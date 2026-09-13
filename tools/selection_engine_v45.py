@@ -666,8 +666,14 @@ def build_candidate(state, stock, radar, quotes):
     sec = next((x for x in radar.get('mainlines') or [] if x.get('name') == stock.get('sector')), {})
     stage = sec.get('stage')
     evidence = rules.sector_evidence(stock, sec, today, now)
+    optional_missing = [x for x in ('B1', 'B2', 'B3') if x not in evidence]
     if stage not in ('EMERGING', 'CONFIRMING'): rejects.append('板块不处于潜在/确认阶段')
-    if len(evidence) < 2 or not set(evidence) & {'B1', 'B2', 'B3'}: rejects.append('板块独立证据不足两类或缺资金')
+    # Slow factors are independent confirmations, not global availability
+    # switches. B0 plus any available funding factor (or two funding factors)
+    # is enough to continue stock-level evaluation; an unavailable ETF history
+    # must not block sectors already confirmed by breadth and main flow.
+    if len(evidence) < 2 or not set(evidence) & {'B1', 'B2', 'B3'}:
+        rejects.append('板块尚未形成两类独立证据')
     if not own_quote_ok(code): rejects.append('主行情缺失/过期')
     y = stock.get('yunai') or {}
     if not y.get('quoteOk') or not rules.fresh(y.get('quoteTime'), now): rejects.append('第二行情缺失/过期')
@@ -716,6 +722,7 @@ def build_candidate(state, stock, radar, quotes):
             'referencePrice': price, 'priceSource': '当时双源确认行情', 'reasonZh': '；'.join(reasons + [setup.get('reasonZh', '')]),
             'targetWeight': target, 'targetWeightPct': target * 100, 'stage': stage,
             'evidence': evidence, 'setup': setup, 'technical': tech, 'rejections': sorted(set(rejects)),
+            'missingOptionalEvidence': optional_missing,
             'rankSampleCount': stock.get('rankSampleCount'), 'sectorRank': stock.get('sectorRank'), 'dataAt': base.iso()}
 
 
