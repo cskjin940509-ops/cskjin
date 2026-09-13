@@ -9,6 +9,7 @@ margin universe so current and historical observations stay comparable.
 from __future__ import annotations
 
 import os
+import re
 import time
 from io import BytesIO
 from unittest.mock import patch as mock_patch
@@ -25,7 +26,9 @@ PROXY_URL = os.getenv("STOCK_API_URL", "https://jiaoch.top/")
 
 
 def _proxy_rows(api_name, params, fields=""):
-    token = os.getenv("STOCK_API_TOKEN", "").strip()
+    raw_token = os.getenv("STOCK_API_TOKEN", "").strip()
+    match = re.search(r"[0-9a-fA-F]{40}", raw_token)
+    token = match.group(0) if match else raw_token.strip("'\"")
     if not token:
         raise RuntimeError("STOCK_API_TOKEN is not configured")
     response = requests.post(
