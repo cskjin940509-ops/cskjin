@@ -55,6 +55,9 @@ jobs:
       - name: 校验免费情绪数据输入
         run: python -m unittest tools/test_free_sentiment_inputs.py
       - name: 拉取两融与ETF份额慢资金数据
+        env:
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
         run: python tools/collect_slow_money_factors_v2.py
       - name: 慢资金到达立即发布并通知雷达
         env:

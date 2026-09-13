@@ -27,26 +27,41 @@ class ColumnFrame:
 
 
 class FreeSentimentInputTests(unittest.TestCase):
-    def test_full_exchange_summary_is_separate_and_not_score_ready(self):
-        with patch.object(collector.ak, "stock_margin_sse", return_value=Frame([{"融资余额": 10_000_000_000}])), \
-             patch.object(collector.ak, "stock_margin_szse", return_value=Frame([{"融资余额": 80.0}])), \
-             patch.object(collector.ak, "stock_margin_detail_bse", return_value=Frame([{"融资余额": 2_000_000}, {"融资余额": 3_000_000}])):
+    def test_proxy_margin_uses_fixed_sse_szse_universe(self):
+        rows = [{"exchange_id": "SSE", "rzye": 10_000_000_000},
+                {"exchange_id": "SZSE", "rzye": 8_000_000_000},
+                {"exchange_id": "BSE", "rzye": 5_000_000}]
+        with patch.object(collector, "_proxy_rows", return_value=rows):
             result = collector.fetch_market_margin_summary(date(2026, 9, 9))
         self.assertTrue(result["complete"])
-        self.assertEqual(result["financingBalance"], 18_005_000_000)
-        self.assertFalse(result["scoreEligible"])
+        self.assertEqual(result["financingBalance"], 18_000_000_000)
+        self.assertEqual(result["exchangeUniverse"], ["SSE", "SZSE"])
+        self.assertEqual(result["excludedExchanges"], ["BSE"])
+        self.assertTrue(result["scoreEligible"])
+
+    def test_official_fallback_also_uses_sse_szse_only(self):
+        with patch.object(collector, "_proxy_rows", side_effect=RuntimeError()), \
+             patch.object(collector.ak, "stock_margin_sse", return_value=Frame([{"融资余额": 10_000_000_000}])), \
+             patch.object(collector.ak, "stock_margin_szse", return_value=Frame([{"融资余额": 80.0}])), \
+             patch.object(collector.ak, "stock_margin_detail_bse", return_value=Frame([])):
+            result = collector.fetch_market_margin_summary(date(2026, 9, 9))
+        self.assertTrue(result["complete"])
+        self.assertEqual(result["financingBalance"], 18_000_000_000)
+        self.assertTrue(result["scoreEligible"])
 
     def test_partial_exchange_data_never_becomes_market_total(self):
-        with patch.object(collector.ak, "stock_margin_sse", side_effect=RuntimeError()), \
+        with patch.object(collector, "_proxy_rows", side_effect=RuntimeError()), \
+             patch.object(collector.ak, "stock_margin_sse", side_effect=RuntimeError()), \
              patch.object(collector.ak, "stock_margin_szse", return_value=Frame([{"融资余额": 80.0}])), \
              patch.object(collector.ak, "stock_margin_detail_bse", return_value=Frame([{"融资余额": 2_000_000}])):
             result = collector.fetch_market_margin_summary(date(2026, 9, 9))
         self.assertFalse(result["complete"])
         self.assertIsNone(result["financingBalance"])
-        self.assertEqual(result["scoreBlocker"], "交易所覆盖不完整")
+        self.assertEqual(result["scoreBlocker"], "沪深交易所覆盖不完整")
 
     def test_szse_summary_failure_falls_back_to_official_detail(self):
-        with patch.object(collector.ak, "stock_margin_sse", return_value=Frame([{"融资余额": 100.0}])), \
+        with patch.object(collector, "_proxy_rows", side_effect=RuntimeError()), \
+             patch.object(collector.ak, "stock_margin_sse", return_value=Frame([{"融资余额": 100.0}])), \
              patch.object(collector.ak, "stock_margin_szse", side_effect=ValueError("shape changed")), \
              patch.object(collector.ak, "stock_margin_detail_szse", return_value=Frame([{"融资余额": 20.0}, {"融资余额": 30.0}])), \
              patch.object(collector.ak, "stock_margin_detail_bse", return_value=Frame([{"融资余额": 5.0}])):
