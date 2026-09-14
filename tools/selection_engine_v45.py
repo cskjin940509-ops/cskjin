@@ -29,6 +29,26 @@ def premarket_sentiment_plan(root, required_date, stored=None, now=None):
     rows = []
     now = now or base.now_cn()
     cutoff = min(now, now.replace(hour=9, minute=30, second=0, microsecond=0))
+    # A dated, audited decision can be published when the reverse-engineered
+    # component calculation has completed outside this process.  Keeping the
+    # decision in a separate file prevents research/PDF completeness flags or
+    # an intraday breadth fallback from overwriting the premarket risk budget.
+    decision = base.read_json(root / 'astock_sentiment' / 'position_decision.json', {})
+    if (decision.get('reportDate') == now.date().isoformat()
+            and decision.get('dataDate') == required_date
+            and rules.finite(decision.get('cap')) is not None
+            and 0 <= rules.finite(decision.get('cap')) <= 1):
+        available = rules.stamp(decision.get('availableAt'))
+        if available is not None and available <= cutoff:
+            return {'ready': True, 'cap': rules.finite(decision['cap']),
+                    'baseCap': rules.finite(decision['cap']),
+                    'direction': decision.get('direction') or 'RISING',
+                    'score': rules.finite(decision.get('score')),
+                    'previousScore': rules.finite(decision.get('previousScore')),
+                    'requiredDataDate': required_date, 'dataDate': required_date,
+                    'classification': decision.get('classification'),
+                    'source': decision.get('source'),
+                    'reasonZh': decision.get('reasonZh') or '盘前仓位决策已发布'}
     folder = root / 'astock_sentiment' / 'history'
     for path in sorted(folder.glob('*.json')) if folder.exists() else []:
         try:
@@ -73,13 +93,16 @@ def premarket_sentiment_plan(root, required_date, stored=None, now=None):
         up, down = rules.finite(raw.get('up')), rules.finite(raw.get('down'))
         if up is not None and down is not None and up + down >= 2000:
             breadth = up / (up + down)
-            cap = .10 if breadth < .25 else .25 if breadth < .40 else .50
-            return {'ready': True, 'cap': cap, 'direction': 'FALLBACK',
+            # Breadth is evidence for market state, not the document's
+            # composite sentiment score. Do not invent a position band from
+            # it; the strategy note requires the composite score and its
+            # prior-session direction to select 0/50/100/30/0 percent.
+            return {'ready': False, 'cap': 0., 'direction': 'UNKNOWN',
                     'score': None, 'previousScore': None, 'fallback': True,
                     'requiredDataDate': required_date, 'dataDate': required_date,
-                    'classification': '前一交易日全市场宽度备用仓位',
-                    'source': '全市场涨跌家数（非掘金综合指数）',
-                    'reasonZh': f'前一交易日全市场上涨占比{breadth:.1%}，备用仓位上限{cap:.0%}'}
+                    'classification': '前一交易日全市场宽度（仅证据）',
+                    'source': '全市场涨跌家数（不能替代综合情绪指数）',
+                    'reasonZh': f'前一交易日上涨占比{breadth:.1%}，缺少综合情绪分数，按文档方案暂不推定仓位'}
         return {'ready': False, 'cap': 0., 'requiredDataDate': required_date,
                 'reasonZh': f'{required_date}盘前市场宽度数据尚未到达'}
     old = ((stored or {}).get('selection45') or {}).get('sentimentPositionControl') or {}
