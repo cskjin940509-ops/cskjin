@@ -231,6 +231,13 @@ class SelectionTests(unittest.TestCase):
             self.assertEqual(market['baseCap'], .5)
             self.assertTrue(market['allowNew'])
 
+    def test_missing_intraday_market_data_keeps_premarket_budget(self):
+        sentiment = {'ready': True, 'cap': .5, 'reasonZh': '盘前基础仓位50%'}
+        market = rules.market_regime({}, self.now, {}, sentiment)
+        self.assertEqual(market['state'], 'BASELINE')
+        self.assertEqual(market['cap'], .5)
+        self.assertTrue(market['allowNew'])
+
     def test_build_latest_keeps_premarket_budget_without_same_day_radar(self):
         self.now = datetime.fromisoformat('2026-09-04T09:20:00+08:00')
         engine.CONTEXT['market'] = {
