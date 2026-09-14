@@ -11,10 +11,16 @@ def explain(latest):
     labels = {'WAIT_WINDOW':'等待普通交易窗口', 'WAIT_FRESH_QUOTE':'等待有效行情', 'WAIT_T_PLUS_ONE':'受T+1约束',
               'WAIT_TURNOVER':'达到当日换手限制', 'WAIT_CAPACITY_OR_LIMIT':'容量或涨跌停限制', 'PARTIAL_WAIT':'部分成交后等待余量执行', 'PENDING':'等待执行'}
     pending_reasons = [f"{x.get('code')}：{labels.get(x.get('state'), x.get('state','待执行'))}" for x in pending]
+    # Missing optional evidence is deliberately not a rejection.  Keep the
+    # published execution summary tri-state as well, otherwise the Android
+    # client can show an old all-blocked reason even though the engine has
+    # already classified the same candidate as a degraded small entry.
     rejected = [x for x in candidates if x.get('rejections')]
+    degraded = [x for x in candidates if not x.get('rejections') and x.get('missingOptionalEvidence')]
     if pending: code='PENDING_EXECUTION'; text='已有退出信号；'+'；'.join(pending_reasons[:3])
     elif reasons: code='BLOCKED_EVIDENCE_OR_RISK'; text='本轮未成交；'+'；'.join(reasons)
-    elif candidates and len(rejected)==len(candidates): code='ENTRY_CONDITIONS_NOT_MET'; text='本轮无退出成交；候选买入条件未通过'
+    elif candidates and len(rejected)==len(candidates): code='ENTRY_CONDITIONS_NOT_MET'; text='本轮无退出成交；全部候选均有明确不支持买入的证据'
+    elif degraded: code='DEGRADED_CANDIDATES_WAITING'; text=f'本轮已评估；{len(degraded)}只候选仅缺可选证据，保留降级小仓资格并等待执行条件'
     else: code='NO_FILL_AFTER_EVALUATION'; text='本轮已评估但未成交；需结合个股确认次数、交易窗口、仓位和执行限制查看'
     rotation = s.get('opportunityRotation') or {}
     plan = rotation.get('active') or {}
@@ -24,4 +30,9 @@ def explain(latest):
         text += '；择优换仓：'+rotation.get('statusZh','等待评估')
     return {'opportunityRotation': rotation, 'reasonCode':code,'reasonZh':text,'entryBlocks':reasons,'pendingExits':pending_reasons,
             'candidateCount':len(candidates),'rejectedCandidateCount':len(rejected),
-            'candidateReasons':[{'code':x.get('code'),'reasons':x.get('rejections',[]), 'executionStatus':x.get('executionStatus')} for x in candidates]}
+            'degradedCandidateCount':len(degraded),
+            'candidateReasons':[{'code':x.get('code'),
+                                 'reasons':x.get('rejections',[]),
+                                 'missingOptionalEvidence':x.get('missingOptionalEvidence',[]),
+                                 'dataConfidence':x.get('dataConfidence'),
+                                 'executionStatus':x.get('executionStatus')} for x in candidates]}
