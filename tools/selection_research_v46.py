@@ -183,12 +183,14 @@ def entry_plan(target):
     atr = rules.finite(tech.get('atr14'))
     risk_pct = rules.finite(setup.get('riskDistancePct'))
     reasons = target.get('rejections') or []
-    return {'actionZh': '等待条件' if reasons else '个股条件通过，等待组合与执行许可',
+    gaps = target.get('missingOptionalEvidence') or []
+    return {'actionZh': '不符合买入条件' if reasons else ('降级小仓候选' if gaps else '个股条件通过，等待组合与执行许可'),
         'buyZoneLow': round(support - (.6 if setup.get('kind') == 'PULLBACK_RECOVERY' else .3) * atr, 4) if support and atr else None,
         'buyZoneHigh': round(support + .5 * atr, 4) if support and atr else None,
         'initialProtectionPrice': round(price * (1 - risk_pct / 100), 4) if price and risk_pct else None,
         'resistanceReference': tech.get('high20') if tech.get('ready') else None,
         'thesisZh': target.get('reasonZh'), 'waitReasons': reasons,
+        'dataGaps': gaps,
         'invalidationZh': '板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。',
         'forecastZh': '相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。'}
 
