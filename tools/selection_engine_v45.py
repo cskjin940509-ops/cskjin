@@ -596,7 +596,7 @@ def build_latest(state, ledger, prices, radar):
     out['targetPortfolio'] = [{k: t[k] for k in ('code', 'name', 'sector', 'score', 'targetWeightPct', 'referencePrice', 'priceSource', 'reasonZh')}
                               for t in LAST_TARGETS if not t['rejections']]
     out['targetGrossPct'] = round(sum(x['targetWeightPct'] for x in out['targetPortfolio']), 2)
-    out['decisionCycle'] = {'frequencyZh': '每5分钟监控；固定窗口普通交易；缺失数据拒绝新增风险',
+    out['decisionCycle'] = {'frequencyZh': '每5分钟监控；明确负面证据拒绝买入；缺失可选数据降置信度、降仓并继续筛选',
                             'actionsThisCycle': len(LAST_ACTIONS), 'singleStockLimitPct': 8,
                             'sectorLimitPct': 25, 'grossLimitPct': 100,
                             'executionModel': 'v3-liquidity-capacity-point-in-time'}
