@@ -31,10 +31,25 @@ def digest(value):
 
 
 def research(state, now):
-    obj = state.setdefault('research46', {'version': VERSION, 'activatedAt': now.isoformat(),
-        'protocol': deepcopy(PROTOCOL), 'protocolHash': digest(PROTOCOL), 'cohorts': {}})
-    if obj['protocolHash'] != digest(PROTOCOL):
-        obj['protocolChanged'] = True
+    current_hash = digest(PROTOCOL)
+    obj = state.get('research46')
+    if not obj:
+        obj = {'version': VERSION, 'activatedAt': now.isoformat(),
+               'protocol': deepcopy(PROTOCOL), 'protocolHash': current_hash, 'cohorts': {}}
+        state['research46'] = obj
+    elif obj.get('protocolHash') != current_hash:
+        # A strategy revision starts a new, independently measured study.  The
+        # previous cohorts remain immutable in the archive, but research state
+        # must never pause the production selector indefinitely.
+        old_hash = str(obj.get('protocolHash') or 'unknown')
+        archive = state.setdefault('research46Archive', {})
+        archive.setdefault(old_hash, deepcopy(obj))
+        obj = {'version': VERSION, 'activatedAt': now.isoformat(),
+               'protocol': deepcopy(PROTOCOL), 'protocolHash': current_hash,
+               'cohorts': {}, 'previousProtocolHash': old_hash,
+               'rolloverAt': now.isoformat(),
+               'rolloverReasonZh': '策略版本变化，旧样本已归档；新版研究自动开始，不影响生产筛选。'}
+        state['research46'] = obj
     return obj
 
 
@@ -71,9 +86,6 @@ def factor_audit(stock, today, now):
 
 def freeze_candidates(state, targets, radar, quotes, now):
     obj = research(state, now); today = now.date().isoformat()
-    if obj['protocolHash'] != digest(PROTOCOL):
-        obj['protocolChanged'] = True
-        return  # Require a new versioned study, never pool retuned rules into frozen cohorts.
     captured = rules.stamp(radar.get('capturedAt'))
     if not captured or not rules.fresh(captured.isoformat(), now, 900) or radar.get('date') != today:
         return
@@ -230,7 +242,7 @@ def report(state, now, comparison=None, simple_comparison=None):
                 'evidencePath': 'astock_ai_portfolio/state.json#research46.cohorts'}
     return {'schemaVersion': 1, 'version': VERSION, 'updatedAt': now.isoformat(),
         'activatedAt': obj['activatedAt'], 'objectiveZh': '提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。',
-        'productionStatusZh': '策略参数或代码已变化：暂停新增冻结，需建立新版本研究' if obj.get('protocolChanged') else '前向影子研究，尚未证明稳定超额收益',
+        'productionStatusZh': '生产策略正常运行；新版研究样本独立累计，不阻断选股、仓位或模拟交易。',
         'protocol': obj['protocol'], 'protocolHash': obj['protocolHash'], 'stages': stages,
         'currentPriorityZh': '优先完成第一步的选股领先性验证；后续实验可积累，不能越级宣称有效。',
         'audits': [

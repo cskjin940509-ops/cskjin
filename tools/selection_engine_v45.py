@@ -804,7 +804,7 @@ def evaluate_entries(state, ledger, radar, prices):
 
 def start_no_t_control(state, ledger, prices):
     obj = study.research(state, base.now_cn())
-    if obj.get('noTControl') or obj.get('protocolChanged'):
+    if obj.get('noTControl'):
         return
     book = deepcopy({k: v for k, v in state.items() if k != 'research46'})
     # Equal cash/positions at activation. Historical T effects before activation stay in both books.
@@ -824,8 +824,6 @@ def start_no_t_control(state, ledger, prices):
 def update_no_t_control(state, ledger, prices, radar, primary_close_ok, control_key='noTControl', mode='NO_T'):
     global NO_T_CONTROL, LAST_ACTIONS, LAST_TARGETS, CONTROL_MODE
     obj = study.research(state, base.now_cn()); control = obj.get(control_key)
-    if obj.get('protocolChanged'):
-        return {'statusZh': '研究协议已变化，暂停对比并等待建立新版本样本', 'closeSampleDays': len((control or {}).get('closeHistory', []))}
     if not control:
         return {'statusZh': '等待下一次有效交易时点初始化同起点对照', 'closeSampleDays': 0}
     if control['capitalEventsHash'] != study.digest(state.get('capitalEvents') or []):
