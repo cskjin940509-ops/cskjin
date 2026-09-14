@@ -619,346 +619,213 @@
   ],
   "setupCandidates": [
     {
-      "code": "002524",
-      "name": "光正眼科",
-      "sector": "医疗服务",
+      "code": "603162",
+      "name": "海通发展",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "买入候选",
+      "action": "盘前观察",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 85.4,
+        "score": 83.2,
         "historical": {
-          "samples": 7,
-          "win5D": 0.8571,
-          "avg5D": 0.0099,
-          "avgMFE5D": 0.0326,
-          "avgMAE5D": -0.0181
+          "samples": 11,
+          "win5D": 1.0,
+          "avg5D": 0.0925,
+          "avgMFE5D": 0.1338,
+          "avgMAE5D": -0.0191
         }
       },
       "quote": {
-        "price": 4.06,
-        "changePct": 1.5,
-        "open": 4.04,
-        "high": 4.11,
-        "low": 3.95,
-        "dayLowToHighPct": 4.05,
-        "quoteTime": "20260914153636"
+        "price": 13.9,
+        "changePct": -1.84,
+        "open": null,
+        "high": 15.24,
+        "low": 13.53,
+        "dayLowToHighPct": 12.64,
+        "quoteTime": null
       },
       "entryZone": [
-        4.05,
-        4.132
+        13.678,
+        13.954
       ],
-      "triggerPrice": 4.091,
-      "stopLoss": 3.963,
-      "takeProfit1": 4.284,
-      "takeProfit2": 4.412,
+      "triggerPrice": 13.816,
+      "stopLoss": 12.987,
+      "takeProfit1": 15.059,
+      "takeProfit2": 15.888,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 3.963",
+      "invalidation": "收盘/有效价格跌破 12.987",
       "reasons": [
         "趋势回踩",
-        "形态分 85",
-        "距MA20 +0.09 ATR",
-        "主力资金占比 +6.90%"
-      ]
-    },
-    {
-      "code": "300305",
-      "name": "裕兴股份",
-      "sector": "MLCC",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "买入候选",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 80.2,
-        "historical": {
-          "samples": 9,
-          "win5D": 0.6667,
-          "avg5D": 0.0188,
-          "avgMFE5D": 0.1054,
-          "avgMAE5D": -0.0424
-        }
-      },
-      "quote": {
-        "price": 6.41,
-        "changePct": 2.4,
-        "open": 6.31,
-        "high": 6.49,
-        "low": 6.1,
-        "dayLowToHighPct": 6.39,
-        "quoteTime": "20260914153636"
-      },
-      "entryZone": [
-        6.303,
-        6.431
-      ],
-      "triggerPrice": 6.367,
-      "stopLoss": 6.142,
-      "takeProfit1": 6.705,
-      "takeProfit2": 6.93,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 6.142",
-      "reasons": [
-        "趋势回踩",
-        "形态分 80",
-        "距MA20 +0.72 ATR",
-        "主力资金占比 -10.83%"
-      ]
-    },
-    {
-      "code": "603336",
-      "name": "宏辉果蔬",
-      "sector": "CRO",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 83.7,
-        "historical": {
-          "samples": 1,
-          "win5D": 0.0,
-          "avg5D": -0.039,
-          "avgMFE5D": 0.0449,
-          "avgMAE5D": -0.143
-        }
-      },
-      "quote": {
-        "price": 10.39,
-        "changePct": 2.97,
-        "open": 10.45,
-        "high": 11.1,
-        "low": 10.0,
-        "dayLowToHighPct": 11.0,
-        "quoteTime": "20260914153634"
-      },
-      "entryZone": [
-        10.229,
-        10.383
-      ],
-      "triggerPrice": 10.26,
-      "stopLoss": 9.806,
-      "takeProfit1": 11.057,
-      "takeProfit2": 11.557,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 9.806",
-      "reasons": [
-        "突破回踩",
-        "形态分 84",
-        "距MA20 +1.80 ATR",
-        "主力资金占比 -1.61%"
-      ]
-    },
-    {
-      "code": "688621",
-      "name": "阳光诺和",
-      "sector": "医疗研发外包",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 83.6,
-        "historical": {
-          "samples": 8,
-          "win5D": 0.875,
-          "avg5D": 0.0587,
-          "avgMFE5D": 0.0917,
-          "avgMAE5D": -0.0431
-        }
-      },
-      "quote": {
-        "price": 70.62,
-        "changePct": 3.0,
-        "open": 68.65,
-        "high": 71.38,
-        "low": 68.65,
-        "dayLowToHighPct": 3.98,
-        "quoteTime": "20260914153623"
-      },
-      "entryZone": [
-        68.954,
-        70.347
-      ],
-      "triggerPrice": 69.65,
-      "stopLoss": 66.195,
-      "takeProfit1": 74.833,
-      "takeProfit2": 78.288,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 66.195",
-      "reasons": [
-        "趋势回踩",
-        "形态分 84",
-        "距MA20 +0.85 ATR",
-        "主力资金占比 -2.08%"
-      ]
-    },
-    {
-      "code": "000516",
-      "name": "国际医学",
-      "sector": "医疗服务",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 82.6,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 4.35,
-        "changePct": 0.0,
-        "open": 4.31,
-        "high": 4.4,
-        "low": 4.31,
-        "dayLowToHighPct": 2.09,
-        "quoteTime": "20260914153627"
-      },
-      "entryZone": [
-        4.357,
-        4.422
-      ],
-      "triggerPrice": 4.37,
-      "stopLoss": 4.303,
-      "takeProfit1": 4.519,
-      "takeProfit2": 4.606,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 4.303",
-      "reasons": [
-        "突破回踩",
         "形态分 83",
-        "距MA20 +1.97 ATR",
-        "主力资金占比 -6.84%"
-      ]
-    },
-    {
-      "code": "601208",
-      "name": "东材科技",
-      "sector": "MLCC",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.7,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 48.29,
-        "changePct": 1.19,
-        "open": 46.92,
-        "high": 48.97,
-        "low": 45.82,
-        "dayLowToHighPct": 6.87,
-        "quoteTime": "20260914153639"
-      },
-      "entryZone": [
-        47.596,
-        48.558
+        "距MA20 +0.84 ATR",
+        "主力资金占比 -4.12%"
       ],
-      "triggerPrice": 48.077,
-      "stopLoss": 45.192,
-      "takeProfit1": 52.404,
-      "takeProfit2": 55.289,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 45.192",
-      "reasons": [
-        "趋势回踩",
-        "形态分 79",
-        "距MA20 +0.26 ATR",
-        "主力资金占比 -1.71%"
-      ]
+      "source": "沪深市场历史形态精筛"
     },
     {
-      "code": "000519",
-      "name": "中兵红箭",
-      "sector": "培育钻石",
+      "code": "600280",
+      "name": "中央商场",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "等待触发",
+      "action": "盘前观察",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 78.1,
+        "score": 87.4,
         "historical": {
           "samples": 6,
-          "win5D": 0.5,
-          "avg5D": 0.0269,
-          "avgMFE5D": 0.0783,
-          "avgMAE5D": -0.06
+          "win5D": 1.0,
+          "avg5D": 0.0551,
+          "avgMFE5D": 0.0931,
+          "avgMAE5D": -0.0193
         }
       },
       "quote": {
-        "price": 15.8,
-        "changePct": -2.53,
-        "open": 16.21,
-        "high": 16.48,
-        "low": 15.31,
-        "dayLowToHighPct": 7.64,
-        "quoteTime": "20260914153600"
+        "price": 3.25,
+        "changePct": 2.52,
+        "open": null,
+        "high": 3.49,
+        "low": 3.12,
+        "dayLowToHighPct": 11.86,
+        "quoteTime": null
       },
       "entryZone": [
-        15.493,
-        15.805
+        3.204,
+        3.268
       ],
-      "triggerPrice": 15.649,
-      "stopLoss": 14.941,
-      "takeProfit1": 16.711,
-      "takeProfit2": 17.419,
+      "triggerPrice": 3.236,
+      "stopLoss": 3.065,
+      "takeProfit1": 3.492,
+      "takeProfit2": 3.663,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 14.941",
+      "invalidation": "收盘/有效价格跌破 3.065",
       "reasons": [
         "趋势回踩",
-        "形态分 78",
-        "距MA20 +1.14 ATR",
-        "主力资金占比 -4.33%"
-      ]
+        "形态分 87",
+        "距MA20 +0.70 ATR",
+        "主力资金占比 +16.76%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "300708",
+      "name": "聚灿光电",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 87.0,
+        "historical": {
+          "samples": 3,
+          "win5D": 1.0,
+          "avg5D": 0.049,
+          "avgMFE5D": 0.0732,
+          "avgMAE5D": -0.0266
+        }
+      },
+      "quote": {
+        "price": 8.35,
+        "changePct": 3.21,
+        "open": null,
+        "high": 8.76,
+        "low": 8.0,
+        "dayLowToHighPct": 9.5,
+        "quoteTime": null
+      },
+      "entryZone": [
+        8.266,
+        8.432
+      ],
+      "triggerPrice": 8.349,
+      "stopLoss": 8.061,
+      "takeProfit1": 8.781,
+      "takeProfit2": 9.069,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 8.061",
+      "reasons": [
+        "趋势回踩",
+        "形态分 87",
+        "距MA20 +0.92 ATR",
+        "主力资金占比 +14.89%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "600778",
+      "name": "友好集团",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 81.0,
+        "historical": {
+          "samples": 12,
+          "win5D": 0.5833,
+          "avg5D": 0.0021,
+          "avgMFE5D": 0.0448,
+          "avgMAE5D": -0.0337
+        }
+      },
+      "quote": {
+        "price": 5.96,
+        "changePct": -0.5,
+        "open": null,
+        "high": 6.13,
+        "low": 5.72,
+        "dayLowToHighPct": 7.17,
+        "quoteTime": null
+      },
+      "entryZone": [
+        5.914,
+        6.034
+      ],
+      "triggerPrice": 5.974,
+      "stopLoss": 5.666,
+      "takeProfit1": 6.436,
+      "takeProfit2": 6.743,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 5.666",
+      "reasons": [
+        "趋势回踩",
+        "形态分 81",
+        "距MA20 +0.60 ATR",
+        "主力资金占比 +1.62%"
+      ],
+      "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
     "official": 14,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 7
+    "expandedSetupCandidates": 4,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -971,5 +838,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "ready",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5558,
+    "uniqueRows": 5558,
+    "pagesRequested": 56,
+    "coveragePct": 100.0,
+    "prefiltered": 220,
+    "historyLoaded": 220,
+    "setupMatches": 20,
+    "historicalEdgeMatches": 4,
+    "selected": 4,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
