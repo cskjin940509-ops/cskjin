@@ -201,6 +201,21 @@ class SelectionTests(unittest.TestCase):
         target = engine.build_candidate(self.state, stock, engine.CONTEXT['radar'], engine.CONTEXT['quotes'])
         self.assertIn('已取得的板块资金证据均不支持买入', target['rejections'])
 
+    def test_old_stored_candidate_is_migrated_even_without_fresh_radar(self):
+        candidate = {'targetWeight': .025, 'targetWeightPct': 2.5,
+                     'technical': {'volumeRatio5to20': None},
+                     'rejections': ['ADV20不足20个完整交易日',
+                                    '完整5/20日成交额量比未通过1.2–2.5',
+                                    '板块5日收益缺失，无法检查相对涨幅'],
+                     'missingOptionalEvidence': [],
+                     'executionStatus': 'BLOCKED_CONDITIONS_OR_RISK',
+                     'decisionPlan': {'actionZh': '等待条件', 'waitReasons': []}}
+        engine.migrate_candidate_evidence(candidate)
+        self.assertEqual(candidate['rejections'], [])
+        self.assertEqual(candidate['targetWeight'], .01)
+        self.assertEqual(candidate['executionStatus'], 'WAIT_CONFIRMATION')
+        self.assertEqual(candidate['decisionPlan']['actionZh'], '降级小仓候选')
+
     def test_missing_composite_uses_previous_close_breadth_without_stopping_selector(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td); history = root / 'astock_sentiment' / 'history'; history.mkdir(parents=True)
