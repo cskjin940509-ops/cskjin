@@ -214,6 +214,7 @@ class SelectionTests(unittest.TestCase):
                      'technical': {'volumeRatio5to20': None},
                      'rejections': ['ADV20不足20个完整交易日',
                                     '完整5/20日成交额量比未通过1.2–2.5',
+                                    '第二行情缺失/过期', '板块尚未形成两类独立证据',
                                     '板块5日收益缺失，无法检查相对涨幅'],
                      'missingOptionalEvidence': [],
                      'executionStatus': 'BLOCKED_CONDITIONS_OR_RISK',

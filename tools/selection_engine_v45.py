@@ -499,6 +499,8 @@ def migrate_candidate_evidence(candidate, held=False):
         '未验证板块完整样本前20%': '板块完整样本排名尚未返回',
         '板块5日收益缺失，无法检查相对涨幅': '板块/个股5日收益尚未取齐',
         '等待完整日线与至少3个有效盘中快照': '等待完整日线与至少3个有效盘中快照',
+        '第二行情缺失/过期': '第二行情缺失/过期，使用主行情并降低仓位',
+        '板块尚未形成两类独立证据': '板块独立证据尚未取齐',
     }
     ratio = (candidate.get('technical') or {}).get('volumeRatio5to20')
     secondary = rules.finite(((candidate.get('yunai') or {}).get('price')))
