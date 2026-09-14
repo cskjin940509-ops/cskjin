@@ -171,6 +171,36 @@ class SelectionTests(unittest.TestCase):
             self.assertTrue(plan['ready']); self.assertEqual(plan['cap'], 1.)
             self.assertFalse(engine.premarket_sentiment_plan(root, '2026-09-11')['ready'])
 
+    def test_missing_optional_stock_history_degrades_instead_of_rejecting(self):
+        stock = {'code': '000002', 'name': '样本', 'sector': '银行', 'price': 10.,
+                 'earlyEntryScore': 70, 'mainlineFormationScore': 66,
+                 'mainFlowPct': 2, 'changePct': 1., 'chaseRisk': 'LOW',
+                 'yunai': {'quoteOk': False}}
+        self.state['selectionData45']['technical']['000002'] = {'ready': False}
+        engine.CONTEXT['quotes']['000002'] = {
+            'price': 10., 'prevClose': 9.9,
+            'quoteTime': self.now.strftime('%Y%m%d%H%M%S'), 'amount': 1e9}
+        engine.CONTEXT['radar']['mainlines'][0]['mainFlowPct'] = 2
+        target = engine.build_candidate(self.state, stock, engine.CONTEXT['radar'], engine.CONTEXT['quotes'])
+        self.assertEqual(target['rejections'], [])
+        self.assertEqual(target['dataConfidence'], 'DEGRADED')
+        self.assertEqual(target['targetWeight'], .01)
+        self.assertIn('ADV20尚未取得20个完整交易日', target['missingOptionalEvidence'])
+
+    def test_known_negative_data_still_rejects(self):
+        stock = {'code': '000002', 'name': '样本', 'sector': '银行', 'price': 10.,
+                 'earlyEntryScore': 70, 'mainlineFormationScore': 66,
+                 'mainFlowPct': -2, 'changePct': 1., 'chaseRisk': 'LOW',
+                 'marginData': {'balanceChange1d': -1}, 'etfData': {'netFlow': -1},
+                 'yunai': {'quoteOk': True, 'price': 10., 'quoteTime': self.now.isoformat()}}
+        self.state['selectionData45']['technical']['000002'] = {'ready': False}
+        engine.CONTEXT['quotes']['000002'] = {
+            'price': 10., 'prevClose': 9.9,
+            'quoteTime': self.now.strftime('%Y%m%d%H%M%S'), 'amount': 1e9}
+        engine.CONTEXT['radar']['mainlines'][0]['mainFlowPct'] = -2
+        target = engine.build_candidate(self.state, stock, engine.CONTEXT['radar'], engine.CONTEXT['quotes'])
+        self.assertIn('已取得的板块资金证据均不支持买入', target['rejections'])
+
     def test_missing_composite_uses_previous_close_breadth_without_stopping_selector(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td); history = root / 'astock_sentiment' / 'history'; history.mkdir(parents=True)
@@ -180,10 +210,26 @@ class SelectionTests(unittest.TestCase):
             (history / '2026-09-11.json').write_text(json.dumps(payload), encoding='utf-8')
             plan = engine.premarket_sentiment_plan(
                 root, '2026-09-10', now=datetime.fromisoformat('2026-09-11T09:20:00+08:00'))
-            self.assertTrue(plan['ready']); self.assertTrue(plan['fallback'])
-            self.assertEqual(plan['cap'], .10)
+            self.assertFalse(plan['ready']); self.assertTrue(plan['fallback'])
+            self.assertEqual(plan['cap'], 0.)
             market = rules.market_regime({}, datetime.fromisoformat('2026-09-11T09:20:00+08:00'), {}, plan)
-            self.assertEqual(market['state'], 'PREMARKET'); self.assertTrue(market['allowNew'])
+            self.assertEqual(market['state'], 'UNKNOWN'); self.assertFalse(market['allowNew'])
+
+    def test_dated_position_decision_wins_over_stale_fallback(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); (root / 'astock_sentiment' / 'history').mkdir(parents=True)
+            decision = {'reportDate': '2026-09-14', 'dataDate': '2026-09-11',
+                        'availableAt': '2026-09-14T09:20:00+08:00', 'cap': .5,
+                        'direction': 'RISING', 'classification': '盘前反向工程仓位结论'}
+            (root / 'astock_sentiment' / 'position_decision.json').write_text(
+                json.dumps(decision), encoding='utf-8')
+            plan = engine.premarket_sentiment_plan(
+                root, '2026-09-11', now=datetime.fromisoformat('2026-09-14T09:22:00+08:00'))
+            self.assertTrue(plan['ready']); self.assertEqual(plan['cap'], .5)
+            market = rules.market_regime({}, datetime.fromisoformat('2026-09-14T09:22:00+08:00'), {}, plan)
+            self.assertEqual(market['state'], 'PREMARKET')
+            self.assertEqual(market['baseCap'], .5)
+            self.assertTrue(market['allowNew'])
 
     def test_build_latest_keeps_premarket_budget_without_same_day_radar(self):
         self.now = datetime.fromisoformat('2026-09-04T09:20:00+08:00')
