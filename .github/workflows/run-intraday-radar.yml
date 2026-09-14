@@ -41,7 +41,10 @@ permissions:
   actions: write
 
 concurrency:
-  group: astock-radar-evidence-producer
+  # Radar publishes evidence and immediately wakes the portfolio consumer.
+  # Both must share one writer lock or a portfolio rebase can lose its freshly
+  # migrated state while radar commits a newer snapshot.
+  group: astock-radar-ai-shadow-production
   cancel-in-progress: false
 
 jobs:
