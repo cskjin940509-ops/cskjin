@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34807426923-1",
-  "lastRunAt": "2026-09-14T12:50:05+08:00",
-  "lastSuccessAt": "2026-09-14T12:50:05+08:00",
+  "cycleId": "34815875698-1",
+  "lastRunAt": "2026-09-14T15:01:10+08:00",
+  "lastSuccessAt": "2026-09-14T15:01:10+08:00",
   "lastTradeAt": "2026-09-14T09:43:12+08:00",
   "status": "OUTSIDE_SESSION",
   "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
   "runSource": "dedicated-auto-scheduler",
   "sessionOpen": false,
-  "radarCapturedAt": "2026-09-14T11:29:04+08:00",
-  "radarFresh": false,
-  "radarAgeSeconds": 4861.8,
+  "radarCapturedAt": "2026-09-14T14:59:35+08:00",
+  "radarFresh": true,
+  "radarAgeSeconds": 95.3,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -39,359 +39,492 @@
       "plans": [],
       "statusZh": "先处理退出和组合风控，不用换仓绕过风险限制"
     },
-    "reasonCode": "ENTRY_CONDITIONS_NOT_MET",
-    "reasonZh": "本轮无退出成交；候选买入条件未通过",
+    "reasonCode": "DEGRADED_CANDIDATES_WAITING",
+    "reasonZh": "本轮已评估；11只候选仅缺可选证据，保留降级小仓资格并等待执行条件",
     "entryBlocks": [],
     "pendingExits": [],
     "candidateCount": 31,
-    "rejectedCandidateCount": 31,
+    "rejectedCandidateCount": 20,
+    "degradedCandidateCount": 11,
     "candidateReasons": [
       {
         "code": "002093",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "600795",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "601991",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "600578",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "600744",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "第二行情缺失/过期，使用主行情并降低仓位",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "601008",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "涨跌幅超出保守买入区间",
+          "涨跌幅超出保守买入区间"
+        ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "第二行情缺失/过期，使用主行情并降低仓位",
           "等待完整日线与至少3个有效盘中快照"
         ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "600396",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "000791",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "600726",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "第二行情缺失/过期，使用主行情并降低仓位",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "600021",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "涨跌幅超出保守买入区间",
+          "涨跌幅超出保守买入区间"
+        ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
           "等待完整日线与至少3个有效盘中快照"
         ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000767",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "600023",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "000899",
-        "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
+        "reasons": [],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
           "等待完整日线与至少3个有效盘中快照"
         ],
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "dataConfidence": "DEGRADED",
+        "executionStatus": "WAIT_CONFIRMATION"
       },
       {
         "code": "002040",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
-          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
-          "等待完整日线与至少3个有效盘中快照",
           "追高风险高"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "300244",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "第二行情缺失/过期，使用主行情并降低仓位",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000690",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "第二行情缺失/过期，使用主行情并降低仓位",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "600011",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "600027",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "001896",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
-          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64",
           "追高风险高"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000905",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "600157",
         "reasons": [
-          "ADV20不足20个完整交易日",
           "双源价格偏差0.65%",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "002669",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
           "当日涨幅已超过提前介入上限",
-          "板块5日收益缺失，无法检查相对涨幅",
           "涨跌幅超出保守买入区间",
           "第二行情缺失/过期",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64",
           "追高风险高"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "第二行情缺失/过期，使用主行情并降低仓位",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000539",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "第二行情缺失/过期，使用主行情并降低仓位",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "600863",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "第二行情缺失/过期，使用主行情并降低仓位",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000543",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000037",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000966",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000582",
         "reasons": [
-          "ADV20不足20个完整交易日",
-          "双源价格偏差超过0.3%或缺数",
-          "完整5/20日成交额量比未通过1.2–2.5",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
-          "等待完整日线与至少3个有效盘中快照",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "ADV20尚未取得20个完整交易日",
+          "B1",
+          "B2",
+          "完整5/20日成交额量比尚未取得",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回",
+          "第二行情缺失/过期，使用主行情并降低仓位",
+          "等待完整日线与至少3个有效盘中快照"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
         "code": "000011",
         "reasons": [
           "成交额低于流动性门槛",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
           "板块不处于潜在/确认阶段",
           "板块尚未形成两类独立证据",
           "盘中样本间隔不足或断档，等待连续确认",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "B1",
+          "B2",
+          "B3",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
@@ -401,13 +534,19 @@
           "加仓要求板块确认",
           "完整5/20日成交额量比未通过1.2–2.5",
           "成交额低于流动性门槛",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
           "板块不处于潜在/确认阶段",
           "板块尚未形成两类独立证据",
           "盘中样本间隔不足或断档，等待连续确认",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "B1",
+          "B2",
+          "B3",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       },
       {
@@ -417,14 +556,20 @@
           "加仓要求板块确认",
           "完整5/20日成交额量比未通过1.2–2.5",
           "成交额低于流动性门槛",
-          "未验证板块完整样本前20%",
-          "板块5日收益缺失，无法检查相对涨幅",
           "板块不处于潜在/确认阶段",
           "板块尚未形成两类独立证据",
           "涨跌幅超出保守买入区间",
           "盘中样本间隔不足或断档，等待连续确认",
           "综合分不足64"
         ],
+        "missingOptionalEvidence": [
+          "B1",
+          "B2",
+          "B3",
+          "板块/个股5日收益尚未取齐",
+          "板块完整样本排名尚未返回"
+        ],
+        "dataConfidence": "DEGRADED",
         "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
       }
     ]
