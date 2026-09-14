@@ -436,7 +436,7 @@ def score_candidate(stock: dict) -> tuple[float, list[str], list[str]]:
     elif change < -2.5:
         rejects.append("当日走势明显走弱")
 
-    if amount < 50_000_000:
+    if amount > 0 and amount < 50_000_000:
         rejects.append("成交额低于流动性门槛")
 
     if chase == "HIGH":
