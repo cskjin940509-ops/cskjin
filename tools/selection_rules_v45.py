@@ -135,22 +135,25 @@ def market_regime(snapshot, now, macro=None, sentiment=None):
                 'breadthPct': None, 'missingEvidence': [],
                 'sentiment': sentiment, 'reasonZh': sentiment['reasonZh']}
     if not snapshot or snapshot.get('sourceDate') != now.date().isoformat() or not snapshot.get('verifiedToday'):
-        result['reasonZh'] += '；缺少当日盘中大盘证据，暂停新增风险'
-        return result
+        return dict(result, state='BASELINE', allowNew=base_cap > 0,
+                    reasonZh=result['reasonZh'] + '；盘中大盘证据尚未到达，维持盘前上限，不据缺失停买')
     if not fresh(snapshot.get('availableAt'), now, 900):
-        result['reasonZh'] = '大盘快照过期/时间在未来'; return result
+        return dict(result, state='BASELINE', allowNew=base_cap > 0,
+                    reasonZh=sentiment.get('reasonZh', '') + '；盘中大盘快照过期/时间异常，维持盘前上限并等待新证据')
     values = [finite((snapshot.get('indices') or {}).get(k, {}).get('changePct'))
               for k in ('sh000001', 'sh000300', 'sz399006')]
     up, down = finite(snapshot.get('up')), finite(snapshot.get('down'))
     if any(x is None for x in values):
-        return result
+        return dict(result, state='BASELINE', allowNew=base_cap > 0,
+                    reasonZh=sentiment.get('reasonZh', '') + '；核心指数数据未取齐，维持盘前上限')
     # Broad index crash still controls risk even if breadth is missing.
     avg = mean(values)
     if avg <= -2 or min(values) <= -3:
         return dict(result, state='RISK', cap=min(base_cap, .10), intradayCap=.10,
                     reasonZh='核心指数急跌，盘中风险上限下调至10%')
     if up is None or down is None or up + down < 2000:
-        result['reasonZh'] = '全市场广度缺失/样本不足2000，禁止用候选样本冒充全市场'; return result
+        return dict(result, state='BASELINE', allowNew=base_cap > 0,
+                    reasonZh=sentiment.get('reasonZh', '') + '；全市场广度未取齐，维持盘前上限，不用候选样本冒充')
     breadth = up / (up + down)
     if breadth < .25:
         state, intraday_cap = 'RISK', .10
