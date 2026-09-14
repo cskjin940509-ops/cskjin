@@ -682,7 +682,7 @@ def evaluate_exits(state, ledger, radar_stocks, quotes, prices):
 
 def build_candidate(state, stock, radar, quotes):
     code = stock['code']; now = base.now_cn(); today = now.date().isoformat()
-    q = quotes.get(code) or {}; rejects = []; reasons = []
+    q = quotes.get(code) or {}; rejects = []; reasons = []; data_gaps = []
     held = state.get('positions', {}).get(code, {})
     if held.get('profitPlan50', {}).get('lastQueuedDay') == now.date().isoformat():
         rejects.append('主动止盈当日不回补，次日重新验证买入条件')
@@ -690,42 +690,72 @@ def build_candidate(state, stock, radar, quotes):
     stage = sec.get('stage')
     evidence = rules.sector_evidence(stock, sec, today, now)
     optional_missing = [x for x in ('B1', 'B2', 'B3') if x not in evidence]
-    if stage not in ('EMERGING', 'CONFIRMING'): rejects.append('板块不处于潜在/确认阶段')
+    if stage is None:
+        data_gaps.append('板块阶段尚未返回')
+    elif stage not in ('EMERGING', 'CONFIRMING'):
+        rejects.append('板块明确不处于潜在/确认阶段')
     # Slow factors are independent confirmations, not global availability
     # switches. B0 plus any available funding factor (or two funding factors)
     # is enough to continue stock-level evaluation; an unavailable ETF history
     # must not block sectors already confirmed by breadth and main flow.
-    if len(evidence) < 2 or not set(evidence) & {'B1', 'B2', 'B3'}:
-        rejects.append('板块尚未形成两类独立证据')
+    funding_values = []
+    for payload, field in ((stock.get('marginData') or {}, 'balanceChange1d'),
+                           (stock.get('etfData') or {}, 'netFlow'), (sec, 'mainFlowPct')):
+        value = rules.finite(payload.get(field))
+        if value is not None: funding_values.append(value)
+    if funding_values and all(x <= 0 for x in funding_values):
+        rejects.append('已取得的板块资金证据均不支持买入')
+    elif len(evidence) < 2 or not set(evidence) & {'B1', 'B2', 'B3'}:
+        data_gaps.append('板块独立证据尚未取齐')
     if not own_quote_ok(code): rejects.append('主行情缺失/过期')
     y = stock.get('yunai') or {}
-    if not y.get('quoteOk') or not rules.fresh(y.get('quoteTime'), now): rejects.append('第二行情缺失/过期')
+    if not y.get('quoteOk') or not rules.fresh(y.get('quoteTime'), now):
+        data_gaps.append('第二行情缺失/过期，使用主行情并降低仓位')
     price = rules.finite(q.get('price'), 0)
-    if not price or not rules.finite(y.get('price'), 0) or abs(price / y['price'] - 1) > .003:
-        rejects.append('双源价格偏差超过0.3%或缺数')
+    secondary_price = rules.finite(y.get('price'))
+    if not price:
+        rejects.append('无可成交主行情价格')
+    elif secondary_price is not None and abs(price / secondary_price - 1) > .003:
+        rejects.append('双源价格明确偏差超过0.3%')
     if 'ST' in stock.get('name', '').upper() or '退' in stock.get('name', '') or stock.get('suspended'):
         rejects.append('风险警示/退市/停牌禁止买入')
-    if stock.get('sectorRank') is None or stock['sectorRank'] > .2: rejects.append('未验证板块完整样本前20%')
+    if stock.get('sectorRank') is None:
+        data_gaps.append('板块完整样本排名尚未返回')
+    elif stock['sectorRank'] > .2:
+        rejects.append('板块排名明确不在完整样本前20%')
     score, old_reasons, old_rejects = base.score_candidate(dict(stock, mainlineStage=stage))
     reasons.extend(old_reasons); rejects.extend(old_rejects)
     if score < 64: rejects.append('综合分不足64')
     change = rules.finite(q.get('changePct'))
-    if change is None or change > 3.5 or change < -2.5: rejects.append('涨跌幅超出保守买入区间')
+    if change is None:
+        data_gaps.append('当日涨跌幅尚未返回')
+    elif change > 3.5 or change < -2.5:
+        rejects.append('涨跌幅明确超出保守买入区间')
     tech = technical(state, code)
     ratio = tech.get('volumeRatio5to20')
-    if ratio is None or not 1.2 <= ratio <= 2.5: rejects.append('完整5/20日成交额量比未通过1.2–2.5')
-    if not tech.get('adv20'): rejects.append('ADV20不足20个完整交易日')
+    if ratio is None:
+        data_gaps.append('完整5/20日成交额量比尚未取得')
+    elif not 1.2 <= ratio <= 2.5:
+        rejects.append('完整5/20日成交额量比明确未通过1.2–2.5')
+    if not tech.get('adv20'): data_gaps.append('ADV20尚未取得20个完整交易日')
     samples = sample(state, code, quotes)
     setup = rules.price_setup(price, tech, samples) if price else {'ready': False, 'reasonZh': '无价格'}
-    if not setup['ready'] and CONTROL_MODE != 'FIXED_HOLD': rejects.append(setup['reasonZh'])
+    setup_inputs_ready = tech.get('ready') and len(samples) >= 3
+    if not setup['ready'] and CONTROL_MODE != 'FIXED_HOLD':
+        (rejects if setup_inputs_ready else data_gaps).append(setup['reasonZh'])
     # Sector-relative 5-day data must be explicitly supplied; cannot substitute daily change.
     sector_r5 = rules.finite(sec.get('return5Pct'))
-    if sector_r5 is None: rejects.append('板块5日收益缺失，无法检查相对涨幅')
-    elif rules.finite(tech.get('return5Pct'), 99) - sector_r5 > 5: rejects.append('5日相对板块扩张超过5个百分点')
+    stock_r5 = rules.finite(tech.get('return5Pct'))
+    if sector_r5 is None or stock_r5 is None:
+        data_gaps.append('板块/个股5日收益尚未取齐')
+    elif stock_r5 - sector_r5 > 5:
+        rejects.append('5日相对板块扩张明确超过5个百分点')
     cost_pct = (base.fees(max(10000, price * 1000), 'BUY') + base.fees(max(10000, price * 1000), 'SELL')) / max(10000, price * 1000) * 100 + .8
     # .8% is the maximum two-leg impact+spread allowance of the conservative model.
     if CONTROL_MODE != 'FIXED_HOLD' and setup.get('ready') and setup.get('potentialRewardPct', 0) < cost_pct + .3: rejects.append('近期阻力位空间不足覆盖双边成本及余量')
     target = .025 if stage == 'EMERGING' else .04
+    if data_gaps:
+        target = min(target, .01)
     pos = (state.get('positions') or {}).get(code)
     rotating = rotation.active(state.get('selection45', {}))
     is_rotation_remainder = rotating and rotating['buyCode'] == code
@@ -745,7 +775,9 @@ def build_candidate(state, stock, radar, quotes):
             'referencePrice': price, 'priceSource': '当时双源确认行情', 'reasonZh': '；'.join(reasons + [setup.get('reasonZh', '')]),
             'targetWeight': target, 'targetWeightPct': target * 100, 'stage': stage,
             'evidence': evidence, 'setup': setup, 'technical': tech, 'rejections': sorted(set(rejects)),
-            'missingOptionalEvidence': optional_missing,
+            'missingOptionalEvidence': sorted(set(optional_missing + data_gaps)),
+            'dataConfidence': 'DEGRADED' if data_gaps else 'FULL',
+            'degradedEntry': bool(data_gaps),
             'rankSampleCount': stock.get('rankSampleCount'), 'sectorRank': stock.get('sectorRank'), 'dataAt': base.iso()}
 
 
