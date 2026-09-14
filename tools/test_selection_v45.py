@@ -15,6 +15,14 @@ import selection_rules_v45 as rules
 
 
 class SelectionTests(unittest.TestCase):
+    def test_ranked_entry_keeps_safety_and_softens_preferences(self):
+        target = {'score': 60, 'targetWeight': .04, 'rejections': [
+            '综合分不足64', '板块排名明确不在完整样本前20%', '主行情缺失/过期']}
+        engine.apply_ranked_entry_policy(target)
+        self.assertEqual(target['rejections'], ['主行情缺失/过期'])
+        self.assertEqual(target['rankingScore'], 54)
+        self.assertEqual(target['targetWeight'], .01)
+
     def setUp(self):
         self.now = datetime.fromisoformat('2026-09-04T10:20:00+08:00')
         self.clock = patch.object(base, 'now_cn', side_effect=lambda: self.now)

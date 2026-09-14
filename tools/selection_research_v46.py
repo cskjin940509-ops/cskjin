@@ -184,13 +184,33 @@ def entry_plan(target):
     risk_pct = rules.finite(setup.get('riskDistancePct'))
     reasons = target.get('rejections') or []
     gaps = target.get('missingOptionalEvidence') or []
-    return {'actionZh': '不符合买入条件' if reasons else ('降级小仓候选' if gaps else '个股条件通过，等待组合与执行许可'),
-        'buyZoneLow': round(support - (.6 if setup.get('kind') == 'PULLBACK_RECOVERY' else .3) * atr, 4) if support and atr else None,
-        'buyZoneHigh': round(support + .5 * atr, 4) if support and atr else None,
-        'initialProtectionPrice': round(price * (1 - risk_pct / 100), 4) if price and risk_pct else None,
+    ranked = target.get('entryPolicy') == 'RANKED_STAGED_ENTRY'
+    statuses = {'FILLED': '本轮已模拟买入', 'PARTIAL_WAIT': '已部分买入，余量分批执行',
+                'WAIT_NEW_SNAPSHOT': '本次行情已检查，等待下一笔新行情',
+                'OUTSIDE_ENTRY_SESSION': '候选已排序，等待下一有效买入时段',
+                'WAIT_FRESH_QUOTE': '候选保留，等待有效行情',
+                'WAIT_BUDGET_OR_LOT': '等待仓位额度或整手金额',
+                'WAIT_CAPACITY_OR_LIMIT': '等待成交容量或涨跌停解除',
+                'WAIT_WINDOW_OR_EXIT': '等待加仓窗口或退出处理',
+                'BLOCKED_CONDITIONS_OR_RISK': '风险条件不允许买入',
+                'BELOW_REBALANCE_THRESHOLD': '持仓已接近目标，暂不加仓',
+                'WAIT_ROTATION_PLAN': '等待现有换仓计划处理'}
+    action = '不符合买入条件' if reasons else statuses.get(target.get('executionStatus'))
+    if not action:
+        action = ('按排名小仓建仓' if gaps or target.get('rankingWarnings') else '按排名分批建仓') if ranked else ('降级小仓候选' if gaps else '个股条件通过，等待组合与执行许可')
+    protection = rules.stop_lines({'avgCost': price}, price, tech)['hardStopPrice'] if ranked and price and price > 0 else None
+    return {'actionZh': action,
+        'buyZoneLow': round(support - (.6 if setup.get('kind') == 'PULLBACK_RECOVERY' else .3) * atr, 4) if support and atr else (price if ranked else None),
+        'buyZoneHigh': round(support + .5 * atr, 4) if support and atr else (price if ranked else None),
+        'initialProtectionPrice': protection if ranked else (round(price * (1 - risk_pct / 100), 4) if price and risk_pct else None),
         'resistanceReference': tech.get('high20') if tech.get('ready') else None,
         'thesisZh': target.get('reasonZh'), 'waitReasons': reasons,
         'dataGaps': gaps,
+        'rankingWarnings': target.get('rankingWarnings', []),
+        'executionReasonZh': target.get('executionReasonZh'),
+        'entryPolicy': target.get('entryPolicy'),
+        'referencePriceAt': target.get('dataAt'),
+        'priceMeaningZh': '所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。' if ranked else None,
         'invalidationZh': '板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。',
         'forecastZh': '相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。'}
 

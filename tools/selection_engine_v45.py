@@ -490,7 +490,7 @@ def t_report(state, prices):
             'noteZh': '配对净收益已扣实际费用和成交滑点；未配对部分按卖出净额减现价持有价值计机会损益。仅做T股数的局部持有对照，不是完整策略回测；不重复计入净值或改写会计成本。'}
 
 
-def migrate_candidate_evidence(candidate):
+def migrate_candidate_evidence(candidate, held=False):
     """Migrate stored candidates created before missing/negative became tri-state."""
     gaps = list(candidate.get('missingOptionalEvidence') or [])
     hard = []
@@ -515,7 +515,7 @@ def migrate_candidate_evidence(candidate):
     candidate['missingOptionalEvidence'] = sorted(set(gaps))
     candidate['dataConfidence'] = 'DEGRADED' if gaps else 'FULL'
     candidate['degradedEntry'] = bool(gaps)
-    if gaps:
+    if gaps and not held:
         candidate['targetWeight'] = min(rules.finite(candidate.get('targetWeight'), .01), .01)
         candidate['targetWeightPct'] = candidate['targetWeight'] * 100
     plan = candidate.get('decisionPlan') or {}
@@ -555,7 +555,15 @@ def build_latest(state, ledger, prices, radar):
     simple_comparison = update_no_t_control(state, ledger, prices, radar, close_ok, 'timingControl', 'FIXED_HOLD')
     study.mark_cohorts(state, quotes, now)
     for candidate in obj.get('signals', {}).values():
-        migrate_candidate_evidence(candidate)
+        migrate_candidate_evidence(candidate, candidate.get('code') in held)
+        apply_ranked_entry_policy(candidate, candidate.get('code') in held)
+        if not base.can_open_new(now):
+            candidate['executionStatus'] = 'OUTSIDE_ENTRY_SESSION'
+        elif not base.radar_freshness(radar, now)[0] or not own_quote_ok(candidate.get('code')):
+            candidate['executionStatus'] = 'WAIT_FRESH_QUOTE'
+        candidate['decisionPlan'] = study.entry_plan(candidate)
+    obj['signals'] = dict(sorted(obj.get('signals', {}).items(),
+                                 key=lambda item: item[1].get('rankingScore', 0), reverse=True))
     out = ORIGINAL_BUILD(state, ledger, prices, radar)
     out.update(strategyVersion=rules.VERSION, mode='a股筛选池 · 主线持仓＋底仓T研究', simulated=True)
     out.setdefault('rulesZh', {}).update(rules.RULES_ZH)
@@ -581,6 +589,7 @@ def build_latest(state, ledger, prices, radar):
         report['returns'].update(daily=strict_daily, weekly=out['weeklyPerformance'], monthly=out['monthlyPerformance'])
     out['selection45'] = {k: deepcopy(obj.get(k)) for k in ('activatedAt', 'validationStatus', 'market', 'portfolioRisk')}
     out['selection45'].update(parameters=rules.PARAMETERS,
+                              entryPolicy='RANKED_STAGED_ENTRY',
                               pendingExits=list(obj['pendingExits'].values()),
                               candidates=list(obj.get('signals', {}).values()),
                               holdingSignals=deepcopy(obj.get('holdingSignals', {})))
@@ -750,13 +759,14 @@ def build_candidate(state, stock, radar, quotes):
         data_gaps.append('板块独立证据尚未取齐')
     if not own_quote_ok(code): rejects.append('主行情缺失/过期')
     y = stock.get('yunai') or {}
-    if not y.get('quoteOk') or not rules.fresh(y.get('quoteTime'), now):
+    secondary_fresh = y.get('quoteOk') and rules.fresh(y.get('quoteTimestamp') or y.get('quoteTime'), now)
+    if not secondary_fresh:
         data_gaps.append('第二行情缺失/过期，使用主行情并降低仓位')
     price = rules.finite(q.get('price'), 0)
     secondary_price = rules.finite(y.get('price'))
     if not price:
         rejects.append('无可成交主行情价格')
-    elif secondary_price is not None and abs(price / secondary_price - 1) > .003:
+    elif secondary_fresh and secondary_price is not None and secondary_price > 0 and abs(price / secondary_price - 1) > .003:
         rejects.append('双源价格明确偏差超过0.3%')
     if 'ST' in stock.get('name', '').upper() or '退' in stock.get('name', '') or stock.get('suspended'):
         rejects.append('风险警示/退市/停牌禁止买入')
@@ -764,7 +774,11 @@ def build_candidate(state, stock, radar, quotes):
         data_gaps.append('板块完整样本排名尚未返回')
     elif stock['sectorRank'] > .2:
         rejects.append('板块排名明确不在完整样本前20%')
-    score, old_reasons, old_rejects = base.score_candidate(dict(stock, mainlineStage=stage))
+    live_stock = dict(stock, mainlineStage=stage, price=price,
+                      yunai=y if secondary_fresh else {})
+    for field in ('changePct', 'amount'):
+        live_stock[field] = rules.finite(q.get(field))
+    score, old_reasons, old_rejects = base.score_candidate(live_stock)
     reasons.extend(old_reasons); rejects.extend(old_rejects)
     if score < 64: rejects.append('综合分不足64')
     change = rules.finite(q.get('changePct'))
@@ -795,7 +809,8 @@ def build_candidate(state, stock, radar, quotes):
     # .8% is the maximum two-leg impact+spread allowance of the conservative model.
     if CONTROL_MODE != 'FIXED_HOLD' and setup.get('ready') and setup.get('potentialRewardPct', 0) < cost_pct + .3: rejects.append('近期阻力位空间不足覆盖双边成本及余量')
     target = .025 if stage == 'EMERGING' else .04
-    if data_gaps:
+    all_gaps = sorted(set(optional_missing + data_gaps))
+    if all_gaps:
         target = min(target, .01)
     pos = (state.get('positions') or {}).get(code)
     rotating = rotation.active(state.get('selection45', {}))
@@ -813,24 +828,57 @@ def build_candidate(state, stock, radar, quotes):
             target = min(.08, max(.04, float(pos.get('coreTargetWeight45', .04)) + .03))
             if stage != 'CONFIRMING': rejects.append('加仓要求板块确认')
     return {'code': code, 'name': stock['name'], 'sector': stock['sector'], 'score': score,
-            'referencePrice': price, 'priceSource': '当时双源确认行情', 'reasonZh': '；'.join(reasons + [setup.get('reasonZh', '')]),
+            'referencePrice': price, 'changePct': change,
+            'priceSource': '当时双源确认行情' if secondary_fresh else '当时主行情（第二来源未确认）',
+            'reasonZh': '；'.join(reasons + [setup.get('reasonZh', '')]),
             'targetWeight': target, 'targetWeightPct': target * 100, 'stage': stage,
             'evidence': evidence, 'setup': setup, 'technical': tech, 'rejections': sorted(set(rejects)),
-            'missingOptionalEvidence': sorted(set(optional_missing + data_gaps)),
-            'dataConfidence': 'DEGRADED' if data_gaps else 'FULL',
-            'degradedEntry': bool(data_gaps),
+            'missingOptionalEvidence': all_gaps,
+            'dataConfidence': 'DEGRADED' if all_gaps else 'FULL',
+            'degradedEntry': bool(all_gaps),
             'rankSampleCount': stock.get('rankSampleCount'), 'sectorRank': stock.get('sectorRank'), 'dataAt': base.iso()}
+
+
+def apply_ranked_entry_policy(target, held=False):
+    """Convert preference gates to ranking penalties, never execution safeguards."""
+    soft = {'综合分不足64', '板块排名明确不在完整样本前20%',
+            '完整5/20日成交额量比未通过1.2–2.5',
+            '完整5/20日成交额量比明确未通过1.2–2.5',
+            '板块不处于潜在/确认阶段', '板块明确不处于潜在/确认阶段',
+            '盘中样本间隔不足或断档，等待连续确认',
+            '未确认回撤企稳/突破回踩，继续等待',
+            '近期阻力位空间不足覆盖双边成本及余量'}
+    change = rules.finite(target.get('changePct'))
+    if change is not None and 3.5 < change <= 4.5:
+        soft.add('涨跌幅明确超出保守买入区间')
+    preferences = sorted(set(target.get('rankingWarnings', [])) |
+                         {r for r in target.get('rejections', []) if r in soft})
+    target['rankingWarnings'] = preferences
+    target['rejections'] = [r for r in target.get('rejections', []) if r not in soft]
+    target['rankingScore'] = rules.finite(target.get('score'), 0) - rules.PARAMETERS['rankingWarningPenalty'] * len(preferences)
+    target['entryPolicy'] = 'RANKED_STAGED_ENTRY'
+    setup = target.setdefault('setup', {})
+    setup.setdefault('researchReasonZh', setup.get('reasonZh'))
+    setup['reasonZh'] = '按板块、资金与量价排名分批建仓；回踩形态只作排序参考'
+    if preferences and not held:
+        target['targetWeight'] = min(target['targetWeight'], rules.PARAMETERS['degradedEntryLimit'])
+        target['targetWeightPct'] = target['targetWeight'] * 100
+    return target
 
 
 def evaluate_entries(state, ledger, radar, prices):
     global LAST_TARGETS, LAST_ACTIONS
     obj = metadata(state); now = base.now_cn(); quotes = CONTEXT.get('quotes') or {}
     risk = risk_control(state, prices); actions = []
+    if not base.trading_session(now):
+        return []
     if not base.radar_freshness(radar, now)[0]:
         return []
     enriched_radar = CONTEXT.get('radar') or radar
     targets = [build_candidate(state, signal_stock(state, code, enriched_radar), enriched_radar, quotes) for code in radar.get('stocks') or {}]
-    targets.sort(key=lambda x: x['score'], reverse=True)
+    for target in targets:
+        apply_ranked_entry_policy(target, target['code'] in (state.get('positions') or {}))
+    targets.sort(key=lambda x: x['rankingScore'], reverse=True)
     LAST_TARGETS = targets
     for target in targets:
         target['decisionPlan'] = study.entry_plan(target)
@@ -839,6 +887,7 @@ def evaluate_entries(state, ledger, radar, prices):
         study.freeze_candidates(state, targets, enriched_radar, quotes, now)
     confirmations = obj.setdefault('confirmations', {})
     pending_core = obj.setdefault('pendingBuys', {})
+    attempted = obj.setdefault('rankedEntryAttempts', {})
     for t in targets:
         code = t['code']; c = confirmations.setdefault(code, {})
         t['executionStatus'] = 'EVALUATING'
@@ -846,17 +895,25 @@ def evaluate_entries(state, ledger, radar, prices):
             t['executionStatus'] = 'BLOCKED_CONDITIONS_OR_RISK'
             c.clear(); pending_core.pop(code, None); continue
         # Target confirmation counts unique timestamped observations separated >=3 minutes.
-        at = rules.stamp((quotes.get(code) or {}).get('quoteTime'))
+        quote = quotes.get(code) or {}
+        at = rules.stamp(quote.get('quoteTimestamp') or quote.get('quoteTime'))
+        if not own_quote_ok(code) or not rules.finite(quote.get('price'), 0) > 0:
+            t['executionStatus'] = 'WAIT_FRESH_QUOTE'; continue
         previous = rules.stamp(c.get('at'))
         weight = t['targetWeight']
         if c.get('weight') != weight or (previous and at and (at - previous).total_seconds() > 900): c.clear()
         if at and (not previous or (at - previous).total_seconds() >= 180):
             c.update(at=at.isoformat(), weight=weight, count=int(c.get('count', 0)) + 1)
-        if c.get('count', 0) < 3 or not rules.normal_window(now) or code in obj['pendingExits']:
-            t['executionStatus'] = 'WAIT_CONFIRMATION' if c.get('count', 0) < 3 else 'WAIT_WINDOW_OR_EXIT'
+        initial_or_remainder = code not in (state.get('positions') or {}) or code in pending_core
+        required = rules.PARAMETERS['initialEntryConfirmations'] if initial_or_remainder else rules.PARAMETERS['targetConfirmations']
+        in_window = base.can_open_new(now) if initial_or_remainder else rules.normal_window(now)
+        if c.get('count', 0) < required or not in_window or code in obj['pendingExits']:
+            t['executionStatus'] = 'WAIT_CONFIRMATION' if c.get('count', 0) < required else 'WAIT_WINDOW_OR_EXIT'
             continue
         if rotation.active(obj):
             t['executionStatus'] = 'WAIT_ROTATION_PLAN'; continue
+        if attempted.get(code) == at.isoformat():
+            t['executionStatus'] = 'WAIT_NEW_SNAPSHOT'; continue
         pos = state.get('positions', {}).get(code)
         nav, mv = base.portfolio_nav(state, prices)
         cw, sw, _ = base.current_weights(state, prices)
@@ -868,16 +925,27 @@ def evaluate_entries(state, ledger, radar, prices):
         group_value = sum(int(p['qty']) * prices.get(k, p.get('lastPrice', p['avgCost']))
                           for k, p in state.get('positions', {}).items() if p.get('correlationGroup', 'UNVERIFIED_GROUP') == group)
         cash = float(state.get('cash', 0)); price = t['referencePrice']
-        room = min(max(0, delta * nav), max(0, risk['cap'] * nav - mv),
-                   max(0, (.25 - sw.get(t['sector'], 0)) * nav), max(0, .35 * nav - group_value),
-                   turnover_room(state, ledger, nav), cash)
+        rooms = {'个股目标仓位已达到': max(0, delta * nav),
+                 '总仓位预算已用完': max(0, risk['cap'] * nav - mv),
+                 '板块仓位已到上限': max(0, (.25 - sw.get(t['sector'], 0)) * nav),
+                 '相关组仓位已到上限': max(0, .35 * nav - group_value),
+                 '当日换手额度不足': turnover_room(state, ledger, nav), '现金不足': cash}
+        room = min(rooms.values())
         qty = int(room / (price * 1.01) / 100) * 100 if price else 0
-        if qty < 100: continue
+        if qty < 100:
+            t['executionStatus'] = 'WAIT_BUDGET_OR_LOT'
+            t['executionReasonZh'] = min(rooms, key=rooms.get) + '，可用金额不足一手及费用'
+            continue
         pending_core.setdefault(code, {'targetWeight': weight, 'startedAt': base.iso(), 'isAdd': bool(pos)})
         order = pending_core[code]
-        reason = '简单持有对照：首个可行窗口建仓/加仓' if CONTROL_MODE == 'FIXED_HOLD' else '回撤确认后的分批建仓/加仓'
+        reason = '简单持有对照：首个可行窗口建仓/加仓' if CONTROL_MODE == 'FIXED_HOLD' else '市场许可后按排名分批建仓/加仓'
+        attempted[code] = at.isoformat()
         row = execution.add_or_buy(state, ledger, t, qty, prices, reason)
-        t['executionStatus'] = 'FILLED' if row else 'WAIT_CAPACITY_OR_LIMIT'
+        t['executionStatus'] = ('PARTIAL_WAIT' if row.get('partialFill') else 'FILLED') if row else 'WAIT_CAPACITY_OR_LIMIT'
+        if not row:
+            rejection = next((x for x in reversed(state.get('recentExecutionRejections') or [])
+                              if x.get('code') == code and x.get('side') == 'BUY'), {})
+            t['executionReasonZh'] = rejection.get('reasonZh') or '可用现金不足以覆盖整手成交及费用'
         if row:
             cancel_t_buybacks(obj, code, '已按主策略买入，取消旧做T回补，避免重复加仓')
             annotate(state, row, 'SIMPLE_ENTRY' if CONTROL_MODE == 'FIXED_HOLD' else 'CONFIRMED_ENTRY', t)
@@ -887,6 +955,7 @@ def evaluate_entries(state, ledger, radar, prices):
                 order['counted'] = True
             new_pos.update(coreTargetWeight45=weight, lastCoreBuyPrice=price,
                            correlationGroup=group, riskBasis=max(new_pos.get('riskBasis', 0), new_pos['avgCost']))
+            new_pos.update(rules.stop_lines(new_pos, price, technical(state, code)))
             # Target remains fixed across partial fills, then confirmation restarts for any later add.
             if state['positions'][code]['qty'] * price >= weight * nav - price * 100 * 1.01:
                 pending_core.pop(code, None); c.clear()
@@ -895,6 +964,8 @@ def evaluate_entries(state, ledger, radar, prices):
     if not rotation.active(obj):
         actions.extend(evaluate_t(state, ledger, prices, radar))
     LAST_ACTIONS += actions
+    for target in targets:
+        target['decisionPlan'] = study.entry_plan(target)
     return actions
 
 

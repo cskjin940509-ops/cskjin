@@ -17,9 +17,17 @@ def explain(latest):
     # already classified the same candidate as a degraded small entry.
     rejected = [x for x in candidates if x.get('rejections')]
     degraded = [x for x in candidates if not x.get('rejections') and x.get('missingOptionalEvidence')]
-    if pending: code='PENDING_EXECUTION'; text='已有退出信号；'+'；'.join(pending_reasons[:3])
+    filled = [x for x in candidates if x.get('executionStatus') in ('FILLED', 'PARTIAL_WAIT')]
+    ranked = [x for x in candidates if x.get('entryPolicy') == 'RANKED_STAGED_ENTRY' and not x.get('rejections')]
+    if filled: code='ENTRY_FILLED'; text=f'本轮已模拟买入{len(filled)}只；部分成交余量按仓位和容量继续分批处理'
+    elif pending: code='PENDING_EXECUTION'; text='已有退出信号；'+'；'.join(pending_reasons[:3])
     elif reasons: code='BLOCKED_EVIDENCE_OR_RISK'; text='本轮未成交；'+'；'.join(reasons)
     elif candidates and len(rejected)==len(candidates): code='ENTRY_CONDITIONS_NOT_MET'; text='本轮无退出成交；全部候选均有明确不支持买入的证据'
+    elif ranked:
+        code='RANKED_ENTRY_WAITING'
+        blocks = list(dict.fromkeys(x.get('executionReasonZh') or
+                      (x.get('decisionPlan') or {}).get('actionZh') or x.get('executionStatus') or '等待下一次执行检查' for x in ranked))
+        text=f'{len(ranked)}只候选按排名保留建仓资格；'+'；'.join(blocks[:3])
     elif degraded: code='DEGRADED_CANDIDATES_WAITING'; text=f'本轮已评估；{len(degraded)}只候选仅缺可选证据，保留降级小仓资格并等待执行条件'
     else: code='NO_FILL_AFTER_EVALUATION'; text='本轮已评估但未成交；需结合个股确认次数、交易窗口、仓位和执行限制查看'
     rotation = s.get('opportunityRotation') or {}
@@ -31,8 +39,11 @@ def explain(latest):
     return {'opportunityRotation': rotation, 'reasonCode':code,'reasonZh':text,'entryBlocks':reasons,'pendingExits':pending_reasons,
             'candidateCount':len(candidates),'rejectedCandidateCount':len(rejected),
             'degradedCandidateCount':len(degraded),
+            'filledCandidateCount':len(filled), 'rankedCandidateCount':len(ranked),
             'candidateReasons':[{'code':x.get('code'),
                                  'reasons':x.get('rejections',[]),
                                  'missingOptionalEvidence':x.get('missingOptionalEvidence',[]),
                                  'dataConfidence':x.get('dataConfidence'),
+                                 'rankingWarnings':x.get('rankingWarnings', []),
+                                 'executionReasonZh':x.get('executionReasonZh') or (x.get('decisionPlan') or {}).get('actionZh'),
                                  'executionStatus':x.get('executionStatus')} for x in candidates]}
