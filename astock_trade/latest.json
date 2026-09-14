@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-11",
-  "generatedAt": "2026-09-11T17:42:46+08:00",
-  "phase": "LIVE",
+  "date": "2026-09-14",
+  "generatedAt": "2026-09-14T09:09:32+08:00",
+  "phase": "CLOSED_OR_STALE",
   "officialDate": "2026-09-11",
   "officialPlans": [
     {
@@ -14,17 +14,13 @@
       "poolTags": [
         "B1"
       ],
-      "action": "买入候选",
+      "action": "盘前观察",
       "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 89.4,
+        "type": "BREAKOUT_READY",
+        "label": "临界突破",
+        "score": 77.4,
         "historical": {
-          "samples": 1,
-          "win5D": 0.0,
-          "avg5D": -0.0507,
-          "avgMFE5D": 0.0056,
-          "avgMAE5D": -0.117
+          "samples": 0
         }
       },
       "quote": {
@@ -37,65 +33,23 @@
         "quoteTime": "20260911161451"
       },
       "entryZone": [
-        396.676,
-        402.644
+        397.127,
+        402.332
       ],
-      "triggerPrice": 397.87,
-      "stopLoss": 381.867,
-      "takeProfit1": 426.351,
-      "takeProfit2": 444.145,
+      "triggerPrice": 400.33,
+      "stopLoss": 384.969,
+      "takeProfit1": 421.87,
+      "takeProfit2": 436.631,
       "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 381.867",
-      "reasons": [
-        "突破回踩",
-        "形态分 89",
-        "距MA20 +1.76 ATR",
-        "主力资金占比 +7.06%"
-      ]
-    },
-    {
-      "code": "301357",
-      "name": "北方长龙",
-      "sector": "地面兵装Ⅲ",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B1"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 53.9,
-        "historical": {}
-      },
-      "quote": {
-        "price": 108.6,
-        "changePct": 4.22,
-        "open": 103.1,
-        "high": 116.68,
-        "low": 103.1,
-        "dayLowToHighPct": 13.17,
-        "quoteTime": "20260911161418"
-      },
-      "entryZone": null,
-      "triggerPrice": 99.383,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
       "preferredWindow": "触发价出现后再评估",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
+      "invalidation": "收盘/有效价格跌破 384.969",
       "reasons": [
-        "暂无可买形态",
-        "形态分 54",
-        "距MA20 +1.51 ATR",
-        "主力资金占比 -0.64%"
+        "临界突破",
+        "形态分 77",
+        "距MA20 +1.79 ATR",
+        "主力资金占比 +7.06%"
       ]
     },
     {
@@ -111,7 +65,7 @@
         "B4",
         "B13"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -128,7 +82,7 @@
         "quoteTime": "20260911161406"
       },
       "entryZone": null,
-      "triggerPrice": 16.008,
+      "triggerPrice": 16.133,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -140,53 +94,8 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +1.79 ATR",
+        "距MA20 +1.53 ATR",
         "主力资金占比 +11.97%"
-      ]
-    },
-    {
-      "code": "600967",
-      "name": "内蒙一机",
-      "sector": "地面兵装Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 51.0,
-        "historical": {}
-      },
-      "quote": {
-        "price": 14.98,
-        "changePct": 9.99,
-        "open": 13.59,
-        "high": 14.98,
-        "low": 13.5,
-        "dayLowToHighPct": 10.96,
-        "quoteTime": "20260911161500"
-      },
-      "entryZone": null,
-      "triggerPrice": 13.026,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 51",
-        "距MA20 +3.94 ATR",
-        "主力资金占比 +31.42%",
-        "接近涨停，按追高风险处理"
       ]
     },
     {
@@ -199,7 +108,7 @@
         "B0",
         "B3"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -216,7 +125,7 @@
         "quoteTime": "20260911161500"
       },
       "entryZone": null,
-      "triggerPrice": 18.12,
+      "triggerPrice": 18.3,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -228,8 +137,53 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 51",
-        "距MA20 +2.79 ATR",
+        "距MA20 +2.34 ATR",
         "主力资金占比 +28.23%",
+        "接近涨停，按追高风险处理"
+      ]
+    },
+    {
+      "code": "600967",
+      "name": "内蒙一机",
+      "sector": "地面兵装Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "盘前观察",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 51.0,
+        "historical": {}
+      },
+      "quote": {
+        "price": 14.98,
+        "changePct": 9.99,
+        "open": 13.59,
+        "high": 14.98,
+        "low": 13.5,
+        "dayLowToHighPct": 10.96,
+        "quoteTime": "20260911161500"
+      },
+      "entryZone": null,
+      "triggerPrice": 13.414,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 51",
+        "距MA20 +3.32 ATR",
+        "主力资金占比 +31.42%",
         "接近涨停，按追高风险处理"
       ]
     },
@@ -242,7 +196,7 @@
       "poolTags": [
         "B3"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -259,7 +213,7 @@
         "quoteTime": "20260911161409"
       },
       "entryZone": null,
-      "triggerPrice": 19.822,
+      "triggerPrice": 19.837,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -271,7 +225,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +1.47 ATR",
+        "距MA20 +1.37 ATR",
         "主力资金占比 +9.34%"
       ]
     },
@@ -285,7 +239,7 @@
         "B0",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -302,7 +256,7 @@
         "quoteTime": "20260911161500"
       },
       "entryZone": null,
-      "triggerPrice": 33.513,
+      "triggerPrice": 33.458,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -314,7 +268,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +0.43 ATR",
+        "距MA20 +0.46 ATR",
         "主力资金占比 +7.72%"
       ]
     },
@@ -327,7 +281,7 @@
       "poolTags": [
         "B3"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -344,7 +298,7 @@
         "quoteTime": "20260911161415"
       },
       "entryZone": null,
-      "triggerPrice": 5.696,
+      "triggerPrice": 5.776,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -356,7 +310,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +4.68 ATR",
+        "距MA20 +3.72 ATR",
         "主力资金占比 +21.89%",
         "接近涨停，按追高风险处理"
       ]
@@ -371,7 +325,7 @@
         "B0",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -388,7 +342,7 @@
         "quoteTime": "20260911161500"
       },
       "entryZone": null,
-      "triggerPrice": 39.346,
+      "triggerPrice": 39.586,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -400,7 +354,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 50",
-        "距MA20 +1.11 ATR",
+        "距MA20 +1.08 ATR",
         "主力资金占比 +6.45%"
       ]
     },
@@ -415,7 +369,7 @@
         "B3",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -432,7 +386,7 @@
         "quoteTime": "20260911161412"
       },
       "entryZone": null,
-      "triggerPrice": 51.289,
+      "triggerPrice": 51.343,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -444,7 +398,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +0.77 ATR",
+        "距MA20 +0.87 ATR",
         "主力资金占比 +20.75%",
         "接近涨停，按追高风险处理"
       ]
@@ -458,7 +412,7 @@
       "poolTags": [
         "B3"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -475,7 +429,7 @@
         "quoteTime": "20260911161500"
       },
       "entryZone": null,
-      "triggerPrice": 8.365,
+      "triggerPrice": 8.438,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -487,7 +441,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +2.54 ATR",
+        "距MA20 +2.22 ATR",
         "主力资金占比 +19.53%",
         "接近涨停，按追高风险处理"
       ]
@@ -503,7 +457,7 @@
         "B3",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -520,7 +474,7 @@
         "quoteTime": "20260911161500"
       },
       "entryZone": null,
-      "triggerPrice": 17.61,
+      "triggerPrice": 17.885,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -532,9 +486,51 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +2.97 ATR",
+        "距MA20 +2.51 ATR",
         "主力资金占比 +18.50%",
         "接近涨停，按追高风险处理"
+      ]
+    },
+    {
+      "code": "301357",
+      "name": "北方长龙",
+      "sector": "地面兵装Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B1"
+      ],
+      "action": "盘前观察",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 48.9,
+        "historical": {}
+      },
+      "quote": {
+        "price": 108.6,
+        "changePct": 4.22,
+        "open": 103.1,
+        "high": 116.68,
+        "low": 103.1,
+        "dayLowToHighPct": 13.17,
+        "quoteTime": "20260911161418"
+      },
+      "entryZone": null,
+      "triggerPrice": 101.244,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 49",
+        "距MA20 +1.38 ATR",
+        "主力资金占比 -0.64%"
       ]
     },
     {
@@ -546,7 +542,7 @@
       "poolTags": [
         "B1"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -563,7 +559,7 @@
         "quoteTime": "20260911161451"
       },
       "entryZone": null,
-      "triggerPrice": 28.244,
+      "triggerPrice": 28.293,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -575,7 +571,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 49",
-        "距MA20 -0.03 ATR",
+        "距MA20 +0.13 ATR",
         "主力资金占比 -0.48%"
       ]
     },
@@ -591,7 +587,7 @@
         "B4",
         "B13"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -608,7 +604,7 @@
         "quoteTime": "20260911161454"
       },
       "entryZone": null,
-      "triggerPrice": 15.706,
+      "triggerPrice": 16.245,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -620,7 +616,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 48",
-        "距MA20 +6.19 ATR",
+        "距MA20 +5.23 ATR",
         "主力资金占比 +11.21%",
         "接近涨停，按追高风险处理"
       ]
@@ -636,7 +632,7 @@
         "B1",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -653,7 +649,7 @@
         "quoteTime": "20260911161500"
       },
       "entryZone": null,
-      "triggerPrice": 15.933,
+      "triggerPrice": 16.453,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -665,7 +661,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 47",
-        "距MA20 +5.28 ATR",
+        "距MA20 +4.55 ATR",
         "主力资金占比 +6.78%",
         "接近涨停，按追高风险处理"
       ]
@@ -679,7 +675,7 @@
       "poolTags": [
         "B0"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -696,7 +692,7 @@
         "quoteTime": "20260911161500"
       },
       "entryZone": null,
-      "triggerPrice": 411.615,
+      "triggerPrice": 416.778,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -708,7 +704,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 47",
-        "距MA20 +2.76 ATR",
+        "距MA20 +2.40 ATR",
         "主力资金占比 +5.82%"
       ]
     },
@@ -722,7 +718,7 @@
         "B0",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -739,7 +735,7 @@
         "quoteTime": "20260911161500"
       },
       "entryZone": null,
-      "triggerPrice": 169.593,
+      "triggerPrice": 172.842,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -751,7 +747,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 47",
-        "距MA20 +1.85 ATR",
+        "距MA20 +1.58 ATR",
         "主力资金占比 +4.95%"
       ]
     },
@@ -764,7 +760,7 @@
       "poolTags": [
         "B1"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -781,7 +777,7 @@
         "quoteTime": "20260911161415"
       },
       "entryZone": null,
-      "triggerPrice": 88.807,
+      "triggerPrice": 89.154,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -793,7 +789,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 47",
-        "距MA20 +0.64 ATR",
+        "距MA20 +0.67 ATR",
         "主力资金占比 -11.21%"
       ]
     },
@@ -806,7 +802,7 @@
       "poolTags": [
         "B1"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -823,7 +819,7 @@
         "quoteTime": "20260911161433"
       },
       "entryZone": null,
-      "triggerPrice": 23.753,
+      "triggerPrice": 24.341,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -835,7 +831,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 46",
-        "距MA20 +3.90 ATR",
+        "距MA20 +3.47 ATR",
         "主力资金占比 +1.77%"
       ]
     },
@@ -848,7 +844,7 @@
       "poolTags": [
         "B1"
       ],
-      "action": "不建议买",
+      "action": "盘前观察",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
@@ -865,7 +861,7 @@
         "quoteTime": "20260911161448"
       },
       "entryZone": null,
-      "triggerPrice": 64.315,
+      "triggerPrice": 65.658,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -877,7 +873,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 46",
-        "距MA20 +2.81 ATR",
+        "距MA20 +2.61 ATR",
         "主力资金占比 -2.33%"
       ]
     }
@@ -885,7 +881,7 @@
   "setupCandidates": [],
   "summary": {
     "official": 20,
-    "officialBuy": 1,
+    "officialBuy": 0,
     "officialWatch": 0,
     "expandedSetupCandidates": 0
   },
@@ -900,9 +896,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "official-has-live-buy"
-  }
+  ]
 }
