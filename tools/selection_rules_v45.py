@@ -8,6 +8,14 @@ from shadow_fund_v3 import finite
 
 VERSION = 'v5.2-sentiment-position-state-machine'
 CN = ZoneInfo('Asia/Shanghai')
+# Authoritative position bands from 市场情绪指数交易策略笔记.
+# Values are fractions of total portfolio exposure.
+POSITION_BANDS = {
+    'LOW': (0.0, 0.20, 0.0),
+    'MID': (0.20, 0.50, 0.50),
+    'HIGH': (0.50, 0.80, 1.0),
+    'OVERHEATED': (0.80, 1.01, 0.0),
+}
 PARAMETERS = {
     'singleLimit': .08, 'leaderLimit': .10, 'sectorLimit': .25,
     'correlationLimit': .35, 'normalTurnoverLimit': .20,
@@ -118,10 +126,10 @@ def market_regime(snapshot, now, macro=None, sentiment=None):
               'missingEvidence': [], 'sentiment': sentiment}
     if not sentiment.get('ready'):
         return result
-    # Before the opening bell the previous-session breadth fallback is the
-    # latest legally available market evidence. It establishes the opening
-    # risk budget; live breadth can tighten it after 09:30.
-    if sentiment.get('fallback') and now.time() < time(9, 30):
+    # Before the opening bell the audited previous-session decision is the
+    # controlling risk budget. Same-day breadth does not exist yet; it may
+    # only tighten this budget after 09:30.
+    if now.time() < time(9, 30):
         return {'state': 'PREMARKET', 'cap': base_cap, 'baseCap': base_cap,
                 'intradayCap': None, 'allowNew': base_cap > 0,
                 'breadthPct': None, 'missingEvidence': [],
