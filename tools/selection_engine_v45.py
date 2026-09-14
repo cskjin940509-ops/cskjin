@@ -490,6 +490,45 @@ def t_report(state, prices):
             'noteZh': '配对净收益已扣实际费用和成交滑点；未配对部分按卖出净额减现价持有价值计机会损益。仅做T股数的局部持有对照，不是完整策略回测；不重复计入净值或改写会计成本。'}
 
 
+def migrate_candidate_evidence(candidate):
+    """Migrate stored candidates created before missing/negative became tri-state."""
+    gaps = list(candidate.get('missingOptionalEvidence') or [])
+    hard = []
+    always_gap = {
+        'ADV20不足20个完整交易日': 'ADV20尚未取得20个完整交易日',
+        '未验证板块完整样本前20%': '板块完整样本排名尚未返回',
+        '板块5日收益缺失，无法检查相对涨幅': '板块/个股5日收益尚未取齐',
+        '等待完整日线与至少3个有效盘中快照': '等待完整日线与至少3个有效盘中快照',
+    }
+    ratio = (candidate.get('technical') or {}).get('volumeRatio5to20')
+    secondary = rules.finite(((candidate.get('yunai') or {}).get('price')))
+    for reason in candidate.get('rejections') or []:
+        if reason in always_gap:
+            gaps.append(always_gap[reason])
+        elif reason == '完整5/20日成交额量比未通过1.2–2.5' and ratio is None:
+            gaps.append('完整5/20日成交额量比尚未取得')
+        elif reason == '双源价格偏差超过0.3%或缺数' and secondary is None:
+            gaps.append('第二行情缺失/过期，使用主行情并降低仓位')
+        else:
+            hard.append(reason)
+    candidate['rejections'] = sorted(set(hard))
+    candidate['missingOptionalEvidence'] = sorted(set(gaps))
+    candidate['dataConfidence'] = 'DEGRADED' if gaps else 'FULL'
+    candidate['degradedEntry'] = bool(gaps)
+    if gaps:
+        candidate['targetWeight'] = min(rules.finite(candidate.get('targetWeight'), .01), .01)
+        candidate['targetWeightPct'] = candidate['targetWeight'] * 100
+    plan = candidate.get('decisionPlan') or {}
+    if plan:
+        plan['waitReasons'] = candidate['rejections']
+        plan['dataGaps'] = candidate['missingOptionalEvidence']
+        plan['actionZh'] = ('不符合买入条件' if hard else
+                            ('降级小仓候选' if gaps else '个股条件通过，等待组合与执行许可'))
+    if not hard and candidate.get('executionStatus') == 'BLOCKED_CONDITIONS_OR_RISK':
+        candidate['executionStatus'] = 'WAIT_CONFIRMATION'
+    return candidate
+
+
 def build_latest(state, ledger, prices, radar):
     obj = metadata(state)
     rotation.expire_snapshot(obj, base.now_cn())
@@ -515,6 +554,8 @@ def build_latest(state, ledger, prices, radar):
     comparison = update_no_t_control(state, ledger, prices, radar, close_ok)
     simple_comparison = update_no_t_control(state, ledger, prices, radar, close_ok, 'timingControl', 'FIXED_HOLD')
     study.mark_cohorts(state, quotes, now)
+    for candidate in obj.get('signals', {}).values():
+        migrate_candidate_evidence(candidate)
     out = ORIGINAL_BUILD(state, ledger, prices, radar)
     out.update(strategyVersion=rules.VERSION, mode='a股筛选池 · 主线持仓＋底仓T研究', simulated=True)
     out.setdefault('rulesZh', {}).update(rules.RULES_ZH)
