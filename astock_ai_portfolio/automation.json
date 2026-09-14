@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "34817781443-1",
-  "lastRunAt": "2026-09-14T15:25:46+08:00",
-  "lastSuccessAt": "2026-09-14T15:25:46+08:00",
+  "cycleId": "34842460617-1",
+  "lastRunAt": "2026-09-14T20:17:07+08:00",
+  "lastSuccessAt": "2026-09-14T20:17:07+08:00",
   "lastTradeAt": "2026-09-14T09:43:12+08:00",
   "status": "OUTSIDE_SESSION",
   "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
   "runSource": "dedicated-auto-scheduler",
   "sessionOpen": false,
   "radarCapturedAt": "2026-09-14T15:19:18+08:00",
-  "radarFresh": true,
-  "radarAgeSeconds": 388.4,
+  "radarFresh": false,
+  "radarAgeSeconds": 17869.4,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -39,13 +39,15 @@
       "plans": [],
       "statusZh": "先处理退出和组合风控，不用换仓绕过风险限制"
     },
-    "reasonCode": "DEGRADED_CANDIDATES_WAITING",
-    "reasonZh": "本轮已评估；11只候选仅缺可选证据，保留降级小仓资格并等待执行条件",
+    "reasonCode": "RANKED_ENTRY_WAITING",
+    "reasonZh": "22只候选按排名保留建仓资格；候选已排序，等待下一有效买入时段",
     "entryBlocks": [],
     "pendingExits": [],
     "candidateCount": 31,
-    "rejectedCandidateCount": 20,
-    "degradedCandidateCount": 11,
+    "rejectedCandidateCount": 9,
+    "degradedCandidateCount": 22,
+    "filledCandidateCount": 0,
+    "rankedCandidateCount": 22,
     "candidateReasons": [
       {
         "code": "002093",
@@ -60,7 +62,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600795",
@@ -74,7 +78,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "601991",
@@ -87,7 +93,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600578",
@@ -100,7 +108,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600744",
@@ -116,7 +126,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "601008",
@@ -133,7 +145,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600396",
@@ -148,7 +162,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000791",
@@ -163,7 +179,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600726",
@@ -178,7 +196,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600021",
@@ -194,7 +214,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000767",
@@ -209,7 +231,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600023",
@@ -224,7 +248,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000899",
@@ -239,7 +265,9 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "WAIT_CONFIRMATION"
+        "rankingWarnings": [],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "002040",
@@ -257,13 +285,13 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "300244",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -274,13 +302,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000690",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -292,13 +322,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600011",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -309,13 +341,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600027",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -326,14 +360,17 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "001896",
         "reasons": [
           "当日涨幅已超过提前介入上限",
           "涨跌幅超出保守买入区间",
-          "综合分不足64",
           "追高风险高"
         ],
         "missingOptionalEvidence": [
@@ -345,13 +382,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000905",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -362,13 +401,16 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600157",
         "reasons": [
-          "双源价格偏差0.65%",
-          "综合分不足64"
+          "双源价格偏差0.65%"
         ],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
@@ -380,7 +422,11 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "002669",
@@ -388,7 +434,6 @@
           "当日涨幅已超过提前介入上限",
           "涨跌幅超出保守买入区间",
           "第二行情缺失/过期",
-          "综合分不足64",
           "追高风险高"
         ],
         "missingOptionalEvidence": [
@@ -401,13 +446,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000539",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -419,13 +466,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600863",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -437,13 +486,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000543",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -454,13 +505,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000037",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -471,13 +524,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000966",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -488,13 +543,15 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000582",
-        "reasons": [
-          "综合分不足64"
-        ],
+        "reasons": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -506,16 +563,17 @@
           "等待完整日线与至少3个有效盘中快照"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000011",
         "reasons": [
           "成交额低于流动性门槛",
-          "板块不处于潜在/确认阶段",
-          "板块尚未形成两类独立证据",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
+          "板块尚未形成两类独立证据"
         ],
         "missingOptionalEvidence": [
           "B1",
@@ -525,19 +583,21 @@
           "板块完整样本排名尚未返回"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "板块不处于潜在/确认阶段",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "001979",
         "reasons": [
           "价格未改善，禁止下跌摊平",
           "加仓要求板块确认",
-          "完整5/20日成交额量比未通过1.2–2.5",
           "成交额低于流动性门槛",
-          "板块不处于潜在/确认阶段",
-          "板块尚未形成两类独立证据",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
+          "板块尚未形成两类独立证据"
         ],
         "missingOptionalEvidence": [
           "B1",
@@ -547,20 +607,23 @@
           "板块完整样本排名尚未返回"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "板块不处于潜在/确认阶段",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "002517",
         "reasons": [
           "价格未改善，禁止下跌摊平",
           "加仓要求板块确认",
-          "完整5/20日成交额量比未通过1.2–2.5",
           "成交额低于流动性门槛",
-          "板块不处于潜在/确认阶段",
           "板块尚未形成两类独立证据",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
+          "涨跌幅超出保守买入区间"
         ],
         "missingOptionalEvidence": [
           "B1",
@@ -570,7 +633,14 @@
           "板块完整样本排名尚未返回"
         ],
         "dataConfidence": "DEGRADED",
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+        "rankingWarnings": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "板块不处于潜在/确认阶段",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "executionReasonZh": "不符合买入条件",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       }
     ]
   }

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 3,
-  "strategyVersion": "v5.2-sentiment-position-state-machine",
+  "strategyVersion": "v5.3-ranked-staged-entry",
   "mode": "a股筛选池 · 主线持仓＋底仓T研究",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-14T15:25:58+08:00",
+  "updatedAt": "2026-09-14T20:17:07+08:00",
   "radarCapturedAt": "2026-09-14T15:19:18+08:00",
   "radarStatus": "RadarFinal",
   "summary": {
@@ -88,12 +88,12 @@
       "floatingReturnPct": -3.27,
       "currentWeightPct": 1.0,
       "tradingDaysObserved": 1,
-      "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260914152445",
+      "currentActionZh": "等待新行情",
+      "valuationQuoteAt": "20260914161424",
       "marketChangePct": -3.9525691699604737,
       "decisionPlan": {
-        "actionZh": "继续持有并跟踪",
-        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "actionZh": "等待新行情",
+        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
         "hardStopPrice": 16.7866,
         "trailingStopPrice": 0.0,
         "takeProfitZh": "主动止盈目标一 18.9913、目标二 20.2222；进入区间并确认滞涨转弱后分两档兑现；已提交档位 []。趋势延续保留剩余仓位；峰值盈利15%/25%后移动保护距离上限收紧至5%/3%。",
@@ -150,12 +150,12 @@
       "floatingReturnPct": -3.73,
       "currentWeightPct": 0.83,
       "tradingDaysObserved": 1,
-      "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20260914152500",
+      "currentActionZh": "等待新行情",
+      "valuationQuoteAt": "20260914161448",
       "marketChangePct": -0.14792899408283544,
       "decisionPlan": {
-        "actionZh": "继续持有并跟踪",
-        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "actionZh": "等待新行情",
+        "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
         "hardStopPrice": 6.5575,
         "trailingStopPrice": 0.0,
         "takeProfitZh": "主动止盈目标一 7.8600、目标二 8.2530；进入区间并确认滞涨转弱后分两档兑现；已提交档位 []。趋势延续保留剩余仓位；峰值盈利15%/25%后移动保护距离上限收紧至5%/3%。",
@@ -11190,7 +11190,7 @@
       "periodReturnPct": -0.0487,
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
-      "pointCount": 8
+      "pointCount": 9
     }
   ],
   "weeklyPerformance": [
@@ -17900,6 +17900,21 @@
       "cumulativeReturnPct": 2.9879,
       "radarCapturedAt": "2026-09-14T15:19:18+08:00",
       "isVerifiedClose": true
+    },
+    {
+      "timestamp": "2026-09-14T20:17:07+08:00",
+      "date": "2026-09-14",
+      "time": "20:17:07",
+      "nav": 19919398.18,
+      "cash": 19555006.18,
+      "marketValue": 364392.0,
+      "positionCount": 2,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.02987932,
+      "cumulativeNav": 1.02987932,
+      "cumulativeReturnPct": 2.9879,
+      "radarCapturedAt": "2026-09-14T15:19:18+08:00",
+      "isVerifiedClose": true
     }
   ],
   "performanceReport": {
@@ -17978,7 +17993,7 @@
           "periodReturnPct": -0.0487,
           "observationGapBusinessDays": 0,
           "coverageStatus": "COMPLETE",
-          "pointCount": 8
+          "pointCount": 9
         }
       ],
       "weekly": [
@@ -18293,17 +18308,17 @@
     "noteZh": "使用本轮当时行情估值。"
   },
   "rulesZh": {
-    "newEntry": "大盘许可→潜在/确认板块至少两类独立证据（含资金）→板块完整样本前20%→回撤企稳/突破回踩；双源偏差≤0.3%，资金滞后时点、ADV20及成本检查通过才分批买入。",
+    "newEntry": "大盘许可后按板块、资金和量价排序分批建仓。分数、排名、量比、阶段及回踩形态用于排序，不要求同时达标；可选数据不足或偏好未满足时首批单股≤1%。保留有效行情、可成交性、明确风险和组合仓位约束。",
     "position": "前一交易日四项掘金指数的综合市场资金情绪按方向型状态机决定次日基础仓位：0–20为0%，上升至20–50为50%，上升至50–80为100%，80以上为0%，回落至50–80为30%，回落至20–50为0%；盘中风险只能下调该上限。潜在主线初始2.5%，确认主线4%；普通单股≤8%，两次确认龙头≤10%，板块≤25%，相关板块≤35%。",
     "exit": "掉出候选只停加仓。至少2个完整交易日观察；1日失效观察，2日减半，3日退出；板块2日确认衰退退出。硬止损及组合风险优先，待退出数量不因T+1/跌停/部分成交丢失。",
     "valuation": "采用基金份额净值法；增资按增资前单位净值发行份额，不重置历史收益。",
     "drawdown": "正式最大回撤按日终单位净值计算；盘中已观测最大回撤单独显示，周频和月频只用于收益归因。",
     "audit": "新规则只影响生效后的模拟成交；旧100万阶段、2000万容量、完整账本保留。T收益单列，不二次计入净值、不改写会计平均成本。所有参数待样本外验证。",
     "rotation": "现金不足时择优换仓：新票通过原买入条件及3轮确认；新旧证据完整，新旧优势再经3次间隔至少3分钟确认；评分优势≥10、近20日高点空间增益覆盖实际费用+0.86%滑点+1%余量，新票空间/风险≥1.5且较旧票高0.5。每天最多1项，单项≤净值5%、旧仓50%；先卖后买，15分钟内重新核验，失效保留现金；不绕过风控、T+1与容量。参数待样本外验证，价格空间不是预测收益。",
-    "rebalance": "10:00–10:30、14:30–14:50普通成交；目标连续3个不同快照确认；调仓差额不足3个百分点不交易（首次小仓和已确认未成交余量除外）；普通双边换手≤20%。",
+    "rebalance": "新仓及已确认余量在有效交易时段按排名执行，14:50后不新增；首批只需一个有效当前行情。普通加仓仍在10:00–10:30、14:30–14:50并确认3个不同快照。相同行情不重复买入；普通双边换手≤20%，仓位上限不要求立即买满。",
     "stop": "1.5×ATR14/价格，距离限制4%–8%；ATR缺失保守4%并标注降级。盈利8%启动2×ATR移动保护；峰值盈利15%/25%后回撤距离上限收紧至5%/3%，风险线只收紧不放宽。",
     "profit": "主动止盈：首次获得完整日线时冻结目标一=max(20日高点,风险基准×1.08)，目标二=max(目标一×1.05,风险基准×1.15)。进入目标99%区间并经3个间隔3–10分钟快照确认滞涨回落≥0.2%，且当前盈利≥5%/10%，分别减1/3及剩余1/2；每档一次、每天一档。保护性卖出不等普通窗口/换手额度，保留T+1及成交限制。止盈当日禁止回补，已有T回补取消；参数待前向验证。",
-    "execution": "持仓保护与慢证据采集独立运行；证据发布后触发交易检查，单一账本写入。缺少新鲜个股行情不假设成交；慢证据不足只阻止新增风险。",
+    "execution": "持仓保护与慢证据采集独立运行；证据发布后触发交易检查，单一账本写入。新鲜行情与成交容量是执行依据；慢证据不足降低置信度和首批仓位，继续筛选。每次未买入必须列明具体执行障碍。",
     "defensive": "防守大盘仓位上限经2个间隔至少60秒的新鲜大盘快照确认后，立即分批降至上限，不受个股观察期、普通窗口及20%普通换手额度限制；指数急跌等紧急风险维持直接降仓。重复快照不累加；T+1/跌停/容量受限保留未成交数量。",
     "risk": "当日单位净值-1.5%停买，-2.5%总仓位目标降低25%；已确认日终净值回撤-5%仓位上限减半，-8%暂停新仓至少5个真实交易日并等待复核。",
     "t": "主策略买卖优先；做T仅优化持仓期间成本，不延长持有。策略减仓/退出立即终止旧T回补，主策略确认买入不等待T配对。仅模拟先卖后买；每股每日最多1组，≤昨日底仓20%且≤净值1%。仅震荡且冲高转弱时卖，回落企稳才买回。强趋势、退出风险、缺行情、价差不足覆盖双边成本时不做T。未买回/部分买回也计入机会损益。",
@@ -18419,7 +18434,7 @@
       "periodReturnPct": -0.0487,
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
-      "pointCount": 19
+      "pointCount": 20
     }
   ],
   "selection45": {
@@ -18431,7 +18446,7 @@
       "baseCap": 0.5,
       "intradayCap": null,
       "allowNew": true,
-      "reasonZh": "按最新版文档方案，2026-09-14盘前基础仓位为50%；盘中只允许收紧，不得突破50%；全市场广度未取齐，维持盘前上限，不用候选样本冒充",
+      "reasonZh": "按最新版文档方案，2026-09-14盘前基础仓位为50%；盘中只允许收紧，不得突破50%；盘中大盘快照过期/时间异常，维持盘前上限并等待新证据",
       "missingEvidence": [],
       "sentiment": {
         "ready": true,
@@ -18451,7 +18466,7 @@
       "cap": 0.5,
       "allowNew": true,
       "date": "2026-09-14",
-      "asOf": "2026-09-14T15:25:46+08:00",
+      "asOf": "2026-09-14T20:17:07+08:00",
       "dailyUnitReturnPct": -0.04867617544178637,
       "confirmedCloseDrawdownPct": -2.787829621677529,
       "dailyRiskDataReady": true,
@@ -18470,6 +18485,9 @@
       "normalTurnoverLimit": 0.2,
       "minCompleteHoldingDays": 2,
       "targetConfirmations": 3,
+      "initialEntryConfirmations": 1,
+      "rankingWarningPenalty": 3,
+      "degradedEntryLimit": 0.01,
       "atrStopMultiple": 1.5,
       "trailingAtrMultiple": 2.0,
       "stopMin": 0.04,
@@ -18487,6 +18505,7 @@
       "tMaxQuoteGapSeconds": 600,
       "parameterStatus": "INITIAL_RESEARCH_NOT_OUT_OF_SAMPLE_VALIDATED"
     },
+    "entryPolicy": "RANKED_STAGED_ENTRY",
     "pendingExits": [],
     "candidates": [
       {
@@ -18507,7 +18526,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -18537,15 +18557,13 @@
         "sectorRank": 0.5,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 7.43,
+          "buyZoneHigh": 7.43,
+          "initialProtectionPrice": 7.0936,
           "resistanceReference": 7.78,
           "thesisZh": "提前分69；主线潜在形成+3；形成分改善+2；资金强度高+5；资金评分高+3；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -18554,11 +18572,21 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 92.61,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600795",
@@ -18578,7 +18606,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -18607,15 +18636,13 @@
         "sectorRank": 0.14705882352941177,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 5.33,
+          "buyZoneHigh": 5.33,
+          "initialProtectionPrice": 5.1168,
           "resistanceReference": 5.48,
           "thesisZh": "提前分61；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -18623,11 +18650,21 @@
             "完整5/20日成交额量比尚未取得",
             "板块/个股5日收益尚未取齐",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 79.64,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "601991",
@@ -18648,7 +18685,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -18676,26 +18714,34 @@
         "sectorRank": 0.11764705882352941,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 5.87,
+          "buyZoneHigh": 5.87,
+          "initialProtectionPrice": 5.6107,
           "resistanceReference": 6.397,
           "thesisZh": "提前分57；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B2",
             "完整5/20日成交额量比尚未取得",
             "板块/个股5日收益尚未取齐",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 76.23,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600578",
@@ -18716,7 +18762,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -18744,26 +18791,34 @@
         "sectorRank": 0.08823529411764706,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 5.69,
+          "buyZoneHigh": 5.69,
+          "initialProtectionPrice": 5.4624,
           "resistanceReference": 5.94,
           "thesisZh": "提前分55；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B2",
             "完整5/20日成交额量比尚未取得",
             "板块/个股5日收益尚未取齐",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 75.67,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600744",
@@ -18783,7 +18838,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -18814,15 +18870,13 @@
         "sectorRank": 0.2647058823529412,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 7.22,
+          "buyZoneHigh": 7.22,
+          "initialProtectionPrice": 6.8204,
           "resistanceReference": 7.55,
           "thesisZh": "提前分56；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -18832,11 +18886,21 @@
             "板块完整样本排名尚未返回",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 71.6,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "601008",
@@ -18857,7 +18921,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -18890,17 +18955,15 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 4.76,
+          "buyZoneHigh": 4.76,
+          "initialProtectionPrice": 4.5425,
           "resistanceReference": 5.05,
           "thesisZh": "提前分57；主线潜在形成+3；形成分改善+2；资金强度高+5；资金评分高+3；追高风险中-5；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [
             "当日涨幅已超过提前介入上限",
             "涨跌幅超出保守买入区间"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B2",
@@ -18908,11 +18971,21 @@
             "板块/个股5日收益尚未取齐",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 70.11,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600396",
@@ -18932,7 +19005,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -18962,15 +19036,13 @@
         "sectorRank": 0.20588235294117646,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 14.98,
+          "buyZoneHigh": 14.98,
+          "initialProtectionPrice": 13.7816,
           "resistanceReference": 17.28,
           "thesisZh": "提前分54；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -18979,11 +19051,21 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 70.07,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000791",
@@ -19003,7 +19085,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19033,15 +19116,13 @@
         "sectorRank": 0.4117647058823529,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 7.5,
+          "buyZoneHigh": 7.5,
+          "initialProtectionPrice": 7.2,
           "resistanceReference": 7.6,
           "thesisZh": "提前分53；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19050,11 +19131,21 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 69.19,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600726",
@@ -19074,7 +19165,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19104,15 +19196,13 @@
         "sectorRank": 0.17647058823529413,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 5.56,
+          "buyZoneHigh": 5.56,
+          "initialProtectionPrice": 5.2354,
           "resistanceReference": 6.37,
           "thesisZh": "提前分50；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19121,11 +19211,21 @@
             "板块/个股5日收益尚未取齐",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 69.06,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600021",
@@ -19145,7 +19245,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19177,16 +19278,14 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 14.43,
+          "buyZoneHigh": 14.43,
+          "initialProtectionPrice": 13.8528,
           "resistanceReference": 14.14,
           "thesisZh": "提前分55；主线潜在形成+3；形成分改善+2；资金强度高+5；资金评分高+3；价格开始扩张+1；追高风险中-5；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [
             "涨跌幅超出保守买入区间"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19194,11 +19293,21 @@
             "完整5/20日成交额量比尚未取得",
             "板块/个股5日收益尚未取齐",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 68.58,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000767",
@@ -19218,7 +19327,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19248,15 +19358,13 @@
         "sectorRank": 0.5,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 3.59,
+          "buyZoneHigh": 3.59,
+          "initialProtectionPrice": 3.4464,
           "resistanceReference": 3.71,
           "thesisZh": "提前分50；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19265,11 +19373,21 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 66.14,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600023",
@@ -19289,7 +19407,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19319,15 +19438,13 @@
         "sectorRank": 0.38235294117647056,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 5.06,
+          "buyZoneHigh": 5.06,
+          "initialProtectionPrice": 4.8576,
           "resistanceReference": 5.04,
           "thesisZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19336,11 +19453,21 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 64.99,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000899",
@@ -19360,7 +19487,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19390,15 +19518,13 @@
         "sectorRank": 0.3235294117647059,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "降级小仓候选",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 10.07,
+          "buyZoneHigh": 10.07,
+          "initialProtectionPrice": 9.6672,
           "resistanceReference": 10.47,
           "thesisZh": "提前分49；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19407,11 +19533,21 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "WAIT_CONFIRMATION",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 64.54,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "002040",
@@ -19431,7 +19567,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19465,9 +19602,9 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 10.15,
+          "buyZoneHigh": 10.15,
+          "initialProtectionPrice": 9.4193,
           "resistanceReference": 10.98,
           "thesisZh": "提前分46；主线潜在形成+3；形成分改善+2；资金强度高+5；资金评分高+3；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [
@@ -19475,8 +19612,6 @@
             "涨跌幅超出保守买入区间",
             "追高风险高"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19484,11 +19619,21 @@
             "完整5/20日成交额量比尚未取得",
             "板块/个股5日收益尚未取齐",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [],
+        "rankingScore": 64.08,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "300244",
@@ -19508,7 +19653,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19524,9 +19670,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -19540,17 +19684,13 @@
         "sectorRank": 0.2,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 17.15,
+          "buyZoneHigh": 17.15,
+          "initialProtectionPrice": 16.0657,
           "resistanceReference": 21.85,
           "thesisZh": "提前分54；主线潜在形成+3；形成分改善+2；资金强度高+5；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金负确认-8；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19559,11 +19699,25 @@
             "板块/个股5日收益尚未取齐",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 59.45,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000690",
@@ -19583,7 +19737,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19599,9 +19754,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -19616,17 +19769,13 @@
         "sectorRank": 0.47058823529411764,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 5.26,
+          "buyZoneHigh": 5.26,
+          "initialProtectionPrice": 5.0496,
           "resistanceReference": 5.45,
           "thesisZh": "提前分59；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金负确认-8；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19636,11 +19785,25 @@
             "板块完整样本排名尚未返回",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 58.76,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600011",
@@ -19660,7 +19823,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19676,9 +19840,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -19692,17 +19854,13 @@
         "sectorRank": 0.23529411764705882,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 7.01,
+          "buyZoneHigh": 7.01,
+          "initialProtectionPrice": 6.7296,
           "resistanceReference": 7.05,
           "thesisZh": "提前分55；主线潜在形成+3；形成分改善+2；资金正向+3；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金负确认-8；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19711,11 +19869,25 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 57.94,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600027",
@@ -19735,7 +19907,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19751,9 +19924,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -19767,17 +19938,13 @@
         "sectorRank": 0.6176470588235294,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 4.92,
+          "buyZoneHigh": 4.92,
+          "initialProtectionPrice": 4.7232,
           "resistanceReference": 4.91,
           "thesisZh": "提前分51；主线潜在形成+3；形成分改善+2；资金转负-6；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19786,11 +19953,25 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 57.92,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "001896",
@@ -19810,7 +19991,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19829,7 +20011,6 @@
         "rejections": [
           "当日涨幅已超过提前介入上限",
           "涨跌幅超出保守买入区间",
-          "综合分不足64",
           "追高风险高"
         ],
         "missingOptionalEvidence": [
@@ -19845,19 +20026,16 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 12.99,
+          "buyZoneHigh": 12.99,
+          "initialProtectionPrice": 12.3621,
           "resistanceReference": 13.24,
           "thesisZh": "提前分42；主线潜在形成+3；形成分改善+2；资金强度高+5；资金评分高+3；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [
             "当日涨幅已超过提前介入上限",
             "涨跌幅超出保守买入区间",
-            "综合分不足64",
             "追高风险高"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19865,11 +20043,25 @@
             "完整5/20日成交额量比尚未取得",
             "板块/个股5日收益尚未取齐",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 57.06,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000905",
@@ -19889,7 +20081,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19905,9 +20098,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -19921,17 +20112,13 @@
         "sectorRank": 0.5294117647058824,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 9.13,
+          "buyZoneHigh": 9.13,
+          "initialProtectionPrice": 8.5761,
           "resistanceReference": 9.66,
           "thesisZh": "提前分44；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -19940,11 +20127,25 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 56.86,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600157",
@@ -19964,7 +20165,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -19981,8 +20183,7 @@
           "volumeRatio5to20": null
         },
         "rejections": [
-          "双源价格偏差0.65%",
-          "综合分不足64"
+          "双源价格偏差0.65%"
         ],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
@@ -19998,17 +20199,14 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 1.55,
+          "buyZoneHigh": 1.55,
+          "initialProtectionPrice": 1.488,
           "resistanceReference": 1.61,
           "thesisZh": "提前分43；主线潜在形成+3；形成分改善+2；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [
-            "双源价格偏差0.65%",
-            "综合分不足64"
+            "双源价格偏差0.65%"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -20017,11 +20215,25 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 56.41,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "002669",
@@ -20041,7 +20253,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -20061,7 +20274,6 @@
           "当日涨幅已超过提前介入上限",
           "涨跌幅超出保守买入区间",
           "第二行情缺失/过期",
-          "综合分不足64",
           "追高风险高"
         ],
         "missingOptionalEvidence": [
@@ -20078,20 +20290,17 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 13.52,
+          "buyZoneHigh": 13.52,
+          "initialProtectionPrice": 12.8879,
           "resistanceReference": 13.28,
           "thesisZh": "提前分39；主线潜在形成+3；形成分强+4；资金强度高+5；资金评分高+3；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
           "waitReasons": [
             "当日涨幅已超过提前介入上限",
             "涨跌幅超出保守买入区间",
             "第二行情缺失/过期",
-            "综合分不足64",
             "追高风险高"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -20100,11 +20309,25 @@
             "板块/个股5日收益尚未取齐",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 55.65,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000539",
@@ -20124,7 +20347,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -20140,9 +20364,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -20157,17 +20379,13 @@
         "sectorRank": 0.7058823529411765,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 5.44,
+          "buyZoneHigh": 5.44,
+          "initialProtectionPrice": 5.2224,
           "resistanceReference": 5.69,
           "thesisZh": "提前分45；主线潜在形成+3；形成分改善+2；资金转负-6；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -20177,11 +20395,25 @@
             "板块完整样本排名尚未返回",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 52.29,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "600863",
@@ -20201,7 +20433,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -20217,9 +20450,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -20234,17 +20465,13 @@
         "sectorRank": 0.7941176470588235,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 4.85,
+          "buyZoneHigh": 4.85,
+          "initialProtectionPrice": 4.6529,
           "resistanceReference": 5.06,
           "thesisZh": "提前分44；主线潜在形成+3；形成分改善+2；资金转负-6；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -20254,11 +20481,25 @@
             "板块完整样本排名尚未返回",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 51.5,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000543",
@@ -20278,7 +20519,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -20294,9 +20536,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -20310,17 +20550,13 @@
         "sectorRank": 0.5882352941176471,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 7.55,
+          "buyZoneHigh": 7.55,
+          "initialProtectionPrice": 7.248,
           "resistanceReference": 7.61,
           "thesisZh": "提前分44；主线潜在形成+3；形成分改善+2；资金转负-6；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -20329,11 +20565,25 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 51.38,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000037",
@@ -20353,7 +20603,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -20369,9 +20620,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -20385,17 +20634,13 @@
         "sectorRank": 0.35294117647058826,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 9.87,
+          "buyZoneHigh": 9.87,
+          "initialProtectionPrice": 9.3729,
           "resistanceReference": 10.03,
           "thesisZh": "提前分36；主线潜在形成+3；形成分改善+2；价格开始扩张+1；追高风险中-5；Yunai独立资金正确认+5；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -20404,11 +20649,25 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 39.45,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000966",
@@ -20428,7 +20687,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -20444,9 +20704,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -20460,17 +20718,13 @@
         "sectorRank": 0.6764705882352942,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 4.2,
+          "buyZoneHigh": 4.2,
+          "initialProtectionPrice": 4.032,
           "resistanceReference": 4.22,
           "thesisZh": "提前分45；主线潜在形成+3；形成分改善+2；资金转负-6；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金负确认-8；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -20479,11 +20733,25 @@
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 39.23,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000582",
@@ -20503,7 +20771,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "等待完整日线与至少3个有效盘中快照"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "等待完整日线与至少3个有效盘中快照"
         },
         "technical": {
           "ready": true,
@@ -20519,9 +20788,7 @@
           "adv20": null,
           "volumeRatio5to20": null
         },
-        "rejections": [
-          "综合分不足64"
-        ],
+        "rejections": [],
         "missingOptionalEvidence": [
           "ADV20尚未取得20个完整交易日",
           "B1",
@@ -20536,17 +20803,13 @@
         "sectorRank": 0.7647058823529411,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "actionZh": "候选已排序，等待下一有效买入时段",
+          "buyZoneLow": 11.21,
+          "buyZoneHigh": 11.21,
+          "initialProtectionPrice": 10.3882,
           "resistanceReference": 12.62,
           "thesisZh": "提前分38；主线潜在形成+3；形成分改善+2；资金转负-6；价格尚未充分扩张+4；追高风险低+2；Yunai独立资金负确认-8；等待完整日线与至少3个有效盘中快照",
-          "waitReasons": [
-            "综合分不足64"
-          ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
+          "waitReasons": [],
           "dataGaps": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -20556,11 +20819,25 @@
             "板块完整样本排名尚未返回",
             "第二行情缺失/过期，使用主行情并降低仓位",
             "等待完整日线与至少3个有效盘中快照"
-          ]
+          ],
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "综合分不足64"
+        ],
+        "rankingScore": 32.3,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "000011",
@@ -20577,7 +20854,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -20595,10 +20873,7 @@
         },
         "rejections": [
           "成交额低于流动性门槛",
-          "板块不处于潜在/确认阶段",
-          "板块尚未形成两类独立证据",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
+          "板块尚未形成两类独立证据"
         ],
         "missingOptionalEvidence": [
           "B1",
@@ -20612,31 +20887,44 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 8.71,
+          "buyZoneHigh": 8.71,
+          "initialProtectionPrice": 8.0132,
           "resistanceReference": 10.07,
           "thesisZh": "提前分0；价格尚未充分扩张+4；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "成交额低于流动性门槛",
-            "板块不处于潜在/确认阶段",
-            "板块尚未形成两类独立证据",
-            "盘中样本间隔不足或断档，等待连续确认",
-            "综合分不足64"
+            "板块尚未形成两类独立证据"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "B1",
             "B2",
             "B3",
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回"
-          ]
+          ],
+          "rankingWarnings": [
+            "板块不处于潜在/确认阶段",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "板块不处于潜在/确认阶段",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "rankingScore": -5.0,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "001979",
@@ -20653,7 +20941,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -20672,12 +20961,8 @@
         "rejections": [
           "价格未改善，禁止下跌摊平",
           "加仓要求板块确认",
-          "完整5/20日成交额量比未通过1.2–2.5",
           "成交额低于流动性门槛",
-          "板块不处于潜在/确认阶段",
-          "板块尚未形成两类独立证据",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
+          "板块尚未形成两类独立证据"
         ],
         "missingOptionalEvidence": [
           "B1",
@@ -20691,34 +20976,48 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 6.71,
+          "buyZoneHigh": 6.71,
+          "initialProtectionPrice": 6.2739,
           "resistanceReference": 7.86,
           "thesisZh": "提前分0；价格尚未充分扩张+4；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "价格未改善，禁止下跌摊平",
             "加仓要求板块确认",
-            "完整5/20日成交额量比未通过1.2–2.5",
             "成交额低于流动性门槛",
-            "板块不处于潜在/确认阶段",
-            "板块尚未形成两类独立证据",
-            "盘中样本间隔不足或断档，等待连续确认",
-            "综合分不足64"
+            "板块尚未形成两类独立证据"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "B1",
             "B2",
             "B3",
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回"
-          ]
+          ],
+          "rankingWarnings": [
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "板块不处于潜在/确认阶段",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "板块不处于潜在/确认阶段",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "rankingScore": -8.0,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       },
       {
         "code": "002517",
@@ -20735,7 +21034,8 @@
         "setup": {
           "ready": false,
           "kind": "WAIT",
-          "reasonZh": "盘中样本间隔不足或断档，等待连续确认"
+          "reasonZh": "按板块、资金与量价排名分批建仓；回踩形态只作排序参考",
+          "researchReasonZh": "盘中样本间隔不足或断档，等待连续确认"
         },
         "technical": {
           "ready": true,
@@ -20754,13 +21054,9 @@
         "rejections": [
           "价格未改善，禁止下跌摊平",
           "加仓要求板块确认",
-          "完整5/20日成交额量比未通过1.2–2.5",
           "成交额低于流动性门槛",
-          "板块不处于潜在/确认阶段",
           "板块尚未形成两类独立证据",
-          "涨跌幅超出保守买入区间",
-          "盘中样本间隔不足或断档，等待连续确认",
-          "综合分不足64"
+          "涨跌幅超出保守买入区间"
         ],
         "missingOptionalEvidence": [
           "B1",
@@ -20774,35 +21070,49 @@
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
           "actionZh": "不符合买入条件",
-          "buyZoneLow": null,
-          "buyZoneHigh": null,
-          "initialProtectionPrice": null,
+          "buyZoneLow": 17.03,
+          "buyZoneHigh": 17.03,
+          "initialProtectionPrice": 16.1225,
           "resistanceReference": 18.3,
           "thesisZh": "提前分0；价格尚未充分扩张+4；盘中样本间隔不足或断档，等待连续确认",
           "waitReasons": [
             "价格未改善，禁止下跌摊平",
             "加仓要求板块确认",
-            "完整5/20日成交额量比未通过1.2–2.5",
             "成交额低于流动性门槛",
-            "板块不处于潜在/确认阶段",
             "板块尚未形成两类独立证据",
-            "涨跌幅超出保守买入区间",
-            "盘中样本间隔不足或断档，等待连续确认",
-            "综合分不足64"
+            "涨跌幅超出保守买入区间"
           ],
-          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
-          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。",
           "dataGaps": [
             "B1",
             "B2",
             "B3",
             "板块/个股5日收益尚未取齐",
             "板块完整样本排名尚未返回"
-          ]
+          ],
+          "rankingWarnings": [
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "板块不处于潜在/确认阶段",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "综合分不足64"
+          ],
+          "executionReasonZh": null,
+          "entryPolicy": "RANKED_STAGED_ENTRY",
+          "referencePriceAt": "2026-09-14T09:43:49+08:00",
+          "priceMeaningZh": "所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。",
+          "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
+          "forecastZh": "相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。"
         },
-        "executionStatus": "BLOCKED_CONDITIONS_OR_RISK",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION",
         "dataConfidence": "DEGRADED",
-        "degradedEntry": true
+        "degradedEntry": true,
+        "rankingWarnings": [
+          "完整5/20日成交额量比未通过1.2–2.5",
+          "板块不处于潜在/确认阶段",
+          "盘中样本间隔不足或断档，等待连续确认",
+          "综合分不足64"
+        ],
+        "rankingScore": -8.0,
+        "entryPolicy": "RANKED_STAGED_ENTRY"
       }
     ],
     "holdingSignals": {
@@ -21331,13 +21641,13 @@
   "strategyResearch": {
     "schemaVersion": 1,
     "version": "v4.6-forward-evidence",
-    "updatedAt": "2026-09-14T15:25:46.419500+08:00",
-    "activatedAt": "2026-09-14T15:01:10.295505+08:00",
+    "updatedAt": "2026-09-14T20:17:07.441326+08:00",
+    "activatedAt": "2026-09-14T20:17:07.442785+08:00",
     "objectiveZh": "提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。",
     "productionStatusZh": "生产策略正常运行；新版研究样本独立累计，不阻断选股、仓位或模拟交易。",
     "protocol": {
       "version": "v4.6-forward-evidence",
-      "ruleVersion": "v5.2-sentiment-position-state-machine",
+      "ruleVersion": "v5.3-ranked-staged-entry",
       "parameters": {
         "singleLimit": 0.08,
         "leaderLimit": 0.1,
@@ -21346,6 +21656,9 @@
         "normalTurnoverLimit": 0.2,
         "minCompleteHoldingDays": 2,
         "targetConfirmations": 3,
+        "initialEntryConfirmations": 1,
+        "rankingWarningPenalty": 3,
+        "degradedEntryLimit": 0.01,
         "atrStopMultiple": 1.5,
         "trailingAtrMultiple": 2.0,
         "stopMin": 0.04,
@@ -21364,10 +21677,10 @@
         "parameterStatus": "INITIAL_RESEARCH_NOT_OUT_OF_SAMPLE_VALIDATED"
       },
       "sourceHashes": {
-        "selection_rules_v45.py": "d19fed541958a5eb1b8e13138c0d25399f95ccfd932aea412a64c3cbb2c528a4",
-        "selection_engine_v45.py": "04ef74c880e906eb318b456d78b9bc3af700dd7b06774cf323e6ac7a0af37b6f",
+        "selection_rules_v45.py": "39c02ec285e7b7e9029191e089057e73281d71b98239825b876a693116ec3619",
+        "selection_engine_v45.py": "62af37b30777a62ddaed55f925c167bf274ddcd67f253caa8269c3ad1c863e1f",
         "selection_data_v45.py": "7b2cf58de717dbbdf588f6f4e1863eff5a451af53b8f25fe191bd26f5aa4acf0",
-        "selection_research_v46.py": "842e11b7ab607d4188310fedae152fbe6e3b4649cd44719b2403a74c52cf390d"
+        "selection_research_v46.py": "c466a8de52f40f52875c3b58cbcdb92e02f947647d8a355df7276173e5cb1817"
       },
       "primaryHorizon": 10,
       "exploratoryHorizons": [
@@ -21385,7 +21698,7 @@
       "timingBenchmark": "相同候选筛选与执行风控；取消回踩买点及阻力空间过滤，首次可行窗口建仓，持仓起始日起满10个完整交易日退出；保留硬止损和组合风险。",
       "noteZh": "固定10日主检验、5/20日辅助观察；60个信号日仅是复核门槛，不是盈利认证。"
     },
-    "protocolHash": "641f4f8b87052d52d032a2074a670bdfe5eda5942393b917a30f59b68a1396dc",
+    "protocolHash": "cd17dcffde28687350a844165676b411be02b1eadbf5ed23ded83b5d1885922f",
     "stages": [
       {
         "id": "SELECTION",
@@ -21425,7 +21738,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-14T15:25:46.419500+08:00",
+        "checkedAt": "2026-09-14T20:17:07.441326+08:00",
         "reasonZh": "仅统计本次启用后的完整成员样本；不等于2017年至今历史覆盖审计。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -21435,7 +21748,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-14T15:25:46.419500+08:00",
+        "checkedAt": "2026-09-14T20:17:07.441326+08:00",
         "reasonZh": "使用首次观察时保存的成员；后续不以今天成员替换。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -21445,7 +21758,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-14T15:25:46.419500+08:00",
+        "checkedAt": "2026-09-14T20:17:07.441326+08:00",
         "reasonZh": "两融/ETF必须具备真实availableAt且不晚于决策；仅写T+1不能通过。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -21455,7 +21768,7 @@
         "status": "PENDING_REVIEW",
         "completed": 0,
         "total": 60,
-        "checkedAt": "2026-09-14T15:25:46.419500+08:00",
+        "checkedAt": "2026-09-14T20:17:07.441326+08:00",
         "reasonZh": "按信号日汇总，重叠窗口仍相关；需补除权、可成交成本、全市场基准与独立样本外验证。",
         "evidencePath": "astock_ai_portfolio/state.json#research46"
       },
@@ -21465,7 +21778,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-14T15:25:46.419500+08:00",
+        "checkedAt": "2026-09-14T20:17:07.441326+08:00",
         "reasonZh": "校验首次冻结内容哈希；仅证明未改写，不等于策略有效。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       }
@@ -21505,17 +21818,17 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "34817781443-1",
-    "lastRunAt": "2026-09-14T15:25:46+08:00",
-    "lastSuccessAt": "2026-09-14T15:25:46+08:00",
+    "cycleId": "34842460617-1",
+    "lastRunAt": "2026-09-14T20:17:07+08:00",
+    "lastSuccessAt": "2026-09-14T20:17:07+08:00",
     "lastTradeAt": "2026-09-14T09:43:12+08:00",
     "status": "OUTSIDE_SESSION",
     "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
     "runSource": "dedicated-auto-scheduler",
     "sessionOpen": false,
     "radarCapturedAt": "2026-09-14T15:19:18+08:00",
-    "radarFresh": true,
-    "radarAgeSeconds": 388.4,
+    "radarFresh": false,
+    "radarAgeSeconds": 17869.4,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -21537,13 +21850,15 @@
         "plans": [],
         "statusZh": "先处理退出和组合风控，不用换仓绕过风险限制"
       },
-      "reasonCode": "DEGRADED_CANDIDATES_WAITING",
-      "reasonZh": "本轮已评估；11只候选仅缺可选证据，保留降级小仓资格并等待执行条件",
+      "reasonCode": "RANKED_ENTRY_WAITING",
+      "reasonZh": "22只候选按排名保留建仓资格；候选已排序，等待下一有效买入时段",
       "entryBlocks": [],
       "pendingExits": [],
       "candidateCount": 31,
-      "rejectedCandidateCount": 20,
-      "degradedCandidateCount": 11,
+      "rejectedCandidateCount": 9,
+      "degradedCandidateCount": 22,
+      "filledCandidateCount": 0,
+      "rankedCandidateCount": 22,
       "candidateReasons": [
         {
           "code": "002093",
@@ -21558,7 +21873,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600795",
@@ -21572,7 +21889,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "601991",
@@ -21585,7 +21904,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600578",
@@ -21598,7 +21919,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600744",
@@ -21614,7 +21937,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "601008",
@@ -21631,7 +21956,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600396",
@@ -21646,7 +21973,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000791",
@@ -21661,7 +21990,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600726",
@@ -21676,7 +22007,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600021",
@@ -21692,7 +22025,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000767",
@@ -21707,7 +22042,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600023",
@@ -21722,7 +22059,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000899",
@@ -21737,7 +22076,9 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "WAIT_CONFIRMATION"
+          "rankingWarnings": [],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "002040",
@@ -21755,13 +22096,13 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "300244",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21772,13 +22113,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000690",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21790,13 +22133,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600011",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21807,13 +22152,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600027",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21824,14 +22171,17 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "001896",
           "reasons": [
             "当日涨幅已超过提前介入上限",
             "涨跌幅超出保守买入区间",
-            "综合分不足64",
             "追高风险高"
           ],
           "missingOptionalEvidence": [
@@ -21843,13 +22193,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000905",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21860,13 +22212,16 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600157",
           "reasons": [
-            "双源价格偏差0.65%",
-            "综合分不足64"
+            "双源价格偏差0.65%"
           ],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
@@ -21878,7 +22233,11 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "002669",
@@ -21886,7 +22245,6 @@
             "当日涨幅已超过提前介入上限",
             "涨跌幅超出保守买入区间",
             "第二行情缺失/过期",
-            "综合分不足64",
             "追高风险高"
           ],
           "missingOptionalEvidence": [
@@ -21899,13 +22257,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000539",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21917,13 +22277,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "600863",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21935,13 +22297,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000543",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21952,13 +22316,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000037",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21969,13 +22335,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000966",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -21986,13 +22354,15 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000582",
-          "reasons": [
-            "综合分不足64"
-          ],
+          "reasons": [],
           "missingOptionalEvidence": [
             "ADV20尚未取得20个完整交易日",
             "B1",
@@ -22004,16 +22374,17 @@
             "等待完整日线与至少3个有效盘中快照"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "综合分不足64"
+          ],
+          "executionReasonZh": "候选已排序，等待下一有效买入时段",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "000011",
           "reasons": [
             "成交额低于流动性门槛",
-            "板块不处于潜在/确认阶段",
-            "板块尚未形成两类独立证据",
-            "盘中样本间隔不足或断档，等待连续确认",
-            "综合分不足64"
+            "板块尚未形成两类独立证据"
           ],
           "missingOptionalEvidence": [
             "B1",
@@ -22023,19 +22394,21 @@
             "板块完整样本排名尚未返回"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "板块不处于潜在/确认阶段",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "综合分不足64"
+          ],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "001979",
           "reasons": [
             "价格未改善，禁止下跌摊平",
             "加仓要求板块确认",
-            "完整5/20日成交额量比未通过1.2–2.5",
             "成交额低于流动性门槛",
-            "板块不处于潜在/确认阶段",
-            "板块尚未形成两类独立证据",
-            "盘中样本间隔不足或断档，等待连续确认",
-            "综合分不足64"
+            "板块尚未形成两类独立证据"
           ],
           "missingOptionalEvidence": [
             "B1",
@@ -22045,20 +22418,23 @@
             "板块完整样本排名尚未返回"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "板块不处于潜在/确认阶段",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "综合分不足64"
+          ],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         },
         {
           "code": "002517",
           "reasons": [
             "价格未改善，禁止下跌摊平",
             "加仓要求板块确认",
-            "完整5/20日成交额量比未通过1.2–2.5",
             "成交额低于流动性门槛",
-            "板块不处于潜在/确认阶段",
             "板块尚未形成两类独立证据",
-            "涨跌幅超出保守买入区间",
-            "盘中样本间隔不足或断档，等待连续确认",
-            "综合分不足64"
+            "涨跌幅超出保守买入区间"
           ],
           "missingOptionalEvidence": [
             "B1",
@@ -22068,45 +22444,22 @@
             "板块完整样本排名尚未返回"
           ],
           "dataConfidence": "DEGRADED",
-          "executionStatus": "BLOCKED_CONDITIONS_OR_RISK"
+          "rankingWarnings": [
+            "完整5/20日成交额量比未通过1.2–2.5",
+            "板块不处于潜在/确认阶段",
+            "盘中样本间隔不足或断档，等待连续确认",
+            "综合分不足64"
+          ],
+          "executionReasonZh": "不符合买入条件",
+          "executionStatus": "OUTSIDE_ENTRY_SESSION"
         }
       ]
     }
   },
   "capitalMigrationThisCycle": null,
   "dataFreshness": {
-    "radarFresh": true,
-    "radarAgeSeconds": 388.4,
+    "radarFresh": false,
+    "radarAgeSeconds": 17869.4,
     "maxAllowedAgeSeconds": 900
-  },
-  "benchmarkComparison": {
-    "startedAt": "2026-09-03T23:23:37+08:00",
-    "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
-    "portfolioMetric": "UNIT_NAV_RETURN",
-    "portfolioReturnPct": -0.582,
-    "indexes": [
-      {
-        "name": "沪深300",
-        "returnPct": -1.593,
-        "alphaPct": 1.011
-      },
-      {
-        "name": "中证A500",
-        "returnPct": -1.915,
-        "alphaPct": 1.333
-      },
-      {
-        "name": "创业板指",
-        "returnPct": -0.814,
-        "alphaPct": 0.232
-      }
-    ],
-    "candidatePool": {
-      "name": "原始候选池固定等权",
-      "memberCount": 30,
-      "returnPct": -4.58,
-      "alphaPct": 3.998,
-      "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
-    }
   }
 }
