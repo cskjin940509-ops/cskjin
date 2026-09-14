@@ -84,10 +84,10 @@ class IndependentRiskTests(unittest.TestCase):
     def test_evidence_arrival_wakes_only_independent_writer(self):
         self.assertEqual(arrival.targets('radar-evidence',self.now),('run-ai-shadow-auto.yml',))
         self.assertNotIn('astock_ai_portfolio',arrival.CHANNELS['radar-evidence'])
-    def test_workflows_have_separate_queues_and_no_producer_ledger_writes(self):
+    def test_workflows_share_writer_queue_and_producer_never_writes_ledger(self):
         root=Path(__file__).resolve().parents[1]/'.github/workflows'
         r=(root/'run-intraday-radar.yml').read_text();t=(root/'run-ai-shadow-auto.yml').read_text()
-        self.assertIn('group: astock-radar-evidence-producer',r)
+        self.assertIn('group: astock-radar-ai-shadow-production',r)
         self.assertIn('group: astock-radar-ai-shadow-production',t)
         self.assertNotIn('run: python tools/run_ai_dynamic_portfolio_v2_2.py',r)
         self.assertNotIn('run: python tools/enrich_ai_shadow_benchmarks.py',r)
