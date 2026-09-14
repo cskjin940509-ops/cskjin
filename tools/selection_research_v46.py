@@ -212,7 +212,12 @@ def entry_plan(target):
         'referencePriceAt': target.get('dataAt'),
         'priceMeaningZh': '所列价格为候选采集时的参考；实际买入须重新检查新行情、容量和仓位，保护线按实际成交成本更新。' if ranked else None,
         'invalidationZh': '板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。',
-        'forecastZh': '相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。'}
+        'forecastZh': (f"参考数据时间：{target.get('dataAt') or '未记录'}；目标仓位：{target.get('targetWeightPct', '未计算')}%。"
+                       '所列买入价格为候选参考，实际成交前重验行情与容量。'
+                       + (' 排序提示：' + '；'.join(target.get('rankingWarnings') or []) if target.get('rankingWarnings') else '')
+                       + (' 数据缺口：' + '；'.join(gaps) if gaps else '')
+                       + (' 执行原因：' + target['executionReasonZh'] if target.get('executionReasonZh') else ''))
+                      if ranked else '相对区间研究；未验证涨跌概率，不预测绝对最低/最高点。'}
 
 
 def holding_plan(pos, pending, quote_ok):
