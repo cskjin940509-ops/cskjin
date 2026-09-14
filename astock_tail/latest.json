@@ -6,7 +6,7 @@
   "scheduledFor": "2026-09-14T15:00:00+08:00",
   "capturedAt": "2026-09-14T15:04:39+08:00",
   "marketQuoteAgeSec": 36.4,
-  "dataSource": "腾讯指数行情 + 东方财富延迟源（约15分钟）",
+  "dataSource": "腾讯指数行情 + 东方财富延迟源（约15分钟） + Yunai Quant API",
   "boardSource": "东方财富延迟源（约15分钟）",
   "factorCutoff": "2026-09-14T15:04:39+08:00",
   "confirmedMainlines": [
@@ -143,7 +143,18 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度74.1；日周月共振；20日相对强弱+29.6%"
+      "reason": "综合强度74.1；日周月共振；20日相对强弱+29.6%",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 228.7,
+        "changePct": 0.0042153333,
+        "amount": 4947478507.0
+      },
+      "yunaiCapital": {
+        "largeNetInflow": 15908.260000000002,
+        "totalNetInflow": -7443.25,
+        "role": "独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "002815": {
       "code": "002815",
@@ -168,7 +179,18 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度78.7；日周月共振；20日相对强弱+61.5%"
+      "reason": "综合强度78.7；日周月共振；20日相对强弱+61.5%",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 21.12,
+        "changePct": 0.0517928287,
+        "amount": 3169763737.12
+      },
+      "yunaiCapital": {
+        "largeNetInflow": 10754.989999999998,
+        "totalNetInflow": 27592.830000000016,
+        "role": "独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "001232": {
       "code": "001232",
@@ -193,7 +215,18 @@
       ],
       "risk": "涨幅较大，追高风险",
       "tailTradable": true,
-      "reason": "综合强度73.4；双周期共振；20日相对强弱+20.4%"
+      "reason": "综合强度73.4；双周期共振；20日相对强弱+20.4%",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 197.68,
+        "changePct": 0.0832967996,
+        "amount": 2340861974.25
+      },
+      "yunaiCapital": {
+        "largeNetInflow": 22251.16,
+        "totalNetInflow": 23335.01999999999,
+        "role": "独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300179": {
       "code": "300179",
@@ -216,7 +249,18 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度70.8；日周月共振；20日相对强弱+14.4%"
+      "reason": "综合强度70.8；日周月共振；20日相对强弱+14.4%",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 43.36,
+        "changePct": 0.0724709374,
+        "amount": 2851370374.88
+      },
+      "yunaiCapital": {
+        "largeNetInflow": 13360.380000000001,
+        "totalNetInflow": 13238.51000000001,
+        "role": "独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "603920": {
       "code": "603920",
@@ -241,7 +285,18 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度65.4；日周月共振；20日相对强弱+14.4%"
+      "reason": "综合强度65.4；日周月共振；20日相对强弱+14.4%",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 43.42,
+        "changePct": 0.0475271411,
+        "amount": 2386633398.0
+      },
+      "yunaiCapital": {
+        "largeNetInflow": 7624.750000000004,
+        "totalNetInflow": 11361.770000000004,
+        "role": "独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "603936": {
       "code": "603936",
@@ -264,7 +319,18 @@
       ],
       "risk": "正常",
       "tailTradable": true,
-      "reason": "综合强度73.9；日周月共振；20日相对强弱+33.8%"
+      "reason": "综合强度73.9；日周月共振；20日相对强弱+33.8%",
+      "yunaiQuote": {
+        "verifiedWithin1Pct": true,
+        "price": 22.29,
+        "changePct": 0.0675287356,
+        "amount": 3285731044.0
+      },
+      "yunaiCapital": {
+        "largeNetInflow": 27138.010000000002,
+        "totalNetInflow": 42276.330000000016,
+        "role": "独立大单资金分布，不等同东方财富主力净流入"
+      }
     }
   },
   "noTrade": false,
@@ -275,5 +341,14 @@
   "scheduledSlot": "1500",
   "isFinal": true,
   "phase": "收盘锁定",
-  "snapshotPath": "astock_tail/history/2026-09-14.json"
+  "snapshotPath": "astock_tail/history/2026-09-14.json",
+  "yunaiIntegration": {
+    "state": "connected",
+    "gatewayCheckedAt": "2026-09-14T15:05:12+08:00",
+    "quoteChecked": 6,
+    "quoteVerifiedWithin1Pct": 6,
+    "capitalAvailable": 6,
+    "priceRole": "第二实时行情源交叉核对",
+    "capitalRole": "独立资金确认源；当前不改变TB3池排序"
+  }
 }
