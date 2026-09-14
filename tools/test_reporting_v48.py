@@ -34,4 +34,14 @@ class ReportingTests(unittest.TestCase):
     def test_pending_exit_is_not_no_signal(self):
         r=explain({'selection45':{'pendingExits':[{'code':'600001','state':'WAIT_T_PLUS_ONE'}]}})
         self.assertEqual(r['reasonCode'],'PENDING_EXECUTION'); self.assertIn('T+1',r['reasonZh'])
+    def test_missing_optional_evidence_is_published_as_degraded_not_rejected(self):
+        r=explain({'selection45':{'market':{'state':'PREMARKET'},'portfolioRisk':{'allowNew':True},
+            'candidates':[{'code':'600001','rejections':[],
+                           'missingOptionalEvidence':['ADV20尚未取得20个完整交易日'],
+                           'dataConfidence':'DEGRADED','executionStatus':'WAIT_CONFIRMATION'}]}})
+        self.assertEqual(r['reasonCode'],'DEGRADED_CANDIDATES_WAITING')
+        self.assertEqual(r['rejectedCandidateCount'],0)
+        self.assertEqual(r['degradedCandidateCount'],1)
+        self.assertEqual(r['candidateReasons'][0]['reasons'],[])
+        self.assertTrue(r['candidateReasons'][0]['missingOptionalEvidence'])
 if __name__=='__main__': unittest.main()
