@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-15T15:16:31+08:00",
+  "checkedAt": "2026-09-15T15:18:27+08:00",
   "provider": "Yunai Quant API",
   "connected": true,
   "marketStatus": {
@@ -17,7 +17,7 @@
     "603256"
   ],
   "quoteAvailable": 6,
-  "capitalResponseAvailable": 6,
+  "capitalResponseAvailable": 5,
   "stocks": {
     "300850": {
       "quoteOk": true,
@@ -32,7 +32,7 @@
         "changePct": 0.070056899,
         "volume": 310157.0,
         "amount": 917622659.54,
-        "turnoverRate": 0.077844,
+        "turnoverRate": 0.0008,
         "askSize": null,
         "bidSize": null,
         "latestTime": "1789455600000",
@@ -100,7 +100,7 @@
         "changePct": 0.0657485562,
         "volume": 102351.0,
         "amount": 240036335.98,
-        "turnoverRate": 0.0619,
+        "turnoverRate": 0.0006,
         "askSize": null,
         "bidSize": null,
         "latestTime": "1789455600000",
@@ -163,7 +163,7 @@
         "changePct": 0.0991820041,
         "volume": 37915.0,
         "amount": 161838441.07,
-        "turnoverRate": 0.052381,
+        "turnoverRate": 0.0005,
         "askSize": null,
         "bidSize": null,
         "latestTime": "1789455600000",
@@ -226,7 +226,7 @@
         "changePct": 0.128414603,
         "volume": 147531.0,
         "amount": 624924998.56,
-        "turnoverRate": 0.067864,
+        "turnoverRate": 0.0007,
         "askSize": null,
         "bidSize": null,
         "latestTime": "1789455600000",
@@ -289,7 +289,7 @@
         "changePct": 0.0638069705,
         "volume": 152923.0,
         "amount": 297889718.86,
-        "turnoverRate": 0.047768,
+        "turnoverRate": null,
         "askSize": null,
         "bidSize": null,
         "latestTime": "1789455600000",
@@ -310,10 +310,6 @@
           "timestamp",
           "volume",
           "amount",
-          "turnoverRate",
-          "peRatio",
-          "pbRatio",
-          "marketCap",
           "status",
           "tradeSession",
           "brokerSource"
@@ -341,7 +337,7 @@
     },
     "603256": {
       "quoteOk": true,
-      "capitalOk": true,
+      "capitalOk": false,
       "quote": {
         "price": 138.23,
         "open": 131.0,
@@ -352,7 +348,7 @@
         "changePct": 0.0578556669,
         "volume": 328017.0,
         "amount": 4588322829.0,
-        "turnoverRate": 0.036262,
+        "turnoverRate": 0.0004,
         "askSize": null,
         "bidSize": null,
         "latestTime": "1789455600000",
@@ -379,25 +375,6 @@
           "marketCap",
           "status",
           "tradeSession",
-          "brokerSource"
-        ]
-      },
-      "capital": {
-        "largeNetInflow": -14253.150000000009,
-        "totalNetInflow": -58778.630000000005,
-        "capitalIn": null,
-        "capitalOut": null,
-        "timestamp": 1789455600000,
-        "retrievedAt": "1789456373671",
-        "brokerSource": "L",
-        "keys": [
-          "timestamp",
-          "retrievedAt",
-          "capitalIn",
-          "capitalOut",
-          "largeNetInflow",
-          "totalNetInflow",
-          "netInflow",
           "brokerSource"
         ]
       }
