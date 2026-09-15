@@ -614,207 +614,63 @@
   ],
   "setupCandidates": [
     {
-      "code": "000859",
-      "name": "国风新材",
-      "sector": "MLCC",
+      "code": "002157",
+      "name": "正邦科技",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "等待触发",
+      "action": "盘前观察",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 81.6,
+        "score": 85.8,
         "historical": {
-          "samples": 5,
-          "win5D": 0.6,
-          "avg5D": 0.0101,
-          "avgMFE5D": 0.1061,
-          "avgMAE5D": -0.0722
+          "samples": 16,
+          "win5D": 0.625,
+          "avg5D": 0.0189,
+          "avgMFE5D": 0.0484,
+          "avgMAE5D": -0.021
         }
       },
       "quote": {
-        "price": 9.05,
-        "changePct": -0.22,
-        "open": 8.97,
-        "high": 9.2,
-        "low": 8.89,
-        "dayLowToHighPct": 3.49,
-        "quoteTime": "20260915101612"
+        "price": 3.18,
+        "changePct": 2.25,
+        "open": null,
+        "high": 3.24,
+        "low": 3.09,
+        "dayLowToHighPct": 4.85,
+        "quoteTime": null
       },
       "entryZone": [
-        8.893,
-        8.986
+        3.135,
+        3.199
       ],
-      "triggerPrice": 8.897,
-      "stopLoss": 8.629,
-      "takeProfit1": 9.404,
-      "takeProfit2": 9.715,
+      "triggerPrice": 3.167,
+      "stopLoss": 3.056,
+      "takeProfit1": 3.333,
+      "takeProfit2": 3.443,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 8.629",
+      "invalidation": "收盘/有效价格跌破 3.056",
       "reasons": [
         "趋势回踩",
-        "形态分 82",
-        "距MA20 +0.48 ATR",
-        "主力资金占比 +3.09%"
-      ]
-    },
-    {
-      "code": "000739",
-      "name": "普洛药业",
-      "sector": "CRO",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.3,
-        "historical": {
-          "samples": 5,
-          "win5D": 0.4,
-          "avg5D": 0.0133,
-          "avgMFE5D": 0.0867,
-          "avgMAE5D": -0.0753
-        }
-      },
-      "quote": {
-        "price": 22.4,
-        "changePct": -1.23,
-        "open": 22.58,
-        "high": 22.63,
-        "low": 22.27,
-        "dayLowToHighPct": 1.62,
-        "quoteTime": "20260915101612"
-      },
-      "entryZone": [
-        21.886,
-        22.328
+        "形态分 86",
+        "距MA20 +1.08 ATR",
+        "主力资金占比 +21.71%"
       ],
-      "triggerPrice": 22.107,
-      "stopLoss": 21.226,
-      "takeProfit1": 23.429,
-      "takeProfit2": 24.31,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 21.226",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.84 ATR",
-        "主力资金占比 +6.49%"
-      ]
-    },
-    {
-      "code": "688621",
-      "name": "阳光诺和",
-      "sector": "医疗研发外包",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 73.3,
-        "historical": {
-          "samples": 2,
-          "win5D": 0.5,
-          "avg5D": 0.0092,
-          "avgMFE5D": 0.0652,
-          "avgMAE5D": -0.041
-        }
-      },
-      "quote": {
-        "price": 72.33,
-        "changePct": 2.42,
-        "open": 70.66,
-        "high": 72.36,
-        "low": 69.33,
-        "dayLowToHighPct": 4.37,
-        "quoteTime": "20260915101613"
-      },
-      "entryZone": [
-        72.386,
-        73.335
-      ],
-      "triggerPrice": 72.97,
-      "stopLoss": 70.21,
-      "takeProfit1": 76.836,
-      "takeProfit2": 79.487,
-      "riskReward1": 1.5,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 70.210",
-      "reasons": [
-        "临界突破",
-        "形态分 73",
-        "距MA20 +1.30 ATR",
-        "主力资金占比 +6.48%"
-      ]
-    },
-    {
-      "code": "000516",
-      "name": "国际医学",
-      "sector": "医疗服务",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 70.4,
-        "historical": {
-          "samples": 13,
-          "win5D": 0.3077,
-          "avg5D": -0.0073,
-          "avgMFE5D": 0.0241,
-          "avgMAE5D": -0.0294
-        }
-      },
-      "quote": {
-        "price": 4.26,
-        "changePct": -2.07,
-        "open": 4.35,
-        "high": 4.37,
-        "low": 4.24,
-        "dayLowToHighPct": 3.07,
-        "quoteTime": "20260915101612"
-      },
-      "entryZone": [
-        4.189,
-        4.24
-      ],
-      "triggerPrice": 4.198,
-      "stopLoss": 4.123,
-      "takeProfit1": 4.351,
-      "takeProfit2": 4.443,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 4.123",
-      "reasons": [
-        "趋势回踩",
-        "形态分 70",
-        "距MA20 +0.86 ATR",
-        "主力资金占比 -23.57%"
-      ]
+      "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
     "official": 14,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 4
+    "expandedSetupCandidates": 1,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -827,5 +683,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "ready",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5559,
+    "uniqueRows": 5313,
+    "pagesRequested": 56,
+    "coveragePct": 95.57,
+    "prefiltered": 220,
+    "historyLoaded": 220,
+    "setupMatches": 17,
+    "historicalEdgeMatches": 1,
+    "selected": 1,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
