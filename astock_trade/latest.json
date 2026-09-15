@@ -614,105 +614,113 @@
   ],
   "setupCandidates": [
     {
-      "code": "301071",
-      "name": "力量钻石",
-      "sector": "培育钻石",
+      "code": "000735",
+      "name": "罗 牛 山",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "买入候选",
-      "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 83.3,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 67.63,
-        "changePct": 2.8,
-        "open": 66.63,
-        "high": 67.63,
-        "low": 64.72,
-        "dayLowToHighPct": 4.5,
-        "quoteTime": "20260915095754"
-      },
-      "entryZone": [
-        67.178,
-        68.189
-      ],
-      "triggerPrice": 67.38,
-      "stopLoss": 63.854,
-      "takeProfit1": 73.427,
-      "takeProfit2": 77.256,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 63.854",
-      "reasons": [
-        "突破回踩",
-        "形态分 83",
-        "距MA20 +1.53 ATR",
-        "主力资金占比 -3.48%"
-      ]
-    },
-    {
-      "code": "000519",
-      "name": "中兵红箭",
-      "sector": "培育钻石",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
+      "action": "盘前观察",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 77.6,
+        "score": 85.3,
         "historical": {
-          "samples": 6,
-          "win5D": 0.5,
-          "avg5D": 0.0269,
-          "avgMFE5D": 0.0783,
-          "avgMAE5D": -0.06
+          "samples": 8,
+          "win5D": 0.875,
+          "avg5D": 0.0928,
+          "avgMFE5D": 0.1406,
+          "avgMAE5D": -0.0265
         }
       },
       "quote": {
-        "price": 15.67,
-        "changePct": -0.82,
-        "open": 15.88,
-        "high": 15.89,
-        "low": 15.41,
-        "dayLowToHighPct": 3.11,
-        "quoteTime": "20260915095751"
+        "price": 6.2,
+        "changePct": 2.65,
+        "open": null,
+        "high": 6.56,
+        "low": 5.92,
+        "dayLowToHighPct": 10.81,
+        "quoteTime": null
       },
       "entryZone": [
-        15.631,
-        15.947
+        6.204,
+        6.33
       ],
-      "triggerPrice": 15.789,
-      "stopLoss": 15.035,
-      "takeProfit1": 16.921,
-      "takeProfit2": 17.675,
+      "triggerPrice": 6.267,
+      "stopLoss": 5.891,
+      "takeProfit1": 6.831,
+      "takeProfit2": 7.207,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 15.035",
+      "invalidation": "收盘/有效价格跌破 5.891",
       "reasons": [
         "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.84 ATR",
-        "主力资金占比 -7.05%"
-      ]
+        "形态分 85",
+        "距MA20 +0.52 ATR",
+        "主力资金占比 +6.48%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "002157",
+      "name": "正邦科技",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 85.7,
+        "historical": {
+          "samples": 16,
+          "win5D": 0.625,
+          "avg5D": 0.0189,
+          "avgMFE5D": 0.0484,
+          "avgMAE5D": -0.021
+        }
+      },
+      "quote": {
+        "price": 3.19,
+        "changePct": 2.57,
+        "open": null,
+        "high": 3.24,
+        "low": 3.09,
+        "dayLowToHighPct": 4.85,
+        "quoteTime": null
+      },
+      "entryZone": [
+        3.135,
+        3.199
+      ],
+      "triggerPrice": 3.167,
+      "stopLoss": 3.056,
+      "takeProfit1": 3.333,
+      "takeProfit2": 3.443,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 3.056",
+      "reasons": [
+        "趋势回踩",
+        "形态分 86",
+        "距MA20 +1.18 ATR",
+        "主力资金占比 +21.23%"
+      ],
+      "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
     "official": 14,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 2
+    "expandedSetupCandidates": 2,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -725,5 +733,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "ready",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5559,
+    "uniqueRows": 5339,
+    "pagesRequested": 56,
+    "coveragePct": 96.04,
+    "prefiltered": 220,
+    "historyLoaded": 220,
+    "setupMatches": 14,
+    "historicalEdgeMatches": 2,
+    "selected": 2,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
