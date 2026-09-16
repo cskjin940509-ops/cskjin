@@ -1,45 +1,20 @@
 {
-  "date": "2026-08-17",
+  "date": "2026-09-15",
   "status": "PartiallyVerified",
   "fullyReproducible": false,
   "eligibleForPerformanceComparison": false,
   "issues": [
-    "missing-original-strategy-version",
-    "missing-original-stock-metadata:17",
-    "same-day-frozen-market-snapshot-missing",
-    "raw-price-cross-source-incomplete:2/17",
-    "original-factor-provenance-incomplete",
+    "raw-price-cross-source-incomplete:0/15",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
-    "total": 17,
-    "verified": 2,
-    "coveragePct": 11.76,
+    "total": 15,
+    "verified": 0,
+    "coveragePct": 0.0,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
-      "002371": {
-        "verified": true,
-        "rawClose": 765.97,
-        "maxRelDiff": 0.0,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯",
-          "东方财富",
-          "Yunai"
-        ]
-      },
-      "002384": {
-        "verified": true,
-        "rawClose": 217.66,
-        "maxRelDiff": 0.0,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯",
-          "东方财富"
-        ]
-      },
-      "002916": {
+      "000657": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -48,7 +23,7 @@
           "腾讯"
         ]
       },
-      "300308": {
+      "002378": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -57,7 +32,7 @@
           "腾讯"
         ]
       },
-      "300394": {
+      "002487": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -66,7 +41,7 @@
           "腾讯"
         ]
       },
-      "300476": {
+      "002531": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -75,7 +50,7 @@
           "腾讯"
         ]
       },
-      "300502": {
+      "002842": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -84,7 +59,7 @@
           "腾讯"
         ]
       },
-      "300604": {
+      "300443": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -93,7 +68,7 @@
           "腾讯"
         ]
       },
-      "600183": {
+      "600549": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -102,7 +77,7 @@
           "腾讯"
         ]
       },
-      "688008": {
+      "601218": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -111,7 +86,7 @@
           "腾讯"
         ]
       },
-      "688012": {
+      "603248": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -120,16 +95,7 @@
           "腾讯"
         ]
       },
-      "688017": {
-        "verified": false,
-        "rawClose": null,
-        "maxRelDiff": null,
-        "reason": "fewer-than-two-agreeing-raw-providers",
-        "providersWithRow": [
-          "腾讯"
-        ]
-      },
-      "688072": {
+      "688037": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -147,15 +113,6 @@
           "腾讯"
         ]
       },
-      "688200": {
-        "verified": false,
-        "rawClose": null,
-        "maxRelDiff": null,
-        "reason": "fewer-than-two-agreeing-raw-providers",
-        "providersWithRow": [
-          "腾讯"
-        ]
-      },
       "688361": {
         "verified": false,
         "rawClose": null,
@@ -165,7 +122,25 @@
           "腾讯"
         ]
       },
-      "688981": {
+      "688409": {
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
+        "providersWithRow": [
+          "腾讯"
+        ]
+      },
+      "688419": {
+        "verified": false,
+        "rawClose": null,
+        "maxRelDiff": null,
+        "reason": "fewer-than-two-agreeing-raw-providers",
+        "providersWithRow": [
+          "腾讯"
+        ]
+      },
+      "688729": {
         "verified": false,
         "rawClose": null,
         "maxRelDiff": null,
@@ -178,60 +153,48 @@
   },
   "factorRecompute": {
     "available": 0,
-    "total": 17,
+    "total": 15,
     "coveragePct": 0.0,
-    "cutoff": "2026-08-17",
+    "cutoff": "2026-09-15",
     "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution",
     "stocks": {
-      "002371": {
+      "000657": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "002384": {
+      "002378": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "002916": {
+      "002487": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "300308": {
+      "002531": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "300394": {
+      "002842": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "300476": {
+      "300443": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "300502": {
+      "600549": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "300604": {
+      "601218": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "600183": {
+      "603248": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "688008": {
-        "available": false,
-        "error": "RemoteDisconnected"
-      },
-      "688012": {
-        "available": false,
-        "error": "RemoteDisconnected"
-      },
-      "688017": {
-        "available": false,
-        "error": "RemoteDisconnected"
-      },
-      "688072": {
+      "688037": {
         "available": false,
         "error": "RemoteDisconnected"
       },
@@ -239,48 +202,55 @@
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "688200": {
-        "available": false,
-        "error": "RemoteDisconnected"
-      },
       "688361": {
         "available": false,
         "error": "RemoteDisconnected"
       },
-      "688981": {
+      "688409": {
+        "available": false,
+        "error": "RemoteDisconnected"
+      },
+      "688419": {
+        "available": false,
+        "error": "RemoteDisconnected"
+      },
+      "688729": {
         "available": false,
         "error": "RemoteDisconnected"
       }
     }
   },
   "frozenMarket": {
-    "available": false,
-    "reason": "frozen-market-snapshot-missing"
+    "available": true,
+    "sourceDate": "2026-09-15",
+    "availableAt": "2026-09-15T17:42:02+08:00",
+    "boardCount": 200,
+    "sameDay": true
   },
   "factorProvenance": {
-    "complete": false,
+    "complete": true,
     "checks": {
       "B0": {
         "used": true,
-        "proven": false,
-        "evidence": null
+        "proven": true,
+        "evidence": "strategyVersion+stockMetadata"
       },
       "B1": {
         "used": true,
-        "proven": false,
-        "evidence": null,
+        "proven": true,
+        "evidence": "可用：交易所两融T+1日频，数据日 2026-09-11，覆盖 2000 只股票",
         "requiredSource": "margin"
       },
       "B2": {
-        "used": true,
-        "proven": false,
-        "evidence": null,
+        "used": false,
+        "proven": true,
+        "evidence": "可用：交易所ETF份额T+1日频，数据日 2026-09-11，覆盖 1747 只ETF；净申赎金额为份额变化×价格的估算",
         "requiredSource": "etf"
       },
       "B3": {
         "used": true,
-        "proven": false,
-        "evidence": null
+        "proven": true,
+        "evidence": "frozen-stock-main-flow-fields"
       }
     }
   },

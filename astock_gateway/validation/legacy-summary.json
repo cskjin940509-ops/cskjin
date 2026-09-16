@@ -1,8 +1,8 @@
 {
-  "auditedAt": "2026-09-14T16:18:48+08:00",
+  "auditedAt": "2026-09-16T15:42:18+08:00",
   "summary": {
-    "Verified": 7,
-    "PartiallyVerified": 7,
+    "Verified": 8,
+    "PartiallyVerified": 8,
     "LegacyUnverified": 0
   },
   "reports": [
@@ -15,7 +15,7 @@
         "missing-original-strategy-version",
         "missing-original-stock-metadata:17",
         "same-day-frozen-market-snapshot-missing",
-        "raw-price-cross-source-incomplete:1/17",
+        "raw-price-cross-source-incomplete:2/17",
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ]
@@ -77,6 +77,16 @@
       "eligibleForPerformanceComparison": false,
       "issues": [
         "raw-price-cross-source-incomplete:0/21",
+        "point-in-time-constituent-snapshot-missing"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "status": "PartiallyVerified",
+      "fullyReproducible": false,
+      "eligibleForPerformanceComparison": false,
+      "issues": [
+        "raw-price-cross-source-incomplete:0/15",
         "point-in-time-constituent-snapshot-missing"
       ]
     }
