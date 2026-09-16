@@ -97126,7 +97126,7 @@
           "basis": "未复权日线",
           "providers": [
             "腾讯",
-            "Yunai"
+            "东方财富"
           ],
           "maxRelDiff": 0.0,
           "note": "最低到最高仅为理论区间，不代表按时间顺序可实现收益。"
@@ -97228,7 +97228,7 @@
           "basis": "未复权日线",
           "providers": [
             "腾讯",
-            "Yunai"
+            "东方财富"
           ],
           "maxRelDiff": 0.0,
           "note": "最低到最高仅为理论区间，不代表按时间顺序可实现收益。"
@@ -97683,7 +97683,7 @@
     "note": "日终扫描已冻结；B1两融与B2 ETF一级份额均按T+1已发布数据参与，B4为基础/主力/慢资金综合排序。",
     "marketSnapshot": {
       "sourceDate": "2026-09-16",
-      "availableAt": "2026-09-16T15:15:41+08:00",
+      "availableAt": "2026-09-16T15:18:50+08:00",
       "confidence": "高",
       "verifiedToday": true,
       "dataSource": "腾讯行情 + 东方财富",
@@ -97693,42 +97693,42 @@
           "close": 3891.6,
           "changePct": 0.71,
           "amount": 871141350000.0,
-          "quoteTime": "151600"
+          "quoteTime": "151900"
         },
         "sz399006": {
           "name": "创业板指",
           "close": 3311.47,
           "changePct": 1.96,
           "amount": 461681410000.0,
-          "quoteTime": "151542"
+          "quoteTime": "151842"
         },
         "sh000688": {
           "name": "科创50",
           "close": 1616.19,
           "changePct": 4.14,
           "amount": 95462300000.0,
-          "quoteTime": "151600"
+          "quoteTime": "151900"
         },
         "sh000300": {
           "name": "沪深300",
           "close": 4480.27,
           "changePct": 0.68,
           "amount": 476451540000.0,
-          "quoteTime": "151600"
+          "quoteTime": "151900"
         },
         "sh000852": {
           "name": "中证1000",
           "close": 7587.43,
           "changePct": 2.01,
           "amount": 398250650000.0,
-          "quoteTime": "151600"
+          "quoteTime": "151900"
         },
         "sz399001": {
           "name": "深证成指",
           "close": 13454.74,
           "changePct": 1.26,
           "amount": 967980530000.0,
-          "quoteTime": "151527"
+          "quoteTime": "151827"
         }
       },
       "totalAmount": 1839009283772.5,
@@ -97737,7 +97737,6 @@
       "flat": 185,
       "medianChangePct": 0.98,
       "sampleCount": 5207,
-      "breadthStatus": "全市场统计可用",
       "coreIndexCoverage": "6/6",
       "coreIndexSource": "腾讯当日收盘快照"
     },
@@ -100347,12 +100346,15 @@
         }
       ],
       "sourceDate": "2026-09-16",
-      "availableAt": "2026-09-16T15:15:41+08:00"
+      "availableAt": "2026-09-16T15:18:50+08:00"
     },
     "syncStatus": {
       "officialCohort": "ready",
       "officialUpdatedAt": "2026-09-16T15:17:22+08:00",
-      "strategyVersion": "v1.9.0-verified-point-in-time-bse-slow-money"
+      "strategyVersion": "v1.9.0-verified-point-in-time-bse-slow-money",
+      "marketSnapshot": "ready",
+      "boardHeatmap": "ready",
+      "marketUpdatedAt": "2026-09-16T15:18:50+08:00"
     },
     "upgraded": [],
     "downgraded": [
@@ -100457,7 +100459,7 @@
       },
       "B23": {}
     },
-    "tradeFactsUpdatedAt": "2026-09-16T15:18:03+08:00",
+    "tradeFactsUpdatedAt": "2026-09-16T15:20:12+08:00",
     "trackingState": {
       "entryRule": "信号日后一交易日开盘",
       "state": "等待下一交易日可成交开盘",
