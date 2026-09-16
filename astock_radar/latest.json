@@ -8,7 +8,7 @@
   "scheduledSlot": "1450",
   "refreshIntervalMin": 5,
   "marketQuoteAgeSec": 2.5,
-  "dataSource": "腾讯指数行情 + 东方财富板块/个股 + 历史日线",
+  "dataSource": "腾讯指数行情 + 东方财富板块/个股 + 历史日线 + Yunai独立确认",
   "mainlines": [
     {
       "boardCode": "BK1002",
@@ -33,7 +33,8 @@
       "firstConfirmingAt": "2026-09-16T11:11:07+08:00",
       "firstEstablishedAt": null,
       "leadTimeMin": 279,
-      "reasonZh": "形成分66；吸筹65；上涨扩散86%；资金强度+6.9%；价格延伸扣分10"
+      "reasonZh": "形成分66；吸筹65；上涨扩散86%；资金强度+6.9%；价格延伸扣分10",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1364",
@@ -58,7 +59,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 0,
-      "reasonZh": "形成分64；吸筹81；上涨扩散100%；资金强度+8.0%；价格延伸扣分4"
+      "reasonZh": "形成分64；吸筹81；上涨扩散100%；资金强度+8.0%；价格延伸扣分4",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1215",
@@ -83,7 +85,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": 0,
-      "reasonZh": "形成分62；吸筹61；上涨扩散83%；资金强度+6.3%；价格延伸扣分10"
+      "reasonZh": "形成分62；吸筹61；上涨扩散83%；资金强度+6.3%；价格延伸扣分10",
+      "return5Pct": null
     },
     {
       "boardCode": "BK0964",
@@ -108,7 +111,8 @@
       "firstConfirmingAt": "2026-09-16T10:10:36+08:00",
       "firstEstablishedAt": null,
       "leadTimeMin": 279,
-      "reasonZh": "形成分61；吸筹65；上涨扩散86%；资金强度+6.7%；价格延伸扣分10"
+      "reasonZh": "形成分61；吸筹65；上涨扩散86%；资金强度+6.7%；价格延伸扣分10",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1128",
@@ -133,7 +137,8 @@
       "firstConfirmingAt": "2026-09-16T11:11:07+08:00",
       "firstEstablishedAt": null,
       "leadTimeMin": 279,
-      "reasonZh": "形成分60；吸筹65；上涨扩散97%；资金强度+6.5%；价格延伸扣分20"
+      "reasonZh": "形成分60；吸筹65；上涨扩散97%；资金强度+6.5%；价格延伸扣分20",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1753",
@@ -158,7 +163,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": null,
-      "reasonZh": "形成分56；吸筹76；上涨扩散98%；资金强度+7.2%；价格延伸扣分10"
+      "reasonZh": "形成分56；吸筹76；上涨扩散98%；资金强度+7.2%；价格延伸扣分10",
+      "return5Pct": null
     },
     {
       "boardCode": "BK1332",
@@ -183,7 +189,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": null,
-      "reasonZh": "形成分54；吸筹73；上涨扩散97%；资金强度+7.0%；价格延伸扣分10"
+      "reasonZh": "形成分54；吸筹73；上涨扩散97%；资金强度+7.0%；价格延伸扣分10",
+      "return5Pct": null
     },
     {
       "boardCode": "BK0915",
@@ -208,7 +215,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": null,
-      "reasonZh": "形成分54；吸筹74；上涨扩散94%；资金强度+7.1%；价格延伸扣分10"
+      "reasonZh": "形成分54；吸筹74；上涨扩散94%；资金强度+7.1%；价格延伸扣分10",
+      "return5Pct": null
     },
     {
       "boardCode": "BK0732",
@@ -233,7 +241,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": null,
-      "reasonZh": "形成分53；吸筹64；上涨扩散100%；资金强度+5.8%；价格延伸扣分10"
+      "reasonZh": "形成分53；吸筹64；上涨扩散100%；资金强度+5.8%；价格延伸扣分10",
+      "return5Pct": null
     },
     {
       "boardCode": "BK0580",
@@ -258,7 +267,8 @@
       "firstConfirmingAt": null,
       "firstEstablishedAt": null,
       "leadTimeMin": null,
-      "reasonZh": "形成分52；吸筹70；上涨扩散91%；资金强度+6.9%；价格延伸扣分10"
+      "reasonZh": "形成分52；吸筹70；上涨扩散91%；资金强度+6.9%；价格延伸扣分10",
+      "return5Pct": null
     }
   ],
   "stocks": {
@@ -281,7 +291,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分41；主线形成66；资金81；追高风险高"
+      "reasonZh": "提前分41；主线形成66；资金81；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 185.21,
+        "changePct": 0.1000178179,
+        "quoteTime": 1789541530370,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 144528.77,
+        "totalNetInflow": 74751.28999999998,
+        "capitalTimestamp": "1789541477219",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "600105": {
       "code": "600105",
@@ -302,7 +326,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分39；主线形成62；资金81；追高风险高"
+      "reasonZh": "提前分39；主线形成62；资金81；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 45.22,
+        "changePct": 0.099975675,
+        "quoteTime": 1789541527000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 181683.12,
+        "totalNetInflow": 100241.20000000001,
+        "capitalTimestamp": "1789541477003",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "002396": {
       "code": "002396",
@@ -323,7 +361,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分37；主线形成62；资金77；追高风险高"
+      "reasonZh": "提前分37；主线形成62；资金77；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 38.83,
+        "changePct": 0.1,
+        "quoteTime": 1789541529997,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": -2173.6900000000023,
+        "totalNetInflow": -21653.410000000033,
+        "capitalTimestamp": "1789541478046",
+        "confirmation": "NEGATIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "601208": {
       "code": "601208",
@@ -344,7 +396,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分34；主线形成61；资金74；追高风险高"
+      "reasonZh": "提前分34；主线形成61；资金74；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 54.31,
+        "changePct": 0.1000607656,
+        "quoteTime": 1789541525000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 64219.219999999994,
+        "totalNetInflow": 39515.139999999985,
+        "capitalTimestamp": "1789541473783",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "002222": {
       "code": "002222",
@@ -365,7 +431,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分35；主线形成66；资金71；追高风险高"
+      "reasonZh": "提前分35；主线形成66；资金71；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 68.55,
+        "changePct": 0.0806807438,
+        "quoteTime": 1789541530370,
+        "priceVsPrimaryPct": 0.0438,
+        "largeNetInflow": 20370.7,
+        "totalNetInflow": 13107.699999999997,
+        "capitalTimestamp": "1789541478004",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "688313": {
       "code": "688313",
@@ -386,7 +466,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分50；主线形成66；资金63；追高风险中"
+      "reasonZh": "提前分50；主线形成66；资金63；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 160.78,
+        "changePct": 0.0954715696,
+        "quoteTime": 1789541528000,
+        "priceVsPrimaryPct": 0.0187,
+        "largeNetInflow": 46199.479999999996,
+        "totalNetInflow": 96057.63000000003,
+        "capitalTimestamp": "1789541475999",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "600487": {
       "code": "600487",
@@ -407,7 +501,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分50；主线形成62；资金69；追高风险中"
+      "reasonZh": "提前分50；主线形成62；资金69；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 65.47,
+        "changePct": 0.0488625441,
+        "quoteTime": 1789541528000,
+        "priceVsPrimaryPct": 0.0153,
+        "largeNetInflow": 26968.960000000003,
+        "totalNetInflow": 121532.7300000001,
+        "capitalTimestamp": "1789541422150",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300502": {
       "code": "300502",
@@ -428,7 +536,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分56；主线形成62；资金61；追高风险低"
+      "reasonZh": "提前分56；主线形成62；资金61；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 423.15,
+        "changePct": 0.0657162288,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": 0.0331,
+        "largeNetInflow": 111217.8,
+        "totalNetInflow": 306461.22,
+        "capitalTimestamp": "1789541478202",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300308": {
       "code": "300308",
@@ -449,7 +571,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分56；主线形成62；资金62；追高风险低"
+      "reasonZh": "提前分56；主线形成62；资金62；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 907.0,
+        "changePct": 0.0502771959,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": 0.0298,
+        "largeNetInflow": 133231.9,
+        "totalNetInflow": 319398.18000000005,
+        "capitalTimestamp": "1789541477165",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300548": {
       "code": "300548",
@@ -470,7 +606,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分27；主线形成62；资金54；追高风险高"
+      "reasonZh": "提前分27；主线形成62；资金54；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 233.43,
+        "changePct": 0.1287373004,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": 0.0686,
+        "largeNetInflow": 48187.59,
+        "totalNetInflow": 95861.01999999999,
+        "capitalTimestamp": "1789541474074",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300620": {
       "code": "300620",
@@ -491,7 +641,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分57；主线形成66；资金63；追高风险低"
+      "reasonZh": "提前分57；主线形成66；资金63；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 295.92,
+        "changePct": 0.0465864874,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.0439,
+        "largeNetInflow": 31498.38,
+        "totalNetInflow": 57640.000000000015,
+        "capitalTimestamp": "1789541477120",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "301165": {
       "code": "301165",
@@ -512,7 +676,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分58；主线形成62；资金71；追高风险低"
+      "reasonZh": "提前分58；主线形成62；资金71；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 113.01,
+        "changePct": 0.0650329877,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": 0.0886,
+        "largeNetInflow": -175.90999999999985,
+        "totalNetInflow": 12236.969999999987,
+        "capitalTimestamp": "1789541478160",
+        "confirmation": "NEGATIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "600330": {
       "code": "600330",
@@ -533,7 +711,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分47；主线形成60；资金68；追高风险中"
+      "reasonZh": "提前分47；主线形成60；资金68；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 30.73,
+        "changePct": 0.0592490527,
+        "quoteTime": 1789541528000,
+        "priceVsPrimaryPct": 0.0325,
+        "largeNetInflow": 32002.63,
+        "totalNetInflow": 52102.21000000002,
+        "capitalTimestamp": "1789541369318",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300456": {
       "code": "300456",
@@ -554,7 +746,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分56；主线形成66；资金63；追高风险低"
+      "reasonZh": "提前分56；主线形成66；资金63；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 35.83,
+        "changePct": 0.0578171091,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.0279,
+        "largeNetInflow": -1066.9800000000005,
+        "totalNetInflow": 6965.619999999995,
+        "capitalTimestamp": "1789541478118",
+        "confirmation": "NEGATIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "605358": {
       "code": "605358",
@@ -575,7 +781,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分30；主线形成60；资金70；追高风险高"
+      "reasonZh": "提前分30；主线形成60；资金70；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 44.87,
+        "changePct": 0.1000245158,
+        "quoteTime": 1789541528000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 11987.41,
+        "totalNetInflow": 845.0000000000146,
+        "capitalTimestamp": "1789541473621",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "002384": {
       "code": "002384",
@@ -596,7 +816,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分46；主线形成60；资金64；追高风险中"
+      "reasonZh": "提前分46；主线形成60；资金64；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 192.06,
+        "changePct": 0.0510338037,
+        "quoteTime": 1789541529997,
+        "priceVsPrimaryPct": -0.0052,
+        "largeNetInflow": 87216.32,
+        "totalNetInflow": 190648.25,
+        "capitalTimestamp": "1789541366424",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "301536": {
       "code": "301536",
@@ -617,7 +851,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分57；主线形成66；资金68；追高风险低"
+      "reasonZh": "提前分57；主线形成66；资金68；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 114.32,
+        "changePct": 0.046852123,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 2615.85,
+        "totalNetInflow": 7548.599999999991,
+        "capitalTimestamp": "1789541477064",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "000988": {
       "code": "000988",
@@ -638,7 +886,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分45；主线形成60；资金63；追高风险中"
+      "reasonZh": "提前分45；主线形成60；资金63；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 106.01,
+        "changePct": 0.0579840319,
+        "quoteTime": 1789541530370,
+        "priceVsPrimaryPct": 0.0094,
+        "largeNetInflow": 74482.15,
+        "totalNetInflow": 109061.99000000002,
+        "capitalTimestamp": "1789541376169",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "002491": {
       "code": "002491",
@@ -659,7 +921,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分21；主线形成62；资金41；追高风险高"
+      "reasonZh": "提前分21；主线形成62；资金41；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 24.45,
+        "changePct": 0.0998650472,
+        "quoteTime": 1789541529997,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 73959.86000000002,
+        "totalNetInflow": 82639.59000000003,
+        "capitalTimestamp": "1789541473666",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "688205": {
       "code": "688205",
@@ -680,7 +956,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分54；主线形成62；资金59；追高风险低"
+      "reasonZh": "提前分54；主线形成62；资金59；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 219.0,
+        "changePct": 0.0512019231,
+        "quoteTime": 1789541530438,
+        "priceVsPrimaryPct": -0.0137,
+        "largeNetInflow": 8502.75,
+        "totalNetInflow": 23560.47,
+        "capitalTimestamp": "1789541474216",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "600498": {
       "code": "600498",
@@ -701,7 +991,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分42；主线形成62；资金52；追高风险中"
+      "reasonZh": "提前分42；主线形成62；资金52；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "price": 42.29,
+        "quoteTime": 1789541526000
+      }
     },
     "300394": {
       "code": "300394",
@@ -722,7 +1017,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分52；主线形成62；资金54；追高风险低"
+      "reasonZh": "提前分52；主线形成62；资金54；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 269.02,
+        "changePct": 0.0455357837,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.0149,
+        "largeNetInflow": 64511.3,
+        "totalNetInflow": 126344.33999999997,
+        "capitalTimestamp": "1789541474154",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "301183": {
       "code": "301183",
@@ -743,7 +1052,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分22；主线形成66；资金40；追高风险高"
+      "reasonZh": "提前分22；主线形成66；资金40；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 302.27,
+        "changePct": 0.1412271422,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.1389,
+        "largeNetInflow": 35334.53,
+        "totalNetInflow": 53371.33,
+        "capitalTimestamp": "1789541474112",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "301205": {
       "code": "301205",
@@ -764,7 +1087,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分43；主线形成62；资金55；追高风险中"
+      "reasonZh": "提前分43；主线形成62；资金55；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "price": 294.0,
+        "quoteTime": 1789541526000
+      }
     },
     "300570": {
       "code": "300570",
@@ -785,7 +1113,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分50；主线形成62；资金48；追高风险低"
+      "reasonZh": "提前分50；主线形成62；资金48；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 205.92,
+        "changePct": 0.0595195226,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.0097,
+        "largeNetInflow": 16925.36,
+        "totalNetInflow": 55262.22000000003,
+        "capitalTimestamp": "1789541476046",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "603083": {
       "code": "603083",
@@ -806,7 +1148,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分51；主线形成62；资金54；追高风险低"
+      "reasonZh": "提前分51；主线形成62；资金54；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 222.91,
+        "changePct": 0.0304990758,
+        "quoteTime": 1789541527000,
+        "priceVsPrimaryPct": -0.009,
+        "largeNetInflow": 14519.36,
+        "totalNetInflow": 31618.48999999996,
+        "capitalTimestamp": "1789541371194",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "600584": {
       "code": "600584",
@@ -827,7 +1183,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分44；主线形成60；资金64；追高风险中"
+      "reasonZh": "提前分44；主线形成60；资金64；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 69.52,
+        "changePct": 0.0397846246,
+        "quoteTime": 1789541529939,
+        "priceVsPrimaryPct": 0.0144,
+        "largeNetInflow": 12668.87,
+        "totalNetInflow": 29377.429999999964,
+        "capitalTimestamp": "1789541375953",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "688167": {
       "code": "688167",
@@ -848,7 +1218,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分39；主线形成66；资金41；追高风险中"
+      "reasonZh": "提前分39；主线形成66；资金41；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "price": 301.24,
+        "quoteTime": 1789541530438
+      }
     },
     "002579": {
       "code": "002579",
@@ -869,7 +1244,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分41；主线形成60；资金55；追高风险中"
+      "reasonZh": "提前分41；主线形成60；资金55；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "price": 19.7,
+        "quoteTime": 1789541529997
+      }
     },
     "000725": {
       "code": "000725",
@@ -890,7 +1270,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分52；主线形成60；资金63；追高风险低"
+      "reasonZh": "提前分52；主线形成60；资金63；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 5.44,
+        "changePct": 0.0322580645,
+        "quoteTime": 1789541530370,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 23650.299999999996,
+        "totalNetInflow": 105713.39999999997,
+        "capitalTimestamp": "1789541379025",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300684": {
       "code": "300684",
@@ -911,7 +1305,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分50；主线形成60；资金58；追高风险低"
+      "reasonZh": "提前分50；主线形成60；资金58；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 93.9,
+        "changePct": 0.0577117786,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.1169,
+        "largeNetInflow": 1374.26,
+        "totalNetInflow": 18041.98000000001,
+        "capitalTimestamp": "1789541475207",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "603118": {
       "code": "603118",
@@ -932,7 +1340,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分40；主线形成62；资金53；追高风险中"
+      "reasonZh": "提前分40；主线形成62；资金53；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "price": 16.96,
+        "quoteTime": 1789541527000
+      }
     },
     "301689": {
       "code": "301689",
@@ -953,7 +1366,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分37；主线形成61；资金46；追高风险中"
+      "reasonZh": "提前分37；主线形成61；资金46；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "price": 53.58,
+        "quoteTime": 1789541526000
+      }
     },
     "300975": {
       "code": "300975",
@@ -974,7 +1392,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分48；主线形成66；资金46；追高风险低"
+      "reasonZh": "提前分48；主线形成66；资金46；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 27.08,
+        "changePct": 0.037164751,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": 0.1109,
+        "largeNetInflow": 8930.59,
+        "totalNetInflow": 15336.259999999995,
+        "capitalTimestamp": "1789541476147",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "600522": {
       "code": "600522",
@@ -995,7 +1427,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分45；主线形成62；资金40；追高风险低"
+      "reasonZh": "提前分45；主线形成62；资金40；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 35.18,
+        "changePct": 0.0191138141,
+        "quoteTime": 1789541529940,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 1334.939999999995,
+        "totalNetInflow": 28409.74999999994,
+        "capitalTimestamp": "1789541391306",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "000938": {
       "code": "000938",
@@ -1016,7 +1462,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分49；主线形成60；资金55；追高风险低"
+      "reasonZh": "提前分49；主线形成60；资金55；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 34.02,
+        "changePct": 0.0352905385,
+        "quoteTime": 1789541530370,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 438.2999999999993,
+        "totalNetInflow": 43747.359999999986,
+        "capitalTimestamp": "1789541383960",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "601138": {
       "code": "601138",
@@ -1037,7 +1497,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分49；主线形成60；资金59；追高风险低"
+      "reasonZh": "提前分49；主线形成60；资金59；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 62.38,
+        "changePct": 0.0266447368,
+        "quoteTime": 1789541529940,
+        "priceVsPrimaryPct": -0.032,
+        "largeNetInflow": 21880.03,
+        "totalNetInflow": 54298.149999999994,
+        "capitalTimestamp": "1789541372218",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "688195": {
       "code": "688195",
@@ -1058,7 +1532,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分45；主线形成66；资金40；追高风险低"
+      "reasonZh": "提前分45；主线形成66；资金40；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 187.8,
+        "changePct": 0.0500251523,
+        "quoteTime": 1789541528000,
+        "priceVsPrimaryPct": -0.0053,
+        "largeNetInflow": 5150.74,
+        "totalNetInflow": 21151.740000000013,
+        "capitalTimestamp": "1789541480219",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "002156": {
       "code": "002156",
@@ -1079,7 +1567,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分46；主线形成60；资金50；追高风险低"
+      "reasonZh": "提前分46；主线形成60；资金50；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 59.21,
+        "changePct": 0.033327517,
+        "quoteTime": 1789541530370,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 12356.21,
+        "totalNetInflow": 32747.26999999996,
+        "capitalTimestamp": "1789541379269",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "601869": {
       "code": "601869",
@@ -1100,7 +1602,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分48；主线形成62；资金40；追高风险低"
+      "reasonZh": "提前分48；主线形成62；资金40；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 464.12,
+        "changePct": 0.0058225108,
+        "quoteTime": 1789541529940,
+        "priceVsPrimaryPct": -0.1075,
+        "largeNetInflow": 4568.070000000001,
+        "totalNetInflow": -15281.350000000006,
+        "capitalTimestamp": "1789541392341",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "688143": {
       "code": "688143",
@@ -1121,7 +1637,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分49；主线形成62；资金43；追高风险低"
+      "reasonZh": "提前分49；主线形成62；资金43；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 191.06,
+        "changePct": 0.0065789474,
+        "quoteTime": 1789541528000,
+        "priceVsPrimaryPct": -0.0157,
+        "largeNetInflow": 315.4399999999996,
+        "totalNetInflow": -11399.040000000008,
+        "capitalTimestamp": "1789541476194",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "002185": {
       "code": "002185",
@@ -1142,7 +1672,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分41；主线形成60；资金39；追高风险低"
+      "reasonZh": "提前分41；主线形成60；资金39；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 16.81,
+        "quoteTime": 1789541530370
+      }
     },
     "688025": {
       "code": "688025",
@@ -1163,7 +1698,21 @@
       "actionZh": "等待回踩，禁止追高",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分11；主线形成60；资金29；追高风险高"
+      "reasonZh": "提前分11；主线形成60；资金29；追高风险高",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 445.0,
+        "changePct": 0.1286874841,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.0899,
+        "largeNetInflow": 36099.11,
+        "totalNetInflow": 61928.18000000001,
+        "capitalTimestamp": "1789541474005",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300398": {
       "code": "300398",
@@ -1184,7 +1733,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分48；主线形成61；资金44；追高风险低"
+      "reasonZh": "提前分48；主线形成61；资金44；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 36.33,
+        "changePct": 0.031516184,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 9170.600000000002,
+        "totalNetInflow": 7210.189999999988,
+        "capitalTimestamp": "1789541476101",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "603773": {
       "code": "603773",
@@ -1205,7 +1768,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分43；主线形成60；资金46；追高风险低"
+      "reasonZh": "提前分43；主线形成60；资金46；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 92.55,
+        "quoteTime": 1789541527000
+      }
     },
     "300857": {
       "code": "300857",
@@ -1226,7 +1794,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分47；主线形成60；资金44；追高风险低"
+      "reasonZh": "提前分47；主线形成60；资金44；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 258.62,
+        "changePct": 0.0313459621,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.0232,
+        "largeNetInflow": 19218.08,
+        "totalNetInflow": 36425.51000000001,
+        "capitalTimestamp": "1789541480066",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "688498": {
       "code": "688498",
@@ -1247,7 +1829,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分40；主线形成60；资金36；追高风险低"
+      "reasonZh": "提前分40；主线形成60；资金36；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 1749.98,
+        "quoteTime": 1789541527000
+      }
     },
     "603936": {
       "code": "603936",
@@ -1268,7 +1855,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分43；主线形成66；资金27；追高风险低"
+      "reasonZh": "提前分43；主线形成66；资金27；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 22.39,
+        "quoteTime": 1789541530438
+      }
     },
     "000070": {
       "code": "000070",
@@ -1289,7 +1881,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分39；主线形成62；资金32；追高风险低"
+      "reasonZh": "提前分39；主线形成62；资金32；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 17.2,
+        "quoteTime": 1789541530370
+      }
     },
     "688668": {
       "code": "688668",
@@ -1310,7 +1907,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分38；主线形成62；资金29；追高风险低"
+      "reasonZh": "提前分38；主线形成62；资金29；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 262.88,
+        "quoteTime": 1789541529000
+      }
     },
     "603236": {
       "code": "603236",
@@ -1331,7 +1933,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分28；主线形成62；资金27；追高风险中"
+      "reasonZh": "提前分28；主线形成62；资金27；追高风险中",
+      "yunai": {
+        "quoteOk": true,
+        "price": 69.76,
+        "quoteTime": 1789541529940
+      }
     },
     "002475": {
       "code": "002475",
@@ -1352,7 +1959,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分38；主线形成60；资金35；追高风险低"
+      "reasonZh": "提前分38；主线形成60；资金35；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 52.88,
+        "quoteTime": 1789541529997
+      }
     },
     "300757": {
       "code": "300757",
@@ -1373,7 +1985,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分44；主线形成60；资金38；追高风险低"
+      "reasonZh": "提前分44；主线形成60；资金38；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 612.04,
+        "changePct": 0.0184470541,
+        "quoteTime": 1789541526000,
+        "priceVsPrimaryPct": -0.0212,
+        "largeNetInflow": 17592.48,
+        "totalNetInflow": 15131.529999999999,
+        "capitalTimestamp": "1789541480151",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "000063": {
       "code": "000063",
@@ -1394,7 +2020,21 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分44；主线形成62；资金37；追高风险低"
+      "reasonZh": "提前分44；主线形成62；资金37；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "capitalOk": true,
+        "unsupportedMarket": null,
+        "price": 32.39,
+        "changePct": 0.0118712902,
+        "quoteTime": 1789541530370,
+        "priceVsPrimaryPct": 0.0,
+        "largeNetInflow": 5359.660000000001,
+        "totalNetInflow": 8414.779999999999,
+        "capitalTimestamp": "1789541357976",
+        "confirmation": "POSITIVE_INDEPENDENT_FLOW",
+        "semanticNote": "largeNetInflow为Yunai独立大单资金分布，不等同东方财富主力净流入"
+      }
     },
     "300136": {
       "code": "300136",
@@ -1415,7 +2055,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分36；主线形成61；资金28；追高风险低"
+      "reasonZh": "提前分36；主线形成61；资金28；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 58.42,
+        "quoteTime": 1789541526000
+      }
     },
     "002897": {
       "code": "002897",
@@ -1436,7 +2081,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分40；主线形成62；资金24；追高风险低"
+      "reasonZh": "提前分40；主线形成62；资金24；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 71.59,
+        "quoteTime": 1789541526000
+      }
     },
     "603228": {
       "code": "603228",
@@ -1457,7 +2107,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分41；主线形成60；资金30；追高风险低"
+      "reasonZh": "提前分41；主线形成60；资金30；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 106.09,
+        "quoteTime": 1789541527000
+      }
     },
     "688808": {
       "code": "688808",
@@ -1478,7 +2133,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分40；主线形成60；资金30；追高风险低"
+      "reasonZh": "提前分40；主线形成60；资金30；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 2317.33,
+        "quoteTime": 1789541528000
+      }
     },
     "600410": {
       "code": "600410",
@@ -1499,7 +2159,12 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分38；主线形成60；资金24；追高风险低"
+      "reasonZh": "提前分38；主线形成60；资金24；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 15.81,
+        "quoteTime": 1789541527000
+      }
     },
     "600184": {
       "code": "600184",
@@ -1520,7 +2185,28 @@
       "actionZh": "提前观察",
       "RS20": null,
       "MTA": "历史趋势未同步",
-      "reasonZh": "提前分37；主线形成60；资金26；追高风险低"
+      "reasonZh": "提前分37；主线形成60；资金26；追高风险低",
+      "yunai": {
+        "quoteOk": true,
+        "price": 21.27,
+        "quoteTime": 1789541528000
+      }
+    },
+    "001979": {
+      "code": "001979",
+      "yunai": {
+        "quoteOk": true,
+        "price": 6.72,
+        "quoteTime": 1789541530370
+      }
+    },
+    "002517": {
+      "code": "002517",
+      "yunai": {
+        "quoteOk": true,
+        "price": 16.8,
+        "quoteTime": 1789541529997
+      }
     }
   },
   "pools": {
@@ -1546,7 +2232,10 @@
       "301183",
       "002491",
       "688025"
-    ]
+    ],
+    "B1": [],
+    "B2": [],
+    "B4": []
   },
   "marketSnapshot": {
     "sourceDate": "2026-09-16",
@@ -1594,9 +2283,66 @@
     "价格/成交/板块广度": "可用",
     "东方财富主力资金": "可用时参与",
     "Yunai独立大单资金": "由后置独立确认层补充",
-    "两融B1": "未接入真实专用数据，不伪造",
-    "ETF一级申赎B2": "未接入真实专用数据，不伪造"
+    "B1": "两融T+1日频数据暂未取得，保持为空",
+    "B2": "ETF份额T+1日频数据暂未取得，保持为空"
   },
   "scoreMeaningZh": "形成分是研究排序分，不代表上涨概率；当日涨幅只进入价格延伸惩罚，不作为形成分正向奖励。",
-  "note": "从开盘起每5分钟滚动识别潜在主线和提前介入候选；14:30以后进入尾盘执行/确认阶段，15:00形成当日最终雷达快照。"
+  "note": "从开盘起每5分钟滚动识别潜在主线和提前介入候选；14:30以后进入尾盘执行/确认阶段，15:00形成当日最终雷达快照。",
+  "yunaiConfirmation": {
+    "checkedAt": "2026-09-16T14:51:20+08:00",
+    "provider": "Yunai Quant API",
+    "checkedSymbols": [
+      "301165",
+      "301536",
+      "300620",
+      "300502",
+      "300456",
+      "300308",
+      "002281",
+      "600105",
+      "002396",
+      "002222",
+      "601208",
+      "605358",
+      "300548",
+      "301183",
+      "002491",
+      "688025",
+      "688205",
+      "000725",
+      "300394",
+      "603083",
+      "300684",
+      "600487",
+      "300570",
+      "688313",
+      "601138",
+      "688143",
+      "000938",
+      "601869",
+      "300975",
+      "300398",
+      "300857",
+      "600330",
+      "002156",
+      "002384",
+      "000988",
+      "688195",
+      "600522",
+      "600584",
+      "300757",
+      "000063"
+    ],
+    "quoteAvailable": 40,
+    "capitalResponseAvailable": 40,
+    "role": "独立确认层；不直接改写formationScore/earlyEntryScore"
+  },
+  "slowMoneyFactor": {
+    "state": "unavailable",
+    "dataDate": null,
+    "latency": "T+1日频",
+    "B1Members": 0,
+    "B2Members": 0,
+    "note": "两融与ETF份额是上一已发布交易日的慢资金结构因子，不冒充盘中实时；空池表示当前候选未达阈值。"
+  }
 }
