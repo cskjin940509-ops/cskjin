@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-18T15:06:57+08:00",
+  "checkedAt": "2026-09-18T17:31:45+08:00",
   "provider": "Yunai Quant API",
   "connected": true,
   "marketStatus": {
@@ -20,11 +20,11 @@
     "688820"
   ],
   "quoteAvailable": 10,
-  "capitalResponseAvailable": 3,
+  "capitalResponseAvailable": 9,
   "stocks": {
     "002902": {
       "quoteOk": true,
-      "capitalOk": false,
+      "capitalOk": true,
       "quote": {
         "price": 31.2,
         "open": 30.02,
@@ -35,13 +35,13 @@
         "changePct": 0.0699588477,
         "volume": 656530.0,
         "amount": 2058407385.1,
-        "turnoverRate": null,
-        "askSize": null,
-        "bidSize": null,
-        "latestTime": "1789714800000",
-        "timestamp": 1789714800000,
+        "turnoverRate": 0.0028,
+        "askSize": 27,
+        "bidSize": 148,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
@@ -54,17 +54,41 @@
           "latestPrice",
           "latestTime",
           "timestamp",
+          "askPrice",
+          "askSize",
+          "bidPrice",
+          "bidSize",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
+          "brokerSource"
+        ]
+      },
+      "capital": {
+        "largeNetInflow": 80254930.25999993,
+        "totalNetInflow": -160952372.87,
+        "capitalIn": null,
+        "capitalOut": null,
+        "timestamp": 1789714800000,
+        "retrievedAt": "1789723907102",
+        "brokerSource": "L",
+        "keys": [
+          "timestamp",
+          "retrievedAt",
+          "capitalIn",
+          "capitalOut",
+          "largeNetInflow",
+          "totalNetInflow",
+          "netInflow",
           "brokerSource"
         ]
       }
     },
     "688313": {
       "quoteOk": true,
-      "capitalOk": false,
+      "capitalOk": true,
       "quote": {
         "price": 170.38,
         "open": 165.2,
@@ -75,13 +99,13 @@
         "changePct": 0.0608966376,
         "volume": 244588.0,
         "amount": 4113241863.0,
-        "turnoverRate": null,
-        "askSize": null,
-        "bidSize": null,
-        "latestTime": "1789714801000",
-        "timestamp": 1789714801000,
+        "turnoverRate": 0.054114,
+        "askSize": 101,
+        "bidSize": 2,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
@@ -94,10 +118,34 @@
           "latestPrice",
           "latestTime",
           "timestamp",
+          "askPrice",
+          "askSize",
+          "bidPrice",
+          "bidSize",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
+          "brokerSource"
+        ]
+      },
+      "capital": {
+        "largeNetInflow": 274680415.63,
+        "totalNetInflow": 354649899.9799998,
+        "capitalIn": null,
+        "capitalOut": null,
+        "timestamp": 1789714800000,
+        "retrievedAt": "1789723907418",
+        "brokerSource": "L",
+        "keys": [
+          "timestamp",
+          "retrievedAt",
+          "capitalIn",
+          "capitalOut",
+          "largeNetInflow",
+          "totalNetInflow",
+          "netInflow",
           "brokerSource"
         ]
       }
@@ -115,16 +163,17 @@
         "changePct": 0.0463029067,
         "volume": 291425.0,
         "amount": 5961528833.0,
-        "turnoverRate": null,
-        "askSize": null,
-        "bidSize": null,
-        "latestTime": "1789714800000",
-        "timestamp": 1789714800000,
+        "turnoverRate": 0.055413,
+        "askSize": 6,
+        "bidSize": 44,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
-        "brokerSource": "L",
+        "tradeSession": "AfterHours",
+        "brokerSource": "L_WS",
         "keys": [
           "symbol",
+          "standardSymbol",
           "open",
           "high",
           "low",
@@ -134,8 +183,13 @@
           "latestPrice",
           "latestTime",
           "timestamp",
+          "askPrice",
+          "askSize",
+          "bidPrice",
+          "bidSize",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
           "brokerSource"
@@ -147,7 +201,7 @@
         "capitalIn": null,
         "capitalOut": null,
         "timestamp": 1789714800000,
-        "retrievedAt": "1789715205100",
+        "retrievedAt": "1789723907234",
         "brokerSource": "L",
         "keys": [
           "timestamp",
@@ -163,7 +217,7 @@
     },
     "300548": {
       "quoteOk": true,
-      "capitalOk": false,
+      "capitalOk": true,
       "quote": {
         "price": 238.8,
         "open": 239.0,
@@ -174,13 +228,13 @@
         "changePct": 0.0320238558,
         "volume": 155471.0,
         "amount": 3741277367.3,
-        "turnoverRate": null,
+        "turnoverRate": 0.0005,
         "askSize": null,
         "bidSize": null,
-        "latestTime": "1789714800000",
-        "timestamp": 1789714800000,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
@@ -195,8 +249,28 @@
           "timestamp",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
+          "brokerSource"
+        ]
+      },
+      "capital": {
+        "largeNetInflow": 84011321.30000001,
+        "totalNetInflow": 240387616.96000004,
+        "capitalIn": null,
+        "capitalOut": null,
+        "timestamp": 1789714800000,
+        "retrievedAt": "1789723907145",
+        "brokerSource": "L",
+        "keys": [
+          "timestamp",
+          "retrievedAt",
+          "capitalIn",
+          "capitalOut",
+          "largeNetInflow",
+          "totalNetInflow",
+          "netInflow",
           "brokerSource"
         ]
       }
@@ -214,13 +288,13 @@
         "changePct": 0.0774907749,
         "volume": 1610179.0,
         "amount": 11490248249.0,
-        "turnoverRate": null,
+        "turnoverRate": 0.0009,
         "askSize": null,
         "bidSize": null,
-        "latestTime": "1789714800000",
-        "timestamp": 1789714800000,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
@@ -235,6 +309,7 @@
           "timestamp",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
           "brokerSource"
@@ -246,7 +321,7 @@
         "capitalIn": null,
         "capitalOut": null,
         "timestamp": 1789714800000,
-        "retrievedAt": "1789715124086",
+        "retrievedAt": "1789723907463",
         "brokerSource": "L",
         "keys": [
           "timestamp",
@@ -262,7 +337,7 @@
     },
     "688362": {
       "quoteOk": true,
-      "capitalOk": false,
+      "capitalOk": true,
       "quote": {
         "price": 64.79,
         "open": 62.74,
@@ -273,13 +348,13 @@
         "changePct": 0.0548681211,
         "volume": 315339.0,
         "amount": 2024000536.0,
-        "turnoverRate": null,
+        "turnoverRate": 0.069577,
         "askSize": null,
         "bidSize": null,
-        "latestTime": "1789714801000",
-        "timestamp": 1789714801000,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
@@ -294,8 +369,28 @@
           "timestamp",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
+          "brokerSource"
+        ]
+      },
+      "capital": {
+        "largeNetInflow": 133367409.13999999,
+        "totalNetInflow": 146271041.36,
+        "capitalIn": null,
+        "capitalOut": null,
+        "timestamp": 1789714800000,
+        "retrievedAt": "1789723907325",
+        "brokerSource": "L",
+        "keys": [
+          "timestamp",
+          "retrievedAt",
+          "capitalIn",
+          "capitalOut",
+          "largeNetInflow",
+          "totalNetInflow",
+          "netInflow",
           "brokerSource"
         ]
       }
@@ -313,13 +408,13 @@
         "changePct": 0.0218596381,
         "volume": 434870.0,
         "amount": 8438906629.57,
-        "turnoverRate": null,
+        "turnoverRate": 0.0006,
         "askSize": null,
         "bidSize": null,
-        "latestTime": "1789714800000",
-        "timestamp": 1789714800000,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
@@ -334,6 +429,7 @@
           "timestamp",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
           "brokerSource"
@@ -345,7 +441,7 @@
         "capitalIn": null,
         "capitalOut": null,
         "timestamp": 1789714800000,
-        "retrievedAt": "1789715123925",
+        "retrievedAt": "1789723907191",
         "brokerSource": "L",
         "keys": [
           "timestamp",
@@ -361,7 +457,7 @@
     },
     "300570": {
       "quoteOk": true,
-      "capitalOk": false,
+      "capitalOk": true,
       "quote": {
         "price": 229.35,
         "open": 223.77,
@@ -372,13 +468,13 @@
         "changePct": 0.06190388,
         "volume": 287093.0,
         "amount": 6665488703.68,
-        "turnoverRate": null,
+        "turnoverRate": 0.0013,
         "askSize": null,
         "bidSize": null,
-        "latestTime": "1789714800000",
-        "timestamp": 1789714800000,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
@@ -393,15 +489,35 @@
           "timestamp",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
+          "brokerSource"
+        ]
+      },
+      "capital": {
+        "largeNetInflow": 795929499.8000001,
+        "totalNetInflow": 538408135.8300004,
+        "capitalIn": null,
+        "capitalOut": null,
+        "timestamp": 1789714800000,
+        "retrievedAt": "1789723907378",
+        "brokerSource": "L",
+        "keys": [
+          "timestamp",
+          "retrievedAt",
+          "capitalIn",
+          "capitalOut",
+          "largeNetInflow",
+          "totalNetInflow",
+          "netInflow",
           "brokerSource"
         ]
       }
     },
     "002156": {
       "quoteOk": true,
-      "capitalOk": false,
+      "capitalOk": true,
       "quote": {
         "price": 61.38,
         "open": 59.7,
@@ -412,13 +528,13 @@
         "changePct": 0.0526496313,
         "volume": 1191684.0,
         "amount": 7245757813.1,
-        "turnoverRate": null,
+        "turnoverRate": 0.0008,
         "askSize": null,
         "bidSize": null,
-        "latestTime": "1789714800000",
-        "timestamp": 1789714800000,
+        "latestTime": "1789716600000",
+        "timestamp": 1789716600000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
@@ -433,8 +549,28 @@
           "timestamp",
           "volume",
           "amount",
+          "turnoverRate",
           "status",
           "tradeSession",
+          "brokerSource"
+        ]
+      },
+      "capital": {
+        "largeNetInflow": 555952438.49,
+        "totalNetInflow": 732091773.9000001,
+        "capitalIn": null,
+        "capitalOut": null,
+        "timestamp": 1789714800000,
+        "retrievedAt": "1789723907503",
+        "brokerSource": "L",
+        "keys": [
+          "timestamp",
+          "retrievedAt",
+          "capitalIn",
+          "capitalOut",
+          "largeNetInflow",
+          "totalNetInflow",
+          "netInflow",
           "brokerSource"
         ]
       }
@@ -443,22 +579,22 @@
       "quoteOk": true,
       "capitalOk": false,
       "quote": {
-        "price": 142.86,
+        "price": 142.87,
         "open": 136.99,
         "high": 146.4,
         "low": 136.99,
         "preClose": 133.39,
-        "change": 9.47,
-        "changePct": 0.0709948272,
-        "volume": 198568.0,
-        "amount": 2833194588.0,
+        "change": 9.48,
+        "changePct": 0.0710697953,
+        "volume": 204802.0,
+        "amount": 2922284040.0,
         "turnoverRate": null,
         "askSize": null,
         "bidSize": null,
-        "latestTime": "1789714314000",
-        "timestamp": 1789714314000,
+        "latestTime": "1789714801000",
+        "timestamp": 1789714801000,
         "status": "NORMAL",
-        "tradeSession": "Intraday",
+        "tradeSession": "AfterHours",
         "brokerSource": "L",
         "keys": [
           "symbol",
