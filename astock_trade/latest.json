@@ -541,12 +541,115 @@
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "601138",
+      "name": "工业富联",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 87.7,
+        "historical": {
+          "samples": 3,
+          "win5D": 1.0,
+          "avg5D": 0.0746,
+          "avgMFE5D": 0.1476,
+          "avgMAE5D": -0.0099
+        }
+      },
+      "quote": {
+        "price": 63.39,
+        "changePct": 3.46,
+        "open": null,
+        "high": 63.95,
+        "low": 62.0,
+        "dayLowToHighPct": 3.15,
+        "quoteTime": null
+      },
+      "entryZone": [
+        62.942,
+        64.054
+      ],
+      "triggerPrice": 63.42,
+      "stopLoss": 61.249,
+      "takeProfit1": 66.872,
+      "takeProfit2": 69.121,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 61.249",
+      "reasons": [
+        "趋势回踩",
+        "形态分 88",
+        "距MA20 +0.21 ATR",
+        "主力资金占比 +18.36%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "601319",
+      "name": "中国人保",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 86.2,
+        "historical": {
+          "samples": 15,
+          "win5D": 0.6667,
+          "avg5D": 0.0095,
+          "avgMFE5D": 0.0328,
+          "avgMAE5D": -0.0235
+        }
+      },
+      "quote": {
+        "price": 7.83,
+        "changePct": 1.82,
+        "open": null,
+        "high": 7.95,
+        "low": 7.63,
+        "dayLowToHighPct": 4.19,
+        "quoteTime": null
+      },
+      "entryZone": [
+        7.751,
+        7.907
+      ],
+      "triggerPrice": 7.829,
+      "stopLoss": 7.571,
+      "takeProfit1": 8.216,
+      "takeProfit2": 8.473,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 7.571",
+      "reasons": [
+        "趋势回踩",
+        "形态分 86",
+        "距MA20 +0.97 ATR",
+        "主力资金占比 +19.14%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    }
+  ],
   "summary": {
     "official": 12,
     "officialBuy": 0,
     "officialWatch": 2,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 2,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -559,5 +662,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "ready",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5560,
+    "uniqueRows": 5555,
+    "pagesRequested": 56,
+    "coveragePct": 99.91,
+    "prefiltered": 220,
+    "historyLoaded": 220,
+    "setupMatches": 21,
+    "historicalEdgeMatches": 2,
+    "selected": 2,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
