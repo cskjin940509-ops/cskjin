@@ -89,3 +89,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python tools/publish_data_on_arrival.py tail
+
+      - name: 保留失败计算产物供恢复
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tail-${{ github.run_id }}-${{ github.run_attempt }}
+          path: astock_tail/
+          retention-days: 30
