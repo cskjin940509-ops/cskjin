@@ -65,7 +65,8 @@ private enum class Tab(val zh:String,val icon:ImageVector){HOME("总览",Icons.D
     item{Title("执行状态")};item{CardBox{KV("市场状态",stateZh(s.marketState));KV("市场仓位上限",s.cap?.let{pct(it*100)}?:"待确认");KV("是否允许新仓",if(s.allowNew)"允许，仍须通过成交约束" else "暂停新增");KV("有效批次","${s.activeBatches}/8");KV("待买入 / 待卖出","${s.pendingBuy} / ${s.pendingSell}");HorizontalDivider(Modifier.padding(vertical=8.dp));Text(s.marketReason,fontSize=11.sp,color=Muted,lineHeight=16.sp)}}
     item{Title("从选股到成交")};item{CardBox{Step("1","T日选股","原板块、资金、量价评分与候选排序",true);Step("2","收盘冻结",s.signalDate?.let{"$it 已冻结 ${s.pendingBuy}只"}?:"等待有效收盘候选",s.signalDate!=null);Step("3","T+1买入","98%限价优先；未触及则收盘窗口兜底",false);Step("4","八批轮动","第9个有效批次形成后轮出最老批次",false)}}
     item{Title("组合风险")};item{Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){Mini("持仓","${s.posCount}只",Modifier.weight(1f));Mini("市值",money(s.mv),Modifier.weight(1f));Mini("最大回撤",s.mdd?.let(::pct)?:"—",Modifier.weight(1f))}}
-    item{Notice("更新时间 ${short(s.updated)}。仅为模拟交易，不连接券商，不构成收益承诺。",SoftBlue)}
+    item{Notice("更新时间 ${short(s.updated)}。仅为模拟交易，不连接券商，不构成收益承诺。",SoftBlue)}76
+}
 }}
 
 @Composable private fun Candidates(s:Snap){Page{
