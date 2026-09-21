@@ -388,6 +388,9 @@ def market_data(radar_stock: dict | None, quote: dict | None, fallback_price: fl
         "amount": min(amounts) if len(amounts) > 1 else (amounts[0] if amounts else None),
         "amountSource": "当时双源累计成交额较小值" if len(amounts) > 1 else "当时累计成交额",
         "quoteTime": quote.get("quoteTimestamp") or quote.get("quoteTime") or stock.get("quoteTime"),
+        "open": finite(quote.get("open")) or finite(stock.get("open")),
+        "high": finite(quote.get("high")) or finite(stock.get("high")),
+        "low": finite(quote.get("low")) or finite(stock.get("low")),
     }
 
 

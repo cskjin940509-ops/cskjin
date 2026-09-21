@@ -128,6 +128,9 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
             quote_time = f[30] if len(f) > 30 else None
             amount = float(f[37]) * 10000.0 if len(f) > 37 and f[37] else None
             volume = float(f[6]) * 100.0 if len(f) > 6 and f[6] else None
+            open_price = float(f[5]) if len(f) > 5 and f[5] else None
+            high = float(f[33]) if len(f) > 33 and f[33] else None
+            low = float(f[34]) if len(f) > 34 and f[34] else None
             change_pct = ((price / prev - 1) * 100) if price and prev else None
             out[code] = {
                 "code": code,
@@ -139,6 +142,9 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
                 "quoteTimestamp": quote_time,
                 "amount": amount,
                 "volumeShares": volume,
+                "open": open_price,
+                "high": high,
+                "low": low,
                 "source": "腾讯实时行情",
             }
         except Exception:

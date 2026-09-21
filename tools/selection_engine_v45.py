@@ -13,6 +13,7 @@ import selection_data_v45 as feeds
 import selection_research_v46 as study
 import selection_rotation_v49 as rotation
 import original_framework
+import batch_execution_v6 as batch_v6
 import sys
 
 CONTEXT = {}
@@ -22,6 +23,7 @@ NO_T_CONTROL = False
 CONTROL_MODE = None
 ORIGINAL_QUOTES = base.fetch_tencent_quotes
 ORIGINAL_BUILD = base.build_latest
+ORIGINAL_EXITS = None
 
 
 def premarket_sentiment_plan(root, required_date, stored=None, now=None):
@@ -140,7 +142,8 @@ def prepare_quotes(codes):
     stored = base.read_json(base.STATE_PATH, {})
     control = ((stored.get('research46') or {}).get('noTControl') or {}).get('state') or {}
     simple = ((stored.get('research46') or {}).get('timingControl') or {}).get('state') or {}
-    codes = sorted(set(codes) | study.pending_codes(stored) | set(control.get('positions') or {}) | set(simple.get('positions') or {}))
+    batch_codes = {x.get('code') for x in ((stored.get('batchExecutionV6') or {}).get('pendingOrders') or []) if x.get('code')}
+    codes = sorted(set(codes) | batch_codes | study.pending_codes(stored) | set(control.get('positions') or {}) | set(simple.get('positions') or {}))
     quotes = ORIGINAL_QUOTES(codes)
     radar = base.read_json(base.RADAR, {})
     state = base.read_json(base.STATE_PATH, base.new_state())
@@ -590,8 +593,11 @@ def build_latest(state, ledger, prices, radar):
         candidate['decisionPlan'] = study.entry_plan(candidate)
     obj['signals'] = dict(sorted(obj.get('signals', {}).items(),
                                  key=lambda item: item[1].get('rankingScore', 0), reverse=True))
+    batch_v6.freeze_signal(sys.modules[__name__], state, CONTEXT.get('radar') or radar, prices,
+                           list(obj.get('signals', {}).values()))
+    batch_v6.mark_limit_up_exits(sys.modules[__name__], state)
     out = ORIGINAL_BUILD(state, ledger, prices, radar)
-    out.update(strategyVersion=rules.VERSION, mode='a股筛选池 · 主线持仓＋底仓T研究', simulated=True)
+    out.update(strategyVersion=rules.VERSION, mode='A股原选股池 · T+1八批轮动模拟执行', simulated=True)
     out.setdefault('rulesZh', {}).update(rules.RULES_ZH)
     verified_history = [x for x in base.fund.combined_unit_history(state) if x.get('isVerifiedClose')]
     strict_daily = base.fund.daily_unit_series(verified_history)
@@ -615,7 +621,7 @@ def build_latest(state, ledger, prices, radar):
         report['returns'].update(daily=strict_daily, weekly=out['weeklyPerformance'], monthly=out['monthlyPerformance'])
     out['selection45'] = {k: deepcopy(obj.get(k)) for k in ('activatedAt', 'validationStatus', 'market', 'portfolioRisk')}
     out['selection45'].update(parameters=rules.PARAMETERS,
-                              entryPolicy='RANKED_STAGED_ENTRY',
+                              entryPolicy='T1_EIGHT_BATCH_LIMIT',
                               pendingExits=list(obj['pendingExits'].values()),
                               candidates=list(obj.get('signals', {}).values()),
                               holdingSignals=deepcopy(obj.get('holdingSignals', {})))
@@ -628,6 +634,7 @@ def build_latest(state, ledger, prices, radar):
     out['originalFramework'] = original_framework.alignment_report()
     out['tTrading'] = t_report(state, prices)
     out['strategyResearch'] = study.report(state, now, comparison, simple_comparison)
+    out['batchExecutionV6'] = batch_v6.report(state)
     out['targetPortfolio'] = [{k: t[k] for k in ('code', 'name', 'sector', 'score', 'targetWeightPct', 'referencePrice', 'priceSource', 'reasonZh')}
                               for t in LAST_TARGETS if not t['rejections']]
     out['targetGrossPct'] = round(sum(x['targetWeightPct'] for x in out['targetPortfolio']), 2)
@@ -648,13 +655,17 @@ def build_latest(state, ledger, prices, radar):
 
 
 def main():
+    global ORIGINAL_EXITS
     base.INDEPENDENT_RISK = True
     base.STRATEGY_VERSION = rules.VERSION
     base.MAX_SINGLE_WEIGHT = .08
     base.MAX_SECTOR_WEIGHT = .25
     base.fetch_tencent_quotes = prepare_quotes
-    base.evaluate_exits = evaluate_exits
-    base.evaluate_entries = evaluate_entries
+    ORIGINAL_EXITS = evaluate_exits
+    base.evaluate_exits = lambda state, ledger, radar_stocks, quotes, prices: batch_v6.evaluate_exits(
+        sys.modules[__name__], ORIGINAL_EXITS, state, ledger, radar_stocks, quotes, prices)
+    base.evaluate_entries = lambda state, ledger, radar, prices: batch_v6.evaluate_entries(
+        sys.modules[__name__], state, ledger, radar, prices)
     base.build_latest = build_latest
     return base.main()
 

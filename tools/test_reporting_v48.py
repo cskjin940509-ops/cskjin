@@ -44,4 +44,10 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(r['degradedCandidateCount'],1)
         self.assertEqual(r['candidateReasons'][0]['reasons'],[])
         self.assertTrue(r['candidateReasons'][0]['missingOptionalEvidence'])
+    def test_t1_batch_order_is_explicitly_reported(self):
+        r=explain({'batchExecutionV6':{'lastSignalDate':'2026-09-21','pendingOrders':[
+            {'code':'600001','signalDate':'2026-09-21','status':'WAIT_T_PLUS_ONE'}]},
+            'selection45':{'market':{'state':'PREMARKET'},'portfolioRisk':{'allowNew':True}}})
+        self.assertEqual(r['reasonCode'],'T1_BATCH_ENTRY_PENDING')
+        self.assertIn('T+1',r['reasonZh'])
 if __name__=='__main__': unittest.main()

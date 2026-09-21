@@ -3,6 +3,9 @@
 def explain(latest):
     s = latest.get('selection45') or {}; risk = s.get('portfolioRisk') or {}; market = s.get('market') or {}
     pending = s.get('pendingExits') or []; candidates = s.get('candidates') or []
+    batch = latest.get('batchExecutionV6') or {}
+    batch_orders = batch.get('pendingOrders') or []
+    batch_exits = batch.get('pendingExits') or []
     reasons = []
     if market.get('state') == 'UNKNOWN': reasons.append(market.get('reasonZh') or '大盘证据缺失')
     if risk.get('dailyRiskDataReady') is False: reasons.append('缺少上一交易日可靠收盘基准，禁止新增风险')
@@ -20,6 +23,12 @@ def explain(latest):
     filled = [x for x in candidates if x.get('executionStatus') in ('FILLED', 'PARTIAL_WAIT')]
     ranked = [x for x in candidates if x.get('entryPolicy') == 'RANKED_STAGED_ENTRY' and not x.get('rejections')]
     if filled: code='ENTRY_FILLED'; text=f'本轮已模拟买入{len(filled)}只；部分成交余量按仓位和容量继续分批处理'
+    elif batch_exits:
+        code='T1_BATCH_EXIT_PENDING'; text=f'{len(batch_exits)}笔批次卖出待T+1或可成交行情执行'
+    elif batch_orders:
+        signal_day=batch.get('lastSignalDate') or batch_orders[0].get('signalDate')
+        code='T1_BATCH_ENTRY_PENDING'
+        text=f'{len(batch_orders)}只{signal_day}收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行'
     elif pending: code='PENDING_EXECUTION'; text='已有退出信号；'+'；'.join(pending_reasons[:3])
     elif reasons: code='BLOCKED_EVIDENCE_OR_RISK'; text='本轮未成交；'+'；'.join(reasons)
     elif candidates and len(rejected)==len(candidates): code='ENTRY_CONDITIONS_NOT_MET'; text='本轮无退出成交；全部候选均有明确不支持买入的证据'
@@ -36,7 +45,8 @@ def explain(latest):
         code='OPPORTUNITY_ROTATION_PENDING'; text='择优换仓：'+rotation.get('statusZh',plan['status'])
     elif rotation and not pending and not reasons and code=='NO_FILL_AFTER_EVALUATION':
         text += '；择优换仓：'+rotation.get('statusZh','等待评估')
-    return {'opportunityRotation': rotation, 'reasonCode':code,'reasonZh':text,'entryBlocks':reasons,'pendingExits':pending_reasons,
+    return {'opportunityRotation': rotation, 'batchExecutionV6': batch,
+            'reasonCode':code,'reasonZh':text,'entryBlocks':reasons,'pendingExits':pending_reasons,
             'candidateCount':len(candidates),'rejectedCandidateCount':len(rejected),
             'degradedCandidateCount':len(degraded),
             'filledCandidateCount':len(filled), 'rankedCandidateCount':len(ranked),
