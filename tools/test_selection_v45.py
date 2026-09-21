@@ -234,10 +234,51 @@ class SelectionTests(unittest.TestCase):
             (history / '2026-09-11.json').write_text(json.dumps(payload), encoding='utf-8')
             plan = engine.premarket_sentiment_plan(
                 root, '2026-09-10', now=datetime.fromisoformat('2026-09-11T09:20:00+08:00'))
-            self.assertFalse(plan['ready']); self.assertTrue(plan['fallback'])
+            self.assertTrue(plan['ready']); self.assertTrue(plan['fallback'])
             self.assertEqual(plan['cap'], 0.)
             market = rules.market_regime({}, datetime.fromisoformat('2026-09-11T09:20:00+08:00'), {}, plan)
-            self.assertEqual(market['state'], 'UNKNOWN'); self.assertFalse(market['allowNew'])
+            self.assertEqual(market['state'], 'PREMARKET'); self.assertFalse(market['allowNew'])
+
+    def test_missing_composite_positive_breadth_keeps_selector_running_conservatively(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); history = root / 'astock_sentiment' / 'history'; history.mkdir(parents=True)
+            payload = {'reportDate': '2026-09-21', 'generatedAt': '2026-09-21T08:55:00+08:00', 'indices': [{
+                'name': '市场赚钱效应', 'dataDate': '2026-09-18',
+                'raw': {'up': 3200, 'down': 1900}}]}
+            (history / '2026-09-21.json').write_text(json.dumps(payload), encoding='utf-8')
+            plan = engine.premarket_sentiment_plan(
+                root, '2026-09-18', now=datetime.fromisoformat('2026-09-21T09:20:00+08:00'))
+            self.assertTrue(plan['ready']); self.assertEqual(plan['cap'], .20)
+            self.assertIn('非掘金指数', plan['classification'])
+            market = rules.market_regime({}, datetime.fromisoformat('2026-09-21T09:20:00+08:00'), {}, plan)
+            self.assertTrue(market['allowNew']); self.assertEqual(market['cap'], .20)
+
+    def test_missing_breadth_uses_verified_previous_close_indices(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); (root / 'astock_sentiment' / 'history').mkdir(parents=True)
+            radar_history = root / 'astock_radar' / 'history'; radar_history.mkdir(parents=True)
+            payload = {'date': '2026-09-18', 'capturedAt': '2026-09-18T15:05:00+08:00',
+                       'marketSnapshot': {'verifiedToday': True, 'availableAt': '2026-09-18T15:05:00+08:00',
+                           'indices': {k: {'changePct': v} for k, v in {
+                               'sh000001': .94, 'sh000300': 1.06, 'sz399006': 2.25}.items()}}}
+            (radar_history / '2026-09-18.json').write_text(json.dumps(payload), encoding='utf-8')
+            plan = engine.premarket_sentiment_plan(
+                root, '2026-09-18', now=datetime.fromisoformat('2026-09-21T09:20:00+08:00'))
+            self.assertTrue(plan['ready']); self.assertEqual(plan['cap'], .20)
+            self.assertEqual(plan['source'], '前一交易日已验证核心指数收盘')
+
+    def test_weak_verified_previous_close_indices_still_block_new_exposure(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); (root / 'astock_sentiment' / 'history').mkdir(parents=True)
+            radar_history = root / 'astock_radar' / 'history'; radar_history.mkdir(parents=True)
+            payload = {'date': '2026-09-18', 'capturedAt': '2026-09-18T15:05:00+08:00',
+                       'marketSnapshot': {'verifiedToday': True, 'availableAt': '2026-09-18T15:05:00+08:00',
+                           'indices': {k: {'changePct': v} for k, v in {
+                               'sh000001': -1.8, 'sh000300': -1.6, 'sz399006': -2.6}.items()}}}
+            (radar_history / '2026-09-18.json').write_text(json.dumps(payload), encoding='utf-8')
+            plan = engine.premarket_sentiment_plan(
+                root, '2026-09-18', now=datetime.fromisoformat('2026-09-21T09:20:00+08:00'))
+            self.assertTrue(plan['ready']); self.assertEqual(plan['cap'], 0.)
 
     def test_dated_position_decision_wins_over_stale_fallback(self):
         with tempfile.TemporaryDirectory() as td:

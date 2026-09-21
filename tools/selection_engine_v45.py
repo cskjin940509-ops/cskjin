@@ -93,18 +93,42 @@ def premarket_sentiment_plan(root, required_date, stored=None, now=None):
         up, down = rules.finite(raw.get('up')), rules.finite(raw.get('down'))
         if up is not None and down is not None and up + down >= 2000:
             breadth = up / (up + down)
-            # Breadth is evidence for market state, not the document's
-            # composite sentiment score. Do not invent a position band from
-            # it; the strategy note requires the composite score and its
-            # prior-session direction to select 0/50/100/30/0 percent.
-            return {'ready': False, 'cap': 0., 'direction': 'UNKNOWN',
+            # This is an operational continuity budget, not a reconstructed
+            # Juejin score.  Missing research fields must not silently turn
+            # the selector off, while a clearly weak breadth reading still
+            # blocks new exposure.
+            cap = 0. if breadth < .25 else .10 if breadth < .40 else .20
+            return {'ready': True, 'cap': cap, 'baseCap': cap,
+                    'direction': 'OPERATIONAL_FALLBACK',
                     'score': None, 'previousScore': None, 'fallback': True,
                     'requiredDataDate': required_date, 'dataDate': required_date,
-                    'classification': '前一交易日全市场宽度（仅证据）',
-                    'source': '全市场涨跌家数（不能替代综合情绪指数）',
-                    'reasonZh': f'前一交易日上涨占比{breadth:.1%}，缺少综合情绪分数，按文档方案暂不推定仓位'}
+                    'classification': '运行连续性保守仓位（非掘金指数）',
+                    'source': '前一交易日全市场涨跌家数',
+                    'reasonZh': f'前一交易日上涨占比{breadth:.1%}，综合情绪分数缺失，采用非掘金的保守运行上限{cap:.0%}'}
+
+        # Some upstream breadth providers publish late.  A final, verified
+        # previous-close radar still gives us independent broad-index risk
+        # evidence.  It may only open a small continuity budget; it can never
+        # imitate or exceed the document's sentiment bands.
+        close_radar = base.read_json(root / 'astock_radar' / 'history' / f'{required_date}.json', {})
+        snapshot = close_radar.get('marketSnapshot') or {}
+        values = [rules.finite((snapshot.get('indices') or {}).get(k, {}).get('changePct'))
+                  for k in ('sh000001', 'sh000300', 'sz399006')]
+        available = rules.stamp(snapshot.get('availableAt') or close_radar.get('capturedAt'))
+        if (close_radar.get('date') == required_date and snapshot.get('verifiedToday')
+                and all(x is not None for x in values)
+                and available is not None and available <= cutoff):
+            avg, worst = sum(values) / len(values), min(values)
+            cap = 0. if avg <= -1.5 or worst <= -2.5 else .10 if avg < 0 or worst < -1 else .20
+            return {'ready': True, 'cap': cap, 'baseCap': cap,
+                    'direction': 'OPERATIONAL_FALLBACK', 'score': None,
+                    'previousScore': None, 'fallback': True,
+                    'requiredDataDate': required_date, 'dataDate': required_date,
+                    'classification': '运行连续性保守仓位（非掘金指数）',
+                    'source': '前一交易日已验证核心指数收盘',
+                    'reasonZh': f'全市场宽度延迟，前收盘核心指数平均{avg:.2f}%，采用非掘金的保守运行上限{cap:.0%}'}
         return {'ready': False, 'cap': 0., 'requiredDataDate': required_date,
-                'reasonZh': f'{required_date}盘前市场宽度数据尚未到达'}
+                'reasonZh': f'{required_date}盘前市场宽度与已验证收盘指数均未到达'}
     old = ((stored or {}).get('selection45') or {}).get('sentimentPositionControl') or {}
     plan = rules.sentiment_position_cap(current['score'], previous['score'], old.get('baseCap'))
     plan.update(requiredDataDate=required_date, dataDate=current['dataDate'],
