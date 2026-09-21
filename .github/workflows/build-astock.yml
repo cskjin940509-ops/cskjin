@@ -2,7 +2,7 @@ name: Build AStock APK
 
 on:
   push:
-    branches: [ astock-build-v0.3 ]
+    branches: [ astock-build-v0.6-live ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -30,6 +30,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AStockStrategy-v0.3-debug
+          name: AStockPool-v4.0.0-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
