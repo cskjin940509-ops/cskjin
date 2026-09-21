@@ -9,9 +9,10 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
-  group: astock-tail-watchdog-recovery
+  group: astock-tail-decision
   cancel-in-progress: false
 
 jobs:
@@ -41,6 +42,12 @@ jobs:
       # 恢复任务优先保证核心快照/Final 落盘。外部 Yunai 只在新 Final 冻结时
       # 尝试补充，失败也不能阻断核心结果保存。已存在的同日 TailFinal 会由
       # run_tail_rolling.py 的 immutable guard 直接保护，不会被恢复任务改写。
+      - name: 立即保存恢复核心结果
+        if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py tail
+
       - name: 刷新 Yunai 候选股确认
         if: steps.rolling.outputs.state == 'tail-final-frozen'
         continue-on-error: true
@@ -56,23 +63,14 @@ jobs:
 
       - name: 保存恢复结果
         if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
-        run: |
-          git config user.name 'astock-tail-watchdog'
-          git config user.email 'actions@users.noreply.github.com'
-          git add astock_tail astock_gateway/yunai_live.json astock_gateway/latest.json
-          if git diff --cached --quiet; then
-            echo 'Tail result already healthy or no recovery changes.'
-            exit 0
-          fi
-          git commit -m 'Recover rolling tail decision result'
-          pushed=0
-          for i in 1 2 3 4; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then
-              pushed=1
-              break
-            fi
-            sleep 2
-          done
-          test "$pushed" -eq 1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/publish_data_on_arrival.py tail
+
+      - name: 保留失败计算产物供恢复
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tail-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: astock_tail/
+          retention-days: 30

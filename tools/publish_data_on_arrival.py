@@ -11,6 +11,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, time, timezone, timedelta
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import tempfile
@@ -78,35 +79,97 @@ def targets(channel: str, now: datetime) -> tuple[str, ...]:
 
 
 def git(root: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess:
-    return subprocess.run(["git", "-c", "user.name=astock-data-bot",
+    result = subprocess.run(["git", "-c", "user.name=astock-data-bot",
                            "-c", "user.email=actions@users.noreply.github.com", *args], cwd=root, text=True,
-                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=check)
+                          encoding="utf-8", errors="replace", timeout=120,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+    if check and result.returncode:
+        raise RuntimeError(f"git {args[0]} failed ({result.returncode}): {safe_error(result)}")
+    return result
+
+
+def safe_error(result) -> str:
+    text = (result.stderr or result.stdout or "no diagnostic output")
+    for key, value in os.environ.items():
+        if value and len(value) >= 4 and any(word in key.upper() for word in ("TOKEN", "PASSWORD", "SECRET")):
+            text = text.replace(value, "[redacted]")
+    text = re.sub(r"https?://[^\s]+", "[remote URL]", text)
+    text = re.sub(r"(?i)(authorization\s*[:=]\s*).*", r"\1[redacted]", text)
+    return text[-2000:]
+
+
+def tree_entry(root: Path, revision: str, path: str) -> str:
+    return git(root, "ls-tree", revision, "--", path).stdout.strip()
+
+
+def publish_revision(root: Path, base: str, revision: str, channel: str) -> str:
+    """Apply only this producer's delta; reject concurrent edits of the same file.
+
+    Rebase in the computation checkout fails when another step has dirty outputs.
+    A disposable worktree keeps those outputs and the local recovery commit intact.
+    """
+    paths = git(root, "diff", "--name-only", "-z", base, revision).stdout.split("\0")
+    paths = [path for path in paths if path]
+    last_error = ""
+    for _ in range(4):
+        git(root, "fetch", "origin", "main")
+        with tempfile.TemporaryDirectory(prefix="astock-publish-") as directory:
+            work = Path(directory) / "publish"
+            git(root, "worktree", "add", "--detach", str(work), "origin/main")
+            try:
+                for path in paths:
+                    before = tree_entry(root, base, path)
+                    local = tree_entry(root, revision, path)
+                    remote = tree_entry(work, "HEAD", path)
+                    if remote == local:
+                        continue
+                    if remote != before:
+                        raise RuntimeError(f"Concurrent data conflict: {path}; local recovery commit {revision} retained")
+                    if local:
+                        git(work, "checkout", revision, "--", path)
+                    else:
+                        git(work, "rm", "--", path)
+                if not git(work, "diff", "--cached", "--name-only").stdout.strip():
+                    return git(work, "rev-parse", "HEAD").stdout.strip()
+                git(work, "commit", "-m", f"Publish {channel} data on arrival")
+                pushed = git(work, "push", "origin", "HEAD:main", check=False)
+                if pushed.returncode == 0:
+                    return git(work, "rev-parse", "HEAD").stdout.strip()
+                last_error = safe_error(pushed)
+            finally:
+                # This worktree was created here and holds only our disposable copy.
+                git(root, "worktree", "remove", "--force", str(work))
+    raise RuntimeError(f"Publication failed after four bounded attempts: {last_error}; recovery commit {revision}")
 
 
 def publish(channel: str, root: Path = ROOT) -> str | None:
     if channel == "official":
         return publish_official(root)
+    pending = Path(git(root, "rev-parse", "--git-path", f"publication-{channel}.json").stdout.strip())
+    if not pending.is_absolute():
+        pending = root / pending
+    recovered = None
+    if pending.exists():
+        saved = json.loads(pending.read_text(encoding="utf-8"))
+        recovered = publish_revision(root, saved["base"], saved["revision"], channel)
+        pending.unlink()
     paths = [p for p in CHANNELS[channel]
              if (root / p).exists() or git(root, "ls-files", "--", p).stdout.strip()]
     if not paths:
-        return None
+        return recovered
     # Never accidentally bundle another step's staged changes in this commit.
     if git(root, "diff", "--cached", "--name-only").stdout.strip():
         raise RuntimeError("Refusing publication with unrelated staged changes")
     git(root, "add", "--", *paths)
     if not git(root, "diff", "--cached", "--name-only").stdout.strip():
-        return None
-    git(root, "commit", "-m", f"Publish {channel} data on arrival")
-    for _ in range(4):
-        git(root, "fetch", "origin", "main")
-        rebased = git(root, "rebase", "origin/main", check=False)
-        if rebased.returncode:
-            git(root, "rebase", "--abort", check=False)
-            raise RuntimeError("Concurrent data conflict: retained remote data; recomputation required")
-        pushed = git(root, "push", "origin", "HEAD:main", check=False)
-        if pushed.returncode == 0:
-            return git(root, "rev-parse", "HEAD").stdout.strip()
-    raise RuntimeError("Publication failed after four bounded attempts; no consumer was dispatched")
+        return recovered
+    base = git(root, "rev-parse", "HEAD").stdout.strip()
+    git(root, "commit", "-m", f"Save {channel} computation for publication")
+    revision = git(root, "rev-parse", "HEAD").stdout.strip()
+    pending.write_text(json.dumps({"base": base, "revision": revision}), encoding="utf-8")
+    published = publish_revision(root, base, revision, channel)
+    pending.unlink()
+    return published
 
 
 def merge_cohorts(base: list, local: list, remote: list) -> list:

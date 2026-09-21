@@ -87,6 +87,46 @@ class PublicationTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "staged"):
             arrival.publish("trade-plan", self.work)
 
+    def test_dirty_other_producer_does_not_block_publication(self):
+        (self.work / "gateway.json").write_text("old")
+        self.git(self.work, "add", ".")
+        self.git(self.work, "commit", "-m", "gateway fixture")
+        self.git(self.work, "push", "origin", "main")
+        (self.work / "gateway.json").write_text("unpublished")
+        self.data.write_text('{"price": 2}\n')
+        arrival.publish("trade-plan", self.work)
+        self.assertEqual("old", self.git(self.remote, "show", "main:gateway.json"))
+        self.assertEqual("unpublished", (self.work / "gateway.json").read_text())
+
+    def test_failed_push_can_retry_without_new_data(self):
+        self.data.write_text('{"price": 2}\n')
+        real_git = arrival.git
+        def fail_push(root, *args, **kwargs):
+            if args[0] == "push":
+                return subprocess.CompletedProcess(args, 1, "", "remote rejected fixture")
+            return real_git(root, *args, **kwargs)
+        with patch.object(arrival, "git", side_effect=fail_push):
+            with self.assertRaisesRegex(RuntimeError, "remote rejected fixture"):
+                arrival.publish("trade-plan", self.work)
+        self.assertEqual('{"price": 1}', self.git(self.remote, "show", "main:astock_trade/latest.json"))
+        self.assertIsNotNone(arrival.publish("trade-plan", self.work))
+        self.assertEqual('{"price": 2}', self.git(self.remote, "show", "main:astock_trade/latest.json"))
+        self.assertIsNone(arrival.publish("trade-plan", self.work))
+
+    def test_multiple_publications_in_same_checkout(self):
+        for price in [2, 3]:
+            self.data.write_text(json.dumps({"price": price}) + "\n")
+            arrival.publish("trade-plan", self.work)
+            self.assertEqual({"price": price}, json.loads(self.git(self.remote, "show", "main:astock_trade/latest.json")))
+
+    def test_error_diagnostics_redact_credentials(self):
+        result = subprocess.CompletedProcess([], 1, "", "denied https://user:secret@github.com/repo token-1234")
+        with patch.dict(os.environ, {"GH_TOKEN": "token-1234"}):
+            text = arrival.safe_error(result)
+        self.assertNotIn("secret", text)
+        self.assertNotIn("token-1234", text)
+        self.assertIn("denied", text)
+
     def test_official_ignores_dirty_and_concurrent_gateway_preserves_tracking(self):
         (self.work / "astock_snapshots").mkdir()
         index = self.work / "astock_snapshots/index.json"
@@ -202,6 +242,21 @@ class CloseGateTests(unittest.TestCase):
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_tail_writers_share_lock_and_failed_outputs_are_saved(self):
+        import yaml
+        root = Path(__file__).resolve().parents[1] / ".github/workflows"
+        configs = {name: yaml.load((root / name).read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+                   for name in ("run-tail-decision.yml", "run-tail-watchdog-recovery.yml", "run-ai-shadow-auto.yml")}
+        self.assertEqual(configs["run-tail-decision.yml"]["concurrency"],
+                         configs["run-tail-watchdog-recovery.yml"]["concurrency"])
+        for config in configs.values():
+            steps = next(iter(config["jobs"].values()))["steps"]
+            backups = [step for step in steps if step.get("uses") == "actions/upload-artifact@v4"]
+            self.assertTrue(backups)
+            self.assertEqual(backups[0]["if"], "failure()")
+        recovery = (root / "run-tail-watchdog-recovery.yml").read_text(encoding="utf-8")
+        self.assertLess(recovery.index("publish_data_on_arrival.py tail"), recovery.index("python tools/sync_yunai_production.py"))
+
     def test_dispatch_targets_exist_and_graph_has_no_cycles(self):
         import yaml
         workflows = Path(__file__).resolve().parents[1] / ".github/workflows"
