@@ -2995,5 +2995,48 @@
   "dataSources": [
     "腾讯行情",
     "东方财富实时/延迟板块"
-  ]
+  ],
+  "yunai": {
+    "configured": true,
+    "connected": false,
+    "marketStatus": {
+      "connected": false,
+      "error": "HTTPError"
+    },
+    "openapiState": "ready",
+    "endpointCount": 38,
+    "categories": [
+      "K线",
+      "行情"
+    ]
+  },
+  "yunaiProduction": {
+    "checkedAt": "2026-09-21T13:54:35+08:00",
+    "provider": "Yunai Quant API",
+    "connected": false,
+    "marketStatus": {
+      "error": "HTTPError"
+    },
+    "checkedSymbols": [
+      "002902",
+      "002185",
+      "688521",
+      "688313",
+      "300548",
+      "002156",
+      "688362",
+      "301583",
+      "300570",
+      "002281",
+      "600584",
+      "001399"
+    ],
+    "quoteAvailable": 0,
+    "capitalResponseAvailable": 0,
+    "roles": {
+      "realTimeQuotes": "第二实时行情源",
+      "capitalDistribution": "独立大单资金分布，不等同东方财富主力净流入",
+      "barsRange": "已验证可用，按需用于历史K线/RS校验"
+    }
+  }
 }
