@@ -1,76 +1,76 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-09-18T21:11:27+08:00",
+  "updatedAt": "2026-09-21T22:03:40+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
-    "sampleCount": 276,
+    "sampleCount": 279,
     "confidenceZh": "高",
     "horizons": {
       "1D": {
-        "members": 276,
+        "members": 279,
         "mature": true,
-        "meanReturn": -0.00225802,
-        "medianReturn": -0.001897,
-        "hitRate": 0.46376812,
-        "meanAlpha": -0.00056211,
-        "medianAlpha": 9.1e-05,
-        "p10": -0.0552085,
-        "p25": -0.02662925,
-        "p75": 0.0192695,
-        "p90": 0.049234
+        "meanReturn": -0.00230631,
+        "medianReturn": -0.002041,
+        "hitRate": 0.46236559,
+        "meanAlpha": -0.00066483,
+        "medianAlpha": -0.000445,
+        "p10": -0.0548704,
+        "p25": -0.0264595,
+        "p75": 0.019216,
+        "p90": 0.0491632
       },
       "2D": {
-        "members": 260,
+        "members": 203,
         "mature": true,
-        "meanReturn": -0.01027441,
-        "medianReturn": -0.01083656,
-        "hitRate": 0.45,
-        "meanAlpha": -0.00403187,
-        "medianAlpha": -0.00376048,
-        "p10": -0.09736549,
-        "p25": -0.04977352,
-        "p75": 0.0249321,
-        "p90": 0.06718046
+        "meanReturn": -0.00708848,
+        "medianReturn": -0.00933126,
+        "hitRate": 0.4679803,
+        "meanAlpha": -0.00084402,
+        "medianAlpha": -0.00185361,
+        "p10": -0.09560817,
+        "p25": -0.04770576,
+        "p75": 0.02534649,
+        "p90": 0.07036732
       },
       "3D": {
-        "members": 245,
+        "members": 191,
         "mature": true,
-        "meanReturn": -0.01271369,
-        "medianReturn": -0.02686567,
-        "hitRate": 0.37142857,
-        "meanAlpha": -0.00432436,
-        "medianAlpha": -0.01563945,
-        "p10": -0.09559518,
-        "p25": -0.06553191,
-        "p75": 0.02507677,
-        "p90": 0.08405166
+        "meanReturn": -0.00762387,
+        "medianReturn": -0.02462121,
+        "hitRate": 0.39790576,
+        "meanAlpha": 0.00095791,
+        "medianAlpha": -0.01332268,
+        "p10": -0.09528796,
+        "p25": -0.06454771,
+        "p75": 0.0299913,
+        "p90": 0.09233792
       },
       "5D": {
-        "members": 218,
+        "members": 222,
         "mature": true,
-        "meanReturn": 0.00033828,
-        "medianReturn": -0.00228736,
-        "hitRate": 0.48623853,
-        "meanAlpha": 0.0109873,
-        "medianAlpha": -0.00011226,
-        "p10": -0.1141597,
-        "p25": -0.060149,
-        "p75": 0.04618704,
-        "p90": 0.12152959
+        "meanReturn": 0.0015422,
+        "medianReturn": 0.0,
+        "hitRate": 0.4954955,
+        "meanAlpha": 0.0117345,
+        "medianAlpha": 0.00115723,
+        "p10": -0.1139524,
+        "p25": -0.05921037,
+        "p75": 0.05113936,
+        "p90": 0.12255826
       },
       "10D": {
-        "members": 126,
+        "members": 128,
         "mature": true,
-        "meanReturn": -0.03448983,
-        "medianReturn": -0.05187502,
-        "hitRate": 0.31746032,
-        "meanAlpha": -0.014345,
-        "medianAlpha": -0.03083805,
-        "p10": -0.1498835,
-        "p25": -0.09608025,
-        "p75": 0.02551486,
-        "p90": 0.0789985
+        "meanReturn": -0.032583,
+        "medianReturn": -0.0500315,
+        "hitRate": 0.328125,
+        "meanAlpha": -0.01262859,
+        "medianAlpha": -0.02986305,
+        "p10": -0.1491893,
+        "p25": -0.09554274,
+        "p75": 0.02635029,
+        "p90": 0.08464524
       },
       "20D": {
         "members": 60,
@@ -102,9 +102,9 @@
         "mature": false
       }
     },
-    "medianMFE": 0.047631,
-    "medianMAE": -0.047013,
-    "medianMaxDrawdown": -0.07826971
+    "medianMFE": 0.047987,
+    "medianMAE": -0.046637,
+    "medianMaxDrawdown": -0.07934444
   },
   "horizonGroups": {
     "shortTerm": [
@@ -124,20 +124,20 @@
     ]
   },
   "bestHolding": {
-    "horizon": "1D",
-    "days": 1,
-    "edge": 9.1e-05,
-    "members": 276,
+    "horizon": "5D",
+    "days": 5,
+    "edge": 0.00115723,
+    "members": 222,
     "stateZh": "存在正向历史优势",
-    "reasonZh": "按成熟样本的中位超额收益选择，当前最佳窗口为1个交易日。"
+    "reasonZh": "按成熟样本的中位超额收益选择，当前最佳窗口为5个交易日。"
   },
   "bestHoldingShort": {
-    "horizon": "1D",
-    "days": 1,
-    "edge": 9.1e-05,
-    "members": 276,
+    "horizon": "5D",
+    "days": 5,
+    "edge": 0.00115723,
+    "members": 222,
     "stateZh": "存在正向历史优势",
-    "reasonZh": "按成熟样本的中位超额收益选择，当前最佳窗口为1个交易日。"
+    "reasonZh": "按成熟样本的中位超额收益选择，当前最佳窗口为5个交易日。"
   },
   "bestHoldingLong": {
     "horizon": null,
@@ -146,12 +146,12 @@
   },
   "edgeTrend": {
     "full": {
-      "requestedSamples": 276,
-      "actualSamples": 276,
-      "fiveDayMedianAlpha": -0.00011226,
-      "fiveDayMedianReturn": -0.00228736,
-      "fiveDayHitRate": 0.48623853,
-      "fiveDayMembers": 218
+      "requestedSamples": 279,
+      "actualSamples": 279,
+      "fiveDayMedianAlpha": 0.00115723,
+      "fiveDayMedianReturn": 0.0,
+      "fiveDayHitRate": 0.4954955,
+      "fiveDayMembers": 222
     },
     "recent20": {
       "requestedSamples": 20,
@@ -164,63 +164,35 @@
     "recent60": {
       "requestedSamples": 60,
       "actualSamples": 60,
-      "fiveDayMedianAlpha": 0.0256646,
-      "fiveDayMedianReturn": 0.03291384,
+      "fiveDayMedianAlpha": 0.051003,
+      "fiveDayMedianReturn": 0.065702,
       "fiveDayHitRate": 1.0,
-      "fiveDayMembers": 3
+      "fiveDayMembers": 4
     },
     "calendarViews": {
       "all": {
-        "sampleCount": 276,
-        "fiveDayMembers": 218,
-        "fiveDayMedianAlpha": -0.00011226,
-        "fiveDayMedianReturn": -0.00228736,
-        "fiveDayHitRate": 0.48623853
+        "sampleCount": 279,
+        "fiveDayMembers": 222,
+        "fiveDayMedianAlpha": 0.00115723,
+        "fiveDayMedianReturn": 0.0,
+        "fiveDayHitRate": 0.4954955
       },
       "recentOneYear": {
-        "sampleCount": 276,
-        "fiveDayMembers": 218,
-        "fiveDayMedianAlpha": -0.00011226,
-        "fiveDayMedianReturn": -0.00228736,
-        "fiveDayHitRate": 0.48623853
+        "sampleCount": 279,
+        "fiveDayMembers": 222,
+        "fiveDayMedianAlpha": 0.00115723,
+        "fiveDayMedianReturn": 0.0,
+        "fiveDayHitRate": 0.4954955
       },
       "recentThreeMonths": {
-        "sampleCount": 276,
-        "fiveDayMembers": 218,
-        "fiveDayMedianAlpha": -0.00011226,
-        "fiveDayMedianReturn": -0.00228736,
-        "fiveDayHitRate": 0.48623853
+        "sampleCount": 279,
+        "fiveDayMembers": 222,
+        "fiveDayMedianAlpha": 0.00115723,
+        "fiveDayMedianReturn": 0.0,
+        "fiveDayHitRate": 0.4954955
       }
     },
     "rolling20": [
-      {
-        "date": "2026-09-02",
-        "windowSamples": 20,
-        "medianAlpha": 0.03518451,
-        "medianReturn": 0.03021452,
-        "hitRate": 0.85
-      },
-      {
-        "date": "2026-09-02",
-        "windowSamples": 20,
-        "medianAlpha": 0.03805901,
-        "medianReturn": 0.03575902,
-        "hitRate": 0.85
-      },
-      {
-        "date": "2026-09-02",
-        "windowSamples": 20,
-        "medianAlpha": 0.03805901,
-        "medianReturn": 0.03575902,
-        "hitRate": 0.85
-      },
-      {
-        "date": "2026-09-02",
-        "windowSamples": 20,
-        "medianAlpha": 0.04187601,
-        "medianReturn": 0.039564,
-        "hitRate": 0.85
-      },
       {
         "date": "2026-09-02",
         "windowSamples": 20,
@@ -721,29 +693,29 @@
       {
         "date": "2026-09-09",
         "windowSamples": 20,
-        "medianAlpha": 0.03430687,
+        "medianAlpha": 0.034307,
         "medianReturn": 0.01287926,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-09",
         "windowSamples": 20,
-        "medianAlpha": 0.04816579,
-        "medianReturn": 0.02645293,
+        "medianAlpha": 0.04816593,
+        "medianReturn": 0.02645276,
         "hitRate": 0.6
       },
       {
         "date": "2026-09-09",
         "windowSamples": 20,
-        "medianAlpha": 0.04816579,
-        "medianReturn": 0.02645293,
+        "medianAlpha": 0.04816593,
+        "medianReturn": 0.02645276,
         "hitRate": 0.65
       },
       {
         "date": "2026-09-09",
         "windowSamples": 20,
-        "medianAlpha": 0.05373039,
-        "medianReturn": 0.03836399,
+        "medianAlpha": 0.05373052,
+        "medianReturn": 0.03836383,
         "hitRate": 0.65
       },
       {
@@ -770,8 +742,8 @@
       {
         "date": "2026-09-09",
         "windowSamples": 20,
-        "medianAlpha": 0.05373039,
-        "medianReturn": 0.03836399,
+        "medianAlpha": 0.05373052,
+        "medianReturn": 0.03836383,
         "hitRate": 0.65
       },
       {
@@ -1032,6 +1004,34 @@
         "medianAlpha": 0.03590512,
         "medianReturn": 0.04315436,
         "hitRate": 0.75
+      },
+      {
+        "date": "2026-09-14",
+        "windowSamples": 20,
+        "medianAlpha": 0.04090512,
+        "medianReturn": 0.04815436,
+        "hitRate": 0.75
+      },
+      {
+        "date": "2026-09-14",
+        "windowSamples": 20,
+        "medianAlpha": 0.03836224,
+        "medianReturn": 0.04815436,
+        "hitRate": 0.75
+      },
+      {
+        "date": "2026-09-14",
+        "windowSamples": 20,
+        "medianAlpha": 0.04090512,
+        "medianReturn": 0.051182,
+        "hitRate": 0.75
+      },
+      {
+        "date": "2026-09-14",
+        "windowSamples": 20,
+        "medianAlpha": 0.04090512,
+        "medianReturn": 0.051182,
+        "hitRate": 0.8
       }
     ],
     "judgement": {
@@ -1125,6 +1125,11 @@
       "date": "2026-09-17",
       "newSamples": 12,
       "cumulativeSamples": 276
+    },
+    {
+      "date": "2026-09-18",
+      "newSamples": 3,
+      "cumulativeSamples": 279
     }
   ],
   "eventPath": [
@@ -1136,38 +1141,38 @@
     },
     {
       "day": 1,
-      "meanReturn": -0.00225802,
-      "medianReturn": -0.001897,
-      "meanAlpha": -0.00056211,
-      "members": 276
+      "meanReturn": -0.00230631,
+      "medianReturn": -0.002041,
+      "meanAlpha": -0.00066483,
+      "members": 279
     },
     {
       "day": 2,
-      "meanReturn": -0.01027441,
-      "medianReturn": -0.01083656,
-      "meanAlpha": -0.00403187,
-      "members": 260
+      "meanReturn": -0.00708848,
+      "medianReturn": -0.00933126,
+      "meanAlpha": -0.00084402,
+      "members": 203
     },
     {
       "day": 3,
-      "meanReturn": -0.01271369,
-      "medianReturn": -0.02686567,
-      "meanAlpha": -0.00432436,
-      "members": 245
+      "meanReturn": -0.00762387,
+      "medianReturn": -0.02462121,
+      "meanAlpha": 0.00095791,
+      "members": 191
     },
     {
       "day": 5,
-      "meanReturn": 0.00033828,
-      "medianReturn": -0.00228736,
-      "meanAlpha": 0.0109873,
-      "members": 218
+      "meanReturn": 0.0015422,
+      "medianReturn": 0.0,
+      "meanAlpha": 0.0117345,
+      "members": 222
     },
     {
       "day": 10,
-      "meanReturn": -0.03448983,
-      "medianReturn": -0.05187502,
-      "meanAlpha": -0.014345,
-      "members": 126
+      "meanReturn": -0.032583,
+      "medianReturn": -0.0500315,
+      "meanAlpha": -0.01262859,
+      "members": 128
     },
     {
       "day": 20,
@@ -1180,205 +1185,205 @@
   "returnDistributions": {
     "1D": {
       "horizon": "1D",
-      "members": 276,
+      "members": 279,
       "bins": [
         {
           "label": "<-5%",
           "count": 32,
-          "share": 0.11594203
+          "share": 0.11469534
         },
         {
           "label": "-5~-3%",
           "count": 30,
-          "share": 0.10869565
+          "share": 0.10752688
         },
         {
           "label": "-3~-1%",
-          "count": 56,
-          "share": 0.20289855
+          "count": 58,
+          "share": 0.2078853
         },
         {
           "label": "-1~0%",
           "count": 24,
-          "share": 0.08695652
+          "share": 0.08602151
         },
         {
           "label": "0~1%",
           "count": 45,
-          "share": 0.16304348
+          "share": 0.16129032
         },
         {
           "label": "1~3%",
-          "count": 36,
-          "share": 0.13043478
+          "count": 37,
+          "share": 0.13261649
         },
         {
           "label": "3~5%",
           "count": 26,
-          "share": 0.0942029
+          "share": 0.09318996
         },
         {
           "label": "5~10%",
           "count": 21,
-          "share": 0.07608696
+          "share": 0.07526882
         },
         {
           "label": ">10%",
           "count": 6,
-          "share": 0.02173913
+          "share": 0.02150538
         }
       ]
     },
     "3D": {
       "horizon": "3D",
-      "members": 245,
+      "members": 191,
       "bins": [
         {
           "label": "<-5%",
-          "count": 87,
-          "share": 0.35510204
+          "count": 64,
+          "share": 0.33507853
         },
         {
           "label": "-5~-3%",
-          "count": 26,
-          "share": 0.10612245
+          "count": 22,
+          "share": 0.11518325
         },
         {
           "label": "-3~-1%",
-          "count": 33,
-          "share": 0.13469388
+          "count": 25,
+          "share": 0.13089005
         },
         {
           "label": "-1~0%",
-          "count": 7,
-          "share": 0.02857143
+          "count": 4,
+          "share": 0.02094241
         },
         {
           "label": "0~1%",
-          "count": 10,
-          "share": 0.04081633
+          "count": 8,
+          "share": 0.04188482
         },
         {
           "label": "1~3%",
-          "count": 26,
-          "share": 0.10612245
+          "count": 20,
+          "share": 0.10471204
         },
         {
           "label": "3~5%",
-          "count": 13,
-          "share": 0.05306122
+          "count": 9,
+          "share": 0.04712042
         },
         {
           "label": "5~10%",
-          "count": 24,
-          "share": 0.09795918
+          "count": 22,
+          "share": 0.11518325
         },
         {
           "label": ">10%",
-          "count": 19,
-          "share": 0.07755102
+          "count": 17,
+          "share": 0.08900524
         }
       ]
     },
     "5D": {
       "horizon": "5D",
-      "members": 218,
+      "members": 222,
       "bins": [
         {
           "label": "<-5%",
           "count": 65,
-          "share": 0.29816514
+          "share": 0.29279279
         },
         {
           "label": "-5~-3%",
           "count": 16,
-          "share": 0.0733945
+          "share": 0.07207207
         },
         {
           "label": "-3~-1%",
           "count": 23,
-          "share": 0.10550459
+          "share": 0.1036036
         },
         {
           "label": "-1~0%",
           "count": 6,
-          "share": 0.02752294
+          "share": 0.02702703
         },
         {
           "label": "0~1%",
           "count": 13,
-          "share": 0.05963303
+          "share": 0.05855856
         },
         {
           "label": "1~3%",
-          "count": 20,
-          "share": 0.09174312
+          "count": 21,
+          "share": 0.09459459
         },
         {
           "label": "3~5%",
           "count": 21,
-          "share": 0.09633028
+          "share": 0.09459459
         },
         {
           "label": "5~10%",
-          "count": 26,
-          "share": 0.11926606
+          "count": 28,
+          "share": 0.12612613
         },
         {
           "label": ">10%",
-          "count": 28,
-          "share": 0.12844037
+          "count": 29,
+          "share": 0.13063063
         }
       ]
     },
     "10D": {
       "horizon": "10D",
-      "members": 126,
+      "members": 128,
       "bins": [
         {
           "label": "<-5%",
           "count": 64,
-          "share": 0.50793651
+          "share": 0.5
         },
         {
           "label": "-5~-3%",
           "count": 10,
-          "share": 0.07936508
+          "share": 0.078125
         },
         {
           "label": "-3~-1%",
           "count": 8,
-          "share": 0.06349206
+          "share": 0.0625
         },
         {
           "label": "-1~0%",
           "count": 4,
-          "share": 0.03174603
+          "share": 0.03125
         },
         {
           "label": "0~1%",
           "count": 2,
-          "share": 0.01587302
+          "share": 0.015625
         },
         {
           "label": "1~3%",
-          "count": 9,
-          "share": 0.07142857
+          "count": 10,
+          "share": 0.078125
         },
         {
           "label": "3~5%",
           "count": 6,
-          "share": 0.04761905
+          "share": 0.046875
         },
         {
           "label": "5~10%",
           "count": 12,
-          "share": 0.0952381
+          "share": 0.09375
         },
         {
           "label": ">10%",
-          "count": 11,
-          "share": 0.08730159
+          "count": 12,
+          "share": 0.09375
         }
       ]
     },
@@ -1537,6 +1542,33 @@
     }
   },
   "riskScatter": [
+    {
+      "id": "2026-09-18-002902",
+      "date": "2026-09-18",
+      "code": "002902",
+      "name": "铭普光磁",
+      "mfe": 0.006536,
+      "mae": -0.023529,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-09-18-002281",
+      "date": "2026-09-18",
+      "code": "002281",
+      "name": "光迅科技",
+      "mfe": 0.007475,
+      "mae": -0.031667,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-09-18-001399",
+      "date": "2026-09-18",
+      "code": "001399",
+      "name": "惠科股份",
+      "mfe": 0.046482,
+      "mae": -0.018007,
+      "fiveDayReturn": null
+    },
     {
       "id": "2026-09-17-605006",
       "date": "2026-09-17",
@@ -1768,7 +1800,7 @@
       "code": "002396",
       "name": "星网锐捷",
       "mfe": 0.058699,
-      "mae": -0.006109,
+      "mae": -0.013811,
       "fiveDayReturn": null
     },
     {
@@ -1776,7 +1808,7 @@
       "date": "2026-09-16",
       "code": "002371",
       "name": "北方华创",
-      "mfe": 0.023716,
+      "mfe": 0.048943,
       "mae": -0.009063,
       "fiveDayReturn": null
     },
@@ -1785,7 +1817,7 @@
       "date": "2026-09-16",
       "code": "002281",
       "name": "光迅科技",
-      "mfe": 0.058511,
+      "mfe": 0.061064,
       "mae": 0.0,
       "fiveDayReturn": null
     },
@@ -1921,7 +1953,7 @@
       "code": "000657",
       "name": "中钨高新",
       "mfe": 0.042613,
-      "mae": -0.017769,
+      "mae": -0.019085,
       "fiveDayReturn": null
     },
     {
@@ -2010,36 +2042,36 @@
       "date": "2026-09-14",
       "code": "002859",
       "name": "洁美科技",
-      "mfe": 0.032129,
+      "mfe": 0.063067,
       "mae": -0.024394,
-      "fiveDayReturn": null
+      "fiveDayReturn": 0.014428
     },
     {
       "id": "2026-09-14-002821",
       "date": "2026-09-14",
       "code": "002821",
       "name": "凯莱英",
-      "mfe": 0.09548,
+      "mfe": 0.097853,
       "mae": -0.014463,
-      "fiveDayReturn": null
+      "fiveDayReturn": 0.07904
     },
     {
       "id": "2026-09-14-002669",
       "date": "2026-09-14",
       "code": "002669",
       "name": "康达新材",
-      "mfe": 0.089455,
+      "mfe": 0.101091,
       "mae": -0.010909,
-      "fiveDayReturn": null
+      "fiveDayReturn": 0.052364
     },
     {
       "id": "2026-09-14-002585",
       "date": "2026-09-14",
       "code": "002585",
       "name": "双星新材",
-      "mfe": 0.117491,
+      "mfe": 0.122792,
       "mae": -0.015901,
-      "fiveDayReturn": null
+      "fiveDayReturn": 0.122792
     },
     {
       "id": "2026-09-14-002172",
@@ -2172,9 +2204,9 @@
       "date": "2026-09-11",
       "code": "002916",
       "name": "深南电路",
-      "mfe": 0.041962,
-      "mae": -0.010845,
-      "fiveDayReturn": -0.00955668
+      "mfe": 0.044667,
+      "mae": -0.050771,
+      "fiveDayReturn": -0.009557
     },
     {
       "id": "2026-09-11-002913",
@@ -2226,7 +2258,7 @@
       "date": "2026-09-11",
       "code": "000636",
       "name": "风华高科",
-      "mfe": 0.08055,
+      "mfe": 0.102876,
       "mae": -0.009109,
       "fiveDayReturn": 0.039471
     },
@@ -2235,7 +2267,7 @@
       "date": "2026-09-11",
       "code": "000070",
       "name": "特发信息",
-      "mfe": 0.077968,
+      "mfe": 0.15003,
       "mae": -0.053751,
       "fiveDayReturn": 0.045481
     },
@@ -2487,9 +2519,9 @@
       "date": "2026-09-09",
       "code": "002916",
       "name": "深南电路",
-      "mfe": 0.064082,
-      "mae": -0.00826,
-      "fiveDayReturn": 0.03251434
+      "mfe": 0.066844,
+      "mae": -0.03062,
+      "fiveDayReturn": 0.032514
     },
     {
       "id": "2026-09-09-002815",
@@ -2559,7 +2591,7 @@
       "date": "2026-09-09",
       "code": "000988",
       "name": "华工科技",
-      "mfe": 0.024815,
+      "mfe": 0.024907,
       "mae": -0.089537,
       "fiveDayReturn": -0.018704
     },
@@ -2677,7 +2709,7 @@
       "code": "002545",
       "name": "东方铁塔",
       "mfe": 0.022892,
-      "mae": -0.093802,
+      "mae": -0.118928,
       "fiveDayReturn": -0.092127
     },
     {
@@ -2856,7 +2888,7 @@
       "date": "2026-09-07",
       "code": "002281",
       "name": "光迅科技",
-      "mfe": 0.051297,
+      "mfe": 0.053833,
       "mae": -0.114639,
       "fiveDayReturn": -0.092345
     },
@@ -2982,7 +3014,7 @@
       "date": "2026-09-03",
       "code": "002046",
       "name": "国机精工",
-      "mfe": 0.214766,
+      "mfe": 0.252336,
       "mae": -0.061495,
       "fiveDayReturn": 0.103551
     },
@@ -3309,83 +3341,56 @@
       "mfe": 0.04703,
       "mae": -0.180693,
       "fiveDayReturn": -0.048267
-    },
-    {
-      "id": "2026-08-31-603533",
-      "date": "2026-08-31",
-      "code": "603533",
-      "name": "掌阅科技",
-      "mfe": 0.044534,
-      "mae": -0.064777,
-      "fiveDayReturn": 0.0
-    },
-    {
-      "id": "2026-08-31-601929",
-      "date": "2026-08-31",
-      "code": "601929",
-      "name": "吉视传媒",
-      "mfe": 0.066667,
-      "mae": -0.035294,
-      "fiveDayReturn": 0.003922
-    },
-    {
-      "id": "2026-08-31-301262",
-      "date": "2026-08-31",
-      "code": "301262",
-      "name": "海看股份",
-      "mfe": 0.045264,
-      "mae": -0.090994,
-      "fiveDayReturn": -0.025198
     }
   ],
   "pathClusters": {
     "methodZh": "第一期使用透明规则分型；样本量充足后再升级为无监督路径聚类，并保留版本号避免事后改口径。",
-    "matureSamples": 218,
+    "matureSamples": 172,
     "clusters": [
       {
         "name": "失败下跌型",
-        "sampleCount": 81,
-        "share": 0.37155963,
-        "medianFiveDayReturn": -0.084337
+        "sampleCount": 61,
+        "share": 0.35465116,
+        "medianFiveDayReturn": -0.09164757
       },
       {
         "name": "其他演化型",
-        "sampleCount": 47,
-        "share": 0.21559633,
-        "medianFiveDayReturn": 0.02776463
+        "sampleCount": 37,
+        "share": 0.21511628,
+        "medianFiveDayReturn": 0.027179
       },
       {
         "name": "横盘蓄势型",
-        "sampleCount": 35,
-        "share": 0.16055046,
-        "medianFiveDayReturn": 0.002289
+        "sampleCount": 28,
+        "share": 0.1627907,
+        "medianFiveDayReturn": 0.0031055
       },
       {
         "name": "回踩再涨型",
-        "sampleCount": 28,
-        "share": 0.12844037,
-        "medianFiveDayReturn": 0.0560795
+        "sampleCount": 23,
+        "share": 0.13372093,
+        "medianFiveDayReturn": 0.058011
       },
       {
         "name": "快速启动型",
-        "sampleCount": 27,
-        "share": 0.12385321,
-        "medianFiveDayReturn": 0.11465721
+        "sampleCount": 23,
+        "share": 0.13372093,
+        "medianFiveDayReturn": 0.124038
       }
     ]
   },
   "successFailure": {
     "definitionZh": "成功：5日收益≥+3%；失败：5日收益≤-3%。中间样本不强行归类。",
-    "matureFiveDaySamples": 218,
+    "matureFiveDaySamples": 222,
     "success": {
-      "sampleCount": 75,
-      "averageScore": 60.01666667,
+      "sampleCount": 78,
+      "averageScore": 60.03923077,
       "averageAccumulation": null,
       "highChaseRatio": null,
       "stageDistribution": {},
       "chaseDistribution": {},
-      "medianMFE": 0.093385,
-      "medianMAE": -0.030978
+      "medianMFE": 0.099472,
+      "medianMAE": -0.0305035
     },
     "failure": {
       "sampleCount": 81,
@@ -3516,12 +3521,12 @@
     "byRegime": [
       {
         "name": "结构性主升/轮动",
-        "sampleCount": 245,
+        "sampleCount": 248,
         "confidenceZh": "高",
-        "fiveDayMedianReturn": 0.010167,
-        "fiveDayMedianAlpha": 0.0159115,
-        "fiveDayHitRate": 0.55319149,
-        "fiveDayMembers": 188
+        "fiveDayMedianReturn": 0.01123197,
+        "fiveDayMedianAlpha": 0.0187345,
+        "fiveDayHitRate": 0.5625,
+        "fiveDayMembers": 192
       },
       {
         "name": "震荡上行",
@@ -3572,7 +3577,7 @@
       },
       {
         "name": "B0/B4",
-        "sampleCount": 18,
+        "sampleCount": 19,
         "confidenceZh": "低",
         "fiveDayMedianReturn": 0.04,
         "fiveDayMedianAlpha": 0.033154,
@@ -3581,12 +3586,12 @@
       },
       {
         "name": "B0/B3/B4",
-        "sampleCount": 88,
+        "sampleCount": 89,
         "confidenceZh": "中",
-        "fiveDayMedianReturn": 0.00925926,
-        "fiveDayMedianAlpha": 0.013541,
-        "fiveDayHitRate": 0.52459016,
-        "fiveDayMembers": 61
+        "fiveDayMedianReturn": 0.00986713,
+        "fiveDayMedianAlpha": 0.014314,
+        "fiveDayHitRate": 0.53225806,
+        "fiveDayMembers": 62
       },
       {
         "name": "B1",
@@ -3596,6 +3601,15 @@
         "fiveDayMedianAlpha": 0.010943,
         "fiveDayHitRate": 0.51785714,
         "fiveDayMembers": 56
+      },
+      {
+        "name": "B3/B4",
+        "sampleCount": 10,
+        "confidenceZh": "低",
+        "fiveDayMedianReturn": -0.03194823,
+        "fiveDayMedianAlpha": -0.01547906,
+        "fiveDayHitRate": 0.4,
+        "fiveDayMembers": 10
       },
       {
         "name": "B0/B3",
@@ -3608,12 +3622,12 @@
       },
       {
         "name": "B3",
-        "sampleCount": 29,
-        "confidenceZh": "低",
-        "fiveDayMedianReturn": -0.031635,
-        "fiveDayMedianAlpha": -0.0181,
-        "fiveDayHitRate": 0.36363636,
-        "fiveDayMembers": 22
+        "sampleCount": 30,
+        "confidenceZh": "中低",
+        "fiveDayMedianReturn": -0.024253,
+        "fiveDayMedianAlpha": -0.017833,
+        "fiveDayHitRate": 0.39130435,
+        "fiveDayMembers": 23
       },
       {
         "name": "B1/B13/B3/B4",
@@ -3625,13 +3639,13 @@
         "fiveDayMembers": 3
       },
       {
-        "name": "B3/B4",
-        "sampleCount": 10,
+        "name": "B0",
+        "sampleCount": 16,
         "confidenceZh": "低",
-        "fiveDayMedianReturn": -0.05578846,
-        "fiveDayMedianAlpha": -0.02772911,
-        "fiveDayHitRate": 0.33333333,
-        "fiveDayMembers": 9
+        "fiveDayMedianReturn": -0.04481446,
+        "fiveDayMedianAlpha": -0.04283767,
+        "fiveDayHitRate": 0.5,
+        "fiveDayMembers": 12
       },
       {
         "name": "B0/B1/B2/B3/B4",
@@ -3641,15 +3655,6 @@
         "fiveDayMedianAlpha": -0.061215,
         "fiveDayHitRate": 0.0,
         "fiveDayMembers": 4
-      },
-      {
-        "name": "B0",
-        "sampleCount": 16,
-        "confidenceZh": "低",
-        "fiveDayMedianReturn": -0.095628,
-        "fiveDayMedianAlpha": -0.089515,
-        "fiveDayHitRate": 0.45454545,
-        "fiveDayMembers": 11
       }
     ],
     "byMainlineState": [],
@@ -3657,11 +3662,11 @@
     "stageByChase": []
   },
   "vitals": {
-    "longTermValidityZh": "偏弱",
+    "longTermValidityZh": "偏强",
     "recentTrendZh": "样本不足",
     "sampleConfidenceZh": "高",
-    "bestHoldingZh": "1个交易日",
-    "bestShortHoldingZh": "1个交易日",
+    "bestHoldingZh": "5个交易日",
+    "bestShortHoldingZh": "5个交易日",
     "bestLongHoldingZh": "暂无正向历史优势",
     "currentAdviceZh": "维持历史优势权重并继续样本外验证"
   },
