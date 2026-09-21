@@ -1,10 +1,10 @@
 {
   "schemaVersion": 3,
-  "strategyVersion": "v5.4-operational-continuity",
-  "mode": "a股筛选池 · 主线持仓＋底仓T研究",
+  "strategyVersion": "v6.0-eight-batch-t1-limit-execution",
+  "mode": "A股原选股池 · T+1八批轮动模拟执行",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-21T21:35:10+08:00",
+  "updatedAt": "2026-09-21T22:33:31+08:00",
   "radarCapturedAt": "2026-09-21T14:54:58+08:00",
   "radarStatus": "RadarLive",
   "summary": {
@@ -11195,7 +11195,7 @@
       "periodReturnPct": 0.0481,
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
-      "pointCount": 5
+      "pointCount": 6
     }
   ],
   "weeklyPerformance": [
@@ -18434,6 +18434,21 @@
       "cumulativeReturnPct": 3.0538,
       "radarCapturedAt": "2026-09-21T14:54:58+08:00",
       "isVerifiedClose": true
+    },
+    {
+      "timestamp": "2026-09-21T22:33:31+08:00",
+      "date": "2026-09-21",
+      "time": "22:33:31",
+      "nav": 19932142.18,
+      "cash": 19555006.18,
+      "marketValue": 377136.0,
+      "positionCount": 2,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.03053822,
+      "cumulativeNav": 1.03053822,
+      "cumulativeReturnPct": 3.0538,
+      "radarCapturedAt": "2026-09-21T14:54:58+08:00",
+      "isVerifiedClose": true
     }
   ],
   "performanceReport": {
@@ -18567,7 +18582,7 @@
           "periodReturnPct": 0.0481,
           "observationGapBusinessDays": 0,
           "coverageStatus": "COMPLETE",
-          "pointCount": 5
+          "pointCount": 6
         }
       ],
       "weekly": [
@@ -18887,14 +18902,14 @@
     "noteZh": "使用本轮当时行情估值。"
   },
   "rulesZh": {
-    "newEntry": "大盘许可后按板块、资金和量价排序分批建仓。分数、排名、量比、阶段及回踩形态用于排序，不要求同时达标；可选数据不足或偏好未满足时首批单股≤1%。保留有效行情、可成交性、明确风险和组合仓位约束。",
-    "position": "前一交易日四项掘金指数的综合市场资金情绪按方向型状态机决定次日基础仓位：0–20为0%，上升至20–50为50%，上升至50–80为100%，80以上为0%，回落至50–80为30%，回落至20–50为0%；盘中风险只能下调该上限。潜在主线初始2.5%，确认主线4%；普通单股≤8%，两次确认龙头≤10%，板块≤25%，相关板块≤35%。",
-    "exit": "掉出候选只停加仓。至少2个完整交易日观察；1日失效观察，2日减半，3日退出；板块2日确认衰退退出。硬止损及组合风险优先，待退出数量不因T+1/跌停/部分成交丢失。",
+    "newEntry": "选股策略保持不变。T日收盘冻结当天候选及排名，T+1按T日收盘价98%低吸限价执行；未触及则14:45–14:55收盘窗口兜底。涨停不可成交最多顺延3个有效交易日。",
+    "position": "前一交易日四项掘金指数的综合市场资金情绪决定次日基础仓位，盘中风险只能下调该上限。8批执行层每批预算为信号日收盘总资产的1/8，单股≤2.25%，板块≤30%；选股评分只决定批内排序和资金分配。",
+    "exit": "T日收盘涨停则T+1开盘优先卖出；否则随所属批次在第9个有效信号批次形成后轮出。ATR硬止损、组合风险、T+1、跌停顺延和部分成交待办继续优先执行。",
     "valuation": "采用基金份额净值法；增资按增资前单位净值发行份额，不重置历史收益。",
     "drawdown": "正式最大回撤按日终单位净值计算；盘中已观测最大回撤单独显示，周频和月频只用于收益归因。",
     "audit": "新规则只影响生效后的模拟成交；旧100万阶段、2000万容量、完整账本保留。T收益单列，不二次计入净值、不改写会计平均成本。所有参数待样本外验证。",
     "rotation": "现金不足时择优换仓：新票通过原买入条件及3轮确认；新旧证据完整，新旧优势再经3次间隔至少3分钟确认；评分优势≥10、近20日高点空间增益覆盖实际费用+0.86%滑点+1%余量，新票空间/风险≥1.5且较旧票高0.5。每天最多1项，单项≤净值5%、旧仓50%；先卖后买，15分钟内重新核验，失效保留现金；不绕过风控、T+1与容量。参数待样本外验证，价格空间不是预测收益。",
-    "rebalance": "新仓及已确认余量在有效交易时段按排名执行，14:50后不新增；首批只需一个有效当前行情。普通加仓仍在10:00–10:30、14:30–14:50并确认3个不同快照。相同行情不重复买入；普通双边换手≤20%，仓位上限不要求立即买满。",
+    "rebalance": "同时保留8个有效信号批次，每批预算为信号日收盘总资产的1/8；第9个批次形成时，T+1开盘轮出最老批次。单股上限2.25%，板块上限30%，单笔至少1万元并遵守100股整手。",
     "stop": "1.5×ATR14/价格，距离限制4%–8%；ATR缺失保守4%并标注降级。盈利8%启动2×ATR移动保护；峰值盈利15%/25%后回撤距离上限收紧至5%/3%，风险线只收紧不放宽。",
     "profit": "主动止盈：首次获得完整日线时冻结目标一=max(20日高点,风险基准×1.08)，目标二=max(目标一×1.05,风险基准×1.15)。进入目标99%区间并经3个间隔3–10分钟快照确认滞涨回落≥0.2%，且当前盈利≥5%/10%，分别减1/3及剩余1/2；每档一次、每天一档。保护性卖出不等普通窗口/换手额度，保留T+1及成交限制。止盈当日禁止回补，已有T回补取消；参数待前向验证。",
     "execution": "持仓保护与慢证据采集独立运行；证据发布后触发交易检查，单一账本写入。新鲜行情与成交容量是执行依据；慢证据不足降低置信度和首批仓位，继续筛选。综合情绪研究分数未按时到达时，仅用前一交易日已验证宽度或核心指数生成0%/10%/20%保守运行上限，不冒充掘金指数。每次未买入必须列明具体执行障碍。",
@@ -19068,7 +19083,7 @@
       "periodReturnPct": 0.0481,
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
-      "pointCount": 5
+      "pointCount": 6
     }
   ],
   "selection45": {
@@ -19101,7 +19116,7 @@
       "cap": 0.2,
       "allowNew": true,
       "date": "2026-09-21",
-      "asOf": "2026-09-21T21:35:01+08:00",
+      "asOf": "2026-09-21T22:33:31+08:00",
       "dailyUnitReturnPct": 0.04810674353594724,
       "confirmedCloseDrawdownPct": -2.819734561505094,
       "dailyRiskDataReady": true,
@@ -19140,7 +19155,7 @@
       "tMaxQuoteGapSeconds": 600,
       "parameterStatus": "INITIAL_RESEARCH_NOT_OUT_OF_SAMPLE_VALIDATED"
     },
-    "entryPolicy": "RANKED_STAGED_ENTRY",
+    "entryPolicy": "T1_EIGHT_BATCH_LIMIT",
     "pendingExits": [],
     "candidates": [
       {
@@ -22330,13 +22345,13 @@
   "strategyResearch": {
     "schemaVersion": 1,
     "version": "v4.6-forward-evidence",
-    "updatedAt": "2026-09-21T21:35:01.783096+08:00",
-    "activatedAt": "2026-09-21T20:15:25.149279+08:00",
+    "updatedAt": "2026-09-21T22:33:31.401946+08:00",
+    "activatedAt": "2026-09-21T22:33:31.403493+08:00",
     "objectiveZh": "提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。",
     "productionStatusZh": "生产策略正常运行；新版研究样本独立累计，不阻断选股、仓位或模拟交易。",
     "protocol": {
       "version": "v4.6-forward-evidence",
-      "ruleVersion": "v5.4-operational-continuity",
+      "ruleVersion": "v6.0-eight-batch-t1-limit-execution",
       "parameters": {
         "singleLimit": 0.08,
         "leaderLimit": 0.1,
@@ -22366,8 +22381,8 @@
         "parameterStatus": "INITIAL_RESEARCH_NOT_OUT_OF_SAMPLE_VALIDATED"
       },
       "sourceHashes": {
-        "selection_rules_v45.py": "3a3a218072c7bca4898e2cdcebbf3f7bcebbc51e4455f3176f52750d2390a236",
-        "selection_engine_v45.py": "c5c341833aede2b9c87b32ec1d7d700fbebe865bcff452b832af3747c1b2b250",
+        "selection_rules_v45.py": "72adceceb4a453dc549945252b7d1dd41eb765a9db4c71af58e2d39e362e2d49",
+        "selection_engine_v45.py": "d09fb2c54d3ca7f5630e364c2eb3a884ae36d6dfc5735b6bdd8ffbc2cc073d1e",
         "selection_data_v45.py": "7b2cf58de717dbbdf588f6f4e1863eff5a451af53b8f25fe191bd26f5aa4acf0",
         "selection_research_v46.py": "55b239fef50d21a7cfc82fedc8776859b72805da3a5f728d390cb6bb43d95207"
       },
@@ -22387,7 +22402,7 @@
       "timingBenchmark": "相同候选筛选与执行风控；取消回踩买点及阻力空间过滤，首次可行窗口建仓，持仓起始日起满10个完整交易日退出；保留硬止损和组合风险。",
       "noteZh": "固定10日主检验、5/20日辅助观察；60个信号日仅是复核门槛，不是盈利认证。"
     },
-    "protocolHash": "1b2e73f8641126172c53412b6faba39b9efa22f615f72227158c0421fc43ed81",
+    "protocolHash": "92eb6671a43f9737158f41224363099aecc1df483ecea8393fc90b7095ffdc7f",
     "stages": [
       {
         "id": "SELECTION",
@@ -22427,7 +22442,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-21T21:35:01.783096+08:00",
+        "checkedAt": "2026-09-21T22:33:31.401946+08:00",
         "reasonZh": "仅统计本次启用后的完整成员样本；不等于2017年至今历史覆盖审计。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -22437,7 +22452,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-21T21:35:01.783096+08:00",
+        "checkedAt": "2026-09-21T22:33:31.401946+08:00",
         "reasonZh": "使用首次观察时保存的成员；后续不以今天成员替换。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -22447,7 +22462,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-21T21:35:01.783096+08:00",
+        "checkedAt": "2026-09-21T22:33:31.401946+08:00",
         "reasonZh": "两融/ETF必须具备真实availableAt且不晚于决策；仅写T+1不能通过。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -22457,7 +22472,7 @@
         "status": "PENDING_REVIEW",
         "completed": 0,
         "total": 60,
-        "checkedAt": "2026-09-21T21:35:01.783096+08:00",
+        "checkedAt": "2026-09-21T22:33:31.401946+08:00",
         "reasonZh": "按信号日汇总，重叠窗口仍相关；需补除权、可成交成本、全市场基准与独立样本外验证。",
         "evidencePath": "astock_ai_portfolio/state.json#research46"
       },
@@ -22467,7 +22482,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-21T21:35:01.783096+08:00",
+        "checkedAt": "2026-09-21T22:33:31.401946+08:00",
         "reasonZh": "校验首次冻结内容哈希；仅证明未改写，不等于策略有效。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       }
@@ -22488,6 +22503,209 @@
     },
     "pendingReasons": []
   },
+  "batchExecutionV6": {
+    "version": "v6.0-eight-batch-t1-limit-execution",
+    "activatedAt": "2026-09-21T22:33:31+08:00",
+    "batchCount": 1,
+    "activeBatchCount": 1,
+    "pendingOrderCount": 19,
+    "pendingExitCount": 0,
+    "lastSignalDate": "2026-09-21",
+    "pendingOrders": [
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "300142",
+        "name": "沃森生物",
+        "rank": 1,
+        "limitPrice": 13.4162,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "000538",
+        "name": "云南白药",
+        "rank": 2,
+        "limitPrice": 50.078,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "300122",
+        "name": "智飞生物",
+        "rank": 3,
+        "limitPrice": 12.74,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "600521",
+        "name": "华海药业",
+        "rank": 4,
+        "limitPrice": 16.3072,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "600436",
+        "name": "片仔癀",
+        "rank": 5,
+        "limitPrice": 118.58,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "002432",
+        "name": "九安医疗",
+        "rank": 6,
+        "limitPrice": 62.4456,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "002603",
+        "name": "以岭药业",
+        "rank": 7,
+        "limitPrice": 15.288,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "300016",
+        "name": "北陆药业",
+        "rank": 8,
+        "limitPrice": 8.4868,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "000963",
+        "name": "华东医药",
+        "rank": 9,
+        "limitPrice": 26.215,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "300199",
+        "name": "翰宇药业",
+        "rank": 10,
+        "limitPrice": 23.0888,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "688166",
+        "name": "博瑞医药",
+        "rank": 11,
+        "limitPrice": 35.525,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "600103",
+        "name": "青山纸业",
+        "rank": 12,
+        "limitPrice": 3.773,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "600359",
+        "name": "新农开发",
+        "rank": 13,
+        "limitPrice": 7.938,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "600267",
+        "name": "海正药业",
+        "rank": 14,
+        "limitPrice": 11.6326,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "600881",
+        "name": "亚泰集团",
+        "rank": 15,
+        "limitPrice": 1.8718,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "002326",
+        "name": "永太科技",
+        "rank": 16,
+        "limitPrice": 16.9344,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "000661",
+        "name": "长春高新",
+        "rank": 17,
+        "limitPrice": 72.6376,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "002219",
+        "name": "新里程",
+        "rank": 18,
+        "limitPrice": 2.1364,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      },
+      {
+        "batchId": "B0001-2026-09-21",
+        "signalDate": "2026-09-21",
+        "code": "600789",
+        "name": "鲁抗医药",
+        "rank": 19,
+        "limitPrice": 7.7126,
+        "status": "WAIT_T_PLUS_ONE",
+        "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+      }
+    ],
+    "pendingExits": [],
+    "rulesZh": "T日收盘冻结当天候选；T+1按T收盘98%低吸，未触及则收盘窗口兜底；8批FIFO轮动；涨停后次日开盘卖出。"
+  },
   "targetPortfolio": [],
   "targetGrossPct": 0,
   "decisionCycle": {
@@ -22507,9 +22725,9 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "35606487430-1",
-    "lastRunAt": "2026-09-21T21:35:01+08:00",
-    "lastSuccessAt": "2026-09-21T21:35:01+08:00",
+    "cycleId": "35612748197-1",
+    "lastRunAt": "2026-09-21T22:33:31+08:00",
+    "lastSuccessAt": "2026-09-21T22:33:31+08:00",
     "lastTradeAt": "2026-09-14T09:43:12+08:00",
     "status": "OUTSIDE_SESSION",
     "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
@@ -22517,7 +22735,7 @@
     "sessionOpen": false,
     "radarCapturedAt": "2026-09-21T14:54:58+08:00",
     "radarFresh": false,
-    "radarAgeSeconds": 24003.8,
+    "radarAgeSeconds": 27513.4,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -22539,8 +22757,211 @@
         "plans": [],
         "statusZh": "先处理退出和组合风控，不用换仓绕过风险限制"
       },
-      "reasonCode": "RANKED_ENTRY_WAITING",
-      "reasonZh": "22只候选按排名保留建仓资格；候选已排序，等待下一有效买入时段",
+      "batchExecutionV6": {
+        "version": "v6.0-eight-batch-t1-limit-execution",
+        "activatedAt": "2026-09-21T22:33:31+08:00",
+        "batchCount": 1,
+        "activeBatchCount": 1,
+        "pendingOrderCount": 19,
+        "pendingExitCount": 0,
+        "lastSignalDate": "2026-09-21",
+        "pendingOrders": [
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "300142",
+            "name": "沃森生物",
+            "rank": 1,
+            "limitPrice": 13.4162,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "000538",
+            "name": "云南白药",
+            "rank": 2,
+            "limitPrice": 50.078,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "300122",
+            "name": "智飞生物",
+            "rank": 3,
+            "limitPrice": 12.74,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "600521",
+            "name": "华海药业",
+            "rank": 4,
+            "limitPrice": 16.3072,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "600436",
+            "name": "片仔癀",
+            "rank": 5,
+            "limitPrice": 118.58,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "002432",
+            "name": "九安医疗",
+            "rank": 6,
+            "limitPrice": 62.4456,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "002603",
+            "name": "以岭药业",
+            "rank": 7,
+            "limitPrice": 15.288,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "300016",
+            "name": "北陆药业",
+            "rank": 8,
+            "limitPrice": 8.4868,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "000963",
+            "name": "华东医药",
+            "rank": 9,
+            "limitPrice": 26.215,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "300199",
+            "name": "翰宇药业",
+            "rank": 10,
+            "limitPrice": 23.0888,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "688166",
+            "name": "博瑞医药",
+            "rank": 11,
+            "limitPrice": 35.525,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "600103",
+            "name": "青山纸业",
+            "rank": 12,
+            "limitPrice": 3.773,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "600359",
+            "name": "新农开发",
+            "rank": 13,
+            "limitPrice": 7.938,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "600267",
+            "name": "海正药业",
+            "rank": 14,
+            "limitPrice": 11.6326,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "600881",
+            "name": "亚泰集团",
+            "rank": 15,
+            "limitPrice": 1.8718,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "002326",
+            "name": "永太科技",
+            "rank": 16,
+            "limitPrice": 16.9344,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "000661",
+            "name": "长春高新",
+            "rank": 17,
+            "limitPrice": 72.6376,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "002219",
+            "name": "新里程",
+            "rank": 18,
+            "limitPrice": 2.1364,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          },
+          {
+            "batchId": "B0001-2026-09-21",
+            "signalDate": "2026-09-21",
+            "code": "600789",
+            "name": "鲁抗医药",
+            "rank": 19,
+            "limitPrice": 7.7126,
+            "status": "WAIT_T_PLUS_ONE",
+            "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+          }
+        ],
+        "pendingExits": [],
+        "rulesZh": "T日收盘冻结当天候选；T+1按T收盘98%低吸，未触及则收盘窗口兜底；8批FIFO轮动；涨停后次日开盘卖出。"
+      },
+      "reasonCode": "T1_BATCH_ENTRY_PENDING",
+      "reasonZh": "19只2026-09-21收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
       "entryBlocks": [],
       "pendingExits": [],
       "candidateCount": 31,
@@ -23147,37 +23568,7 @@
   "capitalMigrationThisCycle": null,
   "dataFreshness": {
     "radarFresh": false,
-    "radarAgeSeconds": 24003.8,
+    "radarAgeSeconds": 27513.4,
     "maxAllowedAgeSeconds": 900
-  },
-  "benchmarkComparison": {
-    "startedAt": "2026-09-03T23:23:37+08:00",
-    "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
-    "portfolioMetric": "UNIT_NAV_RETURN",
-    "portfolioReturnPct": -0.518,
-    "indexes": [
-      {
-        "name": "沪深300",
-        "returnPct": -0.286,
-        "alphaPct": -0.232
-      },
-      {
-        "name": "中证A500",
-        "returnPct": 0.054,
-        "alphaPct": -0.572
-      },
-      {
-        "name": "创业板指",
-        "returnPct": 2.628,
-        "alphaPct": -3.146
-      }
-    ],
-    "candidatePool": {
-      "name": "原始候选池固定等权",
-      "memberCount": 30,
-      "returnPct": -3.065,
-      "alphaPct": 2.547,
-      "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
-    }
   }
 }
