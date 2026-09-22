@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "35688428662-1",
-  "lastRunAt": "2026-09-22T12:51:40+08:00",
-  "lastSuccessAt": "2026-09-22T12:51:40+08:00",
+  "cycleId": "35716501370-1",
+  "lastRunAt": "2026-09-22T18:32:59+08:00",
+  "lastSuccessAt": "2026-09-22T18:32:59+08:00",
   "lastTradeAt": "2026-09-14T09:43:12+08:00",
   "status": "OUTSIDE_SESSION",
   "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
   "runSource": "dedicated-auto-scheduler",
   "sessionOpen": false,
-  "radarCapturedAt": "2026-09-21T14:54:58+08:00",
+  "radarCapturedAt": "2026-09-22T14:20:52+08:00",
   "radarFresh": false,
-  "radarAgeSeconds": 79002.7,
+  "radarAgeSeconds": 15127.6,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -42,11 +42,11 @@
     "batchExecutionV6": {
       "version": "v6.0-eight-batch-t1-limit-execution",
       "activatedAt": "2026-09-21T22:33:31+08:00",
-      "batchCount": 1,
-      "activeBatchCount": 1,
-      "pendingOrderCount": 19,
+      "batchCount": 2,
+      "activeBatchCount": 2,
+      "pendingOrderCount": 55,
       "pendingExitCount": 0,
-      "lastSignalDate": "2026-09-21",
+      "lastSignalDate": "2026-09-22",
       "pendingOrders": [
         {
           "batchId": "B0001-2026-09-21",
@@ -237,13 +237,123 @@
           "limitPrice": 7.7126,
           "status": "WAIT_T_PLUS_ONE",
           "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "300418",
+          "name": "昆仑万维",
+          "rank": 1,
+          "limitPrice": 43.6884,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "300364",
+          "name": "中文在线",
+          "rank": 2,
+          "limitPrice": 25.0096,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "002354",
+          "name": "天娱数科",
+          "rank": 3,
+          "limitPrice": 7.8792,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "603533",
+          "name": "掌阅科技",
+          "rank": 4,
+          "limitPrice": 23.1672,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "603466",
+          "name": "风语筑",
+          "rank": 5,
+          "limitPrice": 12.8282,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "601929",
+          "name": "吉视传媒",
+          "rank": 6,
+          "limitPrice": 2.4696,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "002181",
+          "name": "粤 传 媒",
+          "rank": 7,
+          "limitPrice": 9.4864,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "300170",
+          "name": "汉得信息",
+          "rank": 8,
+          "limitPrice": 15.8564,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "600986",
+          "name": "浙文互联",
+          "rank": 9,
+          "limitPrice": 7.2422,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "300063",
+          "name": "天龙集团",
+          "rank": 10,
+          "limitPrice": 8.8102,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "688158",
+          "name": "优刻得-W",
+          "rank": 11,
+          "limitPrice": 30.2134,
+          "status": "WAIT_T_PLUS_ONE",
+          "reasonZh": "T日收盘候选已冻结，等待T+1低吸限价或收盘兜底"
         }
       ],
       "pendingExits": [],
       "rulesZh": "T日收盘冻结当天候选；T+1按T收盘98%低吸，未触及则收盘窗口兜底；8批FIFO轮动；涨停后次日开盘卖出。"
     },
     "reasonCode": "T1_BATCH_ENTRY_PENDING",
-    "reasonZh": "19只2026-09-21收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
+    "reasonZh": "30只2026-09-22收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
     "entryBlocks": [
       "2026-09-21盘前市场宽度与已验证收盘指数均未到达"
     ],
