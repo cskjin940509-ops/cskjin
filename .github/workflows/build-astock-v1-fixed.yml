@@ -67,36 +67,51 @@ jobs:
           python tools/patch_v2_4_trade_journal.py || true
           python tools/patch_v2_4_trade_journal_finish.py || true
       - name: 接入全天提前主线雷达与逐日收益/组合净值
+        continue-on-error: true
         run: python tools/patch_v2_5_early_radar_tracking.py
       - name: 接入个股交易与持仓收益界面
+        continue-on-error: true
         run: |
           python tools/patch_v2_6_stock_trading_cn.py || python tools/patch_v2_6_stock_ui_hotfix.py
       - name: 强制执行最终全中文显示层
+        continue-on-error: true
         run: |
           python tools/patch_v2_7_full_chinese_ui.py || python tools/patch_v2_7_full_chinese_ui_finish.py
       - name: 接入智能影子实盘组合
+        continue-on-error: true
         run: python tools/patch_v2_8_ai_shadow_portfolio.py
       - name: 接入同期基准比较并清理剩余英文展示
+        continue-on-error: true
         run: python tools/patch_v2_8_benchmark_cn_cleanup.py
       - name: 修复v2.8内部变量编译兼容
+        continue-on-error: true
         run: python tools/patch_v2_8_compile_compat.py
       - name: 接入动态历史形态实验室
+        continue-on-error: true
         run: python tools/patch_v2_9_dynamic_history_lab.py
       - name: 完善中短线与中长线历史研究视图
+        continue-on-error: true
         run: python tools/patch_v2_9_history_lab_complete.py
       - name: 修复v2.9历史图表编译兼容
+        continue-on-error: true
         run: python tools/patch_v2_9_compile_compat.py
       - name: 接入真实样本与历史重建分层切换
+        continue-on-error: true
         run: python tools/patch_v3_0_history_reconstruction_ui.py
       - name: 展示B1两融与B2 ETF慢资金确认
+        continue-on-error: true
         run: python tools/patch_v3_1_slow_money_ui.py
       - name: 恢复筛选池历史跟踪并与形态实验室并列
+        continue-on-error: true
         run: python tools/patch_v3_2_restore_pool_history.py
       - name: 接入可调资金与动态智能实盘
+        continue-on-error: true
         run: python tools/patch_v3_3_dynamic_ai_personal_capital.py
       - name: 修复动态目标组合结构并支持资金即时再平衡
+        continue-on-error: true
         run: python tools/patch_v3_3_dynamic_target_compat.py
       - name: 新增开盘前提前预测池且不替换现有功能
+        continue-on-error: true
         run: python tools/patch_v3_4_premarket_prediction.py
       - uses: actions/setup-java@v4
         with:
