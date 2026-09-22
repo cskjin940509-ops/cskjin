@@ -7,16 +7,6 @@ on:
         description: '目标交易日 YYYY-MM-DD，留空则使用最新冻结市场快照日期'
         required: false
         type: string
-  push:
-    branches: [ main ]
-    paths:
-      - '.github/workflows/run-daily-strategy.yml'
-      - 'tools/ensure_daily_close_snapshot.py'
-      - 'tools/run_daily_strategy_verified.py'
-      - 'tools/run_daily_strategy_verified_bse.py'
-      - 'tools/run_daily_strategy_resilient_bse.py'
-      - 'tools/update_strategy_tracking_display_ready.py'
-      - 'tools/enrich_official_trade_metrics.py'
   schedule:
     # 北京时间收盘后自动生成正式池：15:05首次，15:15/15:25兜底。
     # 每一轮都先自行补抓并验证收盘快照，不再依赖另一个workflow先完成。
