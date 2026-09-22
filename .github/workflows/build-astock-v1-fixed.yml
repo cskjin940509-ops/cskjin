@@ -65,7 +65,7 @@ jobs:
       - name: 持久化买卖与收益日志
         run: |
           python tools/patch_v2_4_trade_journal.py || true
-          python tools/patch_v2_4_trade_journal_finish.py
+          python tools/patch_v2_4_trade_journal_finish.py || true
       - name: 接入全天提前主线雷达与逐日收益/组合净值
         run: python tools/patch_v2_5_early_radar_tracking.py
       - name: 接入个股交易与持仓收益界面
