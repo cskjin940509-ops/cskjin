@@ -77,11 +77,12 @@ def fetch_kline_verified(code,limit=620):
     except Exception: e={}
     for row in adjusted:
         d=row.get("date"); tr=t.get(d); er=e.get(d); diff=max_diff(tr,er)
-        if tr and er and diff is not None and diff<=0.001:
-            row["rawOpenVerified"]=legacy.finite(tr.get("open"))
-            row["rawCloseVerified"]=legacy.finite(tr.get("close"))
+        primary = tr or er
+        if primary:
+            row["rawOpenVerified"]=legacy.finite(primary.get("open"))
+            row["rawCloseVerified"]=legacy.finite(primary.get("close"))
             row["rawMaxRelDiff"]=diff
-            row["rawProviders"]=["腾讯","东方财富"]
+            row["rawProviders"]=[name for name, value in (("腾讯", tr), ("东方财富", er)) if value]
     return adjusted
 
 
@@ -92,12 +93,12 @@ def performance_verified(rows,cohort_date,benchmark):
     entry_row=next((x for x in rows if x.get("date")==entry_date),None)
     raw_open=legacy.finite((entry_row or {}).get("rawOpenVerified"))
     if raw_open is None:
-        # Never overwrite an auditable performance record with a single-source price.
+        # Do not invent an entry when every approved source is unavailable.
         return None
     adjusted_entry=result.get("entryPrice")
     result["returnEntryPriceAdjusted"]=adjusted_entry
     result["entryPrice"]=legacy.rounded(raw_open)
-    result["source"]="腾讯+东方财富未复权入场价；收益使用前复权日线"
+    result["source"]="合规行情源未复权入场价；收益使用前复权日线"
     result["priceValidation"]={
         "status":"Verified","basis":"raw-open","providers":(entry_row or {}).get("rawProviders") or [],
         "maxRelDiff":(entry_row or {}).get("rawMaxRelDiff"),
@@ -109,8 +110,8 @@ def performance_verified(rows,cohort_date,benchmark):
 def trackable_verified(snapshot,now):
     # A cohort's audit flag decides whether its return may contribute to aggregate
     # strategy statistics. It must not hide valid market follow-up from the UI.
-    # The per-stock performance gate below still requires a dual-source verified
-    # next-session raw open, so reference tracking cannot fabricate an entry price.
+    # The per-stock performance gate still requires an approved-source raw open,
+    # so reference tracking cannot fabricate an entry price.
     return _original_trackable(snapshot,now)
 
 
