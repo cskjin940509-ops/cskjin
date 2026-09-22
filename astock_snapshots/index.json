@@ -1424,8 +1424,8 @@
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 17,
@@ -1435,9 +1435,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 17,
+          "available": 0,
           "total": 17,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-08-17",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -5834,22 +5834,23 @@
       "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
+        "raw-price-cross-source-incomplete:13/14",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 14,
-          "verified": 14,
-          "coveragePct": 100.0,
+          "verified": 13,
+          "coveragePct": 92.86,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 14,
+          "available": 0,
           "total": 14,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-08-18",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -16130,8 +16131,8 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 18,
@@ -16141,9 +16142,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 18,
+          "available": 0,
           "total": 18,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-08-20",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -21900,8 +21901,8 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 18,
@@ -21911,9 +21912,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 18,
+          "available": 0,
           "total": 18,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-08-31",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -27619,8 +27620,8 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 17,
@@ -27630,9 +27631,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 17,
+          "available": 0,
           "total": 17,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-09-01",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -38608,8 +38609,8 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 16,
@@ -38619,9 +38620,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 16,
+          "available": 0,
           "total": 16,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-09-03",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -66705,8 +66706,8 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 21,
@@ -66716,9 +66717,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 21,
+          "available": 0,
           "total": 21,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-09-11",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -76448,8 +76449,8 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 15,
@@ -76459,9 +76460,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 15,
+          "available": 0,
           "total": 15,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-09-15",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -85970,8 +85971,8 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-09-22T12:51:39+08:00",
-      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和双源价格全部可证明时才升级为 Verified。",
+      "auditedAt": "2026-09-22T18:32:31+08:00",
+      "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 12,
@@ -85981,9 +85982,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 12,
+          "available": 0,
           "total": 12,
-          "coveragePct": 100.0,
+          "coveragePct": 0.0,
           "cutoff": "2026-09-17",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
