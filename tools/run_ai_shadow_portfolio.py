@@ -6,6 +6,7 @@ import math
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 from copy import deepcopy
 from datetime import datetime, time
@@ -95,20 +96,90 @@ def symbol(code: str) -> str:
     return ("sh" if code.startswith(("5", "6")) else "sz") + code
 
 
+def _quote_order(row: dict | None) -> tuple[int, int]:
+    """Prefer a dated/fresher quote, then a row with more usable fields."""
+    row = row or {}
+    stamp = re.sub(r"\D", "", str(row.get("quoteTimestamp") or row.get("quoteTime") or ""))
+    stamp_value = int(stamp[:14]) if len(stamp) >= 14 else 0
+    completeness = sum(row.get(k) not in (None, "") for k in ("price", "open", "high", "low", "amount", "volumeShares"))
+    return stamp_value, completeness
+
+
+def _merge_quotes(rows: list[dict[str, dict]], codes: list[str]) -> dict[str, dict]:
+    """Choose one execution quote per stock without requiring two providers."""
+    out: dict[str, dict] = {}
+    for code in codes:
+        candidates = [provider.get(code) for provider in rows if provider.get(code)]
+        if not candidates:
+            continue
+        primary = max(candidates, key=_quote_order)
+        merged = dict(primary)
+        for candidate in sorted(candidates, key=_quote_order, reverse=True):
+            for key, value in candidate.items():
+                if merged.get(key) in (None, "") and value not in (None, ""):
+                    merged[key] = value
+        merged["availableProviders"] = [
+            str(x.get("source")) for x in candidates if x.get("source")
+        ]
+        merged["selectedProvider"] = primary.get("source")
+        out[code] = merged
+    return out
+
+
+def _eastmoney_quotes(codes: list[str]) -> dict[str, dict]:
+    """Public Eastmoney snapshot fallback; failure is isolated per batch."""
+    out: dict[str, dict] = {}
+    for code in codes:
+        market = "0" if code.startswith(("0", "2", "3", "8", "9")) else "1"
+        query = urllib.parse.urlencode({
+            "secid": f"{market}.{code}",
+            "fields": "f12,f14,f43,f44,f45,f46,f47,f48,f58,f60,f86",
+        })
+        req = urllib.request.Request(
+            "https://push2.eastmoney.com/api/qt/stock/get?" + query,
+            headers={"User-Agent": "Mozilla/5.0", "Referer": "https://quote.eastmoney.com/"},
+        )
+        try:
+            payload = json.loads(urllib.request.urlopen(req, timeout=6).read())
+            data = payload.get("data") or {}
+            price = finite(data.get("f43"))
+            scale = 1000.0 if price and price > 100000 else 100.0
+            price = price / scale if price is not None else None
+            prev = finite(data.get("f60")); prev = prev / scale if prev is not None else None
+            epoch = finite(data.get("f86"))
+            stamp = datetime.fromtimestamp(epoch, CN).strftime("%Y%m%d%H%M%S") if epoch else None
+            if price and price > 0:
+                out[code] = {
+                    "code": code, "name": data.get("f58") or data.get("f14") or code,
+                    "price": price, "prevClose": prev,
+                    "changePct": ((price / prev - 1) * 100) if prev else None,
+                    "open": finite(data.get("f46")) / scale if finite(data.get("f46")) is not None else None,
+                    "high": finite(data.get("f44")) / scale if finite(data.get("f44")) is not None else None,
+                    "low": finite(data.get("f45")) / scale if finite(data.get("f45")) is not None else None,
+                    "volumeShares": finite(data.get("f47")), "amount": finite(data.get("f48")),
+                    "quoteTime": stamp, "quoteTimestamp": stamp,
+                    "source": "东方财富实时行情",
+                }
+        except Exception:
+            continue
+    return out
+
+
 def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
     if os.environ.get("ASTOCK_DISABLE_QUOTE_FETCH") == "1":
         return {}
     codes = sorted({c for c in codes if re.fullmatch(r"\d{6}", c or "")})
     if not codes:
         return {}
-    # Primary production feed selected by the user.  Keep the established
-    # Tencent feed below as an isolated-provider failover.
+    providers: list[dict[str, dict]] = []
+    # Tushare-compatible stock_api is preferred, but a partial or stale response
+    # must never prevent the remaining approved providers from being queried.
     if os.environ.get("STOCK_API_TOKEN"):
         try:
             from tushare_stock_api import realtime_quotes
             rows = realtime_quotes(codes)
             if rows:
-                return rows
+                providers.append(rows)
         except Exception:
             pass
     q = ",".join(symbol(c) for c in codes)
@@ -120,11 +191,11 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
             "Accept": "*/*",
         },
     )
+    tencent: dict[str, dict] = {}
     try:
         raw = urllib.request.urlopen(req, timeout=8).read().decode("gbk", errors="ignore")
     except Exception:
-        return {}
-    out: dict[str, dict] = {}
+        raw = ""
     for line in raw.split(";"):
         m = re.search(r'v_(sh|sz|bj)(\d{6})="([^"]*)"', line)
         if not m:
@@ -142,7 +213,7 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
             high = float(f[33]) if len(f) > 33 and f[33] else None
             low = float(f[34]) if len(f) > 34 and f[34] else None
             change_pct = ((price / prev - 1) * 100) if price and prev else None
-            out[code] = {
+            tencent[code] = {
                 "code": code,
                 "name": name,
                 "price": price,
@@ -159,7 +230,15 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
             }
         except Exception:
             continue
-    return out
+    if tencent:
+        providers.append(tencent)
+    covered = {code for provider in providers for code in provider}
+    missing = [code for code in codes if code not in covered]
+    if missing:
+        eastmoney = _eastmoney_quotes(missing)
+        if eastmoney:
+            providers.append(eastmoney)
+    return _merge_quotes(providers, codes)
 
 
 def round_tick(price: float) -> float:
