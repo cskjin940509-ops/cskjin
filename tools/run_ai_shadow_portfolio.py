@@ -101,6 +101,16 @@ def fetch_tencent_quotes(codes: list[str]) -> dict[str, dict]:
     codes = sorted({c for c in codes if re.fullmatch(r"\d{6}", c or "")})
     if not codes:
         return {}
+    # Primary production feed selected by the user.  Keep the established
+    # Tencent feed below as an isolated-provider failover.
+    if os.environ.get("STOCK_API_TOKEN"):
+        try:
+            from tushare_stock_api import realtime_quotes
+            rows = realtime_quotes(codes)
+            if rows:
+                return rows
+        except Exception:
+            pass
     q = ",".join(symbol(c) for c in codes)
     req = urllib.request.Request(
         f"https://qt.gtimg.cn/q={q}",
@@ -370,19 +380,9 @@ def current_weights(state: dict, prices: dict[str, float]) -> tuple[dict[str, fl
 
 def candidate_reference_price(stock: dict) -> tuple[float | None, str, float | None]:
     primary = stock.get("price")
-    y = stock.get("yunai") or {}
-    yp = y.get("price") if y.get("quoteOk") else None
-    divergence = None
-    if primary and yp:
-        divergence = abs(float(yp) / float(primary) - 1.0) * 100
-        if divergence <= 0.30:
-            return (float(primary) + float(yp)) / 2.0, "东方财富+Yunai双源均价", divergence
-        return None, "双源价格偏差过大", divergence
     if primary:
-        return float(primary), "东方财富盘中行情", divergence
-    if yp:
-        return float(yp), "Yunai盘中行情", divergence
-    return None, "无可用价格", divergence
+        return float(primary), stock.get("priceSource") or "可用主行情", None
+    return None, "无可用价格", None
 
 
 def score_candidate(stock: dict) -> tuple[float, list[str], list[str]]:
@@ -396,7 +396,6 @@ def score_candidate(stock: dict) -> tuple[float, list[str], list[str]]:
     amount = float(stock.get("amount") or 0.0)
     stage = str(stock.get("mainlineStage") or "")
     chase = str(stock.get("chaseRisk") or "").upper()
-    y = stock.get("yunai") or {}
 
     score = base
     reasons.append(f"提前分{base:.0f}")
@@ -453,18 +452,6 @@ def score_candidate(stock: dict) -> tuple[float, list[str], list[str]]:
     elif chase == "LOW":
         score += 2
         reasons.append("追高风险低+2")
-
-    if y.get("quoteOk") and stock.get("price") and y.get("price"):
-        div = abs(float(y["price"]) / float(stock["price"]) - 1) * 100
-        if div > 0.50:
-            rejects.append(f"双源价格偏差{div:.2f}%")
-    confirmation = y.get("confirmation")
-    if confirmation == "POSITIVE_INDEPENDENT_FLOW":
-        score += 5
-        reasons.append("Yunai独立资金正确认+5")
-    elif confirmation == "NEGATIVE_INDEPENDENT_FLOW":
-        score -= 8
-        reasons.append("Yunai独立资金负确认-8")
 
     return round(score, 2), reasons, rejects
 

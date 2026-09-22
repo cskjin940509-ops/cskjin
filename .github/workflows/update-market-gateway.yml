@@ -8,9 +8,7 @@ on:
       - 'tools/update_market_gateway.py'
       - 'tools/sanitize_market_gateway.py'
       - 'tools/ensure_market_snapshot_core_indices.py'
-      - 'tools/enrich_yunai_gateway.py'
-      - 'tools/yunai_tail_overlay.py'
-      - 'tools/sync_yunai_production.py'
+      - 'tools/tushare_stock_api.py'
       - 'tools/update_trade_execution_signals.py'
       - 'tools/update_trade_execution_signals_strict.py'
       - 'tools/run_tail_rolling_reliable.py'
@@ -44,11 +42,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           CONTENT=$(printf '%s' '${{ github.run_id }}' | base64 -w0)
-          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-yunai-production-run.txt?ref=main --jq .sha 2>/dev/null || true)
+          OLD_SHA=$(gh api repos/${{ github.repository }}/contents/latest-market-gateway-run.txt?ref=main --jq .sha 2>/dev/null || true)
           if [ -n "$OLD_SHA" ]; then
-            gh api --method PUT repos/${{ github.repository }}/contents/latest-yunai-production-run.txt -f message='Record latest Yunai production run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-market-gateway-run.txt -f message='Record latest market gateway run' -f content="$CONTENT" -f sha="$OLD_SHA" -f branch='main' >/dev/null
           else
-            gh api --method PUT repos/${{ github.repository }}/contents/latest-yunai-production-run.txt -f message='Record latest Yunai production run' -f content="$CONTENT" -f branch='main' >/dev/null
+            gh api --method PUT repos/${{ github.repository }}/contents/latest-market-gateway-run.txt -f message='Record latest market gateway run' -f content="$CONTENT" -f branch='main' >/dev/null
           fi
       - uses: actions/checkout@v4
         with:
@@ -57,24 +55,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: 安装Tushare数据适配器
+        run: python -m pip install --quiet 'tushare>=1.4,<2'
       - name: 抓取并校验A股市场数据
         run: |
           python tools/update_market_gateway.py
           python tools/sanitize_market_gateway.py
           python tools/ensure_market_snapshot_core_indices.py
       - name: 校验后立即发布市场数据并通知下游
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python tools/publish_data_on_arrival.py gateway
-
-      - name: 接入 Yunai Quant API
-        env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-        run: |
-          python tools/enrich_yunai_gateway.py
-          python tools/sync_yunai_production.py
-
-      - name: 独立确认到达后立即发布并通知下游
         env:
           GH_TOKEN: ${{ github.token }}
         run: python tools/publish_data_on_arrival.py gateway

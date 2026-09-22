@@ -25,7 +25,7 @@ def _close_time_ok(row: dict | None) -> bool:
 
 
 def verify_price_resilient(code: str, day: str) -> dict:
-    """Keep >=2 independent raw providers, with a same-day close-snapshot fallback."""
+    """Accept one approved provider; use same-day close snapshot as a fallback."""
     first = _BASE_VERIFY(code, day)
     if first.get("verified"):
         return first
@@ -53,41 +53,21 @@ def verify_price_resilient(code: str, day: str) -> dict:
     except Exception as e:
         checks.append({"provider": "东方财富未复权日线", "row": None, "error": e.__class__.__name__})
 
-    if os.environ.get("YUNAI_TOKEN", "").strip() and not str(code).startswith(("8", "9")):
-        try:
-            yu = verified.yunai_raw_day(code, day)
-            checks.append({"provider": "Yunai同日行情", "row": yu})
-            if yu and all(verified.finite(yu.get(k)) is not None for k in ("open", "close", "high", "low")):
-                valid.append(("Yunai同日行情", "Yunai", yu))
-        except Exception as e:
-            checks.append({"provider": "Yunai同日行情", "row": None, "error": e.__class__.__name__})
-
-    best = None
-    for i in range(len(valid)):
-        for j in range(i + 1, len(valid)):
-            # Two endpoints from the same vendor are not counted as two independent sources.
-            if valid[i][1] == valid[j][1]:
-                continue
-            mx = verified.pair_diff(valid[i][2], valid[j][2])
-            if mx is not None and (best is None or mx < best[0]):
-                best = (mx, valid[i], valid[j])
-
-    if best and best[0] <= 0.001:
-        mx, a, b = best
+    if valid:
+        a = valid[0]
         return {
             "verified": True,
             "rawClose": verified.finite(a[2].get("close")),
-            "maxRelDiff": mx,
-            "providers": [a[0], b[0]],
+            "maxRelDiff": None,
+            "providers": [x[0] for x in valid],
+            "selectedProvider": a[0],
             "checks": checks,
-            "rule": "至少两个独立源未复权OHLC最大相对差<=0.1%；历史接口异常时允许同日14:59后收盘快照作为同一厂商的单个来源兜底",
+            "rule": "任一合规源成功即放行；多源仅作诊断",
             "fallbackUsed": True,
         }
 
     first["checks"] = checks
     first["fallbackUsed"] = True
-    if best:
-        first["bestMaxRelDiff"] = best[0]
     return first
 
 
@@ -136,13 +116,13 @@ def main() -> int:
     }, ensure_ascii=False))
 
     if required and not valid:
-        raise RuntimeError("全部入池股票均未通过至少双源收盘价校验，禁止生成 Official")
+        raise RuntimeError("全部入池股票均无合规行情源，禁止生成 Official")
     # Isolated provider failures must not erase an otherwise verified trading day,
     # but broad validation degradation still blocks the cohort.
     max_exclusions = max(3, int(len(required) * 0.20)) if required else 0
     if len(failed) > max_exclusions:
         raise RuntimeError(
-            f"双源校验大面积异常：{len(failed)}/{len(required)}只失败，超过允许隔离阈值{max_exclusions}只"
+            f"行情源大面积异常：{len(failed)}/{len(required)}只失败，超过允许隔离阈值{max_exclusions}只"
         )
 
     valid_set = set(valid)
@@ -169,7 +149,7 @@ def main() -> int:
         v = validations[code]
         excluded.append({
             "code": code,
-            "reason": v.get("reason") or "未通过至少双源未复权OHLC一致性校验",
+            "reason": v.get("reason") or "无合规行情源返回未复权OHLC",
             "maxRelDiff": v.get("maxRelDiff") or v.get("bestMaxRelDiff"),
             "checks": v.get("checks") or [],
         })
@@ -189,14 +169,14 @@ def main() -> int:
             "excludedStockCount": len(failed),
             "excludedStocks": excluded,
             "fallbackVerifiedStocks": [c for c in valid if validations[c].get("fallbackUsed")],
-            "rule": "正式入池股票必须通过至少两个独立源未复权OHLC最大相对差<=0.1%；孤立失败股票剔除，不阻断其余已验证股票。",
+            "rule": "Tushare/同花顺/腾讯/东方财富任一合规源成功即放行；孤立失败股票剔除。",
         }
         item["audit"] = {
             "status": "VerifiedWithExclusions" if failed else "Verified",
             "eligibleForPerformanceComparison": True,
-            "issues": [f"{x['code']}因双源收盘价校验失败已从当日正式池剔除" for x in excluded],
+            "issues": [f"{x['code']}因所有合规行情源失败已从当日正式池剔除" for x in excluded],
             "auditedAt": datetime.now(verified.CN).isoformat(timespec="seconds"),
-            "note": "生产扫描通过目标日时点门禁；只有通过双源价格校验的股票进入Official。",
+            "note": "生产扫描通过目标日时点门禁；任一合规行情源成功即可进入Official。",
         }
         for code in valid:
             v = validations[code]

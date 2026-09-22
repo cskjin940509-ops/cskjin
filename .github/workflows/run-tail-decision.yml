@@ -9,9 +9,6 @@ on:
       - 'tools/run_tail_rolling.py'
       - 'tools/run_tail_rolling_reliable.py'
       - 'tools/bse_market_mapping.py'
-      - 'tools/enrich_tail_yunai.py'
-      - 'tools/sync_yunai_production.py'
-      - 'tools/yunai_tail_overlay.py'
       - '.github/workflows/run-tail-decision.yml'
   schedule:
     # 北京时间工作日 14:30-14:55 每5分钟滚动重算。
@@ -62,29 +59,7 @@ jobs:
           STATE=$(printf '%s\n' "$OUT" | tail -n 1 | python -c 'import json,sys; print(json.load(sys.stdin).get("state", "unknown"))')
           echo "state=$STATE" >> "$GITHUB_OUTPUT"
 
-      # 盘中5分钟任务只做主计算和快照持久化。Yunai 外部调用可能超过一个
-      # 5分钟 slot，放在每个 TailLive run 会让后续 14:50/14:55 排队到收盘后。
-      # 二次确认保留在真正冻结 Final 的 run 中，不影响 TailFinal 的核心生成。
       - name: 立即发布尾盘核心结果并通知下游
-        if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python tools/publish_data_on_arrival.py tail
-
-      - name: 刷新 Yunai 候选股实时行情与资金分布
-        if: steps.rolling.outputs.state == 'tail-final-frozen'
-        continue-on-error: true
-        env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-        run: python tools/sync_yunai_production.py
-      - name: 合并 Yunai 二次确认
-        if: steps.rolling.outputs.state == 'tail-final-frozen'
-        continue-on-error: true
-        env:
-          DRY_RUN: '0'
-        run: python tools/enrich_tail_yunai.py
-
-      - name: 补充发布尾盘二次确认并通知下游
         if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
         env:
           GH_TOKEN: ${{ github.token }}

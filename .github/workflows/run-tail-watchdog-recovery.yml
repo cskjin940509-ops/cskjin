@@ -38,28 +38,12 @@ jobs:
           STATE=$(printf '%s\n' "$OUT" | tail -n 1 | python -c 'import json,sys; print(json.load(sys.stdin).get("state", "unknown"))')
           echo "state=$STATE" >> "$GITHUB_OUTPUT"
 
-      # 恢复任务优先保证核心快照/Final 落盘。外部 Yunai 只在新 Final 冻结时
-      # 尝试补充，失败也不能阻断核心结果保存。已存在的同日 TailFinal 会由
-      # run_tail_rolling.py 的 immutable guard 直接保护，不会被恢复任务改写。
-      - name: 刷新 Yunai 候选股确认
-        if: steps.rolling.outputs.state == 'tail-final-frozen'
-        continue-on-error: true
-        env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-        run: python tools/sync_yunai_production.py
-      - name: 合并 Yunai 二次确认
-        if: steps.rolling.outputs.state == 'tail-final-frozen'
-        continue-on-error: true
-        env:
-          DRY_RUN: '0'
-        run: python tools/enrich_tail_yunai.py
-
       - name: 保存恢复结果
         if: steps.rolling.outputs.state == 'tail-live-updated' || steps.rolling.outputs.state == 'tail-final-frozen' || steps.rolling.outputs.state == 'tail-final-immutable'
         run: |
           git config user.name 'astock-tail-watchdog'
           git config user.email 'actions@users.noreply.github.com'
-          git add astock_tail astock_gateway/yunai_live.json astock_gateway/latest.json
+          git add astock_tail astock_gateway/latest.json
           if git diff --cached --quiet; then
             echo 'Tail result already healthy or no recovery changes.'
             exit 0

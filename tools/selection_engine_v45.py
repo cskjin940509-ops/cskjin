@@ -391,8 +391,7 @@ def evaluate_t(state, ledger, prices, radar):
         if not own_quote_ok(code): continue
         price = prices.get(code); samples = sample(state, code, quotes)
         stock = signal_stock(state, code, radar)
-        y = stock.get('yunai') or {}
-        if not price or not y.get('quoteOk') or not rules.fresh(y.get('quoteTime'), now) or not rules.finite(y.get('price'), 0) or abs(price / y['price'] - 1) > .003: continue
+        if not price: continue
         sec = sectors.get(pos.get('sector')) or {}
         if sec.get('stage') not in ('EMERGING', 'CONFIRMING', 'ESTABLISHED'): continue
         if len(samples) < 3 or not all(180 <= (rules.stamp(b['at']) - rules.stamp(a['at'])).total_seconds() <= 600 for a, b in zip(samples[-3:-1], samples[-2:])): continue
@@ -417,7 +416,7 @@ def evaluate_t(state, ledger, prices, radar):
         proceeds_per_share = cycle['sellNetProceeds'] / cycle['soldQty']
         if (proceeds_per_share * fill_qty - buy_amount - base.fees(buy_amount, 'BUY')) / (price * fill_qty) < .003: continue
         target = {'code': code, 'name': pos['name'], 'sector': pos['sector'], 'score': pos.get('buyScore', 64),
-                  'referencePrice': price, 'priceSource': '当时双源确认行情', 'reasonZh': '回落到预设区间且连续企稳',
+                  'referencePrice': price, 'priceSource': '当时可用实时行情', 'reasonZh': '回落到预设区间且连续企稳',
                   'targetWeight': cw.get(code, 0), 'targetWeightPct': cw.get(code, 0) * 100}
         row = execution.add_or_buy(state, ledger, target, fill_qty, prices, '底仓做T买回')
         if not row: continue
@@ -440,10 +439,10 @@ def evaluate_t(state, ledger, prices, radar):
         if code in obj['pendingExits'] or any(x['code'] == code and x['date'] == today for x in cycles): continue
         if int(pos.get('completeObservedDays', 0)) < 2 or not own_quote_ok(code): continue
         if not technical(state, code).get('adv20'): continue
-        stock = signal_stock(state, code, radar); y = stock.get('yunai') or {}
+        stock = signal_stock(state, code, radar)
         price = prices.get(code, 0); sec = sectors.get(pos.get('sector')) or {}
         if sec.get('stage') not in ('CONFIRMING', 'ESTABLISHED') or rules.finite(stock.get('mainFlowPct'), -1) < 0: continue
-        if not y.get('quoteOk') or not rules.fresh(y.get('quoteTime'), now) or not rules.finite(y.get('price'), 0) or not price or abs(price / y['price'] - 1) > .003: continue
+        if not price: continue
         nav, _ = base.portfolio_nav(state, prices)
         daily = obj.setdefault('tBaseByDay', {}).setdefault(today, {})
         base_qty = daily.setdefault(code, execution.sellable_qty(pos, today))
@@ -526,18 +525,17 @@ def migrate_candidate_evidence(candidate, held=False):
         '未验证板块完整样本前20%': '板块完整样本排名尚未返回',
         '板块5日收益缺失，无法检查相对涨幅': '板块/个股5日收益尚未取齐',
         '等待完整日线与至少3个有效盘中快照': '等待完整日线与至少3个有效盘中快照',
-        '第二行情缺失/过期': '第二行情缺失/过期，使用主行情并降低仓位',
+        '第二行情缺失/过期': None,
         '板块尚未形成两类独立证据': '板块独立证据尚未取齐',
     }
     ratio = (candidate.get('technical') or {}).get('volumeRatio5to20')
-    secondary = rules.finite(((candidate.get('yunai') or {}).get('price')))
     for reason in candidate.get('rejections') or []:
         if reason in always_gap:
-            gaps.append(always_gap[reason])
+            if always_gap[reason]: gaps.append(always_gap[reason])
         elif reason == '完整5/20日成交额量比未通过1.2–2.5' and ratio is None:
             gaps.append('完整5/20日成交额量比尚未取得')
-        elif reason == '双源价格偏差超过0.3%或缺数' and secondary is None:
-            gaps.append('第二行情缺失/过期，使用主行情并降低仓位')
+        elif reason in ('双源价格偏差超过0.3%或缺数', '双源价格明确偏差超过0.3%'):
+            continue
         else:
             hard.append(reason)
     candidate['rejections'] = sorted(set(hard))
@@ -795,24 +793,16 @@ def build_candidate(state, stock, radar, quotes):
     elif len(evidence) < 2 or not set(evidence) & {'B1', 'B2', 'B3'}:
         data_gaps.append('板块独立证据尚未取齐')
     if not own_quote_ok(code): rejects.append('主行情缺失/过期')
-    y = stock.get('yunai') or {}
-    secondary_fresh = y.get('quoteOk') and rules.fresh(y.get('quoteTimestamp') or y.get('quoteTime'), now)
-    if not secondary_fresh:
-        data_gaps.append('第二行情缺失/过期，使用主行情并降低仓位')
     price = rules.finite(q.get('price'), 0)
-    secondary_price = rules.finite(y.get('price'))
     if not price:
         rejects.append('无可成交主行情价格')
-    elif secondary_fresh and secondary_price is not None and secondary_price > 0 and abs(price / secondary_price - 1) > .003:
-        rejects.append('双源价格明确偏差超过0.3%')
     if 'ST' in stock.get('name', '').upper() or '退' in stock.get('name', '') or stock.get('suspended'):
         rejects.append('风险警示/退市/停牌禁止买入')
     if stock.get('sectorRank') is None:
         data_gaps.append('板块完整样本排名尚未返回')
     elif stock['sectorRank'] > .2:
         rejects.append('板块排名明确不在完整样本前20%')
-    live_stock = dict(stock, mainlineStage=stage, price=price,
-                      yunai=y if secondary_fresh else {})
+    live_stock = dict(stock, mainlineStage=stage, price=price)
     for field in ('changePct', 'amount'):
         live_stock[field] = rules.finite(q.get(field))
     score, old_reasons, old_rejects = base.score_candidate(live_stock)
@@ -866,7 +856,7 @@ def build_candidate(state, stock, radar, quotes):
             if stage != 'CONFIRMING': rejects.append('加仓要求板块确认')
     return {'code': code, 'name': stock['name'], 'sector': stock['sector'], 'score': score,
             'referencePrice': price, 'changePct': change,
-            'priceSource': '当时双源确认行情' if secondary_fresh else '当时主行情（第二来源未确认）',
+            'priceSource': q.get('provider') or '当时可用主行情',
             'reasonZh': '；'.join(reasons + [setup.get('reasonZh', '')]),
             'targetWeight': target, 'targetWeightPct': target * 100, 'stage': stage,
             'evidence': evidence, 'setup': setup, 'technical': tech, 'rejections': sorted(set(rejects)),

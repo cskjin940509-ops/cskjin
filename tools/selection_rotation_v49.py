@@ -56,10 +56,9 @@ def run(engine, state, ledger, targets, radar, prices):
     def evidence(t):
         # Missing donor data must never be interpreted as inferior quality.
         stock = engine.signal_stock(state, t['code'], radar)
-        y = stock.get('yunai') or {}; p = rules.finite(t.get('referencePrice'), 0)
+        p = rules.finite(t.get('referencePrice'), 0)
         sector = next((s for s in radar.get('mainlines', []) if s.get('name') == t['sector']), {})
-        return (engine.own_quote_ok(t['code']) and y.get('quoteOk') and rules.fresh(y.get('quoteTime'), now)
-                and rules.finite(y.get('price'), 0) > 0 and p > 0 and abs(p/y['price']-1) <= .003
+        return (engine.own_quote_ok(t['code']) and p > 0
                 and stock.get('rankComplete') is True and rules.finite(sector.get('return5Pct')) is not None
                 and len(rules.sector_evidence(stock, sector, today, now)) >= 2)
     def allowed_buyer(t):

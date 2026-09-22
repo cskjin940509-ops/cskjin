@@ -27,6 +27,16 @@ def get_json(url):
 
 
 def daily_bars(code, exchange=None):
+    # The user-selected Tushare-compatible stock_api is the primary equity and
+    # core-index history source. Eastmoney/Tencent remain an explicit failover.
+    if not code.startswith('BK') and os.getenv('STOCK_API_TOKEN'):
+        try:
+            from tushare_stock_api import daily_bars as tushare_daily_bars
+            rows = tushare_daily_bars(code, 65, exchange)
+            if len(rows) >= 21:
+                return rows
+        except Exception:
+            pass
     sh = exchange == 'sh' or code.startswith(('6', 'BK'))
     params = {'secid': ('90.' if code.startswith('BK') else '1.' if sh else '0.') + code, 'klt': 101,
               'fqt': 1, 'lmt': 65, 'end': '20500101', 'iscca': 1,
@@ -53,19 +63,6 @@ def daily_bars(code, exchange=None):
     data = (obj.get('data') or {}).get(sym) or {}
     rows = [{'date': a[0], 'open': finite(a[1]), 'close': finite(a[2]), 'high': finite(a[3]),
              'low': finite(a[4]), 'amount': None} for a in (data.get('qfqday') or data.get('day') or []) if len(a) >= 5]
-    # Only provider-reported traded amounts; never estimate amount from close*volume.
-    if os.getenv('YUNAI_TOKEN') and not code.startswith('BK') and exchange is None:
-        try:
-            from yunai_tail_overlay import fetch_daily_kline
-            amounts = {x['date']: x for x in fetch_daily_kline(code, 65)}
-            for row in rows:
-                other = amounts.get(row['date']) or {}
-                if (finite(other.get('amount'), 0) > 0 and finite(other.get('close'), 0) > 0
-                        and row['close'] and abs(other['close'] / row['close'] - 1) <= .003):
-                    row['amount'] = other['amount']
-                    row['amountSource'] = 'Yunai bars-range; matching date and close'
-        except Exception:
-            pass
     return rows
 
 
@@ -185,29 +182,25 @@ def history_due(record, now):
 
 
 def refresh_secondary(radar, codes, now):
-    # Refresh price-only batches at decision time, including held names off radar.
-    if not os.getenv('YUNAI_TOKEN'):
+    """Refresh an informational stock_api quote; it is not an execution gate."""
+    if not os.getenv('STOCK_API_TOKEN'):
         return {'status': 'MISSING_CREDENTIAL', 'requested': len(codes), 'fresh': 0}
-    import yunai_tail_overlay as yo
-    codes = sorted(c for c in set(codes) if not c.startswith(('8', '9')))
-    out = {c: {'quoteOk': False} for c in codes}
-    def fetch(batch):
-        status, _, payload = yo.post(yo.PREFIX + '/real-time-quotes', {'symbols': batch})
-        return batch, status, payload
-    with ThreadPoolExecutor(max_workers=6) as pool:
-        for batch, status, payload in pool.map(fetch, [codes[i:i+10] for i in range(0,len(codes),10)]):
-            if 200 <= status < 300: yo.apply_quote(out, batch, payload)
-    now = datetime.now(now.tzinfo)
+    from tushare_stock_api import realtime_quotes
+    codes = sorted(set(codes))
+    try:
+        out = realtime_quotes(codes)
+    except Exception as exc:
+        return {'status': 'ERROR', 'requested': len(codes), 'fresh': 0, 'error': type(exc).__name__}
     count = 0
-    for code, value in out.items():
-        quote = value.get('quote') or {}
-        at = quote.get('timestamp') or quote.get('latestTime')
+    for code in codes:
+        quote = out.get(code) or {}
+        at = quote.get('quoteTime') or quote.get('timestamp')
         row = radar.setdefault('stocks', {}).setdefault(code, {'code': code})
-        y = row.setdefault('yunai', {})
-        ok = value.get('quoteOk') and finite(quote.get('price'), 0) > 0 and fresh(at, now)
+        api = row.setdefault('stockApi', {})
+        ok = quote.get('quoteOk') and finite(quote.get('price'), 0) > 0 and fresh(at, now)
         if ok:
-            y.update(quoteOk=True, price=quote['price'], quoteTime=at)
+            api.update(quoteOk=True, price=quote['price'], quoteTime=at, provider='Tushare兼容stock_api')
             count += 1
         else:
-            y['quoteOk'] = False
+            api['quoteOk'] = False
     return {'status': 'OK' if count == len(codes) else 'PARTIAL', 'requested': len(codes), 'fresh': count}

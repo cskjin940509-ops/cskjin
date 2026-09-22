@@ -45,9 +45,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: 安装Tushare数据适配器
+        run: python -m pip install --quiet 'tushare>=1.4,<2'
       - name: 计算介入/持有/离场条件
         env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
           ALLOW_ANY_TIME: ${{ github.event_name == 'push' && '1' || '0' }}
         run: python tools/update_trade_execution_signals_strict.py
       - name: 保存执行辅助快照并即时同步

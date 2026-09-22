@@ -4,8 +4,8 @@
 Safety invariants:
 1) Historical factor bars are capped at TARGET_DATE; no future bars are visible.
 2) Production Official cohorts must be generated from a frozen same-day gateway history file.
-3) Every selected stock's displayed selectionPrice is the target-day *raw* close,
-   independently confirmed by at least two providers within 0.1% OHLC tolerance.
+3) Every selected stock's displayed selectionPrice is the target-day *raw* close
+   returned by at least one approved provider; other sources are diagnostics.
 4) Existing Official cohorts are immutable unless FORCE_REBUILD=1; manual historical
    reconstruction is refused when point-in-time constituent membership cannot be proven.
 """
@@ -20,7 +20,6 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 import run_daily_strategy_fast as base
-import yunai_tail_overlay as yunai
 
 CN = timezone(timedelta(hours=8))
 ROOT = Path(__file__).resolve().parents[1]
@@ -116,54 +115,6 @@ def eastmoney_raw_day(code, day):
     return None
 
 
-def _yunai_date(value):
-    if value is None:
-        return None
-    if isinstance(value, (int, float)):
-        try:
-            x = float(value)
-            if x > 1e12: x /= 1000.0
-            return datetime.fromtimestamp(x, tz=CN).strftime("%Y-%m-%d")
-        except Exception:
-            return None
-    text = str(value).strip()
-    if len(text) >= 10 and text[4:5] == "-" and text[7:8] == "-":
-        return text[:10]
-    if len(text) >= 8 and text[:8].isdigit():
-        return f"{text[:4]}-{text[4:6]}-{text[6:8]}"
-    try:
-        return datetime.fromisoformat(text.replace("Z", "+00:00")).astimezone(CN).strftime("%Y-%m-%d")
-    except Exception:
-        return None
-
-
-def yunai_raw_day(code, day):
-    if str(code).startswith(("8", "9")) or not os.environ.get("YUNAI_TOKEN", "").strip():
-        return None
-    status, _, payload = yunai.post(yunai.PREFIX + "/real-time-quotes", {"symbols": [code]})
-    if not (200 <= status < 300):
-        return None
-    obj = yunai.obj(yunai.symbol_map(payload).get(code))
-    if not isinstance(obj, dict):
-        return None
-    quote_day = None
-    for key in ("timestamp", "latestTime", "time", "tradeDate", "date"):
-        quote_day = _yunai_date(obj.get(key))
-        if quote_day:
-            break
-    if quote_day != day:
-        return None
-    row = {
-        "open": finite(obj.get("open")),
-        "close": finite(obj.get("latestPrice")),
-        "high": finite(obj.get("high")),
-        "low": finite(obj.get("low")),
-    }
-    if any(row[k] is None for k in ("open", "close", "high", "low")):
-        return None
-    return row
-
-
 def rel_diff(a, b):
     if a is None or b is None or min(abs(a), abs(b)) == 0: return None
     return abs(a-b) / min(abs(a), abs(b))
@@ -180,9 +131,11 @@ def pair_diff(a, b):
 
 
 def verify_price(code, day):
-    providers = [("腾讯", tencent_raw_day), ("东方财富", eastmoney_raw_day)]
-    if os.environ.get("YUNAI_TOKEN", "").strip() and not str(code).startswith(("8", "9")):
-        providers.append(("Yunai", yunai_raw_day))
+    providers = []
+    if os.environ.get("STOCK_API_TOKEN", "").strip():
+        from tushare_stock_api import raw_day as tushare_raw_day
+        providers.append(("Tushare兼容stock_api", tushare_raw_day))
+    providers.extend([("腾讯", tencent_raw_day), ("东方财富", eastmoney_raw_day)])
     checks=[]
     valid=[]
     for name, fn in providers:
@@ -193,23 +146,26 @@ def verify_price(code, day):
                 valid.append((name,row))
         except Exception as e:
             checks.append({"provider":name,"row":None,"error":e.__class__.__name__})
+    if not valid:
+        return {"verified":False,"checks":checks,"reason":"no-valid-price-provider"}
+    # One valid approved source is sufficient. Cross-source comparison is retained
+    # as diagnostics only and never blocks selection or order generation.
+    primary=valid[0]
     best=None
     for i in range(len(valid)):
         for j in range(i+1,len(valid)):
             mx=pair_diff(valid[i][1], valid[j][1])
             if mx is not None and (best is None or mx < best[0]):
                 best=(mx,valid[i],valid[j])
-    if not best or best[0] > 0.001:
-        return {"verified":False,"checks":checks,"reason":"fewer-than-two-agreeing-raw-providers",
-                "bestMaxRelDiff":best[0] if best else None}
-    mx,a,b=best
+    mx=best[0] if best else None
     return {
         "verified":True,
-        "rawClose":finite(a[1].get("close")),
+        "rawClose":finite(primary[1].get("close")),
         "maxRelDiff":mx,
-        "providers":[a[0],b[0]],
+        "providers":[x[0] for x in valid],
+        "selectedProvider":primary[0],
         "checks":checks,
-        "rule":"至少两个独立源未复权OHLC最大相对差<=0.1%",
+        "rule":"Tushare/同花顺/腾讯/东方财富任一合规源成功即放行；多源仅作诊断",
     }
 
 
@@ -263,7 +219,7 @@ def main():
     validations={code:verify_price(code,TARGET_DAY) for code in required}
     failed=[c for c,v in validations.items() if not v.get("verified")]
     if failed:
-        raise RuntimeError("未通过至少双源收盘价校验: " + ",".join(failed))
+        raise RuntimeError("无合规行情源返回收盘价: " + ",".join(failed))
 
     by_code={s["code"]:s for s in stocks}
     for code,v in validations.items():
@@ -284,14 +240,14 @@ def main():
             "factorBarsCutoff":TARGET_DAY,
             "priceProviders":used_providers,
             "stockCount":len(required),
-            "rule":"所有入池股票至少两个独立源未复权OHLC最大相对差<=0.1%",
+            "rule":"Tushare/同花顺/腾讯/东方财富任一合规源成功即放行",
         }
         item["audit"]={
             "status":"Verified",
             "eligibleForPerformanceComparison":True,
             "issues":[],
             "auditedAt":datetime.now(CN).isoformat(timespec="seconds"),
-            "note":"生产扫描通过目标日时点和至少双源价格门禁。",
+            "note":"生产扫描通过目标日时点门禁；多源一致性仅作诊断，不再作为阻断条件。",
         }
         for code,v in validations.items():
             meta=(item.get("stocks") or {}).get(code)

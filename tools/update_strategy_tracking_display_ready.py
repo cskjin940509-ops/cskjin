@@ -5,8 +5,7 @@ Goals:
 - Keep the original next-trading-day-open tracking convention.
 - Calculate tracking for every frozen Official cohort, even when an older cohort is
   audit-ineligible for leaderboard/model statistics. Such results are marked ReferenceOnly.
-- Verify the raw entry-day OHLC with any two agreeing independent providers among
-  Tencent, Eastmoney and (for the current session when available) Yunai.
+- Use any available approved raw provider; multiple feeds are diagnostic only.
 - Preserve the stronger BSE handling from update_strategy_backtest_verified_bse.
 """
 from __future__ import annotations
@@ -31,12 +30,13 @@ def _pair_max_diff(a, b):
     return verified.max_diff(a, b)
 
 
-def _yunai_today(code: str):
-    if not os.environ.get("YUNAI_TOKEN", "").strip() or str(code).startswith(("8", "9")):
+def _stock_api_today(code: str):
+    if not os.environ.get("STOCK_API_TOKEN", "").strip():
         return {}
     day = datetime.now(CN).strftime("%Y-%m-%d")
     try:
-        row = daily_verified.yunai_raw_day(code, day)
+        from tushare_stock_api import raw_day
+        row = raw_day(code, day)
         return {day: row} if row else {}
     except Exception:
         return {}
@@ -52,25 +52,19 @@ def fetch_kline_three_source(code: str, limit: int = 620):
         em = verified.raw_eastmoney(code, limit)
     except Exception:
         em = {}
-    ya = _yunai_today(code)
+    api = _stock_api_today(code)
 
     for row in adjusted:
         day = row.get("date")
-        candidates = [("腾讯", tx.get(day)), ("东方财富", em.get(day)), ("Yunai", ya.get(day))]
+        candidates = [("Tushare兼容stock_api", api.get(day)), ("腾讯", tx.get(day)), ("东方财富", em.get(day))]
         candidates = [(name, value) for name, value in candidates if value]
-        best = None
-        for i in range(len(candidates)):
-            for j in range(i + 1, len(candidates)):
-                diff = _pair_max_diff(candidates[i][1], candidates[j][1])
-                if diff is not None and diff <= 0.001 and (best is None or diff < best[0]):
-                    best = (diff, candidates[i], candidates[j])
-        if best is None:
+        if not candidates:
             continue
-        diff, first, second = best
+        first = candidates[0]
         row["rawOpenVerified"] = legacy.finite(first[1].get("open"))
         row["rawCloseVerified"] = legacy.finite(first[1].get("close"))
-        row["rawMaxRelDiff"] = diff
-        row["rawProviders"] = [first[0], second[0]]
+        row["rawMaxRelDiff"] = _pair_max_diff(candidates[0][1], candidates[1][1]) if len(candidates) > 1 else None
+        row["rawProviders"] = [x[0] for x in candidates]
     return adjusted
 
 

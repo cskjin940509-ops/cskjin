@@ -234,17 +234,16 @@ class WorkflowTests(unittest.TestCase):
     def test_validated_publication_precedes_slow_enrichment(self):
         root = Path(__file__).resolve().parents[1] / ".github/workflows"
         for file, publish, slow in [
-            ("run-intraday-radar.yml", "publish_data_on_arrival.py radar-evidence", "python tools/enrich_intraday_radar_yunai.py"),
             ("run-ai-shadow-auto.yml", "publish_data_on_arrival.py portfolio", "python tools/enrich_ai_shadow_benchmarks.py"),
             ("run-trade-plan.yml", "publish_data_on_arrival.py trade-plan", "python tools/augment_trade_plan_market_setups.py"),
-            ("update-market-gateway.yml", "publish_data_on_arrival.py gateway", "python tools/enrich_yunai_gateway.py"),
-            ("run-tail-decision.yml", "publish_data_on_arrival.py tail", "python tools/sync_yunai_production.py"),
         ]:
             text = (root / file).read_text()
             self.assertLess(text.index(publish), text.index(slow), file)
             if file.startswith("run-ai-"):
                 self.assertLess(text.index("python tools/validate_ai_shadow_contract.py"), text.index(publish))
-        self.assertNotIn("pip install", (root / "run-intraday-radar.yml").read_text())
+        for file in ("run-intraday-radar.yml", "run-ai-shadow-auto.yml", "run-execution-assistant.yml",
+                     "update-market-gateway.yml", "run-tail-decision.yml"):
+            self.assertNotIn("YUNAI_TOKEN", (root / file).read_text(), file)
 
 
 if __name__ == "__main__":

@@ -48,20 +48,21 @@ class RecoveryTests(unittest.TestCase):
         self.assertFalse(feeds.history_due({'lastAttemptAt':now.isoformat()},now))
         for b in bars:b['amount']=1000
         self.assertFalse(feeds.history_due({'collectedDate':'2026-09-08','bars':bars},now))
-    def test_fallback_amount_requires_same_date_and_price_basis(self):
+    def test_tencent_fallback_never_invents_amount(self):
         rows=[['2026-09-07','10','10','11','9'],['2026-09-04','10','10','11','9']]
         def response(url):
             if 'eastmoney' in url: raise TimeoutError()
             return {'data':{'sz000001':{'qfqday':rows}}}
-        with patch.dict('os.environ',{'YUNAI_TOKEN':'test'}), patch.object(feeds,'get_json',side_effect=response), patch('yunai_tail_overlay.fetch_daily_kline',return_value=[{'date':'2026-09-07','close':10,'amount':1500},{'date':'2026-09-04','close':20,'amount':2000}]):
+        with patch.dict('os.environ',{},clear=True), patch.object(feeds,'get_json',side_effect=response):
             result=feeds.daily_bars('000001')
-        self.assertEqual(result[0]['amount'],1500)
+        self.assertIsNone(result[0]['amount'])
         self.assertIsNone(result[1]['amount'])
     def test_secondary_stale_price_never_marked_fresh(self):
-        radar={'stocks':{'000001':{'yunai':{'quoteOk':True,'price':10}}}}
+        radar={'stocks':{'000001':{}}}
         now=datetime.now(CN)
-        with patch.dict('os.environ',{'YUNAI_TOKEN':'test'}), patch('yunai_tail_overlay.post',return_value=(200,'',{'data':{'000001':{'lastPrice':10,'timestamp':int((now-timedelta(hours=1)).timestamp()*1000)}}})):
+        quote={'000001':{'quoteOk':True,'price':10,'quoteTime':(now-timedelta(hours=1)).isoformat()}}
+        with patch.dict('os.environ',{'STOCK_API_TOKEN':'test'}), patch('tushare_stock_api.realtime_quotes',return_value=quote):
             result=feeds.refresh_secondary(radar,['000001'],now)
         self.assertEqual(result['fresh'],0)
-        self.assertFalse(radar['stocks']['000001']['yunai']['quoteOk'])
+        self.assertFalse(radar['stocks']['000001']['stockApi']['quoteOk'])
 if __name__=='__main__':unittest.main()

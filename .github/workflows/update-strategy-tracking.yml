@@ -46,18 +46,22 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: 安装Tushare数据适配器
+        run: python -m pip install --quiet 'tushare>=1.4,<2'
       - name: 检查是否已过收盘数据安全窗口
         id: gate
         run: python tools/tracking_arrival_gate.py >> "$GITHUB_OUTPUT"
       - name: 更新正式与参考批次收益跟踪
         if: steps.gate.outputs.run == 'true'
         env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
         run: python tools/update_strategy_tracking_display_ready.py
       - name: 补齐逐交易日个股收益与固定成员组合净值
         if: steps.gate.outputs.run == 'true'
         env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
         run: python tools/update_daily_signal_tracking.py
       - name: 保存逐日跟踪结果并即时同步
         if: steps.gate.outputs.run == 'true'

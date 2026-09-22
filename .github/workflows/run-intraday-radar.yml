@@ -6,7 +6,6 @@ on:
     branches: [ main ]
     paths:
       - 'tools/run_intraday_radar.py'
-      - 'tools/enrich_intraday_radar_yunai.py'
       - 'tools/enrich_slow_money_factors.py'
       - 'tools/slow_money_factors.py'
       - 'tools/collect_slow_money_factors.py'
@@ -18,6 +17,8 @@ on:
       - 'tools/run_ai_dynamic_portfolio_v2_1.py'
       - 'tools/run_ai_dynamic_portfolio_v2_2.py'
       - 'tools/selection_*_v45.py'
+      - 'tools/tushare_stock_api.py'
+      - 'tools/test_tushare_stock_api.py'
       - 'tools/selection_rotation_v49.py'
       - 'tools/test_rotation_v49.py'
       - 'tools/test_profit_v50.py'
@@ -71,6 +72,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: 安装Tushare数据适配器
+        run: python -m pip install --quiet 'tushare>=1.4,<2'
       # 慢资金由独立采集任务刷新；其发布会立即通知本工作流。
 
       - name: 从开盘起滚动主线形成雷达
@@ -85,19 +88,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python tools/publish_data_on_arrival.py radar-evidence
-      - name: 云AI独立行情与资金确认
-        if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen'
-        env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-        run: python tools/enrich_intraday_radar_yunai.py
       - name: 接入B1两融与B2 ETF慢资金因子
         if: steps.radar.outputs.state == 'radar-live-updated' || steps.radar.outputs.state == 'radar-final-frozen' || steps.radar.outputs.state == 'radar-final-immutable'
         run: python tools/enrich_slow_money_factors.py
       - name: 验证新持仓和底仓T规则
-        run: python -m unittest tools/test_risk_v51.py tools/test_profit_v50.py tools/test_rotation_v49.py tools/test_selection_v45.py tools/test_selection_research_v46.py
+        run: python -m unittest tools/test_risk_v51.py tools/test_profit_v50.py tools/test_rotation_v49.py tools/test_selection_v45.py tools/test_selection_research_v46.py tools/test_tushare_stock_api.py
       - name: 采集独立策略证据（不写账本）
         env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
         run: python tools/collect_selection_evidence_v51.py
       - name: 证据到达立即通知独立交易任务
         env:

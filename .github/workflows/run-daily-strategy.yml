@@ -54,15 +54,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: 安装Tushare数据适配器
+        run: python -m pip install --quiet 'tushare>=1.4,<2'
 
       - name: 自动补抓并锁定当天收盘快照
         if: github.event_name != 'workflow_dispatch' || inputs.target_date == ''
         run: python tools/ensure_daily_close_snapshot.py
 
-      - name: 运行时点安全 + 双源校验 + 孤立失败自动剔除的日终扫描
+      - name: 运行时点安全 + 合规行情源校验 + 孤立失败自动剔除的日终扫描
         env:
           TARGET_DATE: ${{ inputs.target_date }}
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
         run: python tools/run_daily_strategy_resilient_bse.py
 
       - name: 生成两两资金确认池
@@ -79,7 +82,8 @@ jobs:
         continue-on-error: true
         env:
           TARGET_DATE: ${{ inputs.target_date }}
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
         run: python tools/enrich_official_trade_metrics.py
 
       - name: 保全已验证正式池证据（发布失败仍可恢复）

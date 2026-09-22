@@ -8,7 +8,6 @@ from datetime import datetime, time as dtime, timedelta, timezone
 from pathlib import Path
 
 import update_market_gateway as gw
-import yunai_tail_overlay as yo
 
 CN = timezone(timedelta(hours=8))
 ROOT = Path(__file__).resolve().parents[1]
@@ -141,41 +140,9 @@ def build_universe(today: str):
 
 
 def timeshare_rows(codes):
-    supported = [c for c in codes if not c.startswith(("8", "9"))]
-    if not supported:
-        return {}
-    result = {}
-    for i in range(0, len(supported), 10):
-        batch = supported[i:i+10]
-        st, _, payload = yo.post(yo.PREFIX + "/time-share-quotes", {"symbols": batch})
-        if not (200 <= st < 300):
-            continue
-        mp = yo.symbol_map(payload)
-        for code in batch:
-            raw = mp.get(code)
-            if isinstance(raw, dict):
-                rows = None
-                for k in ("items", "quotes", "points", "timeShares", "list", "data", "rows"):
-                    if isinstance(raw.get(k), list):
-                        rows = raw.get(k); break
-                if rows is None:
-                    rows = [raw]
-            elif isinstance(raw, list):
-                rows = raw
-            else:
-                rows = []
-            norm = []
-            for x in rows:
-                if not isinstance(x, dict):
-                    continue
-                pr = yo.scalar(x, ("price", "lastPrice", "close", "currentPrice", "latestPrice"))
-                av = yo.scalar(x, ("avgPrice", "averagePrice", "vwap", "average"))
-                tm = x.get("time") or x.get("tradeTime") or x.get("datetime") or x.get("dateTime") or x.get("timestamp")
-                if pr is None and av is None:
-                    continue
-                norm.append({"price": pr, "avgPrice": av, "time": str(tm) if tm is not None else None})
-            result[code] = norm
-    return result
+    # The approved feeds do not expose a uniform minute-VWAP contract here.
+    # Missing VWAP is optional evidence and never blocks risk or T+1 handling.
+    return {}
 
 
 def time_key(v):
@@ -206,9 +173,17 @@ def current_vwap(rows):
 
 
 def quote_map(codes):
+    if os.getenv("STOCK_API_TOKEN", "").strip():
+        try:
+            from tushare_stock_api import realtime_quotes
+            primary = realtime_quotes(codes)
+        except Exception:
+            primary = {}
+    else:
+        primary = {}
     syms = [symbol(c) for c in codes]
     raw = gw.tencent_quotes(syms) if syms else {}
-    return {c: raw.get(symbol(c)) for c in codes}
+    return {c: primary.get(c) or raw.get(symbol(c)) for c in codes}
 
 
 def load_state(today: str):
@@ -218,7 +193,7 @@ def load_state(today: str):
     return s
 
 
-def entry_score(code, meta, q, vwap, yunai):
+def entry_score(code, meta, q, vwap):
     price = finite((q or {}).get("price"))
     high = finite((q or {}).get("high"))
     low = finite((q or {}).get("low"))
@@ -240,13 +215,6 @@ def entry_score(code, meta, q, vwap, yunai):
         if flow >= 8: score += 15; reasons.append("主力资金强")
         elif flow >= 3: score += 9; reasons.append("主力资金正向")
         elif flow < 0: score -= 10; reasons.append("主力资金偏弱")
-    large = finite((((yunai or {}).get("capital") or {}).get("largeNetInflow")))
-    total = finite((((yunai or {}).get("capital") or {}).get("totalNetInflow")))
-    if large is not None:
-        if large > 0: score += 10; reasons.append("云AI大单净流入为正")
-        elif large < 0: score -= 8; reasons.append("云AI大单净流入为负")
-    elif total is not None and total > 0:
-        score += 5; reasons.append("云AI总资金净流入为正")
     if vwap is not None:
         if price >= vwap * 0.998: score += 10; reasons.append("价格在分时均价附近或上方")
         elif price < vwap * 0.985: score -= 12; reasons.append("价格明显弱于分时均价")
@@ -338,10 +306,6 @@ def main():
 
     quotes = quote_map(codes)
     try:
-        yunai = yo.fetch_stock_overlay(codes)
-    except Exception:
-        yunai = {}
-    try:
         ts = timeshare_rows(codes)
     except Exception:
         ts = {}
@@ -353,7 +317,7 @@ def main():
         q = quotes.get(code) or {}
         price = finite(q.get("price")); high = finite(q.get("high")); low = finite(q.get("low")); chg = finite(q.get("changePct"))
         vwap = current_vwap(ts.get(code) or [])
-        score, reasons = entry_score(code, meta, q, vwap, yunai.get(code) or {})
+        score, reasons = entry_score(code, meta, q, vwap)
         action, action_reason = actionable_label(now, meta, score, q, vwap)
         ez_lo, ez_hi = entry_zone(price, high, low, vwap)
         ref = price if action == "介入候选" else ((ez_lo + ez_hi) / 2.0 if ez_lo is not None and ez_hi is not None else price)
@@ -392,7 +356,6 @@ def main():
         prior_flow = finite(prevrow.get("mainFlowPct"))
         flow_now = finite(meta.get("mainFlowPct"))
         flow_weakening = prior_flow is not None and flow_now is not None and flow_now < prior_flow - 3.0
-        ytotal = finite((((yunai.get(code) or {}).get("capital") or {}).get("totalNetInflow")))
         below_vwap = vwap is not None and price is not None and price < vwap * 0.99
         holding = "持有观察"
         holding_reason = "未触发明确保护条件"
@@ -404,7 +367,7 @@ def main():
                 holding = "分批止盈"; holding_reason = "达到约2R收益区"
             elif sig_t1 is not None and price >= sig_t1 and (range_pos or 0) >= 85:
                 holding = "保护利润"; holding_reason = "达到约1R且接近日内高位"
-            elif below_vwap and (range_pos or 100) < 30 and (flow_weakening or (ytotal is not None and ytotal < 0)):
+            elif below_vwap and (range_pos or 100) < 30 and flow_weakening:
                 holding = "考虑减仓"; holding_reason = "价格弱于分时均价且资金走弱"
 
         rows[code] = {
@@ -435,8 +398,7 @@ def main():
             "target1R": target1,
             "target2R": target2,
             "mainFlowPct": flow_now,
-            "yunaiLargeNetInflow": finite((((yunai.get(code) or {}).get("capital") or {}).get("largeNetInflow"))),
-            "yunaiTotalNetInflow": ytotal,
+            "quoteSource": q.get("source") or "腾讯行情",
             "firstActionableAt": ss.get("signalAt"),
             "firstActionablePrice": signal_price,
             "maxFavorablePctAfterSignal": round(mfe, 3) if mfe is not None else None,
@@ -461,6 +423,7 @@ def main():
             "priorOfficialDate": prior.get("date") if prior else None,
             "tailStatus": tail.get("status") if tail else None,
             "tailCapturedAt": tail.get("capturedAt") if tail else None,
+            "approvedMarketData": ["Tushare兼容stock_api", "同花顺", "腾讯", "东方财富"],
         },
         "stocks": {x["code"]: x for x in ranked},
         "ranking": [x["code"] for x in ranked],

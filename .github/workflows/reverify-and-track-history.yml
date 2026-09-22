@@ -7,7 +7,7 @@ on:
     paths:
       - '.github/workflows/reverify-and-track-history.yml'
       - 'tools/reverify_legacy_cohorts.py'
-      - 'tools/reverify_legacy_with_yunai_history.py'
+      - 'tools/run_daily_strategy_verified.py'
       - 'tools/update_strategy_tracking_reference.py'
   schedule:
     # Beijing weekdays: refresh shortly after close and retry once for delayed daily bars.
@@ -46,10 +46,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install Tushare adapter
+        run: python -m pip install --quiet 'tushare>=1.4,<2'
       - name: Reverify recoverable historical evidence
         env:
-          YUNAI_TOKEN: ${{ secrets.YUNAI_TOKEN }}
-        run: python tools/reverify_legacy_with_yunai_history.py
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
+        run: python tools/reverify_legacy_cohorts.py
       - name: Refresh verified and reference forward tracking
         run: python tools/update_strategy_tracking_reference.py
       - name: Save audit and tracking updates并即时同步
