@@ -118,6 +118,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: 安装Android SDK
+        continue-on-error: true
         run: |
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platforms;android-36" "build-tools;35.0.0" "platform-tools"
