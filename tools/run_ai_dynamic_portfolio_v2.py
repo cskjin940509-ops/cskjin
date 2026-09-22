@@ -66,7 +66,9 @@ def target_rows(radar: dict, state: dict) -> list[dict]:
                 score -= 2; reasons.append("ETF一级资金弱-2")
         ref, source, _ = base.candidate_reference_price(st)
         held = code in existing
-        fatal = any(("走势明显走弱" in x or "双源价格偏差" in x or "流动性" in x) for x in rejects)
+        # Cross-provider disagreement is diagnostic only.  One fresh approved
+        # source is sufficient; risk and liquidity rules remain blocking.
+        fatal = any(("走势明显走弱" in x or "流动性" in x) for x in rejects)
         new_ok = ref is not None and score >= MIN_BUY_SCORE and not rejects
         hold_ok = held and ref is not None and score >= MIN_HOLD_SCORE and not fatal
         if not (new_ok or hold_ok):

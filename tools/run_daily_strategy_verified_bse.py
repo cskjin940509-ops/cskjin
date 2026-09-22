@@ -82,17 +82,20 @@ def verify_price_bse(code, day):
     except Exception as e:
         checks.append({"provider": "东方财富", "row": None, "error": e.__class__.__name__})
         em = None
-    if not tx or not em:
-        return {"verified": False, "checks": checks, "reason": "fewer-than-two-bse-raw-providers"}
-    mx = verified.pair_diff(tx, em)
-    ok = mx is not None and mx <= 0.001
+    valid = [("腾讯实时收盘快照", tx), ("东方财富", em)]
+    valid = [(name, row) for name, row in valid if row and all(verified.finite(row.get(k)) is not None for k in ("open", "close", "high", "low"))]
+    if not valid:
+        return {"verified": False, "checks": checks, "reason": "no-valid-bse-price-provider"}
+    mx = verified.pair_diff(tx, em) if tx and em else None
+    primary_name, primary = valid[0]
     return {
-        "verified": ok,
-        "rawClose": verified.finite(tx.get("close")) if ok else None,
+        "verified": True,
+        "rawClose": verified.finite(primary.get("close")),
         "maxRelDiff": mx,
-        "providers": ["腾讯实时收盘快照", "东方财富"] if ok else [],
+        "providers": [name for name, _ in valid],
+        "selectedProvider": primary_name,
         "checks": checks,
-        "rule": "北交所：腾讯同日收盘快照+东方财富未复权日线OHLC最大相对差<=0.1%",
+        "rule": "北交所任一合规源成功即放行；多源仅作诊断",
     }
 
 

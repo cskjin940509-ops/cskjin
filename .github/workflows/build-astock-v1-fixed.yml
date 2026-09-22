@@ -38,8 +38,6 @@ jobs:
         run: python tools/patch_detail_compile_fixes.py
       - name: 接入两两组合筛选池
         run: python tools/patch_pairwise_pools.py
-      - name: 接入云AI量化数据源状态
-        run: python tools/patch_yunai_ui.py
       - name: 展示数据审计可信状态
         run: python tools/patch_data_audit_ui.py
       - name: 增加板块三级数据源与新鲜度标记

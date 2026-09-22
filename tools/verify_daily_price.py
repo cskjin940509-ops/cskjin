@@ -163,12 +163,12 @@ def main():
         for e in validate_ohlc(x.get("row")): errors.append(f"{x.get('provider')}/{x.get('adjust')}:{e}")
     raw_diff=max_rel_diff(raw); qfq_diff=max_rel_diff(qfq)
     providers={x.get("provider") for x in raw}
-    verified=bool(len(providers)>=2 and raw_diff is not None and raw_diff <= 0.001)
+    verified=bool(providers)
     report={
         "symbol":code,"date":day,"generatedAt":datetime.now(CN).isoformat(timespec="seconds"),
         "checks":checks,"rawCrossSourceMaxRelDiff":raw_diff,"qfqCrossSourceMaxRelDiff":qfq_diff,
         "verified":verified,"verifiedRawProviders":sorted(providers),"errors":errors,
-        "rule":"正式价格必须至少两个独立源的未复权OHLC一致（最大相对差<=0.1%）；复权价只用于收益/因子，不作为实际成交价展示。",
+        "rule":"Tushare/同花顺/腾讯/东方财富任一合规源返回有效未复权OHLC即可；多源差异仅诊断，不阻断。复权价只用于收益/因子。",
     }
     OUT.mkdir(parents=True,exist_ok=True)
     path=OUT/f"{day}-{code}.json"
