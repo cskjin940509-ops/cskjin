@@ -65,9 +65,7 @@ private enum class Tab(val zh:String,val icon:ImageVector){HOME("总览",Icons.D
     item{Title("执行状态")};item{CardBox{KV("市场状态",stateZh(s.marketState));KV("市场仓位上限",s.cap?.let{pct(it*100)}?:"待确认");KV("是否允许新仓",if(s.allowNew)"允许，仍须通过成交约束" else "暂停新增");KV("有效批次","${s.activeBatches}/8");KV("待买入 / 待卖出","${s.pendingBuy} / ${s.pendingSell}");HorizontalDivider(Modifier.padding(vertical=8.dp));Text(s.marketReason,fontSize=11.sp,color=Muted,lineHeight=16.sp)}}
     item{Title("从选股到成交")};item{CardBox{Step("1","T日选股","原板块、资金、量价评分与候选排序",true);Step("2","收盘冻结",s.signalDate?.let{"$it 已冻结 ${s.pendingBuy}只"}?:"等待有效收盘候选",s.signalDate!=null);Step("3","T+1买入","98%限价优先；未触及则收盘窗口兜底",false);Step("4","八批轮动","第9个有效批次形成后轮出最老批次",false)}}
     item{Title("组合风险")};item{Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){Mini("持仓","${s.posCount}只",Modifier.weight(1f));Mini("市值",money(s.mv),Modifier.weight(1f));Mini("最大回撤",s.mdd?.let(::pct)?:"—",Modifier.weight(1f))}}
-    item{Notice("更新时间 ${short(s.updated)}。仅为模拟交易，不连接券商，不构成收益承诺。",SoftBlue)}7676
-
-}
+    item{Notice("更新时间 ${short(s.updated)}。仅为模拟交易，不连接券商，不构成收益承诺。",SoftBlue)}
 }}
 
 @Composable private fun Candidates(s:Snap){Page{
@@ -75,7 +73,7 @@ private enum class Tab(val zh:String,val icon:ImageVector){HOME("总览",Icons.D
     item{Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){Mini("信号日",s.signalDate?:"—",Modifier.weight(1f));Mini("待执行","${s.pendingBuy}只",Modifier.weight(1f));Mini("单股上限","2.25%",Modifier.weight(1f))}}
     if(s.candidates.isEmpty())item{Empty("当前没有已冻结候选")} else items(s.candidates,key={it.code}){c->CardBox{Row(verticalAlignment=Alignment.CenterVertically){Surface(color=Navy,shape=RoundedCornerShape(10.dp)){Text("${c.rank}",Modifier.padding(horizontal=10.dp,vertical=7.dp),color=Color.White,fontWeight=FontWeight.Bold)};Spacer(Modifier.width(10.dp));Column(Modifier.weight(1f)){Text("${c.name}  ${c.code}",fontWeight=FontWeight.Bold);Text(c.sector?:"板块待同步",color=Muted,fontSize=10.sp)};Tag(statusZh(c.status),true)};Spacer(Modifier.height(10.dp));Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){Val("信号收盘",c.close?.let(::price)?:"—",Modifier.weight(1f));Val("98%限价",c.limit?.let(::price)?:"—",Modifier.weight(1f));Val("评分",c.score?.let{String.format("%.1f",it)}?:"—",Modifier.weight(1f))};Text(c.reason,fontSize=11.sp,color=Muted,modifier=Modifier.padding(top=8.dp),lineHeight=16.sp);if(c.gaps.isNotEmpty())Text("降级项：${c.gaps.take(3).joinToString("；")}",fontSize=10.sp,color=Amber)}}
     }
-}}
+}
 
 @Composable private fun Batches(s:Snap){Page{
     item{Title("八批资金账本")};item{Hero{Text("每个有效收盘信号 = 1个独立批次",color=Color.White,fontWeight=FontWeight.Bold,fontSize=16.sp);Text("每批预算为信号日收盘总资产的1/8（约12.5%）",color=Color(0xFFD8E3F3),fontSize=12.sp,modifier=Modifier.padding(vertical=8.dp));LinearProgressIndicator({(s.activeBatches/8f).coerceIn(0f,1f)},Modifier.fillMaxWidth().height(8.dp),color=Color(0xFF61D6A5),trackColor=Color(0xFF314863));Text("当前 ${s.activeBatches}/8批 · 历史共${s.batchCount}批",color=Color.White,fontSize=11.sp,modifier=Modifier.padding(top=7.dp))}}
