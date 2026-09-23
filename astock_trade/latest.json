@@ -705,477 +705,63 @@
   ],
   "setupCandidates": [
     {
-      "code": "300812",
-      "name": "易天股份",
-      "sector": "先进封装",
+      "code": "603228",
+      "name": "景旺电子",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "买入候选",
-      "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 86.1,
-        "historical": {
-          "samples": 2,
-          "win5D": 0.0,
-          "avg5D": -0.2081,
-          "avgMFE5D": 0.0247,
-          "avgMAE5D": -0.2127
-        }
-      },
-      "quote": {
-        "price": 20.59,
-        "changePct": 1.23,
-        "open": 20.2,
-        "high": 20.83,
-        "low": 20.05,
-        "dayLowToHighPct": 3.89,
-        "quoteTime": "20260923132909"
-      },
-      "entryZone": [
-        20.488,
-        20.797
-      ],
-      "triggerPrice": 20.55,
-      "stopLoss": 19.996,
-      "takeProfit1": 21.612,
-      "takeProfit2": 22.258,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 19.996",
-      "reasons": [
-        "突破回踩",
-        "形态分 86",
-        "距MA20 +1.76 ATR",
-        "主力资金占比 +10.58%"
-      ]
-    },
-    {
-      "code": "002897",
-      "name": "意华股份",
-      "sector": "通信网络设备及器件",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "买入候选",
+      "action": "盘前观察",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 82.3,
-        "historical": {
-          "samples": 4,
-          "win5D": 1.0,
-          "avg5D": 0.0425,
-          "avgMFE5D": 0.1125,
-          "avgMAE5D": -0.0621
-        }
-      },
-      "quote": {
-        "price": 68.46,
-        "changePct": -1.24,
-        "open": 69.32,
-        "high": 70.88,
-        "low": 67.82,
-        "dayLowToHighPct": 4.51,
-        "quoteTime": "20260923132906"
-      },
-      "entryZone": [
-        68.183,
-        69.561
-      ],
-      "triggerPrice": 68.872,
-      "stopLoss": 64.74,
-      "takeProfit1": 75.07,
-      "takeProfit2": 79.203,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 64.740",
-      "reasons": [
-        "趋势回踩",
-        "形态分 82",
-        "距MA20 +0.99 ATR",
-        "主力资金占比 -8.27%"
-      ]
-    },
-    {
-      "code": "002975",
-      "name": "博杰股份",
-      "sector": "先进封装",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 85.8,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 112.74,
-        "changePct": 4.87,
-        "open": 108.38,
-        "high": 113.02,
-        "low": 106.6,
-        "dayLowToHighPct": 6.02,
-        "quoteTime": "20260923132906"
-      },
-      "entryZone": [
-        110.697,
-        112.362
-      ],
-      "triggerPrice": 111.03,
-      "stopLoss": 106.035,
-      "takeProfit1": 119.772,
-      "takeProfit2": 125.267,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 106.035",
-      "reasons": [
-        "突破回踩",
-        "形态分 86",
-        "距MA20 +1.66 ATR",
-        "主力资金占比 +9.08%"
-      ]
-    },
-    {
-      "code": "688757",
-      "name": "胜科纳米",
-      "sector": "先进封装",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
         "score": 83.8,
         "historical": {
-          "samples": 0
+          "samples": 5,
+          "win5D": 0.8,
+          "avg5D": 0.0612,
+          "avgMFE5D": 0.1264,
+          "avgMAE5D": -0.0506
         }
       },
       "quote": {
-        "price": 33.02,
-        "changePct": 5.97,
-        "open": 31.28,
-        "high": 33.38,
-        "low": 31.1,
-        "dayLowToHighPct": 7.33,
-        "quoteTime": "20260923132909"
+        "price": 108.55,
+        "changePct": 2.29,
+        "open": null,
+        "high": 110.78,
+        "low": 105.3,
+        "dayLowToHighPct": 5.2,
+        "quoteTime": null
       },
       "entryZone": [
-        32.412,
-        32.9
+        106.477,
+        108.629
       ],
-      "triggerPrice": 32.51,
-      "stopLoss": 31.053,
-      "takeProfit1": 35.061,
-      "takeProfit2": 36.663,
+      "triggerPrice": 107.553,
+      "stopLoss": 101.219,
+      "takeProfit1": 117.055,
+      "takeProfit2": 123.389,
       "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 31.053",
+      "invalidation": "收盘/有效价格跌破 101.219",
       "reasons": [
-        "突破回踩",
+        "趋势回踩",
         "形态分 84",
-        "距MA20 +1.41 ATR",
-        "主力资金占比 -1.12%"
-      ]
-    },
-    {
-      "code": "002077",
-      "name": "大港股份",
-      "sector": "集成电路封测",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.9,
-        "historical": {
-          "samples": 1,
-          "win5D": 1.0,
-          "avg5D": 0.0964,
-          "avgMFE5D": 0.1035,
-          "avgMAE5D": -0.0795
-        }
-      },
-      "quote": {
-        "price": 14.16,
-        "changePct": 0.5,
-        "open": 14.0,
-        "high": 14.28,
-        "low": 13.69,
-        "dayLowToHighPct": 4.31,
-        "quoteTime": "20260923132909"
-      },
-      "entryZone": [
-        13.888,
-        14.168
+        "距MA20 +1.08 ATR",
+        "主力资金占比 -1.06%"
       ],
-      "triggerPrice": 14.028,
-      "stopLoss": 13.431,
-      "takeProfit1": 14.923,
-      "takeProfit2": 15.52,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 13.431",
-      "reasons": [
-        "趋势回踩",
-        "形态分 79",
-        "距MA20 +1.60 ATR",
-        "主力资金占比 -0.58%"
-      ]
-    },
-    {
-      "code": "002579",
-      "name": "中京电子",
-      "sector": "先进封装",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.0,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 18.64,
-        "changePct": -1.27,
-        "open": 18.87,
-        "high": 19.27,
-        "low": 18.3,
-        "dayLowToHighPct": 5.3,
-        "quoteTime": "20260923132906"
-      },
-      "entryZone": [
-        18.451,
-        18.823
-      ],
-      "triggerPrice": 18.637,
-      "stopLoss": 17.519,
-      "takeProfit1": 20.314,
-      "takeProfit2": 21.433,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 17.519",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +1.40 ATR",
-        "主力资金占比 -4.86%"
-      ]
-    },
-    {
-      "code": "600667",
-      "name": "太极实业",
-      "sector": "先进封装",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 77.8,
-        "historical": {
-          "samples": 1,
-          "win5D": 1.0,
-          "avg5D": 0.0199,
-          "avgMFE5D": 0.1586,
-          "avgMAE5D": -0.0199
-        }
-      },
-      "quote": {
-        "price": 19.8,
-        "changePct": -0.35,
-        "open": 20.1,
-        "high": 20.18,
-        "low": 19.45,
-        "dayLowToHighPct": 3.75,
-        "quoteTime": "20260923132909"
-      },
-      "entryZone": [
-        19.474,
-        19.868
-      ],
-      "triggerPrice": 19.671,
-      "stopLoss": 18.491,
-      "takeProfit1": 21.441,
-      "takeProfit2": 22.621,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 18.491",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.49 ATR",
-        "主力资金占比 -5.87%"
-      ]
-    },
-    {
-      "code": "603203",
-      "name": "快克智能",
-      "sector": "先进封装",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 72.7,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 48.34,
-        "changePct": 2.87,
-        "open": 46.82,
-        "high": 49.18,
-        "low": 46.82,
-        "dayLowToHighPct": 5.04,
-        "quoteTime": "20260923132906"
-      },
-      "entryZone": [
-        48.41,
-        49.044
-      ],
-      "triggerPrice": 48.8,
-      "stopLoss": 46.883,
-      "takeProfit1": 51.492,
-      "takeProfit2": 53.335,
-      "riskReward1": 1.5,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 46.883",
-      "reasons": [
-        "临界突破",
-        "形态分 73",
-        "距MA20 +1.77 ATR",
-        "主力资金占比 +3.59%"
-      ]
-    },
-    {
-      "code": "688630",
-      "name": "芯碁微装",
-      "sector": "先进封装",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 72.1,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 443.56,
-        "changePct": 3.71,
-        "open": 430.0,
-        "high": 448.88,
-        "low": 426.5,
-        "dayLowToHighPct": 5.25,
-        "quoteTime": "20260923132909"
-      },
-      "entryZone": [
-        442.978,
-        448.783
-      ],
-      "triggerPrice": 446.55,
-      "stopLoss": 427.357,
-      "takeProfit1": 473.664,
-      "takeProfit2": 492.187,
-      "riskReward1": 1.5,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 427.357",
-      "reasons": [
-        "临界突破",
-        "形态分 72",
-        "距MA20 +1.26 ATR",
-        "主力资金占比 +0.54%"
-      ]
-    },
-    {
-      "code": "300480",
-      "name": "光力科技",
-      "sector": "先进封装",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 72.0,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 33.17,
-        "changePct": 2.44,
-        "open": 32.38,
-        "high": 33.28,
-        "low": 32.36,
-        "dayLowToHighPct": 2.84,
-        "quoteTime": "20260923132909"
-      },
-      "entryZone": [
-        33.292,
-        33.728
-      ],
-      "triggerPrice": 33.56,
-      "stopLoss": 32.357,
-      "takeProfit1": 35.238,
-      "takeProfit2": 36.391,
-      "riskReward1": 1.5,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 32.357",
-      "reasons": [
-        "临界突破",
-        "形态分 72",
-        "距MA20 +1.59 ATR",
-        "主力资金占比 +0.07%"
-      ]
+      "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
     "official": 16,
     "officialBuy": 0,
     "officialWatch": 1,
-    "expandedSetupCandidates": 10
+    "expandedSetupCandidates": 1,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -1188,5 +774,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "partial",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5561,
+    "uniqueRows": 500,
+    "pagesRequested": 56,
+    "coveragePct": 8.99,
+    "prefiltered": 220,
+    "historyLoaded": 220,
+    "setupMatches": 18,
+    "historicalEdgeMatches": 1,
+    "selected": 1,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
