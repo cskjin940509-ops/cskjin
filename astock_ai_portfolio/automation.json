@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "35726441598-1",
-  "lastRunAt": "2026-09-22T20:19:29+08:00",
-  "lastSuccessAt": "2026-09-22T20:19:29+08:00",
+  "cycleId": "35832846599-1",
+  "lastRunAt": "2026-09-23T15:40:07+08:00",
+  "lastSuccessAt": "2026-09-23T15:40:07+08:00",
   "lastTradeAt": "2026-09-14T09:43:12+08:00",
   "status": "OUTSIDE_SESSION",
   "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
   "runSource": "dedicated-auto-scheduler",
   "sessionOpen": false,
-  "radarCapturedAt": "2026-09-22T14:20:52+08:00",
+  "radarCapturedAt": "2026-09-23T14:29:47+08:00",
   "radarFresh": false,
-  "radarAgeSeconds": 21517.6,
+  "radarAgeSeconds": 4220.6,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -42,11 +42,11 @@
     "batchExecutionV6": {
       "version": "v6.0-eight-batch-t1-limit-execution",
       "activatedAt": "2026-09-21T22:33:31+08:00",
-      "batchCount": 2,
-      "activeBatchCount": 2,
-      "pendingOrderCount": 55,
+      "batchCount": 3,
+      "activeBatchCount": 3,
+      "pendingOrderCount": 59,
       "pendingExitCount": 0,
-      "lastSignalDate": "2026-09-22",
+      "lastSignalDate": "2026-09-23",
       "pendingOrders": [
         {
           "batchId": "B0001-2026-09-21",
@@ -353,9 +353,9 @@
       "rulesZh": "T日收盘冻结当天候选；T+1按T收盘98%低吸，未触及则收盘窗口兜底；8批FIFO轮动；涨停后次日开盘卖出。"
     },
     "reasonCode": "T1_BATCH_ENTRY_PENDING",
-    "reasonZh": "30只2026-09-22收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
+    "reasonZh": "30只2026-09-23收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
     "entryBlocks": [
-      "2026-09-21盘前市场宽度与已验证收盘指数均未到达"
+      "2026-09-22盘前市场宽度与已验证收盘指数均未到达"
     ],
     "pendingExits": [],
     "candidateCount": 31,
