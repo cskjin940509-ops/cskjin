@@ -89,22 +89,6 @@ def publish(now=None, report_date=None, source_date=None, write_latest=True):
     factors = factors or read_json(ROOT / "astock_factors" / "latest.json", {})
     snap = latest_snapshot(snapshots, source_date)
     market = (snap or {}).get("marketSnapshot") or {}
-    # 如果 snapshot 里没有 up/down（旧数据），从 gateway fallback
-    if (market.get("up") is None or market.get("down") is None) and (ROOT / "astock_gateway" / "latest.json").exists():
-        try:
-            gw = read_json(ROOT / "astock_gateway" / "latest.json", {})
-            gw_ms = gw.get("marketSnapshot") or {}
-            if gw_ms.get("up") is not None and gw_ms.get("down") is not None:
-                market["up"] = gw_ms["up"]
-                market["down"] = gw_ms["down"]
-                market["flat"] = gw_ms.get("flat")
-                market["sampleCount"] = gw_ms.get("sampleCount")
-                market["medianChangePct"] = gw_ms.get("medianChangePct")
-                market["breadthStatus"] = gw_ms.get("breadthStatus", "腾讯行情接口")
-                market["breadthSampleCount"] = gw_ms.get("breadthSampleCount")
-                market["breadthNote"] = gw_ms.get("breadthNote", "备用数据源：腾讯行情")
-        except Exception:
-            pass
     source_date = market.get("sourceDate") or (snap or {}).get("date")
     up, down = finite(market.get("up")), finite(market.get("down"))
     sample = finite(market.get("sampleCount"))
@@ -155,9 +139,9 @@ def publish(now=None, report_date=None, source_date=None, write_latest=True):
                  "historyObservations": (proxy_margin or {}).get("observations")},
          "dataDate": source_date or summary.get("dataDate") or margin.get("dataDate"),
          "availableAt": factors.get("collectedAt"), "classification": "反向工程估算",
-         "status": "ESTIMATED" if (margin_score is not None or margin_delta is not None) else ("INSUFFICIENT_485_HISTORY" if margin_delta is not None else "MISSING_INPUT"),
-         "blocker": None if (margin_score is not None or margin_delta is not None) else (summary.get("scoreBlocker") or "缺完整沪深余额或相邻交易日基数"),
-         "positionEligible": margin_score is not None or margin_delta is not None},
+         "status": "ESTIMATED" if margin_score is not None else ("INSUFFICIENT_485_HISTORY" if margin_delta is not None else "MISSING_INPUT"),
+         "blocker": None if margin_score is not None else (summary.get("scoreBlocker") or "缺完整沪深余额或相邻交易日基数"),
+         "positionEligible": margin_score is not None},
         {"name": "ETF资金强弱", "score": None, "scoreScale": "0-100",
          "raw": etf_raw, "dataDate": etf.get("dataDate"),
          "availableAt": factors.get("collectedAt"), "classification": "研究观察值",
