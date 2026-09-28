@@ -140,56 +140,413 @@
   ],
   "setupCandidates": [
     {
-      "code": "301456",
-      "name": "盘古智能",
-      "sector": "风电零部件",
+      "code": "002966",
+      "name": "苏州银行",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "买入候选",
+      "action": "盘前观察",
       "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 84.0,
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 85.5,
         "historical": {
-          "samples": 0
+          "samples": 16,
+          "win5D": 0.9375,
+          "avg5D": 0.0245,
+          "avgMFE5D": 0.0349,
+          "avgMAE5D": -0.0107
         }
       },
       "quote": {
-        "price": 25.7,
-        "changePct": 1.54,
-        "open": 25.35,
-        "high": 26.0,
-        "low": 24.63,
-        "dayLowToHighPct": 5.56,
-        "quoteTime": "20260928161451"
+        "price": 9.29,
+        "changePct": 0.98,
+        "open": null,
+        "high": 9.31,
+        "low": 9.17,
+        "dayLowToHighPct": 1.53,
+        "quoteTime": null
       },
       "entryZone": [
-        25.414,
-        25.796
+        9.103,
+        9.247
       ],
-      "triggerPrice": 25.49,
-      "stopLoss": 24.712,
-      "takeProfit1": 26.943,
-      "takeProfit2": 27.836,
+      "triggerPrice": 9.155,
+      "stopLoss": 8.934,
+      "takeProfit1": 9.535,
+      "takeProfit2": 9.776,
       "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 24.712",
+      "invalidation": "收盘/有效价格跌破 8.934",
       "reasons": [
-        "突破回踩",
+        "趋势回踩",
+        "形态分 86",
+        "距MA20 +0.89 ATR",
+        "主力资金占比 +7.66%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "600026",
+      "name": "中远海能",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 84.1,
+        "historical": {
+          "samples": 3,
+          "win5D": 1.0,
+          "avg5D": 0.0749,
+          "avgMFE5D": 0.1271,
+          "avgMAE5D": -0.0027
+        }
+      },
+      "quote": {
+        "price": 21.23,
+        "changePct": -0.79,
+        "open": null,
+        "high": 21.85,
+        "low": 21.09,
+        "dayLowToHighPct": 3.6,
+        "quoteTime": null
+      },
+      "entryZone": [
+        21.285,
+        21.715
+      ],
+      "triggerPrice": 21.5,
+      "stopLoss": 20.304,
+      "takeProfit1": 23.293,
+      "takeProfit2": 24.489,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 20.304",
+      "reasons": [
+        "趋势回踩",
         "形态分 84",
-        "距MA20 +1.81 ATR",
-        "主力资金占比 -0.03%"
-      ]
+        "距MA20 +0.43 ATR",
+        "主力资金占比 +0.67%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "600482",
+      "name": "中国动力",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 84.8,
+        "historical": {
+          "samples": 6,
+          "win5D": 1.0,
+          "avg5D": 0.0383,
+          "avgMFE5D": 0.0677,
+          "avgMAE5D": -0.0449
+        }
+      },
+      "quote": {
+        "price": 33.74,
+        "changePct": -1.49,
+        "open": null,
+        "high": 34.51,
+        "low": 33.55,
+        "dayLowToHighPct": 2.86,
+        "quoteTime": null
+      },
+      "entryZone": [
+        33.752,
+        34.414
+      ],
+      "triggerPrice": 34.073,
+      "stopLoss": 32.529,
+      "takeProfit1": 36.414,
+      "takeProfit2": 37.969,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 32.529",
+      "reasons": [
+        "趋势回踩",
+        "形态分 85",
+        "距MA20 -0.01 ATR",
+        "主力资金占比 +3.88%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 84.5,
+        "historical": {
+          "samples": 5,
+          "win5D": 0.8,
+          "avg5D": 0.058,
+          "avgMFE5D": 0.0966,
+          "avgMAE5D": -0.0081
+        }
+      },
+      "quote": {
+        "price": 5.2,
+        "changePct": 2.77,
+        "open": null,
+        "high": 5.24,
+        "low": 5.04,
+        "dayLowToHighPct": 3.97,
+        "quoteTime": null
+      },
+      "entryZone": [
+        5.145,
+        5.249
+      ],
+      "triggerPrice": 5.197,
+      "stopLoss": 5.023,
+      "takeProfit1": 5.458,
+      "takeProfit2": 5.631,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 5.023",
+      "reasons": [
+        "趋势回踩",
+        "形态分 84",
+        "距MA20 +0.58 ATR",
+        "主力资金占比 +2.40%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "300327",
+      "name": "中颖电子",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 85.0,
+        "historical": {
+          "samples": 9,
+          "win5D": 0.7778,
+          "avg5D": 0.0241,
+          "avgMFE5D": 0.0591,
+          "avgMAE5D": -0.0339
+        }
+      },
+      "quote": {
+        "price": 25.38,
+        "changePct": -2.72,
+        "open": null,
+        "high": 26.2,
+        "low": 25.15,
+        "dayLowToHighPct": 4.17,
+        "quoteTime": null
+      },
+      "entryZone": [
+        24.9,
+        25.404
+      ],
+      "triggerPrice": 25.152,
+      "stopLoss": 24.323,
+      "takeProfit1": 26.396,
+      "takeProfit2": 27.225,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 24.323",
+      "reasons": [
+        "趋势回踩",
+        "形态分 85",
+        "距MA20 +0.74 ATR",
+        "主力资金占比 +4.94%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "601319",
+      "name": "中国人保",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 83.7,
+        "historical": {
+          "samples": 16,
+          "win5D": 0.6875,
+          "avg5D": 0.0107,
+          "avgMFE5D": 0.033,
+          "avgMAE5D": -0.0237
+        }
+      },
+      "quote": {
+        "price": 8.0,
+        "changePct": -0.87,
+        "open": null,
+        "high": 8.17,
+        "low": 7.96,
+        "dayLowToHighPct": 2.64,
+        "quoteTime": null
+      },
+      "entryZone": [
+        7.846,
+        7.975
+      ],
+      "triggerPrice": 7.896,
+      "stopLoss": 7.684,
+      "takeProfit1": 8.25,
+      "takeProfit2": 8.476,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 7.684",
+      "reasons": [
+        "趋势回踩",
+        "形态分 84",
+        "距MA20 +0.76 ATR",
+        "主力资金占比 +4.95%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "002298",
+      "name": "中电鑫龙",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 83.1,
+        "historical": {
+          "samples": 4,
+          "win5D": 0.75,
+          "avg5D": 0.0217,
+          "avgMFE5D": 0.0896,
+          "avgMAE5D": -0.0577
+        }
+      },
+      "quote": {
+        "price": 8.61,
+        "changePct": 0.58,
+        "open": null,
+        "high": 8.85,
+        "low": 8.44,
+        "dayLowToHighPct": 4.86,
+        "quoteTime": null
+      },
+      "entryZone": [
+        8.55,
+        8.722
+      ],
+      "triggerPrice": 8.636,
+      "stopLoss": 8.214,
+      "takeProfit1": 9.27,
+      "takeProfit2": 9.692,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 8.214",
+      "reasons": [
+        "趋势回踩",
+        "形态分 83",
+        "距MA20 +0.29 ATR",
+        "主力资金占比 -4.52%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 79.7,
+        "historical": {
+          "samples": 7,
+          "win5D": 0.5714,
+          "avg5D": 0.0319,
+          "avgMFE5D": 0.0888,
+          "avgMAE5D": -0.0435
+        }
+      },
+      "quote": {
+        "price": 161.8,
+        "changePct": -0.37,
+        "open": null,
+        "high": 165.88,
+        "low": 159.89,
+        "dayLowToHighPct": 3.75,
+        "quoteTime": null
+      },
+      "entryZone": [
+        159.502,
+        162.724
+      ],
+      "triggerPrice": 161.113,
+      "stopLoss": 155.301,
+      "takeProfit1": 169.831,
+      "takeProfit2": 175.644,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 155.301",
+      "reasons": [
+        "趋势回踩",
+        "形态分 80",
+        "距MA20 +0.72 ATR",
+        "主力资金占比 -3.58%"
+      ],
+      "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
     "official": 3,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 1
+    "expandedSetupCandidates": 8,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -202,5 +559,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "partial",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5561,
+    "uniqueRows": 800,
+    "pagesRequested": 56,
+    "coveragePct": 14.39,
+    "prefiltered": 220,
+    "historyLoaded": 220,
+    "setupMatches": 16,
+    "historicalEdgeMatches": 8,
+    "selected": 8,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
