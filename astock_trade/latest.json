@@ -140,105 +140,63 @@
   ],
   "setupCandidates": [
     {
-      "code": "301456",
-      "name": "盘古智能",
-      "sector": "风电零部件",
+      "code": "603259",
+      "name": "药明康德",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "买入候选",
-      "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 84.0,
-        "historical": {
-          "samples": 0
-        }
-      },
-      "quote": {
-        "price": 25.7,
-        "changePct": 1.54,
-        "open": 25.35,
-        "high": 26.0,
-        "low": 24.63,
-        "dayLowToHighPct": 5.56,
-        "quoteTime": "20260928161451"
-      },
-      "entryZone": [
-        25.414,
-        25.796
-      ],
-      "triggerPrice": 25.49,
-      "stopLoss": 24.712,
-      "takeProfit1": 26.943,
-      "takeProfit2": 27.836,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 24.712",
-      "reasons": [
-        "突破回踩",
-        "形态分 84",
-        "距MA20 +1.81 ATR",
-        "主力资金占比 -0.03%"
-      ]
-    },
-    {
-      "code": "300185",
-      "name": "通裕重工",
-      "sector": "风电零部件",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
+      "action": "盘前观察",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 76.0,
+        "score": 79.7,
         "historical": {
-          "samples": 6,
-          "win5D": 0.0,
-          "avg5D": -0.0288,
-          "avgMFE5D": 0.0092,
-          "avgMAE5D": -0.0356
+          "samples": 7,
+          "win5D": 0.5714,
+          "avg5D": 0.0319,
+          "avgMFE5D": 0.0888,
+          "avgMAE5D": -0.0435
         }
       },
       "quote": {
-        "price": 2.74,
-        "changePct": -0.36,
-        "open": 2.74,
-        "high": 2.78,
-        "low": 2.69,
-        "dayLowToHighPct": 3.35,
-        "quoteTime": "20260928161439"
+        "price": 161.8,
+        "changePct": -0.37,
+        "open": null,
+        "high": 165.88,
+        "low": 159.89,
+        "dayLowToHighPct": 3.75,
+        "quoteTime": null
       },
       "entryZone": [
-        2.75,
-        2.801
+        159.502,
+        162.724
       ],
-      "triggerPrice": 2.773,
-      "stopLoss": 2.694,
-      "takeProfit1": 2.898,
-      "takeProfit2": 2.979,
+      "triggerPrice": 161.113,
+      "stopLoss": 155.301,
+      "takeProfit1": 169.831,
+      "takeProfit2": 175.644,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 2.694",
+      "invalidation": "收盘/有效价格跌破 155.301",
       "reasons": [
         "趋势回踩",
-        "形态分 76",
-        "距MA20 -0.15 ATR",
-        "主力资金占比 +5.15%"
-      ]
+        "形态分 80",
+        "距MA20 +0.72 ATR",
+        "主力资金占比 -3.58%"
+      ],
+      "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
     "official": 3,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 2
+    "expandedSetupCandidates": 1,
+    "marketPrefilterCount": 39,
+    "marketScannedCount": 39
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -251,5 +209,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "partial",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5561,
+    "uniqueRows": 100,
+    "pagesRequested": 56,
+    "coveragePct": 1.8,
+    "prefiltered": 39,
+    "historyLoaded": 39,
+    "setupMatches": 3,
+    "historicalEdgeMatches": 1,
+    "selected": 1,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
