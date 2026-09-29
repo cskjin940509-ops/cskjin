@@ -10,37 +10,40 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "logUpDownRatio": -2.282288117199835,
-        "up": 216.0,
-        "down": 2121.0,
-        "flat": 1649.0,
-        "sampleCount": 3986.0
+        "logUpDownRatio": -2.28,
+        "up": 216,
+        "down": 2121,
+        "flat": 1649,
+        "sampleCount": 3986
       },
-      "dataDate": "2026-09-24",
+      "dataDate": "2026-09-28",
       "availableAt": "2026-09-24T22:17:20+08:00",
       "classification": "研究原始值",
-      "status": "INSUFFICIENT_485_HISTORY",
-      "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
-      "positionEligible": false
+      "status": "RAW_AVAILABLE",
+      "blocker": null,
+      "positionEligible": true
     },
     {
       "name": "两融情绪",
-      "score": null,
+      "score": 28.4,
       "scoreScale": "0-100",
       "raw": {
-        "financingBalance": 2464580467587.0,
-        "change1d": -56840313413.0,
-        "exchangeCoverage": [
-          "SSE",
-          "SZSE"
-        ],
-        "errors": {},
-        "historyObservations": 7
+        "balance": 2602518715517.0,
+        "financingBalance": 2573519012492.0,
+        "secFinancingBalance": 28999703025.0,
+        "delta1d": -26424392828.0,
+        "delta1dPct": -1.01,
+        "balancePercentile": 47.6,
+        "logUpDownRatio": -2.28,
+        "up": 216,
+        "down": 2121,
+        "flat": 1649,
+        "sampleCount": 3986
       },
-      "dataDate": "2026-09-24",
-      "availableAt": "2026-09-29T00:11:07+08:00",
-      "classification": "反向工程估算",
-      "status": "ESTIMATED",
+      "dataDate": "2026-09-28",
+      "availableAt": "2026-09-29T01:58:09.738420+00:00",
+      "classification": "两融余额历史分位",
+      "status": "FORMAL",
       "blocker": null,
       "positionEligible": true
     },
