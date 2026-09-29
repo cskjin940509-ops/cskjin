@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "reportDate": "2026-09-28",
-  "generatedAt": "2026-09-28T13:58:34.960177+08:00",
+  "reportDate": "2026-09-29",
+  "generatedAt": "2026-09-29T01:57:07.908505+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -10,16 +10,16 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "logUpDownRatio": null,
-        "up": null,
-        "down": null,
-        "flat": null,
-        "sampleCount": null
+        "logUpDownRatio": -2.282288117199835,
+        "up": 216.0,
+        "down": 2121.0,
+        "flat": 1649.0,
+        "sampleCount": 3986.0
       },
       "dataDate": "2026-09-24",
       "availableAt": "2026-09-24T22:17:20+08:00",
       "classification": "研究原始值",
-      "status": "MISSING_INPUT",
+      "status": "INSUFFICIENT_485_HISTORY",
       "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
       "positionEligible": false
     },
@@ -28,35 +28,35 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "financingBalance": 2608820537493.0,
-        "change1d": 0.0,
+        "financingBalance": 2464580467587.0,
+        "change1d": -56840313413.0,
         "exchangeCoverage": [
           "SSE",
           "SZSE"
         ],
         "errors": {},
-        "historyObservations": null
+        "historyObservations": 7
       },
       "dataDate": "2026-09-24",
-      "availableAt": "2026-09-14T00:33:37+08:00",
+      "availableAt": "2026-09-29T00:11:07+08:00",
       "classification": "反向工程估算",
-      "status": "INSUFFICIENT_485_HISTORY",
-      "blocker": "缺完整沪深余额或相邻交易日基数",
-      "positionEligible": false
+      "status": "ESTIMATED",
+      "blocker": null,
+      "positionEligible": true
     },
     {
       "name": "ETF资金强弱",
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "etfCount": 1747,
-        "validChangeCount": 1746,
-        "netShareChange1d": 1349105.2612999997,
-        "netCreationAmountEstimate1d": 6387339.386923089,
+        "etfCount": 1663,
+        "validChangeCount": 1662,
+        "netShareChange1d": 16997297197.0,
+        "netCreationAmountEstimate1d": null,
         "historyObservations": 21
       },
-      "dataDate": "2026-09-11",
-      "availableAt": "2026-09-14T00:33:37+08:00",
+      "dataDate": "2026-09-28",
+      "availableAt": "2026-09-29T00:11:07+08:00",
       "classification": "研究观察值",
       "status": "FORMULA_UNVERIFIED",
       "blocker": "原版ETF池、窗口、原始因子与标准化顺序未冻结；历史不足485日",
@@ -68,7 +68,7 @@
       "scoreScale": "0-100",
       "raw": null,
       "dataDate": "2026-09-24",
-      "availableAt": "2026-09-28T13:58:34.960177+08:00",
+      "availableAt": "2026-09-29T01:57:07.908505+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
