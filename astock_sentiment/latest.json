@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reportDate": "2026-09-29",
-  "generatedAt": "2026-09-29T01:57:07.908505+08:00",
+  "generatedAt": "2026-09-29T10:48:32.344783+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -10,40 +10,37 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "logUpDownRatio": -2.28,
-        "up": 216,
-        "down": 2121,
-        "flat": 1649,
-        "sampleCount": 3986
+        "logUpDownRatio": -2.282288117199835,
+        "up": 216.0,
+        "down": 2121.0,
+        "flat": 1649.0,
+        "sampleCount": 3986.0
       },
-      "dataDate": "2026-09-28",
+      "dataDate": "2026-09-24",
       "availableAt": "2026-09-24T22:17:20+08:00",
       "classification": "研究原始值",
-      "status": "RAW_AVAILABLE",
-      "blocker": null,
-      "positionEligible": true
+      "status": "INSUFFICIENT_485_HISTORY",
+      "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
+      "positionEligible": false
     },
     {
       "name": "两融情绪",
-      "score": 28.4,
+      "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "balance": 2602518715517.0,
-        "financingBalance": 2573519012492.0,
-        "secFinancingBalance": 28999703025.0,
-        "delta1d": -26424392828.0,
-        "delta1dPct": -1.01,
-        "balancePercentile": 47.6,
-        "logUpDownRatio": -2.28,
-        "up": 216,
-        "down": 2121,
-        "flat": 1649,
-        "sampleCount": 3986
+        "financingBalance": 2464580467587.0,
+        "change1d": -56840313413.0,
+        "exchangeCoverage": [
+          "SSE",
+          "SZSE"
+        ],
+        "errors": {},
+        "historyObservations": 7
       },
-      "dataDate": "2026-09-28",
-      "availableAt": "2026-09-29T01:58:09.738420+00:00",
-      "classification": "两融余额历史分位",
-      "status": "FORMAL",
+      "dataDate": "2026-09-24",
+      "availableAt": "2026-09-29T00:11:07+08:00",
+      "classification": "反向工程估算",
+      "status": "ESTIMATED",
       "blocker": null,
       "positionEligible": true
     },
@@ -71,7 +68,7 @@
       "scoreScale": "0-100",
       "raw": null,
       "dataDate": "2026-09-24",
-      "availableAt": "2026-09-29T01:57:07.908505+08:00",
+      "availableAt": "2026-09-29T10:48:32.344783+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
