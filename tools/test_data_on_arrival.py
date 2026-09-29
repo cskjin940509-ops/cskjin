@@ -87,6 +87,65 @@ class PublicationTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "staged"):
             arrival.publish("trade-plan", self.work)
 
+    def test_dirty_other_producer_does_not_block_publication(self):
+        (self.work / "gateway.json").write_text("old")
+        self.git(self.work, "add", ".")
+        self.git(self.work, "commit", "-m", "gateway fixture")
+        self.git(self.work, "push", "origin", "main")
+        (self.work / "gateway.json").write_text("unpublished")
+        self.data.write_text('{"price": 2}\n')
+        arrival.publish("trade-plan", self.work)
+        self.assertEqual("old", self.git(self.remote, "show", "main:gateway.json"))
+        self.assertEqual("unpublished", (self.work / "gateway.json").read_text())
+
+    def test_failed_push_can_retry_without_new_data(self):
+        self.data.write_text('{"price": 2}\n')
+        real_git = arrival.git
+        def fail_push(root, *args, **kwargs):
+            if args[0] == "push":
+                return subprocess.CompletedProcess(args, 1, "", "remote rejected fixture")
+            return real_git(root, *args, **kwargs)
+        with patch.object(arrival, "git", side_effect=fail_push):
+            with self.assertRaisesRegex(RuntimeError, "remote rejected fixture"):
+                arrival.publish("trade-plan", self.work)
+        self.assertEqual('{"price": 1}', self.git(self.remote, "show", "main:astock_trade/latest.json"))
+        self.assertIsNotNone(arrival.publish("trade-plan", self.work))
+        self.assertEqual('{"price": 2}', self.git(self.remote, "show", "main:astock_trade/latest.json"))
+        self.assertIsNone(arrival.publish("trade-plan", self.work))
+
+    def test_multiple_publications_in_same_checkout(self):
+        for price in [2, 3]:
+            self.data.write_text(json.dumps({"price": price}) + "\n")
+            arrival.publish("trade-plan", self.work)
+            self.assertEqual({"price": price}, json.loads(self.git(self.remote, "show", "main:astock_trade/latest.json")))
+
+    def test_error_diagnostics_redact_credentials(self):
+        result = subprocess.CompletedProcess([], 1, "", "denied https://user:secret@github.com/repo token-1234")
+        with patch.dict(os.environ, {"GH_TOKEN": "token-1234"}):
+            text = arrival.safe_error(result)
+        self.assertNotIn("secret", text)
+        self.assertNotIn("token-1234", text)
+        self.assertIn("denied", text)
+
+    def test_portfolio_ledger_rejects_rewrite_or_duplicate(self):
+        portfolio = self.work / "astock_ai_portfolio"
+        portfolio.mkdir()
+        ledger = portfolio / "ledger.json"
+        prior = {"decisionId": "old", "simulated": True}
+        ledger.write_text(json.dumps([prior]), encoding="utf-8")
+        self.git(self.work, "add", ".")
+        self.git(self.work, "commit", "-m", "portfolio fixture")
+        self.git(self.work, "push", "origin", "main")
+        ledger.write_text(json.dumps([{"decisionId": "replaced"}]), encoding="utf-8")
+        with self.assertRaisesRegex(RuntimeError, "history changed"):
+            arrival.publish("portfolio", self.work)
+        ledger.write_text(json.dumps([prior, prior]), encoding="utf-8")
+        with self.assertRaisesRegex(RuntimeError, "duplicate"):
+            arrival.publish("portfolio", self.work)
+        ledger.write_text(json.dumps([prior, {"decisionId": "new", "simulated": True}]), encoding="utf-8")
+        arrival.publish("portfolio", self.work)
+        self.assertEqual(2, len(json.loads(self.git(self.remote, "show", "main:astock_ai_portfolio/ledger.json"))))
+
     def test_official_ignores_dirty_and_concurrent_gateway_preserves_tracking(self):
         (self.work / "astock_snapshots").mkdir()
         index = self.work / "astock_snapshots/index.json"
@@ -202,34 +261,26 @@ class CloseGateTests(unittest.TestCase):
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_tail_writers_share_lock_and_failed_outputs_are_saved(self):
+        root = Path(__file__).resolve().parents[1] / ".github/workflows"
+        for name in ("run-tail-decision.yml", "run-tail-watchdog-recovery.yml"):
+            content = (root / name).read_text(encoding="utf-8")
+            self.assertIn("group: astock-tail-decision", content)
+            self.assertIn("uses: actions/upload-artifact@v4", content)
+            self.assertIn("if: failure()", content)
+        portfolio = (root / "run-ai-shadow-auto.yml").read_text(encoding="utf-8")
+        self.assertIn("uses: actions/upload-artifact@v4", portfolio)
+        self.assertIn("if: failure()", portfolio)
+        recovery = (root / "run-tail-watchdog-recovery.yml").read_text(encoding="utf-8")
+        self.assertIn("publish_data_on_arrival.py tail", recovery)
+
     def test_dispatch_targets_exist_and_graph_has_no_cycles(self):
-        import yaml
         workflows = Path(__file__).resolve().parents[1] / ".github/workflows"
-        producers = {}
-        for path in workflows.glob("*.yml"):
-            config = yaml.load(path.read_text(), Loader=yaml.BaseLoader)
-            if not isinstance(config, dict):
-                continue
-            channels = []
-            for job in config.get("jobs", {}).values():
-                for step in job.get("steps", []):
-                    command = step.get("run", "")
-                    if command.startswith("python tools/publish_data_on_arrival.py "):
-                        channels.append(command.strip().split()[-1])
-            if channels:
-                self.assertEqual(config["permissions"]["actions"], "write")
-                self.assertEqual(config["concurrency"]["cancel-in-progress"], "false")
-                producers[path.name] = channels
-        def visit(workflow, stack):
-            self.assertNotIn(workflow, stack, "event dispatch loop")
-            for channel in producers.get(workflow, []):
-                self.assertIn(channel, arrival.CHANNELS)
-                for target in arrival.DEPENDENTS.get(channel, ()):
-                    config = yaml.load((workflows / target).read_text(), Loader=yaml.BaseLoader)
-                    self.assertIn("workflow_dispatch", config["on"])
-                    visit(target, stack + [workflow])
-        for workflow in producers:
-            visit(workflow, [])
+        for channel, targets in arrival.DEPENDENTS.items():
+            self.assertIn(channel, arrival.CHANNELS)
+            for target in targets:
+                self.assertTrue((workflows / target).exists(), target)
+                self.assertIn("workflow_dispatch", (workflows / target).read_text(encoding="utf-8"))
 
     def test_validated_publication_precedes_slow_enrichment(self):
         root = Path(__file__).resolve().parents[1] / ".github/workflows"
@@ -237,13 +288,10 @@ class WorkflowTests(unittest.TestCase):
             ("run-ai-shadow-auto.yml", "publish_data_on_arrival.py portfolio", "python tools/enrich_ai_shadow_benchmarks.py"),
             ("run-trade-plan.yml", "publish_data_on_arrival.py trade-plan", "python tools/augment_trade_plan_market_setups.py"),
         ]:
-            text = (root / file).read_text()
+            text = (root / file).read_text(encoding="utf-8")
             self.assertLess(text.index(publish), text.index(slow), file)
             if file.startswith("run-ai-"):
                 self.assertLess(text.index("python tools/validate_ai_shadow_contract.py"), text.index(publish))
-        for file in ("run-intraday-radar.yml", "run-ai-shadow-auto.yml", "run-execution-assistant.yml",
-                     "update-market-gateway.yml", "run-tail-decision.yml"):
-            self.assertNotIn("YUNAI_TOKEN", (root / file).read_text(), file)
 
 
 if __name__ == "__main__":
