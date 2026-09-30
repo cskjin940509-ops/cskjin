@@ -4,7 +4,7 @@
   "mode": "A股原选股池 · T+1八批轮动模拟执行",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-09-30T08:25:12+08:00",
+  "updatedAt": "2026-09-30T08:41:31+08:00",
   "radarCapturedAt": "2026-09-29T10:49:08+08:00",
   "radarStatus": "RadarLive",
   "summary": {
@@ -18936,6 +18936,20 @@
       "cumulativeNav": 1.03025375,
       "cumulativeReturnPct": 3.0254,
       "radarCapturedAt": "2026-09-29T10:49:08+08:00"
+    },
+    {
+      "timestamp": "2026-09-30T08:41:31+08:00",
+      "date": "2026-09-30",
+      "time": "08:41:31",
+      "nav": 19926640.18,
+      "cash": 19555006.18,
+      "marketValue": 371634.0,
+      "positionCount": 2,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.03025375,
+      "cumulativeNav": 1.03025375,
+      "cumulativeReturnPct": 3.0254,
+      "radarCapturedAt": "2026-09-29T10:49:08+08:00"
     }
   ],
   "performanceReport": {
@@ -19707,7 +19721,7 @@
       "periodReturnPct": 0.0,
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
-      "pointCount": 1
+      "pointCount": 2
     }
   ],
   "selection45": {
@@ -19732,7 +19746,7 @@
       "cap": 0.018650108429869788,
       "allowNew": false,
       "date": "2026-09-30",
-      "asOf": "2026-09-30T08:25:12+08:00",
+      "asOf": "2026-09-30T08:41:31+08:00",
       "dailyUnitReturnPct": 0.0,
       "confirmedCloseDrawdownPct": -2.7998228675328085,
       "dailyRiskDataReady": true,
@@ -22975,8 +22989,8 @@
   "strategyResearch": {
     "schemaVersion": 1,
     "version": "v4.6-forward-evidence",
-    "updatedAt": "2026-09-30T08:25:12.852328+08:00",
-    "activatedAt": "2026-09-22T12:51:40.766400+08:00",
+    "updatedAt": "2026-09-30T08:41:31.216399+08:00",
+    "activatedAt": "2026-09-30T08:41:31.216399+08:00",
     "objectiveZh": "提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。",
     "productionStatusZh": "生产策略正常运行；新版研究样本独立累计，不阻断选股、仓位或模拟交易。",
     "protocol": {
@@ -23011,10 +23025,10 @@
         "parameterStatus": "INITIAL_RESEARCH_NOT_OUT_OF_SAMPLE_VALIDATED"
       },
       "sourceHashes": {
-        "selection_rules_v45.py": "72adceceb4a453dc549945252b7d1dd41eb765a9db4c71af58e2d39e362e2d49",
-        "selection_engine_v45.py": "21895e69a4688a4785e6c93cccbe62e2bac939e6f5bdbe656f28891dee2b0735",
-        "selection_data_v45.py": "fe72a9c34d06bf2bd57496cada9bf051436816ded602ae4385cf384c89036c9a",
-        "selection_research_v46.py": "55b239fef50d21a7cfc82fedc8776859b72805da3a5f728d390cb6bb43d95207"
+        "selection_rules_v45.py": "2b1b06bf92ae794766e865ef7911c9bf1101dc2fc0859627576cd221f934e69d",
+        "selection_engine_v45.py": "a1be724be692377a772a11d904c88672d9a6ff2b7b6ccd8fae0881b55f303670",
+        "selection_data_v45.py": "9647a35edb3c9d44ece5426a3898adb1ff8fe6b3a34669b8e6aec1ed8037696c",
+        "selection_research_v46.py": "fda091331351edbb0a2cad5685cc4b4304431f295bd621646c51992a81c89c06"
       },
       "primaryHorizon": 10,
       "exploratoryHorizons": [
@@ -23032,7 +23046,7 @@
       "timingBenchmark": "相同候选筛选与执行风控；取消回踩买点及阻力空间过滤，首次可行窗口建仓，持仓起始日起满10个完整交易日退出；保留硬止损和组合风险。",
       "noteZh": "固定10日主检验、5/20日辅助观察；60个信号日仅是复核门槛，不是盈利认证。"
     },
-    "protocolHash": "bb58e423e3a871ebd1cefde0535578b051ac349e912b3e0a21077d9a714c339c",
+    "protocolHash": "7fd734b516e7eafdb7257360931296f3d9a0c2c1a55702fe1e2b4ae412125002",
     "stages": [
       {
         "id": "SELECTION",
@@ -23072,7 +23086,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-30T08:25:12.852328+08:00",
+        "checkedAt": "2026-09-30T08:41:31.216399+08:00",
         "reasonZh": "仅统计本次启用后的完整成员样本；不等于2017年至今历史覆盖审计。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -23082,7 +23096,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-30T08:25:12.852328+08:00",
+        "checkedAt": "2026-09-30T08:41:31.216399+08:00",
         "reasonZh": "使用首次观察时保存的成员；后续不以今天成员替换。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -23092,7 +23106,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-30T08:25:12.852328+08:00",
+        "checkedAt": "2026-09-30T08:41:31.216399+08:00",
         "reasonZh": "两融/ETF必须具备真实availableAt且不晚于决策；仅写T+1不能通过。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -23102,7 +23116,7 @@
         "status": "PENDING_REVIEW",
         "completed": 0,
         "total": 60,
-        "checkedAt": "2026-09-30T08:25:12.852328+08:00",
+        "checkedAt": "2026-09-30T08:41:31.216399+08:00",
         "reasonZh": "按信号日汇总，重叠窗口仍相关；需补除权、可成交成本、全市场基准与独立样本外验证。",
         "evidencePath": "astock_ai_portfolio/state.json#research46"
       },
@@ -23112,7 +23126,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-09-30T08:25:12.852328+08:00",
+        "checkedAt": "2026-09-30T08:41:31.216399+08:00",
         "reasonZh": "校验首次冻结内容哈希；仅证明未改写，不等于策略有效。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       }
@@ -23465,17 +23479,17 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "36650167313-1",
-    "lastRunAt": "2026-09-30T08:25:12+08:00",
-    "lastSuccessAt": "2026-09-30T08:25:12+08:00",
+    "cycleId": "20260930-084131",
+    "lastRunAt": "2026-09-30T08:41:31+08:00",
+    "lastSuccessAt": "2026-09-30T08:41:31+08:00",
     "lastTradeAt": "2026-09-14T09:43:12+08:00",
     "status": "OUTSIDE_SESSION",
     "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
-    "runSource": "dedicated-auto-scheduler",
+    "runSource": "local-validation",
     "sessionOpen": false,
     "radarCapturedAt": "2026-09-29T10:49:08+08:00",
     "radarFresh": false,
-    "radarAgeSeconds": 77764.8,
+    "radarAgeSeconds": 78743.2,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -24420,7 +24434,7 @@
   "capitalMigrationThisCycle": null,
   "dataFreshness": {
     "radarFresh": false,
-    "radarAgeSeconds": 77764.8,
+    "radarAgeSeconds": 78743.2,
     "maxAllowedAgeSeconds": 900
   }
 }
