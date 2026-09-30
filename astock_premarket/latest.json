@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "version": "v1.0-premarket-prediction-point-in-time",
-  "state": "ready",
-  "targetDate": "2026-09-29",
-  "generatedAt": "2026-09-29T01:56:27+08:00",
+  "state": "waiting-slow-money",
+  "targetDate": "2026-09-30",
+  "generatedAt": "2026-09-30T08:57:40+08:00",
   "sourceOfficialDate": "2026-09-24",
-  "factorDataDate": "2026-09-24",
-  "slowMoneyFresh": true,
+  "factorDataDate": "2026-09-29",
+  "slowMoneyFresh": false,
   "auctionDataUsed": false,
   "continuousMarketDataUsed": false,
   "pointInTimeCutoffZh": "只使用目标交易日开盘前已发布数据；不读取目标日09:15之后的集合竞价或连续竞价行情。",
   "roleZh": "开盘前提前预测池；不是正式买入池，也不会改写Official、盘中雷达或智能实盘账本。",
   "sourceAvailability": {
     "Official": "可用：2026-09-24 Official",
-    "B1两融": "可用：数据日 2026-09-24",
-    "B2 ETF": "可用：数据日 2026-09-24",
+    "B1两融": "等待更新到 2026-09-24；当前文件数据日 2026-09-29",
+    "B2 ETF": "等待更新到 2026-09-24；当前文件数据日 2026-09-29",
     "B3主力": "使用 2026-09-24 Official 冻结主力资金口径",
     "历史形态": "只作风险背景，不直接当作买入概率"
   },
@@ -41,7 +41,7 @@
     "B23": []
   },
   "historyContext": {
-    "updatedAt": "2026-09-28T23:24:16+08:00",
+    "updatedAt": "2026-09-29T23:07:08+08:00",
     "liveSampleConfidenceZh": "高",
     "liveEdgeStateZh": "近期弱化",
     "liveEdgeReasonZh": "最近20个成熟样本的5日中位超额收益明显低于较长窗口。",
@@ -63,7 +63,7 @@
       "code": "000592",
       "name": "平潭发展",
       "sector": "林业Ⅲ",
-      "priorityScore": 59.5,
+      "priorityScore": 60.67,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -71,39 +71,16 @@
         "B4"
       ],
       "baseScore": 65.67,
-      "slowCompositeScore": 64.5,
-      "marginScore": 50.0,
+      "slowCompositeScore": null,
+      "marginScore": null,
       "etfScore": null,
       "mainFlowPct": 22.03,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 10.03,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 64.5；两融评分 50",
-      "riskZh": "追高风险高；上一交易日已上涨10.03%；暂无双因子交叉确认",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 65.7；B1/B2等待当日早间更新",
+      "riskZh": "慢资金尚未更新到上一交易日；追高风险高；上一交易日已上涨10.03%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
-    },
-    {
-      "code": "000663",
-      "name": "永安林业",
-      "sector": "林业Ⅲ",
-      "priorityScore": 45.5,
-      "tierZh": "等竞价确认",
-      "memberships": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "baseScore": 34.33,
-      "slowCompositeScore": 35.5,
-      "marginScore": null,
-      "etfScore": null,
-      "mainFlowPct": 9.8,
-      "mainlineStage": null,
-      "chaseRisk": "LOW",
-      "previousChangePct": 2.7,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 35.5",
-      "riskZh": "暂无双因子交叉确认",
-      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     },
     {
       "code": "002679",
@@ -117,16 +94,39 @@
         "B4"
       ],
       "baseScore": 50.0,
-      "slowCompositeScore": 50.0,
+      "slowCompositeScore": null,
       "marginScore": null,
       "etfScore": null,
       "mainFlowPct": 10.54,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 9.97,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 50.0",
-      "riskZh": "追高风险高；上一交易日已上涨9.97%；暂无双因子交叉确认",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 50.0；B1/B2等待当日早间更新",
+      "riskZh": "慢资金尚未更新到上一交易日；追高风险高；上一交易日已上涨9.97%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "000663",
+      "name": "永安林业",
+      "sector": "林业Ⅲ",
+      "priorityScore": 44.33,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "baseScore": 34.33,
+      "slowCompositeScore": null,
+      "marginScore": null,
+      "etfScore": null,
+      "mainFlowPct": 9.8,
+      "mainlineStage": null,
+      "chaseRisk": "LOW",
+      "previousChangePct": 2.7,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 34.3；B1/B2等待当日早间更新",
+      "riskZh": "慢资金尚未更新到上一交易日；暂无双因子交叉确认",
+      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
     }
   ]
 }
