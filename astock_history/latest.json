@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-09-30T21:40:09+08:00",
+  "updatedAt": "2026-09-30T22:15:52+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
     "sampleCount": 304,
@@ -21,12 +21,30 @@
         "p90": 0.0489933
       },
       "2D": {
-        "members": 0,
-        "mature": false
+        "members": 53,
+        "mature": true,
+        "meanReturn": -0.00340643,
+        "medianReturn": -0.01299468,
+        "hitRate": 0.45283019,
+        "meanAlpha": 0.00144069,
+        "medianAlpha": -0.00185552,
+        "p10": -0.07120964,
+        "p25": -0.03853535,
+        "p75": 0.0271477,
+        "p90": 0.05974245
       },
       "3D": {
-        "members": 0,
-        "mature": false
+        "members": 53,
+        "mature": true,
+        "meanReturn": -0.01064592,
+        "medianReturn": -0.02462121,
+        "hitRate": 0.37735849,
+        "meanAlpha": -0.00485123,
+        "medianAlpha": -0.01350936,
+        "p10": -0.08059892,
+        "p25": -0.05882353,
+        "p75": 0.02101576,
+        "p90": 0.04806567
       },
       "5D": {
         "members": 300,
@@ -86,7 +104,7 @@
     },
     "medianMFE": 0.08523,
     "medianMAE": -0.1153725,
-    "medianMaxDrawdown": null
+    "medianMaxDrawdown": -0.15761118
   },
   "horizonGroups": {
     "shortTerm": [
@@ -1129,6 +1147,20 @@
       "members": 304
     },
     {
+      "day": 2,
+      "meanReturn": -0.00340643,
+      "medianReturn": -0.01299468,
+      "meanAlpha": 0.00144069,
+      "members": 53
+    },
+    {
+      "day": 3,
+      "meanReturn": -0.01064592,
+      "medianReturn": -0.02462121,
+      "meanAlpha": -0.00485123,
+      "members": 53
+    },
+    {
       "day": 5,
       "meanReturn": 0.00097762,
       "medianReturn": -0.0054045,
@@ -1204,52 +1236,52 @@
     },
     "3D": {
       "horizon": "3D",
-      "members": 0,
+      "members": 53,
       "bins": [
         {
           "label": "<-5%",
-          "count": 0,
-          "share": null
+          "count": 17,
+          "share": 0.32075472
         },
         {
           "label": "-5~-3%",
-          "count": 0,
-          "share": null
+          "count": 5,
+          "share": 0.09433962
         },
         {
           "label": "-3~-1%",
-          "count": 0,
-          "share": null
+          "count": 8,
+          "share": 0.1509434
         },
         {
           "label": "-1~0%",
-          "count": 0,
-          "share": null
+          "count": 2,
+          "share": 0.03773585
         },
         {
           "label": "0~1%",
-          "count": 0,
-          "share": null
+          "count": 2,
+          "share": 0.03773585
         },
         {
           "label": "1~3%",
-          "count": 0,
-          "share": null
+          "count": 8,
+          "share": 0.1509434
         },
         {
           "label": "3~5%",
-          "count": 0,
-          "share": null
+          "count": 7,
+          "share": 0.13207547
         },
         {
           "label": "5~10%",
-          "count": 0,
-          "share": null
+          "count": 2,
+          "share": 0.03773585
         },
         {
           "label": ">10%",
-          "count": 0,
-          "share": null
+          "count": 2,
+          "share": 0.03773585
         }
       ]
     },
@@ -3313,8 +3345,39 @@
   ],
   "pathClusters": {
     "methodZh": "第一期使用透明规则分型；样本量充足后再升级为无监督路径聚类，并保留版本号避免事后改口径。",
-    "matureSamples": 0,
-    "clusters": []
+    "matureSamples": 51,
+    "clusters": [
+      {
+        "name": "失败下跌型",
+        "sampleCount": 19,
+        "share": 0.37254902,
+        "medianFiveDayReturn": -0.060527
+      },
+      {
+        "name": "其他演化型",
+        "sampleCount": 10,
+        "share": 0.19607843,
+        "medianFiveDayReturn": 0.030842
+      },
+      {
+        "name": "横盘蓄势型",
+        "sampleCount": 9,
+        "share": 0.17647059,
+        "medianFiveDayReturn": 0.005164
+      },
+      {
+        "name": "快速启动型",
+        "sampleCount": 8,
+        "share": 0.15686275,
+        "medianFiveDayReturn": 0.0885025
+      },
+      {
+        "name": "回踩再涨型",
+        "sampleCount": 5,
+        "share": 0.09803922,
+        "medianFiveDayReturn": 0.045822
+      }
+    ]
   },
   "successFailure": {
     "definitionZh": "成功：5日收益≥+3%；失败：5日收益≤-3%。中间样本不强行归类。",
