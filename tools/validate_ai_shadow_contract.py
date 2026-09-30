@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 
@@ -48,6 +49,21 @@ def validate_daily_drawdown(latest: dict) -> list[str]:
     require(abs(value - round(worst, 4)) <= 0.0002, "daily drawdown does not match verified closes")
     require(risk.get("dailyCloseMaxDrawdownPct") == value, "risk report drawdown mismatch")
     return []
+
+
+def validate_ledger_positions(ledger: list, positions: dict) -> None:
+    """Reconcile every persisted simulated fill against current share balances."""
+    shares = defaultdict(int)
+    for fill in ledger:
+        code = str(fill.get("code") or "")
+        qty = fill.get("qty")
+        require(code and type(qty) is int and qty > 0, "invalid ledger code or quantity")
+        shares[code] += qty if fill.get("side") == "BUY" else -qty
+        require(shares[code] >= 0, f"ledger sells more than it holds: {code}")
+    expected = {code: qty for code, qty in shares.items() if qty}
+    actual = {code: int(row.get("qty") or 0) for code, row in positions.items()
+              if int(row.get("qty") or 0)}
+    require(actual == expected, "current positions do not reconcile to the immutable ledger")
 
 
 def main() -> int:
@@ -109,6 +125,12 @@ def main() -> int:
         positions = state.get("positions") or {}
         require(isinstance(positions, dict), "positions must be an object")
         require(all(int(x.get("qty") or 0) >= 0 for x in positions.values()), "negative position quantity")
+        validate_ledger_positions(ledger, positions)
+        require(abs(float(state.get("cash") or 0) - float(summary.get("cash") or 0)) <= 0.02,
+                "state and summary cash mismatch")
+        require(abs(float(summary.get("cash") or 0) + float(summary.get("marketValue") or 0)
+                    - float(summary.get("totalAssets") or 0)) <= 0.05,
+                "cash plus market value does not match total assets")
         require(int(automation.get("ledgerDecisionCount") or 0) == len(ledger), "automation ledger count mismatch")
         require(int(automation.get("positionCount") or 0) == len(positions), "automation position count mismatch")
 

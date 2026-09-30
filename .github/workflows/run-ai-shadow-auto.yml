@@ -62,7 +62,7 @@ jobs:
       - name: 检查引擎与回归测试
         run: |
           python -m py_compile tools/shadow_fund_v3.py tools/run_ai_shadow_portfolio.py tools/run_ai_dynamic_portfolio_v2.py tools/run_ai_dynamic_portfolio_v2_1.py tools/run_ai_dynamic_portfolio_v2_2.py
-          python -m unittest tools/test_risk_v51.py tools/test_profit_v50.py tools/test_rotation_v49.py tools/test_ai_shadow_portfolio.py tools/test_selection_v45.py tools/test_selection_research_v46.py tools/test_reporting_v48.py tools/test_data_recovery.py tools/test_ranked_entry_v53.py tools/test_batch_execution_v6.py tools/test_tushare_stock_api.py
+          python -m unittest tools/test_risk_v51.py tools/test_profit_v50.py tools/test_rotation_v49.py tools/test_ai_shadow_portfolio.py tools/test_selection_v45.py tools/test_selection_research_v46.py tools/test_reporting_v48.py tools/test_portfolio_reconciliation.py tools/test_data_recovery.py tools/test_ranked_entry_v53.py tools/test_batch_execution_v6.py tools/test_tushare_stock_api.py
       - name: 后台自动模拟买卖
         id: engine
         env:
@@ -110,3 +110,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python tools/publish_data_on_arrival.py portfolio
+
+      - name: 保留失败计算产物供对账
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-${{ github.run_id }}-${{ github.run_attempt }}
+          path: astock_ai_portfolio/
+          retention-days: 30
