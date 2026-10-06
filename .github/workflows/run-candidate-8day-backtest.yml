@@ -1,0 +1,30 @@
+name: Run Candidate 8-Day Backtest
+on:
+  push:
+    paths:
+      - '.github/workflows/run-candidate-8day-backtest.yml'
+      - 'tools/backtest_candidate_8day.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run backtest
+        run: python tools/backtest_candidate_8day.py
+      - name: Commit result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add backtests/candidate_8day_backtest_20261007.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Publish candidate 8-day backtest result"
+            git push
+          fi
