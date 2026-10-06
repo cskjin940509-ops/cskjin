@@ -34,7 +34,6 @@ def server_list():
             if isinstance(h,(list,tuple)) and len(h)>=3: out.append((str(h[-2]),int(h[-1])))
             elif isinstance(h,dict): out.append((str(h.get('ip') or h.get('host')),int(h.get('port',7709))))
         except: pass
-    # commonly available TDX quote servers; duplicates removed below
     out += [('119.147.212.81',7709),('101.227.73.20',7709),('114.80.80.222',7709),('180.153.18.170',7709),('202.108.253.130',7709)]
     seen=set(); ans=[]
     for x in out:
@@ -44,13 +43,11 @@ def server_list():
 def parse_bars(rows):
     byday=defaultdict(list)
     for b in rows:
-        dt=str(b.get('datetime') or '')
-        d=dt[:10]
+        dt=str(b.get('datetime') or ''); d=dt[:10]
         if not (START<=d<=END): continue
         try:
             o=float(b.get('open')); c=float(b.get('close')); h=float(b.get('high')); l=float(b.get('low'))
-            vol=float(b.get('vol') if b.get('vol') is not None else b.get('volume'))
-            amt=float(b.get('amount') or 0)
+            vol=float(b.get('vol') if b.get('vol') is not None else b.get('volume')); amt=float(b.get('amount') or 0)
         except: continue
         byday[d].append({'ts':dt,'open':o,'close':c,'high':h,'low':l,'vol':vol,'amt':amt})
     parsed={}
@@ -70,15 +67,12 @@ def fetch_code(code):
     for ip,port in server_list():
         api=TdxHq_API(heartbeat=False,auto_retry=True,raise_exception=False)
         try:
-            if not api.connect(ip,port):
-                errors.append(f'{ip}:connect'); continue
+            if not api.connect(ip,port): errors.append(f'{ip}:connect'); continue
             rows=[]
             for start in (0,800,1600):
-                chunk=api.get_security_bars(0,market,code,start,800) or []
-                rows.extend(chunk)
+                chunk=api.get_security_bars(0,market,code,start,800) or []; rows.extend(chunk)
                 if len(chunk)<800: break
-            api.disconnect()
-            p=parse_bars(rows)
+            api.disconnect(); p=parse_bars(rows)
             if p and any(d in p for d in TRADING_DAYS): return code,p,None,f'{ip}:{port}'
             errors.append(f'{ip}:empty')
         except Exception as e:
@@ -102,7 +96,6 @@ def simulate(cands,prices,rule):
     for x in cands: byday[x['date']].append(x)
     sleeves=[{'cash':1/8,'positions':[]} for _ in range(8)]; trades=[]; daily=[]
     for i,d in enumerate(TRADING_DAYS):
-        # scheduled exits happen at the first 5-minute VWAP; suspended names remain held until tradable
         for s in sleeves:
             keep=[]
             for ti in s['positions']:
@@ -115,9 +108,10 @@ def simulate(cands,prices,rule):
                     else: keep.append(ti)
                 else: keep.append(ti)
             s['positions']=keep
-        # rotate one of eight capital sleeves into today's candidates
+        # Only the capital still trapped in suspended holdings remains unavailable.
+        # Any cash released by the other matured positions is immediately reusable on this sleeve's rotation day.
         s=sleeves[i%8]; today=byday.get(d,[])
-        if today and not s['positions'] and s['cash']>1e-12:
+        if today and s['cash']>1e-12:
             avail=[]
             for x in today:
                 px=(prices.get(x['code']) or {}).get(d,{}).get('open5_vwap')
@@ -129,7 +123,6 @@ def simulate(cands,prices,rule):
                     alloc=bucket*rw/den; sched=i+8
                     trades.append({**x,'sleeve':i%8+1,'buy_date':d,'buy_price':px,'allocation':alloc,'day_weight':rw/den,'shares':alloc/px,'scheduled_exit_date':TRADING_DAYS[sched] if sched<len(TRADING_DAYS) else None,'scheduled_exit_index':sched,'exit_date':None,'exit_price':None,'exit_value':None,'status':'open','trade_return':None})
                     s['positions'].append(len(trades)-1)
-        # end-of-day mark for NAV/drawdown
         nav=0; invested=0
         for s2 in sleeves:
             nav+=s2['cash']
@@ -154,7 +147,7 @@ def main():
     cands,missing=candidate_rows(); codes={x['code'] for x in cands}; prices,errs,servers=load_prices(codes)
     coverage=[{'date':x['date'],'code':x['code'],'name':x['name'],'reason':'missing buy-day 5m data'} for x in cands if not (prices.get(x['code']) or {}).get(x['date'],{}).get('open5_vwap')]
     fallbacks=[{'date':d,'code':c,'method':p.get('method')} for c,ds in prices.items() for d,p in ds.items() if p.get('method')!='tdx_amount_volume']
-    res={'as_of':'2026-10-07','latest_market_date':'2026-09-30','methodology':{'buy':'first 5-minute VWAP = amount/volume from TDX 5m bar, unadjusted actual price','sell':'8 subsequent trading days later first 5-minute VWAP; if suspended, first later tradable open5 VWAP','mark_to_market':'daily close from final 5-minute bar','fees':'0','capital':'8 rotating sleeves, initial NAV=1.0','rule1':'equal weight within daily sleeve','rule2':'weight proportional to score within daily sleeve'},'candidate_count':len(cands),'unique_codes':len(codes),'missing_history_days':missing,'price_errors':errs,'coverage_issues':coverage,'vwap_fallbacks':fallbacks,'tdx_servers_used':servers,'rule1':simulate(cands,prices,'equal'),'rule2':simulate(cands,prices,'score')}
+    res={'as_of':'2026-10-07','latest_market_date':'2026-09-30','methodology':{'buy':'first 5-minute VWAP = amount/volume from TDX 5m bar, unadjusted actual price','sell':'8 subsequent trading days later first 5-minute VWAP; if suspended, first later tradable open5 VWAP','mark_to_market':'daily close from final 5-minute bar','fees':'0','capital':'8 rotating sleeves, initial NAV=1.0; released cash can redeploy even if a suspended residual remains','rule1':'equal weight within daily sleeve','rule2':'weight proportional to score within daily sleeve'},'candidate_count':len(cands),'unique_codes':len(codes),'missing_history_days':missing,'price_errors':errs,'coverage_issues':coverage,'vwap_fallbacks':fallbacks,'tdx_servers_used':servers,'rule1':simulate(cands,prices,'equal'),'rule2':simulate(cands,prices,'score')}
     OUT.parent.mkdir(parents=True,exist_ok=True); OUT.write_text(json.dumps(res,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({'output':str(OUT.relative_to(ROOT)),'candidates':len(cands),'codes':len(codes),'price_errors':len(errs),'coverage':len(coverage),'fallbacks':len(fallbacks),'rule1':res['rule1']['summary'],'rule2':res['rule2']['summary']},ensure_ascii=False,indent=2))
 if __name__=='__main__': main()
