@@ -13,6 +13,7 @@ ROOT=Path(__file__).resolve().parents[1]
 START='2026-08-19'; END='2026-09-30'
 OUT=ROOT/'backtests'/'candidate_8day_backtest_20261007.json'
 TRADING_DAYS=['2026-08-19','2026-08-20','2026-08-21','2026-08-24','2026-08-25','2026-08-26','2026-08-27','2026-08-28','2026-08-31','2026-09-01','2026-09-02','2026-09-03','2026-09-04','2026-09-07','2026-09-08','2026-09-09','2026-09-10','2026-09-11','2026-09-14','2026-09-15','2026-09-16','2026-09-17','2026-09-18','2026-09-21','2026-09-22','2026-09-23','2026-09-24','2026-09-28','2026-09-29','2026-09-30']
+DAY_INDEX={d:i for i,d in enumerate(TRADING_DAYS)}
 
 def candidate_rows():
     rows=[]; missing=[]
@@ -26,6 +27,11 @@ def candidate_rows():
                 rank+=1; setup=x.get('setup') or {}
                 rows.append({'date':d,'rank':rank,'source':src,'code':str(x.get('code','')).zfill(6),'name':x.get('name',''),'sector':x.get('sector',''),'action':x.get('action',''),'setup':setup.get('label',''),'score':float(setup.get('score') or 0)})
     return rows,missing
+
+def next_session(signal_date):
+    i=DAY_INDEX.get(signal_date)
+    if i is None or i+1>=len(TRADING_DAYS): return None
+    return TRADING_DAYS[i+1]
 
 def server_list():
     out=[]
@@ -95,7 +101,9 @@ def simulate(cands,prices,rule):
     byday=defaultdict(list)
     for x in cands: byday[x['date']].append(x)
     sleeves=[{'cash':1/8,'positions':[]} for _ in range(8)]; trades=[]; daily=[]
+    pending=[]
     for i,d in enumerate(TRADING_DAYS):
+        # Exit positions after eight full subsequent trading days from entry.
         for s in sleeves:
             keep=[]
             for ti in s['positions']:
@@ -108,9 +116,12 @@ def simulate(cands,prices,rule):
                     else: keep.append(ti)
                 else: keep.append(ti)
             s['positions']=keep
-        # Only the capital still trapped in suspended holdings remains unavailable.
-        # Any cash released by the other matured positions is immediately reusable on this sleeve's rotation day.
-        s=sleeves[i%8]; today=byday.get(d,[])
+
+        # Signals generated on D are only tradable on D+1.  On trading day i,
+        # enter the prior trading day's cohort at the first 5-minute VWAP.
+        signal_date=TRADING_DAYS[i-1] if i>0 else None
+        today=byday.get(signal_date,[]) if signal_date else []
+        s=sleeves[i%8]
         if today and s['cash']>1e-12:
             avail=[]
             for x in today:
@@ -121,8 +132,9 @@ def simulate(cands,prices,rule):
                 den=sum(raw); bucket=s['cash']; s['cash']=0
                 for (x,px),rw in zip(avail,raw):
                     alloc=bucket*rw/den; sched=i+8
-                    trades.append({**x,'sleeve':i%8+1,'buy_date':d,'buy_price':px,'allocation':alloc,'day_weight':rw/den,'shares':alloc/px,'scheduled_exit_date':TRADING_DAYS[sched] if sched<len(TRADING_DAYS) else None,'scheduled_exit_index':sched,'exit_date':None,'exit_price':None,'exit_value':None,'status':'open','trade_return':None})
+                    trades.append({**x,'signal_date':x['date'],'sleeve':i%8+1,'buy_date':d,'buy_price':px,'allocation':alloc,'day_weight':rw/den,'shares':alloc/px,'scheduled_exit_date':TRADING_DAYS[sched] if sched<len(TRADING_DAYS) else None,'scheduled_exit_index':sched,'exit_date':None,'exit_price':None,'exit_value':None,'status':'open','trade_return':None})
                     s['positions'].append(len(trades)-1)
+
         nav=0; invested=0
         for s2 in sleeves:
             nav+=s2['cash']
@@ -134,6 +146,11 @@ def simulate(cands,prices,rule):
                         if (pdata.get(dd) or {}).get('close') is not None: close=pdata[dd]['close']; break
                 val=t['shares']*close; nav+=val; invested+=val; t['last_mark_date']=d; t['last_mark_price']=close; t['last_mark_value']=val
         daily.append({'date':d,'nav':nav,'invested':invested,'cash':nav-invested})
+
+    # Last signal-day cohort has no next session before the as-of date and is not entered yet.
+    for x in byday.get(TRADING_DAYS[-1],[]):
+        pending.append({**x,'signal_date':x['date'],'buy_date':None,'status':'pending_next_session'})
+
     peak=1; maxdd=0; prev=1
     for r in daily:
         r['daily_return']=r['nav']/prev-1; prev=r['nav']; peak=max(peak,r['nav']); r['drawdown']=r['nav']/peak-1; maxdd=min(maxdd,r['drawdown'])
@@ -141,13 +158,17 @@ def simulate(cands,prices,rule):
         if t['status']=='open': t['current_value']=t.get('last_mark_value',t['allocation']); t['trade_return']=t['current_value']/t['allocation']-1
         else: t['current_value']=t['exit_value']
     realized=[t for t in trades if t['status']=='realized']; opens=[t for t in trades if t['status']=='open']; final=daily[-1]['nav']
-    return {'summary':{'end_nav':final,'cumulative_return':final-1,'max_drawdown':maxdd,'realized_trades':len(realized),'open_trades':len(opens),'realized_win_rate':sum(1 for t in realized if t['trade_return']>0)/len(realized) if realized else None,'realized_pnl':sum(t['exit_value']-t['allocation'] for t in realized),'open_unrealized_pnl':sum(t['current_value']-t['allocation'] for t in opens)},'daily':daily,'trades':trades}
+    return {'summary':{'end_nav':final,'cumulative_return':final-1,'max_drawdown':maxdd,'realized_trades':len(realized),'open_trades':len(opens),'pending_entries':len(pending),'realized_win_rate':sum(1 for t in realized if t['trade_return']>0)/len(realized) if realized else None,'realized_pnl':sum(t['exit_value']-t['allocation'] for t in realized),'open_unrealized_pnl':sum(t['current_value']-t['allocation'] for t in opens)},'daily':daily,'trades':trades,'pending':pending}
 
 def main():
     cands,missing=candidate_rows(); codes={x['code'] for x in cands}; prices,errs,servers=load_prices(codes)
-    coverage=[{'date':x['date'],'code':x['code'],'name':x['name'],'reason':'missing buy-day 5m data'} for x in cands if not (prices.get(x['code']) or {}).get(x['date'],{}).get('open5_vwap')]
+    coverage=[]
+    for x in cands:
+        bd=next_session(x['date'])
+        if bd and not (prices.get(x['code']) or {}).get(bd,{}).get('open5_vwap'):
+            coverage.append({'signal_date':x['date'],'buy_date':bd,'code':x['code'],'name':x['name'],'reason':'missing next-session 5m data'})
     fallbacks=[{'date':d,'code':c,'method':p.get('method')} for c,ds in prices.items() for d,p in ds.items() if p.get('method')!='tdx_amount_volume']
-    res={'as_of':'2026-10-07','latest_market_date':'2026-09-30','methodology':{'buy':'first 5-minute VWAP = amount/volume from TDX 5m bar, unadjusted actual price','sell':'8 subsequent trading days later first 5-minute VWAP; if suspended, first later tradable open5 VWAP','mark_to_market':'daily close from final 5-minute bar','fees':'0','capital':'8 rotating sleeves, initial NAV=1.0; released cash can redeploy even if a suspended residual remains','rule1':'equal weight within daily sleeve','rule2':'weight proportional to score within daily sleeve'},'candidate_count':len(cands),'unique_codes':len(codes),'missing_history_days':missing,'price_errors':errs,'coverage_issues':coverage,'vwap_fallbacks':fallbacks,'tdx_servers_used':servers,'rule1':simulate(cands,prices,'equal'),'rule2':simulate(cands,prices,'score')}
+    res={'as_of':'2026-10-07','latest_market_date':'2026-09-30','methodology':{'signal':'candidate list is generated near/after the signal-day close','buy':'next trading session first 5-minute VWAP = amount/volume from TDX 5m bar, unadjusted actual price','sell':'8 trading days after entry at first 5-minute VWAP; if suspended, first later tradable open5 VWAP','partial':'positions not yet at the 8-day exit are marked to latest available market close','mark_to_market':'daily close from final 5-minute bar','fees':'0','capital':'8 rotating sleeves, initial NAV=1.0; released cash can redeploy even if a suspended residual remains','rule1':'equal weight within each daily sleeve','rule2':'weight proportional to score within each daily sleeve'},'candidate_count':len(cands),'unique_codes':len(codes),'missing_history_days':missing,'price_errors':errs,'coverage_issues':coverage,'vwap_fallbacks':fallbacks,'tdx_servers_used':servers,'rule1':simulate(cands,prices,'equal'),'rule2':simulate(cands,prices,'score')}
     OUT.parent.mkdir(parents=True,exist_ok=True); OUT.write_text(json.dumps(res,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({'output':str(OUT.relative_to(ROOT)),'candidates':len(cands),'codes':len(codes),'price_errors':len(errs),'coverage':len(coverage),'fallbacks':len(fallbacks),'rule1':res['rule1']['summary'],'rule2':res['rule2']['summary']},ensure_ascii=False,indent=2))
 if __name__=='__main__': main()
