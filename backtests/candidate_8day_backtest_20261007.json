@@ -2,13 +2,15 @@
   "as_of": "2026-10-07",
   "latest_market_date": "2026-09-30",
   "methodology": {
-    "buy": "first 5-minute VWAP = amount/volume from TDX 5m bar, unadjusted actual price",
-    "sell": "8 subsequent trading days later first 5-minute VWAP; if suspended, first later tradable open5 VWAP",
+    "signal": "candidate list is generated near/after the signal-day close",
+    "buy": "next trading session first 5-minute VWAP = amount/volume from TDX 5m bar, unadjusted actual price",
+    "sell": "8 trading days after entry at first 5-minute VWAP; if suspended, first later tradable open5 VWAP",
+    "partial": "positions not yet at the 8-day exit are marked to latest available market close",
     "mark_to_market": "daily close from final 5-minute bar",
     "fees": "0",
     "capital": "8 rotating sleeves, initial NAV=1.0",
-    "rule1": "equal weight within daily sleeve",
-    "rule2": "weight proportional to score within daily sleeve"
+    "rule1": "equal weight within each daily sleeve",
+    "rule2": "weight proportional to score within each daily sleeve"
   },
   "candidate_count": 200,
   "unique_codes": 154,
