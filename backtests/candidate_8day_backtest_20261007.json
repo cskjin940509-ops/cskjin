@@ -1,0 +1,1888 @@
+{
+  "as_of": "2026-10-07",
+  "latest_market_date": "2026-09-30",
+  "methodology": {
+    "buy": "first 5-minute VWAP (amount/volume), unadjusted",
+    "sell": "8 subsequent trading days later first 5-minute VWAP; if suspended, first later tradable open5 VWAP",
+    "mark_to_market": "daily close from final 5-minute bar",
+    "fees": "0",
+    "capital": "8 rotating sleeves, initial NAV=1.0",
+    "rule1": "equal weight within daily sleeve",
+    "rule2": "weight proportional to score within daily sleeve"
+  },
+  "candidate_count": 200,
+  "unique_codes": 154,
+  "missing_history_days": [
+    "2026-08-19",
+    "2026-08-27",
+    "2026-08-28"
+  ],
+  "price_errors": {
+    "000738": "Remote end closed connection without response",
+    "000001": "Remote end closed connection without response",
+    "000403": "Remote end closed connection without response",
+    "000586": "Remote end closed connection without response",
+    "000592": "Remote end closed connection without response",
+    "000519": "Remote end closed connection without response",
+    "000525": "Remote end closed connection without response",
+    "000650": "Remote end closed connection without response",
+    "000516": "Remote end closed connection without response",
+    "000623": "Remote end closed connection without response",
+    "000809": "Remote end closed connection without response",
+    "000801": "Remote end closed connection without response",
+    "000739": "Remote end closed connection without response",
+    "002038": "Remote end closed connection without response",
+    "002077": "Remote end closed connection without response",
+    "000969": "Remote end closed connection without response",
+    "002099": "Remote end closed connection without response",
+    "002095": "Remote end closed connection without response",
+    "000813": "Remote end closed connection without response",
+    "001227": "Remote end closed connection without response",
+    "002111": "Remote end closed connection without response",
+    "002100": "Remote end closed connection without response",
+    "002160": "Remote end closed connection without response",
+    "002170": "Remote end closed connection without response",
+    "002419": "Remote end closed connection without response",
+    "002524": "Remote end closed connection without response",
+    "002281": "Remote end closed connection without response",
+    "002385": "Remote end closed connection without response",
+    "002531": "Remote end closed connection without response",
+    "002296": "Remote end closed connection without response",
+    "002727": "Remote end closed connection without response",
+    "002622": "Remote end closed connection without response",
+    "002539": "Remote end closed connection without response",
+    "002566": "Remote end closed connection without response",
+    "002821": "Remote end closed connection without response",
+    "002579": "Remote end closed connection without response",
+    "002583": "Remote end closed connection without response",
+    "002803": "Remote end closed connection without response",
+    "002807": "Remote end closed connection without response",
+    "002839": "Remote end closed connection without response",
+    "300088": "Remote end closed connection without response",
+    "002936": "Remote end closed connection without response",
+    "002958": "Remote end closed connection without response",
+    "300009": "Remote end closed connection without response",
+    "002948": "Remote end closed connection without response",
+    "300030": "Remote end closed connection without response",
+    "300185": "Remote end closed connection without response",
+    "300122": "Remote end closed connection without response",
+    "002975": "Remote end closed connection without response",
+    "002897": "Remote end closed connection without response",
+    "300252": "Remote end closed connection without response",
+    "300272": "Remote end closed connection without response",
+    "300400": "Remote end closed connection without response",
+    "300299": "Remote end closed connection without response",
+    "300244": "Remote end closed connection without response",
+    "300398": "Remote end closed connection without response",
+    "300318": "Remote end closed connection without response",
+    "300347": "Remote end closed connection without response",
+    "300305": "Remote end closed connection without response",
+    "300453": "Remote end closed connection without response",
+    "300664": "Remote end closed connection without response",
+    "300607": "Remote end closed connection without response",
+    "300565": "Remote end closed connection without response",
+    "300676": "Remote end closed connection without response",
+    "300601": "Remote end closed connection without response",
+    "300690": "Remote end closed connection without response",
+    "300765": "Remote end closed connection without response",
+    "300804": "Remote end closed connection without response",
+    "300698": "Remote end closed connection without response",
+    "300812": "Remote end closed connection without response",
+    "300903": "Remote end closed connection without response",
+    "300964": "Remote end closed connection without response",
+    "301299": "Remote end closed connection without response",
+    "300987": "Remote end closed connection without response",
+    "301239": "Remote end closed connection without response",
+    "301060": "Remote end closed connection without response",
+    "301166": "Remote end closed connection without response",
+    "301348": "Remote end closed connection without response",
+    "301314": "Remote end closed connection without response",
+    "301366": "Remote end closed connection without response",
+    "600038": "Remote end closed connection without response",
+    "600096": "Remote end closed connection without response",
+    "600018": "Remote end closed connection without response",
+    "600150": "Remote end closed connection without response",
+    "301629": "Remote end closed connection without response",
+    "600183": "Remote end closed connection without response",
+    "600195": "Remote end closed connection without response",
+    "600179": "Remote end closed connection without response",
+    "301456": "Remote end closed connection without response",
+    "600300": "Remote end closed connection without response",
+    "600637": "Remote end closed connection without response",
+    "600362": "Remote end closed connection without response",
+    "600490": "Remote end closed connection without response",
+    "600331": "Remote end closed connection without response",
+    "600667": "Remote end closed connection without response",
+    "600330": "Remote end closed connection without response",
+    "600640": "Remote end closed connection without response",
+    "600389": "Remote end closed connection without response",
+    "600498": "Remote end closed connection without response",
+    "600675": "Remote end closed connection without response",
+    "600737": "Remote end closed connection without response",
+    "600739": "Remote end closed connection without response",
+    "600704": "Remote end closed connection without response",
+    "600916": "Remote end closed connection without response",
+    "601128": "Remote end closed connection without response",
+    "600928": "Remote end closed connection without response",
+    "600819": "Remote end closed connection without response",
+    "600825": "Remote end closed connection without response",
+    "600959": "Remote end closed connection without response",
+    "601187": "Remote end closed connection without response",
+    "601628": "Remote end closed connection without response",
+    "601860": "Remote end closed connection without response",
+    "601952": "Remote end closed connection without response",
+    "601939": "Remote end closed connection without response",
+    "601288": "Remote end closed connection without response",
+    "601998": "Remote end closed connection without response",
+    "603077": "Remote end closed connection without response",
+    "603126": "Remote end closed connection without response",
+    "603175": "Remote end closed connection without response",
+    "603203": "Remote end closed connection without response",
+    "603259": "Remote end closed connection without response",
+    "603268": "Remote end closed connection without response",
+    "603421": "Remote end closed connection without response",
+    "603228": "Remote end closed connection without response",
+    "603386": "Remote end closed connection without response",
+    "603803": "Remote end closed connection without response",
+    "603936": "Remote end closed connection without response",
+    "603527": "Remote end closed connection without response",
+    "603989": "Remote end closed connection without response",
+    "603993": "Remote end closed connection without response",
+    "688143": "Remote end closed connection without response",
+    "605277": "Remote end closed connection without response",
+    "605168": "Remote end closed connection without response",
+    "605058": "Remote end closed connection without response",
+    "688131": "Remote end closed connection without response",
+    "688035": "Remote end closed connection without response",
+    "688183": "Remote end closed connection without response",
+    "688167": "Remote end closed connection without response",
+    "688182": "Remote end closed connection without response",
+    "688311": "Remote end closed connection without response",
+    "688432": "Remote end closed connection without response",
+    "688498": "Remote end closed connection without response",
+    "688510": "Remote end closed connection without response",
+    "688586": "Remote end closed connection without response",
+    "688519": "Remote end closed connection without response",
+    "688660": "Remote end closed connection without response",
+    "688630": "Remote end closed connection without response",
+    "688559": "Remote end closed connection without response",
+    "688621": "Remote end closed connection without response",
+    "688687": "Remote end closed connection without response",
+    "688739": "Remote end closed connection without response",
+    "688720": "Remote end closed connection without response",
+    "688689": "Remote end closed connection without response",
+    "688788": "Remote end closed connection without response"
+  },
+  "coverage_issues": [
+    {
+      "date": "2026-08-20",
+      "code": "000813",
+      "name": "德展健康",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "000650",
+      "name": "仁和药业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "301239",
+      "name": "普瑞眼科",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "600195",
+      "name": "中牧股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "300453",
+      "name": "三鑫医疗",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "600739",
+      "name": "辽宁成大",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "002727",
+      "name": "一心堂",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "002100",
+      "name": "天康生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "300272",
+      "name": "开能健康",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-20",
+      "code": "000516",
+      "name": "国际医学",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "300347",
+      "name": "泰格医药",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "600195",
+      "name": "中牧股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "688621",
+      "name": "阳光诺和",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "002622",
+      "name": "皓宸医疗",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "002100",
+      "name": "天康生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "300244",
+      "name": "迪安诊断",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "600739",
+      "name": "辽宁成大",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "688687",
+      "name": "凯因科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "002524",
+      "name": "光正眼科",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-21",
+      "code": "300030",
+      "name": "阳普医疗",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-24",
+      "code": "688687",
+      "name": "凯因科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-24",
+      "code": "688621",
+      "name": "阳光诺和",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-24",
+      "code": "002100",
+      "name": "天康生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-24",
+      "code": "002385",
+      "name": "大北农",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-24",
+      "code": "600739",
+      "name": "辽宁成大",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-24",
+      "code": "688739",
+      "name": "成大生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-24",
+      "code": "301060",
+      "name": "兰卫医学",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "300122",
+      "name": "智飞生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "300601",
+      "name": "康泰生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "300676",
+      "name": "华大基因",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "603259",
+      "name": "药明康德",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "000650",
+      "name": "仁和药业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "301239",
+      "name": "普瑞眼科",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "002727",
+      "name": "一心堂",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "002100",
+      "name": "天康生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "688687",
+      "name": "凯因科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "300765",
+      "name": "石药创新",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "002524",
+      "name": "光正眼科",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-25",
+      "code": "301166",
+      "name": "优宁维",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "300009",
+      "name": "安科生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "688621",
+      "name": "阳光诺和",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "301239",
+      "name": "普瑞眼科",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "300676",
+      "name": "华大基因",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "002622",
+      "name": "皓宸医疗",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "300664",
+      "name": "鹏鹞环保",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "688687",
+      "name": "凯因科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "000403",
+      "name": "派林生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "000650",
+      "name": "仁和药业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "300318",
+      "name": "博晖创新",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-26",
+      "code": "002038",
+      "name": "双鹭药业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-31",
+      "code": "002099",
+      "name": "海翔药业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-31",
+      "code": "000650",
+      "name": "仁和药业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-31",
+      "code": "300318",
+      "name": "博晖创新",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-31",
+      "code": "300030",
+      "name": "阳普医疗",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-31",
+      "code": "600739",
+      "name": "辽宁成大",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-31",
+      "code": "002622",
+      "name": "皓宸医疗",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-31",
+      "code": "002524",
+      "name": "光正眼科",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-08-31",
+      "code": "002160",
+      "name": "常铝股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "605168",
+      "name": "三人行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "002803",
+      "name": "吉宏股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "600959",
+      "name": "江苏有线",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "002095",
+      "name": "生 意 宝",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "301299",
+      "name": "卓创资讯",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "600637",
+      "name": "东方明珠",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "300987",
+      "name": "川网传媒",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "600825",
+      "name": "新华传媒",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "300299",
+      "name": "富春股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-01",
+      "code": "600640",
+      "name": "国脉文化",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "002419",
+      "name": "天虹股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "600300",
+      "name": "维维股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "002539",
+      "name": "云图控股",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "600704",
+      "name": "物产中大",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "600675",
+      "name": "中华企业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "600737",
+      "name": "中粮糖业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "000623",
+      "name": "吉林敖东",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "002566",
+      "name": "益盛药业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-03",
+      "code": "688788",
+      "name": "科思科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-03",
+      "code": "688510",
+      "name": "航亚科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-03",
+      "code": "000738",
+      "name": "航发控制",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-03",
+      "code": "600038",
+      "name": "中直股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-03",
+      "code": "600150",
+      "name": "中国船舶",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-03",
+      "code": "688586",
+      "name": "江航装备",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-03",
+      "code": "002111",
+      "name": "威海广泰",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-04",
+      "code": "601628",
+      "name": "中国人寿",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-04",
+      "code": "600916",
+      "name": "中国黄金",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-07",
+      "code": "601628",
+      "name": "中国人寿",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "300903",
+      "name": "科翔股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "600330",
+      "name": "天通股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "300964",
+      "name": "本川智能",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "688498",
+      "name": "源杰科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "300607",
+      "name": "拓斯达",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "603936",
+      "name": "博敏电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "603228",
+      "name": "景旺电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "603386",
+      "name": "骏亚科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "605058",
+      "name": "澳弘电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "002583",
+      "name": "海能达",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "300565",
+      "name": "科信技术",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-08",
+      "code": "603803",
+      "name": "瑞斯康达",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "603077",
+      "name": "和邦生物",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "603993",
+      "name": "洛阳钼业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "600362",
+      "name": "江西铜业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "002170",
+      "name": "芭田股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "603527",
+      "name": "众源新材",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "300804",
+      "name": "广康生化",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "688621",
+      "name": "阳光诺和",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "000525",
+      "name": "红太阳",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "600331",
+      "name": "宏达股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "002539",
+      "name": "云图控股",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "600389",
+      "name": "江山股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "600490",
+      "name": "鹏欣资源",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-09",
+      "code": "600096",
+      "name": "云天化",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-10",
+      "code": "603268",
+      "name": "松发股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-10",
+      "code": "600179",
+      "name": "安通控股",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-10",
+      "code": "300903",
+      "name": "科翔股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-10",
+      "code": "688183",
+      "name": "生益电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-10",
+      "code": "600183",
+      "name": "生益科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-10",
+      "code": "603386",
+      "name": "骏亚科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "000001",
+      "name": "平安银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "601187",
+      "name": "厦门银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "601939",
+      "name": "建设银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "601128",
+      "name": "常熟银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "002948",
+      "name": "青岛银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "002839",
+      "name": "张家港行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "600928",
+      "name": "西安银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "002936",
+      "name": "郑州银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "001227",
+      "name": "兰州银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "601288",
+      "name": "农业银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "002807",
+      "name": "江阴银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "601860",
+      "name": "紫金银行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "600819",
+      "name": "耀皮玻璃",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-11",
+      "code": "002958",
+      "name": "青农商行",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "688143",
+      "name": "长盈通",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "301366",
+      "name": "一博科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "603989",
+      "name": "艾华集团",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "688183",
+      "name": "生益电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "000586",
+      "name": "汇源通信",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "600183",
+      "name": "生益科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "000519",
+      "name": "中兵红箭",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "688519",
+      "name": "南亚新材",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-14",
+      "code": "603175",
+      "name": "超颖电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-15",
+      "code": "688621",
+      "name": "阳光诺和",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-15",
+      "code": "300305",
+      "name": "裕兴股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-15",
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-15",
+      "code": "000516",
+      "name": "国际医学",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-16",
+      "code": "300690",
+      "name": "双一科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-16",
+      "code": "300185",
+      "name": "通裕重工",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "002281",
+      "name": "光迅科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "688432",
+      "name": "有研硅",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "300398",
+      "name": "飞凯材料",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "600018",
+      "name": "上港集团",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "000801",
+      "name": "四川九洲",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "301629",
+      "name": "矽电股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "605277",
+      "name": "新亚电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "000969",
+      "name": "安泰科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "300252",
+      "name": "金信诺",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-17",
+      "code": "688035",
+      "name": "德邦科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-18",
+      "code": "601952",
+      "name": "苏垦农发",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "603203",
+      "name": "快克智能",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "002296",
+      "name": "辉煌科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "688720",
+      "name": "艾森股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "603421",
+      "name": "鼎信通讯",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "300698",
+      "name": "万马科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "688182",
+      "name": "灿勤科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "301348",
+      "name": "蓝箭电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "600330",
+      "name": "天通股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "300400",
+      "name": "劲拓股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-21",
+      "code": "300565",
+      "name": "科信技术",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "688167",
+      "name": "炬光科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "688689",
+      "name": "银河微电",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "688311",
+      "name": "盟升电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "688559",
+      "name": "海目星",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "300812",
+      "name": "易天股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "603126",
+      "name": "中材节能",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "002897",
+      "name": "意华股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "600330",
+      "name": "天通股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "300400",
+      "name": "劲拓股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "600667",
+      "name": "太极实业",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-22",
+      "code": "002077",
+      "name": "大港股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "300812",
+      "name": "易天股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "301314",
+      "name": "科瑞思",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "002975",
+      "name": "博杰股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "002897",
+      "name": "意华股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "002077",
+      "name": "大港股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "300400",
+      "name": "劲拓股份",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "002579",
+      "name": "中京电子",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "002296",
+      "name": "辉煌科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "300088",
+      "name": "长信科技",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-28",
+      "code": "301456",
+      "name": "盘古智能",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-29",
+      "code": "002531",
+      "name": "天顺风能",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-29",
+      "code": "000809",
+      "name": "和展能源",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-29",
+      "code": "300185",
+      "name": "通裕重工",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-30",
+      "code": "000592",
+      "name": "平潭发展",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-30",
+      "code": "688660",
+      "name": "电气风电",
+      "reason": "missing buy-day 5m data"
+    },
+    {
+      "date": "2026-09-30",
+      "code": "300185",
+      "name": "通裕重工",
+      "reason": "missing buy-day 5m data"
+    }
+  ],
+  "rule1": {
+    "summary": {
+      "end_nav": 1.0,
+      "cumulative_return": 0.0,
+      "max_drawdown": 0,
+      "realized_trades": 0,
+      "open_trades": 0,
+      "realized_win_rate": null,
+      "realized_pnl": 0,
+      "open_unrealized_pnl": 0
+    },
+    "daily": [
+      {
+        "date": "2026-08-19",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-20",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-21",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-24",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-25",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-26",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-27",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-28",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-31",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-01",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-02",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-03",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-04",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-07",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-08",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-09",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-10",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-11",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-14",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-15",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-16",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-17",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-18",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-21",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-22",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-23",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-24",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-28",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-29",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-30",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      }
+    ],
+    "trades": []
+  },
+  "rule2": {
+    "summary": {
+      "end_nav": 1.0,
+      "cumulative_return": 0.0,
+      "max_drawdown": 0,
+      "realized_trades": 0,
+      "open_trades": 0,
+      "realized_win_rate": null,
+      "realized_pnl": 0,
+      "open_unrealized_pnl": 0
+    },
+    "daily": [
+      {
+        "date": "2026-08-19",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-20",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-21",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-24",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-25",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-26",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-27",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-28",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-08-31",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-01",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-02",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-03",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-04",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-07",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-08",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-09",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-10",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-11",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-14",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-15",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-16",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-17",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-18",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-21",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-22",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-23",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-24",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-28",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-29",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      },
+      {
+        "date": "2026-09-30",
+        "nav": 1.0,
+        "invested": 0,
+        "cash": 1.0,
+        "daily_return": 0.0,
+        "drawdown": 0.0
+      }
+    ],
+    "trades": []
+  }
+}
