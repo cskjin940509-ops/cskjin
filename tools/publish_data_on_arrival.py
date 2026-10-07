@@ -6,7 +6,10 @@ conflict resolution, cancelled running ledger job, or trading-rule bypass.
 """
 from __future__ import annotations
 
-from astock_calendar import is_trading_day
+if __package__:
+    from .astock_calendar import is_trading_day
+else:
+    from astock_calendar import is_trading_day
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
