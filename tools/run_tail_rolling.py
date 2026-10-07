@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from astock_calendar import is_trading_day
+
 import json
 import os
 from datetime import datetime, time as dtime, timedelta, timezone
@@ -33,8 +35,8 @@ def main():
     recovery_push = os.getenv("RECOVERY_PUSH", "0") == "1"
     allow_any = os.getenv("ALLOW_ANY_TIME", "0") == "1" or dry_run or recovery_push
 
-    if now.weekday() >= 5:
-        print(json.dumps({"state": "skip", "reason": "weekend", "date": day}, ensure_ascii=False))
+    if not is_trading_day(now):
+        print(json.dumps({"state": "skip", "reason": "exchange-closed", "date": day}, ensure_ascii=False))
         return
 
     # Code pushes are allowed to recover a missing post-close Final, but may not

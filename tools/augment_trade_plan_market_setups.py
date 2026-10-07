@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import json, math
+import json, math, time
+from astock_calendar import is_trading_day
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime
+from datetime import datetime, time as dtime
 from pathlib import Path
 from urllib.parse import urlencode
 
@@ -23,14 +24,18 @@ def market_page(page,pz=100):
     for host in ('push2.eastmoney.com','push2delay.eastmoney.com'):
         try:
             data=base.get_json('https://'+host+'/api/qt/clist/get?'+urlencode(q)).get('data') or {}
-            return int(data.get('total') or 0), list(data.get('diff') or [])
+            rows = data.get('diff') or []
+            if isinstance(rows, dict): rows = list(rows.values())
+            if not rows or not data.get('total'): raise RuntimeError('Empty market page')
+            return int(data['total']), rows
         except Exception as e:last=e
     if last:raise last
     return 0,[]
 
 def all_a_rows():
     total,first=market_page(1)
-    pz=100
+    if total < 2000: raise RuntimeError("Incomplete market universe")
+    pz=len(first)
     pages=max(1,min(70,math.ceil(total/pz) if total else 1))
     collected=list(first)
     if pages>1:
@@ -39,11 +44,12 @@ def all_a_rows():
             for f in as_completed(fut):
                 try:
                     _,rows=f.result();collected.extend(rows)
-                except Exception:pass
+                except Exception as exc: raise RuntimeError("Market page missing; refusing partial scan") from exc
     unique={}
     for x in collected:
         c=str(x.get('f12') or '')
         if c:unique[c]=x
+    if len(unique) != total: raise RuntimeError("Missing or duplicate market pages")
     return list(unique.values()),total,pages
 
 def n(v):return base.num(v)
@@ -89,8 +95,32 @@ def main():
         payload['marketSetupScan']={'state':'skipped','reason':'official-has-live-buy'}
         OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');return
 
+    now=datetime.now(base.CN)
+    if not is_trading_day(now) or not dtime(9) <= now.time() <= dtime(15,40):
+        payload['setupCandidates']=[]
+        payload.setdefault('summary',{})['expandedSetupCandidates']=0
+        payload['marketSetupScan']={'state':'skipped','reason':'outside-exchange-scan-window','checkedAt':now.isoformat()}
+        OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        print(json.dumps(payload['marketSetupScan'],ensure_ascii=False))
+        return
+
     today=payload.get('date') or datetime.now(base.CN).strftime('%Y-%m-%d')
-    rows,reported_total,pages=all_a_rows(); pre=prefilter(rows)
+    errors=[]
+    for attempt in range(3):
+        try:
+            rows,reported_total,pages=all_a_rows()
+            break
+        except Exception as exc:
+            errors.append(type(exc).__name__ + ': ' + str(exc))
+            if attempt < 2: time.sleep(2 ** attempt)
+    else:
+        payload['setupCandidates']=[]
+        payload.setdefault('summary',{})['expandedSetupCandidates']=0
+        payload['marketSetupScan']={'state':'blocked','reason':'full-market-data-unavailable',
+                                   'checkedAt':now.isoformat(),'errors':errors}
+        OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        raise RuntimeError('Full-market scan blocked; diagnostic state saved for publication')
+    pre=prefilter(rows)
     histories={}
     with ThreadPoolExecutor(max_workers=20) as ex:
         fut={ex.submit(base.em_kline,x['code'],today,150):x['code'] for x in pre}

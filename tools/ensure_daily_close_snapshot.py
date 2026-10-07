@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from astock_calendar import is_trading_day
+
 import json
 import re
 import subprocess
@@ -63,8 +65,8 @@ def readiness(payload: dict, day: str) -> tuple[bool, dict]:
 def main() -> int:
     now = datetime.now(CN)
     day = now.date().isoformat()
-    if now.weekday() >= 5:
-        print(json.dumps({"state": "skip-non-trading-weekday", "date": day}, ensure_ascii=False))
+    if not is_trading_day(now):
+        print(json.dumps({"state": "skip-exchange-closed", "date": day}, ensure_ascii=False))
         return 0
     if now.hour < 15:
         raise RuntimeError("尚未到15:00，禁止冻结日终市场快照")

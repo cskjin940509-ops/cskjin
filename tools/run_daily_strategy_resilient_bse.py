@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from astock_calendar import is_trading_day
+
 import json
 import os
 import re
@@ -76,6 +78,9 @@ verified.verify_price = verify_price_resilient
 
 def main() -> int:
     requested = os.getenv("TARGET_DATE", "").strip()
+    if not is_trading_day(requested or datetime.now(verified.CN).date()):
+        print(json.dumps({"state": "skip-exchange-closed", "date": requested or datetime.now(verified.CN).date().isoformat()}))
+        return 0
     if requested:
         day = requested
     else:

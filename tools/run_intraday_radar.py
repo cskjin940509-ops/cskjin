@@ -12,6 +12,8 @@
 """
 from __future__ import annotations
 
+from astock_calendar import is_trading_day
+
 import json
 import math
 import os
@@ -355,7 +357,7 @@ def main():
     now = datetime.now(CN)
     day = now.strftime("%Y-%m-%d")
     allow_any = os.getenv("ALLOW_ANY_TIME", "0") == "1"
-    if now.weekday() >= 5:
+    if not is_trading_day(now):
         print(json.dumps({"state": "skip", "reason": "周末", "date": day}, ensure_ascii=False))
         return
     if not allow_any and not market_window(now):

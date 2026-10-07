@@ -7,6 +7,8 @@ unless FORCE_REBUILD=1 is explicitly set.
 """
 from __future__ import annotations
 
+from astock_calendar import is_trading_day
+
 import json
 import math
 import os
@@ -211,8 +213,8 @@ def main():
     now = datetime.now(CN)
     day = now.strftime("%Y-%m-%d")
     dry_run = os.getenv("DRY_RUN", "0") == "1"
-    if now.weekday() >= 5:
-        print(json.dumps({"state": "skip", "reason": "weekend", "date": day}, ensure_ascii=False))
+    if not is_trading_day(now):
+        print(json.dumps({"state": "skip", "reason": "exchange-closed", "date": day}, ensure_ascii=False))
         return
 
     allow_any = dry_run or os.getenv("ALLOW_ANY_TIME", "0") == "1"

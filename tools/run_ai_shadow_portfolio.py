@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from astock_calendar import is_trading_day
+
 import json
 import math
 import os
@@ -63,7 +65,7 @@ def iso(dt: datetime | None = None) -> str:
 
 
 def trading_session(dt: datetime) -> bool:
-    if dt.weekday() >= 5:
+    if not is_trading_day(dt):
         return False
     t = dt.time()
     return time(9, 30) <= t <= time(11, 30) or time(13, 0) <= t <= time(15, 0)

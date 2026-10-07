@@ -6,6 +6,8 @@ conflict resolution, cancelled running ledger job, or trading-rule bypass.
 """
 from __future__ import annotations
 
+from astock_calendar import is_trading_day
+
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, time, timezone, timedelta
@@ -62,9 +64,11 @@ def targets(channel: str, now: datetime) -> tuple[str, ...]:
         if workflow == "update-history-pattern-lab.yml":
             result.append(workflow)
             continue
-        if now.weekday() >= 5:
+        if not is_trading_day(now):
             continue
         clock = now.time()
+        if workflow == "run-trade-plan.yml" and not time(9) <= clock <= time(15, 40):
+            continue
         if workflow == "run-daily-strategy.yml" and not time(15) <= clock <= time(18):
             continue
         if workflow == "update-strategy-tracking.yml" and clock < time(15):

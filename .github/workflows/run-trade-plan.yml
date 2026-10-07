@@ -57,6 +57,7 @@ jobs:
       - name: Official无买点时做全A历史形态精筛
         run: python tools/augment_trade_plan_market_setups.py
       - name: 补充发布历史形态筛选结果
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: python tools/publish_data_on_arrival.py trade-plan
