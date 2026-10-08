@@ -80,7 +80,28 @@ def fetch_clist(fs: str, fields: str, pz: int = 120, fid: str = "f6"):
 
 def tail_boards(kind: str):
     fs = "m:90+t:2+f:!50" if kind == "industry" else "m:90+t:3+f:!50"
-    rows = fetch_clist(fs, "f3,f6,f12,f14,f62,f184,f104,f105,f106", 500, "f3")
+    try:
+        rows = fetch_clist(fs, "f3,f6,f12,f14,f62,f184,f104,f105,f106", 500, "f3")
+    except Exception as primary_error:
+        # Only reuse a verified same-day, recent gateway board snapshot.
+        # Do not invent missing flow or breadth fields from other providers.
+        try:
+            gateway = json.loads((ROOT / "astock_gateway" / "latest.json").read_text(encoding="utf-8"))
+            heat = gateway.get("boardHeatmap") or {}
+            stamp = datetime.fromisoformat(heat["availableAt"])
+            now = datetime.now(CN)
+            age = (now - stamp).total_seconds()
+            if (gateway.get("verifiedToday") is not True
+                    or heat.get("sourceDate") != now.strftime("%Y-%m-%d")
+                    or stamp.tzinfo is None or not 0 <= age <= 480):
+                raise ValueError("gateway snapshot is stale or unverified")
+            fallback = heat.get(kind) or []
+            if not fallback:
+                raise ValueError("gateway board list is empty")
+            return [{**board, "source": str(board.get("source") or "行情网关") + "（同日缓存回退）"}
+                    for board in fallback]
+        except Exception as fallback_error:
+            raise RuntimeError(f"板块源均不可用: 东方财富={primary_error}; 网关={fallback_error}") from primary_error
     out = []
     for x in rows:
         up, down, flat = int(x.get("f104") or 0), int(x.get("f105") or 0), int(x.get("f106") or 0)
