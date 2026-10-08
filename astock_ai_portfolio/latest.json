@@ -4,25 +4,25 @@
   "mode": "A股原选股池 · T+1八批轮动模拟执行",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-10-08T13:30:44+08:00",
+  "updatedAt": "2026-10-08T13:45:43+08:00",
   "radarCapturedAt": "2026-10-08T11:25:17+08:00",
   "radarStatus": "RadarLive",
   "summary": {
     "initialCapital": 20000000.0,
     "capitalCapacity": 20000000.0,
     "inceptionCapital": 1000000.0,
-    "totalAssets": 19934240.89,
+    "totalAssets": 19933748.89,
     "fundUnits": 19341487.5886677,
-    "unitNav": 1.030647,
-    "cumulativeNav": 1.030647,
+    "unitNav": 1.030621,
+    "cumulativeNav": 1.030621,
     "cash": 19805828.89,
-    "marketValue": 128412.0,
+    "marketValue": 127920.0,
     "positionPct": 0.64,
     "cashPct": 99.36,
     "todayReturnPct": null,
-    "cumulativeReturnPct": 3.065,
+    "cumulativeReturnPct": 3.062,
     "realizedPnl": -79188.56,
-    "floatingPnl": 13418.48,
+    "floatingPnl": 12926.48,
     "maxDrawdownPct": -2.8715,
     "maxDrawdownFrequency": "DAILY_CLOSE_UNIT_NAV",
     "intradayObservedMaxDrawdownPct": -3.6508,
@@ -51,8 +51,8 @@
       "entryTimestamp": "2026-09-04T09:42:17+08:00",
       "entryDate": "2026-09-04",
       "initialWeightTarget": 0.1,
-      "lastPrice": 7.83,
-      "lastPriceAt": "2026-10-08T13:30:43+08:00",
+      "lastPrice": 7.8,
+      "lastPriceAt": "2026-10-08T13:45:42+08:00",
       "missingRadarCount": 11,
       "partialProfitTaken": true,
       "seenTradeDates": [
@@ -71,7 +71,7 @@
       "trailingStopPrice": 7.2588,
       "atrFallback": false,
       "atr14": 0.33142857142857146,
-      "stopDistancePct": 6.349206349206351,
+      "stopDistancePct": 6.373626373626375,
       "holdingState": "HOLD",
       "completeObservedDays": 17,
       "invalidDayStreak": 0,
@@ -85,15 +85,15 @@
         ],
         "lastQueuedDay": "2026-10-08"
       },
-      "currentPrice": 7.83,
-      "marketValue": 128412.0,
-      "floatingPnl": 13418.48,
-      "floatingReturnPct": 11.67,
+      "currentPrice": 7.8,
+      "marketValue": 127920.0,
+      "floatingPnl": 12926.48,
+      "floatingReturnPct": 11.24,
       "currentWeightPct": 0.64,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20261008133036",
-      "marketChangePct": 3.298153034300788,
+      "valuationQuoteAt": "20261008134533",
+      "marketChangePct": 2.902374670184704,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -19752,19 +19752,61 @@
       "cumulativeNav": 1.03064673,
       "cumulativeReturnPct": 3.0647,
       "radarCapturedAt": "2026-10-08T11:25:17+08:00"
+    },
+    {
+      "timestamp": "2026-10-08T13:36:14+08:00",
+      "date": "2026-10-08",
+      "time": "13:36:14",
+      "nav": 19934076.89,
+      "cash": 19805828.89,
+      "marketValue": 128248.0,
+      "positionCount": 1,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.03063825,
+      "cumulativeNav": 1.03063825,
+      "cumulativeReturnPct": 3.0638,
+      "radarCapturedAt": "2026-10-08T11:25:17+08:00"
+    },
+    {
+      "timestamp": "2026-10-08T13:40:55+08:00",
+      "date": "2026-10-08",
+      "time": "13:40:55",
+      "nav": 19933584.89,
+      "cash": 19805828.89,
+      "marketValue": 127756.0,
+      "positionCount": 1,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.03061281,
+      "cumulativeNav": 1.03061281,
+      "cumulativeReturnPct": 3.0613,
+      "radarCapturedAt": "2026-10-08T11:25:17+08:00"
+    },
+    {
+      "timestamp": "2026-10-08T13:45:42+08:00",
+      "date": "2026-10-08",
+      "time": "13:45:42",
+      "nav": 19933748.89,
+      "cash": 19805828.89,
+      "marketValue": 127920.0,
+      "positionCount": 1,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.03062129,
+      "cumulativeNav": 1.03062129,
+      "cumulativeReturnPct": 3.0621,
+      "radarCapturedAt": "2026-10-08T11:25:17+08:00"
     }
   ],
   "performanceReport": {
     "valuation": {
       "method": "UNIT_NAV_SUBSCRIPTION_REDEMPTION",
-      "unitNav": 1.030647,
-      "cumulativeNav": 1.030647,
+      "unitNav": 1.030621,
+      "cumulativeNav": 1.030621,
       "fundUnits": 19341487.5886677,
       "netSubscriptions": 19000000.0,
       "noteZh": "增资按增资前单位净值申购新增份额，单位净值和历史收益不重置。"
     },
     "returns": {
-      "cumulativeReturnPct": 3.0647,
+      "cumulativeReturnPct": 3.0621,
       "daily": [
         {
           "date": "2026-09-07",
@@ -20023,7 +20065,7 @@
       "partialFillCount": 59,
       "averageSlippageBps": 6.361,
       "grossTradedAmount": 42678019.0,
-      "turnoverPctOfCurrentAssets": 214.094,
+      "turnoverPctOfCurrentAssets": 214.099,
       "recentRejections": [
         {
           "timestamp": "2026-10-08T09:30:37+08:00",
@@ -20534,36 +20576,36 @@
     },
     {
       "date": "2026-10-08",
-      "closeUnitNav": 1.030647,
-      "closeCumulativeNav": 1.030647,
-      "cumulativeReturnPct": 3.0647,
+      "closeUnitNav": 1.030621,
+      "closeCumulativeNav": 1.030621,
+      "cumulativeReturnPct": 3.0621,
       "dailyReturnPct": null,
-      "periodReturnPct": 0.0312,
+      "periodReturnPct": 0.0287,
       "observationGapBusinessDays": 4,
       "coverageStatus": "MISSING_BACKEND_CYCLES",
-      "pointCount": 32
+      "pointCount": 35
     }
   ],
   "selection45": {
     "activatedAt": "2026-09-06T00:51:22+08:00",
     "validationStatus": "SHADOW_FORWARD_ONLY",
     "market": {
-      "state": "BASELINE",
-      "cap": 1.0,
+      "state": "RISK",
+      "cap": 0.1,
       "baseCap": 1.0,
-      "intradayCap": null,
-      "allowNew": true,
-      "reasonZh": "按批次预算、个股及板块上限分配仓位；全市场广度未取齐，维持盘前上限，不用候选样本冒充",
+      "intradayCap": 0.1,
+      "allowNew": false,
+      "reasonZh": "核心指数急跌，盘中风险上限下调至10%",
       "missingEvidence": [],
       "positionControlMode": "BUDGET_AND_RISK",
       "fourIndexPositionControlEnabled": false,
       "evidenceReady": true
     },
     "portfolioRisk": {
-      "cap": 1.0,
+      "cap": 0.1,
       "allowNew": false,
       "date": "2026-10-08",
-      "asOf": "2026-10-08T13:30:43+08:00",
+      "asOf": "2026-10-08T13:45:42+08:00",
       "dailyUnitReturnPct": null,
       "confirmedCloseDrawdownPct": -2.7998228675328085,
       "dailyRiskDataReady": false,
@@ -20571,7 +20613,7 @@
       "currentEvidenceReady": true,
       "defensiveConfirmed": false,
       "defensiveConfirmations": 0,
-      "forceReduction": false,
+      "forceReduction": true,
       "executionPolicyZh": "风险独立检查；防守大盘2个至少间隔60秒的新快照确认后立即分批降至上限，不等普通窗口和换手额度"
     },
     "parameters": {
@@ -23772,7 +23814,7 @@
   "strategyResearch": {
     "schemaVersion": 1,
     "version": "v4.6-forward-evidence",
-    "updatedAt": "2026-10-08T13:30:43.465622+08:00",
+    "updatedAt": "2026-10-08T13:45:42.484471+08:00",
     "activatedAt": "2026-10-01T15:16:10.166297+08:00",
     "objectiveZh": "提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。",
     "productionStatusZh": "生产策略正常运行；新版研究样本独立累计，不阻断选股、仓位或模拟交易。",
@@ -23869,7 +23911,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-10-08T13:30:43.465622+08:00",
+        "checkedAt": "2026-10-08T13:45:42.484471+08:00",
         "reasonZh": "仅统计本次启用后的完整成员样本；不等于2017年至今历史覆盖审计。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -23879,7 +23921,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-10-08T13:30:43.465622+08:00",
+        "checkedAt": "2026-10-08T13:45:42.484471+08:00",
         "reasonZh": "使用首次观察时保存的成员；后续不以今天成员替换。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -23889,7 +23931,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-10-08T13:30:43.465622+08:00",
+        "checkedAt": "2026-10-08T13:45:42.484471+08:00",
         "reasonZh": "两融/ETF必须具备真实availableAt且不晚于决策；仅写T+1不能通过。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -23899,7 +23941,7 @@
         "status": "PENDING_REVIEW",
         "completed": 0,
         "total": 60,
-        "checkedAt": "2026-10-08T13:30:43.465622+08:00",
+        "checkedAt": "2026-10-08T13:45:42.484471+08:00",
         "reasonZh": "按信号日汇总，重叠窗口仍相关；需补除权、可成交成本、全市场基准与独立样本外验证。",
         "evidencePath": "astock_ai_portfolio/state.json#research46"
       },
@@ -23909,7 +23951,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-10-08T13:30:43.465622+08:00",
+        "checkedAt": "2026-10-08T13:45:42.484471+08:00",
         "reasonZh": "校验首次冻结内容哈希；仅证明未改写，不等于策略有效。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       }
@@ -24272,9 +24314,9 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "20261008-133043",
-    "lastRunAt": "2026-10-08T13:30:43+08:00",
-    "lastSuccessAt": "2026-10-08T13:30:43+08:00",
+    "cycleId": "20261008-134542",
+    "lastRunAt": "2026-10-08T13:45:42+08:00",
+    "lastSuccessAt": "2026-10-08T13:45:42+08:00",
     "lastTradeAt": "2026-10-08T10:26:17+08:00",
     "status": "BLOCKED_STALE_RADAR",
     "statusZh": "后台已运行，但雷达超过15分钟，禁止旧信号开仓；持仓保护已使用新行情独立检查",
@@ -24282,7 +24324,7 @@
     "sessionOpen": true,
     "radarCapturedAt": "2026-10-08T11:25:17+08:00",
     "radarFresh": false,
-    "radarAgeSeconds": 7526.4,
+    "radarAgeSeconds": 8425.4,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -25227,7 +25269,7 @@
   "capitalMigrationThisCycle": null,
   "dataFreshness": {
     "radarFresh": false,
-    "radarAgeSeconds": 7526.4,
+    "radarAgeSeconds": 8425.4,
     "maxAllowedAgeSeconds": 900
   }
 }
