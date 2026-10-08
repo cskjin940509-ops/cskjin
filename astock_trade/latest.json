@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-30",
-  "generatedAt": "2026-09-30T00:03:55+08:00",
-  "phase": "PREOPEN",
+  "date": "2026-10-08",
+  "generatedAt": "2026-10-08T09:30:08+08:00",
+  "phase": "LIVE",
   "officialDate": "2026-09-24",
   "officialPlans": [
     {
@@ -16,7 +16,7 @@
         "B3",
         "B4"
       ],
-      "action": "盘前观察",
+      "action": "不建议买",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -24,16 +24,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 8.74,
-        "changePct": -3.85,
-        "open": 8.75,
-        "high": 9.19,
-        "low": 8.7,
-        "dayLowToHighPct": 5.63,
-        "quoteTime": "20260929161430"
+        "price": 8.38,
+        "changePct": -1.76,
+        "open": 8.36,
+        "high": 8.43,
+        "low": 8.36,
+        "dayLowToHighPct": 0.84,
+        "quoteTime": "20261008093003"
       },
       "entryZone": null,
-      "triggerPrice": 8.532,
+      "triggerPrice": 8.593,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -45,7 +45,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 53",
-        "距MA20 +0.97 ATR",
+        "距MA20 +0.35 ATR",
         "主力资金占比 +22.03%"
       ]
     },
@@ -60,7 +60,7 @@
         "B3",
         "B4"
       ],
-      "action": "盘前观察",
+      "action": "不建议买",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -68,16 +68,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 11.29,
-        "changePct": -4.81,
-        "open": 11.25,
-        "high": 11.54,
-        "low": 11.1,
-        "dayLowToHighPct": 3.96,
-        "quoteTime": "20260929161454"
+        "price": 11.52,
+        "changePct": -1.12,
+        "open": 11.51,
+        "high": 11.6,
+        "low": 11.51,
+        "dayLowToHighPct": 0.78,
+        "quoteTime": "20261008093003"
       },
       "entryZone": null,
-      "triggerPrice": 11.045,
+      "triggerPrice": 11.185,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -89,7 +89,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +0.13 ATR",
+        "距MA20 +0.50 ATR",
         "主力资金占比 +10.54%"
       ]
     },
@@ -104,7 +104,7 @@
         "B3",
         "B4"
       ],
-      "action": "盘前观察",
+      "action": "不建议买",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
@@ -114,14 +114,14 @@
       "quote": {
         "price": 6.1,
         "changePct": 0.33,
-        "open": 6.0,
-        "high": 6.28,
-        "low": 5.98,
-        "dayLowToHighPct": 5.02,
-        "quoteTime": "20260929161445"
+        "open": 6.09,
+        "high": 6.11,
+        "low": 6.09,
+        "dayLowToHighPct": 0.33,
+        "quoteTime": "20261008093006"
       },
       "entryZone": null,
-      "triggerPrice": 6.006,
+      "triggerPrice": 6.034,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -133,7 +133,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +0.08 ATR",
+        "距MA20 +0.12 ATR",
         "主力资金占比 +9.80%"
       ]
     }
@@ -143,7 +143,9 @@
     "official": 3,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 0,
+    "marketPrefilterCount": 20,
+    "marketScannedCount": 20
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -156,5 +158,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "partial",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5562,
+    "uniqueRows": 4757,
+    "pagesRequested": 56,
+    "coveragePct": 85.53,
+    "prefiltered": 20,
+    "historyLoaded": 20,
+    "setupMatches": 1,
+    "historicalEdgeMatches": 0,
+    "selected": 0,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
