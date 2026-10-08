@@ -5716,5 +5716,74 @@
     },
     "effectiveFrom": "2026-09-06T00:51:22+08:00",
     "orderRequestedQty": 11700
+  },
+  {
+    "decisionId": "20261008-102617-00119",
+    "timestamp": "2026-10-08T10:26:17+08:00",
+    "strategyVersion": "v6.1-eight-batch-no-four-index-position-control",
+    "mode": "AI影子实盘",
+    "simulated": true,
+    "side": "SELL",
+    "sideZh": "减仓",
+    "code": "001979",
+    "name": "招商蛇口",
+    "sector": "租售同权",
+    "qty": 8100,
+    "price": 7.81,
+    "referencePrice": 7.81,
+    "priceSource": "腾讯实时行情/雷达行情",
+    "amount": 63261.0,
+    "fee": 47.71,
+    "realizedPnl": 6417.71,
+    "realizedReturnPct": 11.38,
+    "reasonZh": "目标区间滞涨转弱，主动止盈第1档",
+    "remainingQty": 16400,
+    "executionModel": "v3-liquidity-capacity-point-in-time",
+    "capacityRequestedQty": 8100,
+    "filledQty": 8100,
+    "slippageBps": 3.798,
+    "marketImpactBps": 0.798,
+    "participationPct": 0.0099,
+    "intradayAmount": 635990000.0,
+    "adv20Amount": 788658500.0,
+    "advSampleDays": 20,
+    "capacityAmount": 5087920.0,
+    "dailyCapacityAmount": 9539850.0,
+    "liquidityBasisZh": "当时累计成交额+历史ADV20",
+    "priceLimitPct": 10.0,
+    "upperLimit": 8.34,
+    "lowerLimit": 6.82,
+    "targetWeightPct": 0.0,
+    "requestedQty": 8100,
+    "partialFill": false,
+    "fillRatioPct": 100.0,
+    "ruleVersion": "v6.1-eight-batch-no-four-index-position-control",
+    "sleeve": "CORE",
+    "reasonCode": "PROFIT_TAKE",
+    "signalSnapshot": {
+      "stage": 1,
+      "qty": 8100,
+      "targetPrice": 7.86,
+      "samples": [
+        {
+          "at": "2026-10-08T10:16:09+08:00",
+          "price": 7.83,
+          "vwap": 7.631689768562904
+        },
+        {
+          "at": "2026-10-08T10:21:24+08:00",
+          "price": 7.82,
+          "vwap": 7.661377513720564
+        },
+        {
+          "at": "2026-10-08T10:26:09+08:00",
+          "price": 7.81,
+          "vwap": 7.672513632196111
+        }
+      ],
+      "reasonZh": "目标区间滞涨转弱，主动止盈第1档"
+    },
+    "effectiveFrom": "2026-09-06T00:51:22+08:00",
+    "orderRequestedQty": 8100
   }
 ]
