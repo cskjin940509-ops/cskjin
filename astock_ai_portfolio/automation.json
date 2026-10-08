@@ -7,22 +7,22 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "20261008-093034",
-  "lastRunAt": "2026-10-08T09:30:34+08:00",
-  "lastSuccessAt": "2026-10-08T09:30:34+08:00",
-  "lastTradeAt": "2026-10-08T09:30:37+08:00",
-  "status": "TRADED",
-  "statusZh": "后台自动模拟成交1笔；持仓保护独立执行",
+  "cycleId": "20261008-094541",
+  "lastRunAt": "2026-10-08T09:45:41+08:00",
+  "lastSuccessAt": "2026-10-08T09:45:41+08:00",
+  "lastTradeAt": "2026-10-08T09:39:58+08:00",
+  "status": "NO_ACTION",
+  "statusZh": "30只2026-09-28收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
   "runSource": "local-validation",
   "sessionOpen": true,
-  "radarCapturedAt": "2026-10-08T09:30:21+08:00",
+  "radarCapturedAt": "2026-10-08T09:40:35+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 13.8,
-  "actionsThisCycle": 1,
+  "radarAgeSeconds": 306.9,
+  "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
-  "sellActionsThisCycle": 1,
-  "ledgerDecisionCount": 117,
-  "positionCount": 2,
+  "sellActionsThisCycle": 0,
+  "ledgerDecisionCount": 118,
+  "positionCount": 1,
   "capitalCapacity": 20000000.0,
   "error": null,
   "knownIncident": {
@@ -354,10 +354,10 @@
     },
     "reasonCode": "T1_BATCH_ENTRY_PENDING",
     "reasonZh": "30只2026-09-28收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
-    "entryBlocks": [],
-    "pendingExits": [
-      "002517：部分成交后等待余量执行"
+    "entryBlocks": [
+      "缺少上一交易日可靠收盘基准，禁止新增风险"
     ],
+    "pendingExits": [],
     "candidateCount": 31,
     "rejectedCandidateCount": 9,
     "degradedCandidateCount": 22,
@@ -954,7 +954,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       }
     ]
   }
