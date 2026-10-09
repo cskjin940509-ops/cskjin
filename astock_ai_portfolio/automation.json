@@ -7,22 +7,22 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "20261009-094042",
-  "lastRunAt": "2026-10-09T09:40:42+08:00",
-  "lastSuccessAt": "2026-10-09T09:40:42+08:00",
-  "lastTradeAt": "2026-10-08T10:26:17+08:00",
-  "status": "BLOCKED_STALE_RADAR",
-  "statusZh": "后台已运行，但雷达超过15分钟，禁止旧信号开仓；持仓保护已使用新行情独立检查",
+  "cycleId": "20261009-095532",
+  "lastRunAt": "2026-10-09T09:55:32+08:00",
+  "lastSuccessAt": "2026-10-09T09:55:32+08:00",
+  "lastTradeAt": "2026-10-09T09:50:43+08:00",
+  "status": "NO_ACTION",
+  "statusZh": "30只2026-10-08收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
   "runSource": "local-validation",
   "sessionOpen": true,
-  "radarCapturedAt": "2026-10-08T15:00:19+08:00",
-  "radarFresh": false,
-  "radarAgeSeconds": 67224.0,
+  "radarCapturedAt": "2026-10-09T09:46:07+08:00",
+  "radarFresh": true,
+  "radarAgeSeconds": 565.0,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
-  "ledgerDecisionCount": 119,
-  "positionCount": 1,
+  "ledgerDecisionCount": 121,
+  "positionCount": 3,
   "capitalCapacity": 20000000.0,
   "error": null,
   "knownIncident": {
@@ -44,7 +44,7 @@
       "activatedAt": "2026-09-21T22:33:31+08:00",
       "batchCount": 6,
       "activeBatchCount": 6,
-      "pendingOrderCount": 143,
+      "pendingOrderCount": 141,
       "pendingExitCount": 0,
       "lastSignalDate": "2026-10-08",
       "pendingOrders": [
@@ -115,8 +115,8 @@
           "name": "以岭药业",
           "rank": 7,
           "limitPrice": 15.288,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价15.29"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0001-2026-09-21",
@@ -145,8 +145,8 @@
           "name": "翰宇药业",
           "rank": 10,
           "limitPrice": 23.0888,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价23.09"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0001-2026-09-21",
@@ -185,8 +185,8 @@
           "name": "海正药业",
           "rank": 14,
           "limitPrice": 11.6326,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价11.63"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0001-2026-09-21",
