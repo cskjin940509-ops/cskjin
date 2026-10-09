@@ -1,10 +1,55 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-09",
-  "generatedAt": "2026-10-09T14:30:11+08:00",
+  "generatedAt": "2026-10-09T14:45:13+08:00",
   "phase": "LIVE",
   "officialDate": "2026-09-24",
-  "officialPlans": [],
+  "officialPlans": [
+    {
+      "code": "002679",
+      "name": "福建金森",
+      "sector": "林业Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 51.1,
+        "historical": {}
+      },
+      "quote": {
+        "price": 11.94,
+        "changePct": 3.65,
+        "open": 11.51,
+        "high": 11.99,
+        "low": 11.14,
+        "dayLowToHighPct": 7.63,
+        "quoteTime": "20261009144512"
+      },
+      "entryZone": null,
+      "triggerPrice": 11.209,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 51",
+        "距MA20 +1.04 ATR",
+        "主力资金占比 +10.54%"
+      ]
+    }
+  ],
   "setupCandidates": [
     {
       "code": "300225",
@@ -17,7 +62,7 @@
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 86.6,
+        "score": 86.7,
         "historical": {
           "samples": 3,
           "win5D": 1.0,
@@ -27,8 +72,8 @@
         }
       },
       "quote": {
-        "price": 8.18,
-        "changePct": 1.61,
+        "price": 8.25,
+        "changePct": 2.48,
         "open": null,
         "high": 8.27,
         "low": 7.66,
@@ -51,14 +96,14 @@
       "reasons": [
         "趋势回踩",
         "形态分 87",
-        "距MA20 +0.53 ATR",
-        "主力资金占比 +13.12%"
+        "距MA20 +0.73 ATR",
+        "主力资金占比 +13.33%"
       ],
       "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
-    "official": 0,
+    "official": 1,
     "officialBuy": 0,
     "officialWatch": 0,
     "expandedSetupCandidates": 1,
@@ -81,12 +126,12 @@
     "state": "partial",
     "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
     "reportedTotal": 5562,
-    "uniqueRows": 4460,
+    "uniqueRows": 5158,
     "pagesRequested": 56,
-    "coveragePct": 80.19,
+    "coveragePct": 92.74,
     "prefiltered": 220,
-    "historyLoaded": 37,
-    "setupMatches": 3,
+    "historyLoaded": 197,
+    "setupMatches": 10,
     "historicalEdgeMatches": 1,
     "selected": 1,
     "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
