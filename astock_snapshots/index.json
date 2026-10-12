@@ -128,10 +128,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -189,10 +188,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -1390,14 +1388,14 @@
       }
     },
     "sectorPerformance": {},
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "audit": {
       "status": "PartiallyVerified",
@@ -1409,7 +1407,7 @@
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -5015,10 +5013,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -5076,10 +5073,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -5137,10 +5133,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -5198,10 +5193,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -5259,10 +5253,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -5320,10 +5313,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -5381,10 +5373,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -5792,16 +5783,15 @@
       "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
-        "raw-price-cross-source-incomplete:13/14",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 14,
-          "verified": 13,
-          "coveragePct": 92.86,
+          "verified": 14,
+          "coveragePct": 100.0,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
@@ -5858,14 +5848,14 @@
         }
       }
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingDisplayStatus": "ReferenceOnly",
     "trackingDisplayNote": "价格路径通过入场价验证后可展示参考跟踪；该批次仍不进入胜率、Alpha或因子有效性统计。",
@@ -6903,10 +6893,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -7024,10 +7013,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -7085,10 +7073,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -10240,14 +10227,14 @@
       "state": "可更新后续收益",
       "note": "信号日当天涨跌属于当日行情表现，不计作策略可交易收益。"
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -12261,10 +12248,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -12322,10 +12308,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -12383,10 +12368,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -12444,10 +12428,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -12505,10 +12488,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -16067,7 +16049,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -16230,14 +16212,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -18232,10 +18214,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -18293,10 +18274,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -18354,10 +18334,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -18415,10 +18394,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -18476,10 +18454,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -18597,10 +18574,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -18658,10 +18634,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -22016,7 +21991,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -22179,14 +22154,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -24109,10 +24084,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -24170,10 +24144,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -24231,10 +24204,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -24292,10 +24264,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -24353,10 +24324,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -24414,10 +24384,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -24475,10 +24444,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -24536,10 +24504,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -27909,7 +27876,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -28072,14 +28039,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -30104,10 +30071,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -30165,10 +30131,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -33826,14 +33791,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -35836,10 +35801,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -35897,10 +35861,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -39234,7 +39197,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -39397,14 +39360,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -41314,10 +41277,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -41368,10 +41330,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -41422,10 +41383,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -41476,10 +41436,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -41530,10 +41489,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -44934,14 +44892,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -46733,10 +46691,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -46787,10 +46744,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -46841,10 +46797,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -46895,10 +46850,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -46949,10 +46903,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -47003,10 +46956,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -47057,10 +47009,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -50299,14 +50250,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -52319,10 +52270,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52373,10 +52323,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52427,10 +52376,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52481,10 +52429,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52535,10 +52482,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52589,10 +52535,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52643,10 +52588,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52697,10 +52641,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52751,10 +52694,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -52858,10 +52800,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -56254,14 +56195,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -58239,10 +58180,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -58293,10 +58233,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -58347,10 +58286,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -58401,10 +58339,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -58879,10 +58816,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -58986,10 +58922,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -62123,14 +62058,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -64083,10 +64018,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -64137,10 +64071,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -64191,10 +64124,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -64298,10 +64230,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -64352,10 +64283,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -64406,10 +64336,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -64513,10 +64442,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -67924,7 +67852,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -68087,14 +68015,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -69606,10 +69534,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -69660,10 +69587,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -69714,10 +69640,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -69768,10 +69693,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -73057,14 +72981,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -74476,10 +74400,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -74530,10 +74453,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -74584,10 +74506,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -74638,10 +74559,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -74692,10 +74612,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -77978,7 +77897,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -78136,14 +78055,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -79786,10 +79705,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -79840,10 +79758,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -79894,10 +79811,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -83402,14 +83318,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -84797,10 +84713,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -84851,10 +84766,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -84958,10 +84872,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -88174,7 +88087,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-11T17:03:29+08:00",
+      "auditedAt": "2026-10-13T00:55:24+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -88337,14 +88250,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "ReferenceOnly",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -89895,10 +89808,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -89949,10 +89861,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -90003,10 +89914,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -90057,10 +89967,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -90111,10 +90020,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -93515,14 +93423,14 @@
         "行情"
       ]
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
@@ -94023,10 +93931,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -94070,10 +93977,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       },
@@ -94117,10 +94023,9 @@
           "status": "Verified",
           "basis": "raw-open",
           "providers": [
-            "腾讯",
-            "东方财富"
+            "腾讯"
           ],
-          "maxRelDiff": 0.0,
+          "maxRelDiff": null,
           "returnBasis": "qfq"
         }
       }
@@ -96901,14 +96806,14 @@
       "state": "等待下一交易日可成交开盘",
       "note": "信号日当天涨跌属于当日行情表现，不计作策略可交易收益。"
     },
-    "trackingUpdatedAt": "2026-10-13T00:42:05+08:00",
+    "trackingUpdatedAt": "2026-10-13T01:03:58+08:00",
     "backtestMethod": {
       "entry": "信号日后一交易日开盘",
       "exit": "第1/5/10/20/60个交易日收盘",
       "weight": "池内等权",
       "benchmark": "沪深300",
       "price": "腾讯优先、东方财富兜底的前复权日线",
-      "version": "v1.3-next-open-verified-bse"
+      "version": "v1.4.1-next-open-verified-reference"
     },
     "trackingUse": "Eligible",
     "dailyTrackingUpdatedAt": "2026-10-09T23:34:13+08:00",
