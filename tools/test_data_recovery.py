@@ -7,6 +7,9 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 import update_market_gateway as gateway
 import selection_data_v45 as feeds
 import run_ai_shadow_portfolio as portfolio
+import tushare_stock_api as stock_api
+import ensure_daily_close_snapshot as close_snapshot
+import ensure_market_snapshot_core_indices as core_indices
 from selection_rules_v45 import CN, confirmation_samples
 
 class RecoveryTests(unittest.TestCase):
@@ -37,6 +40,50 @@ class RecoveryTests(unittest.TestCase):
             result=gateway.all_a_breadth()
         self.assertEqual(result['sampleCount'],2301)
         self.assertEqual(result['totalAmount'],23010)
+    def test_board_failover_uses_same_day_tushare_ths(self):
+        sample=[{'boardCode':'885001.TI','name':'人工智能','changePct':2.5,'source':'Tushare/THS'}]
+        with patch.object(gateway,'boards',side_effect=TimeoutError()), patch.object(stock_api,'ths_board_flows',return_value=sample) as backup:
+            result=gateway.boards_with_failover('concept','20261009')
+        self.assertEqual(result,sample)
+        backup.assert_called_once_with('concept','20261009')
+    def test_partial_eastmoney_board_triggers_secondary_provider(self):
+        with patch.object(gateway,'eastmoney_clist',return_value=[{'f12':'BK1','f14':'partial'}]), \
+             patch.object(stock_api,'ths_board_flows',return_value=[{'name':f'x{i}'} for i in range(100)]) as backup:
+            result=gateway.boards_with_failover('concept','20261009')
+        self.assertEqual(len(result),100)
+        backup.assert_called_once_with('concept','20261009')
+    def test_market_breadth_failover_uses_requested_date(self):
+        sample={'sampleCount':4500,'source':'Tushare daily'}
+        with patch.object(gateway,'all_a_breadth',side_effect=TimeoutError()), patch.object(stock_api,'daily_market_breadth',return_value=sample) as backup:
+            self.assertEqual(gateway.breadth_with_failover('20261009'),sample)
+        backup.assert_called_once_with('20261009')
+    def test_stock_api_ths_board_normalization_and_date_guard(self):
+        rows=[{'trade_date':'20261009','ts_code':f'885{i:03d}.TI','name':f'概念{i}',
+               'pct_change':1.5,'net_amount':2.0,'company_num':20} for i in range(100)]
+        frame=type('Frame',(),{'empty':False,'to_dict':lambda self,orient:rows})()
+        pro=type('Pro',(),{'moneyflow_cnt_ths':lambda self,**kwargs:frame})()
+        with patch.object(stock_api,'pro_api',return_value=pro):
+            out=stock_api.ths_board_flows('concept','20261009')
+        self.assertEqual(len(out),100)
+        self.assertEqual(out[0]['boardCode'],'885000.TI')
+        self.assertEqual(out[0]['mainNetFlow'],200_000_000)
+        self.assertIsNone(out[0]['mainFlowPct'])
+    def test_stock_api_breadth_rejects_stale_or_partial_data(self):
+        rows=[{'trade_date':'20261008','ts_code':f'{i:06d}.SH','pct_chg':1,'amount':10} for i in range(4500)]
+        frame=type('Frame',(),{'empty':False,'to_dict':lambda self,orient:rows})()
+        pro=type('Pro',(),{'daily':lambda self,**kwargs:frame})()
+        with patch.object(stock_api,'pro_api',return_value=pro):
+            with self.assertRaises(RuntimeError):
+                stock_api.daily_market_breadth('20261009')
+    def test_stock_api_breadth_accepts_full_same_day_cross_section(self):
+        rows=[{'trade_date':'20261009','ts_code':f'{i:06d}.SH','pct_chg':1 if i%2 else -1,'amount':10} for i in range(4500)]
+        frame=type('Frame',(),{'empty':False,'to_dict':lambda self,orient:rows})()
+        pro=type('Pro',(),{'daily':lambda self,**kwargs:frame})()
+        with patch.object(stock_api,'pro_api',return_value=pro):
+            out=stock_api.daily_market_breadth('20261009')
+        self.assertEqual(out['sampleCount'],4500)
+        self.assertEqual(out['up'],2250)
+        self.assertEqual(out['totalAmount'],45_000_000)
     def test_repeated_first_page_rejected(self):
         response={'data':{'total':2301,'diff':[{'f12':str(i),'f13':0,'f3':1} for i in range(100)]}}
         with patch.object(gateway,'get_json',return_value=response):
@@ -79,4 +126,17 @@ class RecoveryTests(unittest.TestCase):
         out=portfolio._merge_quotes([eastmoney],['600000'])['600000']
         self.assertEqual(out['price'],9.8)
         self.assertEqual(out['selectedProvider'],'东方财富实时行情')
+    def test_close_freeze_requires_same_day_index_quotes(self):
+        day='2026-10-09'
+        indices={code:{'quoteTime':'150000','quoteDate':'20261008'} for code in close_snapshot.CORE}
+        payload={'verifiedToday':True,'marketSnapshot':{'sourceDate':day,'indices':indices},
+                 'boardHeatmap':{'industry':[{}]*30,'concept':[{}]*100}}
+        ok,detail=close_snapshot.readiness(payload,day)
+        self.assertFalse(ok)
+        self.assertEqual(detail['closeCoreCount'],0)
+    def test_core_index_patch_preserves_provider_date(self):
+        payload={'marketSnapshot':{'sourceDate':'2026-10-09','indices':{}}}
+        quotes={'sh000001':{'name':'上证指数','close':3800,'quoteTime':'150001','quoteDate':'20261009'}}
+        self.assertTrue(core_indices.patch_payload(payload,quotes,'2026-10-09'))
+        self.assertEqual(payload['marketSnapshot']['indices']['sh000001']['quoteDate'],'20261009')
 if __name__=='__main__':unittest.main()

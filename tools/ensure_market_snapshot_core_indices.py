@@ -54,7 +54,9 @@ def patch_payload(payload, quotes, day):
     for sym, row in quotes.items():
         if row.get("quoteDate") != day.replace("-", ""):
             continue
-        clean = {k:v for k,v in row.items() if k != "quoteDate"}
+        # Keep the provider date beside the time so close-freeze validation can
+        # distinguish today's 15:00 quote from a stale 15:00 quote.
+        clean = dict(row)
         if indices.get(sym) != clean:
             indices[sym] = clean
             changed = True

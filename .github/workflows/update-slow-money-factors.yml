@@ -10,8 +10,6 @@ on:
       - 'tools/test_free_sentiment_inputs.py'
       - 'tools/slow_money_factors.py'
       - 'tools/generate_premarket_prediction.py'
-      - 'tools/backfill_etf_485.py'
-      - 'tools/test_backfill_etf_485.py'
       - '.github/workflows/update-slow-money-factors.yml'
   schedule:
     # 北京时间工作日08:20起预取；08:40/08:55/09:10/09:20重试。
@@ -32,7 +30,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - name: 记录慢资金运行编号
         continue-on-error: true
@@ -62,12 +60,6 @@ jobs:
           STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
           STOCK_API_URL: https://jiaoch.top/
         run: python tools/check_stock_proxy.py
-      - name: 回补ETF 485日份额横截面（断点续传）
-        env:
-          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
-          STOCK_API_URL: https://jiaoch.top/
-          ETF_BACKFILL_WORKERS: 6
-        run: python tools/backfill_etf_485.py
       - name: 拉取两融与ETF份额慢资金数据
         env:
           STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}

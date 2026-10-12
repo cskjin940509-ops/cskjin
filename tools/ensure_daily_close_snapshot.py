@@ -41,7 +41,11 @@ def readiness(payload: dict, day: str) -> tuple[bool, dict]:
     market = payload.get("marketSnapshot") or {}
     heat = payload.get("boardHeatmap") or {}
     indices = market.get("indices") or {}
-    times = {k: hhmmss((indices.get(k) or {}).get("quoteTime")) for k in CORE}
+    times = {
+        k: hhmmss((indices.get(k) or {}).get("quoteTime"))
+        if (indices.get(k) or {}).get("quoteDate") == day.replace("-", "") else None
+        for k in CORE
+    }
     close_count = sum(1 for t in times.values() if t is not None and t >= 145900)
     industry_count = len(heat.get("industry") or [])
     concept_count = len(heat.get("concept") or [])

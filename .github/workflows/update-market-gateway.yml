@@ -58,6 +58,9 @@ jobs:
       - name: 安装Tushare数据适配器
         run: python -m pip install --quiet 'tushare>=1.4,<2'
       - name: 抓取并校验A股市场数据
+        env:
+          STOCK_API_TOKEN: ${{ secrets.STOCK_API_TOKEN }}
+          STOCK_API_URL: https://jiaoch.top/
         run: |
           python tools/update_market_gateway.py
           python tools/sanitize_market_gateway.py

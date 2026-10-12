@@ -236,7 +236,7 @@ class CloseGateTests(unittest.TestCase):
             now = datetime.fromisoformat(day + "T15:01:00+08:00")
             self.assertFalse(gate.ready(now, root))
             data = {"verifiedToday": True, "closeFreeze": {"state": "ready", "date": day},
-                    "marketSnapshot": {"sourceDate": day, "indices": {k: {"quoteTime": "14:59:59"} for k in gate.CORE}},
+                    "marketSnapshot": {"sourceDate": day, "indices": {k: {"quoteTime": "14:59:59", "quoteDate": "20260907"} for k in gate.CORE}},
                     "boardHeatmap": {"industry": [1], "concept": [1]}}
             path = root / "astock_gateway/history" / (day + ".json")
             path.parent.mkdir(parents=True)

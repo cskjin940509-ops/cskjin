@@ -114,9 +114,28 @@ def boards(kind):
             "breadthPct": (up / total * 100.0) if total else None,
             "source": "东方财富板块"
         })
-    if not out:
-        raise RuntimeError(f"东方财富{kind}板块返回为空")
+    minimum = 30 if kind == "industry" else 100
+    if len(out) < minimum:
+        raise RuntimeError(f"东方财富{kind}板块样本不完整: {len(out)} < {minimum}")
     return out
+
+
+def boards_with_failover(kind, trade_date):
+    """Prefer Eastmoney, then use the independent Tushare/THS API for that date."""
+    try:
+        return boards(kind)
+    except Exception as primary_error:
+        try:
+            from tushare_stock_api import ths_board_flows
+            rows = ths_board_flows(kind, trade_date)
+            for row in rows:
+                row["source"] = "Tushare兼容stock_api/同花顺"
+            return rows
+        except Exception as secondary_error:
+            raise RuntimeError(
+                f"东方财富失败({type(primary_error).__name__}); "
+                f"Tushare/同花顺失败({type(secondary_error).__name__})"
+            ) from secondary_error
 
 
 def all_a_breadth():
@@ -174,6 +193,52 @@ def all_a_breadth():
     }
 
 
+def breadth_with_failover(trade_date):
+    try:
+        return all_a_breadth()
+    except Exception as primary_error:
+        try:
+            from tushare_stock_api import daily_market_breadth
+            return daily_market_breadth(trade_date)
+        except Exception as secondary_error:
+            raise RuntimeError(
+                f"东方财富失败({type(primary_error).__name__}); "
+                f"Tushare全市场日线失败({type(secondary_error).__name__})"
+            ) from secondary_error
+
+
+def stock_api_quotes(symbols):
+    """Best-effort quote failover for equity codes; index freshness stays Tencent-gated."""
+    from tushare_stock_api import realtime_quotes
+    index_symbols = {"sh000001", "sz399006", "sh000688", "sh000300", "sh000852"}
+    codes = sorted({symbol[2:] for symbol in symbols
+                    if symbol not in index_symbols and symbol[:2] in ("sh", "sz", "bj")
+                    and symbol[2:].isdigit()})
+    if not codes:
+        return {}
+    raw = realtime_quotes(codes)
+    out = {}
+    for symbol in symbols:
+        if symbol in index_symbols:
+            continue
+        code = symbol[2:] if symbol[:2] in ("sh", "sz", "bj") else ""
+        row = raw.get(code) or {}
+        if not row.get("quoteOk") or not row.get("price"):
+            continue
+        stamp = str(row.get("quoteTime") or "")
+        digits = re.sub(r"\D", "", stamp)
+        out[symbol] = {
+            "symbol": symbol, "name": row.get("name") or code, "code": code,
+            "price": row.get("price"), "prevClose": row.get("prevClose"),
+            "changePct": row.get("changePct"), "high": row.get("high"), "low": row.get("low"),
+            "amount": row.get("amount"), "quoteTimeRaw": digits,
+            "quoteDate": digits[:8] if len(digits) >= 8 else None,
+            "quoteTime": digits[-6:] if len(digits) >= 14 else None,
+            "source": "Tushare兼容stock_api实时行情",
+        }
+    return out
+
+
 def index_snapshot(quotes):
     names = {
         "sh000001": "上证指数", "sz399006": "创业板指", "sh000688": "科创50",
@@ -185,7 +250,8 @@ def index_snapshot(quotes):
         if not q: continue
         out[sym] = {
             "name": name, "close": q.get("price"), "changePct": q.get("changePct"),
-            "amount": q.get("amount"), "quoteTime": q.get("quoteTime")
+            "amount": q.get("amount"), "quoteTime": q.get("quoteTime"),
+            "quoteDate": q.get("quoteDate"), "source": q.get("source")
         }
     return out
 
@@ -247,25 +313,37 @@ def main():
         quotes = {}
         errors.append("腾讯行情：" + str(e))
 
+    # Complete only missing stock quotes. The second provider is never allowed
+    # to invent an index quote timestamp, which is required by the close gate.
+    if len(quotes) < len(symbols):
+        missing_symbols = [symbol for symbol in pool_symbols if symbol not in quotes]
+        if missing_symbols:
+            try:
+                secondary = stock_api_quotes(missing_symbols)
+                quotes.update(secondary)
+            except Exception as e:
+                errors.append("Tushare兼容个股行情：" + str(e))
+
     try:
-        industry = boards("industry")
+        industry = boards_with_failover("industry", day_compact)
     except Exception as e:
         industry = []
         errors.append("行业板块：" + str(e))
 
     try:
-        concept = boards("concept")
+        concept = boards_with_failover("concept", day_compact)
     except Exception as e:
         concept = []
         errors.append("概念板块：" + str(e))
 
     try:
-        breadth = all_a_breadth()
+        breadth = breadth_with_failover(day_compact)
     except Exception as e:
         breadth = {}
         errors.append("全A截面：" + str(e))
 
-    provider_dates = sorted({q.get("quoteDate") for q in quotes.values() if q.get("quoteDate")})
+    index_quotes = [quotes.get(symbol) or {} for symbol in index_symbols]
+    provider_dates = sorted({q.get("quoteDate") for q in index_quotes if q.get("quoteDate")})
     latest_provider_date = provider_dates[-1] if provider_dates else None
     verified_today = latest_provider_date == day_compact
     market = {
@@ -273,7 +351,9 @@ def main():
         "availableAt": generated,
         "confidence": "高" if verified_today and quotes and industry else ("中" if quotes or industry else "低"),
         "verifiedToday": verified_today,
-        "dataSource": "腾讯行情 + 东方财富",
+        "dataSource": ", ".join(sorted({q.get("source") for q in quotes.values() if q.get("source")}
+                                         | {x.get("source") for x in industry + concept if x.get("source")}
+                                         | ({breadth.get("source")} if breadth.get("source") else set()))),
         "indices": index_snapshot(quotes),
         "totalAmount": breadth.get("totalAmount"),
         "up": breadth.get("up"), "down": breadth.get("down"), "flat": breadth.get("flat"),
@@ -293,7 +373,9 @@ def main():
         "boardHeatmap": heat,
         "quotes": quotes,
         "errors": errors,
-        "dataSources": ["腾讯行情", "东方财富实时/延迟板块"]
+        "dataSources": sorted({q.get("source") for q in quotes.values() if q.get("source")}
+                              | {x.get("source") for x in industry + concept if x.get("source")}
+                              | ({breadth.get("source")} if breadth.get("source") else set()))
     }
 
     GATEWAY.mkdir(parents=True, exist_ok=True)
