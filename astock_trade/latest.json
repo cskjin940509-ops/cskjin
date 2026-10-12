@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-12",
-  "generatedAt": "2026-10-12T10:01:19+08:00",
+  "generatedAt": "2026-10-12T10:16:03+08:00",
   "phase": "LIVE",
   "officialDate": "2026-09-24",
   "officialPlans": [],
@@ -17,7 +17,7 @@
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 86.1,
+        "score": 85.9,
         "historical": {
           "samples": 4,
           "win5D": 1.0,
@@ -27,12 +27,12 @@
         }
       },
       "quote": {
-        "price": 29.13,
-        "changePct": 1.08,
+        "price": 29.16,
+        "changePct": 1.18,
         "open": null,
         "high": 30.3,
-        "low": 29.1,
-        "dayLowToHighPct": 4.12,
+        "low": 28.97,
+        "dayLowToHighPct": 4.59,
         "quoteTime": null
       },
       "entryZone": [
@@ -51,8 +51,58 @@
       "reasons": [
         "趋势回踩",
         "形态分 86",
-        "距MA20 +1.09 ATR",
-        "主力资金占比 +10.58%"
+        "距MA20 +1.11 ATR",
+        "主力资金占比 +9.47%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    },
+    {
+      "code": "300676",
+      "name": "华大基因",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 83.9,
+        "historical": {
+          "samples": 9,
+          "win5D": 0.6667,
+          "avg5D": 0.0045,
+          "avgMFE5D": 0.0585,
+          "avgMAE5D": -0.038
+        }
+      },
+      "quote": {
+        "price": 44.47,
+        "changePct": -2.2,
+        "open": null,
+        "high": 46.28,
+        "low": 44.25,
+        "dayLowToHighPct": 4.59,
+        "quoteTime": null
+      },
+      "entryZone": [
+        43.449,
+        44.327
+      ],
+      "triggerPrice": 43.888,
+      "stopLoss": 41.439,
+      "takeProfit1": 47.562,
+      "takeProfit2": 50.011,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 41.439",
+      "reasons": [
+        "趋势回踩",
+        "形态分 84",
+        "距MA20 +1.65 ATR",
+        "主力资金占比 +8.01%"
       ],
       "source": "沪深市场历史形态精筛"
     }
@@ -61,7 +111,7 @@
     "official": 0,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 1,
+    "expandedSetupCandidates": 2,
     "marketPrefilterCount": 220,
     "marketScannedCount": 220
   },
@@ -81,14 +131,14 @@
     "state": "partial",
     "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
     "reportedTotal": 5562,
-    "uniqueRows": 2094,
+    "uniqueRows": 4849,
     "pagesRequested": 56,
-    "coveragePct": 37.65,
+    "coveragePct": 87.18,
     "prefiltered": 220,
-    "historyLoaded": 80,
-    "setupMatches": 3,
-    "historicalEdgeMatches": 1,
-    "selected": 1,
+    "historyLoaded": 63,
+    "setupMatches": 7,
+    "historicalEdgeMatches": 2,
+    "selected": 2,
     "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
     "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
   }
