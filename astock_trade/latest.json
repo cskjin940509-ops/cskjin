@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-12",
-  "generatedAt": "2026-10-12T14:57:17+08:00",
+  "generatedAt": "2026-10-12T14:59:22+08:00",
   "phase": "LIVE",
   "officialDate": "2026-09-24",
   "officialPlans": [
@@ -30,7 +30,7 @@
         "high": 12.38,
         "low": 11.0,
         "dayLowToHighPct": 12.55,
-        "quoteTime": "20261012145718"
+        "quoteTime": "20261012145915"
       },
       "entryZone": null,
       "triggerPrice": 11.328,
@@ -74,7 +74,7 @@
         "high": 6.16,
         "low": 5.89,
         "dayLowToHighPct": 4.58,
-        "quoteTime": "20261012145700"
+        "quoteTime": "20261012145906"
       },
       "entryZone": null,
       "triggerPrice": 6.046,
@@ -118,7 +118,7 @@
         "high": 8.21,
         "low": 7.32,
         "dayLowToHighPct": 12.16,
-        "quoteTime": "20261012145718"
+        "quoteTime": "20261012145915"
       },
       "entryZone": null,
       "triggerPrice": 8.506,
@@ -138,12 +138,197 @@
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "688349",
+      "name": "三一重能",
+      "sector": "风电设备",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 83.5,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 13.7,
+        "changePct": 0.81,
+        "open": 13.51,
+        "high": 14.02,
+        "low": 13.51,
+        "dayLowToHighPct": 3.77,
+        "quoteTime": "20261012145915"
+      },
+      "entryZone": [
+        13.679,
+        13.885
+      ],
+      "triggerPrice": 13.72,
+      "stopLoss": 13.409,
+      "takeProfit1": 14.341,
+      "takeProfit2": 14.713,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 13.409",
+      "reasons": [
+        "突破回踩",
+        "形态分 83",
+        "距MA20 +1.60 ATR",
+        "主力资金占比 -2.63%"
+      ]
+    },
+    {
+      "code": "603218",
+      "name": "日月股份",
+      "sector": "风电零部件",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 83.1,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 9.72,
+        "changePct": 2.97,
+        "open": 9.41,
+        "high": 9.83,
+        "low": 9.39,
+        "dayLowToHighPct": 4.69,
+        "quoteTime": "20261012145922"
+      },
+      "entryZone": [
+        9.671,
+        9.816
+      ],
+      "triggerPrice": 9.7,
+      "stopLoss": 9.487,
+      "takeProfit1": 10.129,
+      "takeProfit2": 10.386,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 9.487",
+      "reasons": [
+        "突破回踩",
+        "形态分 83",
+        "距MA20 +1.34 ATR",
+        "主力资金占比 -4.34%"
+      ]
+    },
+    {
+      "code": "300185",
+      "name": "通裕重工",
+      "sector": "风电零部件",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 85.0,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 2.86,
+        "changePct": 1.42,
+        "open": 2.81,
+        "high": 2.88,
+        "low": 2.81,
+        "dayLowToHighPct": 2.49,
+        "quoteTime": "20261012145915"
+      },
+      "entryZone": [
+        2.861,
+        2.904
+      ],
+      "triggerPrice": 2.87,
+      "stopLoss": 2.81,
+      "takeProfit1": 2.992,
+      "takeProfit2": 3.065,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 2.810",
+      "reasons": [
+        "突破回踩",
+        "形态分 85",
+        "距MA20 +1.12 ATR",
+        "主力资金占比 +5.19%"
+      ]
+    },
+    {
+      "code": "000809",
+      "name": "和展能源",
+      "sector": "风电零部件",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 74.8,
+        "historical": {
+          "samples": 13,
+          "win5D": 0.2308,
+          "avg5D": -0.0089,
+          "avgMFE5D": 0.0259,
+          "avgMAE5D": -0.0372
+        }
+      },
+      "quote": {
+        "price": 3.47,
+        "changePct": 0.58,
+        "open": 3.44,
+        "high": 3.56,
+        "low": 3.42,
+        "dayLowToHighPct": 4.09,
+        "quoteTime": "20261012145915"
+      },
+      "entryZone": [
+        3.452,
+        3.489
+      ],
+      "triggerPrice": 3.454,
+      "stopLoss": 3.314,
+      "takeProfit1": 3.704,
+      "takeProfit2": 3.859,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 3.314",
+      "reasons": [
+        "趋势回踩",
+        "形态分 75",
+        "距MA20 +0.11 ATR",
+        "主力资金占比 -0.91%"
+      ]
+    }
+  ],
   "summary": {
     "official": 3,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 4
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -156,15 +341,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "blocked",
-    "reason": "full-market-data-unavailable",
-    "checkedAt": "2026-10-12T14:57:25.552753+08:00",
-    "errors": [
-      "HTTPError: HTTP Error 502: Bad Gateway",
-      "HTTPError: HTTP Error 502: Bad Gateway",
-      "HTTPError: HTTP Error 502: Bad Gateway"
-    ]
-  }
+  ]
 }
