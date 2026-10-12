@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-12",
-  "generatedAt": "2026-10-12T15:00:54+08:00",
+  "generatedAt": "2026-10-12T20:32:54+08:00",
   "phase": "LIVE",
   "officialDate": "2026-09-24",
   "officialPlans": [
@@ -30,7 +30,7 @@
         "high": 12.38,
         "low": 11.0,
         "dayLowToHighPct": 12.55,
-        "quoteTime": "20261012150001"
+        "quoteTime": "20261012161442"
       },
       "entryZone": null,
       "triggerPrice": 11.328,
@@ -74,7 +74,7 @@
         "high": 8.21,
         "low": 7.32,
         "dayLowToHighPct": 12.16,
-        "quoteTime": "20261012150001"
+        "quoteTime": "20261012161430"
       },
       "entryZone": null,
       "triggerPrice": 8.506,
@@ -118,7 +118,7 @@
         "high": 6.16,
         "low": 5.89,
         "dayLowToHighPct": 4.58,
-        "quoteTime": "20261012150001"
+        "quoteTime": "20261012161445"
       },
       "entryZone": null,
       "triggerPrice": 6.046,
@@ -138,115 +138,12 @@
       ]
     }
   ],
-  "setupCandidates": [
-    {
-      "code": "300234",
-      "name": "开尔新材",
-      "sector": "沪深市场形态扫描",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "盘前观察",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 86.2,
-        "historical": {
-          "samples": 7,
-          "win5D": 0.7143,
-          "avg5D": 0.0528,
-          "avgMFE5D": 0.1307,
-          "avgMAE5D": -0.0565
-        }
-      },
-      "quote": {
-        "price": 11.24,
-        "changePct": -0.97,
-        "open": null,
-        "high": 11.72,
-        "low": 11.01,
-        "dayLowToHighPct": 6.45,
-        "quoteTime": null
-      },
-      "entryZone": [
-        10.954,
-        11.176
-      ],
-      "triggerPrice": 11.065,
-      "stopLoss": 10.407,
-      "takeProfit1": 12.052,
-      "takeProfit2": 12.71,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 10.407",
-      "reasons": [
-        "趋势回踩",
-        "形态分 86",
-        "距MA20 +0.79 ATR",
-        "主力资金占比 +14.39%"
-      ],
-      "source": "沪深市场历史形态精筛"
-    },
-    {
-      "code": "001211",
-      "name": "双枪科技",
-      "sector": "沪深市场形态扫描",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "盘前观察",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 87.3,
-        "historical": {
-          "samples": 6,
-          "win5D": 0.8333,
-          "avg5D": 0.0138,
-          "avgMFE5D": 0.0481,
-          "avgMAE5D": -0.0306
-        }
-      },
-      "quote": {
-        "price": 27.34,
-        "changePct": -2.29,
-        "open": null,
-        "high": 28.17,
-        "low": 26.8,
-        "dayLowToHighPct": 5.11,
-        "quoteTime": null
-      },
-      "entryZone": [
-        26.63,
-        27.168
-      ],
-      "triggerPrice": 26.899,
-      "stopLoss": 25.285,
-      "takeProfit1": 29.32,
-      "takeProfit2": 30.934,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 25.285",
-      "reasons": [
-        "趋势回踩",
-        "形态分 87",
-        "距MA20 +1.04 ATR",
-        "主力资金占比 +16.75%"
-      ],
-      "source": "沪深市场历史形态精筛"
-    }
-  ],
+  "setupCandidates": [],
   "summary": {
     "official": 3,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 2,
-    "marketPrefilterCount": 220,
-    "marketScannedCount": 220
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -259,20 +156,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "ready",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5562,
-    "uniqueRows": 5562,
-    "pagesRequested": 56,
-    "coveragePct": 100.0,
-    "prefiltered": 220,
-    "historyLoaded": 220,
-    "setupMatches": 8,
-    "historicalEdgeMatches": 2,
-    "selected": 2,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
