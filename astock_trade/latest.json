@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-12",
-  "generatedAt": "2026-10-12T14:25:39+08:00",
+  "generatedAt": "2026-10-12T14:41:44+08:00",
   "phase": "LIVE",
   "officialDate": "2026-09-24",
   "officialPlans": [],
@@ -10,9 +10,7 @@
     "official": 0,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0,
-    "marketPrefilterCount": 62,
-    "marketScannedCount": 62
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -25,20 +23,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "partial",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5562,
-    "uniqueRows": 1400,
-    "pagesRequested": 56,
-    "coveragePct": 25.17,
-    "prefiltered": 62,
-    "historyLoaded": 0,
-    "setupMatches": 0,
-    "historicalEdgeMatches": 0,
-    "selected": 0,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
