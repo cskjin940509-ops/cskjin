@@ -1,10 +1,54 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-13",
-  "generatedAt": "2026-10-13T13:58:09+08:00",
+  "generatedAt": "2026-10-13T14:19:17+08:00",
   "phase": "LIVE",
   "officialDate": "2026-09-24",
   "officialPlans": [
+    {
+      "code": "002679",
+      "name": "福建金森",
+      "sector": "林业Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 51.1,
+        "historical": {}
+      },
+      "quote": {
+        "price": 11.86,
+        "changePct": 6.37,
+        "open": 10.83,
+        "high": 12.16,
+        "low": 10.6,
+        "dayLowToHighPct": 14.72,
+        "quoteTime": "20261013141927"
+      },
+      "entryZone": null,
+      "triggerPrice": 11.351,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 51",
+        "距MA20 +0.79 ATR",
+        "主力资金占比 +10.54%"
+      ]
+    },
     {
       "code": "000663",
       "name": "永安林业",
@@ -24,13 +68,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 6.12,
-        "changePct": 3.38,
+        "price": 6.08,
+        "changePct": 2.7,
         "open": 5.85,
         "high": 6.14,
         "low": 5.75,
         "dayLowToHighPct": 6.78,
-        "quoteTime": "20261013135815"
+        "quoteTime": "20261013141927"
       },
       "entryZone": null,
       "triggerPrice": 6.043,
@@ -45,52 +89,8 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +0.23 ATR",
+        "距MA20 +0.07 ATR",
         "主力资金占比 +9.80%"
-      ]
-    },
-    {
-      "code": "002679",
-      "name": "福建金森",
-      "sector": "林业Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 48.1,
-        "historical": {}
-      },
-      "quote": {
-        "price": 11.98,
-        "changePct": 7.44,
-        "open": 10.83,
-        "high": 12.16,
-        "low": 10.6,
-        "dayLowToHighPct": 14.72,
-        "quoteTime": "20261013135818"
-      },
-      "entryZone": null,
-      "triggerPrice": 11.351,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 48",
-        "距MA20 +0.93 ATR",
-        "主力资金占比 +10.54%"
       ]
     },
     {
@@ -112,13 +112,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 7.84,
-        "changePct": 6.38,
+        "price": 7.78,
+        "changePct": 5.56,
         "open": 7.03,
         "high": 7.88,
         "low": 7.03,
         "dayLowToHighPct": 12.09,
-        "quoteTime": "20261013135818"
+        "quoteTime": "20261013141927"
       },
       "entryZone": null,
       "triggerPrice": 8.38,
@@ -133,59 +133,59 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 43",
-        "距MA20 -0.67 ATR",
+        "距MA20 -0.76 ATR",
         "主力资金占比 +22.03%"
       ]
     }
   ],
   "setupCandidates": [
     {
-      "code": "002349",
-      "name": "精华制药",
+      "code": "002674",
+      "name": "兴业科技",
       "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
       "action": "盘前观察",
       "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 84.6,
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 90.4,
         "historical": {
-          "samples": 12,
-          "win5D": 0.8333,
-          "avg5D": 0.0575,
-          "avgMFE5D": 0.0914,
-          "avgMAE5D": -0.0171
+          "samples": 3,
+          "win5D": 1.0,
+          "avg5D": 0.1307,
+          "avgMFE5D": 0.1917,
+          "avgMAE5D": -0.0278
         }
       },
       "quote": {
-        "price": 8.67,
-        "changePct": 2.6,
+        "price": 21.77,
+        "changePct": 5.02,
         "open": null,
-        "high": 9.1,
-        "low": 8.19,
-        "dayLowToHighPct": 11.11,
+        "high": 22.37,
+        "low": 19.6,
+        "dayLowToHighPct": 14.13,
         "quoteTime": null
       },
       "entryZone": [
-        8.563,
-        8.735
+        21.455,
+        21.778
       ],
-      "triggerPrice": 8.649,
-      "stopLoss": 8.156,
-      "takeProfit1": 9.388,
-      "takeProfit2": 9.881,
+      "triggerPrice": 21.52,
+      "stopLoss": 20.703,
+      "takeProfit1": 22.988,
+      "takeProfit2": 23.902,
       "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 8.156",
+      "invalidation": "收盘/有效价格跌破 20.703",
       "reasons": [
-        "趋势回踩",
-        "形态分 85",
-        "距MA20 +0.42 ATR",
-        "主力资金占比 +2.80%"
+        "突破回踩",
+        "形态分 90",
+        "距MA20 +1.94 ATR",
+        "主力资金占比 +7.18%"
       ],
       "source": "沪深市场历史形态精筛"
     }
@@ -214,12 +214,12 @@
     "state": "ready",
     "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
     "reportedTotal": 5562,
-    "uniqueRows": 5559,
+    "uniqueRows": 5557,
     "pagesRequested": 56,
-    "coveragePct": 99.95,
+    "coveragePct": 99.91,
     "prefiltered": 220,
     "historyLoaded": 220,
-    "setupMatches": 7,
+    "setupMatches": 12,
     "historicalEdgeMatches": 1,
     "selected": 1,
     "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
