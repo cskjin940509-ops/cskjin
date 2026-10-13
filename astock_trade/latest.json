@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-12",
-  "generatedAt": "2026-10-12T15:03:55+08:00",
+  "date": "2026-10-13",
+  "generatedAt": "2026-10-13T09:43:14+08:00",
   "phase": "LIVE",
   "officialDate": "2026-09-24",
   "officialPlans": [
@@ -16,36 +16,45 @@
         "B3",
         "B4"
       ],
-      "action": "不建议买",
+      "action": "买入候选",
       "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 51.1,
-        "historical": {}
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 90.1,
+        "historical": {
+          "samples": 5,
+          "win5D": 0.8,
+          "avg5D": 0.0799,
+          "avgMFE5D": 0.1532,
+          "avgMAE5D": -0.0532
+        }
       },
       "quote": {
-        "price": 11.15,
-        "changePct": -6.3,
-        "open": 12.0,
-        "high": 12.38,
-        "low": 11.0,
-        "dayLowToHighPct": 12.55,
-        "quoteTime": "20261012150342"
+        "price": 11.31,
+        "changePct": 1.43,
+        "open": 10.83,
+        "high": 11.86,
+        "low": 10.6,
+        "dayLowToHighPct": 11.89,
+        "quoteTime": "20261013094324"
       },
-      "entryZone": null,
-      "triggerPrice": 11.328,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
+      "entryZone": [
+        11.237,
+        11.465
+      ],
+      "triggerPrice": 11.351,
+      "stopLoss": 10.67,
+      "takeProfit1": 12.373,
+      "takeProfit2": 13.054,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
+      "invalidation": "收盘/有效价格跌破 10.670",
       "reasons": [
-        "暂无可买形态",
-        "形态分 51",
-        "距MA20 +0.02 ATR",
+        "趋势回踩",
+        "形态分 90",
+        "距MA20 +0.17 ATR",
         "主力资金占比 +10.54%"
       ]
     },
@@ -68,16 +77,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 7.37,
-        "changePct": -9.35,
-        "open": 8.06,
-        "high": 8.21,
-        "low": 7.32,
-        "dayLowToHighPct": 12.16,
-        "quoteTime": "20261012150406"
+        "price": 7.57,
+        "changePct": 2.71,
+        "open": 7.03,
+        "high": 7.76,
+        "low": 7.03,
+        "dayLowToHighPct": 10.38,
+        "quoteTime": "20261013094324"
       },
       "entryZone": null,
-      "triggerPrice": 8.506,
+      "triggerPrice": 8.38,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -89,7 +98,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 43",
-        "距MA20 -1.39 ATR",
+        "距MA20 -1.09 ATR",
         "主力资金占比 +22.03%"
       ]
     },
@@ -112,16 +121,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 5.92,
-        "changePct": -2.95,
-        "open": 6.1,
-        "high": 6.16,
-        "low": 5.89,
-        "dayLowToHighPct": 4.58,
-        "quoteTime": "20261012150330"
+        "price": 5.86,
+        "changePct": -1.01,
+        "open": 5.85,
+        "high": 6.01,
+        "low": 5.78,
+        "dayLowToHighPct": 3.98,
+        "quoteTime": "20261013094324"
       },
       "entryZone": null,
-      "triggerPrice": 6.046,
+      "triggerPrice": 6.043,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -133,7 +142,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 41",
-        "距MA20 -0.65 ATR",
+        "距MA20 -0.84 ATR",
         "主力资金占比 +9.80%"
       ]
     }
@@ -141,7 +150,7 @@
   "setupCandidates": [],
   "summary": {
     "official": 3,
-    "officialBuy": 0,
+    "officialBuy": 1,
     "officialWatch": 0,
     "expandedSetupCandidates": 0
   },
@@ -156,5 +165,9 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "skipped",
+    "reason": "official-has-live-buy"
+  }
 }
