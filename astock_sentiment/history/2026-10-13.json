@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reportDate": "2026-10-13",
-  "generatedAt": "2026-10-13T15:09:10.584074+08:00",
+  "generatedAt": "2026-10-13T15:41:46.156217+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -10,37 +10,37 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "logUpDownRatio": null,
-        "up": null,
-        "down": null,
-        "flat": null,
-        "sampleCount": null
+        "logUpDownRatio": 0.20790118276112354,
+        "up": 2791.0,
+        "down": 2267.0,
+        "flat": 155.0,
+        "sampleCount": 5213.0
       },
-      "dataDate": "2026-09-24",
-      "availableAt": "2026-09-24T22:17:20+08:00",
+      "dataDate": "2026-10-13",
+      "availableAt": "2026-10-13T15:22:32+08:00",
       "classification": "研究原始值",
-      "status": "MISSING_INPUT",
+      "status": "INSUFFICIENT_485_HISTORY",
       "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
       "positionEligible": false
     },
     {
       "name": "两融情绪",
-      "score": 5.785123966942149,
+      "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "financingBalance": 2599510585033.0,
-        "change1d": -17300425101.0,
+        "financingBalance": 2517189315772.0,
+        "change1d": -82321269261.0,
         "exchangeCoverage": [
           "SSE",
           "SZSE"
         ],
         "errors": {},
-        "historyObservations": 485
+        "historyObservations": null
       },
-      "dataDate": "2026-09-24",
-      "availableAt": "2026-10-13T14:54:55+08:00",
-      "classification": "OFFICIAL_EXCHANGE_DATA",
-      "status": "FORMAL",
+      "dataDate": "2026-10-13",
+      "availableAt": "2026-10-13T15:41:19+08:00",
+      "classification": "反向工程估算",
+      "status": "ESTIMATED",
       "blocker": null,
       "positionEligible": true
     },
@@ -52,11 +52,11 @@
         "etfCount": 1783,
         "validChangeCount": 1781,
         "netShareChange1d": 992200.6203000001,
-        "netCreationAmountEstimate1d": 23776529.761437174,
+        "netCreationAmountEstimate1d": 23777327.500514988,
         "historyObservations": 21
       },
       "dataDate": "2026-10-12",
-      "availableAt": "2026-10-13T14:54:55+08:00",
+      "availableAt": "2026-10-13T15:41:19+08:00",
       "classification": "研究观察值",
       "status": "FORMULA_UNVERIFIED",
       "blocker": "原版ETF池、窗口、原始因子与标准化顺序未冻结；历史不足485日",
@@ -67,8 +67,8 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": null,
-      "dataDate": "2026-09-24",
-      "availableAt": "2026-10-13T15:09:10.584074+08:00",
+      "dataDate": "2026-10-13",
+      "availableAt": "2026-10-13T15:41:46.156217+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
