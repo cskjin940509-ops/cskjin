@@ -759,158 +759,63 @@
   ],
   "setupCandidates": [
     {
-      "code": "301001",
-      "name": "凯淳股份",
-      "sector": "电商服务",
+      "code": "002674",
+      "name": "兴业科技",
+      "sector": "沪深市场形态扫描",
       "official": false,
       "tailCore": false,
       "poolTags": [],
-      "action": "等待触发",
+      "action": "盘前观察",
       "setup": {
         "type": "BREAKOUT_RETEST",
         "label": "突破回踩",
-        "score": 85.6,
+        "score": 90.2,
         "historical": {
-          "samples": 2,
+          "samples": 3,
           "win5D": 1.0,
-          "avg5D": 0.0254,
-          "avgMFE5D": 0.0725,
-          "avgMAE5D": -0.0252
+          "avg5D": 0.1307,
+          "avgMFE5D": 0.1917,
+          "avgMAE5D": -0.0278
         }
       },
       "quote": {
-        "price": 26.75,
-        "changePct": 5.56,
-        "open": 24.99,
-        "high": 27.66,
-        "low": 24.71,
-        "dayLowToHighPct": 11.94,
-        "quoteTime": "20261013152509"
+        "price": 21.71,
+        "changePct": 4.73,
+        "open": null,
+        "high": 22.37,
+        "low": 19.6,
+        "dayLowToHighPct": 14.13,
+        "quoteTime": null
       },
       "entryZone": [
-        26.201,
-        26.595
+        21.455,
+        21.778
       ],
-      "triggerPrice": 26.28,
-      "stopLoss": 25.467,
-      "takeProfit1": 27.795,
-      "takeProfit2": 28.725,
+      "triggerPrice": 21.52,
+      "stopLoss": 20.703,
+      "takeProfit1": 22.988,
+      "takeProfit2": 23.902,
       "riskReward1": 1.5,
       "preferredWindow": "09:35-10:45 / 13:30-14:50",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 25.467",
+      "invalidation": "收盘/有效价格跌破 20.703",
       "reasons": [
         "突破回踩",
-        "形态分 86",
-        "距MA20 +1.58 ATR",
-        "主力资金占比 +7.84%"
-      ]
-    },
-    {
-      "code": "605566",
-      "name": "福莱蒽特",
-      "sector": "纺织化学制品",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.0,
-        "historical": {
-          "samples": 2,
-          "win5D": 0.5,
-          "avg5D": 0.0394,
-          "avgMFE5D": 0.1098,
-          "avgMAE5D": -0.0646
-        }
-      },
-      "quote": {
-        "price": 32.04,
-        "changePct": 2.04,
-        "open": 31.39,
-        "high": 32.25,
-        "low": 30.18,
-        "dayLowToHighPct": 6.86,
-        "quoteTime": "20261013152525"
-      },
-      "entryZone": [
-        32.01,
-        32.656
+        "形态分 90",
+        "距MA20 +1.88 ATR",
+        "主力资金占比 +6.23%"
       ],
-      "triggerPrice": 32.333,
-      "stopLoss": 30.474,
-      "takeProfit1": 35.122,
-      "takeProfit2": 36.981,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 30.474",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +1.27 ATR",
-        "主力资金占比 -4.88%"
-      ]
-    },
-    {
-      "code": "603093",
-      "name": "南华期货",
-      "sector": "期货",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 76.2,
-        "historical": {
-          "samples": 4,
-          "win5D": 0.0,
-          "avg5D": -0.0738,
-          "avgMFE5D": 0.054,
-          "avgMAE5D": -0.1028
-        }
-      },
-      "quote": {
-        "price": 13.58,
-        "changePct": 3.27,
-        "open": 13.01,
-        "high": 13.91,
-        "low": 12.95,
-        "dayLowToHighPct": 7.41,
-        "quoteTime": "20261013152524"
-      },
-      "entryZone": [
-        13.304,
-        13.572
-      ],
-      "triggerPrice": 13.438,
-      "stopLoss": 12.794,
-      "takeProfit1": 14.404,
-      "takeProfit2": 15.048,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 12.794",
-      "reasons": [
-        "趋势回踩",
-        "形态分 76",
-        "距MA20 +0.73 ATR",
-        "主力资金占比 +5.98%"
-      ]
+      "source": "沪深市场历史形态精筛"
     }
   ],
   "summary": {
     "official": 17,
     "officialBuy": 0,
     "officialWatch": 1,
-    "expandedSetupCandidates": 3
+    "expandedSetupCandidates": 1,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -923,5 +828,20 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "ready",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5562,
+    "uniqueRows": 5562,
+    "pagesRequested": 56,
+    "coveragePct": 100.0,
+    "prefiltered": 220,
+    "historyLoaded": 220,
+    "setupMatches": 12,
+    "historicalEdgeMatches": 1,
+    "selected": 1,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
+  }
 }
