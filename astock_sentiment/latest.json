@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reportDate": "2026-10-14",
-  "generatedAt": "2026-10-14T13:30:53.984141+08:00",
+  "generatedAt": "2026-10-14T14:06:13.573658+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -28,36 +28,37 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "financingBalance": null,
-        "change1d": null,
-        "exchangeCoverage": [],
+        "financingBalance": 2508122659838.0,
+        "change1d": -91387925195.0,
+        "exchangeCoverage": [
+          "SSE",
+          "SZSE"
+        ],
         "errors": {
-          "SSE": "JSONDecodeError",
-          "SZSE": "summary:ValueError;detail:ValueError;raw:ValueError",
           "primaryProxy": "RuntimeError"
         },
         "historyObservations": null
       },
       "dataDate": "2026-10-13",
-      "availableAt": "2026-10-14T13:04:19+08:00",
+      "availableAt": "2026-10-14T14:05:47+08:00",
       "classification": "反向工程估算",
-      "status": "MISSING_INPUT",
-      "blocker": "沪深交易所覆盖不完整",
-      "positionEligible": false
+      "status": "ESTIMATED",
+      "blocker": null,
+      "positionEligible": true
     },
     {
       "name": "ETF资金强弱",
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "etfCount": 753,
-        "validChangeCount": 751,
-        "netShareChange1d": 1980911073.0,
+        "etfCount": 1674,
+        "validChangeCount": 1671,
+        "netShareChange1d": 8939373073.0,
         "netCreationAmountEstimate1d": null,
         "historyObservations": 21
       },
       "dataDate": "2026-10-13",
-      "availableAt": "2026-10-14T13:04:19+08:00",
+      "availableAt": "2026-10-14T14:05:47+08:00",
       "classification": "研究观察值",
       "status": "FORMULA_UNVERIFIED",
       "blocker": "原版ETF池、窗口、原始因子与标准化顺序未冻结；历史不足485日",
@@ -69,7 +70,7 @@
       "scoreScale": "0-100",
       "raw": null,
       "dataDate": "2026-10-13",
-      "availableAt": "2026-10-14T13:30:53.984141+08:00",
+      "availableAt": "2026-10-14T14:06:13.573658+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
