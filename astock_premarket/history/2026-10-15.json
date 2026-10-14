@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "version": "v1.0-premarket-prediction-point-in-time",
+  "state": "ready",
+  "targetDate": "2026-10-15",
+  "generatedAt": "2026-10-14T15:27:45+08:00",
+  "sourceOfficialDate": "2026-10-13",
+  "factorDataDate": "2026-10-13",
+  "slowMoneyFresh": true,
+  "auctionDataUsed": false,
+  "continuousMarketDataUsed": false,
+  "pointInTimeCutoffZh": "只使用目标交易日开盘前已发布数据；不读取目标日09:15之后的集合竞价或连续竞价行情。",
+  "roleZh": "开盘前提前预测池；不是正式买入池，也不会改写Official、盘中雷达或智能实盘账本。",
+  "sourceAvailability": {
+    "Official": "可用：2026-10-13 Official",
+    "B1两融": "可用：数据日 2026-10-13",
+    "B2 ETF": "可用：数据日 2026-10-13",
+    "B3主力": "使用 2026-10-13 Official 冻结主力资金口径",
+    "历史形态": "只作风险背景，不直接当作买入概率"
+  },
+  "pools": {
+    "B0": [
+      "300107",
+      "603980",
+      "603466",
+      "605058",
+      "688655",
+      "301132",
+      "301041",
+      "000823",
+      "300964",
+      "301313"
+    ],
+    "B1": [
+      "301313",
+      "603328",
+      "001232"
+    ],
+    "B2": [],
+    "B3": [
+      "300107",
+      "603466",
+      "000823",
+      "603980",
+      "301041",
+      "603328",
+      "301313",
+      "002579",
+      "605258",
+      "002961"
+    ],
+    "B4": [
+      "300107",
+      "000823",
+      "603328",
+      "603466",
+      "301313",
+      "002961",
+      "603980",
+      "605058",
+      "301041",
+      "605258"
+    ],
+    "B12": [],
+    "B13": [
+      "301313",
+      "603328"
+    ],
+    "B23": []
+  },
+  "historyContext": {
+    "updatedAt": "2026-10-14T00:26:37+08:00",
+    "liveSampleConfidenceZh": "高",
+    "liveEdgeStateZh": "近期弱化",
+    "liveEdgeReasonZh": "最近20个成熟样本的5日中位超额收益明显低于较长窗口。",
+    "reconstructionRecentTrendZh": "近期增强",
+    "reconstructionAdviceZh": "历史重建只用于研究/校准；真实交易权重仍以持续样本外验证为准。",
+    "policyZh": "历史形态只作风险背景，不把历史重建收益直接写成买入概率或实盘权重。"
+  },
+  "summary": {
+    "candidateCount": 15,
+    "tierCounts": {
+      "一级优先": 0,
+      "二级观察": 0,
+      "等竞价确认": 15
+    },
+    "noteZh": "一级优先仍需竞价/开盘确认；若B1/B2尚未更新则不会给出一级优先。"
+  },
+  "candidates": [
+    {
+      "code": "603328",
+      "name": "依顿电子",
+      "sector": "印制电路板",
+      "priorityScore": 71.98,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B1",
+        "B3",
+        "B4",
+        "B13"
+      ],
+      "baseScore": 69.58,
+      "slowCompositeScore": 69.98,
+      "marginScore": 84.62,
+      "etfScore": null,
+      "mainFlowPct": 18.3,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 9.98,
+      "reasonZh": "B13 双因子确认；基础/综合强度 70.0；两融评分 85",
+      "riskZh": "追高风险高；上一交易日已上涨9.98%",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "301313",
+      "name": "凡拓数创",
+      "sector": "其他数字媒体",
+      "priorityScore": 70.73,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B1",
+        "B3",
+        "B4",
+        "B13"
+      ],
+      "baseScore": 69.73,
+      "slowCompositeScore": 66.73,
+      "marginScore": 90.77,
+      "etfScore": 29.05,
+      "mainFlowPct": 16.69,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 13.91,
+      "reasonZh": "B13 双因子确认；基础/综合强度 66.7；两融评分 91；ETF评分 29",
+      "riskZh": "追高风险高；上一交易日已上涨13.91%",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "300107",
+      "name": "建新股份",
+      "sector": "纺织化学制品",
+      "priorityScore": 67.7,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "baseScore": 84.23,
+      "slowCompositeScore": 72.7,
+      "marginScore": null,
+      "etfScore": 24.29,
+      "mainFlowPct": 34.15,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 20.03,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 72.7；ETF评分 24",
+      "riskZh": "追高风险高；上一交易日已上涨20.03%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "000823",
+      "name": "超声电子",
+      "sector": "印制电路板",
+      "priorityScore": 65.08,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "baseScore": 74.87,
+      "slowCompositeScore": 70.08,
+      "marginScore": 45.38,
+      "etfScore": null,
+      "mainFlowPct": 23.61,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 10.0,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 70.1；两融评分 45",
+      "riskZh": "追高风险高；上一交易日已上涨10.00%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "603466",
+      "name": "风语筑",
+      "sector": "其他数字媒体",
+      "priorityScore": 64.94,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "baseScore": 83.11,
+      "slowCompositeScore": 69.94,
+      "marginScore": 45.38,
+      "etfScore": 29.05,
+      "mainFlowPct": 19.73,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 9.97,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 69.9；两融评分 45；ETF评分 29",
+      "riskZh": "追高风险高；上一交易日已上涨9.97%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "002961",
+      "name": "瑞达期货",
+      "sector": "期货",
+      "priorityScore": 64.0,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B3",
+        "B4"
+      ],
+      "baseScore": 63.78,
+      "slowCompositeScore": 63.0,
+      "marginScore": null,
+      "etfScore": null,
+      "mainFlowPct": 18.49,
+      "mainlineStage": null,
+      "chaseRisk": "MEDIUM",
+      "previousChangePct": 5.9,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 63.0",
+      "riskZh": "追高风险中；上一交易日已上涨5.90%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "603980",
+      "name": "吉华集团",
+      "sector": "纺织化学制品",
+      "priorityScore": 57.59,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "baseScore": 84.01,
+      "slowCompositeScore": 62.59,
+      "marginScore": null,
+      "etfScore": 24.29,
+      "mainFlowPct": 7.61,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 10.0,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 62.6；ETF评分 24",
+      "riskZh": "追高风险高；上一交易日已上涨10.00%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "301041",
+      "name": "金百泽",
+      "sector": "印制电路板",
+      "priorityScore": 55.87,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "baseScore": 75.09,
+      "slowCompositeScore": 60.87,
+      "marginScore": 27.69,
+      "etfScore": null,
+      "mainFlowPct": 15.33,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 20.0,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 60.9；两融评分 28",
+      "riskZh": "追高风险高；上一交易日已上涨20.00%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "301132",
+      "name": "满坤科技",
+      "sector": "印制电路板",
+      "priorityScore": 54.29,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0"
+      ],
+      "baseScore": 75.13,
+      "slowCompositeScore": 60.29,
+      "marginScore": 60.77,
+      "etfScore": null,
+      "mainFlowPct": 5.81,
+      "mainlineStage": null,
+      "chaseRisk": "MEDIUM",
+      "previousChangePct": 10.94,
+      "reasonZh": "基础/综合强度 60.3；两融评分 61",
+      "riskZh": "追高风险中；上一交易日已上涨10.94%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "605258",
+      "name": "协和电子",
+      "sector": "印制电路板",
+      "priorityScore": 53.4,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B3",
+        "B4"
+      ],
+      "baseScore": 69.69,
+      "slowCompositeScore": 60.4,
+      "marginScore": null,
+      "etfScore": null,
+      "mainFlowPct": 14.01,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 10.01,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 60.4",
+      "riskZh": "追高风险高；上一交易日已上涨10.01%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "605058",
+      "name": "澳弘电子",
+      "sector": "印制电路板",
+      "priorityScore": 52.18,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0",
+        "B4"
+      ],
+      "baseScore": 77.91,
+      "slowCompositeScore": 61.18,
+      "marginScore": null,
+      "etfScore": null,
+      "mainFlowPct": 5.88,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 10.0,
+      "reasonZh": "基础/综合强度 61.2",
+      "riskZh": "追高风险高；上一交易日已上涨10.00%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "001232",
+      "name": "嘉立创",
+      "sector": "印制电路板",
+      "priorityScore": 49.5,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B1"
+      ],
+      "baseScore": 43.77,
+      "slowCompositeScore": 42.5,
+      "marginScore": 61.54,
+      "etfScore": null,
+      "mainFlowPct": 4.77,
+      "mainlineStage": null,
+      "chaseRisk": "LOW",
+      "previousChangePct": 0.99,
+      "reasonZh": "B1 单源/多源确认；基础/综合强度 42.5；两融评分 62",
+      "riskZh": "暂无双因子交叉确认",
+      "auctionConfirmZh": "竞价不明显转弱即可继续观察；9:30后交给盘中雷达和智能实盘重新评分。"
+    },
+    {
+      "code": "002579",
+      "name": "中京电子",
+      "sector": "印制电路板",
+      "priorityScore": 48.38,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B3"
+      ],
+      "baseScore": 68.89,
+      "slowCompositeScore": 57.38,
+      "marginScore": 17.69,
+      "etfScore": null,
+      "mainFlowPct": 16.39,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 9.97,
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 57.4；两融评分 18",
+      "riskZh": "追高风险高；上一交易日已上涨9.97%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "300964",
+      "name": "本川智能",
+      "sector": "印制电路板",
+      "priorityScore": 46.91,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0"
+      ],
+      "baseScore": 69.94,
+      "slowCompositeScore": 52.91,
+      "marginScore": 58.46,
+      "etfScore": null,
+      "mainFlowPct": -0.54,
+      "mainlineStage": null,
+      "chaseRisk": "MEDIUM",
+      "previousChangePct": 11.08,
+      "reasonZh": "基础/综合强度 52.9；两融评分 58",
+      "riskZh": "追高风险中；上一交易日已上涨11.08%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    },
+    {
+      "code": "688655",
+      "name": "迅捷兴",
+      "sector": "印制电路板",
+      "priorityScore": 43.57,
+      "tierZh": "等竞价确认",
+      "memberships": [
+        "B0"
+      ],
+      "baseScore": 76.36,
+      "slowCompositeScore": 54.57,
+      "marginScore": 40.77,
+      "etfScore": null,
+      "mainFlowPct": 3.63,
+      "mainlineStage": null,
+      "chaseRisk": "HIGH",
+      "previousChangePct": 20.0,
+      "reasonZh": "基础/综合强度 54.6；两融评分 41",
+      "riskZh": "追高风险高；上一交易日已上涨20.00%；暂无双因子交叉确认",
+      "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
+    }
+  ]
+}
