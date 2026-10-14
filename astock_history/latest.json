@@ -1,24 +1,24 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-10-14T00:26:37+08:00",
+  "updatedAt": "2026-10-14T20:52:29+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
-    "sampleCount": 304,
+    "sampleCount": 322,
     "confidenceZh": "高",
     "horizons": {
       "1D": {
-        "members": 304,
+        "members": 322,
         "mature": true,
-        "meanReturn": -0.00178905,
-        "medianReturn": -0.0024015,
-        "hitRate": 0.45723684,
-        "meanAlpha": -0.00014888,
-        "medianAlpha": -0.001264,
-        "p10": -0.0518746,
-        "p25": -0.0248305,
-        "p75": 0.01886075,
-        "p90": 0.049298
+        "meanReturn": -0.00219399,
+        "medianReturn": -0.0030875,
+        "hitRate": 0.44409938,
+        "meanAlpha": -4.011e-05,
+        "medianAlpha": -0.0019515,
+        "p10": -0.0526966,
+        "p25": -0.0272435,
+        "p75": 0.01823425,
+        "p90": 0.0490751
       },
       "2D": {
         "members": 0,
@@ -31,12 +31,12 @@
       "5D": {
         "members": 303,
         "mature": true,
-        "meanReturn": 0.00102149,
+        "meanReturn": 0.00102015,
         "medianReturn": -0.00534,
         "hitRate": 0.47854785,
-        "meanAlpha": 0.00946127,
+        "meanAlpha": 0.00945994,
         "medianAlpha": -0.002539,
-        "p10": -0.1140012,
+        "p10": -0.1141092,
         "p25": -0.0604245,
         "p75": 0.0518275,
         "p90": 0.1223246
@@ -44,10 +44,10 @@
       "10D": {
         "members": 300,
         "mature": true,
-        "meanReturn": -0.03031025,
+        "meanReturn": -0.03031193,
         "medianReturn": -0.0487885,
         "hitRate": 0.34333333,
-        "meanAlpha": -0.00837665,
+        "meanAlpha": -0.00837833,
         "medianAlpha": -0.0284585,
         "p10": -0.1740102,
         "p25": -0.11663525,
@@ -55,17 +55,17 @@
         "p90": 0.1302472
       },
       "20D": {
-        "members": 146,
+        "members": 163,
         "mature": true,
-        "meanReturn": -0.07455356,
-        "medianReturn": -0.085706,
-        "hitRate": 0.15753425,
-        "meanAlpha": -0.02471123,
-        "medianAlpha": -0.0293735,
-        "p10": -0.171033,
-        "p25": -0.14567175,
-        "p75": -0.025345,
-        "p90": 0.0347825
+        "meanReturn": -0.0859408,
+        "medianReturn": -0.097906,
+        "hitRate": 0.14723926,
+        "meanAlpha": -0.03307736,
+        "medianAlpha": -0.043714,
+        "p10": -0.1845026,
+        "p25": -0.1544285,
+        "p75": -0.028292,
+        "p90": 0.0340626
       },
       "40D": {
         "members": 0,
@@ -84,8 +84,8 @@
         "mature": false
       }
     },
-    "medianMFE": 0.0888045,
-    "medianMAE": -0.1737,
+    "medianMFE": 0.08523,
+    "medianMAE": -0.1667335,
     "medianMaxDrawdown": null
   },
   "horizonGroups": {
@@ -122,8 +122,8 @@
   },
   "edgeTrend": {
     "full": {
-      "requestedSamples": 304,
-      "actualSamples": 304,
+      "requestedSamples": 322,
+      "actualSamples": 322,
       "fiveDayMedianAlpha": -0.002539,
       "fiveDayMedianReturn": -0.00534,
       "fiveDayHitRate": 0.47854785,
@@ -132,36 +132,36 @@
     "recent20": {
       "requestedSamples": 20,
       "actualSamples": 20,
-      "fiveDayMedianAlpha": -0.0693765,
-      "fiveDayMedianReturn": -0.105581,
-      "fiveDayHitRate": 0.1,
-      "fiveDayMembers": 20
+      "fiveDayMedianAlpha": 0.069308,
+      "fiveDayMedianReturn": 0.045218,
+      "fiveDayHitRate": 1.0,
+      "fiveDayMembers": 2
     },
     "recent60": {
       "requestedSamples": 60,
       "actualSamples": 60,
-      "fiveDayMedianAlpha": -0.0218895,
-      "fiveDayMedianReturn": -0.0212465,
-      "fiveDayHitRate": 0.38333333,
-      "fiveDayMembers": 60
+      "fiveDayMedianAlpha": -0.029432,
+      "fiveDayMedianReturn": -0.0400905,
+      "fiveDayHitRate": 0.30952381,
+      "fiveDayMembers": 42
     },
     "calendarViews": {
       "all": {
-        "sampleCount": 304,
+        "sampleCount": 322,
         "fiveDayMembers": 303,
         "fiveDayMedianAlpha": -0.002539,
         "fiveDayMedianReturn": -0.00534,
         "fiveDayHitRate": 0.47854785
       },
       "recentOneYear": {
-        "sampleCount": 304,
+        "sampleCount": 322,
         "fiveDayMembers": 303,
         "fiveDayMedianAlpha": -0.002539,
         "fiveDayMedianReturn": -0.00534,
         "fiveDayHitRate": 0.47854785
       },
       "recentThreeMonths": {
-        "sampleCount": 304,
+        "sampleCount": 322,
         "fiveDayMembers": 303,
         "fiveDayMedianAlpha": -0.002539,
         "fiveDayMedianReturn": -0.00534,
@@ -1011,10 +1011,9 @@
       }
     ],
     "judgement": {
-      "stateZh": "近期弱化",
-      "score": -1,
-      "delta": -0.047487,
-      "reasonZh": "最近20个成熟样本的5日中位超额收益明显低于较长窗口。"
+      "stateZh": "样本不足",
+      "score": 0,
+      "reasonZh": "5日成熟样本不足，暂不对历史优势强弱下结论。"
     }
   },
   "sampleGrowth": [
@@ -1112,6 +1111,11 @@
       "date": "2026-09-24",
       "newSamples": 3,
       "cumulativeSamples": 304
+    },
+    {
+      "date": "2026-10-13",
+      "newSamples": 18,
+      "cumulativeSamples": 322
     }
   ],
   "eventPath": [
@@ -1123,82 +1127,82 @@
     },
     {
       "day": 1,
-      "meanReturn": -0.00178905,
-      "medianReturn": -0.0024015,
-      "meanAlpha": -0.00014888,
-      "members": 304
+      "meanReturn": -0.00219399,
+      "medianReturn": -0.0030875,
+      "meanAlpha": -4.011e-05,
+      "members": 322
     },
     {
       "day": 5,
-      "meanReturn": 0.00102149,
+      "meanReturn": 0.00102015,
       "medianReturn": -0.00534,
-      "meanAlpha": 0.00946127,
+      "meanAlpha": 0.00945994,
       "members": 303
     },
     {
       "day": 10,
-      "meanReturn": -0.03031025,
+      "meanReturn": -0.03031193,
       "medianReturn": -0.0487885,
-      "meanAlpha": -0.00837665,
+      "meanAlpha": -0.00837833,
       "members": 300
     },
     {
       "day": 20,
-      "meanReturn": -0.07455356,
-      "medianReturn": -0.085706,
-      "meanAlpha": -0.02471123,
-      "members": 146
+      "meanReturn": -0.0859408,
+      "medianReturn": -0.097906,
+      "meanAlpha": -0.03307736,
+      "members": 163
     }
   ],
   "returnDistributions": {
     "1D": {
       "horizon": "1D",
-      "members": 304,
+      "members": 322,
       "bins": [
         {
           "label": "<-5%",
-          "count": 32,
-          "share": 0.10526316
+          "count": 35,
+          "share": 0.10869565
         },
         {
           "label": "-5~-3%",
-          "count": 32,
-          "share": 0.10526316
+          "count": 37,
+          "share": 0.11490683
         },
         {
           "label": "-3~-1%",
-          "count": 66,
-          "share": 0.21710526
+          "count": 70,
+          "share": 0.2173913
         },
         {
           "label": "-1~0%",
-          "count": 29,
-          "share": 0.09539474
+          "count": 30,
+          "share": 0.0931677
         },
         {
           "label": "0~1%",
-          "count": 48,
-          "share": 0.15789474
+          "count": 50,
+          "share": 0.1552795
         },
         {
           "label": "1~3%",
-          "count": 39,
-          "share": 0.12828947
+          "count": 41,
+          "share": 0.12732919
         },
         {
           "label": "3~5%",
           "count": 28,
-          "share": 0.09210526
+          "share": 0.08695652
         },
         {
           "label": "5~10%",
           "count": 24,
-          "share": 0.07894737
+          "share": 0.07453416
         },
         {
           "label": ">10%",
-          "count": 6,
-          "share": 0.01973684
+          "count": 7,
+          "share": 0.02173913
         }
       ]
     },
@@ -1357,52 +1361,52 @@
     },
     "20D": {
       "horizon": "20D",
-      "members": 146,
+      "members": 163,
       "bins": [
         {
           "label": "<-5%",
-          "count": 100,
-          "share": 0.68493151
+          "count": 116,
+          "share": 0.71165644
         },
         {
           "label": "-5~-3%",
           "count": 4,
-          "share": 0.02739726
+          "share": 0.02453988
         },
         {
           "label": "-3~-1%",
           "count": 13,
-          "share": 0.0890411
+          "share": 0.0797546
         },
         {
           "label": "-1~0%",
           "count": 5,
-          "share": 0.03424658
+          "share": 0.03067485
         },
         {
           "label": "0~1%",
           "count": 1,
-          "share": 0.00684932
+          "share": 0.00613497
         },
         {
           "label": "1~3%",
           "count": 6,
-          "share": 0.04109589
+          "share": 0.03680982
         },
         {
           "label": "3~5%",
           "count": 4,
-          "share": 0.02739726
+          "share": 0.02453988
         },
         {
           "label": "5~10%",
-          "count": 6,
-          "share": 0.04109589
+          "count": 7,
+          "share": 0.04294479
         },
         {
           "label": ">10%",
           "count": 7,
-          "share": 0.04794521
+          "share": 0.04294479
         }
       ]
     },
@@ -1511,6 +1515,168 @@
   },
   "riskScatter": [
     {
+      "id": "2026-10-13-688655",
+      "date": "2026-10-13",
+      "code": "688655",
+      "name": "迅捷兴",
+      "mfe": 0.049602,
+      "mae": -0.012581,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-605258",
+      "date": "2026-10-13",
+      "code": "605258",
+      "name": "协和电子",
+      "mfe": 0.019286,
+      "mae": -0.045238,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-605058",
+      "date": "2026-10-13",
+      "code": "605058",
+      "name": "澳弘电子",
+      "mfe": 0.060843,
+      "mae": -0.017886,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-603980",
+      "date": "2026-10-13",
+      "code": "603980",
+      "name": "吉华集团",
+      "mfe": 0.053421,
+      "mae": -0.059981,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-603466",
+      "date": "2026-10-13",
+      "code": "603466",
+      "name": "风语筑",
+      "mfe": 0.071481,
+      "mae": -0.006632,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-603328",
+      "date": "2026-10-13",
+      "code": "603328",
+      "name": "依顿电子",
+      "mfe": 0.03209,
+      "mae": -0.019403,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-301313",
+      "date": "2026-10-13",
+      "code": "301313",
+      "name": "凡拓数创",
+      "mfe": 0.141112,
+      "mae": 0.0,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-301132",
+      "date": "2026-10-13",
+      "code": "301132",
+      "name": "满坤科技",
+      "mfe": 0.22044,
+      "mae": 0.0,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-301041",
+      "date": "2026-10-13",
+      "code": "301041",
+      "name": "金百泽",
+      "mfe": 0.019155,
+      "mae": -0.051081,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-300964",
+      "date": "2026-10-13",
+      "code": "300964",
+      "name": "本川智能",
+      "mfe": 0.013448,
+      "mae": -0.06105,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-300107",
+      "date": "2026-10-13",
+      "code": "300107",
+      "name": "建新股份",
+      "mfe": 0.127273,
+      "mae": -0.010227,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-002961",
+      "date": "2026-10-13",
+      "code": "002961",
+      "name": "瑞达期货",
+      "mfe": 0.01669,
+      "mae": -0.037552,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-002938",
+      "date": "2026-10-13",
+      "code": "002938",
+      "name": "鹏鼎控股",
+      "mfe": 0.010186,
+      "mae": -0.03205,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-002579",
+      "date": "2026-10-13",
+      "code": "002579",
+      "name": "中京电子",
+      "mfe": 0.019825,
+      "mae": -0.044898,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-002440",
+      "date": "2026-10-13",
+      "code": "002440",
+      "name": "闰土股份",
+      "mfe": 0.021792,
+      "mae": -0.071832,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-001389",
+      "date": "2026-10-13",
+      "code": "001389",
+      "name": "广合科技",
+      "mfe": 0.018651,
+      "mae": -0.033716,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-001232",
+      "date": "2026-10-13",
+      "code": "001232",
+      "name": "嘉立创",
+      "mfe": 0.007266,
+      "mae": -0.024635,
+      "fiveDayReturn": null
+    },
+    {
+      "id": "2026-10-13-000823",
+      "date": "2026-10-13",
+      "code": "000823",
+      "name": "超声电子",
+      "mfe": 0.0,
+      "mae": -0.017923,
+      "fiveDayReturn": null
+    },
+    {
       "id": "2026-09-24-002679",
       "date": "2026-09-24",
       "code": "002679",
@@ -1552,7 +1718,7 @@
       "code": "688521",
       "name": "芯原股份",
       "mfe": 0.055797,
-      "mae": -0.360773,
+      "mae": -0.37401,
       "fiveDayReturn": -0.067633
     },
     {
@@ -1714,7 +1880,7 @@
       "code": "601112",
       "name": "振石股份",
       "mfe": 0.089286,
-      "mae": -0.081281,
+      "mae": -0.094212,
       "fiveDayReturn": -0.00431
     },
     {
@@ -1749,7 +1915,7 @@
       "date": "2026-09-17",
       "code": "300413",
       "name": "芒果超媒",
-      "mfe": 0.411299,
+      "mfe": 0.532203,
       "mae": -0.016384,
       "fiveDayReturn": 0.073446
     },
@@ -1777,7 +1943,7 @@
       "code": "002080",
       "name": "中材科技",
       "mfe": 0.026022,
-      "mae": -0.237299,
+      "mae": -0.28005,
       "fiveDayReturn": -0.114002
     },
     {
@@ -1795,7 +1961,7 @@
       "code": "688729",
       "name": "屹唐股份",
       "mfe": 0.103636,
-      "mae": -0.210196,
+      "mae": -0.214375,
       "fiveDayReturn": 0.030088
     },
     {
@@ -1858,7 +2024,7 @@
       "code": "688008",
       "name": "澜起科技",
       "mfe": 0.178084,
-      "mae": -0.102758,
+      "mae": -0.122007,
       "fiveDayReturn": 0.128473
     },
     {
@@ -1894,7 +2060,7 @@
       "code": "600206",
       "name": "有研新材",
       "mfe": 0.023585,
-      "mae": -0.2,
+      "mae": -0.250755,
       "fiveDayReturn": -0.028679
     },
     {
@@ -1939,7 +2105,7 @@
       "code": "688729",
       "name": "屹唐股份",
       "mfe": 0.138362,
-      "mae": -0.185345,
+      "mae": -0.189655,
       "fiveDayReturn": 0.067241
     },
     {
@@ -1993,7 +2159,7 @@
       "code": "603248",
       "name": "锡华科技",
       "mfe": 0.3245,
-      "mae": -0.042,
+      "mae": -0.0695,
       "fiveDayReturn": 0.194
     },
     {
@@ -2011,7 +2177,7 @@
       "code": "600549",
       "name": "厦门钨业",
       "mfe": 0.013911,
-      "mae": -0.2188,
+      "mae": -0.230326,
       "fiveDayReturn": -0.027822
     },
     {
@@ -2020,7 +2186,7 @@
       "code": "300443",
       "name": "金雷股份",
       "mfe": 0.123125,
-      "mae": -0.028453,
+      "mae": -0.067253,
       "fiveDayReturn": 0.011899
     },
     {
@@ -2164,7 +2330,7 @@
       "code": "002821",
       "name": "凯莱英",
       "mfe": 0.097853,
-      "mae": -0.062147,
+      "mae": -0.079096,
       "fiveDayReturn": 0.07904
     },
     {
@@ -2262,9 +2428,9 @@
       "date": "2026-09-11",
       "code": "600105",
       "name": "永鼎股份",
-      "mfe": 0.153585,
-      "mae": -0.299419,
-      "fiveDayReturn": 0.125727
+      "mfe": 0.153716,
+      "mae": -0.299673,
+      "fiveDayReturn": 0.125833
     },
     {
       "id": "2026-09-11-301526",
@@ -2415,7 +2581,7 @@
       "date": "2026-09-10",
       "code": "601939",
       "name": "建设银行",
-      "mfe": 0.042844,
+      "mfe": 0.052871,
       "mae": -0.024613,
       "fiveDayReturn": -0.005469
     },
@@ -2452,7 +2618,7 @@
       "code": "601112",
       "name": "振石股份",
       "mfe": 0.13982,
-      "mae": -0.03866,
+      "mae": -0.052191,
       "fiveDayReturn": 0.055412
     },
     {
@@ -2488,7 +2654,7 @@
       "code": "600876",
       "name": "凯盛新能",
       "mfe": 0.153483,
-      "mae": -0.140496,
+      "mae": -0.146399,
       "fiveDayReturn": -0.012987
     },
     {
@@ -2533,7 +2699,7 @@
       "code": "002948",
       "name": "青岛银行",
       "mfe": 0.001572,
-      "mae": -0.062893,
+      "mae": -0.06761,
       "fiveDayReturn": -0.053459
     },
     {
@@ -2560,7 +2726,7 @@
       "code": "002080",
       "name": "中材科技",
       "mfe": 0.33012,
-      "mae": -0.034137,
+      "mae": -0.066667,
       "fiveDayReturn": 0.178514
     },
     {
@@ -2640,9 +2806,9 @@
       "date": "2026-09-09",
       "code": "600105",
       "name": "永鼎股份",
-      "mfe": 0.156948,
-      "mae": -0.297376,
-      "fiveDayReturn": 0.098639
+      "mfe": 0.157082,
+      "mae": -0.297629,
+      "fiveDayReturn": 0.098723
     },
     {
       "id": "2026-09-09-301366",
@@ -2740,7 +2906,7 @@
       "code": "002320",
       "name": "海峡股份",
       "mfe": 0.07723,
-      "mae": -0.191744,
+      "mae": -0.201065,
       "fiveDayReturn": -0.111851
     },
     {
@@ -2803,7 +2969,7 @@
       "code": "600596",
       "name": "新安股份",
       "mfe": 0.075041,
-      "mae": -0.155791,
+      "mae": -0.162316,
       "fiveDayReturn": 0.020392
     },
     {
@@ -2892,9 +3058,9 @@
       "date": "2026-09-08",
       "code": "002312",
       "name": "川发龙蟒",
-      "mfe": 0.028125,
-      "mae": -0.16875,
-      "fiveDayReturn": -0.113542
+      "mfe": 0.028272,
+      "mae": -0.169634,
+      "fiveDayReturn": -0.114136
     },
     {
       "id": "2026-09-08-000893",
@@ -2902,7 +3068,7 @@
       "code": "000893",
       "name": "亚钾国际",
       "mfe": 0.011013,
-      "mae": -0.25,
+      "mae": -0.264097,
       "fiveDayReturn": -0.114537
     },
     {
@@ -3109,7 +3275,7 @@
       "code": "601888",
       "name": "中国中免",
       "mfe": 0.030314,
-      "mae": -0.072345,
+      "mae": -0.0809,
       "fiveDayReturn": -0.022131
     },
     {
@@ -3118,7 +3284,7 @@
       "code": "601628",
       "name": "中国人寿",
       "mfe": 0.019128,
-      "mae": -0.10176,
+      "mae": -0.130579,
       "fiveDayReturn": -0.023718
     },
     {
@@ -3127,7 +3293,7 @@
       "code": "601318",
       "name": "中国平安",
       "mfe": 0.019508,
-      "mae": -0.096134,
+      "mae": -0.106854,
       "fiveDayReturn": -0.024253
     },
     {
@@ -3147,168 +3313,6 @@
       "mfe": 0.03777,
       "mae": -0.18705,
       "fiveDayReturn": -0.068345
-    },
-    {
-      "id": "2026-09-03-600172",
-      "date": "2026-09-03",
-      "code": "600172",
-      "name": "黄河旋风",
-      "mfe": 0.103165,
-      "mae": -0.236709,
-      "fiveDayReturn": -0.027848
-    },
-    {
-      "id": "2026-09-03-301071",
-      "date": "2026-09-03",
-      "code": "301071",
-      "name": "力量钻石",
-      "mfe": 0.152993,
-      "mae": -0.195755,
-      "fiveDayReturn": -0.019005
-    },
-    {
-      "id": "2026-09-03-301021",
-      "date": "2026-09-03",
-      "code": "301021",
-      "name": "英诺激光",
-      "mfe": 0.281865,
-      "mae": -0.164646,
-      "fiveDayReturn": 0.05322
-    },
-    {
-      "id": "2026-09-03-301008",
-      "date": "2026-09-03",
-      "code": "301008",
-      "name": "宏昌科技",
-      "mfe": 0.360177,
-      "mae": -0.172345,
-      "fiveDayReturn": -0.010841
-    },
-    {
-      "id": "2026-09-03-300179",
-      "date": "2026-09-03",
-      "code": "300179",
-      "name": "四方达",
-      "mfe": 0.223061,
-      "mae": -0.168922,
-      "fiveDayReturn": 0.040864
-    },
-    {
-      "id": "2026-09-03-002171",
-      "date": "2026-09-03",
-      "code": "002171",
-      "name": "楚江新材",
-      "mfe": 0.089962,
-      "mae": -0.137311,
-      "fiveDayReturn": 0.045455
-    },
-    {
-      "id": "2026-09-03-002046",
-      "date": "2026-09-03",
-      "code": "002046",
-      "name": "国机精工",
-      "mfe": 0.285981,
-      "mae": -0.093458,
-      "fiveDayReturn": 0.103551
-    },
-    {
-      "id": "2026-09-03-000519",
-      "date": "2026-09-03",
-      "code": "000519",
-      "name": "中兵红箭",
-      "mfe": 0.110385,
-      "mae": -0.114304,
-      "fiveDayReturn": 0.054213
-    },
-    {
-      "id": "2026-09-02-688543",
-      "date": "2026-09-02",
-      "code": "688543",
-      "name": "国科军工",
-      "mfe": 0.09205,
-      "mae": -0.109716,
-      "fiveDayReturn": 0.057415
-    },
-    {
-      "id": "2026-09-02-688297",
-      "date": "2026-09-02",
-      "code": "688297",
-      "name": "中无人机",
-      "mfe": 0.076084,
-      "mae": -0.115193,
-      "fiveDayReturn": 0.059967
-    },
-    {
-      "id": "2026-09-02-603268",
-      "date": "2026-09-02",
-      "code": "603268",
-      "name": "松发股份",
-      "mfe": 0.239063,
-      "mae": -0.003315,
-      "fiveDayReturn": 0.074398
-    },
-    {
-      "id": "2026-09-02-601606",
-      "date": "2026-09-02",
-      "code": "601606",
-      "name": "长城军工",
-      "mfe": 0.047987,
-      "mae": -0.203806,
-      "fiveDayReturn": -0.022063
-    },
-    {
-      "id": "2026-09-02-600967",
-      "date": "2026-09-02",
-      "code": "600967",
-      "name": "内蒙一机",
-      "mfe": 0.074658,
-      "mae": -0.173973,
-      "fiveDayReturn": -0.011644
-    },
-    {
-      "id": "2026-09-02-600435",
-      "date": "2026-09-02",
-      "code": "600435",
-      "name": "北方导航",
-      "mfe": 0.052129,
-      "mae": -0.072111,
-      "fiveDayReturn": 0.037359
-    },
-    {
-      "id": "2026-09-02-600391",
-      "date": "2026-09-02",
-      "code": "600391",
-      "name": "航发科技",
-      "mfe": 0.288775,
-      "mae": -0.040274,
-      "fiveDayReturn": 0.167666
-    },
-    {
-      "id": "2026-09-02-600316",
-      "date": "2026-09-02",
-      "code": "600316",
-      "name": "洪都航空",
-      "mfe": 0.098742,
-      "mae": -0.054088,
-      "fiveDayReturn": 0.074214
-    },
-    {
-      "id": "2026-09-02-302132",
-      "date": "2026-09-02",
-      "code": "302132",
-      "name": "中航成飞",
-      "mfe": 0.047957,
-      "mae": -0.113425,
-      "fiveDayReturn": 0.027765
-    },
-    {
-      "id": "2026-09-02-301357",
-      "date": "2026-09-02",
-      "code": "301357",
-      "name": "北方长龙",
-      "mfe": 0.131717,
-      "mae": -0.195635,
-      "fiveDayReturn": 0.010475
     }
   ],
   "pathClusters": {
@@ -3327,7 +3331,7 @@
       "stageDistribution": {},
       "chaseDistribution": {},
       "medianMFE": 0.16251,
-      "medianMAE": -0.119413
+      "medianMAE": -0.120639
     },
     "failure": {
       "sampleCount": 110,
@@ -3337,7 +3341,7 @@
       "stageDistribution": {},
       "chaseDistribution": {},
       "medianMFE": 0.0375545,
-      "medianMAE": -0.217188
+      "medianMAE": -0.221151
     },
     "topExamples": [
       {
@@ -3458,7 +3462,7 @@
     "byRegime": [
       {
         "name": "结构性主升/轮动",
-        "sampleCount": 273,
+        "sampleCount": 291,
         "confidenceZh": "高",
         "fiveDayMedianReturn": 0.005999,
         "fiveDayMedianAlpha": 0.009313,
@@ -3505,7 +3509,7 @@
       },
       {
         "name": "B0/B1/B13/B3/B4",
-        "sampleCount": 17,
+        "sampleCount": 18,
         "confidenceZh": "低",
         "fiveDayMedianReturn": 0.027765,
         "fiveDayMedianAlpha": 0.038232,
@@ -3514,7 +3518,7 @@
       },
       {
         "name": "B0/B4",
-        "sampleCount": 20,
+        "sampleCount": 23,
         "confidenceZh": "低",
         "fiveDayMedianReturn": -0.0022025,
         "fiveDayMedianAlpha": 0.014643,
@@ -3523,7 +3527,7 @@
       },
       {
         "name": "B1",
-        "sampleCount": 67,
+        "sampleCount": 71,
         "confidenceZh": "中低",
         "fiveDayMedianReturn": 0.002289,
         "fiveDayMedianAlpha": 0.000836,
@@ -3532,7 +3536,7 @@
       },
       {
         "name": "B0/B3/B4",
-        "sampleCount": 99,
+        "sampleCount": 103,
         "confidenceZh": "中",
         "fiveDayMedianReturn": -0.0050205,
         "fiveDayMedianAlpha": -0.000882,
@@ -3541,7 +3545,7 @@
       },
       {
         "name": "B0",
-        "sampleCount": 17,
+        "sampleCount": 18,
         "confidenceZh": "低",
         "fiveDayMedianReturn": -0.007977,
         "fiveDayMedianAlpha": -0.004955,
@@ -3550,7 +3554,7 @@
       },
       {
         "name": "B3",
-        "sampleCount": 31,
+        "sampleCount": 33,
         "confidenceZh": "中低",
         "fiveDayMedianReturn": -0.021672,
         "fiveDayMedianAlpha": -0.009385,
@@ -3559,7 +3563,7 @@
       },
       {
         "name": "B0/B3",
-        "sampleCount": 9,
+        "sampleCount": 10,
         "confidenceZh": "低",
         "fiveDayMedianReturn": -0.020429,
         "fiveDayMedianAlpha": -0.01726,
@@ -3577,7 +3581,7 @@
       },
       {
         "name": "B3/B4",
-        "sampleCount": 11,
+        "sampleCount": 13,
         "confidenceZh": "低",
         "fiveDayMedianReturn": -0.055788,
         "fiveDayMedianAlpha": -0.027729,
@@ -3600,12 +3604,12 @@
   },
   "vitals": {
     "longTermValidityZh": "偏弱",
-    "recentTrendZh": "近期弱化",
+    "recentTrendZh": "样本不足",
     "sampleConfidenceZh": "高",
     "bestHoldingZh": "暂无正向历史优势",
     "bestShortHoldingZh": "暂无正向历史优势",
     "bestLongHoldingZh": "暂无正向历史优势",
-    "currentAdviceZh": "降低历史优势权重，等待重新增强"
+    "currentAdviceZh": "维持历史优势权重并继续样本外验证"
   },
   "limitationsZh": [
     "样本数量或目标周期未成熟时不输出高置信结论。",
