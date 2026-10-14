@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "reportDate": "2026-10-13",
-  "generatedAt": "2026-10-13T17:19:15.285204+08:00",
+  "reportDate": "2026-10-14",
+  "generatedAt": "2026-10-14T13:04:45.849476+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -17,7 +17,7 @@
         "sampleCount": 5213.0
       },
       "dataDate": "2026-10-13",
-      "availableAt": "2026-10-13T15:22:32+08:00",
+      "availableAt": "2026-10-13T22:56:55+08:00",
       "classification": "研究原始值",
       "status": "INSUFFICIENT_485_HISTORY",
       "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
@@ -28,35 +28,36 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "financingBalance": 2517189315772.0,
-        "change1d": -82321269261.0,
-        "exchangeCoverage": [
-          "SSE",
-          "SZSE"
-        ],
-        "errors": {},
+        "financingBalance": null,
+        "change1d": null,
+        "exchangeCoverage": [],
+        "errors": {
+          "SSE": "JSONDecodeError",
+          "SZSE": "summary:ValueError;detail:ValueError;raw:ValueError",
+          "primaryProxy": "RuntimeError"
+        },
         "historyObservations": null
       },
       "dataDate": "2026-10-13",
-      "availableAt": "2026-10-13T17:18:48+08:00",
+      "availableAt": "2026-10-14T13:04:19+08:00",
       "classification": "反向工程估算",
-      "status": "ESTIMATED",
-      "blocker": null,
-      "positionEligible": true
+      "status": "MISSING_INPUT",
+      "blocker": "沪深交易所覆盖不完整",
+      "positionEligible": false
     },
     {
       "name": "ETF资金强弱",
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "etfCount": 779,
-        "validChangeCount": 778,
-        "netShareChange1d": 30981.451199999996,
+        "etfCount": 753,
+        "validChangeCount": 751,
+        "netShareChange1d": 1980911073.0,
         "netCreationAmountEstimate1d": null,
         "historyObservations": 21
       },
       "dataDate": "2026-10-13",
-      "availableAt": "2026-10-13T17:18:48+08:00",
+      "availableAt": "2026-10-14T13:04:19+08:00",
       "classification": "研究观察值",
       "status": "FORMULA_UNVERIFIED",
       "blocker": "原版ETF池、窗口、原始因子与标准化顺序未冻结；历史不足485日",
@@ -68,7 +69,7 @@
       "scoreScale": "0-100",
       "raw": null,
       "dataDate": "2026-10-13",
-      "availableAt": "2026-10-13T17:19:15.285204+08:00",
+      "availableAt": "2026-10-14T13:04:45.849476+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
