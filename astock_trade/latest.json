@@ -738,62 +738,12 @@
       ]
     }
   ],
-  "setupCandidates": [
-    {
-      "code": "301110",
-      "name": "青木科技",
-      "sector": "电商服务",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 77.8,
-        "historical": {
-          "samples": 1,
-          "win5D": 0.0,
-          "avg5D": -0.0095,
-          "avgMFE5D": 0.0828,
-          "avgMAE5D": -0.0118
-        }
-      },
-      "quote": {
-        "price": 36.13,
-        "changePct": -1.79,
-        "open": 37.58,
-        "high": 37.78,
-        "low": 36.04,
-        "dayLowToHighPct": 4.83,
-        "quoteTime": "20261016133000"
-      },
-      "entryZone": [
-        35.759,
-        36.481
-      ],
-      "triggerPrice": 36.12,
-      "stopLoss": 34.301,
-      "takeProfit1": 38.848,
-      "takeProfit2": 40.667,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 34.301",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.21 ATR",
-        "主力资金占比 -6.18%"
-      ]
-    }
-  ],
+  "setupCandidates": [],
   "summary": {
     "official": 17,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 1
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -806,5 +756,15 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "blocked",
+    "reason": "full-market-data-unavailable",
+    "checkedAt": "2026-10-16T13:30:17.070685+08:00",
+    "errors": [
+      "RuntimeError: Missing or duplicate market pages",
+      "RuntimeError: Missing or duplicate market pages",
+      "RuntimeError: Missing or duplicate market pages"
+    ]
+  }
 }
