@@ -1,152 +1,65 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-20",
-  "generatedAt": "2026-10-20T14:40:05+08:00",
+  "generatedAt": "2026-10-20T14:55:09+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-16",
   "officialPlans": [
     {
-      "code": "002614",
-      "name": "奥佳华",
-      "sector": "其他家电Ⅲ",
+      "code": "002646",
+      "name": "天佑德酒",
+      "sector": "白酒Ⅲ",
       "official": true,
       "tailCore": false,
       "poolTags": [
-        "B0",
-        "B3",
-        "B4"
+        "B1"
       ],
-      "action": "买入候选",
+      "action": "等待触发",
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 87.4,
+        "score": 77.8,
         "historical": {
-          "samples": 6,
-          "win5D": 0.5,
-          "avg5D": 0.0568,
-          "avgMFE5D": 0.085,
-          "avgMAE5D": -0.023
+          "samples": 7,
+          "win5D": 0.2857,
+          "avg5D": -0.0084,
+          "avgMFE5D": 0.0192,
+          "avgMAE5D": -0.041
         }
       },
       "quote": {
-        "price": 8.17,
-        "changePct": -1.33,
-        "open": 8.38,
-        "high": 8.4,
-        "low": 8.09,
-        "dayLowToHighPct": 3.83,
-        "quoteTime": "20261020144003"
+        "price": 7.09,
+        "changePct": -1.53,
+        "open": 7.15,
+        "high": 7.2,
+        "low": 7.07,
+        "dayLowToHighPct": 1.84,
+        "quoteTime": "20261020145506"
       },
       "entryZone": [
-        8.121,
-        8.285
+        7.043,
+        7.185
       ],
-      "triggerPrice": 8.203,
-      "stopLoss": 7.711,
-      "takeProfit1": 8.941,
-      "takeProfit2": 9.433,
+      "triggerPrice": 7.114,
+      "stopLoss": 6.785,
+      "takeProfit1": 7.608,
+      "takeProfit2": 7.938,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 7.711",
+      "invalidation": "收盘/有效价格跌破 6.785",
       "reasons": [
         "趋势回踩",
-        "形态分 87",
-        "距MA20 +1.13 ATR",
-        "主力资金占比 +22.20%"
+        "形态分 78",
+        "距MA20 +0.16 ATR",
+        "主力资金占比 -5.93%"
       ]
     },
     {
-      "code": "000090",
-      "name": "天健集团",
-      "sector": "租售同权",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 53.4,
-        "historical": {}
-      },
-      "quote": {
-        "price": 3.48,
-        "changePct": -3.06,
-        "open": 3.6,
-        "high": 3.62,
-        "low": 3.45,
-        "dayLowToHighPct": 4.93,
-        "quoteTime": "20261020144003"
-      },
-      "entryZone": null,
-      "triggerPrice": 3.573,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 53",
-        "距MA20 -0.39 ATR",
-        "主力资金占比 +21.85%"
-      ]
-    },
-    {
-      "code": "001979",
-      "name": "招商蛇口",
-      "sector": "租售同权",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 50.1,
-        "historical": {}
-      },
-      "quote": {
-        "price": 7.45,
-        "changePct": -2.99,
-        "open": 7.7,
-        "high": 7.78,
-        "low": 7.44,
-        "dayLowToHighPct": 4.57,
-        "quoteTime": "20261020144003"
-      },
-      "entryZone": null,
-      "triggerPrice": 7.589,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 50",
-        "距MA20 +0.40 ATR",
-        "主力资金占比 +5.73%"
-      ]
-    },
-    {
-      "code": "600199",
-      "name": "金种子酒",
-      "sector": "白酒Ⅲ",
+      "code": "600585",
+      "name": "海螺水泥",
+      "sector": "水泥制造",
       "official": true,
       "tailCore": false,
       "poolTags": [
@@ -158,20 +71,20 @@
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
-        "score": 49.9,
+        "score": 51.1,
         "historical": {}
       },
       "quote": {
-        "price": 7.5,
-        "changePct": -3.6,
-        "open": 7.63,
-        "high": 7.79,
-        "low": 7.41,
-        "dayLowToHighPct": 5.13,
-        "quoteTime": "20261020144002"
+        "price": 18.09,
+        "changePct": -1.9,
+        "open": 18.41,
+        "high": 18.5,
+        "low": 17.97,
+        "dayLowToHighPct": 2.95,
+        "quoteTime": "20261020145506"
       },
       "entryZone": null,
-      "triggerPrice": 7.329,
+      "triggerPrice": 17.588,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -182,38 +95,40 @@
       "invalidation": "未形成可执行入场，不设交易止损",
       "reasons": [
         "暂无可买形态",
-        "形态分 50",
-        "距MA20 +0.65 ATR",
-        "主力资金占比 +4.66%"
+        "形态分 51",
+        "距MA20 +1.82 ATR",
+        "主力资金占比 +10.72%"
       ]
     },
     {
-      "code": "000995",
-      "name": "皇台酒业",
-      "sector": "白酒Ⅲ",
+      "code": "600668",
+      "name": "尖峰集团",
+      "sector": "水泥制造",
       "official": true,
       "tailCore": false,
       "poolTags": [
-        "B0"
+        "B0",
+        "B3",
+        "B4"
       ],
       "action": "不建议买",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
-        "score": 48.2,
+        "score": 49.1,
         "historical": {}
       },
       "quote": {
-        "price": 13.63,
-        "changePct": -2.22,
-        "open": 13.8,
-        "high": 14.3,
-        "low": 13.19,
-        "dayLowToHighPct": 8.42,
-        "quoteTime": "20261020144003"
+        "price": 7.84,
+        "changePct": -2.73,
+        "open": 8.11,
+        "high": 8.26,
+        "low": 7.71,
+        "dayLowToHighPct": 7.13,
+        "quoteTime": "20261020145507"
       },
       "entryZone": null,
-      "triggerPrice": 12.28,
+      "triggerPrice": 7.647,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -224,39 +139,38 @@
       "invalidation": "未形成可执行入场，不设交易止损",
       "reasons": [
         "暂无可买形态",
-        "形态分 48",
-        "距MA20 +1.82 ATR",
-        "主力资金占比 -3.83%"
+        "形态分 49",
+        "距MA20 +1.27 ATR",
+        "主力资金占比 +0.65%"
       ]
     },
     {
-      "code": "000002",
-      "name": "万  科Ａ",
-      "sector": "租售同权",
+      "code": "603198",
+      "name": "迎驾贡酒",
+      "sector": "白酒Ⅲ",
       "official": true,
       "tailCore": false,
       "poolTags": [
-        "B1",
-        "B4"
+        "B1"
       ],
       "action": "不建议买",
       "setup": {
-        "type": "BROKEN",
-        "label": "跌破趋势支撑",
-        "score": 39.1,
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 48.9,
         "historical": {}
       },
       "quote": {
-        "price": 3.44,
-        "changePct": -1.71,
-        "open": 3.51,
-        "high": 3.52,
-        "low": 3.42,
-        "dayLowToHighPct": 2.92,
-        "quoteTime": "20261020144003"
+        "price": 40.08,
+        "changePct": -1.16,
+        "open": 40.59,
+        "high": 40.87,
+        "low": 39.55,
+        "dayLowToHighPct": 3.34,
+        "quoteTime": "20261020145504"
       },
       "entryZone": null,
-      "triggerPrice": 3.839,
+      "triggerPrice": 38.678,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -266,19 +180,21 @@
       "tPlusOne": true,
       "invalidation": "未形成可执行入场，不设交易止损",
       "reasons": [
-        "跌破趋势支撑",
-        "形态分 39",
-        "距MA20 -0.64 ATR",
-        "主力资金占比 +0.52%"
+        "暂无可买形态",
+        "形态分 49",
+        "距MA20 +1.04 ATR",
+        "主力资金占比 -0.27%"
       ]
     }
   ],
   "setupCandidates": [],
   "summary": {
-    "official": 6,
-    "officialBuy": 1,
-    "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "official": 4,
+    "officialBuy": 0,
+    "officialWatch": 1,
+    "expandedSetupCandidates": 0,
+    "marketPrefilterCount": 220,
+    "marketScannedCount": 220
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -293,7 +209,18 @@
     "TailCore（如当日存在）"
   ],
   "marketSetupScan": {
-    "state": "skipped",
-    "reason": "official-has-live-buy"
+    "state": "partial",
+    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
+    "reportedTotal": 5562,
+    "uniqueRows": 4195,
+    "pagesRequested": 56,
+    "coveragePct": 75.42,
+    "prefiltered": 220,
+    "historyLoaded": 129,
+    "setupMatches": 6,
+    "historicalEdgeMatches": 0,
+    "selected": 0,
+    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
+    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
   }
 }
