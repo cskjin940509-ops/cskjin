@@ -8650,6 +8650,21 @@
       "cumulativeReturnPct": 2.9788,
       "radarCapturedAt": "2026-10-20T15:12:36+08:00",
       "isVerifiedClose": true
+    },
+    {
+      "timestamp": "2026-10-20T16:25:05+08:00",
+      "date": "2026-10-20",
+      "time": "16:25:05",
+      "nav": 19917627.18,
+      "cash": 19555006.18,
+      "marketValue": 362621.0,
+      "positionCount": 2,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.02978776,
+      "cumulativeNav": 1.02978776,
+      "cumulativeReturnPct": 2.9788,
+      "radarCapturedAt": "2026-10-20T15:12:36+08:00",
+      "isVerifiedClose": true
     }
   ],
   "dailyControl": {
@@ -8831,11 +8846,11 @@
     "2026-10-20": {
       "newBuys": 0,
       "sells": 0,
-      "lastDecisionAt": "2026-10-20T15:24:43+08:00"
+      "lastDecisionAt": "2026-10-20T16:25:05+08:00"
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-10-20T15:24:53+08:00",
+  "updatedAt": "2026-10-20T16:25:05+08:00",
   "capitalEvents": [
     {
       "eventId": "capital-20260903-232335",
@@ -26743,7 +26758,7 @@
       "baseCap": 0.1,
       "intradayCap": null,
       "allowNew": true,
-      "reasonZh": "全市场宽度延迟，前收盘核心指数平均-0.15%，采用非掘金的保守运行上限10%；全市场广度未取齐，维持盘前上限，不用候选样本冒充",
+      "reasonZh": "全市场宽度延迟，前收盘核心指数平均-0.15%，采用非掘金的保守运行上限10%；盘中大盘快照过期/时间异常，维持盘前上限并等待新证据",
       "missingEvidence": [],
       "sentiment": {
         "ready": true,
@@ -26764,7 +26779,7 @@
       "cap": 0.1,
       "allowNew": true,
       "date": "2026-10-20",
-      "asOf": "2026-10-20T15:24:43+08:00",
+      "asOf": "2026-10-20T16:25:05+08:00",
       "dailyUnitReturnPct": -0.019898199085299773,
       "confirmedCloseDrawdownPct": -2.824450911098453,
       "dailyRiskDataReady": true,
@@ -904848,6 +904863,21 @@
       "元宇宙概念": "BK1009"
     },
     "sectorRanks": {
+      "楼宇设备": {
+        "complete": false,
+        "error": "HTTPError",
+        "httpStatus": 502
+      },
+      "工程机械": {
+        "complete": false,
+        "error": "HTTPError",
+        "httpStatus": 502
+      },
+      "空间计算": {
+        "complete": false,
+        "error": "HTTPError",
+        "httpStatus": 502
+      },
       "通信工程及服务": {
         "complete": false,
         "error": "HTTPError",
@@ -904858,32 +904888,12 @@
         "error": "HTTPError",
         "httpStatus": 502
       },
-      "空间计算": {
-        "complete": false,
-        "error": "HTTPError",
-        "httpStatus": 502
-      },
-      "工程机械": {
-        "complete": false,
-        "error": "HTTPError",
-        "httpStatus": 502
-      },
       "耐火材料": {
         "complete": false,
         "error": "HTTPError",
         "httpStatus": 502
       },
-      "楼宇设备": {
-        "complete": false,
-        "error": "HTTPError",
-        "httpStatus": 502
-      },
-      "元宇宙概念": {
-        "complete": false,
-        "error": "HTTPError",
-        "httpStatus": 502
-      },
-      "传媒": {
+      "脑机接口": {
         "complete": false,
         "error": "HTTPError",
         "httpStatus": 502
@@ -904893,7 +904903,12 @@
         "error": "HTTPError",
         "httpStatus": 502
       },
-      "PLC概念": {
+      "传媒": {
+        "complete": false,
+        "error": "HTTPError",
+        "httpStatus": 502
+      },
+      "元宇宙概念": {
         "complete": false,
         "error": "HTTPError",
         "httpStatus": 502
@@ -904903,14 +904918,13 @@
         "error": "HTTPError",
         "httpStatus": 502
       },
-      "脑机接口": {
+      "PLC概念": {
         "complete": false,
         "error": "HTTPError",
         "httpStatus": 502
       }
     },
     "marketSessions": [
-      "2026-07-13",
       "2026-07-14",
       "2026-07-15",
       "2026-07-16",
@@ -904974,7 +904988,8 @@
       "2026-10-14",
       "2026-10-15",
       "2026-10-16",
-      "2026-10-19"
+      "2026-10-19",
+      "2026-10-20"
     ],
     "sectorHistory": {
       "农业综合Ⅲ": {
@@ -905983,9 +905998,7 @@
       },
       "裸眼3D": {
         "collectedDate": "2026-10-20",
-        "return5Pct": null,
-        "error": "RemoteDisconnected",
-        "httpStatus": null
+        "return5Pct": -1.8526468186830347
       },
       "互联网电商": {
         "collectedDate": "2026-10-13",
@@ -906445,9 +906458,7 @@
       },
       "脑机接口": {
         "collectedDate": "2026-10-20",
-        "return5Pct": null,
-        "error": "RemoteDisconnected",
-        "httpStatus": null
+        "return5Pct": -5.7014553956679865
       },
       "AIPC": {
         "collectedDate": "2026-10-20",
@@ -906465,39 +906476,27 @@
       },
       "通信工程及服务": {
         "collectedDate": "2026-10-20",
-        "return5Pct": null,
-        "error": "RemoteDisconnected",
-        "httpStatus": null
+        "return5Pct": -4.093325981592367
       },
       "工程机械": {
         "collectedDate": "2026-10-20",
-        "return5Pct": null,
-        "error": "RemoteDisconnected",
-        "httpStatus": null
+        "return5Pct": -3.4242232086239666
       },
       "楼宇设备": {
         "collectedDate": "2026-10-20",
-        "return5Pct": null,
-        "error": "RemoteDisconnected",
-        "httpStatus": null
+        "return5Pct": -5.49869547707017
       },
       "PLC概念": {
         "collectedDate": "2026-10-20",
-        "return5Pct": null,
-        "error": "RemoteDisconnected",
-        "httpStatus": null
+        "return5Pct": -4.664409773329403
       },
       "元宇宙概念": {
         "collectedDate": "2026-10-20",
-        "return5Pct": null,
-        "error": "RemoteDisconnected",
-        "httpStatus": null
+        "return5Pct": -3.0638088199063884
       },
       "机器人执行器": {
         "collectedDate": "2026-10-20",
-        "return5Pct": null,
-        "error": "RemoteDisconnected",
-        "httpStatus": null
+        "return5Pct": -1.8114600660134816
       }
     },
     "technical": {
@@ -907450,7 +907449,7 @@
         "volumeRatio5to20": 1.0912925876506645
       }
     },
-    "collectedAt": "2026-10-20T15:13:12.380209+08:00",
+    "collectedAt": "2026-10-20T16:13:26.407307+08:00",
     "secondaryQuoteRefresh": {
       "status": "ERROR",
       "requested": 2,
