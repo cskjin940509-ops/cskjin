@@ -739,62 +739,12 @@
       ]
     }
   ],
-  "setupCandidates": [
-    {
-      "code": "300792",
-      "name": "壹网壹创",
-      "sector": "电商服务",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.4,
-        "historical": {
-          "samples": 2,
-          "win5D": 0.5,
-          "avg5D": -0.0167,
-          "avgMFE5D": 0.0466,
-          "avgMAE5D": -0.0568
-        }
-      },
-      "quote": {
-        "price": 25.15,
-        "changePct": 2.24,
-        "open": 24.57,
-        "high": 25.69,
-        "low": 24.05,
-        "dayLowToHighPct": 6.82,
-        "quoteTime": "20261020134006"
-      },
-      "entryZone": [
-        24.686,
-        25.184
-      ],
-      "triggerPrice": 24.935,
-      "stopLoss": 23.471,
-      "takeProfit1": 27.13,
-      "takeProfit2": 28.594,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 23.471",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.38 ATR",
-        "主力资金占比 -3.04%"
-      ]
-    }
-  ],
+  "setupCandidates": [],
   "summary": {
     "official": 17,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 1
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -807,5 +757,15 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "blocked",
+    "reason": "full-market-data-unavailable",
+    "checkedAt": "2026-10-20T13:40:18.745029+08:00",
+    "errors": [
+      "HTTPError: HTTP Error 502: Bad Gateway",
+      "HTTPError: HTTP Error 502: Bad Gateway",
+      "HTTPError: HTTP Error 502: Bad Gateway"
+    ]
+  }
 }
