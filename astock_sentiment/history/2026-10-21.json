@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "reportDate": "2026-10-21",
+  "generatedAt": "2026-10-21T13:00:50.837162+08:00",
+  "cutoffZh": "截至生成时实际可得数据",
+  "referenceReplication": "NOT_VERIFIED",
+  "indices": [
+    {
+      "name": "市场赚钱效应",
+      "score": null,
+      "scoreScale": "0-100",
+      "raw": {
+        "logUpDownRatio": 0.8174020862693457,
+        "up": 3778.0,
+        "down": 1668.0,
+        "flat": 129.0,
+        "sampleCount": 5575.0
+      },
+      "dataDate": "2026-10-20",
+      "availableAt": "2026-10-20T22:25:12+08:00",
+      "classification": "研究原始值",
+      "status": "INSUFFICIENT_485_HISTORY",
+      "blocker": "尚无485个固定股票宇宙、同口径、可得时间可审计的交易日观测",
+      "positionEligible": false
+    },
+    {
+      "name": "两融情绪",
+      "score": null,
+      "scoreScale": "0-100",
+      "raw": {
+        "financingBalance": 2443356986156.0,
+        "change1d": -8399722404.0,
+        "exchangeCoverage": [
+          "SSE",
+          "SZSE"
+        ],
+        "errors": {},
+        "historyObservations": null
+      },
+      "dataDate": "2026-10-20",
+      "availableAt": "2026-10-21T13:00:22+08:00",
+      "classification": "反向工程估算",
+      "status": "ESTIMATED",
+      "blocker": null,
+      "positionEligible": true
+    },
+    {
+      "name": "ETF资金强弱",
+      "score": null,
+      "scoreScale": "0-100",
+      "raw": {
+        "etfCount": 1798,
+        "validChangeCount": 1797,
+        "netShareChange1d": 871493.7741999999,
+        "netCreationAmountEstimate1d": 14653056.307050114,
+        "historyObservations": 21
+      },
+      "dataDate": "2026-10-20",
+      "availableAt": "2026-10-21T13:00:22+08:00",
+      "classification": "研究观察值",
+      "status": "FORMULA_UNVERIFIED",
+      "blocker": "原版ETF池、窗口、原始因子与标准化顺序未冻结；历史不足485日",
+      "positionEligible": false
+    },
+    {
+      "name": "综合市场资金情绪",
+      "score": null,
+      "scoreScale": "0-100",
+      "raw": null,
+      "dataDate": "2026-10-20",
+      "availableAt": "2026-10-21T13:00:50.837162+08:00",
+      "classification": "不可计算",
+      "status": "DEPENDENCIES_INCOMPLETE",
+      "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
+      "positionEligible": false
+    }
+  ],
+  "allFourScoresAvailable": false,
+  "positionControlEnabled": false,
+  "noteZh": "缺失不补0；研究原始值不冒充原版0-100指数；不修改模拟仓位。"
+}
