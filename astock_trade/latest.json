@@ -1,63 +1,10 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-21",
-  "generatedAt": "2026-10-21T09:37:52+08:00",
+  "generatedAt": "2026-10-21T09:55:05+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-16",
   "officialPlans": [
-    {
-      "code": "002614",
-      "name": "奥佳华",
-      "sector": "其他家电Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "买入候选",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 87.4,
-        "historical": {
-          "samples": 6,
-          "win5D": 0.5,
-          "avg5D": 0.0568,
-          "avgMFE5D": 0.085,
-          "avgMAE5D": -0.023
-        }
-      },
-      "quote": {
-        "price": 8.17,
-        "changePct": -0.24,
-        "open": 8.19,
-        "high": 8.27,
-        "low": 8.06,
-        "dayLowToHighPct": 2.61,
-        "quoteTime": "20261021093751"
-      },
-      "entryZone": [
-        8.127,
-        8.291
-      ],
-      "triggerPrice": 8.209,
-      "stopLoss": 7.716,
-      "takeProfit1": 8.948,
-      "takeProfit2": 9.44,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 7.716",
-      "reasons": [
-        "趋势回踩",
-        "形态分 87",
-        "距MA20 +0.97 ATR",
-        "主力资金占比 +22.20%"
-      ]
-    },
     {
       "code": "001979",
       "name": "招商蛇口",
@@ -81,13 +28,13 @@
         }
       },
       "quote": {
-        "price": 7.57,
-        "changePct": 1.2,
+        "price": 7.52,
+        "changePct": 0.53,
         "open": 7.5,
-        "high": 7.6,
+        "high": 7.61,
         "low": 7.41,
-        "dayLowToHighPct": 2.56,
-        "quoteTime": "20261021093751"
+        "dayLowToHighPct": 2.7,
+        "quoteTime": "20261021095503"
       },
       "entryZone": [
         7.502,
@@ -105,8 +52,114 @@
       "reasons": [
         "趋势回踩",
         "形态分 84",
-        "距MA20 +0.62 ATR",
+        "距MA20 +0.48 ATR",
         "主力资金占比 +5.73%"
+      ]
+    },
+    {
+      "code": "002614",
+      "name": "奥佳华",
+      "sector": "其他家电Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 87.4,
+        "historical": {
+          "samples": 6,
+          "win5D": 0.5,
+          "avg5D": 0.0568,
+          "avgMFE5D": 0.085,
+          "avgMAE5D": -0.023
+        }
+      },
+      "quote": {
+        "price": 8.31,
+        "changePct": 1.47,
+        "open": 8.19,
+        "high": 8.46,
+        "low": 8.06,
+        "dayLowToHighPct": 4.96,
+        "quoteTime": "20261021095503"
+      },
+      "entryZone": [
+        8.127,
+        8.291
+      ],
+      "triggerPrice": 8.209,
+      "stopLoss": 7.716,
+      "takeProfit1": 8.948,
+      "takeProfit2": 9.44,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 7.716",
+      "reasons": [
+        "趋势回踩",
+        "形态分 87",
+        "距MA20 +1.18 ATR",
+        "主力资金占比 +22.20%"
+      ]
+    },
+    {
+      "code": "600585",
+      "name": "海螺水泥",
+      "sector": "水泥制造",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 81.1,
+        "historical": {
+          "samples": 9,
+          "win5D": 0.1111,
+          "avg5D": -0.0255,
+          "avgMFE5D": 0.0065,
+          "avgMAE5D": -0.0342
+        }
+      },
+      "quote": {
+        "price": 17.95,
+        "changePct": -0.72,
+        "open": 18.08,
+        "high": 18.14,
+        "low": 17.91,
+        "dayLowToHighPct": 1.28,
+        "quoteTime": "20261021095500"
+      },
+      "entryZone": [
+        17.534,
+        17.888
+      ],
+      "triggerPrice": 17.711,
+      "stopLoss": 17.158,
+      "takeProfit1": 18.54,
+      "takeProfit2": 19.092,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 17.158",
+      "reasons": [
+        "趋势回踩",
+        "形态分 81",
+        "距MA20 +1.35 ATR",
+        "主力资金占比 +10.72%"
       ]
     },
     {
@@ -132,13 +185,13 @@
         }
       },
       "quote": {
-        "price": 7.16,
-        "changePct": 0.85,
+        "price": 7.15,
+        "changePct": 0.7,
         "open": 7.12,
         "high": 7.23,
         "low": 7.06,
         "dayLowToHighPct": 2.41,
-        "quoteTime": "20261021093751"
+        "quoteTime": "20261021095503"
       },
       "entryZone": [
         7.048,
@@ -156,54 +209,8 @@
       "reasons": [
         "趋势回踩",
         "形态分 79",
-        "距MA20 +0.35 ATR",
+        "距MA20 +0.32 ATR",
         "主力资金占比 -5.93%"
-      ]
-    },
-    {
-      "code": "600802",
-      "name": "福建水泥",
-      "sector": "水泥制造",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B1",
-        "B3",
-        "B4",
-        "B13"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 54.0,
-        "historical": {}
-      },
-      "quote": {
-        "price": 6.53,
-        "changePct": 2.03,
-        "open": 6.4,
-        "high": 6.71,
-        "low": 6.25,
-        "dayLowToHighPct": 7.36,
-        "quoteTime": "20261021093749"
-      },
-      "entryZone": null,
-      "triggerPrice": 6.823,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 54",
-        "距MA20 +0.07 ATR",
-        "主力资金占比 +38.98%"
       ]
     },
     {
@@ -224,13 +231,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 3.49,
-        "changePct": -0.29,
+        "price": 3.48,
+        "changePct": -0.57,
         "open": 3.48,
         "high": 3.52,
         "low": 3.47,
         "dayLowToHighPct": 1.44,
-        "quoteTime": "20261021093751"
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 3.559,
@@ -245,7 +252,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 53",
-        "距MA20 -0.34 ATR",
+        "距MA20 -0.40 ATR",
         "主力资金占比 +21.85%"
       ]
     },
@@ -268,13 +275,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 10.74,
-        "changePct": -0.92,
+        "price": 11.0,
+        "changePct": 1.48,
         "open": 10.71,
-        "high": 10.84,
+        "high": 11.04,
         "low": 10.51,
-        "dayLowToHighPct": 3.14,
-        "quoteTime": "20261021093751"
+        "dayLowToHighPct": 5.04,
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 11.624,
@@ -289,7 +296,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 52",
-        "距MA20 +0.19 ATR",
+        "距MA20 +0.41 ATR",
         "主力资金占比 +17.04%"
       ]
     },
@@ -312,13 +319,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 5.44,
-        "changePct": 0.93,
+        "price": 5.43,
+        "changePct": 0.74,
         "open": 5.39,
-        "high": 5.45,
+        "high": 5.46,
         "low": 5.37,
-        "dayLowToHighPct": 1.49,
-        "quoteTime": "20261021093748"
+        "dayLowToHighPct": 1.68,
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 5.538,
@@ -333,39 +340,41 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 -0.21 ATR",
+        "距MA20 -0.25 ATR",
         "主力资金占比 +11.91%"
       ]
     },
     {
-      "code": "600585",
-      "name": "海螺水泥",
+      "code": "600802",
+      "name": "福建水泥",
       "sector": "水泥制造",
       "official": true,
       "tailCore": false,
       "poolTags": [
         "B0",
+        "B1",
         "B3",
-        "B4"
+        "B4",
+        "B13"
       ],
       "action": "不建议买",
       "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 51.1,
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 51.0,
         "historical": {}
       },
       "quote": {
-        "price": 18.04,
-        "changePct": -0.22,
-        "open": 18.08,
-        "high": 18.14,
-        "low": 17.91,
-        "dayLowToHighPct": 1.28,
-        "quoteTime": "20261021093748"
+        "price": 7.04,
+        "changePct": 10.0,
+        "open": 6.4,
+        "high": 7.04,
+        "low": 6.25,
+        "dayLowToHighPct": 12.64,
+        "quoteTime": "20261021095501"
       },
       "entryZone": null,
-      "triggerPrice": 17.711,
+      "triggerPrice": 6.823,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -375,10 +384,11 @@
       "tPlusOne": true,
       "invalidation": "未形成可执行入场，不设交易止损",
       "reasons": [
-        "暂无可买形态",
+        "过度延伸/追高风险",
         "形态分 51",
-        "距MA20 +1.54 ATR",
-        "主力资金占比 +10.72%"
+        "距MA20 +0.69 ATR",
+        "主力资金占比 +38.98%",
+        "接近涨停，按追高风险处理"
       ]
     },
     {
@@ -398,13 +408,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 9.54,
-        "changePct": 0.1,
+        "price": 9.51,
+        "changePct": -0.21,
         "open": 9.55,
         "high": 9.59,
         "low": 9.43,
         "dayLowToHighPct": 1.7,
-        "quoteTime": "20261021093751"
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 9.816,
@@ -419,7 +429,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 50",
-        "距MA20 +0.67 ATR",
+        "距MA20 +0.63 ATR",
         "主力资金占比 +6.01%"
       ]
     },
@@ -448,7 +458,7 @@
         "high": 7.67,
         "low": 7.43,
         "dayLowToHighPct": 3.23,
-        "quoteTime": "20261021093749"
+        "quoteTime": "20261021095501"
       },
       "entryZone": null,
       "triggerPrice": 7.388,
@@ -486,13 +496,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 7.86,
-        "changePct": -0.38,
+        "price": 7.98,
+        "changePct": 1.14,
         "open": 7.88,
-        "high": 8.02,
+        "high": 8.03,
         "low": 7.79,
-        "dayLowToHighPct": 2.95,
-        "quoteTime": "20261021093747"
+        "dayLowToHighPct": 3.08,
+        "quoteTime": "20261021095502"
       },
       "entryZone": null,
       "triggerPrice": 7.697,
@@ -507,7 +517,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 49",
-        "距MA20 +1.12 ATR",
+        "距MA20 +1.48 ATR",
         "主力资金占比 +0.65%"
       ]
     },
@@ -528,13 +538,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 39.93,
-        "changePct": -0.22,
+        "price": 39.9,
+        "changePct": -0.3,
         "open": 40.0,
         "high": 40.32,
         "low": 39.68,
         "dayLowToHighPct": 1.61,
-        "quoteTime": "20261021093749"
+        "quoteTime": "20261021095501"
       },
       "entryZone": null,
       "triggerPrice": 38.935,
@@ -549,7 +559,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 49",
-        "距MA20 +0.88 ATR",
+        "距MA20 +0.86 ATR",
         "主力资金占比 -0.27%"
       ]
     },
@@ -570,13 +580,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 13.67,
-        "changePct": 1.03,
+        "price": 13.71,
+        "changePct": 1.33,
         "open": 13.5,
-        "high": 13.9,
+        "high": 14.03,
         "low": 13.3,
-        "dayLowToHighPct": 4.51,
-        "quoteTime": "20261021093751"
+        "dayLowToHighPct": 5.49,
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 12.505,
@@ -591,7 +601,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 48",
-        "距MA20 +1.65 ATR",
+        "距MA20 +1.69 ATR",
         "主力资金占比 -3.83%"
       ]
     },
@@ -612,13 +622,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 9.42,
-        "changePct": 0.43,
+        "price": 9.38,
+        "changePct": 0.0,
         "open": 9.39,
         "high": 9.46,
         "low": 9.35,
         "dayLowToHighPct": 1.18,
-        "quoteTime": "20261021093749"
+        "quoteTime": "20261021095501"
       },
       "entryZone": null,
       "triggerPrice": 9.376,
@@ -633,7 +643,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 48",
-        "距MA20 +0.38 ATR",
+        "距MA20 +0.18 ATR",
         "主力资金占比 -5.91%"
       ]
     },
@@ -654,13 +664,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 12.15,
-        "changePct": 0.33,
+        "price": 12.16,
+        "changePct": 0.41,
         "open": 12.15,
         "high": 12.17,
         "low": 12.04,
         "dayLowToHighPct": 1.08,
-        "quoteTime": "20261021093747"
+        "quoteTime": "20261021095502"
       },
       "entryZone": null,
       "triggerPrice": 12.124,
@@ -675,7 +685,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 47",
-        "距MA20 -1.03 ATR",
+        "距MA20 -1.00 ATR",
         "主力资金占比 -8.14%"
       ]
     },
@@ -698,13 +708,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 3.03,
-        "changePct": 0.66,
+        "price": 3.06,
+        "changePct": 1.66,
         "open": 3.02,
-        "high": 3.06,
+        "high": 3.08,
         "low": 3.0,
-        "dayLowToHighPct": 2.0,
-        "quoteTime": "20261021093751"
+        "dayLowToHighPct": 2.67,
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 3.332,
@@ -719,7 +729,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 41",
-        "距MA20 -0.86 ATR",
+        "距MA20 -0.77 ATR",
         "主力资金占比 +11.71%"
       ]
     },
@@ -741,13 +751,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 3.47,
-        "changePct": 0.58,
+        "price": 3.48,
+        "changePct": 0.87,
         "open": 3.45,
         "high": 3.49,
         "low": 3.43,
         "dayLowToHighPct": 1.75,
-        "quoteTime": "20261021093751"
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 3.776,
@@ -762,7 +772,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 39",
-        "距MA20 -0.64 ATR",
+        "距MA20 -0.61 ATR",
         "主力资金占比 +0.52%"
       ]
     },
@@ -787,9 +797,9 @@
         "changePct": -1.68,
         "open": 22.1,
         "high": 22.16,
-        "low": 21.63,
-        "dayLowToHighPct": 2.45,
-        "quoteTime": "20261021093747"
+        "low": 21.6,
+        "dayLowToHighPct": 2.59,
+        "quoteTime": "20261021095502"
       },
       "entryZone": null,
       "triggerPrice": 22.292,
@@ -825,13 +835,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 14.19,
-        "changePct": 0.71,
+        "price": 14.23,
+        "changePct": 0.99,
         "open": 14.09,
         "high": 14.43,
         "low": 14.05,
         "dayLowToHighPct": 2.7,
-        "quoteTime": "20261021093751"
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 14.345,
@@ -846,7 +856,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 39",
-        "距MA20 -0.91 ATR",
+        "距MA20 -0.84 ATR",
         "主力资金占比 -0.54%"
       ]
     },
@@ -867,13 +877,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 2.6,
-        "changePct": 0.78,
+        "price": 2.62,
+        "changePct": 1.55,
         "open": 2.57,
-        "high": 2.62,
+        "high": 2.63,
         "low": 2.55,
-        "dayLowToHighPct": 2.75,
-        "quoteTime": "20261021093751"
+        "dayLowToHighPct": 3.14,
+        "quoteTime": "20261021095503"
       },
       "entryZone": null,
       "triggerPrice": 2.854,
@@ -888,7 +898,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 39",
-        "距MA20 -0.95 ATR",
+        "距MA20 -0.89 ATR",
         "主力资金占比 -2.11%"
       ]
     }
@@ -896,8 +906,8 @@
   "setupCandidates": [],
   "summary": {
     "official": 20,
-    "officialBuy": 2,
-    "officialWatch": 1,
+    "officialBuy": 1,
+    "officialWatch": 3,
     "expandedSetupCandidates": 0
   },
   "rules": {
