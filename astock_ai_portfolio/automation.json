@@ -7,22 +7,22 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "20261021-095518",
-  "lastRunAt": "2026-10-21T09:55:18+08:00",
-  "lastSuccessAt": "2026-10-21T09:55:18+08:00",
-  "lastTradeAt": "2026-10-21T09:55:18+08:00",
-  "status": "TRADED",
-  "statusZh": "后台自动模拟成交1笔；持仓保护独立执行",
+  "cycleId": "20261021-101020",
+  "lastRunAt": "2026-10-21T10:10:20+08:00",
+  "lastSuccessAt": "2026-10-21T10:10:20+08:00",
+  "lastTradeAt": "2026-10-21T10:00:26+08:00",
+  "status": "NO_ACTION",
+  "statusZh": "30只2026-10-16收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
   "runSource": "local-validation",
   "sessionOpen": true,
-  "radarCapturedAt": "2026-10-21T09:51:09+08:00",
+  "radarCapturedAt": "2026-10-21T10:06:10+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 249.1,
-  "actionsThisCycle": 1,
-  "buyActionsThisCycle": 1,
+  "radarAgeSeconds": 250.4,
+  "actionsThisCycle": 0,
+  "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
-  "ledgerDecisionCount": 140,
-  "positionCount": 6,
+  "ledgerDecisionCount": 142,
+  "positionCount": 8,
   "capitalCapacity": 20000000.0,
   "error": null,
   "knownIncident": {
@@ -44,20 +44,10 @@
       "activatedAt": "2026-09-21T22:33:31+08:00",
       "batchCount": 9,
       "activeBatchCount": 8,
-      "pendingOrderCount": 223,
+      "pendingOrderCount": 221,
       "pendingExitCount": 0,
       "lastSignalDate": "2026-10-16",
       "pendingOrders": [
-        {
-          "batchId": "B0002-2026-09-22",
-          "signalDate": "2026-09-22",
-          "code": "300418",
-          "name": "昆仑万维",
-          "rank": 1,
-          "limitPrice": 43.6884,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
         {
           "batchId": "B0002-2026-09-22",
           "signalDate": "2026-09-22",
@@ -65,18 +55,8 @@
           "name": "中文在线",
           "rank": 2,
           "limitPrice": 25.0096,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0002-2026-09-22",
-          "signalDate": "2026-09-22",
-          "code": "002354",
-          "name": "天娱数科",
-          "rank": 3,
-          "limitPrice": 7.8792,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -105,8 +85,8 @@
           "name": "吉视传媒",
           "rank": 6,
           "limitPrice": 2.4696,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -125,8 +105,8 @@
           "name": "汉得信息",
           "rank": 8,
           "limitPrice": 15.8564,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -135,8 +115,8 @@
           "name": "浙文互联",
           "rank": 9,
           "limitPrice": 7.2422,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -145,8 +125,8 @@
           "name": "天龙集团",
           "rank": 10,
           "limitPrice": 8.8102,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -155,8 +135,8 @@
           "name": "优刻得-W",
           "rank": 11,
           "limitPrice": 30.2134,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -165,8 +145,8 @@
           "name": "东方明珠",
           "rank": 12,
           "limitPrice": 8.8788,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -175,8 +155,8 @@
           "name": "旗天科技",
           "rank": 14,
           "limitPrice": 6.9384,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -185,8 +165,8 @@
           "name": "神州数码",
           "rank": 15,
           "limitPrice": 23.1966,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -205,8 +185,8 @@
           "name": "每日互动",
           "rank": 17,
           "limitPrice": 22.148,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -215,8 +195,8 @@
           "name": "歌尔股份",
           "rank": 18,
           "limitPrice": 24.2844,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -235,8 +215,8 @@
           "name": "中视传媒",
           "rank": 21,
           "limitPrice": 14.8078,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -245,8 +225,8 @@
           "name": "巨人网络",
           "rank": 22,
           "limitPrice": 23.7944,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -275,8 +255,8 @@
           "name": "常山北明",
           "rank": 25,
           "limitPrice": 12.9066,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -285,8 +265,8 @@
           "name": "视觉中国",
           "rank": 27,
           "limitPrice": 16.415,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -315,8 +295,8 @@
           "name": "新 华 都",
           "rank": 30,
           "limitPrice": 7.7812,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -325,8 +305,8 @@
           "name": "世纪华通",
           "rank": 31,
           "limitPrice": 14.3472,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -335,8 +315,8 @@
           "name": "梦网科技",
           "rank": 32,
           "limitPrice": 8.1536,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0002-2026-09-22",
@@ -345,8 +325,28 @@
           "name": "首都在线",
           "rank": 33,
           "limitPrice": 20.0704,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "001330",
+          "name": "博纳影业",
+          "rank": 34,
+          "limitPrice": 5.39,
+          "status": "WAIT_LIMIT_PRICE",
+          "reasonZh": "等待触及低吸限价5.39"
+        },
+        {
+          "batchId": "B0002-2026-09-22",
+          "signalDate": "2026-09-22",
+          "code": "002027",
+          "name": "分众传媒",
+          "rank": 35,
+          "limitPrice": 4.655,
+          "status": "WAIT_LIMIT_PRICE",
+          "reasonZh": "等待触及低吸限价4.66"
         }
       ],
       "pendingExits": [],
