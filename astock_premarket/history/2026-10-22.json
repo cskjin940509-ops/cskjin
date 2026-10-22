@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "version": "v1.0-premarket-prediction-point-in-time",
-  "state": "ready",
+  "state": "waiting-slow-money",
   "targetDate": "2026-10-22",
-  "generatedAt": "2026-10-21T15:27:05+08:00",
+  "generatedAt": "2026-10-22T13:00:50+08:00",
   "sourceOfficialDate": "2026-10-20",
-  "factorDataDate": "2026-10-20",
-  "slowMoneyFresh": true,
+  "factorDataDate": "2026-10-21",
+  "slowMoneyFresh": false,
   "auctionDataUsed": false,
   "continuousMarketDataUsed": false,
   "pointInTimeCutoffZh": "只使用目标交易日开盘前已发布数据；不读取目标日09:15之后的集合竞价或连续竞价行情。",
   "roleZh": "开盘前提前预测池；不是正式买入池，也不会改写Official、盘中雷达或智能实盘账本。",
   "sourceAvailability": {
     "Official": "可用：2026-10-20 Official",
-    "B1两融": "可用：数据日 2026-10-20",
-    "B2 ETF": "可用：数据日 2026-10-20",
+    "B1两融": "等待更新到 2026-10-20；当前文件数据日 2026-10-21",
+    "B2 ETF": "等待更新到 2026-10-20；当前文件数据日 2026-10-21",
     "B3主力": "使用 2026-10-20 Official 冻结主力资金口径",
     "历史形态": "只作风险背景，不直接当作买入概率"
   },
@@ -38,10 +38,10 @@
     "B23": []
   },
   "historyContext": {
-    "updatedAt": "2026-10-20T21:54:32+08:00",
+    "updatedAt": "2026-10-21T22:09:31+08:00",
     "liveSampleConfidenceZh": "高",
-    "liveEdgeStateZh": "相对稳定",
-    "liveEdgeReasonZh": "最近20个成熟样本与较长窗口的差异尚未达到1个百分点阈值。",
+    "liveEdgeStateZh": "近期弱化",
+    "liveEdgeReasonZh": "最近20个成熟样本的5日中位超额收益明显低于较长窗口。",
     "reconstructionRecentTrendZh": "相对稳定",
     "reconstructionAdviceZh": "历史重建只用于研究/校准；真实交易权重仍以持续样本外验证为准。",
     "policyZh": "历史形态只作风险背景，不把历史重建收益直接写成买入概率或实盘权重。"
@@ -60,7 +60,7 @@
       "code": "301313",
       "name": "凡拓数创",
       "sector": "其他数字媒体",
-      "priorityScore": 56.05,
+      "priorityScore": 57.1,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -68,22 +68,22 @@
         "B4"
       ],
       "baseScore": 62.1,
-      "slowCompositeScore": 61.05,
-      "marginScore": 50.0,
+      "slowCompositeScore": null,
+      "marginScore": null,
       "etfScore": null,
       "mainFlowPct": 18.48,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 20.0,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 61.0；两融评分 50",
-      "riskZh": "追高风险高；上一交易日已上涨20.00%；暂无双因子交叉确认",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 62.1；B1/B2等待当日早间更新",
+      "riskZh": "慢资金尚未更新到上一交易日；追高风险高；上一交易日已上涨20.00%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     },
     {
       "code": "603466",
       "name": "风语筑",
       "sector": "其他数字媒体",
-      "priorityScore": 37.1,
+      "priorityScore": 39.2,
       "tierZh": "等竞价确认",
       "memberships": [
         "B0",
@@ -91,15 +91,15 @@
         "B4"
       ],
       "baseScore": 44.2,
-      "slowCompositeScore": 42.1,
-      "marginScore": 50.0,
+      "slowCompositeScore": null,
+      "marginScore": null,
       "etfScore": null,
       "mainFlowPct": 9.0,
       "mainlineStage": null,
       "chaseRisk": "HIGH",
       "previousChangePct": 7.23,
-      "reasonZh": "B3 单源/多源确认；基础/综合强度 42.1；两融评分 50",
-      "riskZh": "追高风险高；上一交易日已上涨7.23%；暂无双因子交叉确认",
+      "reasonZh": "B3 单源/多源确认；基础/综合强度 44.2；B1/B2等待当日早间更新",
+      "riskZh": "慢资金尚未更新到上一交易日；追高风险高；上一交易日已上涨7.23%；暂无双因子交叉确认",
       "auctionConfirmZh": "9:15-9:25必须检查是否高开过度/虚假强势；不直接追价。"
     }
   ]
