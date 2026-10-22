@@ -8785,6 +8785,21 @@
       "cumulativeReturnPct": 2.9327,
       "radarCapturedAt": "2026-10-22T15:08:22+08:00",
       "isVerifiedClose": true
+    },
+    {
+      "timestamp": "2026-10-22T15:26:48+08:00",
+      "date": "2026-10-22",
+      "time": "15:26:48",
+      "nav": 19908724.18,
+      "cash": 19555006.18,
+      "marketValue": 353718.0,
+      "positionCount": 2,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.02932745,
+      "cumulativeNav": 1.02932745,
+      "cumulativeReturnPct": 2.9327,
+      "radarCapturedAt": "2026-10-22T15:08:22+08:00",
+      "isVerifiedClose": true
     }
   ],
   "dailyControl": {
@@ -8976,11 +8991,11 @@
     "2026-10-22": {
       "newBuys": 0,
       "sells": 0,
-      "lastDecisionAt": "2026-10-22T15:10:37+08:00"
+      "lastDecisionAt": "2026-10-22T15:26:48+08:00"
     }
   },
   "createdAt": "2026-08-20T11:14:42+08:00",
-  "updatedAt": "2026-10-22T15:10:52+08:00",
+  "updatedAt": "2026-10-22T15:26:48+08:00",
   "capitalEvents": [
     {
       "eventId": "capital-20260903-232335",
@@ -27528,12 +27543,12 @@
     "tCycles": [],
     "audit": [],
     "market": {
-      "state": "RISK",
+      "state": "BASELINE",
       "cap": 0.1,
       "baseCap": 0.1,
-      "intradayCap": 0.1,
-      "allowNew": false,
-      "reasonZh": "核心指数急跌，盘中风险上限下调至10%",
+      "intradayCap": null,
+      "allowNew": true,
+      "reasonZh": "全市场宽度延迟，前收盘核心指数平均-1.06%，采用非掘金的保守运行上限10%；盘中大盘快照过期/时间异常，维持盘前上限并等待新证据",
       "missingEvidence": [],
       "sentiment": {
         "ready": true,
@@ -27552,9 +27567,9 @@
     },
     "portfolioRisk": {
       "cap": 0.1,
-      "allowNew": false,
+      "allowNew": true,
       "date": "2026-10-22",
-      "asOf": "2026-10-22T15:10:37+08:00",
+      "asOf": "2026-10-22T15:26:48+08:00",
       "dailyUnitReturnPct": -0.0369755241045544,
       "confirmedCloseDrawdownPct": -2.85129419548128,
       "dailyRiskDataReady": true,
@@ -27562,7 +27577,7 @@
       "currentEvidenceReady": true,
       "defensiveConfirmed": false,
       "defensiveConfirmations": 0,
-      "forceReduction": true,
+      "forceReduction": false,
       "executionPolicyZh": "风险独立检查；防守大盘2个至少间隔60秒的新快照确认后立即分批降至上限，不等普通窗口和换手额度"
     },
     "riskGuard": {},
