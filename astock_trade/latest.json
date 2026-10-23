@@ -1,54 +1,10 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-23",
-  "generatedAt": "2026-10-23T13:45:23+08:00",
+  "generatedAt": "2026-10-23T15:04:51+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-20",
   "officialPlans": [
-    {
-      "code": "603466",
-      "name": "风语筑",
-      "sector": "其他数字媒体",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 50.8,
-        "historical": {}
-      },
-      "quote": {
-        "price": 14.19,
-        "changePct": 6.29,
-        "open": 13.0,
-        "high": 14.4,
-        "low": 12.59,
-        "dayLowToHighPct": 14.38,
-        "quoteTime": "20261023134522"
-      },
-      "entryZone": null,
-      "triggerPrice": 13.224,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 51",
-        "距MA20 +1.35 ATR",
-        "主力资金占比 +9.00%"
-      ]
-    },
     {
       "code": "301313",
       "name": "凡拓数创",
@@ -76,7 +32,7 @@
         "high": 61.44,
         "low": 49.55,
         "dayLowToHighPct": 24.0,
-        "quoteTime": "20261023134521"
+        "quoteTime": "20261023150409"
       },
       "entryZone": null,
       "triggerPrice": 37.788,
@@ -93,6 +49,51 @@
         "形态分 50",
         "距MA20 +6.88 ATR",
         "主力资金占比 +18.48%",
+        "接近涨停，按追高风险处理"
+      ]
+    },
+    {
+      "code": "603466",
+      "name": "风语筑",
+      "sector": "其他数字媒体",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 47.8,
+        "historical": {}
+      },
+      "quote": {
+        "price": 14.69,
+        "changePct": 10.04,
+        "open": 13.0,
+        "high": 14.69,
+        "low": 12.59,
+        "dayLowToHighPct": 16.68,
+        "quoteTime": "20261023150443"
+      },
+      "entryZone": null,
+      "triggerPrice": 13.224,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 48",
+        "距MA20 +1.82 ATR",
+        "主力资金占比 +9.00%",
         "接近涨停，按追高风险处理"
       ]
     }
@@ -115,15 +116,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "blocked",
-    "reason": "full-market-data-unavailable",
-    "checkedAt": "2026-10-23T13:45:31.018969+08:00",
-    "errors": [
-      "RuntimeError: Market page missing; refusing partial scan",
-      "HTTPError: HTTP Error 502: Bad Gateway",
-      "HTTPError: HTTP Error 502: Bad Gateway"
-    ]
-  }
+  ]
 }
