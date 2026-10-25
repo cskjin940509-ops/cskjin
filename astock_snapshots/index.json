@@ -7117,7 +7117,7 @@
         "original-factor-provenance-incomplete",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -7128,9 +7128,9 @@
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
         "factorRecompute": {
-          "available": 12,
+          "available": 0,
           "total": 17,
-          "coveragePct": 70.59,
+          "coveragePct": 0.0,
           "cutoff": "2026-08-17",
           "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution"
         },
@@ -16655,15 +16655,16 @@
       "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
+        "raw-price-cross-source-incomplete:13/14",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 14,
-          "verified": 14,
-          "coveragePct": 100.0,
+          "verified": 13,
+          "coveragePct": 92.86,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
@@ -36819,7 +36820,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -49243,7 +49244,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -60117,7 +60118,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -79717,7 +79718,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -130006,7 +130007,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -145444,7 +145445,7 @@
       "issues": [
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
@@ -159536,15 +159537,16 @@
       "status": "PartiallyVerified",
       "eligibleForPerformanceComparison": false,
       "issues": [
+        "raw-price-cross-source-incomplete:2/12",
         "point-in-time-constituent-snapshot-missing"
       ],
-      "auditedAt": "2026-10-23T21:18:20+08:00",
+      "auditedAt": "2026-10-25T15:40:33+08:00",
       "note": "旧批次已完成可恢复数据的逐项复核；只有原始时点成分、因子来源和至少一个合规价格源可证明时才升级为 Verified。",
       "reverification": {
         "rawPrice": {
           "total": 12,
-          "verified": 12,
-          "coveragePct": 100.0,
+          "verified": 2,
+          "coveragePct": 16.67,
           "bseSingleSource": 0,
           "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%"
         },
