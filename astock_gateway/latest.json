@@ -1,77 +1,74 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T22:01:46+08:00",
-  "state": "可用",
-  "verifiedToday": true,
+  "generatedAt": "2026-10-27T00:15:22+08:00",
+  "state": "部分可用",
+  "verifiedToday": false,
   "providerDate": "20261026",
   "activeCohortDate": "2026-10-20",
   "activePoolQuoteCount": 2,
   "marketSnapshot": {
     "sourceDate": "2026-10-26",
-    "availableAt": "2026-10-26T22:01:46+08:00",
-    "confidence": "高",
-    "completeness": "完整",
-    "verifiedToday": true,
-    "dataSource": "Tushare日线全市场截面, 东方财富板块, 腾讯行情",
+    "availableAt": "2026-10-27T00:15:22+08:00",
+    "confidence": "低",
+    "completeness": "部分",
+    "verifiedToday": false,
+    "dataSource": "东方财富板块, 腾讯行情",
     "indices": {
       "sh000001": {
         "name": "上证指数",
         "close": 3697.52,
         "changePct": 0.19,
         "amount": 746528030000.0,
-        "quoteTime": "161400",
-        "quoteDate": "20261026"
+        "quoteTime": "16:14:00",
+        "quoteDate": "20261026",
+        "source": "腾讯行情"
       },
       "sz399006": {
         "name": "创业板指",
         "close": 2638.23,
         "changePct": -1.71,
         "amount": 428141980000.0,
-        "quoteTime": "161412",
-        "quoteDate": "20261026"
+        "quoteTime": "16:14:12",
+        "quoteDate": "20261026",
+        "source": "腾讯行情"
       },
       "sh000688": {
         "name": "科创50",
         "close": 1315.5,
         "changePct": -2.23,
         "amount": 81697460000.0,
-        "quoteTime": "161412",
-        "quoteDate": "20261026"
+        "quoteTime": "16:14:12",
+        "quoteDate": "20261026",
+        "source": "腾讯行情"
       },
       "sh000300": {
         "name": "沪深300",
         "close": 4103.54,
         "changePct": -0.04,
         "amount": 456246630000.0,
-        "quoteTime": "161412",
-        "quoteDate": "20261026"
+        "quoteTime": "16:14:12",
+        "quoteDate": "20261026",
+        "source": "腾讯行情"
       },
       "sh000852": {
         "name": "中证1000",
         "close": 6630.78,
         "changePct": -1.54,
         "amount": 316761120000.0,
-        "quoteTime": "161400",
-        "quoteDate": "20261026"
-      },
-      "sz399001": {
-        "name": "深证成指",
-        "close": 11534.38,
-        "changePct": -1.19,
-        "amount": 862265350000.0,
-        "quoteTime": "161457",
-        "quoteDate": "20261026"
+        "quoteTime": "16:14:00",
+        "quoteDate": "20261026",
+        "source": "腾讯行情"
       }
     },
-    "totalAmount": 1623091874611.0151,
-    "up": 2252,
-    "down": 3157,
-    "flat": 165,
-    "medianChangePct": -0.46375,
-    "sampleCount": 5574,
-    "breadthStatus": "全市场统计可用",
-    "coreIndexCoverage": "6/6",
-    "coreIndexSource": "腾讯当日收盘快照"
+    "totalAmount": null,
+    "up": null,
+    "down": null,
+    "flat": null,
+    "medianChangePct": null,
+    "sampleCount": null,
+    "breadthStatus": "全市场统计待同步",
+    "breadthSampleCount": 0,
+    "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。"
   },
   "boardHeatmap": {
     "industry": [
@@ -2679,7 +2676,7 @@
       }
     ],
     "sourceDate": "2026-10-26",
-    "availableAt": "2026-10-26T22:01:46+08:00"
+    "availableAt": "2026-10-27T00:15:22+08:00"
   },
   "quotes": {
     "sh000001": {
@@ -2788,9 +2785,10 @@
       "source": "腾讯行情"
     }
   },
-  "errors": [],
+  "errors": [
+    "全A截面：东方财富失败(RuntimeError: Full-market pagination failed: HTTPError,HTTPError); Tushare全市场日线失败(RuntimeError: Tushare daily returned no rows)"
+  ],
   "dataSources": [
-    "Tushare日线全市场截面",
     "东方财富板块",
     "腾讯行情"
   ]
