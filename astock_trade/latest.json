@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-26",
-  "generatedAt": "2026-10-26T13:47:37+08:00",
+  "generatedAt": "2026-10-26T15:11:37+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-20",
   "officialPlans": [
@@ -16,41 +16,36 @@
         "B3",
         "B4"
       ],
-      "action": "买入候选",
+      "action": "不建议买",
       "setup": {
-        "type": "BREAKOUT_RETEST",
-        "label": "突破回踩",
-        "score": 89.8,
-        "historical": {
-          "samples": 0
-        }
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 50.8,
+        "historical": {}
       },
       "quote": {
-        "price": 15.1,
-        "changePct": 2.79,
+        "price": 14.73,
+        "changePct": 0.27,
         "open": 15.58,
         "high": 15.98,
         "low": 14.46,
         "dayLowToHighPct": 10.51,
-        "quoteTime": "20261026134737"
+        "quoteTime": "20261026151136"
       },
-      "entryZone": [
-        15.095,
-        15.322
-      ],
-      "triggerPrice": 15.14,
-      "stopLoss": 14.296,
-      "takeProfit1": 16.577,
-      "takeProfit2": 17.489,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "entryZone": null,
+      "triggerPrice": 13.493,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 14.296",
+      "invalidation": "未形成可执行入场，不设交易止损",
       "reasons": [
-        "突破回踩",
-        "形态分 90",
-        "距MA20 +1.95 ATR",
+        "暂无可买形态",
+        "形态分 51",
+        "距MA20 +1.63 ATR",
         "主力资金占比 +9.00%"
       ]
     },
@@ -75,13 +70,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 69.59,
-        "changePct": 13.26,
+        "price": 67.85,
+        "changePct": 10.43,
         "open": 68.0,
         "high": 70.78,
         "low": 65.01,
         "dayLowToHighPct": 8.88,
-        "quoteTime": "20261026134736"
+        "quoteTime": "20261026151130"
       },
       "entryZone": null,
       "triggerPrice": 41.075,
@@ -96,17 +91,67 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +7.23 ATR",
+        "距MA20 +6.86 ATR",
         "主力资金占比 +18.48%"
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "688363",
+      "name": "华熙生物",
+      "sector": "医美耗材",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 83.4,
+        "historical": {
+          "samples": 1,
+          "win5D": 1.0,
+          "avg5D": 0.0252,
+          "avgMFE5D": 0.0557,
+          "avgMAE5D": -0.0493
+        }
+      },
+      "quote": {
+        "price": 35.6,
+        "changePct": 1.11,
+        "open": 34.88,
+        "high": 35.78,
+        "low": 34.62,
+        "dayLowToHighPct": 3.35,
+        "quoteTime": "20261026151136"
+      },
+      "entryZone": [
+        35.503,
+        36.037
+      ],
+      "triggerPrice": 35.61,
+      "stopLoss": 34.815,
+      "takeProfit1": 37.203,
+      "takeProfit2": 38.158,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 34.815",
+      "reasons": [
+        "突破回踩",
+        "形态分 83",
+        "距MA20 +1.17 ATR",
+        "主力资金占比 -3.01%"
+      ]
+    }
+  ],
   "summary": {
     "official": 2,
-    "officialBuy": 1,
+    "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 1
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -119,9 +164,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "official-has-live-buy"
-  }
+  ]
 }
