@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-26",
-  "generatedAt": "2026-10-26T18:37:52+08:00",
+  "date": "2026-10-27",
+  "generatedAt": "2026-10-27T13:58:51+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-20",
   "officialPlans": [
@@ -24,16 +24,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 14.73,
-        "changePct": 0.27,
-        "open": 15.58,
-        "high": 15.98,
-        "low": 14.46,
-        "dayLowToHighPct": 10.51,
-        "quoteTime": "20261026161440"
+        "price": 14.08,
+        "changePct": -4.41,
+        "open": 14.59,
+        "high": 14.81,
+        "low": 13.99,
+        "dayLowToHighPct": 5.86,
+        "quoteTime": "20261027135851"
       },
       "entryZone": null,
-      "triggerPrice": 13.493,
+      "triggerPrice": 13.732,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -45,7 +45,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +1.63 ATR",
+        "距MA20 +0.92 ATR",
         "主力资金占比 +9.00%"
       ]
     },
@@ -70,16 +70,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 67.85,
-        "changePct": 10.43,
-        "open": 68.0,
-        "high": 70.78,
-        "low": 65.01,
-        "dayLowToHighPct": 8.88,
-        "quoteTime": "20261026161457"
+        "price": 65.9,
+        "changePct": -2.87,
+        "open": 66.88,
+        "high": 69.77,
+        "low": 64.6,
+        "dayLowToHighPct": 8.0,
+        "quoteTime": "20261027135851"
       },
       "entryZone": null,
-      "triggerPrice": 41.075,
+      "triggerPrice": 44.962,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -91,17 +91,67 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +6.86 ATR",
+        "距MA20 +5.39 ATR",
         "主力资金占比 +18.48%"
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "002543",
+      "name": "万和电气",
+      "sector": "卫浴电器",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 85.6,
+        "historical": {
+          "samples": 12,
+          "win5D": 0.9167,
+          "avg5D": 0.0445,
+          "avgMFE5D": 0.0973,
+          "avgMAE5D": -0.0256
+        }
+      },
+      "quote": {
+        "price": 7.7,
+        "changePct": 2.26,
+        "open": 7.55,
+        "high": 7.99,
+        "low": 7.55,
+        "dayLowToHighPct": 5.83,
+        "quoteTime": "20261027135848"
+      },
+      "entryZone": [
+        7.691,
+        7.847
+      ],
+      "triggerPrice": 7.769,
+      "stopLoss": 7.306,
+      "takeProfit1": 8.464,
+      "takeProfit2": 8.928,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 7.306",
+      "reasons": [
+        "趋势回踩",
+        "形态分 86",
+        "距MA20 +0.27 ATR",
+        "主力资金占比 +7.83%"
+      ]
+    }
+  ],
   "summary": {
     "official": 2,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 1
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -114,10 +164,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "outside-exchange-scan-window",
-    "checkedAt": "2026-10-26T18:38:01.978386+08:00"
-  }
+  ]
 }
