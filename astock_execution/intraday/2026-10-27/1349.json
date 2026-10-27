@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "strategyVersion": "v1.0-execution-assistant-5m",
+  "date": "2026-10-27",
+  "generatedAt": "2026-10-27T13:49:50+08:00",
+  "phase": "下午连续竞价",
+  "refreshIntervalMin": 5,
+  "isMarketOpen": true,
+  "candidateSources": {
+    "priorOfficialDate": "2026-10-20",
+    "tailStatus": null,
+    "tailCapturedAt": null,
+    "approvedMarketData": [
+      "Tushare兼容stock_api",
+      "同花顺",
+      "腾讯",
+      "东方财富"
+    ]
+  },
+  "stocks": {
+    "301313": {
+      "code": "301313",
+      "name": "凡拓数创",
+      "sector": "其他数字媒体",
+      "source": "Official",
+      "sourceDate": "2026-10-20",
+      "pools": [
+        "B0",
+        "B1",
+        "B3",
+        "B4",
+        "B13"
+      ],
+      "score": 62.1,
+      "entryScore": 23.0,
+      "entryAction": "等待企稳",
+      "entryReason": "价格结构偏弱",
+      "signalReasons": [
+        "昨日综合确认池",
+        "主力资金强",
+        "接近日内低位"
+      ],
+      "holdingAction": "持有观察",
+      "holdingReason": "未触发明确保护条件",
+      "price": 65.49,
+      "changePct": -3.48,
+      "dayHigh": 69.77,
+      "dayLow": 64.6,
+      "dayRangePct": 8.003,
+      "rangePositionPct": 17.21,
+      "vwap": null,
+      "entryZoneLow": 66.565,
+      "entryZoneHigh": 67.805,
+      "riskPct": 4.4,
+      "protectiveStop": 64.228,
+      "target1R": 70.142,
+      "target2R": 73.1,
+      "mainFlowPct": 18.48,
+      "quoteSource": "腾讯行情",
+      "firstActionableAt": null,
+      "firstActionablePrice": null,
+      "maxFavorablePctAfterSignal": null,
+      "maxAdversePctAfterSignal": null,
+      "bestObservedTimeAfterSignal": null,
+      "worstObservedTimeAfterSignal": null,
+      "postSignalMetricPrecision": null,
+      "quoteTime": "20261027134948",
+      "newPositionSellableToday": false
+    },
+    "603466": {
+      "code": "603466",
+      "name": "风语筑",
+      "sector": "其他数字媒体",
+      "source": "Official",
+      "sourceDate": "2026-10-20",
+      "pools": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "score": 44.2,
+      "entryScore": 3.0,
+      "entryAction": "等待企稳",
+      "entryReason": "价格结构偏弱",
+      "signalReasons": [
+        "昨日综合确认池",
+        "主力资金强",
+        "接近日内低位",
+        "当日走势偏弱"
+      ],
+      "holdingAction": "持有观察",
+      "holdingReason": "未触发明确保护条件",
+      "price": 14.03,
+      "changePct": -4.75,
+      "dayHigh": 14.81,
+      "dayLow": 13.99,
+      "dayRangePct": 5.861,
+      "rangePositionPct": 4.88,
+      "vwap": null,
+      "entryZoneLow": 14.302,
+      "entryZoneHigh": 14.498,
+      "riskPct": 3.22,
+      "protectiveStop": 13.936,
+      "target1R": 14.864,
+      "target2R": 15.328,
+      "mainFlowPct": 9.0,
+      "quoteSource": "腾讯行情",
+      "firstActionableAt": null,
+      "firstActionablePrice": null,
+      "maxFavorablePctAfterSignal": null,
+      "maxAdversePctAfterSignal": null,
+      "bestObservedTimeAfterSignal": null,
+      "worstObservedTimeAfterSignal": null,
+      "postSignalMetricPrecision": null,
+      "quoteTime": "20261027134948",
+      "newPositionSellableToday": false
+    }
+  },
+  "ranking": [
+    "301313",
+    "603466"
+  ],
+  "rules": {
+    "newEntry": "昨日正式综合池用于次日延续观察；当日14:30后TailCore用于尾盘新仓。介入信号要求价格位置、资金和池强度共振，并避开明显追高。",
+    "holding": "持仓提示依据模型保护位、1R/2R、分时均价和资金变化；未录入真实持仓时仅作结构参考。",
+    "tPlusOne": "普通A股当日新买入仓位不可按本模型假设当日卖出；卖出提示仅适用于已有可卖持仓。",
+    "closingAuction": "14:57-15:00为收盘集合竞价阶段，不生成连续竞价式追价信号。",
+    "range": "日内最高/最低是事实区间；信号后最大浮盈/回撤只使用信号出现后可观察数据，不用事后全日高低倒推。"
+  },
+  "disclaimer": "规则化交易辅助，不是保证收益或自动下单系统。信号可能滞后、失效或因流动性/涨跌停/T+1无法成交。"
+}
