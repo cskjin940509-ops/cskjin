@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-10-27T22:54:52+08:00",
+  "updatedAt": "2026-10-27T22:57:08+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
     "sampleCount": 324,
@@ -21,12 +21,30 @@
         "p90": 0.0489933
       },
       "2D": {
-        "members": 0,
-        "mature": false
+        "members": 44,
+        "mature": true,
+        "meanReturn": -0.01621862,
+        "medianReturn": -0.01826868,
+        "hitRate": 0.38636364,
+        "meanAlpha": -0.00822146,
+        "medianAlpha": -0.01347265,
+        "p10": -0.09257229,
+        "p25": -0.05917789,
+        "p75": 0.0124565,
+        "p90": 0.04845715
       },
       "3D": {
-        "members": 0,
-        "mature": false
+        "members": 44,
+        "mature": true,
+        "meanReturn": -0.02378165,
+        "medianReturn": -0.04928736,
+        "hitRate": 0.27272727,
+        "meanAlpha": -0.01460295,
+        "medianAlpha": -0.03377483,
+        "p10": -0.09149377,
+        "p25": -0.06766745,
+        "p75": 0.00882873,
+        "p90": 0.04624827
       },
       "5D": {
         "members": 323,
@@ -68,8 +86,17 @@
         "p90": 0.0336972
       },
       "40D": {
-        "members": 0,
-        "mature": false
+        "members": 9,
+        "mature": true,
+        "meanReturn": -0.15363992,
+        "medianReturn": -0.11732852,
+        "hitRate": 0.11111111,
+        "meanAlpha": -0.03294388,
+        "medianAlpha": 0.00029443,
+        "p10": -0.33912259,
+        "p25": -0.19678715,
+        "p75": -0.08088979,
+        "p90": -0.02053321
       },
       "60D": {
         "members": 0,
@@ -86,7 +113,7 @@
     },
     "medianMFE": 0.090456,
     "medianMAE": -0.25183,
-    "medianMaxDrawdown": null
+    "medianMaxDrawdown": -0.26845413
   },
   "horizonGroups": {
     "shortTerm": [
@@ -116,9 +143,12 @@
     "reasonZh": "已有成熟周期，但目前没有一个周期呈现正向中位历史优势；不强行挑选所谓最佳持有期。"
   },
   "bestHoldingLong": {
-    "horizon": null,
-    "stateZh": "暂无正向历史优势",
-    "reasonZh": "已有成熟周期，但目前没有一个周期呈现正向中位历史优势；不强行挑选所谓最佳持有期。"
+    "horizon": "40D",
+    "days": 40,
+    "edge": 0.00029443,
+    "members": 9,
+    "stateZh": "存在正向历史优势",
+    "reasonZh": "按成熟样本的中位超额收益选择，当前最佳窗口为40个交易日。"
   },
   "edgeTrend": {
     "full": {
@@ -1139,6 +1169,20 @@
       "members": 324
     },
     {
+      "day": 2,
+      "meanReturn": -0.01621862,
+      "medianReturn": -0.01826868,
+      "meanAlpha": -0.00822146,
+      "members": 44
+    },
+    {
+      "day": 3,
+      "meanReturn": -0.02378165,
+      "medianReturn": -0.04928736,
+      "meanAlpha": -0.01460295,
+      "members": 44
+    },
+    {
       "day": 5,
       "meanReturn": 0.00094864,
       "medianReturn": -0.008303,
@@ -1158,6 +1202,13 @@
       "medianReturn": -0.1311085,
       "meanAlpha": -0.05603018,
       "members": 300
+    },
+    {
+      "day": 40,
+      "meanReturn": -0.15363992,
+      "medianReturn": -0.11732852,
+      "meanAlpha": -0.03294388,
+      "members": 9
     }
   ],
   "returnDistributions": {
@@ -1214,52 +1265,52 @@
     },
     "3D": {
       "horizon": "3D",
-      "members": 0,
+      "members": 44,
       "bins": [
         {
           "label": "<-5%",
-          "count": 0,
-          "share": null
+          "count": 21,
+          "share": 0.47727273
         },
         {
           "label": "-5~-3%",
-          "count": 0,
-          "share": null
+          "count": 2,
+          "share": 0.04545455
         },
         {
           "label": "-3~-1%",
-          "count": 0,
-          "share": null
+          "count": 5,
+          "share": 0.11363636
         },
         {
           "label": "-1~0%",
-          "count": 0,
-          "share": null
+          "count": 3,
+          "share": 0.06818182
         },
         {
           "label": "0~1%",
-          "count": 0,
-          "share": null
+          "count": 2,
+          "share": 0.04545455
         },
         {
           "label": "1~3%",
-          "count": 0,
-          "share": null
+          "count": 5,
+          "share": 0.11363636
         },
         {
           "label": "3~5%",
-          "count": 0,
-          "share": null
+          "count": 4,
+          "share": 0.09090909
         },
         {
           "label": "5~10%",
           "count": 0,
-          "share": null
+          "share": 0.0
         },
         {
           "label": ">10%",
-          "count": 0,
-          "share": null
+          "count": 2,
+          "share": 0.04545455
         }
       ]
     },
@@ -3323,8 +3374,39 @@
   ],
   "pathClusters": {
     "methodZh": "第一期使用透明规则分型；样本量充足后再升级为无监督路径聚类，并保留版本号避免事后改口径。",
-    "matureSamples": 0,
-    "clusters": []
+    "matureSamples": 44,
+    "clusters": [
+      {
+        "name": "失败下跌型",
+        "sampleCount": 18,
+        "share": 0.40909091,
+        "medianFiveDayReturn": -0.0791845
+      },
+      {
+        "name": "横盘蓄势型",
+        "sampleCount": 10,
+        "share": 0.22727273,
+        "medianFiveDayReturn": 0.006969
+      },
+      {
+        "name": "其他演化型",
+        "sampleCount": 9,
+        "share": 0.20454545,
+        "medianFiveDayReturn": 0.027328
+      },
+      {
+        "name": "快速启动型",
+        "sampleCount": 4,
+        "share": 0.09090909,
+        "medianFiveDayReturn": 0.0891255
+      },
+      {
+        "name": "回踩再涨型",
+        "sampleCount": 3,
+        "share": 0.06818182,
+        "medianFiveDayReturn": 0.045481
+      }
+    ]
   },
   "successFailure": {
     "definitionZh": "成功：5日收益≥+3%；失败：5日收益≤-3%。中间样本不强行归类。",
@@ -3614,7 +3696,7 @@
     "sampleConfidenceZh": "高",
     "bestHoldingZh": "暂无正向历史优势",
     "bestShortHoldingZh": "暂无正向历史优势",
-    "bestLongHoldingZh": "暂无正向历史优势",
+    "bestLongHoldingZh": "40个交易日",
     "currentAdviceZh": "维持历史优势权重并继续样本外验证"
   },
   "limitationsZh": [
