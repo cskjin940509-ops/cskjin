@@ -7,21 +7,21 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "20261026-155225",
-  "lastRunAt": "2026-10-26T15:52:25+08:00",
-  "lastSuccessAt": "2026-10-26T15:52:25+08:00",
-  "lastTradeAt": "2026-10-26T14:45:33+08:00",
-  "status": "OUTSIDE_SESSION",
-  "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
+  "cycleId": "20261027-093907",
+  "lastRunAt": "2026-10-27T09:39:07+08:00",
+  "lastSuccessAt": "2026-10-27T09:39:07+08:00",
+  "lastTradeAt": "2026-10-27T09:39:08+08:00",
+  "status": "TRADED",
+  "statusZh": "后台自动模拟成交5笔；持仓保护独立执行",
   "runSource": "local-validation",
-  "sessionOpen": false,
-  "radarCapturedAt": "2026-10-26T15:00:53+08:00",
-  "radarFresh": false,
-  "radarAgeSeconds": 3092.7,
-  "actionsThisCycle": 0,
-  "buyActionsThisCycle": 0,
-  "sellActionsThisCycle": 0,
-  "ledgerDecisionCount": 208,
+  "sessionOpen": true,
+  "radarCapturedAt": "2026-10-27T09:31:05+08:00",
+  "radarFresh": true,
+  "radarAgeSeconds": 483.0,
+  "actionsThisCycle": 5,
+  "buyActionsThisCycle": 1,
+  "sellActionsThisCycle": 4,
+  "ledgerDecisionCount": 221,
   "positionCount": 9,
   "capitalCapacity": 20000000.0,
   "error": null,
@@ -44,307 +44,307 @@
       "activatedAt": "2026-09-21T22:33:31+08:00",
       "batchCount": 12,
       "activeBatchCount": 8,
-      "pendingOrderCount": 214,
+      "pendingOrderCount": 167,
       "pendingExitCount": 0,
       "lastSignalDate": "2026-10-26",
       "pendingOrders": [
         {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600011",
-          "name": "华能国际",
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "688353",
+          "name": "华盛锂电",
+          "rank": 1,
+          "limitPrice": 86.9162,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "301358",
+          "name": "湖南裕能",
           "rank": 2,
-          "limitPrice": 7.0952,
+          "limitPrice": 51.499,
           "status": "WAIT_CAPACITY_OR_LIMIT",
           "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601001",
-          "name": "晋控煤业",
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "603659",
+          "name": "璞泰来",
+          "rank": 3,
+          "limitPrice": 22.1186,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "300035",
+          "name": "中科电气",
           "rank": 4,
-          "limitPrice": 17.052,
+          "limitPrice": 12.9164,
           "status": "WAIT_CAPACITY_OR_LIMIT",
           "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601011",
-          "name": "宝泰隆",
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "300432",
+          "name": "富临精工",
           "rank": 5,
-          "limitPrice": 2.9106,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601088",
-          "name": "中国神华",
-          "rank": 6,
-          "limitPrice": 46.5402,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601985",
-          "name": "中国核电",
-          "rank": 7,
-          "limitPrice": 8.9866,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "000723",
-          "name": "美锦能源",
-          "rank": 9,
-          "limitPrice": 3.4692,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600578",
-          "name": "京能电力",
-          "rank": 10,
-          "limitPrice": 5.2528,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "920571",
-          "name": "国航远洋",
-          "rank": 11,
-          "limitPrice": 8.6142,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600546",
-          "name": "山煤国际",
-          "rank": 12,
-          "limitPrice": 13.2888,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600744",
-          "name": "华银电力",
-          "rank": 13,
-          "limitPrice": 6.0466,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601699",
-          "name": "潞安环能",
-          "rank": 14,
-          "limitPrice": 14.9646,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600023",
-          "name": "浙能电力",
-          "rank": 15,
-          "limitPrice": 5.2724,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601918",
-          "name": "新集能源",
-          "rank": 16,
-          "limitPrice": 11.2994,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "603565",
-          "name": "中谷物流",
-          "rank": 17,
-          "limitPrice": 11.5444,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "603162",
-          "name": "海通发展",
-          "rank": 18,
-          "limitPrice": 13.23,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "003816",
-          "name": "中国广核",
-          "rank": 19,
-          "limitPrice": 4.3218,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601225",
-          "name": "陕西煤业",
-          "rank": 20,
-          "limitPrice": 26.068,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600428",
-          "name": "中远海特",
-          "rank": 21,
-          "limitPrice": 10.7604,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600396",
-          "name": "华电辽能",
-          "rank": 22,
-          "limitPrice": 12.3088,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600256",
-          "name": "广汇能源",
-          "rank": 23,
-          "limitPrice": 6.664,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "000767",
-          "name": "晋控电力",
-          "rank": 24,
-          "limitPrice": 3.2732,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "002128",
-          "name": "电投能源",
-          "rank": 25,
-          "limitPrice": 27.587,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "001896",
-          "name": "豫能控股",
-          "rank": 27,
-          "limitPrice": 10.241,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600726",
-          "name": "华电能源",
-          "rank": 28,
-          "limitPrice": 4.9098,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601101",
-          "name": "昊华能源",
-          "rank": 29,
           "limitPrice": 12.887,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_LIMIT_PRICE",
+          "reasonZh": "等待触及低吸限价12.89"
         },
         {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600642",
-          "name": "申能股份",
-          "rank": 30,
-          "limitPrice": 8.9082,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
-        },
-        {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
           "code": "600188",
           "name": "兖矿能源",
-          "rank": 31,
-          "limitPrice": 19.551,
+          "rank": 6,
+          "limitPrice": 20.0998,
           "status": "WAIT_CAPACITY_OR_LIMIT",
           "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "601919",
-          "name": "中远海控",
-          "rank": 32,
-          "limitPrice": 16.268,
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "688005",
+          "name": "容百科技",
+          "rank": 7,
+          "limitPrice": 24.3922,
           "status": "WAIT_CAPACITY_OR_LIMIT",
           "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "600575",
-          "name": "淮河能源",
-          "rank": 33,
-          "limitPrice": 3.1654,
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "300390",
+          "name": "天华新能",
+          "rank": 8,
+          "limitPrice": 49.5978,
           "status": "WAIT_CAPACITY_OR_LIMIT",
           "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
-          "batchId": "B0006-2026-10-08",
-          "signalDate": "2026-10-08",
-          "code": "000966",
-          "name": "长源电力",
-          "rank": 34,
-          "limitPrice": 3.969,
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "300568",
+          "name": "星源材质",
+          "rank": 9,
+          "limitPrice": 15.4742,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "300919",
+          "name": "中伟新材",
+          "rank": 10,
+          "limitPrice": 37.8084,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "600887",
+          "name": "伊利股份",
+          "rank": 12,
+          "limitPrice": 27.1852,
+          "status": "WAIT_LIMIT_PRICE",
+          "reasonZh": "等待触及低吸限价27.19"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "605179",
+          "name": "一鸣食品",
+          "rank": 13,
+          "limitPrice": 24.1276,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "300438",
+          "name": "鹏辉能源",
+          "rank": 14,
+          "limitPrice": 50.2642,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "002326",
+          "name": "永太科技",
+          "rank": 15,
+          "limitPrice": 16.807,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "300750",
+          "name": "宁德时代",
+          "rank": 16,
+          "limitPrice": 293.51,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "600884",
+          "name": "杉杉股份",
+          "rank": 17,
+          "limitPrice": 11.7698,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "601225",
+          "name": "陕西煤业",
+          "rank": 18,
+          "limitPrice": 26.5972,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "600403",
+          "name": "大有能源",
+          "rank": 19,
+          "limitPrice": 7.2422,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "300014",
+          "name": "亿纬锂能",
+          "rank": 20,
+          "limitPrice": 50.5582,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "601898",
+          "name": "中煤能源",
+          "rank": 21,
+          "limitPrice": 14.0924,
+          "status": "WAIT_LIMIT_PRICE",
+          "reasonZh": "等待触及低吸限价14.09"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "601088",
+          "name": "中国神华",
+          "rank": 23,
+          "limitPrice": 47.726,
+          "status": "WAIT_LIMIT_PRICE",
+          "reasonZh": "等待触及低吸限价47.73"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "000933",
+          "name": "神火股份",
+          "rank": 24,
+          "limitPrice": 26.1562,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0007-2026-10-09",
+          "signalDate": "2026-10-09",
+          "code": "002532",
+          "name": "天山铝业",
+          "rank": 25,
+          "limitPrice": 11.8678,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0008-2026-10-13",
+          "signalDate": "2026-10-13",
+          "code": "300805",
+          "name": "电声股份",
+          "rank": 1,
+          "limitPrice": 9.0846,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0008-2026-10-13",
+          "signalDate": "2026-10-13",
+          "code": "002291",
+          "name": "遥望科技",
+          "rank": 2,
+          "limitPrice": 5.8506,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0008-2026-10-13",
+          "signalDate": "2026-10-13",
+          "code": "002712",
+          "name": "思美传媒",
+          "rank": 3,
+          "limitPrice": 5.3606,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0008-2026-10-13",
+          "signalDate": "2026-10-13",
+          "code": "300464",
+          "name": "星徽股份",
+          "rank": 5,
+          "limitPrice": 8.428,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0008-2026-10-13",
+          "signalDate": "2026-10-13",
+          "code": "603602",
+          "name": "纵横通信",
+          "rank": 6,
+          "limitPrice": 12.495,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0008-2026-10-13",
+          "signalDate": "2026-10-13",
+          "code": "002400",
+          "name": "省广集团",
+          "rank": 7,
+          "limitPrice": 6.6052,
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
+        },
+        {
+          "batchId": "B0008-2026-10-13",
+          "signalDate": "2026-10-13",
+          "code": "603093",
+          "name": "南华期货",
+          "rank": 8,
+          "limitPrice": 13.3084,
           "status": "WAIT_CAPACITY_OR_LIMIT",
           "reasonZh": "实时成交容量或价格限制未通过"
         }
@@ -355,16 +355,7 @@
     "reasonCode": "T1_BATCH_ENTRY_PENDING",
     "reasonZh": "30只2026-10-26收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
     "entryBlocks": [],
-    "pendingExits": [
-      "300058：受T+1约束",
-      "300364：受T+1约束",
-      "600795：受T+1约束",
-      "600104：受T+1约束",
-      "000568：受T+1约束",
-      "603000：受T+1约束",
-      "000983：受T+1约束",
-      "300085：受T+1约束"
-    ],
+    "pendingExits": [],
     "candidateCount": 31,
     "rejectedCandidateCount": 9,
     "degradedCandidateCount": 22,
@@ -385,8 +376,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600795",
@@ -401,8 +392,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "601991",
@@ -416,8 +407,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600578",
@@ -431,8 +422,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600744",
@@ -449,8 +440,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "601008",
@@ -469,7 +460,7 @@
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600396",
@@ -485,8 +476,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000791",
@@ -502,8 +493,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600726",
@@ -519,8 +510,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600021",
@@ -538,7 +529,7 @@
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000767",
@@ -554,8 +545,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600023",
@@ -571,8 +562,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000899",
@@ -588,8 +579,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "002040",
@@ -609,7 +600,7 @@
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "300244",
@@ -627,8 +618,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000690",
@@ -647,8 +638,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600011",
@@ -666,8 +657,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600027",
@@ -685,8 +676,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "001896",
@@ -708,7 +699,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000905",
@@ -726,8 +717,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600157",
@@ -748,7 +739,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "002669",
@@ -771,7 +762,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000539",
@@ -790,8 +781,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "600863",
@@ -810,8 +801,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000543",
@@ -829,8 +820,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000037",
@@ -848,8 +839,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000966",
@@ -867,8 +858,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000582",
@@ -887,8 +878,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选已排序，等待下一有效买入时段",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionReasonZh": "候选保留，等待有效行情",
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "000011",
@@ -910,7 +901,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "001979",
@@ -935,7 +926,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       },
       {
         "code": "002517",
@@ -961,7 +952,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "OUTSIDE_ENTRY_SESSION"
+        "executionStatus": "WAIT_FRESH_QUOTE"
       }
     ]
   }
