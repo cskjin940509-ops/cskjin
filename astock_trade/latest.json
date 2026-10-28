@@ -1,111 +1,15 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-28",
-  "generatedAt": "2026-10-28T14:55:38+08:00",
+  "generatedAt": "2026-10-28T15:00:16+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-27",
-  "officialPlans": [
-    {
-      "code": "601398",
-      "name": "工商银行",
-      "sector": "红利破净股",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B1",
-        "B4"
-      ],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 88.2,
-        "historical": {
-          "samples": 24,
-          "win5D": 0.7083,
-          "avg5D": 0.0158,
-          "avgMFE5D": 0.0311,
-          "avgMAE5D": -0.0115
-        }
-      },
-      "quote": {
-        "price": 8.56,
-        "changePct": -0.7,
-        "open": 8.62,
-        "high": 8.63,
-        "low": 8.45,
-        "dayLowToHighPct": 2.13,
-        "quoteTime": "20261028145535"
-      },
-      "entryZone": [
-        8.358,
-        8.526
-      ],
-      "triggerPrice": 8.442,
-      "stopLoss": 8.196,
-      "takeProfit1": 8.811,
-      "takeProfit2": 9.057,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 8.196",
-      "reasons": [
-        "趋势回踩",
-        "形态分 88",
-        "距MA20 +1.46 ATR",
-        "主力资金占比 +5.41%"
-      ]
-    },
-    {
-      "code": "300976",
-      "name": "达瑞电子",
-      "sector": "昨日涨停",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B1",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 48.8,
-        "historical": {}
-      },
-      "quote": {
-        "price": 59.08,
-        "changePct": 3.41,
-        "open": 58.8,
-        "high": 62.49,
-        "low": 57.77,
-        "dayLowToHighPct": 8.17,
-        "quoteTime": "20261028145533"
-      },
-      "entryZone": null,
-      "triggerPrice": 49.552,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 49",
-        "距MA20 +1.34 ATR",
-        "主力资金占比 -1.17%"
-      ]
-    }
-  ],
+  "officialPlans": [],
   "setupCandidates": [],
   "summary": {
-    "official": 2,
+    "official": 0,
     "officialBuy": 0,
-    "officialWatch": 1,
+    "officialWatch": 0,
     "expandedSetupCandidates": 0
   },
   "rules": {
