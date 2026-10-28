@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-27",
-  "generatedAt": "2026-10-27T18:07:01+08:00",
+  "date": "2026-10-28",
+  "generatedAt": "2026-10-28T14:37:09+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-20",
   "officialPlans": [
@@ -24,16 +24,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 13.82,
-        "changePct": -6.18,
-        "open": 14.59,
-        "high": 14.81,
-        "low": 13.81,
-        "dayLowToHighPct": 7.24,
-        "quoteTime": "20261027161439"
+        "price": 14.31,
+        "changePct": 3.55,
+        "open": 14.0,
+        "high": 15.2,
+        "low": 14.0,
+        "dayLowToHighPct": 8.57,
+        "quoteTime": "20261028143710"
       },
       "entryZone": null,
-      "triggerPrice": 13.732,
+      "triggerPrice": 13.757,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -45,7 +45,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +0.70 ATR",
+        "距MA20 +1.03 ATR",
         "主力资金占比 +9.00%"
       ]
     },
@@ -70,16 +70,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 64.4,
-        "changePct": -5.08,
-        "open": 66.88,
-        "high": 69.77,
-        "low": 63.23,
-        "dayLowToHighPct": 10.34,
-        "quoteTime": "20261027161442"
+        "price": 63.93,
+        "changePct": -0.73,
+        "open": 64.79,
+        "high": 68.77,
+        "low": 62.01,
+        "dayLowToHighPct": 10.9,
+        "quoteTime": "20261028143709"
       },
       "entryZone": null,
-      "triggerPrice": 44.962,
+      "triggerPrice": 48.101,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -91,17 +91,112 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +5.11 ATR",
+        "距MA20 +4.41 ATR",
         "主力资金占比 +18.48%"
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "920982",
+      "name": "锦波生物",
+      "sector": "医美耗材",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 76.6,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 144.88,
+        "changePct": -2.37,
+        "open": 148.39,
+        "high": 151.78,
+        "low": 141.7,
+        "dayLowToHighPct": 7.11,
+        "quoteTime": "20261028143705"
+      },
+      "entryZone": [
+        144.148,
+        147.06
+      ],
+      "triggerPrice": 145.604,
+      "stopLoss": 136.868,
+      "takeProfit1": 158.708,
+      "takeProfit2": 167.445,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 136.868",
+      "reasons": [
+        "趋势回踩",
+        "形态分 77",
+        "距MA20 +0.70 ATR",
+        "主力资金占比 -11.78%"
+      ]
+    },
+    {
+      "code": "300896",
+      "name": "爱美客",
+      "sector": "医美耗材",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 73.0,
+        "historical": {
+          "samples": 6,
+          "win5D": 0.0,
+          "avg5D": -0.0371,
+          "avgMFE5D": 0.0217,
+          "avgMAE5D": -0.055
+        }
+      },
+      "quote": {
+        "price": 97.19,
+        "changePct": -1.69,
+        "open": 98.83,
+        "high": 99.89,
+        "low": 96.35,
+        "dayLowToHighPct": 3.67,
+        "quoteTime": "20261028143703"
+      },
+      "entryZone": [
+        96.025,
+        97.965
+      ],
+      "triggerPrice": 96.995,
+      "stopLoss": 93.147,
+      "takeProfit1": 102.767,
+      "takeProfit2": 106.616,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 93.147",
+      "reasons": [
+        "趋势回踩",
+        "形态分 73",
+        "距MA20 +0.54 ATR",
+        "主力资金占比 -9.92%"
+      ]
+    }
+  ],
   "summary": {
     "official": 2,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 2
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -114,10 +209,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "outside-exchange-scan-window",
-    "checkedAt": "2026-10-27T18:07:10.391613+08:00"
-  }
+  ]
 }
