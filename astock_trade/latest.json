@@ -1,16 +1,156 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-28",
-  "generatedAt": "2026-10-28T14:10:09+08:00",
+  "generatedAt": "2026-10-28T14:25:14+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-27",
-  "officialPlans": [],
-  "setupCandidates": [],
+  "officialPlans": [
+    {
+      "code": "001318",
+      "name": "阳光乳业",
+      "sector": "昨日涨停",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 51.9,
+        "historical": {}
+      },
+      "quote": {
+        "price": 13.0,
+        "changePct": -2.33,
+        "open": 13.54,
+        "high": 14.51,
+        "low": 12.9,
+        "dayLowToHighPct": 12.48,
+        "quoteTime": "20261028142512"
+      },
+      "entryZone": null,
+      "triggerPrice": 13.584,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 52",
+        "距MA20 -0.02 ATR",
+        "主力资金占比 +14.39%"
+      ]
+    },
+    {
+      "code": "000001",
+      "name": "平安银行",
+      "sector": "股份制银行Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 50.0,
+        "historical": {}
+      },
+      "quote": {
+        "price": 11.33,
+        "changePct": -1.22,
+        "open": 11.43,
+        "high": 11.5,
+        "low": 11.22,
+        "dayLowToHighPct": 2.5,
+        "quoteTime": "20261028142512"
+      },
+      "entryZone": null,
+      "triggerPrice": 11.418,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 50",
+        "距MA20 -0.53 ATR",
+        "主力资金占比 +4.80%"
+      ]
+    }
+  ],
+  "setupCandidates": [
+    {
+      "code": "600229",
+      "name": "城市传媒",
+      "sector": "沪深市场形态扫描",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "盘前观察",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 87.5,
+        "historical": {
+          "samples": 14,
+          "win5D": 0.7857,
+          "avg5D": 0.0274,
+          "avgMFE5D": 0.0635,
+          "avgMAE5D": -0.0269
+        }
+      },
+      "quote": {
+        "price": 6.02,
+        "changePct": 3.61,
+        "open": null,
+        "high": 6.39,
+        "low": 5.61,
+        "dayLowToHighPct": 13.9,
+        "quoteTime": null
+      },
+      "entryZone": [
+        5.953,
+        6.073
+      ],
+      "triggerPrice": 6.013,
+      "stopLoss": 5.652,
+      "takeProfit1": 6.554,
+      "takeProfit2": 6.915,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 5.652",
+      "reasons": [
+        "趋势回踩",
+        "形态分 88",
+        "距MA20 +0.20 ATR",
+        "主力资金占比 +17.70%"
+      ],
+      "source": "沪深市场历史形态精筛"
+    }
+  ],
   "summary": {
-    "official": 0,
+    "official": 2,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0,
+    "expandedSetupCandidates": 1,
     "marketPrefilterCount": 220,
     "marketScannedCount": 220
   },
@@ -30,14 +170,14 @@
     "state": "ready",
     "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
     "reportedTotal": 5563,
-    "uniqueRows": 5562,
+    "uniqueRows": 5359,
     "pagesRequested": 56,
-    "coveragePct": 99.98,
+    "coveragePct": 96.33,
     "prefiltered": 220,
-    "historyLoaded": 7,
-    "setupMatches": 0,
-    "historicalEdgeMatches": 0,
-    "selected": 0,
+    "historyLoaded": 96,
+    "setupMatches": 3,
+    "historicalEdgeMatches": 1,
+    "selected": 1,
     "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
     "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
   }
