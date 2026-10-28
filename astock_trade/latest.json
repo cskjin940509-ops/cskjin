@@ -1,39 +1,90 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-28",
-  "generatedAt": "2026-10-28T14:40:35+08:00",
+  "generatedAt": "2026-10-28T14:55:38+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-27",
   "officialPlans": [
     {
-      "code": "001331",
-      "name": "胜通能源",
+      "code": "601398",
+      "name": "工商银行",
+      "sector": "红利破净股",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B1",
+        "B4"
+      ],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 88.2,
+        "historical": {
+          "samples": 24,
+          "win5D": 0.7083,
+          "avg5D": 0.0158,
+          "avgMFE5D": 0.0311,
+          "avgMAE5D": -0.0115
+        }
+      },
+      "quote": {
+        "price": 8.56,
+        "changePct": -0.7,
+        "open": 8.62,
+        "high": 8.63,
+        "low": 8.45,
+        "dayLowToHighPct": 2.13,
+        "quoteTime": "20261028145535"
+      },
+      "entryZone": [
+        8.358,
+        8.526
+      ],
+      "triggerPrice": 8.442,
+      "stopLoss": 8.196,
+      "takeProfit1": 8.811,
+      "takeProfit2": 9.057,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 8.196",
+      "reasons": [
+        "趋势回踩",
+        "形态分 88",
+        "距MA20 +1.46 ATR",
+        "主力资金占比 +5.41%"
+      ]
+    },
+    {
+      "code": "300976",
+      "name": "达瑞电子",
       "sector": "昨日涨停",
       "official": true,
       "tailCore": false,
       "poolTags": [
-        "B0",
-        "B3",
+        "B1",
         "B4"
       ],
       "action": "不建议买",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
-        "score": 52.2,
+        "score": 48.8,
         "historical": {}
       },
       "quote": {
-        "price": 39.62,
-        "changePct": 2.86,
-        "open": 37.0,
-        "high": 41.8,
-        "low": 35.63,
-        "dayLowToHighPct": 17.32,
-        "quoteTime": "20261028144033"
+        "price": 59.08,
+        "changePct": 3.41,
+        "open": 58.8,
+        "high": 62.49,
+        "low": 57.77,
+        "dayLowToHighPct": 8.17,
+        "quoteTime": "20261028145533"
       },
       "entryZone": null,
-      "triggerPrice": 34.005,
+      "triggerPrice": 49.552,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -44,20 +95,18 @@
       "invalidation": "未形成可执行入场，不设交易止损",
       "reasons": [
         "暂无可买形态",
-        "形态分 52",
-        "距MA20 +1.16 ATR",
-        "主力资金占比 +15.77%"
+        "形态分 49",
+        "距MA20 +1.34 ATR",
+        "主力资金占比 -1.17%"
       ]
     }
   ],
   "setupCandidates": [],
   "summary": {
-    "official": 1,
+    "official": 2,
     "officialBuy": 0,
-    "officialWatch": 0,
-    "expandedSetupCandidates": 0,
-    "marketPrefilterCount": 220,
-    "marketScannedCount": 220
+    "officialWatch": 1,
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -70,20 +119,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "partial",
-    "scope": "沪深A股；北交所未使用未验证的列表参数，单独留待补充",
-    "reportedTotal": 5563,
-    "uniqueRows": 1500,
-    "pagesRequested": 56,
-    "coveragePct": 26.96,
-    "prefiltered": 220,
-    "historyLoaded": 156,
-    "setupMatches": 4,
-    "historicalEdgeMatches": 0,
-    "selected": 0,
-    "historicalGate": "样本>=3、5D胜率>=55%、平均5D>0、平均MFE不显著弱于MAE",
-    "method": "沪深完整分页截面→流动性/不过热预筛→历史K线形态精筛→正历史优势门禁→历史5D/MFE/MAE排序"
-  }
+  ]
 }
