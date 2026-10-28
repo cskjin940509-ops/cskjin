@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-28",
-  "generatedAt": "2026-10-28T09:38:31+08:00",
+  "generatedAt": "2026-10-28T09:55:49+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-27",
   "officialPlans": [
@@ -30,13 +30,13 @@
         }
       },
       "quote": {
-        "price": 42.54,
-        "changePct": -1.05,
+        "price": 42.44,
+        "changePct": -1.28,
         "open": 42.51,
         "high": 42.68,
         "low": 42.31,
         "dayLowToHighPct": 0.87,
-        "quoteTime": "20261028093829"
+        "quoteTime": "20261028095547"
       },
       "entryZone": [
         42.046,
@@ -54,7 +54,7 @@
       "reasons": [
         "趋势回踩",
         "形态分 80",
-        "距MA20 +0.77 ATR",
+        "距MA20 +0.65 ATR",
         "主力资金占比 +5.82%"
       ]
     },
@@ -70,44 +70,94 @@
       ],
       "action": "等待触发",
       "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 77.1,
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 88.2,
         "historical": {
-          "samples": 2,
-          "win5D": 1.0,
-          "avg5D": 0.0166,
-          "avgMFE5D": 0.0364,
-          "avgMAE5D": -0.0145
+          "samples": 24,
+          "win5D": 0.7083,
+          "avg5D": 0.0158,
+          "avgMFE5D": 0.0311,
+          "avgMAE5D": -0.0115
         }
       },
       "quote": {
-        "price": 8.6,
-        "changePct": -0.23,
+        "price": 8.55,
+        "changePct": -0.81,
         "open": 8.62,
         "high": 8.63,
-        "low": 8.54,
-        "dayLowToHighPct": 1.05,
-        "quoteTime": "20261028093829"
+        "low": 8.51,
+        "dayLowToHighPct": 1.41,
+        "quoteTime": "20261028095547"
       },
       "entryZone": [
-        8.591,
-        8.703
+        8.358,
+        8.526
       ],
-      "triggerPrice": 8.66,
-      "stopLoss": 8.498,
-      "takeProfit1": 8.87,
-      "takeProfit2": 9.019,
+      "triggerPrice": 8.442,
+      "stopLoss": 8.196,
+      "takeProfit1": 8.811,
+      "takeProfit2": 9.057,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 8.196",
+      "reasons": [
+        "趋势回踩",
+        "形态分 88",
+        "距MA20 +1.41 ATR",
+        "主力资金占比 +5.41%"
+      ]
+    },
+    {
+      "code": "601288",
+      "name": "农业银行",
+      "sector": "红利破净股",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B1",
+        "B3",
+        "B4",
+        "B13"
+      ],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_READY",
+        "label": "临界突破",
+        "score": 77.2,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 7.39,
+        "changePct": -0.14,
+        "open": 7.43,
+        "high": 7.43,
+        "low": 7.32,
+        "dayLowToHighPct": 1.5,
+        "quoteTime": "20261028095546"
+      },
+      "entryZone": [
+        7.371,
+        7.467
+      ],
+      "triggerPrice": 7.43,
+      "stopLoss": 7.276,
+      "takeProfit1": 7.633,
+      "takeProfit2": 7.775,
       "riskReward1": 1.5,
       "preferredWindow": "触发价出现后再评估",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 8.498",
+      "invalidation": "收盘/有效价格跌破 7.276",
       "reasons": [
         "临界突破",
         "形态分 77",
-        "距MA20 +1.66 ATR",
-        "主力资金占比 +5.41%"
+        "距MA20 +1.76 ATR",
+        "主力资金占比 +5.84%"
       ]
     },
     {
@@ -128,13 +178,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 7.51,
-        "changePct": -5.3,
+        "price": 7.85,
+        "changePct": -1.01,
         "open": 7.79,
-        "high": 7.81,
+        "high": 8.26,
         "low": 7.35,
-        "dayLowToHighPct": 6.26,
-        "quoteTime": "20261028093827"
+        "dayLowToHighPct": 12.38,
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 6.723,
@@ -149,7 +199,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 54",
-        "距MA20 +1.14 ATR",
+        "距MA20 +2.06 ATR",
         "主力资金占比 +29.56%"
       ]
     },
@@ -172,13 +222,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 36.67,
-        "changePct": -4.8,
+        "price": 38.23,
+        "changePct": -0.75,
         "open": 37.0,
-        "high": 37.37,
+        "high": 39.0,
         "low": 35.63,
-        "dayLowToHighPct": 4.88,
-        "quoteTime": "20261028093827"
+        "dayLowToHighPct": 9.46,
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 34.005,
@@ -193,7 +243,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 52",
-        "距MA20 +0.05 ATR",
+        "距MA20 +0.64 ATR",
         "主力资金占比 +15.77%"
       ]
     },
@@ -216,13 +266,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 14.1,
-        "changePct": 5.94,
+        "price": 13.83,
+        "changePct": 3.91,
         "open": 13.54,
         "high": 14.51,
-        "low": 13.54,
-        "dayLowToHighPct": 7.16,
-        "quoteTime": "20261028093827"
+        "low": 13.38,
+        "dayLowToHighPct": 8.45,
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 13.584,
@@ -237,7 +287,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 52",
-        "距MA20 +0.72 ATR",
+        "距MA20 +0.53 ATR",
         "主力资金占比 +14.39%"
       ]
     },
@@ -260,13 +310,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 19.04,
-        "changePct": -0.31,
+        "price": 19.06,
+        "changePct": -0.21,
         "open": 19.1,
         "high": 19.1,
         "low": 18.92,
         "dayLowToHighPct": 0.95,
-        "quoteTime": "20261028093830"
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 18.505,
@@ -281,7 +331,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 52",
-        "距MA20 +2.24 ATR",
+        "距MA20 +2.29 ATR",
         "主力资金占比 +13.55%"
       ]
     },
@@ -306,13 +356,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 48.75,
-        "changePct": -1.12,
+        "price": 49.77,
+        "changePct": 0.95,
         "open": 47.94,
         "high": 50.9,
         "low": 47.03,
         "dayLowToHighPct": 8.23,
-        "quoteTime": "20261028093829"
+        "quoteTime": "20261028095547"
       },
       "entryZone": null,
       "triggerPrice": 39.911,
@@ -327,53 +377,8 @@
       "reasons": [
         "暂无可买形态",
         "形态分 52",
-        "距MA20 +1.89 ATR",
+        "距MA20 +2.21 ATR",
         "主力资金占比 +12.87%"
-      ]
-    },
-    {
-      "code": "601288",
-      "name": "农业银行",
-      "sector": "红利破净股",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B1",
-        "B3",
-        "B4",
-        "B13"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 50.2,
-        "historical": {}
-      },
-      "quote": {
-        "price": 7.4,
-        "changePct": 0.0,
-        "open": 7.43,
-        "high": 7.43,
-        "low": 7.32,
-        "dayLowToHighPct": 1.5,
-        "quoteTime": "20261028093828"
-      },
-      "entryZone": null,
-      "triggerPrice": 7.254,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 50",
-        "距MA20 +1.81 ATR",
-        "主力资金占比 +5.84%"
       ]
     },
     {
@@ -395,13 +400,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 11.39,
-        "changePct": -0.7,
+        "price": 11.38,
+        "changePct": -0.78,
         "open": 11.43,
         "high": 11.5,
-        "low": 11.36,
-        "dayLowToHighPct": 1.23,
-        "quoteTime": "20261028093827"
+        "low": 11.33,
+        "dayLowToHighPct": 1.5,
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 11.418,
@@ -416,7 +421,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 50",
-        "距MA20 -0.28 ATR",
+        "距MA20 -0.32 ATR",
         "主力资金占比 +4.80%"
       ]
     },
@@ -437,13 +442,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 34.09,
-        "changePct": 2.19,
+        "price": 33.47,
+        "changePct": 0.33,
         "open": 33.01,
-        "high": 34.51,
+        "high": 34.88,
         "low": 33.01,
-        "dayLowToHighPct": 4.54,
-        "quoteTime": "20261028093829"
+        "dayLowToHighPct": 5.66,
+        "quoteTime": "20261028095547"
       },
       "entryZone": null,
       "triggerPrice": 29.563,
@@ -458,7 +463,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 50",
-        "距MA20 +1.74 ATR",
+        "距MA20 +1.53 ATR",
         "主力资金占比 +2.73%"
       ]
     },
@@ -483,9 +488,9 @@
         "changePct": -0.28,
         "open": 3.54,
         "high": 3.57,
-        "low": 3.53,
-        "dayLowToHighPct": 1.13,
-        "quoteTime": "20261028093829"
+        "low": 3.51,
+        "dayLowToHighPct": 1.71,
+        "quoteTime": "20261028095547"
       },
       "entryZone": null,
       "triggerPrice": 3.492,
@@ -522,13 +527,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 60.2,
-        "changePct": 5.37,
+        "price": 60.36,
+        "changePct": 5.65,
         "open": 58.8,
         "high": 61.5,
         "low": 57.77,
         "dayLowToHighPct": 6.46,
-        "quoteTime": "20261028093827"
+        "quoteTime": "20261028095545"
       },
       "entryZone": null,
       "triggerPrice": 49.552,
@@ -543,7 +548,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 49",
-        "距MA20 +1.61 ATR",
+        "距MA20 +1.64 ATR",
         "主力资金占比 -1.17%"
       ]
     },
@@ -564,13 +569,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 41.3,
-        "changePct": 0.54,
+        "price": 41.53,
+        "changePct": 1.1,
         "open": 41.08,
-        "high": 42.14,
+        "high": 42.4,
         "low": 40.35,
-        "dayLowToHighPct": 4.44,
-        "quoteTime": "20261028093827"
+        "dayLowToHighPct": 5.08,
+        "quoteTime": "20261028095545"
       },
       "entryZone": null,
       "triggerPrice": 36.916,
@@ -585,7 +590,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 48",
-        "距MA20 +1.45 ATR",
+        "距MA20 +1.55 ATR",
         "主力资金占比 -5.75%"
       ]
     },
@@ -610,13 +615,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 46.27,
-        "changePct": 4.24,
+        "price": 47.17,
+        "changePct": 6.26,
         "open": 44.39,
-        "high": 46.33,
+        "high": 48.42,
         "low": 43.72,
-        "dayLowToHighPct": 5.97,
-        "quoteTime": "20261028093830"
+        "dayLowToHighPct": 10.75,
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 36.625,
@@ -631,7 +636,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 46",
-        "距MA20 +4.08 ATR",
+        "距MA20 +4.44 ATR",
         "主力资金占比 +1.77%"
       ]
     },
@@ -653,13 +658,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 14.06,
-        "changePct": 3.53,
+        "price": 14.28,
+        "changePct": 5.15,
         "open": 13.45,
-        "high": 14.1,
+        "high": 14.61,
         "low": 13.17,
-        "dayLowToHighPct": 7.06,
-        "quoteTime": "20261028093827"
+        "dayLowToHighPct": 10.93,
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 11.246,
@@ -674,7 +679,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 46",
-        "距MA20 +2.62 ATR",
+        "距MA20 +2.85 ATR",
         "主力资金占比 +0.65%"
       ]
     },
@@ -701,7 +706,7 @@
         "high": 17.61,
         "low": 16.66,
         "dayLowToHighPct": 5.7,
-        "quoteTime": "20261028093827"
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 12.035,
@@ -738,13 +743,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 159.2,
-        "changePct": 3.04,
+        "price": 160.51,
+        "changePct": 3.88,
         "open": 153.51,
-        "high": 160.19,
+        "high": 164.65,
         "low": 150.66,
-        "dayLowToHighPct": 6.33,
-        "quoteTime": "20261028093829"
+        "dayLowToHighPct": 9.29,
+        "quoteTime": "20261028095547"
       },
       "entryZone": null,
       "triggerPrice": 120.428,
@@ -759,7 +764,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 43",
-        "距MA20 +2.87 ATR",
+        "距MA20 +2.97 ATR",
         "主力资金占比 -12.54%"
       ]
     },
@@ -780,13 +785,13 @@
         "historical": {}
       },
       "quote": {
-        "price": 10.97,
-        "changePct": 3.98,
+        "price": 11.02,
+        "changePct": 4.45,
         "open": 10.8,
-        "high": 11.14,
+        "high": 11.24,
         "low": 10.67,
-        "dayLowToHighPct": 4.4,
-        "quoteTime": "20261028093827"
+        "dayLowToHighPct": 5.34,
+        "quoteTime": "20261028095548"
       },
       "entryZone": null,
       "triggerPrice": 9.447,
@@ -801,7 +806,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 43",
-        "距MA20 +3.73 ATR",
+        "距MA20 +3.84 ATR",
         "主力资金占比 -12.98%"
       ]
     }
@@ -810,7 +815,7 @@
   "summary": {
     "official": 18,
     "officialBuy": 1,
-    "officialWatch": 1,
+    "officialWatch": 2,
     "expandedSetupCandidates": 0
   },
   "rules": {
