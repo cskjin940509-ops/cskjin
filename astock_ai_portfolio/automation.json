@@ -7,22 +7,22 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "20261028-095604",
-  "lastRunAt": "2026-10-28T09:56:04+08:00",
-  "lastSuccessAt": "2026-10-28T09:56:04+08:00",
-  "lastTradeAt": "2026-10-28T09:56:04+08:00",
-  "status": "TRADED",
-  "statusZh": "后台自动模拟成交1笔；持仓保护独立执行",
+  "cycleId": "20261028-101019",
+  "lastRunAt": "2026-10-28T10:10:19+08:00",
+  "lastSuccessAt": "2026-10-28T10:10:19+08:00",
+  "lastTradeAt": "2026-10-28T10:00:31+08:00",
+  "status": "NO_ACTION",
+  "statusZh": "30只2026-10-27收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
   "runSource": "local-validation",
   "sessionOpen": true,
-  "radarCapturedAt": "2026-10-28T09:30:54+08:00",
-  "radarFresh": false,
-  "radarAgeSeconds": 1510.2,
-  "actionsThisCycle": 1,
+  "radarCapturedAt": "2026-10-28T10:06:30+08:00",
+  "radarFresh": true,
+  "radarAgeSeconds": 229.8,
+  "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
-  "sellActionsThisCycle": 1,
-  "ledgerDecisionCount": 235,
-  "positionCount": 8,
+  "sellActionsThisCycle": 0,
+  "ledgerDecisionCount": 236,
+  "positionCount": 9,
   "capitalCapacity": 20000000.0,
   "error": null,
   "knownIncident": {
@@ -44,7 +44,7 @@
       "activatedAt": "2026-09-21T22:33:31+08:00",
       "batchCount": 13,
       "activeBatchCount": 8,
-      "pendingOrderCount": 93,
+      "pendingOrderCount": 92,
       "pendingExitCount": 0,
       "lastSignalDate": "2026-10-27",
       "pendingOrders": [
@@ -55,8 +55,8 @@
           "name": "华是科技",
           "rank": 1,
           "limitPrice": 67.4044,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -65,8 +65,8 @@
           "name": "内蒙新华",
           "rank": 2,
           "limitPrice": 11.8874,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -75,8 +75,8 @@
           "name": "用友网络",
           "rank": 4,
           "limitPrice": 9.6432,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -85,8 +85,8 @@
           "name": "优刻得-W",
           "rank": 5,
           "limitPrice": 27.783,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -95,8 +95,8 @@
           "name": "博汇科技",
           "rank": 6,
           "limitPrice": 38.0142,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -105,8 +105,8 @@
           "name": "旋极信息",
           "rank": 7,
           "limitPrice": 3.6358,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -125,8 +125,8 @@
           "name": "达实智能",
           "rank": 9,
           "limitPrice": 3.2928,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -135,8 +135,8 @@
           "name": "楚天龙",
           "rank": 10,
           "limitPrice": 13.8768,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -145,8 +145,8 @@
           "name": "东方国信",
           "rank": 11,
           "limitPrice": 11.2602,
-          "status": "WAIT_CAPACITY_OR_LIMIT",
-          "reasonZh": "实时成交容量或价格限制未通过"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -225,8 +225,8 @@
           "name": "神州数码",
           "rank": 21,
           "limitPrice": 20.7564,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价20.76"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         },
         {
           "batchId": "B0010-2026-10-21",
@@ -345,8 +345,8 @@
           "name": "岩山科技",
           "rank": 36,
           "limitPrice": 5.7624,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价5.76"
+          "status": "WAIT_BUDGET",
+          "reasonZh": "批次、个股、板块或总仓位剩余额度不足1万元"
         }
       ],
       "pendingExits": [],
