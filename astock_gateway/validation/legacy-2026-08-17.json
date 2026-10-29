@@ -190,9 +190,9 @@
     }
   },
   "factorRecompute": {
-    "available": 11,
+    "available": 8,
     "total": 17,
-    "coveragePct": 64.71,
+    "coveragePct": 47.06,
     "cutoff": "2026-08-17",
     "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution",
     "stocks": {
@@ -237,28 +237,16 @@
         "mta": "双周期共振"
       },
       "300476": {
-        "available": true,
-        "barCount": 90,
-        "lastBarDate": "2026-08-17",
-        "r20": 0.23153808397661857,
-        "r60": -0.2649800266311585,
-        "mta": "双周期共振"
+        "available": false,
+        "error": "RemoteDisconnected"
       },
       "300502": {
-        "available": true,
-        "barCount": 90,
-        "lastBarDate": "2026-08-17",
-        "r20": -0.08494117647058819,
-        "r60": 0.07855508562712332,
-        "mta": "双周期共振"
+        "available": false,
+        "error": "RemoteDisconnected"
       },
       "300604": {
-        "available": true,
-        "barCount": 90,
-        "lastBarDate": "2026-08-17",
-        "r20": 0.14177358490566028,
-        "r60": 0.2825110206849779,
-        "mta": "双周期共振"
+        "available": false,
+        "error": "RemoteDisconnected"
       },
       "600183": {
         "available": false,
@@ -269,20 +257,20 @@
         "error": "RemoteDisconnected"
       },
       "688012": {
-        "available": false,
-        "error": "RemoteDisconnected"
+        "available": true,
+        "barCount": 90,
+        "lastBarDate": "2026-08-17",
+        "r20": 0.1323211678832117,
+        "r60": 0.23144825834312388,
+        "mta": "双周期共振"
       },
       "688017": {
         "available": false,
         "error": "RemoteDisconnected"
       },
       "688072": {
-        "available": true,
-        "barCount": 90,
-        "lastBarDate": "2026-08-17",
-        "r20": 0.12872624469923033,
-        "r60": 0.5542963427558016,
-        "mta": "双周期共振"
+        "available": false,
+        "error": "RemoteDisconnected"
       },
       "688120": {
         "available": true,
@@ -297,16 +285,16 @@
         "error": "RemoteDisconnected"
       },
       "688361": {
+        "available": false,
+        "error": "RemoteDisconnected"
+      },
+      "688981": {
         "available": true,
         "barCount": 90,
         "lastBarDate": "2026-08-17",
-        "r20": 0.20734822188748447,
-        "r60": 0.5021389284986759,
-        "mta": "日周月共振"
-      },
-      "688981": {
-        "available": false,
-        "error": "RemoteDisconnected"
+        "r20": -0.050277777777777866,
+        "r60": 0.041346227061600294,
+        "mta": "双周期共振"
       }
     }
   },
@@ -345,5 +333,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-10-28T23:01:06+08:00"
+  "auditedAt": "2026-10-29T23:08:07+08:00"
 }

@@ -176,9 +176,9 @@
     }
   },
   "factorRecompute": {
-    "available": 1,
+    "available": 0,
     "total": 16,
-    "coveragePct": 6.25,
+    "coveragePct": 0.0,
     "cutoff": "2026-09-03",
     "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution",
     "stocks": {
@@ -187,12 +187,8 @@
         "error": "RemoteDisconnected"
       },
       "002046": {
-        "available": true,
-        "barCount": 90,
-        "lastBarDate": "2026-09-03",
-        "r20": 0.14927630157701466,
-        "r60": -0.09799932180400128,
-        "mta": "双周期共振"
+        "available": false,
+        "error": "RemoteDisconnected"
       },
       "002171": {
         "available": false,
@@ -290,5 +286,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-10-28T23:01:06+08:00"
+  "auditedAt": "2026-10-29T23:08:07+08:00"
 }
