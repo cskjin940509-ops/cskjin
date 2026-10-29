@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "factorVersion": "v1.0-exchange-slow-money",
   "dataDate": "2026-10-28",
-  "collectedAt": "2026-10-29T08:22:36+08:00",
+  "collectedAt": "2026-10-29T08:43:08+08:00",
   "usableFor": "下一交易日及之后；禁止用于同一数据日的盘中决策",
   "margin": {
     "dataDate": "2026-10-28",
@@ -28279,10 +28279,10 @@
     "errors": {},
     "marketSummary": {
       "dataDate": "2026-10-27",
-      "financingBalance": 2373196211338.0,
+      "financingBalance": 2373196129148.0,
       "exchangeBalances": {
         "SSE": 1227269129148.0,
-        "SZSE": 1145927082190.0
+        "SZSE": 1145927000000.0
       },
       "exchangeCoverage": [
         "SSE",
@@ -28296,10 +28296,12 @@
         "BSE"
       ],
       "complete": true,
-      "errors": {},
+      "errors": {
+        "primaryProxy": "SSLError"
+      },
       "sources": {
-        "SSE": "用户指定Tushare兼容接口",
-        "SZSE": "用户指定Tushare兼容接口"
+        "SSE": "上交所融资融券汇总",
+        "SZSE": "深交所融资融券汇总"
       },
       "scoreEligible": true,
       "scoreBlocker": null,
@@ -28323,7 +28325,6 @@
       "2026-10-27",
       "2026-10-26",
       "2026-10-23",
-      "2026-10-22",
       "2026-10-21",
       "2026-10-20",
       "2026-10-19",
@@ -28339,7 +28340,8 @@
       "2026-09-28",
       "2026-09-24",
       "2026-09-23",
-      "2026-09-22"
+      "2026-09-22",
+      "2026-09-21"
     ],
     "etfs": {
       "508010": {
@@ -29326,8 +29328,8 @@
         "themes": [],
         "shareChange1d": null,
         "shareChangePct1d": null,
-        "shareChange5d": 0.0,
-        "shareChangePct5d": 0.0,
+        "shareChange5d": null,
+        "shareChangePct5d": null,
         "shareChange20d": null,
         "shareChangePct20d": null,
         "latestPriceForEstimate": null,
@@ -29806,8 +29808,8 @@
         "themes": [],
         "shareChange1d": null,
         "shareChangePct1d": null,
-        "shareChange5d": 0.0,
-        "shareChangePct5d": 0.0,
+        "shareChange5d": null,
+        "shareChangePct5d": null,
         "shareChange20d": null,
         "shareChangePct20d": null,
         "latestPriceForEstimate": null,
@@ -29822,8 +29824,8 @@
         "themes": [],
         "shareChange1d": null,
         "shareChangePct1d": null,
-        "shareChange5d": 0.0,
-        "shareChangePct5d": 0.0,
+        "shareChange5d": null,
+        "shareChangePct5d": null,
         "shareChange20d": null,
         "shareChangePct20d": null,
         "latestPriceForEstimate": null,
@@ -29838,7 +29840,10 @@
     ],
     "latency": "T+1日频；一级资金以交易所基金份额变化推导",
     "errors": {
-      "price": "ProxyError"
+      "price": "ProxyError",
+      "skippedDates": [
+        "2026-10-22:SSLError"
+      ]
     },
     "primarySource": "https://jiaoch.top/"
   },
