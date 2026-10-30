@@ -1,54 +1,10 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-29",
-  "generatedAt": "2026-10-29T19:10:49+08:00",
+  "date": "2026-10-30",
+  "generatedAt": "2026-10-30T14:47:34+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-20",
   "officialPlans": [
-    {
-      "code": "603466",
-      "name": "风语筑",
-      "sector": "其他数字媒体",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 50.8,
-        "historical": {}
-      },
-      "quote": {
-        "price": 13.35,
-        "changePct": -7.23,
-        "open": 13.9,
-        "high": 14.35,
-        "low": 13.3,
-        "dayLowToHighPct": 7.89,
-        "quoteTime": "20261029161442"
-      },
-      "entryZone": null,
-      "triggerPrice": 13.845,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 51",
-        "距MA20 +0.21 ATR",
-        "主力资金占比 +9.00%"
-      ]
-    },
     {
       "code": "301313",
       "name": "凡拓数创",
@@ -70,16 +26,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 64.82,
-        "changePct": 2.89,
-        "open": 60.51,
-        "high": 68.7,
-        "low": 60.51,
-        "dayLowToHighPct": 13.53,
-        "quoteTime": "20261029161457"
+        "price": 60.7,
+        "changePct": -6.36,
+        "open": 63.2,
+        "high": 66.5,
+        "low": 58.86,
+        "dayLowToHighPct": 12.98,
+        "quoteTime": "20261030144733"
       },
       "entryZone": null,
-      "triggerPrice": 50.982,
+      "triggerPrice": 54.321,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -91,8 +47,52 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 50",
-        "距MA20 +4.03 ATR",
+        "距MA20 +2.87 ATR",
         "主力资金占比 +18.48%"
+      ]
+    },
+    {
+      "code": "603466",
+      "name": "风语筑",
+      "sector": "其他数字媒体",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "BROKEN",
+        "label": "跌破趋势支撑",
+        "score": 40.8,
+        "historical": {}
+      },
+      "quote": {
+        "price": 12.02,
+        "changePct": -9.96,
+        "open": 12.85,
+        "high": 13.2,
+        "low": 12.02,
+        "dayLowToHighPct": 9.82,
+        "quoteTime": "20261030144732"
+      },
+      "entryZone": null,
+      "triggerPrice": 13.894,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "跌破趋势支撑",
+        "形态分 41",
+        "距MA20 -0.82 ATR",
+        "主力资金占比 +9.00%"
       ]
     }
   ],
@@ -114,10 +114,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "outside-exchange-scan-window",
-    "checkedAt": "2026-10-29T19:10:58.959782+08:00"
-  }
+  ]
 }
