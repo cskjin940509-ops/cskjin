@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-11-02",
-  "generatedAt": "2026-11-02T15:06:07+08:00",
+  "generatedAt": "2026-11-02T15:12:14+08:00",
   "phase": "LIVE",
   "officialDate": "2026-10-20",
   "officialPlans": [
@@ -32,7 +32,7 @@
         "high": 62.49,
         "low": 55.0,
         "dayLowToHighPct": 13.62,
-        "quoteTime": "20261102150615"
+        "quoteTime": "20261102151203"
       },
       "entryZone": null,
       "triggerPrice": 57.031,
@@ -76,7 +76,7 @@
         "high": 13.22,
         "low": 11.11,
         "dayLowToHighPct": 18.99,
-        "quoteTime": "20261102150615"
+        "quoteTime": "20261102151215"
       },
       "entryZone": null,
       "triggerPrice": 13.832,
@@ -97,12 +97,62 @@
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "300244",
+      "name": "迪安诊断",
+      "sector": "诊断服务",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 75.3,
+        "historical": {
+          "samples": 5,
+          "win5D": 0.2,
+          "avg5D": -0.0533,
+          "avgMFE5D": 0.0612,
+          "avgMAE5D": -0.1149
+        }
+      },
+      "quote": {
+        "price": 20.83,
+        "changePct": 3.02,
+        "open": 20.13,
+        "high": 21.07,
+        "low": 19.27,
+        "dayLowToHighPct": 9.34,
+        "quoteTime": "20261102151200"
+      },
+      "entryZone": [
+        20.679,
+        21.097
+      ],
+      "triggerPrice": 20.888,
+      "stopLoss": 19.635,
+      "takeProfit1": 22.768,
+      "takeProfit2": 24.021,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 19.635",
+      "reasons": [
+        "趋势回踩",
+        "形态分 75",
+        "距MA20 +0.24 ATR",
+        "主力资金占比 +1.41%"
+      ]
+    }
+  ],
   "summary": {
     "official": 2,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "expandedSetupCandidates": 1
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -115,15 +165,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "blocked",
-    "reason": "full-market-data-unavailable",
-    "checkedAt": "2026-11-02T15:06:26.646168+08:00",
-    "errors": [
-      "HTTPError: HTTP Error 502: Bad Gateway",
-      "HTTPError: HTTP Error 502: Bad Gateway",
-      "HTTPError: HTTP Error 502: Bad Gateway"
-    ]
-  }
+  ]
 }
