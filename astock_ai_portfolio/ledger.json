@@ -13436,5 +13436,74 @@
     "priceLimitPct": 10.0,
     "upperLimit": 3.89,
     "lowerLimit": 3.19
+  },
+  {
+    "decisionId": "20261102-101045-00269",
+    "timestamp": "2026-11-02T10:10:45+08:00",
+    "strategyVersion": "v6.1-eight-batch-no-four-index-position-control",
+    "mode": "AI影子实盘",
+    "simulated": true,
+    "side": "SELL",
+    "sideZh": "减仓",
+    "code": "000568",
+    "name": "泸州老窖",
+    "sector": "白酒Ⅲ",
+    "qty": 1100,
+    "price": 80.75,
+    "referencePrice": 80.78,
+    "priceSource": "腾讯实时行情/雷达行情",
+    "amount": 88825.0,
+    "fee": 66.98,
+    "realizedPnl": 10581.68,
+    "realizedReturnPct": 13.62,
+    "reasonZh": "目标区间滞涨转弱，主动止盈第2档",
+    "remainingQty": 1100,
+    "executionModel": "v3-liquidity-capacity-point-in-time",
+    "capacityRequestedQty": 1100,
+    "filledQty": 1100,
+    "slippageBps": 3.553,
+    "marketImpactBps": 0.553,
+    "participationPct": 0.0048,
+    "intradayAmount": 1860848015.39,
+    "adv20Amount": 1211784166.67,
+    "advSampleDays": 12,
+    "capacityAmount": 14886784.12,
+    "dailyCapacityAmount": 24235683.33,
+    "liquidityBasisZh": "当时累计成交额+历史ADV20",
+    "priceLimitPct": 10.0,
+    "upperLimit": 84.78,
+    "lowerLimit": 69.36,
+    "targetWeightPct": 0.0,
+    "requestedQty": 1100,
+    "partialFill": false,
+    "fillRatioPct": 100.0,
+    "ruleVersion": "v6.1-eight-batch-no-four-index-position-control",
+    "sleeve": "CORE",
+    "reasonCode": "PROFIT_TAKE",
+    "signalSnapshot": {
+      "stage": 2,
+      "qty": 1100,
+      "targetPrice": 81.1531,
+      "samples": [
+        {
+          "at": "2026-11-02T10:00:24+08:00",
+          "price": 80.97,
+          "vwap": 79.64278694968553
+        },
+        {
+          "at": "2026-11-02T10:05:51+08:00",
+          "price": 81.5,
+          "vwap": 79.80375980762142
+        },
+        {
+          "at": "2026-11-02T10:10:36+08:00",
+          "price": 80.78,
+          "vwap": 79.88017725843586
+        }
+      ],
+      "reasonZh": "目标区间滞涨转弱，主动止盈第2档"
+    },
+    "effectiveFrom": "2026-09-06T00:51:22+08:00",
+    "orderRequestedQty": 1100
   }
 ]
