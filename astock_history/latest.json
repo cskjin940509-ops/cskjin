@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "version": "v2.9-dynamic-pattern-lab-2",
-  "updatedAt": "2026-11-03T23:31:59+08:00",
+  "updatedAt": "2026-11-04T00:11:14+08:00",
   "sourcePolicyZh": "真实冻结样本用于样本外验证；历史重建样本独立展示，仅用于研究/校准。两者不合并样本数、不合并收益、不共享可信度评级。",
   "overall": {
     "sampleCount": 324,
@@ -13,38 +13,38 @@
         "meanReturn": -0.00177379,
         "medianReturn": -0.002684,
         "hitRate": 0.44753086,
-        "meanAlpha": 0.00040699,
-        "medianAlpha": -0.0014395,
+        "meanAlpha": 0.00400064,
+        "medianAlpha": 0.00143,
         "p10": -0.0525478,
         "p25": -0.02662925,
         "p75": 0.01886075,
         "p90": 0.0489933
       },
       "2D": {
-        "members": 323,
+        "members": 158,
         "mature": true,
-        "meanReturn": -0.00822451,
-        "medianReturn": -0.00867052,
-        "hitRate": 0.44891641,
-        "meanAlpha": -0.00218974,
-        "medianAlpha": -0.00340866,
-        "p10": -0.09433996,
-        "p25": -0.04689956,
-        "p75": 0.02535723,
-        "p90": 0.068831
+        "meanReturn": -0.00280033,
+        "medianReturn": -0.00638647,
+        "hitRate": 0.46202532,
+        "meanAlpha": 0.00338843,
+        "medianAlpha": -0.00109472,
+        "p10": -0.09827536,
+        "p25": -0.04230141,
+        "p75": 0.02999672,
+        "p90": 0.0744982
       },
       "3D": {
-        "members": 323,
+        "members": 158,
         "mature": true,
-        "meanReturn": -0.0091819,
-        "medianReturn": -0.01752225,
-        "hitRate": 0.39318885,
-        "meanAlpha": -0.00241526,
-        "medianAlpha": -0.01332268,
-        "p10": -0.09508342,
-        "p25": -0.06048697,
-        "p75": 0.02816669,
-        "p90": 0.08415665
+        "meanReturn": -0.00499796,
+        "medianReturn": -0.01649756,
+        "hitRate": 0.39240506,
+        "meanAlpha": 0.00199547,
+        "medianAlpha": -0.01294772,
+        "p10": -0.09307376,
+        "p25": -0.05743561,
+        "p75": 0.03258789,
+        "p90": 0.09356323
       },
       "5D": {
         "members": 323,
@@ -52,8 +52,8 @@
         "meanReturn": 0.00094884,
         "medianReturn": -0.008303,
         "hitRate": 0.47058824,
-        "meanAlpha": 0.01043511,
-        "medianAlpha": -0.003337,
+        "meanAlpha": 0.01504771,
+        "medianAlpha": -0.0011885,
         "p10": -0.1180434,
         "p25": -0.068211,
         "p75": 0.0518275,
@@ -65,8 +65,8 @@
         "meanReturn": -0.03566933,
         "medianReturn": -0.053022,
         "hitRate": 0.33126935,
-        "meanAlpha": -0.01176493,
-        "medianAlpha": -0.030656,
+        "meanAlpha": -0.01275963,
+        "medianAlpha": -0.0307775,
         "p10": -0.1883846,
         "p25": -0.125432,
         "p75": 0.03194,
@@ -78,25 +78,25 @@
         "meanReturn": -0.1223488,
         "medianReturn": -0.131439,
         "hitRate": 0.12211221,
-        "meanAlpha": -0.05640953,
-        "medianAlpha": -0.069656,
+        "meanAlpha": -0.05604772,
+        "medianAlpha": -0.0736535,
         "p10": -0.2889128,
         "p25": -0.206566,
         "p75": -0.054305,
         "p90": 0.0330228
       },
       "40D": {
-        "members": 78,
+        "members": 39,
         "mature": true,
-        "meanReturn": -0.12961192,
-        "medianReturn": -0.1461251,
-        "hitRate": 0.19230769,
-        "meanAlpha": -0.00934042,
-        "medianAlpha": -0.02689874,
-        "p10": -0.31436361,
-        "p25": -0.24082,
-        "p75": -0.05484077,
-        "p90": 0.12360871
+        "meanReturn": -0.13807967,
+        "medianReturn": -0.14523218,
+        "hitRate": 0.17948718,
+        "meanAlpha": -0.01797388,
+        "medianAlpha": -0.03385429,
+        "p10": -0.28834715,
+        "p25": -0.23989966,
+        "p75": -0.04906557,
+        "p90": 0.05006437
       },
       "60D": {
         "members": 0,
@@ -113,7 +113,7 @@
     },
     "medianMFE": 0.0917855,
     "medianMAE": -0.298462,
-    "medianMaxDrawdown": -0.34408602
+    "medianMaxDrawdown": -0.34607891
   },
   "horizonGroups": {
     "shortTerm": [
@@ -133,14 +133,20 @@
     ]
   },
   "bestHolding": {
-    "horizon": null,
-    "stateZh": "暂无正向历史优势",
-    "reasonZh": "已有成熟周期，但目前没有一个周期呈现正向中位历史优势；不强行挑选所谓最佳持有期。"
+    "horizon": "1D",
+    "days": 1,
+    "edge": 0.00143,
+    "members": 324,
+    "stateZh": "存在正向历史优势",
+    "reasonZh": "按成熟样本的中位超额收益选择，当前最佳窗口为1个交易日。"
   },
   "bestHoldingShort": {
-    "horizon": null,
-    "stateZh": "暂无正向历史优势",
-    "reasonZh": "已有成熟周期，但目前没有一个周期呈现正向中位历史优势；不强行挑选所谓最佳持有期。"
+    "horizon": "1D",
+    "days": 1,
+    "edge": 0.00143,
+    "members": 324,
+    "stateZh": "存在正向历史优势",
+    "reasonZh": "按成熟样本的中位超额收益选择，当前最佳窗口为1个交易日。"
   },
   "bestHoldingLong": {
     "horizon": null,
@@ -151,7 +157,7 @@
     "full": {
       "requestedSamples": 324,
       "actualSamples": 324,
-      "fiveDayMedianAlpha": -0.003337,
+      "fiveDayMedianAlpha": -0.0011885,
       "fiveDayMedianReturn": -0.008303,
       "fiveDayHitRate": 0.47058824,
       "fiveDayMembers": 323
@@ -167,7 +173,7 @@
     "recent60": {
       "requestedSamples": 60,
       "actualSamples": 60,
-      "fiveDayMedianAlpha": -0.029432,
+      "fiveDayMedianAlpha": -0.009734,
       "fiveDayMedianReturn": -0.047198,
       "fiveDayHitRate": 0.31666667,
       "fiveDayMembers": 60
@@ -176,21 +182,21 @@
       "all": {
         "sampleCount": 324,
         "fiveDayMembers": 323,
-        "fiveDayMedianAlpha": -0.003337,
+        "fiveDayMedianAlpha": -0.0011885,
         "fiveDayMedianReturn": -0.008303,
         "fiveDayHitRate": 0.47058824
       },
       "recentOneYear": {
         "sampleCount": 324,
         "fiveDayMembers": 323,
-        "fiveDayMedianAlpha": -0.003337,
+        "fiveDayMedianAlpha": -0.0011885,
         "fiveDayMedianReturn": -0.008303,
         "fiveDayHitRate": 0.47058824
       },
       "recentThreeMonths": {
         "sampleCount": 324,
         "fiveDayMembers": 323,
-        "fiveDayMedianAlpha": -0.003337,
+        "fiveDayMedianAlpha": -0.0011885,
         "fiveDayMedianReturn": -0.008303,
         "fiveDayHitRate": 0.47058824
       }
@@ -199,7 +205,7 @@
       {
         "date": "2026-09-10",
         "windowSamples": 20,
-        "medianAlpha": 0.002765,
+        "medianAlpha": 0.032565,
         "medianReturn": -0.009228,
         "hitRate": 0.45
       },
@@ -213,98 +219,98 @@
       {
         "date": "2026-09-10",
         "windowSamples": 20,
-        "medianAlpha": 0.002765,
+        "medianAlpha": 0.010129,
         "medianReturn": -0.009228,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.002765,
+        "medianAlpha": 0.021252,
         "medianReturn": -0.009228,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.002765,
+        "medianAlpha": 0.026737,
         "medianReturn": -0.009228,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.002765,
+        "medianAlpha": 0.026737,
         "medianReturn": -0.009228,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.004158,
+        "medianAlpha": 0.032222,
         "medianReturn": 0.0017865,
         "hitRate": 0.5
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.000399,
+        "medianAlpha": 0.026737,
         "medianReturn": -0.009228,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.000399,
+        "medianAlpha": 0.021252,
         "medianReturn": -0.009228,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.004158,
+        "medianAlpha": 0.021252,
         "medianReturn": 0.0017865,
         "hitRate": 0.5
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.000399,
+        "medianAlpha": -0.000994,
         "medianReturn": -0.007513,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": -0.003645,
+        "medianAlpha": -0.009082,
         "medianReturn": -0.0039555,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.004158,
+        "medianAlpha": 0.021252,
         "medianReturn": 0.0033,
         "hitRate": 0.5
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.013888,
+        "medianAlpha": 0.026737,
         "medianReturn": 0.0091505,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.013888,
+        "medianAlpha": 0.021252,
         "medianReturn": 0.0091505,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.013888,
+        "medianAlpha": 0.021252,
         "medianReturn": 0.0091505,
         "hitRate": 0.55
       },
@@ -318,385 +324,385 @@
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.035227,
+        "medianAlpha": 0.032222,
         "medianReturn": 0.042476,
         "hitRate": 0.65
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.0386455,
+        "medianAlpha": 0.035227,
         "medianReturn": 0.045895,
         "hitRate": 0.7
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.040905,
+        "medianAlpha": 0.035227,
         "medianReturn": 0.0481545,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.0386455,
+        "medianAlpha": 0.032222,
         "medianReturn": 0.045895,
         "hitRate": 0.7
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.0386455,
+        "medianAlpha": 0.035227,
         "medianReturn": 0.045895,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.0386455,
+        "medianAlpha": 0.035227,
         "medianReturn": 0.045895,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-11",
         "windowSamples": 20,
-        "medianAlpha": 0.035905,
+        "medianAlpha": 0.032222,
         "medianReturn": 0.0431545,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.040905,
+        "medianAlpha": 0.032362,
         "medianReturn": 0.0481545,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.040905,
+        "medianAlpha": 0.032362,
         "medianReturn": 0.0481545,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.040905,
+        "medianAlpha": 0.037665,
         "medianReturn": 0.051182,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.0472205,
+        "medianAlpha": 0.038362,
         "medianReturn": 0.0556515,
         "hitRate": 0.8
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.040905,
+        "medianAlpha": 0.037665,
         "medianReturn": 0.051182,
         "hitRate": 0.8
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.038362,
+        "medianAlpha": 0.037665,
         "medianReturn": 0.0481545,
         "hitRate": 0.8
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.0388765,
+        "medianAlpha": 0.038362,
         "medianReturn": 0.051182,
         "hitRate": 0.85
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.040905,
+        "medianAlpha": 0.039059,
         "medianReturn": 0.0528785,
         "hitRate": 0.9
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.040905,
+        "medianAlpha": 0.039059,
         "medianReturn": 0.0528785,
         "hitRate": 0.9
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.0388765,
+        "medianAlpha": 0.038362,
         "medianReturn": 0.051182,
         "hitRate": 0.85
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.040905,
+        "medianAlpha": 0.046744,
         "medianReturn": 0.0528785,
         "hitRate": 0.9
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.0407225,
+        "medianAlpha": 0.046047,
         "medianReturn": 0.0528785,
         "hitRate": 0.9
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.0407225,
+        "medianAlpha": 0.054429,
         "medianReturn": 0.0528785,
         "hitRate": 0.9
       },
       {
         "date": "2026-09-14",
         "windowSamples": 20,
-        "medianAlpha": 0.0407225,
+        "medianAlpha": 0.054429,
         "medianReturn": 0.0528785,
         "hitRate": 0.9
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.0381795,
+        "medianAlpha": 0.046047,
         "medianReturn": 0.0528785,
         "hitRate": 0.85
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.035208,
+        "medianAlpha": 0.046047,
         "medianReturn": 0.046182,
         "hitRate": 0.8
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.035208,
+        "medianAlpha": 0.037665,
         "medianReturn": 0.046182,
         "hitRate": 0.8
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.035208,
+        "medianAlpha": 0.037665,
         "medianReturn": 0.046182,
         "hitRate": 0.75
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.035208,
+        "medianAlpha": 0.037665,
         "medianReturn": 0.046182,
         "hitRate": 0.7
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.0314075,
+        "medianAlpha": 0.037665,
         "medianReturn": 0.0461065,
         "hitRate": 0.7
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.0172315,
+        "medianAlpha": 0.037665,
         "medianReturn": 0.0319305,
         "hitRate": 0.65
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.004521,
+        "medianAlpha": 0.0314075,
         "medianReturn": 0.01922,
         "hitRate": 0.6
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.004521,
+        "medianAlpha": 0.0397895,
         "medianReturn": 0.01922,
         "hitRate": 0.6
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.004521,
+        "medianAlpha": 0.0397895,
         "medianReturn": 0.01922,
         "hitRate": 0.6
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": -3.6e-05,
+        "medianAlpha": 0.054429,
         "medianReturn": 0.0179555,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.0078825,
+        "medianAlpha": 0.054429,
         "medianReturn": 0.025874,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.00647,
+        "medianAlpha": 0.054429,
         "medianReturn": 0.025874,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.00647,
+        "medianAlpha": 0.054429,
         "medianReturn": 0.025874,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-15",
         "windowSamples": 20,
-        "medianAlpha": 0.00647,
+        "medianAlpha": 0.0397895,
         "medianReturn": 0.025874,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": 0.010471,
+        "medianAlpha": 0.02515,
         "medianReturn": 0.025874,
         "hitRate": 0.6
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0020575,
+        "medianAlpha": -0.001383,
         "medianReturn": 0.0112685,
         "hitRate": 0.6
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0060585,
+        "medianAlpha": -0.002732,
         "medianReturn": 0.009964,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0060585,
+        "medianAlpha": -0.0162855,
         "medianReturn": 0.009964,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0193225,
+        "medianAlpha": -0.029839,
         "medianReturn": 0.0006565,
         "hitRate": 0.5
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0193225,
+        "medianAlpha": -0.032942,
         "medianReturn": 0.0006565,
         "hitRate": 0.5
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0060585,
+        "medianAlpha": -0.032942,
         "medianReturn": 0.009964,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0020575,
+        "medianAlpha": -0.002732,
         "medianReturn": 0.0112685,
         "hitRate": 0.6
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0002735,
+        "medianAlpha": -0.0020575,
         "medianReturn": 0.012378,
         "hitRate": 0.65
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0002735,
+        "medianAlpha": -0.0020575,
         "medianReturn": 0.012378,
         "hitRate": 0.65
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0002735,
+        "medianAlpha": -0.0020575,
         "medianReturn": 0.0117475,
         "hitRate": 0.6
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0002735,
+        "medianAlpha": -0.002732,
         "medianReturn": 0.0117475,
         "hitRate": 0.65
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": 0.0009575,
+        "medianAlpha": -0.002732,
         "medianReturn": 0.0129785,
         "hitRate": 0.7
       },
       {
         "date": "2026-09-16",
         "windowSamples": 20,
-        "medianAlpha": -0.0002735,
-        "medianReturn": 0.0117475,
-        "hitRate": 0.65
-      },
-      {
-        "date": "2026-09-16",
-        "windowSamples": 20,
-        "medianAlpha": -0.0020575,
-        "medianReturn": 0.009964,
-        "hitRate": 0.6
-      },
-      {
-        "date": "2026-09-16",
-        "windowSamples": 20,
-        "medianAlpha": -0.0002735,
-        "medianReturn": 0.0117475,
-        "hitRate": 0.65
-      },
-      {
-        "date": "2026-09-17",
-        "windowSamples": 20,
-        "medianAlpha": -0.0020575,
-        "medianReturn": 0.009964,
-        "hitRate": 0.6
-      },
-      {
-        "date": "2026-09-17",
-        "windowSamples": 20,
         "medianAlpha": -0.005916,
+        "medianReturn": 0.0117475,
+        "hitRate": 0.65
+      },
+      {
+        "date": "2026-09-16",
+        "windowSamples": 20,
+        "medianAlpha": -0.0091,
+        "medianReturn": 0.009964,
+        "hitRate": 0.6
+      },
+      {
+        "date": "2026-09-16",
+        "windowSamples": 20,
+        "medianAlpha": -0.0091,
+        "medianReturn": 0.0117475,
+        "hitRate": 0.65
+      },
+      {
+        "date": "2026-09-17",
+        "windowSamples": 20,
+        "medianAlpha": -0.009417,
+        "medianReturn": 0.009964,
+        "hitRate": 0.6
+      },
+      {
+        "date": "2026-09-17",
+        "windowSamples": 20,
+        "medianAlpha": -0.009417,
         "medianReturn": 0.006106,
         "hitRate": 0.55
       },
       {
         "date": "2026-09-17",
         "windowSamples": 20,
-        "medianAlpha": -0.009417,
+        "medianAlpha": -0.009734,
         "medianReturn": -0.0008895,
         "hitRate": 0.5
       },
@@ -710,21 +716,21 @@
       {
         "date": "2026-09-17",
         "windowSamples": 20,
-        "medianAlpha": -0.009417,
+        "medianAlpha": -0.009734,
         "medianReturn": -0.009539,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-17",
         "windowSamples": 20,
-        "medianAlpha": -0.013228,
+        "medianAlpha": -0.016722,
         "medianReturn": -0.0170815,
         "hitRate": 0.4
       },
       {
         "date": "2026-09-17",
         "windowSamples": 20,
-        "medianAlpha": -0.009417,
+        "medianAlpha": -0.009734,
         "medianReturn": -0.009539,
         "hitRate": 0.45
       },
@@ -741,13 +747,6 @@
         "medianAlpha": -0.0058195,
         "medianReturn": -0.0045055,
         "hitRate": 0.45
-      },
-      {
-        "date": "2026-09-17",
-        "windowSamples": 20,
-        "medianAlpha": -0.0008515,
-        "medianReturn": -0.000694,
-        "hitRate": 0.5
       },
       {
         "date": "2026-09-17",
@@ -759,231 +758,238 @@
       {
         "date": "2026-09-17",
         "windowSamples": 20,
-        "medianAlpha": -0.0058195,
+        "medianAlpha": 0.007528,
+        "medianReturn": -0.000694,
+        "hitRate": 0.5
+      },
+      {
+        "date": "2026-09-17",
+        "windowSamples": 20,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.0045055,
         "hitRate": 0.45
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0080115,
+        "medianAlpha": -0.0058195,
         "medianReturn": -0.009539,
         "hitRate": 0.4
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.007406,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.0170815,
         "hitRate": 0.4
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.007406,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.0170815,
         "hitRate": 0.4
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.007406,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.020679,
         "hitRate": 0.35
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0088115,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.02833,
         "hitRate": 0.3
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0088115,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.0333325,
         "hitRate": 0.3
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0088115,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.046296,
         "hitRate": 0.3
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0088115,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.046296,
         "hitRate": 0.25
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.020572,
+        "medianAlpha": 0.0024945,
         "medianReturn": -0.047982,
         "hitRate": 0.25
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.020572,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.047982,
         "hitRate": 0.25
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.028892,
+        "medianAlpha": -0.002539,
         "medianReturn": -0.064084,
         "hitRate": 0.25
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0568155,
+        "medianAlpha": -0.028104,
         "medianReturn": -0.085087,
         "hitRate": 0.25
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0658005,
+        "medianAlpha": -0.028104,
         "medianReturn": -0.0964815,
         "hitRate": 0.2
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0681075,
+        "medianAlpha": 0.007528,
         "medianReturn": -0.103402,
         "hitRate": 0.2
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0681075,
+        "medianAlpha": -0.028104,
         "medianReturn": -0.103402,
         "hitRate": 0.15
       },
       {
         "date": "2026-09-18",
         "windowSamples": 20,
-        "medianAlpha": -0.0693765,
+        "medianAlpha": -0.063736,
         "medianReturn": -0.105581,
         "hitRate": 0.1
       },
       {
         "date": "2026-09-24",
         "windowSamples": 20,
-        "medianAlpha": -0.0693765,
+        "medianAlpha": -0.063736,
         "medianReturn": -0.105581,
         "hitRate": 0.1
       },
       {
         "date": "2026-09-24",
         "windowSamples": 20,
-        "medianAlpha": -0.0693765,
+        "medianAlpha": -0.063736,
         "medianReturn": -0.105581,
         "hitRate": 0.1
       },
       {
         "date": "2026-09-24",
         "windowSamples": 20,
-        "medianAlpha": -0.0693765,
+        "medianAlpha": -0.0681075,
         "medianReturn": -0.105581,
         "hitRate": 0.1
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.065005,
+        "medianAlpha": -0.056839,
         "medianReturn": -0.105581,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.065005,
+        "medianAlpha": -0.056839,
         "medianReturn": -0.105581,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.0676095,
+        "medianAlpha": -0.056839,
         "medianReturn": -0.105581,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.070712,
+        "medianAlpha": -0.056839,
         "medianReturn": -0.1099525,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.068533,
+        "medianAlpha": -0.049942,
         "medianReturn": -0.105581,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.0671975,
+        "medianAlpha": -0.053689,
         "medianReturn": -0.099215,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.065005,
+        "medianAlpha": -0.049942,
         "medianReturn": -0.093706,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.065005,
+        "medianAlpha": -0.053689,
         "medianReturn": -0.093706,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.0671975,
+        "medianAlpha": -0.057436,
         "medianReturn": -0.099215,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.0671975,
+        "medianAlpha": -0.060586,
         "medianReturn": -0.099215,
         "hitRate": 0.15
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.0671975,
+        "medianAlpha": -0.053689,
         "medianReturn": -0.093706,
         "hitRate": 0.2
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.061855,
+        "medianAlpha": -0.049942,
         "medianReturn": -0.0879515,
         "hitRate": 0.25
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.053689,
+        "medianAlpha": -0.049942,
         "medianReturn": -0.0783205,
         "hitRate": 0.25
       },
@@ -997,7 +1003,7 @@
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.046112,
+        "medianAlpha": -0.049942,
         "medianReturn": -0.0708325,
         "hitRate": 0.3
       },
@@ -1011,21 +1017,21 @@
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.03062,
+        "medianAlpha": -0.042282,
         "medianReturn": -0.055793,
         "hitRate": 0.4
       },
       {
         "date": "2026-10-13",
         "windowSamples": 20,
-        "medianAlpha": -0.03062,
+        "medianAlpha": 8.6e-05,
         "medianReturn": -0.055793,
         "hitRate": 0.4
       },
       {
         "date": "2026-10-20",
         "windowSamples": 20,
-        "medianAlpha": -0.03062,
+        "medianAlpha": -0.042282,
         "medianReturn": -0.055793,
         "hitRate": 0.4
       },
@@ -1038,10 +1044,10 @@
       }
     ],
     "judgement": {
-      "stateZh": "相对稳定",
-      "score": 0,
-      "delta": -0.0017345,
-      "reasonZh": "最近20个成熟样本与较长窗口的差异尚未达到1个百分点阈值。"
+      "stateZh": "近期弱化",
+      "score": -1,
+      "delta": -0.0214325,
+      "reasonZh": "最近20个成熟样本的5日中位超额收益明显低于较长窗口。"
     }
   },
   "sampleGrowth": [
@@ -1162,50 +1168,50 @@
       "day": 1,
       "meanReturn": -0.00177379,
       "medianReturn": -0.002684,
-      "meanAlpha": 0.00040699,
+      "meanAlpha": 0.00400064,
       "members": 324
     },
     {
       "day": 2,
-      "meanReturn": -0.00822451,
-      "medianReturn": -0.00867052,
-      "meanAlpha": -0.00218974,
-      "members": 323
+      "meanReturn": -0.00280033,
+      "medianReturn": -0.00638647,
+      "meanAlpha": 0.00338843,
+      "members": 158
     },
     {
       "day": 3,
-      "meanReturn": -0.0091819,
-      "medianReturn": -0.01752225,
-      "meanAlpha": -0.00241526,
-      "members": 323
+      "meanReturn": -0.00499796,
+      "medianReturn": -0.01649756,
+      "meanAlpha": 0.00199547,
+      "members": 158
     },
     {
       "day": 5,
       "meanReturn": 0.00094884,
       "medianReturn": -0.008303,
-      "meanAlpha": 0.01043511,
+      "meanAlpha": 0.01504771,
       "members": 323
     },
     {
       "day": 10,
       "meanReturn": -0.03566933,
       "medianReturn": -0.053022,
-      "meanAlpha": -0.01176493,
+      "meanAlpha": -0.01275963,
       "members": 323
     },
     {
       "day": 20,
       "meanReturn": -0.1223488,
       "medianReturn": -0.131439,
-      "meanAlpha": -0.05640953,
+      "meanAlpha": -0.05604772,
       "members": 303
     },
     {
       "day": 40,
-      "meanReturn": -0.12961192,
-      "medianReturn": -0.1461251,
-      "meanAlpha": -0.00934042,
-      "members": 78
+      "meanReturn": -0.13807967,
+      "medianReturn": -0.14523218,
+      "meanAlpha": -0.01797388,
+      "members": 39
     }
   ],
   "returnDistributions": {
@@ -1262,52 +1268,52 @@
     },
     "3D": {
       "horizon": "3D",
-      "members": 323,
+      "members": 158,
       "bins": [
         {
           "label": "<-5%",
-          "count": 101,
-          "share": 0.3126935
+          "count": 46,
+          "share": 0.29113924
         },
         {
           "label": "-5~-3%",
-          "count": 36,
-          "share": 0.11145511
+          "count": 18,
+          "share": 0.11392405
         },
         {
           "label": "-3~-1%",
-          "count": 44,
-          "share": 0.13622291
+          "count": 23,
+          "share": 0.14556962
         },
         {
           "label": "-1~0%",
-          "count": 14,
-          "share": 0.04334365
+          "count": 8,
+          "share": 0.05063291
         },
         {
           "label": "0~1%",
-          "count": 13,
-          "share": 0.04024768
+          "count": 5,
+          "share": 0.03164557
         },
         {
           "label": "1~3%",
-          "count": 37,
-          "share": 0.11455108
+          "count": 16,
+          "share": 0.10126582
         },
         {
           "label": "3~5%",
-          "count": 18,
-          "share": 0.05572755
+          "count": 9,
+          "share": 0.05696203
         },
         {
           "label": "5~10%",
-          "count": 37,
-          "share": 0.11455108
+          "count": 19,
+          "share": 0.12025316
         },
         {
           "label": ">10%",
-          "count": 23,
-          "share": 0.07120743
+          "count": 14,
+          "share": 0.08860759
         }
       ]
     },
@@ -3371,37 +3377,37 @@
   ],
   "pathClusters": {
     "methodZh": "第一期使用透明规则分型；样本量充足后再升级为无监督路径聚类，并保留版本号避免事后改口径。",
-    "matureSamples": 323,
+    "matureSamples": 158,
     "clusters": [
       {
         "name": "失败下跌型",
-        "sampleCount": 122,
-        "share": 0.37770898,
-        "medianFiveDayReturn": -0.0910595
+        "sampleCount": 54,
+        "share": 0.34177215,
+        "medianFiveDayReturn": -0.080176
       },
       {
         "name": "其他演化型",
-        "sampleCount": 61,
-        "share": 0.18885449,
-        "medianFiveDayReturn": 0.027328
+        "sampleCount": 28,
+        "share": 0.17721519,
+        "medianFiveDayReturn": 0.0280965
       },
       {
         "name": "横盘蓄势型",
-        "sampleCount": 52,
-        "share": 0.16099071,
-        "medianFiveDayReturn": -0.0010665
+        "sampleCount": 28,
+        "share": 0.17721519,
+        "medianFiveDayReturn": 0.0
       },
       {
         "name": "快速启动型",
-        "sampleCount": 49,
-        "share": 0.15170279,
-        "medianFiveDayReturn": 0.106045
+        "sampleCount": 28,
+        "share": 0.17721519,
+        "medianFiveDayReturn": 0.111755
       },
       {
         "name": "回踩再涨型",
-        "sampleCount": 39,
-        "share": 0.12074303,
-        "medianFiveDayReturn": 0.061633
+        "sampleCount": 20,
+        "share": 0.12658228,
+        "medianFiveDayReturn": 0.0635695
       }
     ]
   },
@@ -3436,7 +3442,7 @@
         "sector": "其他数字媒体",
         "regime": "结构性主升/轮动",
         "fiveDayReturn": 0.504339,
-        "fiveDayAlpha": 0.529512,
+        "fiveDayAlpha": null,
         "mfe": 1.275153,
         "mae": -0.008357
       },
@@ -3469,7 +3475,7 @@
         "sector": "印制电路板",
         "regime": "结构性主升/轮动",
         "fiveDayReturn": 0.298889,
-        "fiveDayAlpha": 0.314255,
+        "fiveDayAlpha": null,
         "mfe": 0.458889,
         "mae": -0.197778
       },
@@ -3480,7 +3486,7 @@
         "sector": "其他数字媒体",
         "regime": "结构性主升/轮动",
         "fiveDayReturn": 0.291358,
-        "fiveDayAlpha": 0.318203,
+        "fiveDayAlpha": null,
         "mfe": 0.41929,
         "mae": -0.014438
       }
@@ -3537,7 +3543,7 @@
         "sector": "农化制品",
         "regime": "结构性主升/轮动",
         "fiveDayReturn": -0.255396,
-        "fiveDayAlpha": -0.227336,
+        "fiveDayAlpha": null,
         "mfe": 0.007194,
         "mae": -0.413669
       }
@@ -3550,7 +3556,7 @@
         "sampleCount": 293,
         "confidenceZh": "高",
         "fiveDayMedianReturn": 0.005164,
-        "fiveDayMedianAlpha": 0.006524,
+        "fiveDayMedianAlpha": 0.010106,
         "fiveDayHitRate": 0.51194539,
         "fiveDayMembers": 293
       },
@@ -3559,12 +3565,21 @@
         "sampleCount": 31,
         "confidenceZh": "中低",
         "fiveDayMedianReturn": -0.082493,
-        "fiveDayMedianAlpha": -0.052848,
+        "fiveDayMedianAlpha": -0.032903,
         "fiveDayHitRate": 0.06666667,
         "fiveDayMembers": 30
       }
     ],
     "byPool": [
+      {
+        "name": "B1/B4",
+        "sampleCount": 5,
+        "confidenceZh": "低",
+        "fiveDayMedianReturn": 0.067241,
+        "fiveDayMedianAlpha": 0.284855,
+        "fiveDayHitRate": 1.0,
+        "fiveDayMembers": 5
+      },
       {
         "name": "B4",
         "sampleCount": 5,
@@ -3575,20 +3590,11 @@
         "fiveDayMembers": 5
       },
       {
-        "name": "B1/B4",
-        "sampleCount": 5,
-        "confidenceZh": "低",
-        "fiveDayMedianReturn": 0.067241,
-        "fiveDayMedianAlpha": 0.059106,
-        "fiveDayHitRate": 1.0,
-        "fiveDayMembers": 5
-      },
-      {
         "name": "B0/B1/B4",
         "sampleCount": 7,
         "confidenceZh": "低",
         "fiveDayMedianReturn": 0.045455,
-        "fiveDayMedianAlpha": 0.05134,
+        "fiveDayMedianAlpha": 0.051944,
         "fiveDayHitRate": 0.57142857,
         "fiveDayMembers": 7
       },
@@ -3597,7 +3603,7 @@
         "sampleCount": 19,
         "confidenceZh": "低",
         "fiveDayMedianReturn": 0.028865,
-        "fiveDayMedianAlpha": 0.039006,
+        "fiveDayMedianAlpha": 0.0440285,
         "fiveDayHitRate": 0.73684211,
         "fiveDayMembers": 19
       },
@@ -3606,7 +3612,7 @@
         "sampleCount": 18,
         "confidenceZh": "低",
         "fiveDayMedianReturn": -0.000989,
-        "fiveDayMedianAlpha": -0.0005575,
+        "fiveDayMedianAlpha": 0.022496,
         "fiveDayHitRate": 0.5,
         "fiveDayMembers": 18
       },
@@ -3615,9 +3621,27 @@
         "sampleCount": 104,
         "confidenceZh": "中",
         "fiveDayMedianReturn": -0.008555,
-        "fiveDayMedianAlpha": -0.001383,
+        "fiveDayMedianAlpha": 0.009785,
         "fiveDayHitRate": 0.46601942,
         "fiveDayMembers": 103
+      },
+      {
+        "name": "B3/B4",
+        "sampleCount": 13,
+        "confidenceZh": "低",
+        "fiveDayMedianReturn": -0.016418,
+        "fiveDayMedianAlpha": -0.000271,
+        "fiveDayHitRate": 0.38461538,
+        "fiveDayMembers": 13
+      },
+      {
+        "name": "B3",
+        "sampleCount": 33,
+        "confidenceZh": "中低",
+        "fiveDayMedianReturn": -0.022131,
+        "fiveDayMedianAlpha": -0.0010755,
+        "fiveDayHitRate": 0.42424242,
+        "fiveDayMembers": 33
       },
       {
         "name": "B0/B4",
@@ -3629,38 +3653,20 @@
         "fiveDayMembers": 23
       },
       {
-        "name": "B3/B4",
-        "sampleCount": 13,
-        "confidenceZh": "低",
-        "fiveDayMedianReturn": -0.016418,
-        "fiveDayMedianAlpha": -0.003423,
-        "fiveDayHitRate": 0.38461538,
-        "fiveDayMembers": 13
-      },
-      {
         "name": "B1",
         "sampleCount": 71,
         "confidenceZh": "中低",
         "fiveDayMedianReturn": -0.002442,
-        "fiveDayMedianAlpha": -0.0091,
+        "fiveDayMedianAlpha": -0.0093955,
         "fiveDayHitRate": 0.47887324,
         "fiveDayMembers": 71
-      },
-      {
-        "name": "B3",
-        "sampleCount": 33,
-        "confidenceZh": "中低",
-        "fiveDayMedianReturn": -0.022131,
-        "fiveDayMedianAlpha": -0.009679,
-        "fiveDayHitRate": 0.42424242,
-        "fiveDayMembers": 33
       },
       {
         "name": "B0/B3",
         "sampleCount": 10,
         "confidenceZh": "低",
         "fiveDayMedianReturn": -0.0149905,
-        "fiveDayMedianAlpha": -0.013171,
+        "fiveDayMedianAlpha": -0.018685,
         "fiveDayHitRate": 0.3,
         "fiveDayMembers": 10
       },
@@ -3669,7 +3675,7 @@
         "sampleCount": 3,
         "confidenceZh": "低",
         "fiveDayMedianReturn": -0.016919,
-        "fiveDayMedianAlpha": -0.026698,
+        "fiveDayMedianAlpha": -0.0392355,
         "fiveDayHitRate": 0.33333333,
         "fiveDayMembers": 3
       },
@@ -3678,7 +3684,7 @@
         "sampleCount": 4,
         "confidenceZh": "低",
         "fiveDayMedianReturn": -0.0973235,
-        "fiveDayMedianAlpha": -0.061215,
+        "fiveDayMedianAlpha": -0.044541,
         "fiveDayHitRate": 0.0,
         "fiveDayMembers": 4
       }
@@ -3689,12 +3695,12 @@
   },
   "vitals": {
     "longTermValidityZh": "偏弱",
-    "recentTrendZh": "相对稳定",
+    "recentTrendZh": "近期弱化",
     "sampleConfidenceZh": "高",
-    "bestHoldingZh": "暂无正向历史优势",
-    "bestShortHoldingZh": "暂无正向历史优势",
+    "bestHoldingZh": "1个交易日",
+    "bestShortHoldingZh": "1个交易日",
     "bestLongHoldingZh": "暂无正向历史优势",
-    "currentAdviceZh": "维持历史优势权重并继续样本外验证"
+    "currentAdviceZh": "降低历史优势权重，等待重新增强"
   },
   "limitationsZh": [
     "样本数量或目标周期未成熟时不输出高置信结论。",
