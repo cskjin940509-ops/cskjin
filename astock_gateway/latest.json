@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T20:42:30+08:00",
-  "state": "可用",
+  "generatedAt": "2026-11-03T22:55:45+08:00",
+  "state": "部分可用",
   "verifiedToday": true,
   "providerDate": "20261103",
   "activeCohortDate": "2026-11-03",
   "activePoolQuoteCount": 16,
   "marketSnapshot": {
     "sourceDate": "2026-11-03",
-    "availableAt": "2026-11-03T20:42:30+08:00",
-    "confidence": "高",
-    "completeness": "完整",
+    "availableAt": "2026-11-03T22:55:45+08:00",
+    "confidence": "中",
+    "completeness": "部分",
     "verifiedToday": true,
-    "dataSource": "东方财富全A截面, 东方财富板块, 腾讯行情",
+    "dataSource": "东方财富板块, 腾讯行情",
     "indices": {
       "sh000001": {
         "name": "上证指数",
@@ -63,13 +63,15 @@
         "quoteDate": "20261103"
       }
     },
-    "totalAmount": 1702911851473.44,
-    "up": 2023,
-    "down": 3045,
-    "flat": 150,
-    "medianChangePct": -0.6,
-    "sampleCount": 5218,
-    "breadthStatus": "全市场统计可用",
+    "totalAmount": null,
+    "up": null,
+    "down": null,
+    "flat": null,
+    "medianChangePct": null,
+    "sampleCount": null,
+    "breadthStatus": "全市场统计待同步",
+    "breadthSampleCount": 0,
+    "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
     "coreIndexCoverage": "6/6",
     "coreIndexSource": "腾讯当日收盘快照"
   },
@@ -2679,7 +2681,7 @@
       }
     ],
     "sourceDate": "2026-11-03",
-    "availableAt": "2026-11-03T20:42:30+08:00"
+    "availableAt": "2026-11-03T22:55:45+08:00"
   },
   "quotes": {
     "sh000001": {
@@ -2998,9 +3000,10 @@
       "source": "腾讯行情"
     }
   },
-  "errors": [],
+  "errors": [
+    "全A截面：东方财富失败(RuntimeError: Full-market pagination failed: HTTPError,HTTPError); Tushare全市场日线失败(ModuleNotFoundError: No module named 'six')"
+  ],
   "dataSources": [
-    "东方财富全A截面",
     "东方财富板块",
     "腾讯行情"
   ]
