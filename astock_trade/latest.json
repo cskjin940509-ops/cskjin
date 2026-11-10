@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-09",
-  "generatedAt": "2026-11-09T21:28:47+08:00",
+  "date": "2026-11-10",
+  "generatedAt": "2026-11-10T15:14:37+08:00",
   "phase": "LIVE",
   "officialDate": "2026-11-09",
   "officialPlans": [
@@ -28,31 +28,31 @@
         }
       },
       "quote": {
-        "price": 5.62,
-        "changePct": 1.63,
-        "open": 5.49,
-        "high": 5.63,
-        "low": 5.46,
-        "dayLowToHighPct": 3.11,
-        "quoteTime": "20261109161458"
+        "price": 5.63,
+        "changePct": 0.18,
+        "open": 5.59,
+        "high": 5.65,
+        "low": 5.55,
+        "dayLowToHighPct": 1.8,
+        "quoteTime": "20261110151439"
       },
       "entryZone": [
-        5.601,
-        5.69
+        5.604,
+        5.695
       ],
-      "triggerPrice": 5.634,
-      "stopLoss": 5.492,
-      "takeProfit1": 5.876,
-      "takeProfit2": 6.029,
+      "triggerPrice": 5.639,
+      "stopLoss": 5.495,
+      "takeProfit1": 5.881,
+      "takeProfit2": 6.035,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 5.492",
+      "invalidation": "收盘/有效价格跌破 5.495",
       "reasons": [
         "趋势回踩",
         "形态分 87",
-        "距MA20 +0.14 ATR",
+        "距MA20 +0.19 ATR",
         "主力资金占比 +11.29%"
       ]
     },
@@ -67,309 +67,44 @@
       ],
       "action": "等待触发",
       "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 80.9,
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 87.4,
         "historical": {
-          "samples": 4,
-          "win5D": 0.75,
-          "avg5D": 0.0097,
-          "avgMFE5D": 0.043,
-          "avgMAE5D": -0.0153
+          "samples": 22,
+          "win5D": 0.7273,
+          "avg5D": 0.0182,
+          "avgMFE5D": 0.0338,
+          "avgMAE5D": -0.0132
         }
       },
       "quote": {
-        "price": 12.14,
-        "changePct": 1.93,
-        "open": 11.8,
-        "high": 12.15,
-        "low": 11.75,
-        "dayLowToHighPct": 3.4,
-        "quoteTime": "20261109161452"
+        "price": 12.03,
+        "changePct": -0.91,
+        "open": 12.02,
+        "high": 12.11,
+        "low": 11.97,
+        "dayLowToHighPct": 1.17,
+        "quoteTime": "20261110151433"
       },
       "entryZone": [
-        12.162,
-        12.321
+        11.769,
+        12.007
       ],
-      "triggerPrice": 12.26,
-      "stopLoss": 11.987,
-      "takeProfit1": 12.623,
-      "takeProfit2": 12.877,
+      "triggerPrice": 11.888,
+      "stopLoss": 11.491,
+      "takeProfit1": 12.484,
+      "takeProfit2": 12.881,
       "riskReward1": 1.5,
-      "preferredWindow": "触发价出现后再评估",
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 11.987",
+      "invalidation": "收盘/有效价格跌破 11.491",
       "reasons": [
-        "临界突破",
-        "形态分 81",
-        "距MA20 +1.46 ATR",
+        "趋势回踩",
+        "形态分 87",
+        "距MA20 +0.99 ATR",
         "主力资金占比 -0.71%"
-      ]
-    },
-    {
-      "code": "300433",
-      "name": "蓝思科技",
-      "sector": "减速器",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 56.1,
-        "historical": {}
-      },
-      "quote": {
-        "price": 28.81,
-        "changePct": 6.66,
-        "open": 27.8,
-        "high": 29.45,
-        "low": 27.8,
-        "dayLowToHighPct": 5.94,
-        "quoteTime": "20261109161424"
-      },
-      "entryZone": null,
-      "triggerPrice": 26.756,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 56",
-        "距MA20 +1.50 ATR",
-        "主力资金占比 +10.55%"
-      ]
-    },
-    {
-      "code": "001400",
-      "name": "江顺科技",
-      "sector": "减速器",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 55.7,
-        "historical": {}
-      },
-      "quote": {
-        "price": 100.65,
-        "changePct": 5.24,
-        "open": 98.04,
-        "high": 104.98,
-        "low": 97.55,
-        "dayLowToHighPct": 7.62,
-        "quoteTime": "20261109161445"
-      },
-      "entryZone": null,
-      "triggerPrice": 91.89,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 56",
-        "距MA20 +1.82 ATR",
-        "主力资金占比 +8.47%"
-      ]
-    },
-    {
-      "code": "688017",
-      "name": "绿的谐波",
-      "sector": "减速器",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 55.5,
-        "historical": {}
-      },
-      "quote": {
-        "price": 296.2,
-        "changePct": 3.91,
-        "open": 292.0,
-        "high": 305.68,
-        "low": 290.5,
-        "dayLowToHighPct": 5.23,
-        "quoteTime": "20261109161433"
-      },
-      "entryZone": null,
-      "triggerPrice": 278.771,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 55",
-        "距MA20 +1.09 ATR",
-        "主力资金占比 +7.25%"
-      ]
-    },
-    {
-      "code": "002164",
-      "name": "宁波东力",
-      "sector": "减速器",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B1",
-        "B3",
-        "B4",
-        "B13"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 55.0,
-        "historical": {}
-      },
-      "quote": {
-        "price": 19.7,
-        "changePct": 5.46,
-        "open": 19.0,
-        "high": 20.55,
-        "low": 19.0,
-        "dayLowToHighPct": 8.16,
-        "quoteTime": "20261109161436"
-      },
-      "entryZone": null,
-      "triggerPrice": 17.711,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 55",
-        "距MA20 +1.75 ATR",
-        "主力资金占比 +5.17%"
-      ]
-    },
-    {
-      "code": "003021",
-      "name": "兆威机电",
-      "sector": "减速器",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 52.1,
-        "historical": {}
-      },
-      "quote": {
-        "price": 103.72,
-        "changePct": 1.74,
-        "open": 105.0,
-        "high": 109.88,
-        "low": 102.68,
-        "dayLowToHighPct": 7.01,
-        "quoteTime": "20261109161415"
-      },
-      "entryZone": null,
-      "triggerPrice": 93.83,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 52",
-        "距MA20 +2.74 ATR",
-        "主力资金占比 +5.70%"
-      ]
-    },
-    {
-      "code": "300825",
-      "name": "阿尔特",
-      "sector": "减速器",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 52.0,
-        "historical": {}
-      },
-      "quote": {
-        "price": 12.42,
-        "changePct": 15.43,
-        "open": 11.01,
-        "high": 12.91,
-        "low": 11.01,
-        "dayLowToHighPct": 17.26,
-        "quoteTime": "20261109161451"
-      },
-      "entryZone": null,
-      "triggerPrice": 10.921,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 52",
-        "距MA20 +1.50 ATR",
-        "主力资金占比 +5.17%"
       ]
     },
     {
@@ -389,16 +124,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 10.96,
-        "changePct": 5.38,
-        "open": 10.8,
-        "high": 11.44,
-        "low": 10.7,
-        "dayLowToHighPct": 6.92,
-        "quoteTime": "20261109161430"
+        "price": 11.26,
+        "changePct": 2.74,
+        "open": 11.41,
+        "high": 11.41,
+        "low": 10.98,
+        "dayLowToHighPct": 3.92,
+        "quoteTime": "20261110151415"
       },
       "entryZone": null,
-      "triggerPrice": 10.635,
+      "triggerPrice": 10.633,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -410,8 +145,51 @@
       "reasons": [
         "暂无可买形态",
         "形态分 52",
-        "距MA20 +0.49 ATR",
+        "距MA20 +0.79 ATR",
         "主力资金占比 +13.43%"
+      ]
+    },
+    {
+      "code": "300433",
+      "name": "蓝思科技",
+      "sector": "减速器",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 51.1,
+        "historical": {}
+      },
+      "quote": {
+        "price": 29.17,
+        "changePct": 1.25,
+        "open": 29.0,
+        "high": 29.59,
+        "low": 28.67,
+        "dayLowToHighPct": 3.21,
+        "quoteTime": "20261110151430"
+      },
+      "entryZone": null,
+      "triggerPrice": 26.841,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 51",
+        "距MA20 +1.63 ATR",
+        "主力资金占比 +10.55%"
       ]
     },
     {
@@ -431,16 +209,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 46.7,
-        "changePct": 4.45,
-        "open": 45.4,
-        "high": 47.7,
-        "low": 45.38,
-        "dayLowToHighPct": 5.11,
-        "quoteTime": "20261109161455"
+        "price": 48.42,
+        "changePct": 3.68,
+        "open": 47.33,
+        "high": 49.44,
+        "low": 47.33,
+        "dayLowToHighPct": 4.46,
+        "quoteTime": "20261110151438"
       },
       "entryZone": null,
-      "triggerPrice": 44.585,
+      "triggerPrice": 44.855,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -452,7 +230,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +1.66 ATR",
+        "距MA20 +2.26 ATR",
         "主力资金占比 +10.28%"
       ]
     },
@@ -475,16 +253,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 20.19,
-        "changePct": 10.03,
-        "open": 18.6,
-        "high": 20.19,
-        "low": 18.5,
-        "dayLowToHighPct": 9.14,
-        "quoteTime": "20261109161445"
+        "price": 21.05,
+        "changePct": 4.26,
+        "open": 20.49,
+        "high": 21.6,
+        "low": 20.23,
+        "dayLowToHighPct": 6.77,
+        "quoteTime": "20261110151415"
       },
       "entryZone": null,
-      "triggerPrice": 17.613,
+      "triggerPrice": 17.867,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -496,9 +274,8 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 51",
-        "距MA20 +2.29 ATR",
-        "主力资金占比 +24.38%",
-        "接近涨停，按追高风险处理"
+        "距MA20 +2.75 ATR",
+        "主力资金占比 +24.38%"
       ]
     },
     {
@@ -519,16 +296,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 55.04,
-        "changePct": 1.55,
-        "open": 55.38,
-        "high": 57.69,
-        "low": 54.57,
-        "dayLowToHighPct": 5.72,
-        "quoteTime": "20261109161451"
+        "price": 57.13,
+        "changePct": 3.8,
+        "open": 55.25,
+        "high": 60.2,
+        "low": 55.16,
+        "dayLowToHighPct": 9.14,
+        "quoteTime": "20261110151439"
       },
       "entryZone": null,
-      "triggerPrice": 51.698,
+      "triggerPrice": 52.151,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -540,8 +317,184 @@
       "reasons": [
         "暂无可买形态",
         "形态分 51",
-        "距MA20 +1.88 ATR",
+        "距MA20 +2.28 ATR",
         "主力资金占比 +8.81%"
+      ]
+    },
+    {
+      "code": "001400",
+      "name": "江顺科技",
+      "sector": "减速器",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 50.7,
+        "historical": {}
+      },
+      "quote": {
+        "price": 102.45,
+        "changePct": 1.79,
+        "open": 102.49,
+        "high": 106.85,
+        "low": 100.65,
+        "dayLowToHighPct": 6.16,
+        "quoteTime": "20261110151424"
+      },
+      "entryZone": null,
+      "triggerPrice": 94.657,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 51",
+        "距MA20 +1.91 ATR",
+        "主力资金占比 +8.47%"
+      ]
+    },
+    {
+      "code": "688017",
+      "name": "绿的谐波",
+      "sector": "减速器",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 50.5,
+        "historical": {}
+      },
+      "quote": {
+        "price": 302.76,
+        "changePct": 2.21,
+        "open": 300.0,
+        "high": 315.95,
+        "low": 300.0,
+        "dayLowToHighPct": 5.32,
+        "quoteTime": "20261110151433"
+      },
+      "entryZone": null,
+      "triggerPrice": 279.091,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 50",
+        "距MA20 +1.28 ATR",
+        "主力资金占比 +7.25%"
+      ]
+    },
+    {
+      "code": "300680",
+      "name": "隆盛科技",
+      "sector": "减速器",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 50.3,
+        "historical": {}
+      },
+      "quote": {
+        "price": 21.7,
+        "changePct": 2.94,
+        "open": 21.32,
+        "high": 22.35,
+        "low": 21.28,
+        "dayLowToHighPct": 5.03,
+        "quoteTime": "20261110151406"
+      },
+      "entryZone": null,
+      "triggerPrice": 19.532,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 50",
+        "距MA20 +1.80 ATR",
+        "主力资金占比 +6.28%"
+      ]
+    },
+    {
+      "code": "002164",
+      "name": "宁波东力",
+      "sector": "减速器",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B1",
+        "B3",
+        "B4",
+        "B13"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 50.0,
+        "historical": {}
+      },
+      "quote": {
+        "price": 19.92,
+        "changePct": 1.12,
+        "open": 20.21,
+        "high": 20.86,
+        "low": 19.31,
+        "dayLowToHighPct": 8.03,
+        "quoteTime": "20261110151433"
+      },
+      "entryZone": null,
+      "triggerPrice": 18.039,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 50",
+        "距MA20 +1.68 ATR",
+        "主力资金占比 +5.17%"
       ]
     },
     {
@@ -562,16 +515,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 11.9,
-        "changePct": 4.02,
-        "open": 11.6,
-        "high": 12.15,
-        "low": 11.55,
-        "dayLowToHighPct": 5.19,
-        "quoteTime": "20261109161442"
+        "price": 11.84,
+        "changePct": -0.5,
+        "open": 11.99,
+        "high": 12.19,
+        "low": 11.79,
+        "dayLowToHighPct": 3.39,
+        "quoteTime": "20261110151420"
       },
       "entryZone": null,
-      "triggerPrice": 11.021,
+      "triggerPrice": 11.108,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -583,50 +536,8 @@
       "reasons": [
         "暂无可买形态",
         "形态分 50",
-        "距MA20 +1.87 ATR",
+        "距MA20 +1.58 ATR",
         "主力资金占比 +5.13%"
-      ]
-    },
-    {
-      "code": "000678",
-      "name": "襄阳轴承",
-      "sector": "减速器",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 49.3,
-        "historical": {}
-      },
-      "quote": {
-        "price": 17.51,
-        "changePct": -1.46,
-        "open": 17.5,
-        "high": 19.06,
-        "low": 17.4,
-        "dayLowToHighPct": 9.54,
-        "quoteTime": "20261109161439"
-      },
-      "entryZone": null,
-      "triggerPrice": 18.214,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 49",
-        "距MA20 +1.74 ATR",
-        "主力资金占比 +1.36%"
       ]
     },
     {
@@ -646,16 +557,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 26.82,
-        "changePct": 0.07,
-        "open": 27.42,
-        "high": 28.65,
-        "low": 26.72,
-        "dayLowToHighPct": 7.22,
-        "quoteTime": "20261109161430"
+        "price": 27.19,
+        "changePct": 1.38,
+        "open": 27.38,
+        "high": 27.58,
+        "low": 26.75,
+        "dayLowToHighPct": 3.1,
+        "quoteTime": "20261110151421"
       },
       "entryZone": null,
-      "triggerPrice": 24.798,
+      "triggerPrice": 24.918,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -667,7 +578,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 49",
-        "距MA20 +1.14 ATR",
+        "距MA20 +1.21 ATR",
         "主力资金占比 +0.29%"
       ]
     },
@@ -690,16 +601,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 21.97,
-        "changePct": 10.02,
-        "open": 20.85,
-        "high": 21.97,
-        "low": 20.68,
-        "dayLowToHighPct": 6.24,
-        "quoteTime": "20261109161445"
+        "price": 24.17,
+        "changePct": 10.01,
+        "open": 23.52,
+        "high": 24.17,
+        "low": 23.22,
+        "dayLowToHighPct": 4.09,
+        "quoteTime": "20261110151430"
       },
       "entryZone": null,
-      "triggerPrice": 19.128,
+      "triggerPrice": 19.76,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -711,38 +622,40 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 49",
-        "距MA20 +2.58 ATR",
+        "距MA20 +3.44 ATR",
         "主力资金占比 +12.72%",
         "接近涨停，按追高风险处理"
       ]
     },
     {
-      "code": "300680",
-      "name": "隆盛科技",
+      "code": "003021",
+      "name": "兆威机电",
       "sector": "减速器",
       "official": true,
       "tailCore": false,
       "poolTags": [
-        "B0"
+        "B0",
+        "B3",
+        "B4"
       ],
       "action": "不建议买",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
-        "score": 47.3,
+        "score": 47.1,
         "historical": {}
       },
       "quote": {
-        "price": 21.08,
-        "changePct": 8.44,
-        "open": 19.8,
-        "high": 21.81,
-        "low": 19.8,
-        "dayLowToHighPct": 10.15,
-        "quoteTime": "20261109161445"
+        "price": 107.0,
+        "changePct": 3.16,
+        "open": 105.79,
+        "high": 111.5,
+        "low": 104.12,
+        "dayLowToHighPct": 7.09,
+        "quoteTime": "20261110151400"
       },
       "entryZone": null,
-      "triggerPrice": 19.384,
+      "triggerPrice": 94.576,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -754,8 +667,95 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 47",
-        "距MA20 +1.51 ATR",
-        "主力资金占比 +6.28%"
+        "距MA20 +2.88 ATR",
+        "主力资金占比 +5.70%"
+      ]
+    },
+    {
+      "code": "300825",
+      "name": "阿尔特",
+      "sector": "减速器",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 47.0,
+        "historical": {}
+      },
+      "quote": {
+        "price": 13.96,
+        "changePct": 12.4,
+        "open": 12.79,
+        "high": 14.18,
+        "low": 12.59,
+        "dayLowToHighPct": 12.63,
+        "quoteTime": "20261110151345"
+      },
+      "entryZone": null,
+      "triggerPrice": 10.952,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 47",
+        "距MA20 +2.81 ATR",
+        "主力资金占比 +5.17%"
+      ]
+    },
+    {
+      "code": "000678",
+      "name": "襄阳轴承",
+      "sector": "减速器",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 46.3,
+        "historical": {}
+      },
+      "quote": {
+        "price": 19.26,
+        "changePct": 9.99,
+        "open": 17.51,
+        "high": 19.26,
+        "low": 17.51,
+        "dayLowToHighPct": 9.99,
+        "quoteTime": "20261110151415"
+      },
+      "entryZone": null,
+      "triggerPrice": 18.51,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 46",
+        "距MA20 +2.56 ATR",
+        "主力资金占比 +1.36%",
+        "接近涨停，按追高风险处理"
       ]
     },
     {
@@ -776,16 +776,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 35.8,
-        "changePct": 2.78,
-        "open": 34.13,
-        "high": 36.98,
-        "low": 33.3,
-        "dayLowToHighPct": 11.05,
-        "quoteTime": "20261109161427"
+        "price": 35.55,
+        "changePct": -0.7,
+        "open": 34.88,
+        "high": 37.38,
+        "low": 34.55,
+        "dayLowToHighPct": 8.19,
+        "quoteTime": "20261110151430"
       },
       "entryZone": null,
-      "triggerPrice": 27.013,
+      "triggerPrice": 28.177,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -797,7 +797,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 46",
-        "距MA20 +3.95 ATR",
+        "距MA20 +3.44 ATR",
         "主力资金占比 -0.20%"
       ]
     }
@@ -820,9 +820,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "official-has-live-buy"
-  }
+  ]
 }
