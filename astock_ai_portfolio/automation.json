@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "20261111-093720",
-  "lastRunAt": "2026-11-11T09:37:20+08:00",
-  "lastSuccessAt": "2026-11-11T09:37:20+08:00",
+  "cycleId": "20261111-095040",
+  "lastRunAt": "2026-11-11T09:50:40+08:00",
+  "lastSuccessAt": "2026-11-11T09:50:40+08:00",
   "lastTradeAt": "2026-11-10T14:47:13+08:00",
   "status": "NO_ACTION",
   "statusZh": "30只2026-11-10收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
   "runSource": "local-validation",
   "sessionOpen": true,
-  "radarCapturedAt": "2026-11-11T09:30:57+08:00",
+  "radarCapturedAt": "2026-11-11T09:45:58+08:00",
   "radarFresh": true,
-  "radarAgeSeconds": 383.9,
+  "radarAgeSeconds": 282.5,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -55,8 +55,8 @@
           "name": "五 粮 液",
           "rank": 1,
           "limitPrice": 73.0786,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价73.08"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0016-2026-10-30",
@@ -345,8 +345,8 @@
           "name": "农业银行",
           "rank": 31,
           "limitPrice": 7.3402,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价7.34"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         }
       ],
       "pendingExits": [],
