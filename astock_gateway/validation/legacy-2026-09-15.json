@@ -4,120 +4,149 @@
   "fullyReproducible": false,
   "eligibleForPerformanceComparison": false,
   "issues": [
-    "raw-price-cross-source-incomplete:0/15",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
     "total": 15,
-    "verified": 0,
-    "coveragePct": 0.0,
+    "verified": 15,
+    "coveragePct": 100.0,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
       "000657": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 62.23,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "002378": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 24.74,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "002487": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 39.44,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "002531": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 7.81,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "002842": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 36.6,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "300443": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 19.84,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "600549": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 51.14,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "601218": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 5.18,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "603248": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 18.46,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "688037": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 321.0,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "688120": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 255.5,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "688361": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 309.79,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "688409": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 183.29,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "688419": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 48.64,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       },
       "688729": {
-        "verified": false,
-        "rawClose": null,
+        "verified": true,
+        "rawClose": 23.18,
         "maxRelDiff": null,
-        "reason": "no-valid-price-provider",
-        "providersWithRow": []
+        "reason": null,
+        "providersWithRow": [
+          "腾讯"
+        ]
       }
     }
   },
@@ -228,5 +257,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-11-12T00:01:43+08:00"
+  "auditedAt": "2026-11-13T00:09:23+08:00"
 }
