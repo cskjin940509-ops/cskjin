@@ -20,55 +20,61 @@
       "002371": {
         "verified": true,
         "rawClose": 765.97,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "002384": {
         "verified": true,
         "rawClose": 217.66,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "002916": {
         "verified": true,
         "rawClose": 392.9,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "300308": {
         "verified": true,
         "rawClose": 1001.03,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "300394": {
         "verified": true,
         "rawClose": 286.56,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "300476": {
         "verified": true,
         "rawClose": 276.0,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "300502": {
@@ -83,10 +89,11 @@
       "300604": {
         "verified": true,
         "rawClose": 302.57,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "600183": {
@@ -137,19 +144,21 @@
       "688120": {
         "verified": true,
         "rawClose": 277.44,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "688200": {
         "verified": true,
         "rawClose": 437.1,
-        "maxRelDiff": null,
+        "maxRelDiff": 0.0,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "腾讯",
+          "东方财富"
         ]
       },
       "688361": {
@@ -173,9 +182,9 @@
     }
   },
   "factorRecompute": {
-    "available": 0,
+    "available": 1,
     "total": 17,
-    "coveragePct": 0.0,
+    "coveragePct": 5.88,
     "cutoff": "2026-08-17",
     "methodology": "current safe qfq factor recomputation capped at historical date; evidence only, not original-factor substitution",
     "stocks": {
@@ -192,8 +201,12 @@
         "error": "RemoteDisconnected"
       },
       "300308": {
-        "available": false,
-        "error": "RemoteDisconnected"
+        "available": true,
+        "barCount": 90,
+        "lastBarDate": "2026-08-17",
+        "r20": -0.0029616776857031013,
+        "r60": -0.03563884682529728,
+        "mta": "双周期共振"
       },
       "300394": {
         "available": false,
@@ -284,5 +297,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-11-15T17:37:24+08:00"
+  "auditedAt": "2026-11-17T01:20:00+08:00"
 }
