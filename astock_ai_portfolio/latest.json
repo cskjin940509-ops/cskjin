@@ -4,30 +4,30 @@
   "mode": "A股原选股池 · T+1八批轮动模拟执行",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-11-17T11:30:35+08:00",
-  "radarCapturedAt": "2026-11-17T11:25:54+08:00",
+  "updatedAt": "2026-11-17T13:10:33+08:00",
+  "radarCapturedAt": "2026-11-17T13:06:21+08:00",
   "radarStatus": "RadarLive",
   "summary": {
     "initialCapital": 20000000.0,
     "capitalCapacity": 20000000.0,
     "inceptionCapital": 1000000.0,
-    "totalAssets": 19610289.9,
+    "totalAssets": 19612105.23,
     "fundUnits": 19341487.5886677,
-    "unitNav": 1.013898,
-    "cumulativeNav": 1.013898,
-    "cash": 18991517.9,
-    "marketValue": 618772.0,
-    "positionPct": 3.16,
-    "cashPct": 96.84,
-    "todayReturnPct": -0.060966989162902774,
-    "cumulativeReturnPct": 1.39,
+    "unitNav": 1.013992,
+    "cumulativeNav": 1.013992,
+    "cash": 18555855.23,
+    "marketValue": 1056250.0,
+    "positionPct": 5.39,
+    "cashPct": 94.61,
+    "todayReturnPct": -0.05171627466225015,
+    "cumulativeReturnPct": 1.399,
     "realizedPnl": -397558.0,
-    "floatingPnl": 7829.88,
+    "floatingPnl": 9645.12,
     "maxDrawdownPct": -4.2846,
     "maxDrawdownFrequency": "DAILY_CLOSE_UNIT_NAV",
     "intradayObservedMaxDrawdownPct": -5.1142,
     "missingBackendBusinessDays": 20,
-    "positionCount": 4,
+    "positionCount": 5,
     "sellDecisionCount": 324,
     "profitableSellCount": 115,
     "winRatePct": 35.49,
@@ -38,6 +38,68 @@
     "dailyCloseDrawdownStatus": "VALID"
   },
   "positions": [
+    {
+      "code": "300458",
+      "name": "全志科技",
+      "sector": "数字芯片设计",
+      "qty": 15600,
+      "avgCost": 27.9271,
+      "costAmount": 435662.67,
+      "entryPrice": 27.92,
+      "entryReferencePrice": 27.91,
+      "entryPriceSource": "T+1实时行情/日内最低价触发",
+      "entryTimestamp": "2026-11-17T13:05:48+08:00",
+      "entryDate": "2026-11-17",
+      "initialWeightTarget": 0.0225,
+      "lastPrice": 27.94,
+      "lastPriceAt": "2026-11-17T13:10:31+08:00",
+      "missingRadarCount": 0,
+      "partialProfitTaken": false,
+      "seenTradeDates": [
+        "2026-11-17"
+      ],
+      "buyScore": 51.34,
+      "buyReasonZh": "T日候选；T+1低吸限价成交",
+      "invalidationZh": "硬止损、日级连续失效、板块确认衰退或组合风险；掉榜不卖",
+      "expectedHorizonZh": "至少观察2个完整交易日；第3/5/10交易日复核，不机械换仓",
+      "dailyBuyQty": {
+        "2026-11-17": 15600
+      },
+      "riskBasis": 27.9271,
+      "hardStopPrice": 25.6929,
+      "peakPrice": 27.94,
+      "trailingStopPrice": 0,
+      "atrFallback": false,
+      "atr14": 1.64,
+      "stopDistancePct": 8.0,
+      "holdingState": "HOLD",
+      "completeObservedDays": 0,
+      "invalidDayStreak": 0,
+      "nextReviewDay": 3,
+      "profitPlan50": {
+        "activatedAt": "2026-11-17T13:10:31.977132+08:00",
+        "target1": 30.7,
+        "target2": 32.235,
+        "queuedStages": []
+      },
+      "currentPrice": 27.94,
+      "marketValue": 435864.0,
+      "floatingPnl": 201.24,
+      "floatingReturnPct": 0.05,
+      "currentWeightPct": 2.22,
+      "tradingDaysObserved": 1,
+      "currentActionZh": "继续持有并跟踪",
+      "valuationQuoteAt": "20261117131024",
+      "marketChangePct": 0.9393063583815087,
+      "decisionPlan": {
+        "actionZh": "继续持有并跟踪",
+        "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
+        "hardStopPrice": 25.6929,
+        "trailingStopPrice": 0,
+        "takeProfitZh": "主动止盈目标一 30.7000、目标二 32.2350；进入区间并确认滞涨转弱后分两档兑现；已提交档位 []。趋势延续保留剩余仓位；峰值盈利15%/25%后移动保护距离上限收紧至5%/3%。",
+        "tPolicyZh": "震荡才研究小比例做T；总收益须与独立无T组合对比，趋势强时保留底仓。"
+      }
+    },
     {
       "code": "600941",
       "name": "中国移动",
@@ -51,8 +113,8 @@
       "entryTimestamp": "2026-11-10T14:47:13+08:00",
       "entryDate": "2026-11-10",
       "initialWeightTarget": 0.0225,
-      "lastPrice": 104.26,
-      "lastPriceAt": "2026-11-17T11:25:25+08:00",
+      "lastPrice": 104.6,
+      "lastPriceAt": "2026-11-17T13:10:31+08:00",
       "missingRadarCount": 0,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -83,15 +145,15 @@
         "target2": 116.8927,
         "queuedStages": []
       },
-      "currentPrice": 104.25,
-      "marketValue": 281475.0,
-      "floatingPnl": 9226.17,
-      "floatingReturnPct": 3.39,
+      "currentPrice": 104.6,
+      "marketValue": 282420.0,
+      "floatingPnl": 10171.17,
+      "floatingReturnPct": 3.74,
       "currentWeightPct": 1.44,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20261117113027",
-      "marketChangePct": -0.2296870513924687,
+      "valuationQuoteAt": "20261117131024",
+      "marketChangePct": 0.10527323188822546,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -114,8 +176,8 @@
       "entryTimestamp": "2026-11-11T09:55:31+08:00",
       "entryDate": "2026-11-11",
       "initialWeightTarget": 0.0225,
-      "lastPrice": 29.57,
-      "lastPriceAt": "2026-11-17T11:25:25+08:00",
+      "lastPrice": 29.66,
+      "lastPriceAt": "2026-11-17T13:10:31+08:00",
       "missingRadarCount": 0,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -134,7 +196,7 @@
       "trailingStopPrice": 0.0,
       "atrFallback": false,
       "atr14": 1.0392857142857146,
-      "stopDistancePct": 5.271993816126384,
+      "stopDistancePct": 5.255996532126002,
       "holdingState": "HOLD",
       "completeObservedDays": 3,
       "invalidDayStreak": 0,
@@ -145,15 +207,15 @@
         "target2": 37.8945,
         "queuedStages": []
       },
-      "currentPrice": 29.58,
-      "marketValue": 156774.0,
-      "floatingPnl": -3008.81,
-      "floatingReturnPct": -1.88,
+      "currentPrice": 29.66,
+      "marketValue": 157198.0,
+      "floatingPnl": -2584.81,
+      "floatingReturnPct": -1.62,
       "currentWeightPct": 0.8,
       "tradingDaysObserved": 1,
       "currentActionZh": "等待执行退出",
-      "valuationQuoteAt": "20261117113020",
-      "marketChangePct": -4.2098445595854965,
+      "valuationQuoteAt": "20261117131023",
+      "marketChangePct": -3.9507772020725307,
       "decisionPlan": {
         "actionZh": "等待执行退出",
         "reasonZh": "资金快速转负且明显弱于板块，减半",
@@ -176,8 +238,8 @@
       "entryTimestamp": "2026-11-02T09:45:58+08:00",
       "entryDate": "2026-11-02",
       "initialWeightTarget": 0.0225,
-      "lastPrice": 3.47,
-      "lastPriceAt": "2026-11-17T11:25:25+08:00",
+      "lastPrice": 3.48,
+      "lastPriceAt": "2026-11-17T13:10:31+08:00",
       "missingRadarCount": 0,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -214,7 +276,7 @@
       "currentWeightPct": 0.73,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20261117113027",
+      "valuationQuoteAt": "20261117131024",
       "marketChangePct": -0.8547008547008517,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
@@ -238,8 +300,8 @@
       "entryTimestamp": "2026-11-11T10:30:28+08:00",
       "entryDate": "2026-11-11",
       "initialWeightTarget": 0.00296223276969653,
-      "lastPrice": 7.5,
-      "lastPriceAt": "2026-11-17T11:25:25+08:00",
+      "lastPrice": 7.56,
+      "lastPriceAt": "2026-11-17T13:10:31+08:00",
       "missingRadarCount": 0,
       "partialProfitTaken": false,
       "seenTradeDates": [
@@ -269,15 +331,15 @@
         "target2": 8.4432,
         "queuedStages": []
       },
-      "currentPrice": 7.51,
-      "marketValue": 36799.0,
-      "floatingPnl": 823.69,
-      "floatingReturnPct": 2.29,
+      "currentPrice": 7.56,
+      "marketValue": 37044.0,
+      "floatingPnl": 1068.69,
+      "floatingReturnPct": 2.97,
       "currentWeightPct": 0.19,
       "tradingDaysObserved": 1,
       "currentActionZh": "继续持有并跟踪",
-      "valuationQuoteAt": "20261117113013",
-      "marketChangePct": -1.0540184453227908,
+      "valuationQuoteAt": "20261117131022",
+      "marketChangePct": -0.39525691699605625,
       "decisionPlan": {
         "actionZh": "继续持有并跟踪",
         "reasonZh": "当前未触发退出；掉出候选名单只停止加仓",
@@ -493,70 +555,50 @@
       "requestedQty": 22900,
       "partialFill": false,
       "fillRatioPct": 100.0
-    }
-  ],
-  "recentDecisions": [
+    },
     {
-      "decisionId": "20261111-102101-00317",
-      "timestamp": "2026-11-11T10:21:01+08:00",
+      "decisionId": "20261117-130548-00417",
+      "timestamp": "2026-11-17T13:05:48+08:00",
       "strategyVersion": "v6.1-eight-batch-no-four-index-position-control",
       "mode": "AI影子实盘",
       "simulated": true,
-      "side": "SELL",
-      "sideZh": "减仓",
-      "code": "600941",
-      "name": "中国移动",
-      "sector": "电信运营商",
-      "qty": 300,
-      "price": 101.12,
-      "referencePrice": 101.16,
-      "priceSource": "腾讯实时行情/雷达行情",
-      "amount": 30336.0,
-      "fee": 22.88,
-      "realizedPnl": -180.62,
-      "realizedReturnPct": -0.52,
-      "reasonZh": "组合风险优先降仓",
-      "remainingQty": 2200,
+      "side": "BUY",
+      "sideZh": "买入",
+      "code": "300458",
+      "name": "全志科技",
+      "sector": "数字芯片设计",
+      "qty": 15600,
+      "price": 27.92,
+      "referencePrice": 27.91,
+      "priceSource": "T+1实时行情/日内最低价触发",
+      "amount": 435552.0,
+      "fee": 110.67,
+      "targetWeightPct": 2.25,
+      "decisionScore": 51.34,
+      "reasonZh": "T日候选；T+1低吸限价成交；T日候选；T+1低吸限价成交",
+      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
+      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
       "executionModel": "v3-liquidity-capacity-point-in-time",
-      "capacityRequestedQty": 300,
-      "filledQty": 300,
-      "slippageBps": 3.903,
-      "marketImpactBps": 0.903,
-      "participationPct": 0.0127,
-      "intradayAmount": 237990000.0,
-      "adv20Amount": 1012385000.0,
-      "advSampleDays": 10,
-      "capacityAmount": 1903920.0,
-      "dailyCapacityAmount": 3569850.0,
-      "liquidityBasisZh": "当时累计成交额+历史ADV20",
-      "priceLimitPct": 10.0,
-      "upperLimit": 111.71,
-      "lowerLimit": 91.4,
-      "targetWeightPct": 0.0,
-      "requestedQty": 300,
+      "requestedQty": 15600,
+      "capacityRequestedQty": 15600,
+      "filledQty": 15600,
       "partialFill": false,
       "fillRatioPct": 100.0,
-      "ruleVersion": "v6.1-eight-batch-no-four-index-position-control",
-      "sleeve": "CORE",
-      "reasonCode": "PORTFOLIO_RISK",
-      "signalSnapshot": {
-        "cap": 0.25,
-        "allowNew": false,
-        "date": "2026-11-11",
-        "asOf": "2026-11-11T10:21:00+08:00",
-        "dailyUnitReturnPct": 0.19731556906870118,
-        "confirmedCloseDrawdownPct": -3.7246094885651337,
-        "dailyRiskDataReady": true,
-        "paused": false,
-        "currentEvidenceReady": true,
-        "defensiveConfirmed": true,
-        "defensiveConfirmations": 2,
-        "forceReduction": true,
-        "executionPolicyZh": "风险独立检查；防守大盘2个至少间隔60秒的新快照确认后立即分批降至上限，不等普通窗口和换手额度"
-      },
-      "effectiveFrom": "2026-09-06T00:51:22+08:00",
-      "orderRequestedQty": 300
-    },
+      "slippageBps": 5.082,
+      "marketImpactBps": 2.082,
+      "participationPct": 0.0678,
+      "intradayAmount": 642660992.7,
+      "adv20Amount": 1160648000.0,
+      "advSampleDays": 5,
+      "capacityAmount": 5141287.94,
+      "dailyCapacityAmount": 9639914.89,
+      "liquidityBasisZh": "当时累计成交额+历史ADV20",
+      "priceLimitPct": 20.0,
+      "upperLimit": 33.22,
+      "lowerLimit": 22.14
+    }
+  ],
+  "recentDecisions": [
     {
       "decisionId": "20261111-102101-00318",
       "timestamp": "2026-11-11T10:21:01+08:00",
@@ -5932,6 +5974,47 @@
       "requestedQty": 22900,
       "partialFill": false,
       "fillRatioPct": 100.0
+    },
+    {
+      "decisionId": "20261117-130548-00417",
+      "timestamp": "2026-11-17T13:05:48+08:00",
+      "strategyVersion": "v6.1-eight-batch-no-four-index-position-control",
+      "mode": "AI影子实盘",
+      "simulated": true,
+      "side": "BUY",
+      "sideZh": "买入",
+      "code": "300458",
+      "name": "全志科技",
+      "sector": "数字芯片设计",
+      "qty": 15600,
+      "price": 27.92,
+      "referencePrice": 27.91,
+      "priceSource": "T+1实时行情/日内最低价触发",
+      "amount": 435552.0,
+      "fee": 110.67,
+      "targetWeightPct": 2.25,
+      "decisionScore": 51.34,
+      "reasonZh": "T日候选；T+1低吸限价成交；T日候选；T+1低吸限价成交",
+      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
+      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "executionModel": "v3-liquidity-capacity-point-in-time",
+      "requestedQty": 15600,
+      "capacityRequestedQty": 15600,
+      "filledQty": 15600,
+      "partialFill": false,
+      "fillRatioPct": 100.0,
+      "slippageBps": 5.082,
+      "marketImpactBps": 2.082,
+      "participationPct": 0.0678,
+      "intradayAmount": 642660992.7,
+      "adv20Amount": 1160648000.0,
+      "advSampleDays": 5,
+      "capacityAmount": 5141287.94,
+      "dailyCapacityAmount": 9639914.89,
+      "liquidityBasisZh": "当时累计成交额+历史ADV20",
+      "priceLimitPct": 20.0,
+      "upperLimit": 33.22,
+      "lowerLimit": 22.14
     }
   ],
   "allDecisions": [
@@ -27389,6 +27472,47 @@
       "requestedQty": 22900,
       "partialFill": false,
       "fillRatioPct": 100.0
+    },
+    {
+      "decisionId": "20261117-130548-00417",
+      "timestamp": "2026-11-17T13:05:48+08:00",
+      "strategyVersion": "v6.1-eight-batch-no-four-index-position-control",
+      "mode": "AI影子实盘",
+      "simulated": true,
+      "side": "BUY",
+      "sideZh": "买入",
+      "code": "300458",
+      "name": "全志科技",
+      "sector": "数字芯片设计",
+      "qty": 15600,
+      "price": 27.92,
+      "referencePrice": 27.91,
+      "priceSource": "T+1实时行情/日内最低价触发",
+      "amount": 435552.0,
+      "fee": 110.67,
+      "targetWeightPct": 2.25,
+      "decisionScore": 51.34,
+      "reasonZh": "T日候选；T+1低吸限价成交；T日候选；T+1低吸限价成交",
+      "invalidationZh": "目标仓位降为0、主线/资金恶化或保护性止损触发",
+      "expectedHorizonZh": "动态持有；每轮行情重新计算目标仓位，不设固定持有天数",
+      "executionModel": "v3-liquidity-capacity-point-in-time",
+      "requestedQty": 15600,
+      "capacityRequestedQty": 15600,
+      "filledQty": 15600,
+      "partialFill": false,
+      "fillRatioPct": 100.0,
+      "slippageBps": 5.082,
+      "marketImpactBps": 2.082,
+      "participationPct": 0.0678,
+      "intradayAmount": 642660992.7,
+      "adv20Amount": 1160648000.0,
+      "advSampleDays": 5,
+      "capacityAmount": 5141287.94,
+      "dailyCapacityAmount": 9639914.89,
+      "liquidityBasisZh": "当时累计成交额+历史ADV20",
+      "priceLimitPct": 20.0,
+      "upperLimit": 33.22,
+      "lowerLimit": 22.14
     }
   ],
   "capitalEvents": [
@@ -27879,48 +28003,6 @@
     }
   ],
   "navHistory": [
-    {
-      "timestamp": "2026-10-09T13:50:49+08:00",
-      "date": "2026-10-09",
-      "time": "13:50:49",
-      "nav": 19944167.45,
-      "cash": 18028781.45,
-      "marketValue": 1915386.0,
-      "positionCount": 5,
-      "fundUnits": 19341487.5886677,
-      "unitNav": 1.03115995,
-      "cumulativeNav": 1.03115995,
-      "cumulativeReturnPct": 3.116,
-      "radarCapturedAt": "2026-10-09T11:26:06+08:00"
-    },
-    {
-      "timestamp": "2026-10-09T13:56:09+08:00",
-      "date": "2026-10-09",
-      "time": "13:56:09",
-      "nav": 19954397.45,
-      "cash": 18028781.45,
-      "marketValue": 1925616.0,
-      "positionCount": 5,
-      "fundUnits": 19341487.5886677,
-      "unitNav": 1.03168887,
-      "cumulativeNav": 1.03168887,
-      "cumulativeReturnPct": 3.1689,
-      "radarCapturedAt": "2026-10-09T11:26:06+08:00"
-    },
-    {
-      "timestamp": "2026-10-09T14:00:20+08:00",
-      "date": "2026-10-09",
-      "time": "14:00:20",
-      "nav": 19963463.45,
-      "cash": 18028781.45,
-      "marketValue": 1934682.0,
-      "positionCount": 5,
-      "fundUnits": 19341487.5886677,
-      "unitNav": 1.0321576,
-      "cumulativeNav": 1.0321576,
-      "cumulativeReturnPct": 3.2158,
-      "radarCapturedAt": "2026-10-09T11:26:06+08:00"
-    },
     {
       "timestamp": "2026-10-09T14:05:59+08:00",
       "date": "2026-10-09",
@@ -41943,19 +42025,61 @@
       "cumulativeNav": 1.01389771,
       "cumulativeReturnPct": 1.3898,
       "radarCapturedAt": "2026-11-17T11:25:54+08:00"
+    },
+    {
+      "timestamp": "2026-11-17T13:00:27+08:00",
+      "date": "2026-11-17",
+      "time": "13:00:27",
+      "nav": 19610988.9,
+      "cash": 18991517.9,
+      "marketValue": 619471.0,
+      "positionCount": 4,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.01393385,
+      "cumulativeNav": 1.01393385,
+      "cumulativeReturnPct": 1.3934,
+      "radarCapturedAt": "2026-11-17T11:31:05+08:00"
+    },
+    {
+      "timestamp": "2026-11-17T13:05:48+08:00",
+      "date": "2026-11-17",
+      "time": "13:05:48",
+      "nav": 19611707.23,
+      "cash": 18555855.23,
+      "marketValue": 1055852.0,
+      "positionCount": 5,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.01397099,
+      "cumulativeNav": 1.01397099,
+      "cumulativeReturnPct": 1.3971,
+      "radarCapturedAt": "2026-11-17T13:01:01+08:00"
+    },
+    {
+      "timestamp": "2026-11-17T13:10:31+08:00",
+      "date": "2026-11-17",
+      "time": "13:10:31",
+      "nav": 19612105.23,
+      "cash": 18555855.23,
+      "marketValue": 1056250.0,
+      "positionCount": 5,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.01399156,
+      "cumulativeNav": 1.01399156,
+      "cumulativeReturnPct": 1.3992,
+      "radarCapturedAt": "2026-11-17T13:06:21+08:00"
     }
   ],
   "performanceReport": {
     "valuation": {
       "method": "UNIT_NAV_SUBSCRIPTION_REDEMPTION",
-      "unitNav": 1.013898,
-      "cumulativeNav": 1.013898,
+      "unitNav": 1.013992,
+      "cumulativeNav": 1.013992,
       "fundUnits": 19341487.5886677,
       "netSubscriptions": 19000000.0,
       "noteZh": "增资按增资前单位净值申购新增份额，单位净值和历史收益不重置。"
     },
     "returns": {
-      "cumulativeReturnPct": 1.3898,
+      "cumulativeReturnPct": 1.3992,
       "daily": [
         {
           "date": "2026-09-07",
@@ -42424,12 +42548,16 @@
       "closeVerificationNoteZh": "仅使用确认的日终估值；旧版盘中替代收盘统计另列保留"
     },
     "exposure": {
-      "grossExposurePct": 3.16,
-      "netExposurePct": 3.16,
-      "cashPct": 96.84,
-      "top1ConcentrationPct": 1.44,
-      "top5ConcentrationPct": 3.16,
+      "grossExposurePct": 5.39,
+      "netExposurePct": 5.39,
+      "cashPct": 94.61,
+      "top1ConcentrationPct": 2.22,
+      "top5ConcentrationPct": 5.38,
       "sectorExposure": [
+        {
+          "sector": "数字芯片设计",
+          "weightPct": 2.22
+        },
         {
           "sector": "大盘价值",
           "weightPct": 1.72
@@ -42441,12 +42569,12 @@
       ]
     },
     "transactions": {
-      "decisionCount": 416,
-      "buyDecisionCount": 92,
+      "decisionCount": 417,
+      "buyDecisionCount": 93,
       "sellDecisionCount": 324,
-      "grossBuyAmount": 46627649.0,
+      "grossBuyAmount": 47063201.0,
       "grossSellAmount": 45665709.0,
-      "totalFees": 46542.1,
+      "totalFees": 46652.77,
       "profitableSellCount": 115,
       "winRatePct": 35.49,
       "avgWinPnl": 8974.99,
@@ -42456,59 +42584,59 @@
     "liquidityAndCapacity": {
       "executionModel": "v3-liquidity-capacity-point-in-time",
       "capacityCapital": 20000000.0,
-      "modeledFillCount": 400,
+      "modeledFillCount": 401,
       "legacyFixedSlippageFillCount": 16,
       "partialFillCount": 99,
-      "averageSlippageBps": 6.021,
-      "grossTradedAmount": 92293358.0,
-      "turnoverPctOfCurrentAssets": 470.637,
+      "averageSlippageBps": 6.018,
+      "grossTradedAmount": 92728910.0,
+      "turnoverPctOfCurrentAssets": 472.815,
       "recentRejections": [
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "300291",
           "name": "百纳千成",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 76100,
+          "requestedQty": 77800,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "002646",
           "name": "天佑德酒",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 65000,
+          "requestedQty": 65300,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "603721",
           "name": "中广天择",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 21800,
+          "requestedQty": 22100,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "000892",
           "name": "欢瑞世纪",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 97500,
+          "requestedQty": 98800,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "000799",
           "name": "酒鬼酒",
           "side": "BUY",
@@ -42519,62 +42647,62 @@
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "300133",
           "name": "华策影视",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 49500,
+          "requestedQty": 50700,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "300182",
           "name": "捷成股份",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 80600,
+          "requestedQty": 81800,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "002238",
           "name": "天威视讯",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 64700,
+          "requestedQty": 65600,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "600831",
           "name": "广电网络",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 131900,
+          "requestedQty": 134400,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "920021",
           "name": "流金科技",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 50600,
+          "requestedQty": 50900,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "601019",
           "name": "山东出版",
           "side": "BUY",
@@ -42585,18 +42713,18 @@
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "600037",
           "name": "歌华有线",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 66400,
+          "requestedQty": 66700,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "601666",
           "name": "平煤股份",
           "side": "BUY",
@@ -42607,29 +42735,29 @@
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "600985",
           "name": "淮北矿业",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 30900,
+          "requestedQty": 30800,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "600996",
           "name": "贵广网络",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 71700,
+          "requestedQty": 72300,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "000631",
           "name": "顺发恒能",
           "side": "BUY",
@@ -42640,40 +42768,40 @@
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "301551",
           "name": "无线传媒",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 17700,
+          "requestedQty": 17900,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "600373",
           "name": "中文传媒",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 59300,
+          "requestedQty": 59600,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "000917",
           "name": "电广传媒",
           "side": "BUY",
           "rejectCode": "NO_PREV_CLOSE",
           "reasonZh": "缺少昨收价，无法校验涨跌停价格",
-          "requestedQty": 68600,
+          "requestedQty": 69400,
           "intradayAmount": null,
           "capacityAmount": null
         },
         {
-          "timestamp": "2026-11-17T11:25:25+08:00",
+          "timestamp": "2026-11-17T13:10:31+08:00",
           "code": "601699",
           "name": "潞安环能",
           "side": "BUY",
@@ -42715,7 +42843,7 @@
     "t": "主策略买卖优先；做T仅优化持仓期间成本，不延长持有。策略减仓/退出立即终止旧T回补，主策略确认买入不等待T配对。仅模拟先卖后买；每股每日最多1组，≤昨日底仓20%且≤净值1%。仅震荡且冲高转弱时卖，回落企稳才买回。强趋势、退出风险、缺行情、价差不足覆盖双边成本时不做T。未买回/部分买回也计入机会损益。",
     "lowPoint": "判断相对买入区间，不宣称预测最低点：价格回撤接近20日均线/突破位，同时连续快照不再创新低并回升，且板块与资金未失效。"
   },
-  "legacyReportedMaxDrawdownPct": -4.3429,
+  "legacyReportedMaxDrawdownPct": -4.3341,
   "legacyDailyPerformance": [
     {
       "date": "2026-08-20",
@@ -43203,14 +43331,14 @@
     },
     {
       "date": "2026-11-17",
-      "closeUnitNav": 1.013898,
-      "closeCumulativeNav": 1.013898,
-      "cumulativeReturnPct": 1.3898,
-      "dailyReturnPct": -0.061,
-      "periodReturnPct": -0.061,
+      "closeUnitNav": 1.013992,
+      "closeCumulativeNav": 1.013992,
+      "cumulativeReturnPct": 1.3992,
+      "dailyReturnPct": -0.0517,
+      "periodReturnPct": -0.0517,
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
-      "pointCount": 25
+      "pointCount": 28
     }
   ],
   "selection45": {
@@ -43222,7 +43350,7 @@
       "baseCap": 1.0,
       "intradayCap": 1.0,
       "allowNew": true,
-      "breadthPct": 63.37,
+      "breadthPct": 46.97,
       "missingEvidence": [
         "margin",
         "broadEtf",
@@ -43230,7 +43358,7 @@
         "us30y",
         "cn10y"
       ],
-      "reasonZh": "按批次预算、个股及板块上限分配仓位；盘中广度63.4%，实际仓位上限100%",
+      "reasonZh": "按批次预算、个股及板块上限分配仓位；盘中广度47.0%，实际仓位上限100%",
       "positionControlMode": "BUDGET_AND_RISK",
       "fourIndexPositionControlEnabled": false,
       "evidenceReady": true
@@ -43239,8 +43367,8 @@
       "cap": 1.0,
       "allowNew": true,
       "date": "2026-11-17",
-      "asOf": "2026-11-17T11:30:34+08:00",
-      "dailyUnitReturnPct": -0.060966989162902774,
+      "asOf": "2026-11-17T13:10:32+08:00",
+      "dailyUnitReturnPct": -0.05171627466225015,
       "confirmedCloseDrawdownPct": -4.284592742552196,
       "dailyRiskDataReady": true,
       "paused": false,
@@ -43341,7 +43469,7 @@
         "sectorRank": 0.5,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 7.43,
           "buyZoneHigh": 7.43,
           "initialProtectionPrice": 7.0936,
@@ -43365,7 +43493,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -43420,7 +43548,7 @@
         "sectorRank": 0.14705882352941177,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 5.33,
           "buyZoneHigh": 5.33,
           "initialProtectionPrice": 5.1168,
@@ -43443,7 +43571,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -43498,7 +43626,7 @@
         "sectorRank": 0.11764705882352941,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 5.87,
           "buyZoneHigh": 5.87,
           "initialProtectionPrice": 5.6107,
@@ -43520,7 +43648,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -43575,7 +43703,7 @@
         "sectorRank": 0.08823529411764706,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 5.69,
           "buyZoneHigh": 5.69,
           "initialProtectionPrice": 5.4624,
@@ -43597,7 +43725,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -43654,7 +43782,7 @@
         "sectorRank": 0.2647058823529412,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 7.22,
           "buyZoneHigh": 7.22,
           "initialProtectionPrice": 6.8204,
@@ -43679,7 +43807,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -43764,7 +43892,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -43820,7 +43948,7 @@
         "sectorRank": 0.20588235294117646,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 14.98,
           "buyZoneHigh": 14.98,
           "initialProtectionPrice": 13.7816,
@@ -43844,7 +43972,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -43900,7 +44028,7 @@
         "sectorRank": 0.4117647058823529,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 7.5,
           "buyZoneHigh": 7.5,
           "initialProtectionPrice": 7.2,
@@ -43924,7 +44052,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -43980,7 +44108,7 @@
         "sectorRank": 0.17647058823529413,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 5.56,
           "buyZoneHigh": 5.56,
           "initialProtectionPrice": 5.2354,
@@ -44004,7 +44132,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -44086,7 +44214,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -44142,7 +44270,7 @@
         "sectorRank": 0.5,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 3.59,
           "buyZoneHigh": 3.59,
           "initialProtectionPrice": 3.4464,
@@ -44166,7 +44294,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -44222,7 +44350,7 @@
         "sectorRank": 0.38235294117647056,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 5.06,
           "buyZoneHigh": 5.06,
           "initialProtectionPrice": 4.8576,
@@ -44246,7 +44374,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -44302,7 +44430,7 @@
         "sectorRank": 0.3235294117647059,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 10.07,
           "buyZoneHigh": 10.07,
           "initialProtectionPrice": 9.6672,
@@ -44326,7 +44454,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -44412,7 +44540,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [],
@@ -44468,7 +44596,7 @@
         "sectorRank": 0.2,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 17.15,
           "buyZoneHigh": 17.15,
           "initialProtectionPrice": 16.0657,
@@ -44494,7 +44622,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -44553,7 +44681,7 @@
         "sectorRank": 0.47058823529411764,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 5.26,
           "buyZoneHigh": 5.26,
           "initialProtectionPrice": 5.0496,
@@ -44580,7 +44708,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -44638,7 +44766,7 @@
         "sectorRank": 0.23529411764705882,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 7.01,
           "buyZoneHigh": 7.01,
           "initialProtectionPrice": 6.7296,
@@ -44664,7 +44792,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -44722,7 +44850,7 @@
         "sectorRank": 0.6176470588235294,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 4.92,
           "buyZoneHigh": 4.92,
           "initialProtectionPrice": 4.7232,
@@ -44748,7 +44876,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -44838,7 +44966,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -44896,7 +45024,7 @@
         "sectorRank": 0.5294117647058824,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 9.13,
           "buyZoneHigh": 9.13,
           "initialProtectionPrice": 8.5761,
@@ -44922,7 +45050,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45010,7 +45138,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45102,7 +45230,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45161,7 +45289,7 @@
         "sectorRank": 0.7058823529411765,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 5.44,
           "buyZoneHigh": 5.44,
           "initialProtectionPrice": 5.2224,
@@ -45188,7 +45316,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45247,7 +45375,7 @@
         "sectorRank": 0.7941176470588235,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 4.85,
           "buyZoneHigh": 4.85,
           "initialProtectionPrice": 4.6529,
@@ -45274,7 +45402,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45332,7 +45460,7 @@
         "sectorRank": 0.5882352941176471,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 7.55,
           "buyZoneHigh": 7.55,
           "initialProtectionPrice": 7.248,
@@ -45358,7 +45486,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45416,7 +45544,7 @@
         "sectorRank": 0.35294117647058826,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 9.87,
           "buyZoneHigh": 9.87,
           "initialProtectionPrice": 9.3729,
@@ -45442,7 +45570,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45500,7 +45628,7 @@
         "sectorRank": 0.6764705882352942,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 4.2,
           "buyZoneHigh": 4.2,
           "initialProtectionPrice": 4.032,
@@ -45526,7 +45654,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45585,7 +45713,7 @@
         "sectorRank": 0.7647058823529411,
         "dataAt": "2026-09-14T09:43:49+08:00",
         "decisionPlan": {
-          "actionZh": "候选已排序，等待下一有效买入时段",
+          "actionZh": "候选保留，等待有效行情",
           "buyZoneLow": 11.21,
           "buyZoneHigh": 11.21,
           "initialProtectionPrice": 10.3882,
@@ -45612,7 +45740,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：综合分不足64 数据缺口：ADV20尚未取得20个完整交易日；B1；B2；完整5/20日成交额量比尚未取得；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；第二行情缺失/过期，使用主行情并降低仓位；等待完整日线与至少3个有效盘中快照"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45697,7 +45825,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：板块不处于潜在/确认阶段；盘中样本间隔不足或断档，等待连续确认；综合分不足64 数据缺口：B1；B2；B3；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；板块独立证据尚未取齐"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45789,7 +45917,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：完整5/20日成交额量比未通过1.2–2.5；板块不处于潜在/确认阶段；盘中样本间隔不足或断档，等待连续确认；综合分不足64 数据缺口：B1；B2；B3；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；板块独立证据尚未取齐"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -45884,7 +46012,7 @@
           "invalidationZh": "板块转弱、资金证据失效或触及保护线时重新评估；不因单纯下跌补仓。",
           "forecastZh": "参考数据时间：2026-09-14T09:43:49+08:00；目标仓位：1.0%。所列买入价格为候选参考，实际成交前重验行情与容量。 排序提示：完整5/20日成交额量比未通过1.2–2.5；板块不处于潜在/确认阶段；盘中样本间隔不足或断档，等待连续确认；综合分不足64 数据缺口：B1；B2；B3；板块/个股5日收益尚未取齐；板块完整样本排名尚未返回；板块独立证据尚未取齐"
         },
-        "executionStatus": "OUTSIDE_ENTRY_SESSION",
+        "executionStatus": "WAIT_FRESH_QUOTE",
         "dataConfidence": "DEGRADED",
         "degradedEntry": true,
         "rankingWarnings": [
@@ -47417,6 +47545,10 @@
             "reasonZh": "缺失数据为未知，不当成失效"
           }
         }
+      },
+      "300458": {
+        "completedDays": [],
+        "daily": {}
       }
     },
     "nextReview": {
@@ -47494,7 +47626,7 @@
   "strategyResearch": {
     "schemaVersion": 1,
     "version": "v4.6-forward-evidence",
-    "updatedAt": "2026-11-17T11:30:34.483818+08:00",
+    "updatedAt": "2026-11-17T13:10:32.003976+08:00",
     "activatedAt": "2026-10-01T15:16:10.166297+08:00",
     "objectiveZh": "提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。",
     "productionStatusZh": "生产策略正常运行；新版研究样本独立累计，不阻断选股、仓位或模拟交易。",
@@ -47591,7 +47723,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-11-17T11:30:34.483818+08:00",
+        "checkedAt": "2026-11-17T13:10:32.003976+08:00",
         "reasonZh": "仅统计本次启用后的完整成员样本；不等于2017年至今历史覆盖审计。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -47601,7 +47733,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-11-17T11:30:34.483818+08:00",
+        "checkedAt": "2026-11-17T13:10:32.003976+08:00",
         "reasonZh": "使用首次观察时保存的成员；后续不以今天成员替换。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -47611,7 +47743,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-11-17T11:30:34.483818+08:00",
+        "checkedAt": "2026-11-17T13:10:32.003976+08:00",
         "reasonZh": "两融/ETF必须具备真实availableAt且不晚于决策；仅写T+1不能通过。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -47621,7 +47753,7 @@
         "status": "PENDING_REVIEW",
         "completed": 0,
         "total": 60,
-        "checkedAt": "2026-11-17T11:30:34.483818+08:00",
+        "checkedAt": "2026-11-17T13:10:32.003976+08:00",
         "reasonZh": "按信号日汇总，重叠窗口仍相关；需补除权、可成交成本、全市场基准与独立样本外验证。",
         "evidencePath": "astock_ai_portfolio/state.json#research46"
       },
@@ -47631,7 +47763,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-11-17T11:30:34.483818+08:00",
+        "checkedAt": "2026-11-17T13:10:32.003976+08:00",
         "reasonZh": "校验首次冻结内容哈希；仅证明未改写，不等于策略有效。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       }
@@ -47667,7 +47799,7 @@
     "activatedAt": "2026-09-21T22:33:31+08:00",
     "batchCount": 22,
     "activeBatchCount": 8,
-    "pendingOrderCount": 129,
+    "pendingOrderCount": 128,
     "pendingExitCount": 0,
     "lastSignalDate": "2026-11-16",
     "pendingOrders": [
@@ -47994,22 +48126,22 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "20261117-113034",
-    "lastRunAt": "2026-11-17T11:30:34+08:00",
-    "lastSuccessAt": "2026-11-17T11:30:34+08:00",
-    "lastTradeAt": "2026-11-17T09:37:53+08:00",
-    "status": "OUTSIDE_SESSION",
-    "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
+    "cycleId": "20261117-131031",
+    "lastRunAt": "2026-11-17T13:10:31+08:00",
+    "lastSuccessAt": "2026-11-17T13:10:31+08:00",
+    "lastTradeAt": "2026-11-17T13:05:48+08:00",
+    "status": "NO_ACTION",
+    "statusZh": "30只2026-11-16收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
     "runSource": "local-validation",
-    "sessionOpen": false,
-    "radarCapturedAt": "2026-11-17T11:25:54+08:00",
+    "sessionOpen": true,
+    "radarCapturedAt": "2026-11-17T13:06:21+08:00",
     "radarFresh": true,
-    "radarAgeSeconds": 280.4,
+    "radarAgeSeconds": 250.9,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
-    "ledgerDecisionCount": 416,
-    "positionCount": 4,
+    "ledgerDecisionCount": 417,
+    "positionCount": 5,
     "capitalCapacity": 20000000.0,
     "error": null,
     "knownIncident": {
@@ -48031,7 +48163,7 @@
         "activatedAt": "2026-09-21T22:33:31+08:00",
         "batchCount": 22,
         "activeBatchCount": 8,
-        "pendingOrderCount": 129,
+        "pendingOrderCount": 128,
         "pendingExitCount": 0,
         "lastSignalDate": "2026-11-16",
         "pendingOrders": [
@@ -48365,8 +48497,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600795",
@@ -48381,8 +48513,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "601991",
@@ -48396,8 +48528,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600578",
@@ -48411,8 +48543,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600744",
@@ -48429,8 +48561,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "601008",
@@ -48449,7 +48581,7 @@
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600396",
@@ -48465,8 +48597,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000791",
@@ -48482,8 +48614,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600726",
@@ -48499,8 +48631,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600021",
@@ -48518,7 +48650,7 @@
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000767",
@@ -48534,8 +48666,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600023",
@@ -48551,8 +48683,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000899",
@@ -48568,8 +48700,8 @@
           ],
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "002040",
@@ -48589,7 +48721,7 @@
           "dataConfidence": "DEGRADED",
           "rankingWarnings": [],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "300244",
@@ -48607,8 +48739,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000690",
@@ -48627,8 +48759,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600011",
@@ -48646,8 +48778,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600027",
@@ -48665,8 +48797,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "001896",
@@ -48688,7 +48820,7 @@
             "综合分不足64"
           ],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000905",
@@ -48706,8 +48838,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600157",
@@ -48728,7 +48860,7 @@
             "综合分不足64"
           ],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "002669",
@@ -48751,7 +48883,7 @@
             "综合分不足64"
           ],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000539",
@@ -48770,8 +48902,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "600863",
@@ -48790,8 +48922,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000543",
@@ -48809,8 +48941,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000037",
@@ -48828,8 +48960,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000966",
@@ -48847,8 +48979,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000582",
@@ -48867,8 +48999,8 @@
           "rankingWarnings": [
             "综合分不足64"
           ],
-          "executionReasonZh": "候选已排序，等待下一有效买入时段",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionReasonZh": "候选保留，等待有效行情",
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "000011",
@@ -48890,7 +49022,7 @@
             "综合分不足64"
           ],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "001979",
@@ -48915,7 +49047,7 @@
             "综合分不足64"
           ],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         },
         {
           "code": "002517",
@@ -48941,7 +49073,7 @@
             "综合分不足64"
           ],
           "executionReasonZh": "不符合买入条件",
-          "executionStatus": "OUTSIDE_ENTRY_SESSION"
+          "executionStatus": "WAIT_FRESH_QUOTE"
         }
       ]
     }
@@ -48949,7 +49081,7 @@
   "capitalMigrationThisCycle": null,
   "dataFreshness": {
     "radarFresh": true,
-    "radarAgeSeconds": 280.4,
+    "radarAgeSeconds": 250.9,
     "maxAllowedAgeSeconds": 900
   }
 }
