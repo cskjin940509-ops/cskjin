@@ -346299,11 +346299,11 @@
     "note": "日终扫描已冻结；B1两融与B2 ETF一级份额均按T+1已发布数据参与，B4为基础/主力/慢资金综合排序。",
     "marketSnapshot": {
       "sourceDate": "2026-11-17",
-      "availableAt": "2026-11-17T16:51:18+08:00",
-      "confidence": "高",
-      "completeness": "完整",
+      "availableAt": "2026-11-17T22:13:46+08:00",
+      "confidence": "中",
+      "completeness": "部分",
       "verifiedToday": true,
-      "dataSource": "东方财富全A截面, 东方财富板块, 腾讯行情",
+      "dataSource": "东方财富板块, 腾讯行情",
       "indices": {
         "sh000001": {
           "name": "上证指数",
@@ -346354,13 +346354,15 @@
           "quoteDate": "20261117"
         }
       },
-      "totalAmount": 1457524665358.98,
-      "up": 1216,
-      "down": 3882,
-      "flat": 122,
-      "medianChangePct": -1.41,
-      "sampleCount": 5220,
-      "breadthStatus": "全市场统计可用",
+      "totalAmount": null,
+      "up": null,
+      "down": null,
+      "flat": null,
+      "medianChangePct": null,
+      "sampleCount": null,
+      "breadthStatus": "全市场统计待同步",
+      "breadthSampleCount": 0,
+      "breadthNote": "当前备用接口返回样本不足，不将样本统计冒充全市场。",
       "coreIndexCoverage": "6/6",
       "coreIndexSource": "腾讯当日收盘快照"
     },
@@ -348970,12 +348972,15 @@
         }
       ],
       "sourceDate": "2026-11-17",
-      "availableAt": "2026-11-17T16:51:18+08:00"
+      "availableAt": "2026-11-17T22:13:46+08:00"
     },
     "syncStatus": {
       "officialCohort": "ready",
       "officialUpdatedAt": "2026-11-17T16:52:51+08:00",
-      "strategyVersion": "v1.9.0-verified-point-in-time-bse-slow-money"
+      "strategyVersion": "v1.9.0-verified-point-in-time-bse-slow-money",
+      "marketSnapshot": "ready",
+      "boardHeatmap": "ready",
+      "marketUpdatedAt": "2026-11-17T22:13:46+08:00"
     },
     "upgraded": [],
     "downgraded": [],
