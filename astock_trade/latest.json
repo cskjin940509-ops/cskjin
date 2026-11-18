@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-17",
-  "generatedAt": "2026-11-17T21:57:37+08:00",
+  "date": "2026-11-18",
+  "generatedAt": "2026-11-18T15:12:10+08:00",
   "phase": "LIVE",
   "officialDate": "2026-11-17",
   "officialPlans": [
@@ -28,120 +28,83 @@
         }
       },
       "quote": {
-        "price": 30.6,
-        "changePct": 0.36,
-        "open": 30.59,
-        "high": 30.64,
-        "low": 30.18,
-        "dayLowToHighPct": 1.52,
-        "quoteTime": "20261117161442"
+        "price": 30.68,
+        "changePct": 0.26,
+        "open": 30.62,
+        "high": 30.77,
+        "low": 30.41,
+        "dayLowToHighPct": 1.18,
+        "quoteTime": "20261118151210"
       },
       "entryZone": [
-        30.409,
-        30.866
+        30.548,
+        31.008
       ],
-      "triggerPrice": 30.5,
-      "stopLoss": 30.044,
-      "takeProfit1": 31.527,
-      "takeProfit2": 32.12,
+      "triggerPrice": 30.64,
+      "stopLoss": 30.202,
+      "takeProfit1": 31.642,
+      "takeProfit2": 32.218,
       "riskReward1": 1.5,
       "preferredWindow": "09:35-10:45 / 13:30-14:50",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 30.044",
+      "invalidation": "收盘/有效价格跌破 30.202",
       "reasons": [
         "突破回踩",
         "形态分 92",
-        "距MA20 +1.53 ATR",
+        "距MA20 +1.65 ATR",
         "主力资金占比 +1.39%"
       ]
     },
     {
-      "code": "688981",
-      "name": "中芯国际",
+      "code": "600519",
+      "name": "贵州茅台",
       "sector": "茅指数",
       "official": true,
-      "tailCore": true,
+      "tailCore": false,
       "poolTags": [
-        "B0",
-        "B3",
-        "B4"
+        "B3"
       ],
-      "action": "不建议买",
+      "action": "买入候选",
       "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 56.2,
-        "historical": {}
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 85.9,
+        "historical": {
+          "samples": 10,
+          "win5D": 0.6,
+          "avg5D": 0.0082,
+          "avgMFE5D": 0.0313,
+          "avgMAE5D": -0.0229
+        }
       },
       "quote": {
-        "price": 113.45,
-        "changePct": 6.59,
-        "open": 108.12,
-        "high": 115.94,
-        "low": 107.66,
-        "dayLowToHighPct": 7.69,
-        "quoteTime": "20261117161452"
+        "price": 1442.66,
+        "changePct": -1.03,
+        "open": 1450.0,
+        "high": 1456.0,
+        "low": 1431.7,
+        "dayLowToHighPct": 1.7,
+        "quoteTime": "20261118151156"
       },
-      "entryZone": null,
-      "triggerPrice": 108.974,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 56",
-        "距MA20 +1.57 ATR",
-        "主力资金占比 +10.85%"
-      ]
-    },
-    {
-      "code": "000568",
-      "name": "泸州老窖",
-      "sector": "茅指数",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
+      "entryZone": [
+        1425.091,
+        1453.881
       ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 55.7,
-        "historical": {}
-      },
-      "quote": {
-        "price": 81.77,
-        "changePct": 1.67,
-        "open": 80.43,
-        "high": 82.11,
-        "low": 79.5,
-        "dayLowToHighPct": 3.28,
-        "quoteTime": "20261117161445"
-      },
-      "entryZone": null,
-      "triggerPrice": 79.621,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
+      "triggerPrice": 1439.486,
+      "stopLoss": 1398.736,
+      "takeProfit1": 1500.611,
+      "takeProfit2": 1541.362,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
+      "invalidation": "收盘/有效价格跌破 1398.736",
       "reasons": [
-        "暂无可买形态",
-        "形态分 56",
-        "距MA20 +2.25 ATR",
-        "主力资金占比 +8.48%"
+        "趋势回踩",
+        "形态分 86",
+        "距MA20 +1.20 ATR",
+        "主力资金占比 +4.33%"
       ]
     },
     {
@@ -149,7 +112,60 @@
       "name": "豪威集团",
       "sector": "茅指数",
       "official": true,
-      "tailCore": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 84.3,
+        "historical": {
+          "samples": 1,
+          "win5D": 1.0,
+          "avg5D": 0.0044,
+          "avgMFE5D": 0.0429,
+          "avgMAE5D": -0.0145
+        }
+      },
+      "quote": {
+        "price": 85.95,
+        "changePct": -2.44,
+        "open": 89.65,
+        "high": 89.65,
+        "low": 85.21,
+        "dayLowToHighPct": 5.21,
+        "quoteTime": "20261118151208"
+      },
+      "entryZone": [
+        86.015,
+        87.753
+      ],
+      "triggerPrice": 86.884,
+      "stopLoss": 83.468,
+      "takeProfit1": 92.008,
+      "takeProfit2": 95.423,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 83.468",
+      "reasons": [
+        "趋势回踩",
+        "形态分 84",
+        "距MA20 +0.38 ATR",
+        "主力资金占比 +6.62%"
+      ]
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "sector": "茅指数",
+      "official": true,
+      "tailCore": false,
       "poolTags": [
         "B0",
         "B3",
@@ -159,20 +175,20 @@
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
-        "score": 55.3,
+        "score": 51.2,
         "historical": {}
       },
       "quote": {
-        "price": 88.1,
-        "changePct": 1.86,
-        "open": 86.66,
-        "high": 89.75,
-        "low": 86.06,
-        "dayLowToHighPct": 4.29,
-        "quoteTime": "20261117161456"
+        "price": 115.1,
+        "changePct": 1.45,
+        "open": 115.9,
+        "high": 117.3,
+        "low": 112.12,
+        "dayLowToHighPct": 4.62,
+        "quoteTime": "20261118151204"
       },
       "entryZone": null,
-      "triggerPrice": 86.48,
+      "triggerPrice": 110.108,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -183,184 +199,9 @@
       "invalidation": "未形成可执行入场，不设交易止损",
       "reasons": [
         "暂无可买形态",
-        "形态分 55",
-        "距MA20 +1.22 ATR",
-        "主力资金占比 +6.62%"
-      ]
-    },
-    {
-      "code": "000333",
-      "name": "美的集团",
-      "sector": "茅指数",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 53.0,
-        "historical": {}
-      },
-      "quote": {
-        "price": 93.33,
-        "changePct": 0.7,
-        "open": 92.68,
-        "high": 93.9,
-        "low": 92.0,
-        "dayLowToHighPct": 2.07,
-        "quoteTime": "20261117161454"
-      },
-      "entryZone": null,
-      "triggerPrice": 89.18,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 53",
-        "距MA20 +2.68 ATR",
-        "主力资金占比 +10.06%"
-      ]
-    },
-    {
-      "code": "000628",
-      "name": "高新发展",
-      "sector": "昨日首板",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 52.3,
-        "historical": {}
-      },
-      "quote": {
-        "price": 48.71,
-        "changePct": 4.64,
-        "open": 46.55,
-        "high": 51.21,
-        "low": 45.22,
-        "dayLowToHighPct": 13.25,
-        "quoteTime": "20261117161500"
-      },
-      "entryZone": null,
-      "triggerPrice": 41.793,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 52",
-        "距MA20 +3.27 ATR",
-        "主力资金占比 +6.59%"
-      ]
-    },
-    {
-      "code": "600258",
-      "name": "首旅酒店",
-      "sector": "酒店",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 52.2,
-        "historical": {}
-      },
-      "quote": {
-        "price": 13.56,
-        "changePct": 3.51,
-        "open": 13.18,
-        "high": 13.75,
-        "low": 13.09,
-        "dayLowToHighPct": 5.04,
-        "quoteTime": "20261117161457"
-      },
-      "entryZone": null,
-      "triggerPrice": 13.167,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 52",
-        "距MA20 +2.52 ATR",
-        "主力资金占比 +5.88%"
-      ]
-    },
-    {
-      "code": "300015",
-      "name": "爱尔眼科",
-      "sector": "茅指数",
-      "official": true,
-      "tailCore": true,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 51.8,
-        "historical": {}
-      },
-      "quote": {
-        "price": 9.15,
-        "changePct": 1.78,
-        "open": 8.94,
-        "high": 9.17,
-        "low": 8.92,
-        "dayLowToHighPct": 2.8,
-        "quoteTime": "20261117161442"
-      },
-      "entryZone": null,
-      "triggerPrice": 8.879,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 52",
-        "距MA20 +2.39 ATR",
-        "主力资金占比 +4.09%"
+        "形态分 51",
+        "距MA20 +1.65 ATR",
+        "主力资金占比 +10.85%"
       ]
     },
     {
@@ -383,16 +224,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 4.74,
-        "changePct": 9.98,
-        "open": 4.4,
-        "high": 4.74,
-        "low": 4.38,
-        "dayLowToHighPct": 8.22,
-        "quoteTime": "20261117161430"
+        "price": 4.71,
+        "changePct": -0.63,
+        "open": 5.21,
+        "high": 5.21,
+        "low": 4.61,
+        "dayLowToHighPct": 13.02,
+        "quoteTime": "20261118151200"
       },
       "entryZone": null,
-      "triggerPrice": 4.054,
+      "triggerPrice": 4.123,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -404,38 +245,82 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 51",
-        "距MA20 +6.65 ATR",
-        "主力资金占比 +26.98%",
-        "接近涨停，按追高风险处理"
+        "距MA20 +4.96 ATR",
+        "主力资金占比 +26.98%"
       ]
     },
     {
-      "code": "600519",
-      "name": "贵州茅台",
+      "code": "000568",
+      "name": "泸州老窖",
       "sector": "茅指数",
       "official": true,
       "tailCore": false,
       "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 50.7,
+        "historical": {}
+      },
+      "quote": {
+        "price": 81.5,
+        "changePct": -0.33,
+        "open": 81.38,
+        "high": 82.2,
+        "low": 80.51,
+        "dayLowToHighPct": 2.1,
+        "quoteTime": "20261118151206"
+      },
+      "entryZone": null,
+      "triggerPrice": 79.718,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 51",
+        "距MA20 +1.92 ATR",
+        "主力资金占比 +8.48%"
+      ]
+    },
+    {
+      "code": "600258",
+      "name": "首旅酒店",
+      "sector": "酒店",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
         "B3"
       ],
       "action": "不建议买",
       "setup": {
         "type": "NONE",
         "label": "暂无可买形态",
-        "score": 49.9,
+        "score": 50.2,
         "historical": {}
       },
       "quote": {
-        "price": 1457.7,
-        "changePct": 0.26,
-        "open": 1458.88,
-        "high": 1461.6,
-        "low": 1437.71,
-        "dayLowToHighPct": 1.66,
-        "quoteTime": "20261117161443"
+        "price": 13.51,
+        "changePct": -0.37,
+        "open": 13.53,
+        "high": 13.61,
+        "low": 13.31,
+        "dayLowToHighPct": 2.25,
+        "quoteTime": "20261118151209"
       },
       "entryZone": null,
-      "triggerPrice": 1441.716,
+      "triggerPrice": 13.191,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -447,8 +332,138 @@
       "reasons": [
         "暂无可买形态",
         "形态分 50",
-        "距MA20 +1.81 ATR",
-        "主力资金占比 +4.33%"
+        "距MA20 +2.07 ATR",
+        "主力资金占比 +5.88%"
+      ]
+    },
+    {
+      "code": "300015",
+      "name": "爱尔眼科",
+      "sector": "茅指数",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 49.8,
+        "historical": {}
+      },
+      "quote": {
+        "price": 9.08,
+        "changePct": -0.77,
+        "open": 9.1,
+        "high": 9.18,
+        "low": 8.99,
+        "dayLowToHighPct": 2.11,
+        "quoteTime": "20261118151133"
+      },
+      "entryZone": null,
+      "triggerPrice": 8.901,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 50",
+        "距MA20 +1.87 ATR",
+        "主力资金占比 +4.09%"
+      ]
+    },
+    {
+      "code": "301187",
+      "name": "欧圣电气",
+      "sector": "清洁小家电",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B1",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 49.4,
+        "historical": {}
+      },
+      "quote": {
+        "price": 16.11,
+        "changePct": -12.25,
+        "open": 17.78,
+        "high": 18.56,
+        "low": 15.81,
+        "dayLowToHighPct": 17.39,
+        "quoteTime": "20261118151130"
+      },
+      "entryZone": null,
+      "triggerPrice": 16.662,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 49",
+        "距MA20 +0.33 ATR",
+        "主力资金占比 +2.08%"
+      ]
+    },
+    {
+      "code": "688169",
+      "name": "石头科技",
+      "sector": "茅指数",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 49.2,
+        "historical": {}
+      },
+      "quote": {
+        "price": 137.29,
+        "changePct": -2.18,
+        "open": 139.0,
+        "high": 140.23,
+        "low": 136.5,
+        "dayLowToHighPct": 2.73,
+        "quoteTime": "20261118151208"
+      },
+      "entryZone": null,
+      "triggerPrice": 134.274,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 49",
+        "距MA20 +1.97 ATR",
+        "主力资金占比 +1.16%"
       ]
     },
     {
@@ -468,16 +483,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 46.3,
+        "price": 46.06,
         "changePct": -0.52,
-        "open": 45.99,
-        "high": 47.09,
-        "low": 45.62,
-        "dayLowToHighPct": 3.22,
-        "quoteTime": "20261117161445"
+        "open": 45.92,
+        "high": 46.4,
+        "low": 45.05,
+        "dayLowToHighPct": 3.0,
+        "quoteTime": "20261118151145"
       },
       "entryZone": null,
-      "triggerPrice": 48.805,
+      "triggerPrice": 48.543,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -489,7 +504,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 49",
-        "距MA20 -0.37 ATR",
+        "距MA20 -0.53 ATR",
         "主力资金占比 -2.19%"
       ]
     },
@@ -510,16 +525,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 9.11,
-        "changePct": -3.6,
-        "open": 9.36,
-        "high": 9.48,
-        "low": 9.02,
-        "dayLowToHighPct": 5.1,
-        "quoteTime": "20261117161447"
+        "price": 9.05,
+        "changePct": -0.66,
+        "open": 9.1,
+        "high": 9.21,
+        "low": 8.9,
+        "dayLowToHighPct": 3.48,
+        "quoteTime": "20261118151200"
       },
       "entryZone": null,
-      "triggerPrice": 8.829,
+      "triggerPrice": 8.861,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -531,8 +546,52 @@
       "reasons": [
         "暂无可买形态",
         "形态分 48",
-        "距MA20 +0.74 ATR",
+        "距MA20 +0.54 ATR",
         "主力资金占比 -4.61%"
+      ]
+    },
+    {
+      "code": "000333",
+      "name": "美的集团",
+      "sector": "茅指数",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 48.0,
+        "historical": {}
+      },
+      "quote": {
+        "price": 93.65,
+        "changePct": 0.34,
+        "open": 93.48,
+        "high": 94.37,
+        "low": 92.77,
+        "dayLowToHighPct": 1.72,
+        "quoteTime": "20261118151145"
+      },
+      "entryZone": null,
+      "triggerPrice": 89.625,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 48",
+        "距MA20 +2.63 ATR",
+        "主力资金占比 +10.06%"
       ]
     },
     {
@@ -556,16 +615,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 10.8,
-        "changePct": 9.98,
-        "open": 10.4,
-        "high": 10.8,
-        "low": 10.13,
-        "dayLowToHighPct": 6.61,
-        "quoteTime": "20261117161500"
+        "price": 10.65,
+        "changePct": -1.39,
+        "open": 10.11,
+        "high": 11.52,
+        "low": 10.01,
+        "dayLowToHighPct": 15.08,
+        "quoteTime": "20261118151206"
       },
       "entryZone": null,
-      "triggerPrice": 9.454,
+      "triggerPrice": 9.673,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -577,82 +636,39 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 48",
-        "距MA20 +3.10 ATR",
-        "主力资金占比 +7.60%",
-        "接近涨停，按追高风险处理"
+        "距MA20 +2.41 ATR",
+        "主力资金占比 +7.60%"
       ]
     },
     {
-      "code": "301187",
-      "name": "欧圣电气",
-      "sector": "清洁小家电",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B1",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 46.4,
-        "historical": {}
-      },
-      "quote": {
-        "price": 18.36,
-        "changePct": 5.88,
-        "open": 17.03,
-        "high": 18.45,
-        "low": 16.72,
-        "dayLowToHighPct": 10.35,
-        "quoteTime": "20261117161415"
-      },
-      "entryZone": null,
-      "triggerPrice": 16.377,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 46",
-        "距MA20 +2.47 ATR",
-        "主力资金占比 +2.08%"
-      ]
-    },
-    {
-      "code": "688169",
-      "name": "石头科技",
-      "sector": "茅指数",
+      "code": "000628",
+      "name": "高新发展",
+      "sector": "昨日首板",
       "official": true,
       "tailCore": false,
       "poolTags": [
         "B0",
+        "B3",
         "B4"
       ],
       "action": "不建议买",
       "setup": {
         "type": "OVEREXTENDED",
         "label": "过度延伸/追高风险",
-        "score": 46.2,
+        "score": 47.3,
         "historical": {}
       },
       "quote": {
-        "price": 140.35,
-        "changePct": 5.01,
-        "open": 132.63,
-        "high": 142.77,
-        "low": 132.32,
-        "dayLowToHighPct": 7.9,
-        "quoteTime": "20261117161455"
+        "price": 47.74,
+        "changePct": -1.99,
+        "open": 48.72,
+        "high": 49.2,
+        "low": 47.48,
+        "dayLowToHighPct": 3.62,
+        "quoteTime": "20261118151200"
       },
       "entryZone": null,
-      "triggerPrice": 133.238,
+      "triggerPrice": 42.865,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -663,9 +679,9 @@
       "invalidation": "未形成可执行入场，不设交易止损",
       "reasons": [
         "过度延伸/追高风险",
-        "形态分 46",
-        "距MA20 +2.80 ATR",
-        "主力资金占比 +1.16%"
+        "形态分 47",
+        "距MA20 +2.36 ATR",
+        "主力资金占比 +6.59%"
       ]
     },
     {
@@ -685,16 +701,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 31.52,
-        "changePct": 10.02,
-        "open": 28.26,
-        "high": 31.52,
-        "low": 25.79,
-        "dayLowToHighPct": 22.22,
-        "quoteTime": "20261117161454"
+        "price": 28.37,
+        "changePct": -9.99,
+        "open": 32.5,
+        "high": 34.67,
+        "low": 28.37,
+        "dayLowToHighPct": 22.21,
+        "quoteTime": "20261118151200"
       },
       "entryZone": null,
-      "triggerPrice": 25.712,
+      "triggerPrice": 26.576,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -706,9 +722,8 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 46",
-        "距MA20 +5.75 ATR",
-        "主力资金占比 -0.63%",
-        "接近涨停，按追高风险处理"
+        "距MA20 +2.46 ATR",
+        "主力资金占比 -0.63%"
       ]
     },
     {
@@ -728,16 +743,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 32.41,
-        "changePct": 0.65,
-        "open": 32.29,
-        "high": 32.44,
-        "low": 31.95,
-        "dayLowToHighPct": 1.53,
-        "quoteTime": "20261117161445"
+        "price": 32.39,
+        "changePct": -0.06,
+        "open": 32.28,
+        "high": 32.59,
+        "low": 31.98,
+        "dayLowToHighPct": 1.91,
+        "quoteTime": "20261118151209"
       },
       "entryZone": null,
-      "triggerPrice": 31.251,
+      "triggerPrice": 31.345,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -749,7 +764,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 46",
-        "距MA20 +2.94 ATR",
+        "距MA20 +2.69 ATR",
         "主力资金占比 -2.49%"
       ]
     },
@@ -770,16 +785,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 10.03,
-        "changePct": -0.3,
-        "open": 10.0,
+        "price": 9.66,
+        "changePct": -3.69,
+        "open": 10.02,
         "high": 10.1,
-        "low": 9.93,
-        "dayLowToHighPct": 1.71,
-        "quoteTime": "20261117161415"
+        "low": 9.52,
+        "dayLowToHighPct": 6.09,
+        "quoteTime": "20261118151200"
       },
       "entryZone": null,
-      "triggerPrice": 10.587,
+      "triggerPrice": 10.536,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -791,7 +806,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 39",
-        "距MA20 -1.41 ATR",
+        "距MA20 -2.46 ATR",
         "主力资金占比 +0.10%"
       ]
     },
@@ -812,16 +827,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 217.5,
-        "changePct": 0.28,
-        "open": 215.27,
-        "high": 217.79,
-        "low": 213.28,
-        "dayLowToHighPct": 2.11,
-        "quoteTime": "20261117161444"
+        "price": 214.6,
+        "changePct": -1.33,
+        "open": 218.0,
+        "high": 218.01,
+        "low": 212.04,
+        "dayLowToHighPct": 2.82,
+        "quoteTime": "20261118151156"
       },
       "entryZone": null,
-      "triggerPrice": 224.703,
+      "triggerPrice": 223.994,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -833,7 +848,7 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 38",
-        "距MA20 -1.08 ATR",
+        "距MA20 -1.45 ATR",
         "主力资金占比 -4.93%"
       ]
     },
@@ -854,16 +869,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 11.26,
-        "changePct": -1.23,
-        "open": 11.38,
-        "high": 11.39,
-        "low": 11.11,
-        "dayLowToHighPct": 2.52,
-        "quoteTime": "20261117161446"
+        "price": 10.95,
+        "changePct": -2.75,
+        "open": 11.3,
+        "high": 11.3,
+        "low": 10.8,
+        "dayLowToHighPct": 4.63,
+        "quoteTime": "20261118151158"
       },
       "entryZone": null,
-      "triggerPrice": 11.946,
+      "triggerPrice": 11.896,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -875,17 +890,500 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 37",
-        "距MA20 -0.75 ATR",
+        "距MA20 -1.55 ATR",
         "主力资金占比 -7.70%"
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "002226",
+      "name": "江南化工",
+      "sector": "昨日首板",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 84.4,
+        "historical": {
+          "samples": 2,
+          "win5D": 0.5,
+          "avg5D": -0.0018,
+          "avgMFE5D": 0.0688,
+          "avgMAE5D": -0.0591
+        }
+      },
+      "quote": {
+        "price": 5.44,
+        "changePct": -0.18,
+        "open": 5.42,
+        "high": 5.59,
+        "low": 5.31,
+        "dayLowToHighPct": 5.27,
+        "quoteTime": "20261118151200"
+      },
+      "entryZone": [
+        5.434,
+        5.515
+      ],
+      "triggerPrice": 5.45,
+      "stopLoss": 5.294,
+      "takeProfit1": 5.745,
+      "takeProfit2": 5.926,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 5.294",
+      "reasons": [
+        "突破回踩",
+        "形态分 84",
+        "距MA20 +1.65 ATR",
+        "主力资金占比 +2.20%"
+      ]
+    },
+    {
+      "code": "301332",
+      "name": "德尔玛",
+      "sector": "清洁小家电",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 83.3,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 7.56,
+        "changePct": 1.48,
+        "open": 7.45,
+        "high": 8.14,
+        "low": 7.31,
+        "dayLowToHighPct": 11.35,
+        "quoteTime": "20261118151200"
+      },
+      "entryZone": [
+        7.547,
+        7.661
+      ],
+      "triggerPrice": 7.57,
+      "stopLoss": 7.409,
+      "takeProfit1": 7.896,
+      "takeProfit2": 8.091,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 7.409",
+      "reasons": [
+        "突破回踩",
+        "形态分 83",
+        "距MA20 +1.57 ATR",
+        "主力资金占比 -3.49%"
+      ]
+    },
+    {
+      "code": "603288",
+      "name": "海天味业",
+      "sector": "茅指数",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 79.2,
+        "historical": {
+          "samples": 7,
+          "win5D": 0.5714,
+          "avg5D": 0.0124,
+          "avgMFE5D": 0.0368,
+          "avgMAE5D": -0.0264
+        }
+      },
+      "quote": {
+        "price": 35.99,
+        "changePct": -0.58,
+        "open": 36.46,
+        "high": 36.46,
+        "low": 35.65,
+        "dayLowToHighPct": 2.27,
+        "quoteTime": "20261118151210"
+      },
+      "entryZone": [
+        35.0,
+        35.708
+      ],
+      "triggerPrice": 35.354,
+      "stopLoss": 34.186,
+      "takeProfit1": 37.106,
+      "takeProfit2": 38.274,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 34.186",
+      "reasons": [
+        "趋势回踩",
+        "形态分 79",
+        "距MA20 +1.03 ATR",
+        "主力资金占比 -6.02%"
+      ]
+    },
+    {
+      "code": "603899",
+      "name": "晨光股份",
+      "sector": "茅指数",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 77.5,
+        "historical": {
+          "samples": 10,
+          "win5D": 0.5,
+          "avg5D": 0.0006,
+          "avgMFE5D": 0.0322,
+          "avgMAE5D": -0.029
+        }
+      },
+      "quote": {
+        "price": 23.0,
+        "changePct": -0.56,
+        "open": 23.03,
+        "high": 23.32,
+        "low": 22.85,
+        "dayLowToHighPct": 2.06,
+        "quoteTime": "20261118151211"
+      },
+      "entryZone": [
+        22.765,
+        23.225
+      ],
+      "triggerPrice": 22.995,
+      "stopLoss": 22.231,
+      "takeProfit1": 24.141,
+      "takeProfit2": 24.906,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 22.231",
+      "reasons": [
+        "趋势回踩",
+        "形态分 77",
+        "距MA20 +0.77 ATR",
+        "主力资金占比 -7.58%"
+      ]
+    },
+    {
+      "code": "603215",
+      "name": "比依股份",
+      "sector": "厨房小家电",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 77.0,
+        "historical": {
+          "samples": 10,
+          "win5D": 0.4,
+          "avg5D": -0.0133,
+          "avgMFE5D": 0.0351,
+          "avgMAE5D": -0.056
+        }
+      },
+      "quote": {
+        "price": 15.47,
+        "changePct": -0.51,
+        "open": 15.55,
+        "high": 15.99,
+        "low": 15.0,
+        "dayLowToHighPct": 6.6,
+        "quoteTime": "20261118151209"
+      },
+      "entryZone": [
+        15.098,
+        15.404
+      ],
+      "triggerPrice": 15.251,
+      "stopLoss": 14.424,
+      "takeProfit1": 16.492,
+      "takeProfit2": 17.319,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 14.424",
+      "reasons": [
+        "趋势回踩",
+        "形态分 77",
+        "距MA20 +0.55 ATR",
+        "主力资金占比 +0.15%"
+      ]
+    },
+    {
+      "code": "600036",
+      "name": "招商银行",
+      "sector": "茅指数",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 75.9,
+        "historical": {
+          "samples": 25,
+          "win5D": 0.48,
+          "avg5D": -0.0003,
+          "avgMFE5D": 0.0152,
+          "avgMAE5D": -0.0181
+        }
+      },
+      "quote": {
+        "price": 43.12,
+        "changePct": -0.76,
+        "open": 43.42,
+        "high": 43.43,
+        "low": 42.83,
+        "dayLowToHighPct": 1.4,
+        "quoteTime": "20261118151213"
+      },
+      "entryZone": [
+        42.74,
+        43.324
+      ],
+      "triggerPrice": 42.895,
+      "stopLoss": 42.101,
+      "takeProfit1": 44.429,
+      "takeProfit2": 45.36,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 42.101",
+      "reasons": [
+        "趋势回踩",
+        "形态分 76",
+        "距MA20 +0.48 ATR",
+        "主力资金占比 -13.40%"
+      ]
+    },
+    {
+      "code": "002415",
+      "name": "海康威视",
+      "sector": "茅指数",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 75.4,
+        "historical": {
+          "samples": 12,
+          "win5D": 0.4167,
+          "avg5D": -0.004,
+          "avgMFE5D": 0.0383,
+          "avgMAE5D": -0.0453
+        }
+      },
+      "quote": {
+        "price": 35.29,
+        "changePct": 0.03,
+        "open": 35.28,
+        "high": 35.59,
+        "low": 35.08,
+        "dayLowToHighPct": 1.45,
+        "quoteTime": "20261118151145"
+      },
+      "entryZone": [
+        34.522,
+        35.22
+      ],
+      "triggerPrice": 34.871,
+      "stopLoss": 33.867,
+      "takeProfit1": 36.377,
+      "takeProfit2": 37.381,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 33.867",
+      "reasons": [
+        "趋势回踩",
+        "形态分 75",
+        "距MA20 +0.95 ATR",
+        "主力资金占比 -9.66%"
+      ]
+    },
+    {
+      "code": "300059",
+      "name": "东方财富",
+      "sector": "茅指数",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 73.6,
+        "historical": {
+          "samples": 4,
+          "win5D": 0.0,
+          "avg5D": -0.0275,
+          "avgMFE5D": 0.0066,
+          "avgMAE5D": -0.0435
+        }
+      },
+      "quote": {
+        "price": 18.38,
+        "changePct": 0.05,
+        "open": 18.3,
+        "high": 18.42,
+        "low": 18.17,
+        "dayLowToHighPct": 1.38,
+        "quoteTime": "20261118151139"
+      },
+      "entryZone": [
+        18.444,
+        18.816
+      ],
+      "triggerPrice": 18.63,
+      "stopLoss": 18.045,
+      "takeProfit1": 19.507,
+      "takeProfit2": 20.091,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 18.045",
+      "reasons": [
+        "趋势回踩",
+        "形态分 74",
+        "距MA20 -0.07 ATR",
+        "主力资金占比 -6.80%"
+      ]
+    },
+    {
+      "code": "300760",
+      "name": "迈瑞医疗",
+      "sector": "茅指数",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_READY",
+        "label": "临界突破",
+        "score": 71.3,
+        "historical": {
+          "samples": 1,
+          "win5D": 0.0,
+          "avg5D": -0.0189,
+          "avgMFE5D": 0.0036,
+          "avgMAE5D": -0.0462
+        }
+      },
+      "quote": {
+        "price": 184.61,
+        "changePct": -0.42,
+        "open": 183.5,
+        "high": 186.0,
+        "low": 182.64,
+        "dayLowToHighPct": 1.84,
+        "quoteTime": "20261118151130"
+      },
+      "entryZone": [
+        184.423,
+        186.84
+      ],
+      "triggerPrice": 185.91,
+      "stopLoss": 181.564,
+      "takeProfit1": 191.731,
+      "takeProfit2": 195.798,
+      "riskReward1": 1.5,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 181.564",
+      "reasons": [
+        "临界突破",
+        "形态分 71",
+        "距MA20 +1.06 ATR",
+        "主力资金占比 -3.69%"
+      ]
+    },
+    {
+      "code": "002983",
+      "name": "芯瑞达",
+      "sector": "昨日首板",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_READY",
+        "label": "临界突破",
+        "score": 70.4,
+        "historical": {
+          "samples": 0
+        }
+      },
+      "quote": {
+        "price": 24.36,
+        "changePct": 1.71,
+        "open": 24.5,
+        "high": 25.36,
+        "low": 22.88,
+        "dayLowToHighPct": 10.84,
+        "quoteTime": "20261118151200"
+      },
+      "entryZone": [
+        24.602,
+        24.924
+      ],
+      "triggerPrice": 24.8,
+      "stopLoss": 23.746,
+      "takeProfit1": 26.288,
+      "takeProfit2": 27.306,
+      "riskReward1": 1.5,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 23.746",
+      "reasons": [
+        "临界突破",
+        "形态分 70",
+        "距MA20 +1.37 ATR",
+        "主力资金占比 -7.86%"
+      ]
+    }
+  ],
   "summary": {
     "official": 20,
-    "officialBuy": 1,
-    "officialWatch": 0,
-    "expandedSetupCandidates": 0
+    "officialBuy": 2,
+    "officialWatch": 1,
+    "expandedSetupCandidates": 10
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -898,9 +1396,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "official-has-live-buy"
-  }
+  ]
 }
