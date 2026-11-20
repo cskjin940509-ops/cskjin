@@ -773,160 +773,12 @@
       ]
     }
   ],
-  "setupCandidates": [
-    {
-      "code": "600548",
-      "name": "深高速",
-      "sector": "高速公路",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "买入候选",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 81.9,
-        "historical": {
-          "samples": 13,
-          "win5D": 0.6154,
-          "avg5D": 0.0023,
-          "avgMFE5D": 0.0237,
-          "avgMAE5D": -0.021
-        }
-      },
-      "quote": {
-        "price": 8.67,
-        "changePct": -0.23,
-        "open": 8.7,
-        "high": 8.82,
-        "low": 8.57,
-        "dayLowToHighPct": 2.92,
-        "quoteTime": "20261120151055"
-      },
-      "entryZone": [
-        8.64,
-        8.814
-      ],
-      "triggerPrice": 8.727,
-      "stopLoss": 8.484,
-      "takeProfit1": 9.092,
-      "takeProfit2": 9.335,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 8.484",
-      "reasons": [
-        "趋势回踩",
-        "形态分 82",
-        "距MA20 +0.31 ATR",
-        "主力资金占比 +2.86%"
-      ]
-    },
-    {
-      "code": "600269",
-      "name": "赣粤高速",
-      "sector": "高速公路",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 83.2,
-        "historical": {
-          "samples": 11,
-          "win5D": 0.8182,
-          "avg5D": 0.0206,
-          "avgMFE5D": 0.0309,
-          "avgMAE5D": -0.0167
-        }
-      },
-      "quote": {
-        "price": 4.02,
-        "changePct": -0.74,
-        "open": 4.03,
-        "high": 4.04,
-        "low": 3.97,
-        "dayLowToHighPct": 1.76,
-        "quoteTime": "20261120151057"
-      },
-      "entryZone": [
-        4.032,
-        4.114
-      ],
-      "triggerPrice": 4.073,
-      "stopLoss": 3.971,
-      "takeProfit1": 4.226,
-      "takeProfit2": 4.328,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 3.971",
-      "reasons": [
-        "趋势回踩",
-        "形态分 83",
-        "距MA20 -0.13 ATR",
-        "主力资金占比 -4.08%"
-      ]
-    },
-    {
-      "code": "300121",
-      "name": "阳谷华泰",
-      "sector": "橡胶助剂",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 79.0,
-        "historical": {
-          "samples": 6,
-          "win5D": 0.5,
-          "avg5D": -0.0054,
-          "avgMFE5D": 0.0162,
-          "avgMAE5D": -0.0438
-        }
-      },
-      "quote": {
-        "price": 10.39,
-        "changePct": 0.68,
-        "open": 10.03,
-        "high": 10.96,
-        "low": 9.82,
-        "dayLowToHighPct": 11.61,
-        "quoteTime": "20261120151054"
-      },
-      "entryZone": [
-        10.184,
-        10.39
-      ],
-      "triggerPrice": 10.287,
-      "stopLoss": 9.794,
-      "takeProfit1": 11.027,
-      "takeProfit2": 11.52,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 9.794",
-      "reasons": [
-        "趋势回踩",
-        "形态分 79",
-        "距MA20 +0.68 ATR",
-        "主力资金占比 -0.12%"
-      ]
-    }
-  ],
+  "setupCandidates": [],
   "summary": {
     "official": 17,
     "officialBuy": 4,
     "officialWatch": 0,
-    "expandedSetupCandidates": 3
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -939,5 +791,9 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "skipped",
+    "reason": "official-has-live-buy"
+  }
 }
