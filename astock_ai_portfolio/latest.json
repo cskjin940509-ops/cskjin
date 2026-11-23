@@ -4,25 +4,25 @@
   "mode": "A股原选股池 · T+1八批轮动模拟执行",
   "simulated": true,
   "disclaimerZh": "这是按真实时点数据生成的模拟影子组合，不会向券商发送订单，也不代表收益保证。",
-  "updatedAt": "2026-11-20T23:54:48+08:00",
+  "updatedAt": "2026-11-23T17:36:08+08:00",
   "radarCapturedAt": "2026-11-16T14:48:06+08:00",
   "radarStatus": "RadarLive",
   "summary": {
     "initialCapital": 20000000.0,
     "capitalCapacity": 20000000.0,
     "inceptionCapital": 1000000.0,
-    "totalAssets": 19890797.18,
+    "totalAssets": 19892932.18,
     "fundUnits": 19341487.5886677,
-    "unitNav": 1.028401,
-    "cumulativeNav": 1.028401,
+    "unitNav": 1.028511,
+    "cumulativeNav": 1.028511,
     "cash": 19555006.18,
-    "marketValue": 335791.0,
-    "positionPct": 1.69,
-    "cashPct": 98.31,
+    "marketValue": 337926.0,
+    "positionPct": 1.7,
+    "cashPct": 98.3,
     "todayReturnPct": null,
-    "cumulativeReturnPct": 2.84,
+    "cumulativeReturnPct": 2.851,
     "realizedPnl": -67477.04,
-    "floatingPnl": -41736.75,
+    "floatingPnl": -39601.75,
     "maxDrawdownPct": -2.8873,
     "maxDrawdownFrequency": "DAILY_CLOSE_UNIT_NAV",
     "intradayObservedMaxDrawdownPct": -3.7531,
@@ -82,15 +82,15 @@
         "target2": 8.253,
         "queuedStages": []
       },
-      "currentPrice": 7.34,
-      "marketValue": 179830.0,
-      "floatingPnl": 8040.9,
-      "floatingReturnPct": 4.68,
-      "currentWeightPct": 0.9,
+      "currentPrice": 7.26,
+      "marketValue": 177870.0,
+      "floatingPnl": 6080.9,
+      "floatingReturnPct": 3.54,
+      "currentWeightPct": 0.89,
       "tradingDaysObserved": 1,
       "currentActionZh": "等待新行情",
-      "valuationQuoteAt": "20261120161415",
-      "marketChangePct": -1.608579088471851,
+      "valuationQuoteAt": "20261123161415",
+      "marketChangePct": -1.0899182561307952,
       "decisionPlan": {
         "actionZh": "等待新行情",
         "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
@@ -144,15 +144,15 @@
         "target2": 20.2222,
         "queuedStages": []
       },
-      "currentPrice": 13.33,
-      "marketValue": 155961.0,
-      "floatingPnl": -49777.65,
-      "floatingReturnPct": -24.19,
-      "currentWeightPct": 0.78,
+      "currentPrice": 13.68,
+      "marketValue": 160056.0,
+      "floatingPnl": -45682.65,
+      "floatingReturnPct": -22.2,
+      "currentWeightPct": 0.8,
       "tradingDaysObserved": 1,
       "currentActionZh": "等待新行情",
-      "valuationQuoteAt": "20261120161439",
-      "marketChangePct": -9.993247805536798,
+      "valuationQuoteAt": "20261123161439",
+      "marketChangePct": 2.6256564141035277,
       "decisionPlan": {
         "actionZh": "等待新行情",
         "reasonZh": "报价未通过时点检查，无法确认当前持有或卖出信号",
@@ -22186,19 +22186,33 @@
       "cumulativeNav": 1.02840059,
       "cumulativeReturnPct": 2.8401,
       "radarCapturedAt": "2026-11-16T14:48:06+08:00"
+    },
+    {
+      "timestamp": "2026-11-23T17:36:08+08:00",
+      "date": "2026-11-23",
+      "time": "17:36:08",
+      "nav": 19892932.18,
+      "cash": 19555006.18,
+      "marketValue": 337926.0,
+      "positionCount": 2,
+      "fundUnits": 19341487.5886677,
+      "unitNav": 1.02851097,
+      "cumulativeNav": 1.02851097,
+      "cumulativeReturnPct": 2.8511,
+      "radarCapturedAt": "2026-11-16T14:48:06+08:00"
     }
   ],
   "performanceReport": {
     "valuation": {
       "method": "UNIT_NAV_SUBSCRIPTION_REDEMPTION",
-      "unitNav": 1.028401,
-      "cumulativeNav": 1.028401,
+      "unitNav": 1.028511,
+      "cumulativeNav": 1.028511,
       "fundUnits": 19341487.5886677,
       "netSubscriptions": 19000000.0,
       "noteZh": "增资按增资前单位净值申购新增份额，单位净值和历史收益不重置。"
     },
     "returns": {
-      "cumulativeReturnPct": 2.8401,
+      "cumulativeReturnPct": 2.8511,
       "daily": [
         {
           "date": "2026-09-07",
@@ -22717,19 +22731,19 @@
       "closeVerificationNoteZh": "仅使用确认的日终估值；旧版盘中替代收盘统计另列保留"
     },
     "exposure": {
-      "grossExposurePct": 1.69,
-      "netExposurePct": 1.69,
-      "cashPct": 98.31,
-      "top1ConcentrationPct": 0.9,
-      "top5ConcentrationPct": 1.68,
+      "grossExposurePct": 1.7,
+      "netExposurePct": 1.7,
+      "cashPct": 98.3,
+      "top1ConcentrationPct": 0.89,
+      "top5ConcentrationPct": 1.69,
       "sectorExposure": [
         {
           "sector": "租售同权",
-          "weightPct": 0.9
+          "weightPct": 0.89
         },
         {
           "sector": "传媒",
-          "weightPct": 0.78
+          "weightPct": 0.8
         }
       ]
     },
@@ -22754,7 +22768,7 @@
       "partialFillCount": 58,
       "averageSlippageBps": 6.343,
       "grossTradedAmount": 42427007.0,
-      "turnoverPctOfCurrentAssets": 213.3,
+      "turnoverPctOfCurrentAssets": 213.277,
       "recentRejections": [
         {
           "timestamp": "2026-09-04T14:34:41+08:00",
@@ -23658,6 +23672,17 @@
       "observationGapBusinessDays": 0,
       "coverageStatus": "COMPLETE",
       "pointCount": 6
+    },
+    {
+      "date": "2026-11-23",
+      "closeUnitNav": 1.028511,
+      "closeCumulativeNav": 1.028511,
+      "cumulativeReturnPct": 2.8511,
+      "dailyReturnPct": 0.0107,
+      "periodReturnPct": 0.0107,
+      "observationGapBusinessDays": 0,
+      "coverageStatus": "COMPLETE",
+      "pointCount": 1
     }
   ],
   "selection45": {
@@ -23669,20 +23694,20 @@
       "baseCap": 0.0,
       "intradayCap": null,
       "allowNew": false,
-      "reasonZh": "2026-11-19盘前市场宽度与已验证收盘指数均未到达",
+      "reasonZh": "2026-11-20盘前市场宽度与已验证收盘指数均未到达",
       "missingEvidence": [],
       "sentiment": {
         "ready": false,
         "cap": 0.0,
-        "requiredDataDate": "2026-11-19",
-        "reasonZh": "2026-11-19盘前市场宽度与已验证收盘指数均未到达"
+        "requiredDataDate": "2026-11-20",
+        "reasonZh": "2026-11-20盘前市场宽度与已验证收盘指数均未到达"
       }
     },
     "portfolioRisk": {
-      "cap": 0.016881726607600952,
+      "cap": 0.016987239334166373,
       "allowNew": false,
-      "date": "2026-11-20",
-      "asOf": "2026-11-20T23:54:36+08:00",
+      "date": "2026-11-23",
+      "asOf": "2026-11-23T17:36:08+08:00",
       "dailyUnitReturnPct": null,
       "confirmedCloseDrawdownPct": -2.820011938336564,
       "dailyRiskDataReady": false,
@@ -27027,7 +27052,7 @@
       }
     },
     "nextReview": {
-      "observedTradingDays": 49,
+      "observedTradingDays": 50,
       "reviewEveryTradingDays": 20,
       "reviewDue": true,
       "statusZh": "已到滚动复核窗口，须样本外检查"
@@ -27135,7 +27160,7 @@
   "strategyResearch": {
     "schemaVersion": 1,
     "version": "v4.6-forward-evidence",
-    "updatedAt": "2026-11-20T23:54:36.335066+08:00",
+    "updatedAt": "2026-11-23T17:36:08.560576+08:00",
     "activatedAt": "2026-09-22T12:51:40.766400+08:00",
     "objectiveZh": "提前发现潜力，优化买入与退出，最后验证做T增益；以扣费超额收益和回撤衡量。",
     "productionStatusZh": "生产策略正常运行；新版研究样本独立累计，不阻断选股、仓位或模拟交易。",
@@ -27232,7 +27257,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-11-20T23:54:36.335066+08:00",
+        "checkedAt": "2026-11-23T17:36:08.560576+08:00",
         "reasonZh": "仅统计本次启用后的完整成员样本；不等于2017年至今历史覆盖审计。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -27242,7 +27267,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-11-20T23:54:36.335066+08:00",
+        "checkedAt": "2026-11-23T17:36:08.560576+08:00",
         "reasonZh": "使用首次观察时保存的成员；后续不以今天成员替换。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -27252,7 +27277,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-11-20T23:54:36.335066+08:00",
+        "checkedAt": "2026-11-23T17:36:08.560576+08:00",
         "reasonZh": "两融/ETF必须具备真实availableAt且不晚于决策；仅写T+1不能通过。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       },
@@ -27262,7 +27287,7 @@
         "status": "PENDING_REVIEW",
         "completed": 0,
         "total": 60,
-        "checkedAt": "2026-11-20T23:54:36.335066+08:00",
+        "checkedAt": "2026-11-23T17:36:08.560576+08:00",
         "reasonZh": "按信号日汇总，重叠窗口仍相关；需补除权、可成交成本、全市场基准与独立样本外验证。",
         "evidencePath": "astock_ai_portfolio/state.json#research46"
       },
@@ -27272,7 +27297,7 @@
         "status": "MISSING",
         "completed": 0,
         "total": 0,
-        "checkedAt": "2026-11-20T23:54:36.335066+08:00",
+        "checkedAt": "2026-11-23T17:36:08.560576+08:00",
         "reasonZh": "校验首次冻结内容哈希；仅证明未改写，不等于策略有效。",
         "evidencePath": "astock_ai_portfolio/state.json#research46.cohorts"
       }
@@ -27625,9 +27650,9 @@
     "appRequired": false,
     "engineLocation": "GitHub Actions云端定时任务",
     "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-    "cycleId": "44767801158-1",
-    "lastRunAt": "2026-11-20T23:54:36+08:00",
-    "lastSuccessAt": "2026-11-20T23:54:36+08:00",
+    "cycleId": "45148305028-1",
+    "lastRunAt": "2026-11-23T17:36:08+08:00",
+    "lastSuccessAt": "2026-11-23T17:36:08+08:00",
     "lastTradeAt": "2026-09-14T09:43:12+08:00",
     "status": "OUTSIDE_SESSION",
     "statusZh": "后台已运行；当前不在A股交易时段，仅更新净值与健康状态",
@@ -27635,7 +27660,7 @@
     "sessionOpen": false,
     "radarCapturedAt": "2026-11-16T14:48:06+08:00",
     "radarFresh": false,
-    "radarAgeSeconds": 378390.3,
+    "radarAgeSeconds": 614882.5,
     "actionsThisCycle": 0,
     "buyActionsThisCycle": 0,
     "sellActionsThisCycle": 0,
@@ -27973,7 +27998,7 @@
       "reasonCode": "T1_BATCH_ENTRY_PENDING",
       "reasonZh": "30只2026-11-16收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
       "entryBlocks": [
-        "2026-11-19盘前市场宽度与已验证收盘指数均未到达",
+        "2026-11-20盘前市场宽度与已验证收盘指数均未到达",
         "缺少上一交易日可靠收盘基准，禁止新增风险"
       ],
       "pendingExits": [],
@@ -28581,37 +28606,7 @@
   "capitalMigrationThisCycle": null,
   "dataFreshness": {
     "radarFresh": false,
-    "radarAgeSeconds": 378390.3,
+    "radarAgeSeconds": 614882.5,
     "maxAllowedAgeSeconds": 900
-  },
-  "benchmarkComparison": {
-    "startedAt": "2026-09-03T23:23:37+08:00",
-    "noteZh": "基准从该同步时点开始，不回填影子账户更早的11:14买入时点，避免事后选择基准价格。",
-    "portfolioMetric": "UNIT_NAV_RETURN",
-    "portfolioReturnPct": -0.724,
-    "indexes": [
-      {
-        "name": "沪深300",
-        "returnPct": -13.136,
-        "alphaPct": 12.412
-      },
-      {
-        "name": "中证A500",
-        "returnPct": -16.542,
-        "alphaPct": 15.818
-      },
-      {
-        "name": "创业板指",
-        "returnPct": -33.22,
-        "alphaPct": 32.496
-      }
-    ],
-    "candidatePool": {
-      "name": "原始候选池固定等权",
-      "memberCount": 30,
-      "returnPct": -17.437,
-      "alphaPct": 16.713,
-      "definitionZh": "基准起始时点提前主线雷达中的前30只候选固定等权，不随后续入池/出池回改成员"
-    }
   }
 }
