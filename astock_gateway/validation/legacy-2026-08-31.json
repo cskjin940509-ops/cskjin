@@ -4,12 +4,13 @@
   "fullyReproducible": false,
   "eligibleForPerformanceComparison": false,
   "issues": [
+    "raw-price-cross-source-incomplete:17/18",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
     "total": 18,
-    "verified": 18,
-    "coveragePct": 100.0,
+    "verified": 17,
+    "coveragePct": 94.44,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
@@ -158,13 +159,11 @@
         ]
       },
       "601929": {
-        "verified": true,
-        "rawClose": 2.57,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "603533": {
         "verified": true,
@@ -296,5 +295,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-11-22T17:56:34+08:00"
+  "auditedAt": "2026-11-24T03:26:04+08:00"
 }
