@@ -4,12 +4,13 @@
   "fullyReproducible": false,
   "eligibleForPerformanceComparison": false,
   "issues": [
+    "raw-price-cross-source-incomplete:12/21",
     "point-in-time-constituent-snapshot-missing"
   ],
   "rawPrice": {
     "total": 21,
-    "verified": 21,
-    "coveragePct": 100.0,
+    "verified": 12,
+    "coveragePct": 57.14,
     "bseSingleSource": 0,
     "rule": "signal-day raw OHLC must agree across two independent providers within 0.1%",
     "stocks": {
@@ -104,31 +105,25 @@
         ]
       },
       "300739": {
-        "verified": true,
-        "rawClose": 28.63,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "301357": {
-        "verified": true,
-        "rawClose": 108.6,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "301526": {
-        "verified": true,
-        "rawClose": 30.69,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "600105": {
         "verified": true,
@@ -140,13 +135,11 @@
         ]
       },
       "600184": {
-        "verified": true,
-        "rawClose": 19.98,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "600237": {
         "verified": true,
@@ -154,53 +147,43 @@
         "maxRelDiff": null,
         "reason": null,
         "providersWithRow": [
-          "腾讯"
+          "东方财富"
         ]
       },
       "600522": {
-        "verified": true,
-        "rawClose": 34.49,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "600967": {
-        "verified": true,
-        "rawClose": 14.98,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "601869": {
-        "verified": true,
-        "rawClose": 473.99,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "603936": {
-        "verified": true,
-        "rawClose": 20.88,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       },
       "688143": {
-        "verified": true,
-        "rawClose": 195.0,
+        "verified": false,
+        "rawClose": null,
         "maxRelDiff": null,
-        "reason": null,
-        "providersWithRow": [
-          "腾讯"
-        ]
+        "reason": "no-valid-price-provider",
+        "providersWithRow": []
       }
     }
   },
@@ -335,5 +318,5 @@
     "available": false,
     "rule": "must have a frozen historical constituent/membership snapshot; current membership is not accepted"
   },
-  "auditedAt": "2026-11-24T04:02:53+08:00"
+  "auditedAt": "2026-11-25T03:02:23+08:00"
 }
