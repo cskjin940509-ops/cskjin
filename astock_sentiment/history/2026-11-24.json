@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reportDate": "2026-11-24",
-  "generatedAt": "2026-11-24T18:29:09.683018+08:00",
+  "generatedAt": "2026-11-24T18:54:15.827036+08:00",
   "cutoffZh": "截至生成时实际可得数据",
   "referenceReplication": "NOT_VERIFIED",
   "indices": [
@@ -28,37 +28,37 @@
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "financingBalance": null,
-        "change1d": null,
+        "financingBalance": 2134807062961.0,
+        "change1d": -66196092815.0,
         "exchangeCoverage": [
+          "SSE",
           "SZSE"
         ],
         "errors": {
-          "SSE": "JSONDecodeError",
           "primaryProxy": "RuntimeError"
         },
         "historyObservations": null
       },
       "dataDate": "2026-11-20",
-      "availableAt": "2026-11-24T18:05:08+08:00",
+      "availableAt": "2026-11-24T18:53:40+08:00",
       "classification": "反向工程估算",
-      "status": "MISSING_INPUT",
-      "blocker": "沪深交易所覆盖不完整",
-      "positionEligible": false
+      "status": "ESTIMATED",
+      "blocker": null,
+      "positionEligible": true
     },
     {
       "name": "ETF资金强弱",
       "score": null,
       "scoreScale": "0-100",
       "raw": {
-        "etfCount": 781,
-        "validChangeCount": 781,
-        "netShareChange1d": 21879382.0,
+        "etfCount": 1717,
+        "validChangeCount": 1708,
+        "netShareChange1d": 10842771382.0,
         "netCreationAmountEstimate1d": null,
         "historyObservations": 21
       },
       "dataDate": "2026-11-23",
-      "availableAt": "2026-11-24T18:05:08+08:00",
+      "availableAt": "2026-11-24T18:53:40+08:00",
       "classification": "研究观察值",
       "status": "FORMULA_UNVERIFIED",
       "blocker": "原版ETF池、窗口、原始因子与标准化顺序未冻结；历史不足485日",
@@ -70,7 +70,7 @@
       "scoreScale": "0-100",
       "raw": null,
       "dataDate": "2026-11-20",
-      "availableAt": "2026-11-24T18:29:09.683018+08:00",
+      "availableAt": "2026-11-24T18:54:15.827036+08:00",
       "classification": "不可计算",
       "status": "DEPENDENCIES_INCOMPLETE",
       "blocker": "前三项未全部形成正式分位，且综合权重版本未冻结",
