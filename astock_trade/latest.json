@@ -1,10 +1,61 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-24",
-  "generatedAt": "2026-11-24T23:24:55+08:00",
+  "date": "2026-11-25",
+  "generatedAt": "2026-11-25T15:10:26+08:00",
   "phase": "LIVE",
   "officialDate": "2026-11-20",
   "officialPlans": [
+    {
+      "code": "601166",
+      "name": "兴业银行",
+      "sector": "股份制银行Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0"
+      ],
+      "action": "买入候选",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 92.7,
+        "historical": {
+          "samples": 4,
+          "win5D": 0.75,
+          "avg5D": 0.0145,
+          "avgMFE5D": 0.0208,
+          "avgMAE5D": -0.0162
+        }
+      },
+      "quote": {
+        "price": 20.48,
+        "changePct": 1.39,
+        "open": 20.24,
+        "high": 20.65,
+        "low": 20.07,
+        "dayLowToHighPct": 2.89,
+        "quoteTime": "20261125151027"
+      },
+      "entryZone": [
+        20.339,
+        20.645
+      ],
+      "triggerPrice": 20.4,
+      "stopLoss": 20.103,
+      "takeProfit1": 21.074,
+      "takeProfit2": 21.463,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 20.103",
+      "reasons": [
+        "突破回踩",
+        "形态分 93",
+        "距MA20 +1.84 ATR",
+        "主力资金占比 -1.69%"
+      ]
+    },
     {
       "code": "600015",
       "name": "华夏银行",
@@ -16,44 +67,97 @@
       ],
       "action": "买入候选",
       "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 87.3,
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 91.8,
         "historical": {
-          "samples": 13,
-          "win5D": 0.6923,
-          "avg5D": 0.0168,
-          "avgMFE5D": 0.0298,
-          "avgMAE5D": -0.013
+          "samples": 3,
+          "win5D": 0.6667,
+          "avg5D": 0.0054,
+          "avgMFE5D": 0.0316,
+          "avgMAE5D": -0.009
         }
       },
       "quote": {
-        "price": 6.72,
-        "changePct": -0.15,
-        "open": 6.69,
-        "high": 6.75,
-        "low": 6.66,
-        "dayLowToHighPct": 1.35,
-        "quoteTime": "20261124161435"
+        "price": 6.8,
+        "changePct": 1.19,
+        "open": 6.74,
+        "high": 6.83,
+        "low": 6.67,
+        "dayLowToHighPct": 2.4,
+        "quoteTime": "20261125151021"
       },
       "entryZone": [
-        6.63,
-        6.764
+        6.79,
+        6.892
       ],
-      "triggerPrice": 6.697,
-      "stopLoss": 6.541,
-      "takeProfit1": 6.93,
-      "takeProfit2": 7.086,
+      "triggerPrice": 6.81,
+      "stopLoss": 6.723,
+      "takeProfit1": 7.017,
+      "takeProfit2": 7.134,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 6.723",
+      "reasons": [
+        "突破回踩",
+        "形态分 92",
+        "距MA20 +1.76 ATR",
+        "主力资金占比 +2.46%"
+      ]
+    },
+    {
+      "code": "600000",
+      "name": "浦发银行",
+      "sector": "股份制银行Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "买入候选",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 85.4,
+        "historical": {
+          "samples": 22,
+          "win5D": 0.5,
+          "avg5D": 0.0104,
+          "avgMFE5D": 0.0301,
+          "avgMAE5D": -0.0188
+        }
+      },
+      "quote": {
+        "price": 10.67,
+        "changePct": -0.19,
+        "open": 10.74,
+        "high": 10.79,
+        "low": 10.52,
+        "dayLowToHighPct": 2.57,
+        "quoteTime": "20261125151020"
+      },
+      "entryZone": [
+        10.509,
+        10.721
+      ],
+      "triggerPrice": 10.615,
+      "stopLoss": 10.313,
+      "takeProfit1": 11.067,
+      "takeProfit2": 11.369,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 6.541",
+      "invalidation": "收盘/有效价格跌破 10.313",
       "reasons": [
         "趋势回踩",
-        "形态分 87",
-        "距MA20 +1.16 ATR",
-        "主力资金占比 +2.46%"
+        "形态分 85",
+        "距MA20 +1.42 ATR",
+        "主力资金占比 +12.18%"
       ]
     },
     {
@@ -71,41 +175,41 @@
       "setup": {
         "type": "TREND_PULLBACK",
         "label": "趋势回踩",
-        "score": 84.6,
+        "score": 85.2,
         "historical": {
-          "samples": 16,
-          "win5D": 0.5,
-          "avg5D": -0.0009,
-          "avgMFE5D": 0.0329,
-          "avgMAE5D": -0.0334
+          "samples": 17,
+          "win5D": 0.5294,
+          "avg5D": 0.0,
+          "avgMFE5D": 0.0331,
+          "avgMAE5D": -0.0323
         }
       },
       "quote": {
-        "price": 5.79,
-        "changePct": -2.2,
-        "open": 5.86,
-        "high": 5.9,
+        "price": 5.81,
+        "changePct": 0.35,
+        "open": 5.83,
+        "high": 5.84,
         "low": 5.73,
-        "dayLowToHighPct": 2.97,
-        "quoteTime": "20261124161437"
+        "dayLowToHighPct": 1.92,
+        "quoteTime": "20261125151025"
       },
       "entryZone": [
-        5.776,
-        5.883
+        5.79,
+        5.893
       ],
-      "triggerPrice": 5.825,
-      "stopLoss": 5.646,
-      "takeProfit1": 6.105,
-      "takeProfit2": 6.288,
+      "triggerPrice": 5.835,
+      "stopLoss": 5.66,
+      "takeProfit1": 6.114,
+      "takeProfit2": 6.296,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 5.646",
+      "invalidation": "收盘/有效价格跌破 5.660",
       "reasons": [
         "趋势回踩",
         "形态分 85",
-        "距MA20 +0.09 ATR",
+        "距MA20 +0.13 ATR",
         "主力资金占比 +7.87%"
       ]
     },
@@ -114,7 +218,7 @@
       "name": "建设银行",
       "sector": "国有大型银行Ⅲ",
       "official": true,
-      "tailCore": false,
+      "tailCore": true,
       "poolTags": [
         "B0",
         "B3",
@@ -122,199 +226,44 @@
       ],
       "action": "等待触发",
       "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 88.8,
+        "type": "BREAKOUT_READY",
+        "label": "临界突破",
+        "score": 86.8,
         "historical": {
-          "samples": 30,
+          "samples": 5,
           "win5D": 0.8,
-          "avg5D": 0.0208,
-          "avgMFE5D": 0.0347,
-          "avgMAE5D": -0.0133
+          "avg5D": 0.0097,
+          "avgMFE5D": 0.0378,
+          "avgMAE5D": -0.0178
         }
       },
       "quote": {
-        "price": 12.43,
-        "changePct": 0.32,
-        "open": 12.1,
-        "high": 12.44,
-        "low": 12.01,
-        "dayLowToHighPct": 3.58,
-        "quoteTime": "20261124161500"
+        "price": 12.59,
+        "changePct": 1.29,
+        "open": 12.42,
+        "high": 12.67,
+        "low": 12.12,
+        "dayLowToHighPct": 4.54,
+        "quoteTime": "20261125151025"
       },
       "entryZone": [
-        12.125,
-        12.369
+        12.678,
+        12.844
       ],
-      "triggerPrice": 12.247,
-      "stopLoss": 11.902,
-      "takeProfit1": 12.765,
-      "takeProfit2": 13.11,
+      "triggerPrice": 12.78,
+      "stopLoss": 12.546,
+      "takeProfit1": 13.084,
+      "takeProfit2": 13.299,
       "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "preferredWindow": "触发价出现后再评估",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 11.902",
+      "invalidation": "收盘/有效价格跌破 12.546",
       "reasons": [
-        "趋势回踩",
-        "形态分 89",
-        "距MA20 +1.30 ATR",
+        "临界突破",
+        "形态分 87",
+        "距MA20 +1.67 ATR",
         "主力资金占比 +4.01%"
-      ]
-    },
-    {
-      "code": "601166",
-      "name": "兴业银行",
-      "sector": "股份制银行Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0"
-      ],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 87.7,
-        "historical": {
-          "samples": 16,
-          "win5D": 0.75,
-          "avg5D": 0.0161,
-          "avgMFE5D": 0.0245,
-          "avgMAE5D": -0.0138
-        }
-      },
-      "quote": {
-        "price": 20.2,
-        "changePct": 0.7,
-        "open": 19.94,
-        "high": 20.27,
-        "low": 19.75,
-        "dayLowToHighPct": 2.63,
-        "quoteTime": "20261124161437"
-      },
-      "entryZone": [
-        19.741,
-        20.132
-      ],
-      "triggerPrice": 19.933,
-      "stopLoss": 19.452,
-      "takeProfit1": 20.665,
-      "takeProfit2": 21.15,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 19.452",
-      "reasons": [
-        "趋势回踩",
-        "形态分 88",
-        "距MA20 +1.27 ATR",
-        "主力资金占比 -1.69%"
-      ]
-    },
-    {
-      "code": "600000",
-      "name": "浦发银行",
-      "sector": "股份制银行Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 85.4,
-        "historical": {
-          "samples": 22,
-          "win5D": 0.5,
-          "avg5D": 0.0104,
-          "avgMFE5D": 0.0301,
-          "avgMAE5D": -0.0188
-        }
-      },
-      "quote": {
-        "price": 10.69,
-        "changePct": -0.56,
-        "open": 10.62,
-        "high": 10.75,
-        "low": 10.45,
-        "dayLowToHighPct": 2.87,
-        "quoteTime": "20261124161500"
-      },
-      "entryZone": [
-        10.46,
-        10.672
-      ],
-      "triggerPrice": 10.566,
-      "stopLoss": 10.272,
-      "takeProfit1": 11.007,
-      "takeProfit2": 11.302,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 10.272",
-      "reasons": [
-        "趋势回踩",
-        "形态分 85",
-        "距MA20 +1.74 ATR",
-        "主力资金占比 +12.18%"
-      ]
-    },
-    {
-      "code": "600795",
-      "name": "国电电力",
-      "sector": "证金持股",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B1"
-      ],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 84.6,
-        "historical": {
-          "samples": 34,
-          "win5D": 0.6176,
-          "avg5D": 0.0019,
-          "avgMFE5D": 0.0289,
-          "avgMAE5D": -0.0245
-        }
-      },
-      "quote": {
-        "price": 5.42,
-        "changePct": 0.0,
-        "open": 5.31,
-        "high": 5.48,
-        "low": 5.31,
-        "dayLowToHighPct": 3.2,
-        "quoteTime": "20261124161451"
-      },
-      "entryZone": [
-        5.42,
-        5.53
-      ],
-      "triggerPrice": 5.475,
-      "stopLoss": 5.307,
-      "takeProfit1": 5.727,
-      "takeProfit2": 5.895,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 5.307",
-      "reasons": [
-        "趋势回踩",
-        "形态分 85",
-        "距MA20 +0.23 ATR",
-        "主力资金占比 -3.80%"
       ]
     },
     {
@@ -333,91 +282,40 @@
         "label": "趋势回踩",
         "score": 80.4,
         "historical": {
-          "samples": 6,
-          "win5D": 0.1667,
-          "avg5D": -0.018,
-          "avgMFE5D": 0.0111,
-          "avgMAE5D": -0.0285
+          "samples": 7,
+          "win5D": 0.1429,
+          "avg5D": -0.0179,
+          "avgMFE5D": 0.0116,
+          "avgMAE5D": -0.028
         }
       },
       "quote": {
         "price": 54.88,
-        "changePct": 2.2,
-        "open": 53.5,
-        "high": 54.99,
-        "low": 53.19,
-        "dayLowToHighPct": 3.38,
-        "quoteTime": "20261124161457"
+        "changePct": 0.0,
+        "open": 54.85,
+        "high": 55.31,
+        "low": 54.5,
+        "dayLowToHighPct": 1.49,
+        "quoteTime": "20261125151014"
       },
       "entryZone": [
-        53.913,
-        54.758
+        54.026,
+        54.837
       ],
-      "triggerPrice": 54.216,
-      "stopLoss": 53.143,
-      "takeProfit1": 56.123,
-      "takeProfit2": 57.315,
+      "triggerPrice": 54.294,
+      "stopLoss": 53.204,
+      "takeProfit1": 56.273,
+      "takeProfit2": 57.501,
       "riskReward1": 1.5,
       "preferredWindow": "09:40-11:00 / 13:15-14:45",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 53.143",
+      "invalidation": "收盘/有效价格跌破 53.204",
       "reasons": [
         "趋势回踩",
         "形态分 80",
-        "距MA20 +1.01 ATR",
+        "距MA20 +0.83 ATR",
         "主力资金占比 +7.22%"
-      ]
-    },
-    {
-      "code": "000001",
-      "name": "平安银行",
-      "sector": "股份制银行Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B1"
-      ],
-      "action": "等待触发",
-      "setup": {
-        "type": "BREAKOUT_READY",
-        "label": "临界突破",
-        "score": 80.0,
-        "historical": {
-          "samples": 4,
-          "win5D": 1.0,
-          "avg5D": 0.0266,
-          "avgMFE5D": 0.0348,
-          "avgMAE5D": -0.009
-        }
-      },
-      "quote": {
-        "price": 12.3,
-        "changePct": -0.32,
-        "open": 12.28,
-        "high": 12.34,
-        "low": 12.16,
-        "dayLowToHighPct": 1.48,
-        "quoteTime": "20261124161500"
-      },
-      "entryZone": [
-        12.41,
-        12.573
-      ],
-      "triggerPrice": 12.51,
-      "stopLoss": 12.312,
-      "takeProfit1": 12.76,
-      "takeProfit2": 12.939,
-      "riskReward1": 1.5,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 12.312",
-      "reasons": [
-        "临界突破",
-        "形态分 80",
-        "距MA20 +1.79 ATR",
-        "主力资金占比 -5.15%"
       ]
     },
     {
@@ -434,86 +332,42 @@
       "setup": {
         "type": "BREAKOUT_READY",
         "label": "临界突破",
-        "score": 73.4,
+        "score": 76.7,
         "historical": {
-          "samples": 3,
-          "win5D": 0.3333,
-          "avg5D": -0.0033,
-          "avgMFE5D": 0.0135,
-          "avgMAE5D": -0.0329
+          "samples": 4,
+          "win5D": 0.5,
+          "avg5D": 0.0053,
+          "avgMFE5D": 0.0208,
+          "avgMAE5D": -0.0259
         }
       },
       "quote": {
-        "price": 107.77,
-        "changePct": 0.02,
-        "open": 106.3,
-        "high": 107.77,
-        "low": 105.0,
-        "dayLowToHighPct": 2.64,
-        "quoteTime": "20261124161500"
+        "price": 107.53,
+        "changePct": -0.22,
+        "open": 107.46,
+        "high": 108.29,
+        "low": 106.3,
+        "dayLowToHighPct": 1.87,
+        "quoteTime": "20261125151019"
       },
       "entryZone": [
         108.098,
         109.515
       ],
       "triggerPrice": 108.97,
-      "stopLoss": 106.838,
-      "takeProfit1": 111.759,
-      "takeProfit2": 113.728,
+      "stopLoss": 106.893,
+      "takeProfit1": 111.676,
+      "takeProfit2": 113.589,
       "riskReward1": 1.5,
       "preferredWindow": "触发价出现后再评估",
       "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
       "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 106.838",
+      "invalidation": "收盘/有效价格跌破 106.893",
       "reasons": [
         "临界突破",
-        "形态分 73",
-        "距MA20 +1.77 ATR",
+        "形态分 77",
+        "距MA20 +1.59 ATR",
         "主力资金占比 +3.72%"
-      ]
-    },
-    {
-      "code": "601328",
-      "name": "交通银行",
-      "sector": "国有大型银行Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B3",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "NONE",
-        "label": "暂无可买形态",
-        "score": 50.3,
-        "historical": {}
-      },
-      "quote": {
-        "price": 8.98,
-        "changePct": 0.56,
-        "open": 8.84,
-        "high": 9.08,
-        "low": 8.74,
-        "dayLowToHighPct": 3.89,
-        "quoteTime": "20261124161446"
-      },
-      "entryZone": null,
-      "triggerPrice": 8.671,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "暂无可买形态",
-        "形态分 50",
-        "距MA20 +2.24 ATR",
-        "主力资金占比 +6.30%"
       ]
     },
     {
@@ -535,16 +389,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 9.22,
-        "changePct": 0.77,
-        "open": 8.9,
+        "price": 9.2,
+        "changePct": -0.22,
+        "open": 9.22,
         "high": 9.27,
-        "low": 8.85,
-        "dayLowToHighPct": 4.75,
-        "quoteTime": "20261124161500"
+        "low": 9.05,
+        "dayLowToHighPct": 2.43,
+        "quoteTime": "20261125151023"
       },
       "entryZone": null,
-      "triggerPrice": 8.949,
+      "triggerPrice": 9.011,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -556,7 +410,7 @@
       "reasons": [
         "暂无可买形态",
         "形态分 49",
-        "距MA20 +2.12 ATR",
+        "距MA20 +1.77 ATR",
         "主力资金占比 +1.72%"
       ]
     },
@@ -577,16 +431,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 7.01,
-        "changePct": -0.28,
-        "open": 6.9,
-        "high": 7.01,
-        "low": 6.7,
-        "dayLowToHighPct": 4.63,
-        "quoteTime": "20261124161500"
+        "price": 7.18,
+        "changePct": 2.43,
+        "open": 7.0,
+        "high": 7.2,
+        "low": 6.89,
+        "dayLowToHighPct": 4.5,
+        "quoteTime": "20261125151025"
       },
       "entryZone": null,
-      "triggerPrice": 6.918,
+      "triggerPrice": 6.943,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -598,8 +452,135 @@
       "reasons": [
         "暂无可买形态",
         "形态分 49",
-        "距MA20 +0.32 ATR",
+        "距MA20 +0.98 ATR",
         "主力资金占比 +1.36%"
+      ]
+    },
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "sector": "国有大型银行Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 48.7,
+        "historical": {}
+      },
+      "quote": {
+        "price": 7.5,
+        "changePct": -0.13,
+        "open": 7.51,
+        "high": 7.55,
+        "low": 7.34,
+        "dayLowToHighPct": 2.86,
+        "quoteTime": "20261125151029"
+      },
+      "entryZone": null,
+      "triggerPrice": 7.299,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 49",
+        "距MA20 +2.06 ATR",
+        "主力资金占比 -1.41%"
+      ]
+    },
+    {
+      "code": "600795",
+      "name": "国电电力",
+      "sector": "证金持股",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B1"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 48.2,
+        "historical": {}
+      },
+      "quote": {
+        "price": 5.38,
+        "changePct": -0.74,
+        "open": 5.45,
+        "high": 5.45,
+        "low": 5.34,
+        "dayLowToHighPct": 2.06,
+        "quoteTime": "20261125151026"
+      },
+      "entryZone": null,
+      "triggerPrice": 5.476,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 48",
+        "距MA20 -0.15 ATR",
+        "主力资金占比 -3.80%"
+      ]
+    },
+    {
+      "code": "000001",
+      "name": "平安银行",
+      "sector": "股份制银行Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B1"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "NONE",
+        "label": "暂无可买形态",
+        "score": 48.0,
+        "historical": {}
+      },
+      "quote": {
+        "price": 12.4,
+        "changePct": 0.81,
+        "open": 12.29,
+        "high": 12.47,
+        "low": 12.13,
+        "dayLowToHighPct": 2.8,
+        "quoteTime": "20261125151015"
+      },
+      "entryZone": null,
+      "triggerPrice": 12.122,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "暂无可买形态",
+        "形态分 48",
+        "距MA20 +2.03 ATR",
+        "主力资金占比 -5.15%"
       ]
     },
     {
@@ -619,16 +600,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 94.23,
-        "changePct": 0.11,
-        "open": 92.6,
-        "high": 94.56,
-        "low": 92.02,
-        "dayLowToHighPct": 2.76,
-        "quoteTime": "20261124161415"
+        "price": 94.14,
+        "changePct": -0.1,
+        "open": 93.89,
+        "high": 95.6,
+        "low": 93.08,
+        "dayLowToHighPct": 2.71,
+        "quoteTime": "20261125151015"
       },
       "entryZone": null,
-      "triggerPrice": 91.837,
+      "triggerPrice": 92.407,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -640,8 +621,52 @@
       "reasons": [
         "暂无可买形态",
         "形态分 48",
-        "距MA20 +2.07 ATR",
+        "距MA20 +1.79 ATR",
         "主力资金占比 -5.17%"
+      ]
+    },
+    {
+      "code": "601328",
+      "name": "交通银行",
+      "sector": "国有大型银行Ⅲ",
+      "official": true,
+      "tailCore": false,
+      "poolTags": [
+        "B0",
+        "B3",
+        "B4"
+      ],
+      "action": "不建议买",
+      "setup": {
+        "type": "OVEREXTENDED",
+        "label": "过度延伸/追高风险",
+        "score": 47.3,
+        "historical": {}
+      },
+      "quote": {
+        "price": 9.14,
+        "changePct": 1.78,
+        "open": 9.03,
+        "high": 9.25,
+        "low": 8.93,
+        "dayLowToHighPct": 3.58,
+        "quoteTime": "20261125151026"
+      },
+      "entryZone": null,
+      "triggerPrice": 8.728,
+      "stopLoss": null,
+      "takeProfit1": null,
+      "takeProfit2": null,
+      "riskReward1": null,
+      "preferredWindow": "触发价出现后再评估",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "未形成可执行入场，不设交易止损",
+      "reasons": [
+        "过度延伸/追高风险",
+        "形态分 47",
+        "距MA20 +2.75 ATR",
+        "主力资金占比 +6.30%"
       ]
     },
     {
@@ -663,16 +688,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 17.33,
-        "changePct": -0.4,
-        "open": 17.8,
-        "high": 18.6,
-        "low": 17.08,
-        "dayLowToHighPct": 8.9,
-        "quoteTime": "20261124161445"
+        "price": 18.73,
+        "changePct": 8.08,
+        "open": 17.31,
+        "high": 19.0,
+        "low": 16.8,
+        "dayLowToHighPct": 13.1,
+        "quoteTime": "20261125151015"
       },
       "entryZone": null,
-      "triggerPrice": 12.667,
+      "triggerPrice": 13.323,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -684,7 +709,7 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 47",
-        "距MA20 +7.07 ATR",
+        "距MA20 +7.74 ATR",
         "主力资金占比 +6.61%"
       ]
     },
@@ -707,16 +732,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 29.34,
-        "changePct": -3.74,
-        "open": 30.18,
-        "high": 33.0,
-        "low": 28.04,
-        "dayLowToHighPct": 17.69,
-        "quoteTime": "20261124161500"
+        "price": 32.27,
+        "changePct": 9.99,
+        "open": 28.26,
+        "high": 32.27,
+        "low": 28.2,
+        "dayLowToHighPct": 14.43,
+        "quoteTime": "20261125151031"
       },
       "entryZone": null,
-      "triggerPrice": 22.729,
+      "triggerPrice": 23.628,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -728,51 +753,9 @@
       "reasons": [
         "过度延伸/追高风险",
         "形态分 47",
-        "距MA20 +4.52 ATR",
-        "主力资金占比 +5.64%"
-      ]
-    },
-    {
-      "code": "601988",
-      "name": "中国银行",
-      "sector": "国有大型银行Ⅲ",
-      "official": true,
-      "tailCore": false,
-      "poolTags": [
-        "B0",
-        "B4"
-      ],
-      "action": "不建议买",
-      "setup": {
-        "type": "OVEREXTENDED",
-        "label": "过度延伸/追高风险",
-        "score": 45.7,
-        "historical": {}
-      },
-      "quote": {
-        "price": 7.51,
-        "changePct": 1.62,
-        "open": 7.28,
-        "high": 7.53,
-        "low": 7.23,
-        "dayLowToHighPct": 4.15,
-        "quoteTime": "20261124161500"
-      },
-      "entryZone": null,
-      "triggerPrice": 7.244,
-      "stopLoss": null,
-      "takeProfit1": null,
-      "takeProfit2": null,
-      "riskReward1": null,
-      "preferredWindow": "触发价出现后再评估",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "未形成可执行入场，不设交易止损",
-      "reasons": [
-        "过度延伸/追高风险",
-        "形态分 46",
-        "距MA20 +2.40 ATR",
-        "主力资金占比 -1.41%"
+        "距MA20 +5.21 ATR",
+        "主力资金占比 +5.64%",
+        "接近涨停，按追高风险处理"
       ]
     },
     {
@@ -792,16 +775,16 @@
         "historical": {}
       },
       "quote": {
-        "price": 12.35,
-        "changePct": -1.44,
-        "open": 12.11,
-        "high": 12.41,
-        "low": 12.07,
-        "dayLowToHighPct": 2.82,
-        "quoteTime": "20261124161500"
+        "price": 12.3,
+        "changePct": -0.4,
+        "open": 12.35,
+        "high": 12.47,
+        "low": 12.08,
+        "dayLowToHighPct": 3.23,
+        "quoteTime": "20261125151030"
       },
       "entryZone": null,
-      "triggerPrice": 12.398,
+      "triggerPrice": 12.451,
       "stopLoss": null,
       "takeProfit1": null,
       "takeProfit2": null,
@@ -813,17 +796,508 @@
       "reasons": [
         "跌破趋势支撑",
         "形态分 41",
-        "距MA20 -0.93 ATR",
+        "距MA20 -0.95 ATR",
         "主力资金占比 +7.79%"
       ]
     }
   ],
-  "setupCandidates": [],
+  "setupCandidates": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "sector": "证金持股",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 84.4,
+        "historical": {
+          "samples": 27,
+          "win5D": 0.6296,
+          "avg5D": 0.0089,
+          "avgMFE5D": 0.0288,
+          "avgMAE5D": -0.0177
+        }
+      },
+      "quote": {
+        "price": 35.2,
+        "changePct": 0.06,
+        "open": 35.14,
+        "high": 35.52,
+        "low": 34.58,
+        "dayLowToHighPct": 2.72,
+        "quoteTime": "20261125151012"
+      },
+      "entryZone": [
+        34.514,
+        35.212
+      ],
+      "triggerPrice": 34.863,
+      "stopLoss": 33.949,
+      "takeProfit1": 36.234,
+      "takeProfit2": 37.147,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 33.949",
+      "reasons": [
+        "趋势回踩",
+        "形态分 84",
+        "距MA20 +1.03 ATR",
+        "主力资金占比 +13.98%"
+      ]
+    },
+    {
+      "code": "000568",
+      "name": "泸州老窖",
+      "sector": "证金持股",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 84.0,
+        "historical": {
+          "samples": 6,
+          "win5D": 0.6667,
+          "avg5D": 0.0034,
+          "avgMFE5D": 0.0354,
+          "avgMAE5D": -0.0268
+        }
+      },
+      "quote": {
+        "price": 79.84,
+        "changePct": 1.2,
+        "open": 78.9,
+        "high": 80.66,
+        "low": 78.0,
+        "dayLowToHighPct": 3.41,
+        "quoteTime": "20261125151000"
+      },
+      "entryZone": [
+        78.909,
+        80.503
+      ],
+      "triggerPrice": 79.706,
+      "stopLoss": 77.153,
+      "takeProfit1": 83.536,
+      "takeProfit2": 86.089,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 77.153",
+      "reasons": [
+        "趋势回踩",
+        "形态分 84",
+        "距MA20 +0.48 ATR",
+        "主力资金占比 +8.09%"
+      ]
+    },
+    {
+      "code": "000895",
+      "name": "双汇发展",
+      "sector": "证金持股",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "买入候选",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 82.5,
+        "historical": {
+          "samples": 13,
+          "win5D": 0.6154,
+          "avg5D": 0.0149,
+          "avgMFE5D": 0.03,
+          "avgMAE5D": -0.0245
+        }
+      },
+      "quote": {
+        "price": 25.48,
+        "changePct": 0.51,
+        "open": 25.35,
+        "high": 25.66,
+        "low": 25.17,
+        "dayLowToHighPct": 1.95,
+        "quoteTime": "20261125151024"
+      },
+      "entryZone": [
+        24.977,
+        25.481
+      ],
+      "triggerPrice": 25.229,
+      "stopLoss": 24.61,
+      "takeProfit1": 26.157,
+      "takeProfit2": 26.775,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 24.610",
+      "reasons": [
+        "趋势回踩",
+        "形态分 82",
+        "距MA20 +1.45 ATR",
+        "主力资金占比 +5.76%"
+      ]
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "sector": "证金持股",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 89.1,
+        "historical": {
+          "samples": 5,
+          "win5D": 1.0,
+          "avg5D": 0.0358,
+          "avgMFE5D": 0.043,
+          "avgMAE5D": -0.0062
+        }
+      },
+      "quote": {
+        "price": 51.82,
+        "changePct": 1.79,
+        "open": 51.39,
+        "high": 52.18,
+        "low": 50.54,
+        "dayLowToHighPct": 3.24,
+        "quoteTime": "20261125151014"
+      },
+      "entryZone": [
+        51.914,
+        52.695
+      ],
+      "triggerPrice": 52.07,
+      "stopLoss": 50.991,
+      "takeProfit1": 54.274,
+      "takeProfit2": 55.587,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 50.991",
+      "reasons": [
+        "突破回踩",
+        "形态分 89",
+        "距MA20 +1.07 ATR",
+        "主力资金占比 +0.72%"
+      ]
+    },
+    {
+      "code": "601818",
+      "name": "光大银行",
+      "sector": "股份制银行Ⅲ",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "BREAKOUT_RETEST",
+        "label": "突破回踩",
+        "score": 88.3,
+        "historical": {
+          "samples": 3,
+          "win5D": 0.6667,
+          "avg5D": 0.0063,
+          "avgMFE5D": 0.0201,
+          "avgMAE5D": -0.0117
+        }
+      },
+      "quote": {
+        "price": 3.28,
+        "changePct": 0.61,
+        "open": 3.26,
+        "high": 3.3,
+        "low": 3.23,
+        "dayLowToHighPct": 2.17,
+        "quoteTime": "20261125151015"
+      },
+      "entryZone": [
+        3.28,
+        3.329
+      ],
+      "triggerPrice": 3.29,
+      "stopLoss": 3.239,
+      "takeProfit1": 3.404,
+      "takeProfit2": 3.47,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:35-10:45 / 13:30-14:50",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 3.239",
+      "reasons": [
+        "突破回踩",
+        "形态分 88",
+        "距MA20 +1.42 ATR",
+        "主力资金占比 +4.87%"
+      ]
+    },
+    {
+      "code": "601668",
+      "name": "中国建筑",
+      "sector": "证金持股",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 79.5,
+        "historical": {
+          "samples": 9,
+          "win5D": 0.5556,
+          "avg5D": 0.0096,
+          "avgMFE5D": 0.0191,
+          "avgMAE5D": -0.0168
+        }
+      },
+      "quote": {
+        "price": 4.68,
+        "changePct": 0.65,
+        "open": 4.66,
+        "high": 4.7,
+        "low": 4.61,
+        "dayLowToHighPct": 1.95,
+        "quoteTime": "20261125151022"
+      },
+      "entryZone": [
+        4.663,
+        4.712
+      ],
+      "triggerPrice": 4.665,
+      "stopLoss": 4.601,
+      "takeProfit1": 4.816,
+      "takeProfit2": 4.902,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 4.601",
+      "reasons": [
+        "趋势回踩",
+        "形态分 80",
+        "距MA20 +0.22 ATR",
+        "主力资金占比 -2.91%"
+      ]
+    },
+    {
+      "code": "600036",
+      "name": "招商银行",
+      "sector": "股份制银行Ⅲ",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 78.2,
+        "historical": {
+          "samples": 30,
+          "win5D": 0.5333,
+          "avg5D": 0.0018,
+          "avgMFE5D": 0.0162,
+          "avgMAE5D": -0.0172
+        }
+      },
+      "quote": {
+        "price": 43.2,
+        "changePct": -0.74,
+        "open": 43.6,
+        "high": 43.61,
+        "low": 42.81,
+        "dayLowToHighPct": 1.87,
+        "quoteTime": "20261125151028"
+      },
+      "entryZone": [
+        43.033,
+        43.651
+      ],
+      "triggerPrice": 43.219,
+      "stopLoss": 42.448,
+      "takeProfit1": 44.683,
+      "takeProfit2": 45.576,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 42.448",
+      "reasons": [
+        "趋势回踩",
+        "形态分 78",
+        "距MA20 +0.23 ATR",
+        "主力资金占比 -7.26%"
+      ]
+    },
+    {
+      "code": "002708",
+      "name": "光洋股份",
+      "sector": "昨日连板_含一字",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 75.9,
+        "historical": {
+          "samples": 3,
+          "win5D": 0.3333,
+          "avg5D": -0.0452,
+          "avgMFE5D": 0.0538,
+          "avgMAE5D": -0.1017
+        }
+      },
+      "quote": {
+        "price": 22.8,
+        "changePct": -1.26,
+        "open": 24.23,
+        "high": 25.15,
+        "low": 22.54,
+        "dayLowToHighPct": 11.58,
+        "quoteTime": "20261125151015"
+      },
+      "entryZone": [
+        22.573,
+        23.029
+      ],
+      "triggerPrice": 22.801,
+      "stopLoss": 21.433,
+      "takeProfit1": 24.853,
+      "takeProfit2": 26.221,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 21.433",
+      "reasons": [
+        "趋势回踩",
+        "形态分 76",
+        "距MA20 +0.53 ATR",
+        "主力资金占比 +1.03%"
+      ]
+    },
+    {
+      "code": "601601",
+      "name": "中国太保",
+      "sector": "证金持股",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 73.9,
+        "historical": {
+          "samples": 4,
+          "win5D": 0.25,
+          "avg5D": -0.0257,
+          "avgMFE5D": 0.0151,
+          "avgMAE5D": -0.0421
+        }
+      },
+      "quote": {
+        "price": 32.22,
+        "changePct": -1.35,
+        "open": 32.5,
+        "high": 32.7,
+        "low": 32.19,
+        "dayLowToHighPct": 1.58,
+        "quoteTime": "20261125151021"
+      },
+      "entryZone": [
+        31.824,
+        32.466
+      ],
+      "triggerPrice": 32.145,
+      "stopLoss": 31.203,
+      "takeProfit1": 33.558,
+      "takeProfit2": 34.5,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 31.203",
+      "reasons": [
+        "趋势回踩",
+        "形态分 74",
+        "距MA20 +0.65 ATR",
+        "主力资金占比 -5.63%"
+      ]
+    },
+    {
+      "code": "600016",
+      "name": "民生银行",
+      "sector": "股份制银行Ⅲ",
+      "official": false,
+      "tailCore": false,
+      "poolTags": [],
+      "action": "等待触发",
+      "setup": {
+        "type": "TREND_PULLBACK",
+        "label": "趋势回踩",
+        "score": 72.9,
+        "historical": {
+          "samples": 8,
+          "win5D": 0.125,
+          "avg5D": -0.0178,
+          "avgMFE5D": 0.0073,
+          "avgMAE5D": -0.0268
+        }
+      },
+      "quote": {
+        "price": 3.51,
+        "changePct": 0.0,
+        "open": 3.52,
+        "high": 3.53,
+        "low": 3.46,
+        "dayLowToHighPct": 2.02,
+        "quoteTime": "20261125151026"
+      },
+      "entryZone": [
+        3.463,
+        3.502
+      ],
+      "triggerPrice": 3.467,
+      "stopLoss": 3.415,
+      "takeProfit1": 3.583,
+      "takeProfit2": 3.65,
+      "riskReward1": 1.5,
+      "preferredWindow": "09:40-11:00 / 13:15-14:45",
+      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
+      "tPlusOne": true,
+      "invalidation": "收盘/有效价格跌破 3.415",
+      "reasons": [
+        "趋势回踩",
+        "形态分 73",
+        "距MA20 +0.78 ATR",
+        "主力资金占比 -10.35%"
+      ]
+    }
+  ],
   "summary": {
     "official": 17,
-    "officialBuy": 2,
-    "officialWatch": 7,
-    "expandedSetupCandidates": 0
+    "officialBuy": 4,
+    "officialWatch": 3,
+    "expandedSetupCandidates": 10
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -836,9 +1310,5 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ],
-  "marketSetupScan": {
-    "state": "skipped",
-    "reason": "official-has-live-buy"
-  }
+  ]
 }
