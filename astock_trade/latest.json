@@ -879,111 +879,12 @@
       ]
     }
   ],
-  "setupCandidates": [
-    {
-      "code": "601728",
-      "name": "中国电信",
-      "sector": "科技风格",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.2,
-        "historical": {
-          "samples": 14,
-          "win5D": 0.5714,
-          "avg5D": 0.0071,
-          "avgMFE5D": 0.0276,
-          "avgMAE5D": -0.0239
-        }
-      },
-      "quote": {
-        "price": 7.01,
-        "changePct": -2.5,
-        "open": 7.2,
-        "high": 7.2,
-        "low": 6.95,
-        "dayLowToHighPct": 3.6,
-        "quoteTime": "20261127161447"
-      },
-      "entryZone": [
-        6.986,
-        7.128
-      ],
-      "triggerPrice": 7.057,
-      "stopLoss": 6.796,
-      "takeProfit1": 7.449,
-      "takeProfit2": 7.711,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 6.796",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.24 ATR",
-        "主力资金占比 -10.97%"
-      ]
-    },
-    {
-      "code": "600050",
-      "name": "中国联通",
-      "sector": "科技风格",
-      "official": false,
-      "tailCore": false,
-      "poolTags": [],
-      "action": "等待触发",
-      "setup": {
-        "type": "TREND_PULLBACK",
-        "label": "趋势回踩",
-        "score": 78.1,
-        "historical": {
-          "samples": 14,
-          "win5D": 0.5,
-          "avg5D": -0.0039,
-          "avgMFE5D": 0.0189,
-          "avgMAE5D": -0.0242
-        }
-      },
-      "quote": {
-        "price": 4.49,
-        "changePct": 0.45,
-        "open": 4.47,
-        "high": 4.5,
-        "low": 4.38,
-        "dayLowToHighPct": 2.74,
-        "quoteTime": "20261127161444"
-      },
-      "entryZone": [
-        4.428,
-        4.502
-      ],
-      "triggerPrice": 4.457,
-      "stopLoss": 4.354,
-      "takeProfit1": 4.631,
-      "takeProfit2": 4.742,
-      "riskReward1": 1.5,
-      "preferredWindow": "09:40-11:00 / 13:15-14:45",
-      "sellRule": "买入当日仅预警；次一交易日起：跌破失效位退出；到TP1可减仓，TP2或跌破10日趋势线继续减/退出。",
-      "tPlusOne": true,
-      "invalidation": "收盘/有效价格跌破 4.354",
-      "reasons": [
-        "趋势回踩",
-        "形态分 78",
-        "距MA20 +0.67 ATR",
-        "主力资金占比 -4.68%"
-      ]
-    }
-  ],
+  "setupCandidates": [],
   "summary": {
     "official": 20,
     "officialBuy": 0,
     "officialWatch": 0,
-    "expandedSetupCandidates": 2
+    "expandedSetupCandidates": 0
   },
   "rules": {
     "entry": "只在形态+价格区间同时满足时给“买入候选”；过度延伸、破位或接近涨停默认不追。",
@@ -996,5 +897,10 @@
     "东方财富板块成分/前复权日线",
     "Official冻结池",
     "TailCore（如当日存在）"
-  ]
+  ],
+  "marketSetupScan": {
+    "state": "skipped",
+    "reason": "outside-exchange-scan-window",
+    "checkedAt": "2026-11-27T22:31:08.048954+08:00"
+  }
 }
