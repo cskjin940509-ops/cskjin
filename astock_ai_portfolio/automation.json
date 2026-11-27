@@ -7,17 +7,17 @@
   "appRequired": false,
   "engineLocation": "GitHub Actions云端定时任务",
   "scheduleZh": "A股交易时段约每5分钟检查一次；收盘后仅更新状态，不虚构成交",
-  "cycleId": "20261127-143608",
-  "lastRunAt": "2026-11-27T14:36:08+08:00",
-  "lastSuccessAt": "2026-11-27T14:36:08+08:00",
+  "cycleId": "20261127-145127",
+  "lastRunAt": "2026-11-27T14:51:27+08:00",
+  "lastSuccessAt": "2026-11-27T14:51:27+08:00",
   "lastTradeAt": "2026-11-26T09:39:11+08:00",
-  "status": "BLOCKED_STALE_RADAR",
-  "statusZh": "后台已运行，但雷达超过15分钟，禁止旧信号开仓；持仓保护已使用新行情独立检查",
+  "status": "NO_ACTION",
+  "statusZh": "30只2026-11-26收盘候选已冻结；T+1按98%低吸限价或收盘窗口兜底执行",
   "runSource": "local-validation",
   "sessionOpen": true,
-  "radarCapturedAt": "2026-11-27T10:39:49+08:00",
-  "radarFresh": false,
-  "radarAgeSeconds": 14179.2,
+  "radarCapturedAt": "2026-11-27T14:36:47+08:00",
+  "radarFresh": true,
+  "radarAgeSeconds": 880.9,
   "actionsThisCycle": 0,
   "buyActionsThisCycle": 0,
   "sellActionsThisCycle": 0,
@@ -65,8 +65,8 @@
           "name": "联讯仪器",
           "rank": 2,
           "limitPrice": 602.6706,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价602.67"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0028-2026-11-24",
@@ -195,8 +195,8 @@
           "name": "光库科技",
           "rank": 16,
           "limitPrice": 163.9344,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价163.93"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0028-2026-11-24",
@@ -275,8 +275,8 @@
           "name": "贵州茅台",
           "rank": 25,
           "limitPrice": 1418.7656,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价1418.77"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0028-2026-11-24",
@@ -295,8 +295,8 @@
           "name": "华润三九",
           "rank": 1,
           "limitPrice": 25.3918,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价25.39"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0029-2026-11-25",
@@ -305,8 +305,8 @@
           "name": "片仔癀",
           "rank": 2,
           "limitPrice": 126.1946,
-          "status": "WAIT_LIMIT_PRICE",
-          "reasonZh": "等待触及低吸限价126.19"
+          "status": "WAIT_CAPACITY_OR_LIMIT",
+          "reasonZh": "实时成交容量或价格限制未通过"
         },
         {
           "batchId": "B0029-2026-11-25",
@@ -376,8 +376,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600795",
@@ -392,8 +392,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "601991",
@@ -407,8 +407,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600578",
@@ -422,8 +422,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600744",
@@ -440,8 +440,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "601008",
@@ -460,7 +460,7 @@
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600396",
@@ -476,8 +476,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000791",
@@ -493,8 +493,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600726",
@@ -510,8 +510,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600021",
@@ -529,7 +529,7 @@
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000767",
@@ -545,8 +545,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600023",
@@ -562,8 +562,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000899",
@@ -579,8 +579,8 @@
         ],
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "002040",
@@ -600,7 +600,7 @@
         "dataConfidence": "DEGRADED",
         "rankingWarnings": [],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "300244",
@@ -618,8 +618,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000690",
@@ -638,8 +638,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600011",
@@ -657,8 +657,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600027",
@@ -676,8 +676,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "001896",
@@ -699,7 +699,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000905",
@@ -717,8 +717,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600157",
@@ -739,7 +739,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "002669",
@@ -762,7 +762,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000539",
@@ -781,8 +781,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "600863",
@@ -801,8 +801,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000543",
@@ -820,8 +820,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000037",
@@ -839,8 +839,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000966",
@@ -858,8 +858,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000582",
@@ -878,8 +878,8 @@
         "rankingWarnings": [
           "综合分不足64"
         ],
-        "executionReasonZh": "候选保留，等待有效行情",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionReasonZh": "候选已排序，等待下一有效买入时段",
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "000011",
@@ -901,7 +901,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "001979",
@@ -926,7 +926,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       },
       {
         "code": "002517",
@@ -952,7 +952,7 @@
           "综合分不足64"
         ],
         "executionReasonZh": "不符合买入条件",
-        "executionStatus": "WAIT_FRESH_QUOTE"
+        "executionStatus": "OUTSIDE_ENTRY_SESSION"
       }
     ]
   }
