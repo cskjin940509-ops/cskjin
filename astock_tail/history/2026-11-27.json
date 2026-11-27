@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-27",
+  "status": "TailFinal",
+  "strategyVersion": "v1.2-tail-1430-1500-rolling-recovery",
+  "scheduledFor": "2026-11-27T15:00:00+08:00",
+  "capturedAt": "2026-11-27T15:06:27+08:00",
+  "marketQuoteAgeSec": 27.9,
+  "dataSource": "腾讯指数行情 + 东方财富实时",
+  "boardSource": "东方财富实时",
+  "factorCutoff": "2026-11-27T15:06:27+08:00",
+  "confirmedMainlines": [
+    {
+      "boardCode": "BK1329",
+      "name": "集成电路制造",
+      "type": "行业",
+      "score": 88.64,
+      "status": "确认主线",
+      "changePct": 16.49,
+      "amount": 32807620800.0,
+      "mainNetFlow": 2428246528.0,
+      "mainFlowPct": 7.4,
+      "breadthPct": 100.0,
+      "RS20": 26.34,
+      "RS60": -4.53,
+      "MTA": "日周月共振",
+      "confidence": "高",
+      "reason": "综合强度88.6；上涨扩散100%；涨跌+16.49%；主力资金占比+7.40%"
+    },
+    {
+      "boardCode": "BK1688",
+      "name": "大基金持股",
+      "type": "概念",
+      "score": 87.86,
+      "status": "确认主线",
+      "changePct": 14.44,
+      "amount": 80599191516.0,
+      "mainNetFlow": 8103091968.0,
+      "mainFlowPct": 10.05,
+      "breadthPct": 100.0,
+      "RS20": 7.79,
+      "RS60": null,
+      "MTA": "双周期共振",
+      "confidence": "高",
+      "reason": "综合强度87.9；上涨扩散100%；涨跌+14.44%；主力资金占比+10.05%"
+    },
+    {
+      "boardCode": "BK1328",
+      "name": "集成电路封测",
+      "type": "行业",
+      "score": 87.48,
+      "status": "确认主线",
+      "changePct": 14.55,
+      "amount": 20174218362.0,
+      "mainNetFlow": 3267828512.0,
+      "mainFlowPct": 16.2,
+      "breadthPct": 100.0,
+      "RS20": 10.71,
+      "RS60": -6.76,
+      "MTA": "双周期共振",
+      "confidence": "高",
+      "reason": "综合强度87.5；上涨扩散100%；涨跌+14.55%；主力资金占比+16.20%"
+    },
+    {
+      "boardCode": "BK1326",
+      "name": "半导体设备",
+      "type": "行业",
+      "score": 86.12,
+      "status": "确认主线",
+      "changePct": 17.6,
+      "amount": 44511473222.0,
+      "mainNetFlow": 3554079488.0,
+      "mainFlowPct": 7.98,
+      "breadthPct": 100.0,
+      "RS20": 13.04,
+      "RS60": -18.44,
+      "MTA": "双周期共振",
+      "confidence": "高",
+      "reason": "综合强度86.1；上涨扩散100%；涨跌+17.60%；主力资金占比+7.98%"
+    },
+    {
+      "boardCode": "BK0935",
+      "name": "中芯概念",
+      "type": "概念",
+      "score": 85.62,
+      "status": "确认主线",
+      "changePct": 14.32,
+      "amount": 103562285059.0,
+      "mainNetFlow": 8689336576.0,
+      "mainFlowPct": 8.39,
+      "breadthPct": 100.0,
+      "RS20": 7.47,
+      "RS60": -12.56,
+      "MTA": "双周期共振",
+      "confidence": "高",
+      "reason": "综合强度85.6；上涨扩散100%；涨跌+14.32%；主力资金占比+8.39%"
+    }
+  ],
+  "candidateMainlines": [],
+  "pools": {
+    "TB0": [
+      "688981"
+    ],
+    "TB3": [
+      "688981"
+    ],
+    "TailCore": [
+      "688981"
+    ]
+  },
+  "stocks": {
+    "688981": {
+      "code": "688981",
+      "name": "中芯国际",
+      "sector": "集成电路制造",
+      "price": 134.42,
+      "changePct": 15.38,
+      "amount": 12306543461.0,
+      "turnover": 4.84,
+      "mainNetFlow": 953619616.0,
+      "mainFlowPct": 7.75,
+      "RS20": 36.93,
+      "RS60": 18.65,
+      "MTA": "日周月共振",
+      "baseScore": 77.32,
+      "flowScore": 72.13,
+      "tailScore": 77.46,
+      "pools": [
+        "TB0",
+        "TB3",
+        "TailCore"
+      ],
+      "risk": "涨幅较大，追高风险",
+      "tailTradable": true,
+      "reason": "综合强度77.3；日周月共振；20日相对强弱+36.9%"
+    }
+  },
+  "noTrade": false,
+  "confidence": "中高",
+  "note": "14:30后每5分钟重算尾盘主线与筛选池；本批次使用当日收盘状态完成最终锁定。B1两融/B2 ETF申赎缺失时不伪造。",
+  "executionNote": "TailFinal 为当日尾盘最终留档；GitHub Actions若延迟，可在收盘后恢复生成，但不使用下一交易日数据，也不会被后续盘后任务改写。",
+  "refreshIntervalMin": 5,
+  "scheduledSlot": "1500",
+  "isFinal": true,
+  "phase": "收盘锁定",
+  "snapshotPath": "astock_tail/history/2026-11-27.json"
+}
